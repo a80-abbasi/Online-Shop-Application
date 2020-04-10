@@ -8,15 +8,16 @@ public class Product {
     private String productName;
     private String companyName;
     private double price;
-    private Seller seller;
     private String existenceStatus;
     private Category productCategory;
     private String explanations;
     private double productRate;
-    private ArrayList<String> opinionsForProduct;
+    private ArrayList<Comment> productComments;
+    private ArrayList<Seller> productSellers;
 
     {
-        opinionsForProduct = new ArrayList<>();
+        productComments = new ArrayList<>();
+        productSellers = new ArrayList<>();
     }
 
     public Product (String productId, ProductStatus productStatus, String productName, String companyName, double price, Seller seller, String existenceStatus) {
@@ -25,7 +26,7 @@ public class Product {
         this.productName = productName;
         this.companyName = companyName;
         this.price = price;
-        this.seller = seller;
+        this.productSellers.add(seller);
         this.existenceStatus = existenceStatus;
     }
 }

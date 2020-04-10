@@ -5,6 +5,7 @@ public class Comment {
     private Product product;
     private String comment;
     private CommentStatus status;
+    private boolean checkBuy;
 
     public Comment(Account account, Product product, String comment) {
         this.account = account;
