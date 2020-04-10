@@ -72,4 +72,8 @@ public abstract class Account {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public static ArrayList<Account> getAllAccounts() {
+        return allAccounts;
+    }
 }
