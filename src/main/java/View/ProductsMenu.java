@@ -9,6 +9,7 @@ public class ProductsMenu extends Menu {
         super("Products Menu", parentMenu);
         ArrayList<Menu> subMenus = new ArrayList<>();
         subMenus.add(getViewCategoriesMenu());
+        subMenus.add(new FilteringMenu(this));
         subMenus.add(getShowProductsMenu());
     }
 
@@ -16,7 +17,7 @@ public class ProductsMenu extends Menu {
         return new Menu("View Categories", this) {
             @Override
             public void execute() {
-                manager.showAllCategories();
+                productsManager.showAllCategories();
                 parentMenu.execute();
             }
         };
@@ -26,11 +27,12 @@ public class ProductsMenu extends Menu {
         return new Menu("Show Products", this) {
             @Override
             public void execute() {
-                ArrayList<Product> sortedFilteredProducts = manager.showProducts();
+                ArrayList<Product> sortedFilteredProducts = productsManager.showProducts();
                 for (Product product : sortedFilteredProducts) {
                     System.out.println(product);
                     System.out.println();
                 }
+                parentMenu.execute();
             }
         };
     }

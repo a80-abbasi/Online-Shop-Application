@@ -1,6 +1,6 @@
 package View;
 
-import Controller.Manager;
+import Controller.ProductsManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,7 +10,7 @@ public abstract class Menu {
     protected ArrayList<Menu> submenus;
     protected Menu parentMenu;
     public static Scanner scanner;
-    protected static Manager manager;
+    protected static ProductsManager productsManager;
     protected static ArrayList<Menu> allMenus = new ArrayList<>();
 
     public Menu (String name, Menu parentMenu) {
@@ -23,8 +23,8 @@ public abstract class Menu {
         Menu.scanner = scanner;
     }
 
-    public static void setManager(Manager manager) {
-        Menu.manager = manager;
+    public static void setProductsManager(ProductsManager productsManager) {
+        Menu.productsManager = productsManager;
     }
 
     public void setParentMenu(Menu parentMenu) {
