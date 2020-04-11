@@ -9,13 +9,13 @@ import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Manager {
+public class ProductsManager {
     private ArrayList<Product> allProducts = Product.getAllProducts();
 
     private Comparator<Product> currentSortMode = new ProductComparatorForVisitNumber();
     private String nameFilter;
     private Category categoryFilter;
-    private boolean existingFilter;
+    private boolean existenceFilter;
 
     public void showAllCategories () {
         Category.showAllCategories();
@@ -34,7 +34,7 @@ public class Manager {
                     continue;
                 }
             }
-            if (existingFilter){
+            if (existenceFilter){
                 if (!product.getExistenceStatus()){
                     continue;
                 }
@@ -45,7 +45,41 @@ public class Manager {
         return sortedFilteredProducts;
     }
 
-    public static Matcher getMatcher(String input, String regex){
+    public void addCategoryFilter(String name) throws IllegalArgumentException{
+        Category category = Category.getCategoryByName(name);
+        if (categoryFilter == null){
+            throw new IllegalArgumentException();
+        }
+        categoryFilter = category;
+    }
+
+    public void disableCategoryFilter(){
+        categoryFilter = null;
+    }
+
+    public void addNameFiltering(String name){
+        nameFilter = name;
+    }
+
+    public void addExistenceFilter(boolean existenceFilter){
+        this.existenceFilter = existenceFilter;
+    }
+
+    public void printCurrentFilters(){
+        System.out.println("Active Filters");
+        if (categoryFilter != null){
+            System.out.println("\tCategory Filter");
+        }
+        if (nameFilter != null){
+            System.out.println("\tName Filter");
+        }
+        if (existenceFilter){
+            System.out.println("\tExistence Filter");
+        }
+        System.out.println();
+    }
+
+    private static Matcher getMatcher(String input, String regex){
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(input);
     }
