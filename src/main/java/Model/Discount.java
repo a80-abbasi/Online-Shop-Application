@@ -6,15 +6,17 @@ public class Discount {
     private String discountCode;
     private String startTime;
     private String endTime;
-    private DiscountAmount discountAmount;
+    private int discountPercent;
+    private int maxPossibleDiscount;
     private int discountPerCustomer;
     private ArrayList<Customer> includingCustomers;
 
-    Discount (String discountCode, String startTime, String endTime, DiscountAmount discountAmount, int discountPerCustomer) {
+    Discount (String discountCode, String startTime, String endTime, int discountPercent, int maxPossibleDiscount, int discountPerCustomer) {
         this.discountCode = discountCode;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.discountAmount = discountAmount;
+        this.discountPercent = discountPercent;
+        this.maxPossibleDiscount = maxPossibleDiscount;
         this.discountPerCustomer = discountPerCustomer;
     }
 }

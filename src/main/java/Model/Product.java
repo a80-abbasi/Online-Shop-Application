@@ -10,8 +10,7 @@ public class Product {
     private double price;
     private String existenceStatus;
     private Category productCategory;
-    private String explanations;
-    private double productRate;
+    private Score productScore;
     private ArrayList<Comment> productComments;
     private ArrayList<Seller> productSellers;
 
