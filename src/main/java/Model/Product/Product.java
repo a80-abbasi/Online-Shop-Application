@@ -3,10 +3,10 @@ package Model.Product;
 import Model.Account.Seller;
 
 import java.util.ArrayList;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 public class Product {
+    private static ArrayList<Product> allProducts = new ArrayList<>();
     private String productId;
     private ProductStatus productStatus;
     private String productName;
@@ -18,7 +18,6 @@ public class Product {
     private ArrayList<Comment> productComments;
     private ArrayList<Seller> productSellers;
     private int visitNumber;
-    private static Comparable<Product> currentSortMode;
     private LocalDateTime timeOfCreation;
 
     {
@@ -36,6 +35,7 @@ public class Product {
         this.productSellers.add(seller);
         this.existenceStatus = existenceStatus;
         timeOfCreation = LocalDateTime.now();
+        allProducts.add(this);
     }
 
     public Product() {
@@ -82,7 +82,7 @@ public class Product {
         this.price = price;
     }
 
-    public boolean isExistenceStatus() {
+    public boolean getExistenceStatus() {
         return existenceStatus;
     }
 
@@ -130,16 +130,12 @@ public class Product {
         this.visitNumber = visitNumber;
     }
 
-    public static Comparable<Product> getCurrentSortMode() {
-        return currentSortMode;
-    }
-
-    public static void setCurrentSortMode(Comparable<Product> currentSortMode) {
-        Product.currentSortMode = currentSortMode;
-    }
-
     public LocalDateTime getTimeOfCreation() {
         return timeOfCreation;
+    }
+
+    public static ArrayList<Product> getAllProducts() {
+        return allProducts;
     }
 
     public double getTotalScore() {
@@ -150,5 +146,17 @@ public class Product {
             productScore += score.getScore().score;
         }
         return productScore / allScores.size();
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productName='" + productName + '\'' +
+                ", productId='" + productId + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", price=" + price +
+                ", score=" + getTotalScore() +
+                ", 'does" + (existenceStatus ? "" :  "not") + "exist'" +
+                '}';
     }
 }
