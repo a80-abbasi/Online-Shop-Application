@@ -1,4 +1,4 @@
-package Model;
+package Model.Product;
 
 import java.util.ArrayList;
 
@@ -42,5 +42,30 @@ public class Category {
 
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
+    }
+
+    public static void showAllCategories(){
+        for (Category category : allCategories) {
+            System.out.println(category);
+        }
+    }
+
+    public static Category getCategoryByName(String name){
+        for (Category category : allCategories) {
+            if (category.name.equals(name)){
+                return category;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Category: ").append(name);
+        for (Category subCategory : subCategories) {
+            stringBuilder.append("\n\t").append(subCategory.getName());
+        }
+        return stringBuilder.toString();
     }
 }
