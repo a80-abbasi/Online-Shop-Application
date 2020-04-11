@@ -1,8 +1,7 @@
-import Model.Customer;
-import Model.Product;
-import Model.Score;
-import Model.ScoreEnumeration;
-import org.junit.Assert;
+import Model.Account.Customer;
+import Model.Product.Product;
+import Model.Product.Score;
+import Model.Product.ScoreEnumeration;
 import org.junit.Test;
 
 public class ScoreTest {

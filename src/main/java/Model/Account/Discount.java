@@ -1,4 +1,4 @@
-package Model;
+package Model.Account;
 
 import java.util.ArrayList;
 

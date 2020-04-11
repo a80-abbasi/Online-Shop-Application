@@ -1,4 +1,6 @@
-package Model;
+package Model.Account;
+
+import Model.Product.Category;
 
 import java.util.ArrayList;
 

@@ -45,11 +45,11 @@ public abstract class Menu {
         for (int i = 0; i < submenus.size(); i++) {
             System.out.println(i + ". " + submenus.get(i).getName());
         }
-
+        System.out.println(submenus.size() + 1 + ". Help");
         if (this.parentMenu != null)
-            System.out.println((submenus.size() + 1) + ". Back");
+            System.out.println((submenus.size() + 2) + ". Back");
         else
-            System.out.println((submenus.size() + 1) + ". Exit");
+            System.out.println((submenus.size() + 2) + ". Exit");
     }
 
     public void execute() {

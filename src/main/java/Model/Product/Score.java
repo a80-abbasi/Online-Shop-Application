@@ -1,4 +1,6 @@
-package Model;
+package Model.Product;
+
+import Model.Account.Customer;
 
 public class Score {
     private Customer customer;

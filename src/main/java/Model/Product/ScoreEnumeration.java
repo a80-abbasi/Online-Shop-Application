@@ -1,4 +1,4 @@
-package Model;
+package Model.Product;
 
 public enum ScoreEnumeration {
     VERY_BAD(1), BAD(2), NOT_BAD(3), GOOD(4), VERY_GOOD(5);
