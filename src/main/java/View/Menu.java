@@ -43,7 +43,7 @@ public abstract class Menu {
     public void show() {
         System.out.println(this.name + ":");
         for (int i = 0; i < submenus.size(); i++) {
-            System.out.println(i + ". " + submenus.get(i).getName());
+            System.out.println(i + 1 + ". " + submenus.get(i).getName());
         }
         System.out.println(submenus.size() + 1 + ". Help");
         if (this.parentMenu != null)
@@ -54,16 +54,23 @@ public abstract class Menu {
 
     public void execute() {
         show();
-        Menu nextMenu = null;
-        int chosenMenu = Integer.parseInt(scanner.nextLine());
-        if (chosenMenu == submenus.size() + 1) {
-            if (this.parentMenu == null)
-                System.exit(1);
-            else
-                nextMenu = this.parentMenu;
-        } else
-            nextMenu = submenus.get(chosenMenu);
+        try {
+            Menu nextMenu = null;
+            int chosenMenu = Integer.parseInt(scanner.nextLine());
+            if (chosenMenu == submenus.size() + 1) {
+                if (this.parentMenu == null)
+                    System.exit(1);
+                else
+                    nextMenu = this.parentMenu;
+            } else
+                nextMenu = submenus.get(chosenMenu - 1);
 
-        nextMenu.execute();
+            nextMenu.execute();
+        }
+        catch (Exception e){
+            System.out.println("Wrong input\n");
+            execute();
+        }
+
     }
 }
