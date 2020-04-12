@@ -76,4 +76,13 @@ public abstract class Account {
     public static ArrayList<Account> getAllAccounts() {
         return allAccounts;
     }
+
+    public static Account getAccountByUsername (String username) {
+        for (Account account : allAccounts) {
+            if (account.getUsername().equalsIgnoreCase(username)) {
+                return account;
+            }
+        }
+        return null;
+    }
 }
