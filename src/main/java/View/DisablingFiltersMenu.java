@@ -1,5 +1,7 @@
 package View;
 
+import Controller.FilteringType;
+
 import java.util.ArrayList;
 
 public class DisablingFiltersMenu extends Menu
@@ -14,7 +16,7 @@ public class DisablingFiltersMenu extends Menu
     }
 
     private Menu getDisableCategoryFilterMenu(){
-        return new Menu("Disable Category Filtering", this) {
+        return new Menu("Disable" + FilteringType.CATEGORY_FILTER.getFilterType(), this) {
             @Override
             public void execute() {
                 productsManager.disableCategoryFilter();
@@ -24,7 +26,7 @@ public class DisablingFiltersMenu extends Menu
     }
 
     private Menu getDisableNameFilteringMenu(){
-        return new Menu("Disable Name Filtering", this) {
+        return new Menu("Disable" + FilteringType.NAME_FILTER.getFilterType(), this) {
             @Override
             public void execute() {
                 productsManager.disableNameFiltering();
@@ -34,7 +36,7 @@ public class DisablingFiltersMenu extends Menu
     }
 
     private Menu getDisableExistenceFilteringMenu(){
-        return new Menu("Disable Existence Filtering", this) {
+        return new Menu("Disable" + FilteringType.EXISTENCE_FILTER.getFilterType(), this) {
             @Override
             public void execute() {
                 productsManager.addExistenceFilter(false);

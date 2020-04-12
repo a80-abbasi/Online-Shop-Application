@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.Product.Category;
-import Model.Product.Product;
-import Model.Product.ProductComparatorForVisitNumber;
-import View.FilteringType;
+import Model.Product.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,6 +12,7 @@ public class ProductsManager {
 
     private Comparator<Product> currentSortMode = new ProductComparatorForVisitNumber();
     private ArrayList<FilteringType> currentFilters = new ArrayList<>();
+    private SortType currentSort = SortType.SORT_BY_VISIT;
     private String nameFilter;
     private Category categoryFilter;
     private boolean existenceFilter;
@@ -85,12 +83,24 @@ public class ProductsManager {
         }
     }
 
-    public void printCurrentFilters(){
-        System.out.println("Active Filters:");
-        for (FilteringType filter : currentFilters) {
-            System.out.println("\t" + filter.getFilterType());
-        }
-        System.out.println();
+    public ArrayList<FilteringType> getCurrentFilters(){
+        return currentFilters;
+    }
+
+    public void useSortByTime(){
+        currentSortMode = new ProductComparatorForTime();
+    }
+
+    public void useSortByScore(){
+        currentSortMode = new ProductComparatorForScore();
+    }
+
+    public void useSortByVisit(){
+        currentSortMode = new ProductComparatorForVisitNumber();
+    }
+
+    public String getCurrentSort(){
+        return currentSort.getSortType();
     }
 
     private static Matcher getMatcher(String input, String regex){

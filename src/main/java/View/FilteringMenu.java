@@ -1,5 +1,7 @@
 package View;
 
+import Controller.FilteringType;
+
 import java.util.ArrayList;
 
 public class FilteringMenu extends Menu {
@@ -27,7 +29,12 @@ public class FilteringMenu extends Menu {
         return new Menu("CurrentFilters", this) {
             @Override
             public void execute() {
-                productsManager.printCurrentFilters();
+                ArrayList<FilteringType> currentFilters = productsManager.getCurrentFilters();
+                System.out.println("Active Filters:");
+                for (FilteringType filter : currentFilters) {
+                    System.out.println("\t" + filter.getFilterType());
+                }
+                System.out.println();
                 parentMenu.execute();
             }
         };

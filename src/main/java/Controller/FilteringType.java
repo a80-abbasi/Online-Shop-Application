@@ -1,4 +1,4 @@
-package View;
+package Controller;
 
 public enum FilteringType {
     CATEGORY_FILTER("Category Filter"), NAME_FILTER("Name Filter"),
