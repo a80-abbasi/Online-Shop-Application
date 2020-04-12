@@ -3,6 +3,7 @@ package Controller;
 import Model.Product.Category;
 import Model.Product.Product;
 import Model.Product.ProductComparatorForVisitNumber;
+import View.FilteringType;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,6 +14,7 @@ public class ProductsManager {
     private ArrayList<Product> allProducts = Product.getAllProducts();
 
     private Comparator<Product> currentSortMode = new ProductComparatorForVisitNumber();
+    private ArrayList<FilteringType> currentFilters = new ArrayList<>();
     private String nameFilter;
     private Category categoryFilter;
     private boolean existenceFilter;
@@ -51,30 +53,42 @@ public class ProductsManager {
             throw new IllegalArgumentException();
         }
         categoryFilter = category;
+        if (!currentFilters.contains(FilteringType.CATEGORY_FILTER)){
+            currentFilters.add(FilteringType.CATEGORY_FILTER);
+        }
     }
 
     public void disableCategoryFilter(){
         categoryFilter = null;
+        currentFilters.remove(FilteringType.CATEGORY_FILTER);
     }
 
     public void addNameFiltering(String name){
         nameFilter = name;
+        if (!currentFilters.contains(FilteringType.NAME_FILTER)){
+            currentFilters.add(FilteringType.NAME_FILTER);
+        }
+    }
+
+    public void disableNameFiltering(){
+        nameFilter = null;
+        currentFilters.remove(FilteringType.NAME_FILTER);
     }
 
     public void addExistenceFilter(boolean existenceFilter){
         this.existenceFilter = existenceFilter;
+        if (!currentFilters.contains(FilteringType.EXISTENCE_FILTER) && existenceFilter){
+            currentFilters.add(FilteringType.EXISTENCE_FILTER);
+        }
+        if (!existenceFilter){
+            currentFilters.remove(FilteringType.EXISTENCE_FILTER);
+        }
     }
 
     public void printCurrentFilters(){
-        System.out.println("Active Filters");
-        if (categoryFilter != null){
-            System.out.println("\tCategory Filter");
-        }
-        if (nameFilter != null){
-            System.out.println("\tName Filter");
-        }
-        if (existenceFilter){
-            System.out.println("\tExistence Filter");
+        System.out.println("Active Filters:");
+        for (FilteringType filter : currentFilters) {
+            System.out.println("\t" + filter.getFilterType());
         }
         System.out.println();
     }

@@ -3,7 +3,7 @@ package Model.Product;
 public enum ScoreEnumeration {
     VERY_BAD(1), BAD(2), NOT_BAD(3), GOOD(4), VERY_GOOD(5);
 
-    int score;
+    private int score;
 
     ScoreEnumeration(int score) {
         this.score = score;

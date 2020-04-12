@@ -27,7 +27,7 @@ public class DisablingFiltersMenu extends Menu
         return new Menu("Disable Name Filtering", this) {
             @Override
             public void execute() {
-                productsManager.addNameFiltering(null);
+                productsManager.disableNameFiltering();
                 parentMenu.execute();
             }
         };
