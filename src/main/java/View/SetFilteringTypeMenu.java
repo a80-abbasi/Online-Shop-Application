@@ -1,5 +1,7 @@
 package View;
 
+import Controller.FilteringType;
+
 import java.util.ArrayList;
 
 public class SetFilteringTypeMenu extends Menu {
@@ -13,7 +15,7 @@ public class SetFilteringTypeMenu extends Menu {
     }
 
     private Menu getCategoryFilterMenu(){
-        return new Menu("Category Filtering", this) {
+        return new Menu(FilteringType.CATEGORY_FILTER.getFilterType(), this) {
             @Override
             public void execute() {
                 String categoryName = scanner.nextLine().trim();
@@ -31,7 +33,7 @@ public class SetFilteringTypeMenu extends Menu {
     }
 
     private Menu getNameFilteringMenu(){
-        return new Menu("Name Filtering", this) {
+        return new Menu(FilteringType.NAME_FILTER.getFilterType(), this) {
             @Override
             public void execute() {
                 productsManager.addNameFiltering(scanner.nextLine().trim());
@@ -41,7 +43,7 @@ public class SetFilteringTypeMenu extends Menu {
     }
 
     private Menu getExistenceFilteringMenu(){
-        return new Menu("Existence Filtering", this) {
+        return new Menu(FilteringType.EXISTENCE_FILTER.getFilterType(), this) {
             @Override
             public void execute() {
                 System.out.println("1. only existing files");

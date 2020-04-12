@@ -53,6 +53,7 @@ public abstract class Menu {
     }
 
     public void execute() {
+        show();
         Menu nextMenu = null;
         int chosenMenu = Integer.parseInt(scanner.nextLine());
         if (chosenMenu == submenus.size() + 1) {
@@ -62,7 +63,7 @@ public abstract class Menu {
                 nextMenu = this.parentMenu;
         } else
             nextMenu = submenus.get(chosenMenu);
-        nextMenu.show();
+
         nextMenu.execute();
     }
 }
