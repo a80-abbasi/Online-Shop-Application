@@ -143,9 +143,18 @@ public class Product {
             return 0;
         double productScore = 0;
         for (Score score : allScores) {
-            productScore += score.getScore().score;
+            productScore += score.getScore().getScore();
         }
         return productScore / allScores.size();
+    }
+
+    public static Product getProductByName(String ID){
+        for (Product product : allProducts) {
+            if (product.productId.equals(ID)){
+                return product;
+            }
+        }
+        return null;
     }
 
     @Override

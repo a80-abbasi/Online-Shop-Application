@@ -10,7 +10,10 @@ public class ProductsMenu extends Menu {
         ArrayList<Menu> subMenus = new ArrayList<>();
         subMenus.add(getViewCategoriesMenu());
         subMenus.add(new FilteringMenu(this));
+        subMenus.add(new SortingMenu(this));
         subMenus.add(getShowProductsMenu());
+        subMenus.add(new ProductMenu(this));
+        this.setSubmenus(subMenus);
     }
 
     private Menu getViewCategoriesMenu(){
@@ -35,5 +38,34 @@ public class ProductsMenu extends Menu {
                 parentMenu.execute();
             }
         };
+    }
+
+    @Override
+    public void execute() {
+        show();
+        try {
+            Menu nextMenu;
+            int chosenMenu = Integer.parseInt(scanner.nextLine());
+            if (chosenMenu == submenus.size() + 1) {
+                nextMenu = this.parentMenu;
+            } else {
+                if (chosenMenu == submenus.size()) {
+                    System.out.println("Enter Product ID");
+                    Product product = productsManager.getProductByID(scanner.nextLine().trim());
+                    if (product == null) {
+                        System.out.println("There is no product with this Id");
+                        execute();
+                    } else {
+                        ProductMenu productMenu = (ProductMenu) submenus.get(chosenMenu - 1);
+                        productMenu.setProduct(product);
+                    }
+                }
+                nextMenu = submenus.get(chosenMenu - 1);
+            }
+            nextMenu.execute();
+        } catch (Exception e) {
+            System.out.println("Wrong Input\n");
+            execute();
+        }
     }
 }

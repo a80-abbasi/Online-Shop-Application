@@ -103,6 +103,10 @@ public class ProductsManager {
         return currentSort.getSortType();
     }
 
+    public Product getProductByID(String ID){
+        return Product.getProductByName(ID);
+    }
+
     private static Matcher getMatcher(String input, String regex){
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(input);
