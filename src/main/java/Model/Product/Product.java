@@ -13,7 +13,7 @@ public class Product {
     private String productName;
     private String companyName;
     private double price;
-    private boolean existenceStatus;
+    private int existingNumber;
     private Category productCategory;
     private String explanations;
     private Discount discount;
@@ -28,20 +28,20 @@ public class Product {
     }
 
     public Product (String productId, ProductStatus productStatus, String productName, String companyName, double price,
-                    Seller seller, boolean existenceStatus) {
+                    Seller seller, int existingNumber) {
         this.productId = productId;
         this.productStatus = productStatus;
         this.productName = productName;
         this.companyName = companyName;
         this.price = price;
         this.productSeller = seller;
-        this.existenceStatus = existenceStatus;
+        this.existingNumber = existingNumber;
         timeOfCreation = LocalDateTime.now();
         allProducts.add(this);
     }
 
     public Product() {
-        this("", null, "", "", 0, null, false);
+        this("", null, "", "", 0, null, 0);
     }
 
     public String getProductId() {
@@ -84,12 +84,12 @@ public class Product {
         this.price = price;
     }
 
-    public boolean getExistenceStatus() {
-        return existenceStatus;
+    public int getExistingNumber() {
+        return existingNumber;
     }
 
-    public void setExistenceStatus(boolean existenceStatus) {
-        this.existenceStatus = existenceStatus;
+    public void setExistingNumber(int existingNumber) {
+        this.existingNumber = existingNumber;
     }
 
     public Category getProductCategory() {
@@ -148,6 +148,22 @@ public class Product {
         this.explanations = explanations;
     }
 
+    public static void setAllProducts(ArrayList<Product> allProducts) {
+        Product.allProducts = allProducts;
+    }
+
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
+    }
+
+    public void setTimeOfCreation(LocalDateTime timeOfCreation) {
+        this.timeOfCreation = timeOfCreation;
+    }
+
     public double getTotalScore() {
         if (allScores.size() == 0)
             return 0;
@@ -185,7 +201,7 @@ public class Product {
                 ", companyName='" + companyName + '\'' +
                 ", price=" + price +
                 ", score=" + getTotalScore() +
-                ", 'does" + (existenceStatus ? "" :  "not") + "exist'" +
+                ", 'does" + (existingNumber != 0 ? "" :  "not") + "exist'" +
                 '}';
     }
 }
