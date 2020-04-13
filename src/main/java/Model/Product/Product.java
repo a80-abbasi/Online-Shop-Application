@@ -1,5 +1,6 @@
 package Model.Product;
 
+import Model.Account.Discount;
 import Model.Account.Seller;
 
 import java.util.ArrayList;
@@ -14,15 +15,16 @@ public class Product {
     private double price;
     private boolean existenceStatus;
     private Category productCategory;
+    private String explanations;
+    private Discount discount;
     private ArrayList<Score> allScores;
     private ArrayList<Comment> productComments;
-    private ArrayList<Seller> productSellers;
+    private Seller productSeller;
     private int visitNumber;
     private LocalDateTime timeOfCreation;
 
     {
         productComments = new ArrayList<>();
-        productSellers = new ArrayList<>();
     }
 
     public Product (String productId, ProductStatus productStatus, String productName, String companyName, double price,
@@ -32,7 +34,7 @@ public class Product {
         this.productName = productName;
         this.companyName = companyName;
         this.price = price;
-        this.productSellers.add(seller);
+        this.productSeller = seller;
         this.existenceStatus = existenceStatus;
         timeOfCreation = LocalDateTime.now();
         allProducts.add(this);
@@ -114,12 +116,12 @@ public class Product {
         this.productComments = productComments;
     }
 
-    public ArrayList<Seller> getProductSellers() {
-        return productSellers;
+    public Seller getProductSeller() {
+        return productSeller;
     }
 
-    public void setProductSellers(ArrayList<Seller> productSellers) {
-        this.productSellers = productSellers;
+    public void setProductSeller(Seller productSeller) {
+        this.productSeller = productSeller;
     }
 
     public int getVisitNumber() {
@@ -136,6 +138,14 @@ public class Product {
 
     public static ArrayList<Product> getAllProducts() {
         return allProducts;
+    }
+
+    public String getExplanations() {
+        return explanations;
+    }
+
+    public void setExplanations(String explanations) {
+        this.explanations = explanations;
     }
 
     public double getTotalScore() {
@@ -155,6 +165,16 @@ public class Product {
             }
         }
         return null;
+    }
+
+    public void digest(){
+        System.out.printf("%s: %s%n%s: %f%n%s: %d %s: %f%n%s: %s%n%s: %s%n%s: %f%n%n",
+                "explanations", explanations,
+                "price", price,
+                "discount percentage", discount.getDiscountPercent(), "max discount amount", discount.getMaxPossibleDiscount(),
+                "category", productCategory.getName(),
+                "seller", productSeller.getName(),
+                "average score", getTotalScore());
     }
 
     @Override

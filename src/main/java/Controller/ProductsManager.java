@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Product.*;
+import com.sun.tools.javac.parser.Tokens;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -105,6 +106,10 @@ public class ProductsManager {
 
     public Product getProductByID(String ID){
         return Product.getProductByName(ID);
+    }
+
+    public ArrayList<Comment> getProductComments(Product product){
+        return product.getProductComments();
     }
 
     private static Matcher getMatcher(String input, String regex){
