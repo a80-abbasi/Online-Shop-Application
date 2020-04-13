@@ -12,12 +12,12 @@ public class Discount {
     private ArrayList<Customer> includingCustomers;
 
     Discount (String discountCode, String startTime, String endTime, int discountPercent, double maxPossibleDiscount) {
-    {
+
         allDiscounts = new ArrayList<>();
         includingCustomers = new ArrayList<>();
     }
 
-    public Discount (String discountCode, String startTime, String endTime, int discountPercent, int maxPossibleDiscount, int discountPerCustomer) {
+    public Discount (String discountCode, String startTime, String endTime, int discountPercent, int maxPossibleDiscount) {
         this.discountCode = discountCode;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -28,10 +28,6 @@ public class Discount {
     public double calculateTotalDiscount(double money){
         double discountAmount = money * discountPercent;
         return Math.min(discountAmount, maxPossibleDiscount);
-    }
-
-    public String getDiscountCode() {
-        return discountCode;
     }
 
     public void setDiscountCode(String discountCode) {
@@ -76,7 +72,7 @@ public class Discount {
 
     public void setIncludingCustomers(ArrayList<Customer> includingCustomers) {
         this.includingCustomers = includingCustomers;
-        this.discountPerCustomer = discountPerCustomer;
+//        this.discountPerCustomer = discountPerCustomer;
         allDiscounts.add(this);
     }
 
