@@ -16,10 +16,12 @@ public class ViewOrdersMenu extends Menu {
 
     private Menu getShowOrderMenu() {
         //todo
+        return null;
     }
 
     private Menu getRateMenu() {
         //todo
+        return null;
     }
 
     //todo: w8 for answer in group for adding override for execute to give inputs for rate;
