@@ -4,9 +4,9 @@ import Model.Account.Account;
 import Model.Account.Admin;
 import Model.Account.Customer;
 import Model.Account.Seller;
-import View.AdminProfileMenu;
-import View.CustomerProfileMenu;
-import View.SellerProfileMenu;
+import View.AdminMenus.AdminProfileMenu;
+import View.CustomerProfileMenus.CustomerProfileMenu;
+import View.SellerMenus.SellerProfileMenu;
 
 import java.util.Scanner;
 
@@ -26,7 +26,7 @@ public class LoginAndRegisterManager {
             String password = scanner.nextLine().trim();
             if (account.getPassword().equals(password)) {
                 if (account instanceof Admin) {
-                    new AdminProfileMenu((Admin) account);
+                    new AdminProfileMenu(, (Admin) account);
                 }
                 else if (account instanceof Seller) {
                     new SellerProfileMenu((Seller) account);

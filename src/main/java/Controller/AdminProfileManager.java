@@ -84,7 +84,6 @@ public class AdminProfileManager extends ProfileManager{
     public void viewDiscountCodes() {
         ArrayList<Discount> allDiscounts = Discount.getAllDiscounts();
         for (Discount discount : allDiscounts) {
-            System.out.println(discount.getDiscountCode());
         }
     }
 
@@ -116,11 +115,6 @@ public class AdminProfileManager extends ProfileManager{
 
 
     public void editCategory(Category category) {
-        String editionField = scanner.nextLine().trim();
-        if (editionField.equalsIgnoreCase("name")) {
-            String editionName = scanner.nextLine().trim();
-            category.setName(editionName);
-        }
 
     }
 
