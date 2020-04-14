@@ -9,10 +9,10 @@ public class EditMenu extends Menu {
     Account account;
     public EditMenu(Account account, Menu parentMenu) {
         super("Edit Personal Info", parentMenu);
-        ArrayList<Menu> submenus = new ArrayList<>();
-        submenus.add(getEditMenu());
+        ArrayList<Menu> subMenus = new ArrayList<>();
+        subMenus.add(getEditMenu());
         this.account = account;
-        this.submenus = submenus;
+        this.setSubmenus(subMenus);
 
     }
     private Menu getEditMenu() {
