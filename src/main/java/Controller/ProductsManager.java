@@ -104,7 +104,7 @@ public class ProductsManager {
     }
 
     public Product getProductByID(String ID){
-        return Product.getProductByName(ID);
+        return Product.getProductByID(ID);
     }
 
     private static Matcher getMatcher(String input, String regex){

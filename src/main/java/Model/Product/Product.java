@@ -148,7 +148,7 @@ public class Product {
         return productScore / allScores.size();
     }
 
-    public static Product getProductByName(String ID){
+    public static Product getProductByID(String ID){
         for (Product product : allProducts) {
             if (product.productId.equals(ID)){
                 return product;

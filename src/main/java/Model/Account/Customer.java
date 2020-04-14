@@ -9,8 +9,7 @@ public class Customer extends Account {
     private ArrayList<Product> cart;
     private ArrayList<BuyLog> buyLogs;
 
-    public Customer(String username, String password, String name, String lastName, String email, String phoneNumber,
-                    int balance) {
+    public Customer(String username, String password, String name, String lastName, String email, String phoneNumber, int balance) {
         super(username, password, name, lastName, email, phoneNumber);
         this.balance = balance;
         cart = new ArrayList<>();
