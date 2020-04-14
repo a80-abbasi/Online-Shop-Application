@@ -17,7 +17,7 @@
   </nodes>
   <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="214.0" y="199.5" />
+  <settings layout="Hierarchic Group" zoom="0.4359141184124919" x="704.0" y="758.5" />
   <SelectedNodes>
     <node>Model.Product.Category</node>
     <node>Model.Product.ProductComparatorForScore</node>

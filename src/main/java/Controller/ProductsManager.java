@@ -105,7 +105,7 @@ public class ProductsManager {
     }
 
     public Product getProductByID(String ID){
-        return Product.getProductByName(ID);
+        return Product.getProductByID(ID);
     }
 
     public ArrayList<Comment> getProductComments(Product product){
