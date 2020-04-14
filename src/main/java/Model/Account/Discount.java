@@ -12,8 +12,7 @@ public class Discount {
     private int discountPerCustomer;
     private ArrayList<Customer> includingCustomers;
 
-    Discount (String discountCode, String startTime, String endTime, int discountPercent, double maxPossibleDiscount) {
-
+    {
         allDiscounts = new ArrayList<>();
         includingCustomers = new ArrayList<>();
     }
@@ -75,7 +74,6 @@ public class Discount {
 
     public void setIncludingCustomers(ArrayList<Customer> includingCustomers) {
         this.includingCustomers = includingCustomers;
-        this.discountPerCustomer = discountPerCustomer;
         allDiscounts.add(this);
     }
 
