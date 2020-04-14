@@ -2,22 +2,11 @@ package Model.Account;
 
 import java.util.ArrayList;
 
-class Field {
-    String name;
-    String value;
-    public Field(String name, String value){
-        this.name = name;
-        this.value = value;
-    }
 
-    public String getName() {
-        return name;
-    }
-}
 
 public abstract class Account {
     private static ArrayList<Account> allAccounts = new ArrayList<>();
-    protected ArrayList<Field> personalFields = new ArrayList<>();
+    public ArrayList<Field> personalFields = new ArrayList<>();
 
     public Account(String username, String password, String name, String lastName, String email, String phoneNumber) {
         personalFields.add(new Field("username", username));
