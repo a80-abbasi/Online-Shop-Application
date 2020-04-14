@@ -1,4 +1,4 @@
-package View.SellerMenus;
+package View.SellerProfileMenus;
 
 import Model.Account.Seller;
 import View.Menu;

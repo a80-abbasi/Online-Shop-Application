@@ -12,7 +12,7 @@
     <node x="2737.0" y="480.0">View.ProductMenus.ProductMenu</node>
     <node x="1481.0" y="522.0">View.LoginMenu</node>
     <node x="1649.0" y="501.0">View.CustomerProfileMenus.CustomerProfileMenu</node>
-    <node x="1068.0" y="501.0">View.SellerMenus.SellerProfileMenu</node>
+    <node x="1068.0" y="501.0">View.SellerProfileMenus.SellerProfileMenu</node>
     <node x="581.9999999999999" y="479.0">View.ProductsMenus.SetFilteringTypeMenu</node>
     <node x="2936.0" y="479.0">View.ProductsMenus.DisablingFiltersMenu</node>
     <node x="2212.0" y="479.0">View.ProductsMenus.SortingMenu</node>
@@ -63,7 +63,7 @@
       <point x="1349.3214285714284" y="409.0" />
       <point x="-111.17857142857133" y="189.5" />
     </edge>
-    <edge source="View.SellerMenus.SellerProfileMenu" target="View.Menu">
+    <edge source="View.SellerProfileMenus.SellerProfileMenu" target="View.Menu">
       <point x="0.0" y="-47.5" />
       <point x="1159.5" y="449.0" />
       <point x="1430.178571428571" y="449.0" />
@@ -117,7 +117,7 @@
     <node>View.ProductMenus.ProductMenu</node>
     <node>View.LoginMenu</node>
     <node>View.CustomerProfileMenus.CustomerProfileMenu</node>
-    <node>View.SellerMenus.SellerProfileMenu</node>
+    <node>View.SellerProfileMenus.SellerProfileMenu</node>
     <node>View.ProductsMenus.SetFilteringTypeMenu</node>
     <node>View.ProductsMenus.DisablingFiltersMenu</node>
     <node>View.ProductsMenus.SortingMenu</node>
