@@ -19,16 +19,11 @@ public class Customer extends Account {
         usedDiscounts = new HashMap<>();
     }
 
-    public Customer() {
-        super();
-        this.balance = 0;
-    }
-
     public int getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public void setBalance(int newBalance) {
+        this.balance = newBalance;
     }
 }
