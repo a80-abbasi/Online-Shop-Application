@@ -2,8 +2,6 @@ package View;
 
 import Controller.EditManager;
 import Model.Account.Account;
-import Model.Account.Customer;
-import Model.Account.Field;
 
 import java.util.ArrayList;
 
