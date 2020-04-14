@@ -1,5 +1,6 @@
 package View;
 
+import Controller.EditManager;
 import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Field;
@@ -20,7 +21,8 @@ public class ViewPersonalInfoMenu extends Menu {
 
     @Override
     public void execute() {
-        for (Field personalField : account.personalFields) {
+
+        for (Field personalField : EditManager.getAnAccountPersonalFields(account)) {
             System.out.println(personalField.getName() + " : " + personalField.getValue());
         }
         if (accountType.equals("Customer")) {

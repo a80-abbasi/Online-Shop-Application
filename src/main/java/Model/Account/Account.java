@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public abstract class Account {
     private static ArrayList<Account> allAccounts = new ArrayList<>();
-    public ArrayList<Field> personalFields = new ArrayList<>();
+    private ArrayList<Field> personalFields = new ArrayList<>();
 
     public Account(String username, String password, String name, String lastName, String email, String phoneNumber) {
         personalFields.add(new Field("username", username));
@@ -57,5 +57,9 @@ public abstract class Account {
             }
         }
         return false;
+    }
+
+    public ArrayList<Field> getPersonalFields() {
+        return personalFields;
     }
 }
