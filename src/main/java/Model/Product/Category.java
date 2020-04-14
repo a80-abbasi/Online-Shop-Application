@@ -9,7 +9,7 @@ public class Category {
     private ArrayList<Product> products;
     //vizhegi makhsus??!
 
-    public Category(String name) {
+    public Category(String name, String specialProperties) {
         this.name = name;
         subCategories = new ArrayList<>();
         products = new ArrayList<>();
@@ -57,6 +57,10 @@ public class Category {
             }
         }
         return null;
+    }
+
+    public static void removeCategory(Category category) {
+        allCategories.remove(category);
     }
 
     @Override

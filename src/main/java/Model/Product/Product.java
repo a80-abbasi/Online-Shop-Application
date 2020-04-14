@@ -183,6 +183,10 @@ public class Product {
         return null;
     }
 
+    public static void removeProduct(Product product) {
+        allProducts.remove(product);
+    }
+
     public void digest(){
         System.out.printf("%s: %s%n%s: %f%n%s: %d %s: %f%n%s: %s%n%s: %s%n%s: %f%n%n",
                 "explanations", explanations,
