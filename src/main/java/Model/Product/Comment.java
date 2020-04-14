@@ -5,6 +5,7 @@ import Model.Account.Account;
 public class Comment {
     private Account account;
     private Product product;
+    private String title;
     private String comment;
     private CommentStatus status;
     private boolean checkBuy;
@@ -50,5 +51,13 @@ public class Comment {
 
     public void setStatus(CommentStatus status) {
         this.status = status;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

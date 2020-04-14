@@ -1,5 +1,6 @@
 package Model.Product;
 
+import Model.Account.Discount;
 import Model.Account.Seller;
 
 import java.util.ArrayList;
@@ -12,34 +13,35 @@ public class Product {
     private String productName;
     private String companyName;
     private double price;
-    private boolean existenceStatus;
+    private int existingNumber;
     private Category productCategory;
+    private String explanations;
+    private Discount discount;
     private ArrayList<Score> allScores;
     private ArrayList<Comment> productComments;
-    private ArrayList<Seller> productSellers;
+    private Seller productSeller;
     private int visitNumber;
     private LocalDateTime timeOfCreation;
 
     {
         productComments = new ArrayList<>();
-        productSellers = new ArrayList<>();
     }
 
     public Product (String productId, ProductStatus productStatus, String productName, String companyName, double price,
-                    Seller seller, boolean existenceStatus) {
+                    Seller seller, int existingNumber) {
         this.productId = productId;
         this.productStatus = productStatus;
         this.productName = productName;
         this.companyName = companyName;
         this.price = price;
-        this.productSellers.add(seller);
-        this.existenceStatus = existenceStatus;
+        this.productSeller = seller;
+        this.existingNumber = existingNumber;
         timeOfCreation = LocalDateTime.now();
         allProducts.add(this);
     }
 
     public Product() {
-        this("", null, "", "", 0, null, false);
+        this("", null, "", "", 0, null, 0);
     }
 
     public String getProductId() {
@@ -82,12 +84,12 @@ public class Product {
         this.price = price;
     }
 
-    public boolean getExistenceStatus() {
-        return existenceStatus;
+    public int getExistingNumber() {
+        return existingNumber;
     }
 
-    public void setExistenceStatus(boolean existenceStatus) {
-        this.existenceStatus = existenceStatus;
+    public void setExistingNumber(int existingNumber) {
+        this.existingNumber = existingNumber;
     }
 
     public Category getProductCategory() {
@@ -114,12 +116,12 @@ public class Product {
         this.productComments = productComments;
     }
 
-    public ArrayList<Seller> getProductSellers() {
-        return productSellers;
+    public Seller getProductSeller() {
+        return productSeller;
     }
 
-    public void setProductSellers(ArrayList<Seller> productSellers) {
-        this.productSellers = productSellers;
+    public void setProductSeller(Seller productSeller) {
+        this.productSeller = productSeller;
     }
 
     public int getVisitNumber() {
@@ -136,6 +138,30 @@ public class Product {
 
     public static ArrayList<Product> getAllProducts() {
         return allProducts;
+    }
+
+    public String getExplanations() {
+        return explanations;
+    }
+
+    public void setExplanations(String explanations) {
+        this.explanations = explanations;
+    }
+
+    public static void setAllProducts(ArrayList<Product> allProducts) {
+        Product.allProducts = allProducts;
+    }
+
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
+    }
+
+    public void setTimeOfCreation(LocalDateTime timeOfCreation) {
+        this.timeOfCreation = timeOfCreation;
     }
 
     public double getTotalScore() {
@@ -157,6 +183,16 @@ public class Product {
         return null;
     }
 
+    public void digest(){
+        System.out.printf("%s: %s%n%s: %f%n%s: %d %s: %f%n%s: %s%n%s: %s%n%s: %f%n%n",
+                "explanations", explanations,
+                "price", price,
+                "discount percentage", discount.getDiscountPercent(), "max discount amount", discount.getMaxPossibleDiscount(),
+                "category", productCategory.getName(),
+                "seller", productSeller.getName(),
+                "average score", getTotalScore());
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -165,7 +201,7 @@ public class Product {
                 ", companyName='" + companyName + '\'' +
                 ", price=" + price +
                 ", score=" + getTotalScore() +
-                ", 'does" + (existenceStatus ? "" :  "not") + "exist'" +
+                ", 'does" + (existingNumber != 0 ? "" :  "not") + "exist'" +
                 '}';
     }
 }

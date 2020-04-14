@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Model.Account</OriginalElement>
+  <nodes>
+    <node x="1000.0" y="308.0">Model.Account.BuyLog</node>
+    <node x="0.0" y="648.0">Model.Account.Seller</node>
+    <node x="0.0" y="897.0">Model.Account.Discount</node>
+    <node x="317.0" y="0.0">Model.Account.Account</node>
+    <node x="361.0" y="691.0">Model.Account.Admin</node>
+    <node x="1186.0" y="0.0">Model.Account.Log</node>
+    <node x="1262.0" y="297.0">Model.Account.SellLog</node>
+    <node x="611.0" y="627.0">Model.Account.Customer</node>
+    <node x="359.0" y="897.0">Model.Account.Off</node>
+    <node x="650.0" y="897.0">Model.Account.OffStatus</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Model.Account.BuyLog" target="Model.Account.Log">
+      <point x="0.0" y="-211.5" />
+      <point x="1121.0" y="272.0" />
+      <point x="1224.75" y="272.0" />
+      <point x="-38.75" y="123.5" />
+    </edge>
+    <edge source="Model.Account.Customer" target="Model.Account.Account">
+      <point x="0.0" y="-112.5" />
+      <point x="783.0" y="602.0" />
+      <point x="582.0" y="602.0" />
+      <point x="106.0" y="288.5" />
+    </edge>
+    <edge source="Model.Account.Admin" target="Model.Account.Account">
+      <point x="0.0" y="-48.5" />
+      <point x="0.0" y="288.5" />
+    </edge>
+    <edge source="Model.Account.Seller" target="Model.Account.Account">
+      <point x="0.0" y="-91.5" />
+      <point x="170.5" y="602.0" />
+      <point x="370.0" y="602.0" />
+      <point x="-106.0" y="288.5" />
+    </edge>
+    <edge source="Model.Account.SellLog" target="Model.Account.Log">
+      <point x="0.0" y="-222.5" />
+      <point x="1406.0" y="272.0" />
+      <point x="1302.25" y="272.0" />
+      <point x="38.75" y="123.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.42948717948717946" x="775.0" y="770.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

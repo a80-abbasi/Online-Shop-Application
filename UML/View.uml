@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>View</OriginalElement>
+  <nodes>
+    <node x="0.0" y="522.0">View.MainMenu</node>
+    <node x="1319.0" y="0.0">View.Menu</node>
+    <node x="829.9999999999999" y="479.0">View.ProductsMenu</node>
+    <node x="1271.0" y="522.0">View.ManageUsersMenu</node>
+    <node x="356.0" y="479.0">View.SetSortTypeMenu</node>
+    <node x="1893.0" y="479.0">View.AdminProfileMenu</node>
+    <node x="2737.0" y="480.0">View.ProductMenu</node>
+    <node x="1481.0" y="522.0">View.LoginMenu</node>
+    <node x="1649.0" y="501.0">View.CustomerProfileMenu</node>
+    <node x="1068.0" y="501.0">View.SellerProfileMenu</node>
+    <node x="581.9999999999999" y="479.0">View.SetFilteringTypeMenu</node>
+    <node x="2936.0" y="479.0">View.DisablingFiltersMenu</node>
+    <node x="2212.0" y="479.0">View.SortingMenu</node>
+    <node x="136.0" y="480.0">View.DigestMenu</node>
+    <node x="2472.0" y="490.0">View.FilteringMenu</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="View.ProductsMenu" target="View.Menu">
+      <point x="1.1368683772161603E-13" y="-69.5" />
+      <point x="939.0" y="439.0" />
+      <point x="1409.9642857142858" y="439.0" />
+      <point x="-50.53571428571422" y="189.5" />
+    </edge>
+    <edge source="View.ManageUsersMenu" target="View.Menu">
+      <point x="0.0" y="-26.5" />
+      <point x="1366.0" y="459.0" />
+      <point x="1450.3928571428569" y="459.0" />
+      <point x="-10.10714285714289" y="189.5" />
+    </edge>
+    <edge source="View.SetSortTypeMenu" target="View.Menu">
+      <point x="0.0" y="-69.5" />
+      <point x="459.0" y="419.0" />
+      <point x="1369.5357142857142" y="419.0" />
+      <point x="-90.96428571428578" y="189.5" />
+    </edge>
+    <edge source="View.ProductMenu" target="View.Menu">
+      <point x="0.0" y="-68.5" />
+      <point x="2826.5" y="409.0" />
+      <point x="1571.6785714285716" y="409.0" />
+      <point x="111.17857142857156" y="189.5" />
+    </edge>
+    <edge source="View.LoginMenu" target="View.Menu">
+      <point x="0.0" y="-26.5" />
+      <point x="1555.0" y="459.0" />
+      <point x="1470.6071428571427" y="459.0" />
+      <point x="10.10714285714289" y="189.5" />
+    </edge>
+    <edge source="View.DisablingFiltersMenu" target="View.Menu">
+      <point x="0.0" y="-69.5" />
+      <point x="3070.0" y="399.0" />
+      <point x="1591.8928571428569" y="399.0" />
+      <point x="131.3928571428571" y="189.5" />
+    </edge>
+    <edge source="View.DigestMenu" target="View.Menu">
+      <point x="0.0" y="-68.5" />
+      <point x="236.0" y="409.0" />
+      <point x="1349.3214285714284" y="409.0" />
+      <point x="-111.17857142857133" y="189.5" />
+    </edge>
+    <edge source="View.SellerProfileMenu" target="View.Menu">
+      <point x="0.0" y="-47.5" />
+      <point x="1159.5" y="449.0" />
+      <point x="1430.178571428571" y="449.0" />
+      <point x="-30.32142857142867" y="189.5" />
+    </edge>
+    <edge source="View.FilteringMenu" target="View.Menu">
+      <point x="0.0" y="-58.5" />
+      <point x="2594.5" y="419.0" />
+      <point x="1551.4642857142858" y="419.0" />
+      <point x="90.96428571428578" y="189.5" />
+    </edge>
+    <edge source="View.SortingMenu" target="View.Menu">
+      <point x="0.0" y="-69.5" />
+      <point x="2332.0" y="429.0" />
+      <point x="1531.25" y="429.0" />
+      <point x="70.75" y="189.5" />
+    </edge>
+    <edge source="View.AdminProfileMenu" target="View.Menu">
+      <point x="0.0" y="-69.5" />
+      <point x="2042.5" y="439.0" />
+      <point x="1511.0357142857142" y="439.0" />
+      <point x="50.53571428571422" y="189.5" />
+    </edge>
+    <edge source="View.SetFilteringTypeMenu" target="View.Menu">
+      <point x="0.0" y="-69.5" />
+      <point x="695.9999999999999" y="429.0" />
+      <point x="1389.75" y="429.0" />
+      <point x="-70.75" y="189.5" />
+    </edge>
+    <edge source="View.MainMenu" target="View.Menu">
+      <point x="0.0" y="-26.5" />
+      <point x="58.0" y="399.0" />
+      <point x="1329.1071428571427" y="399.0" />
+      <point x="-131.3928571428571" y="189.5" />
+    </edge>
+    <edge source="View.CustomerProfileMenu" target="View.Menu">
+      <point x="0.0" y="-47.5" />
+      <point x="1761.0" y="449.0" />
+      <point x="1490.8214285714284" y="449.0" />
+      <point x="30.32142857142844" y="189.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.3663151364764268" x="1602.0000000000002" y="309.0" />
+  <SelectedNodes>
+    <node>View.MainMenu</node>
+    <node>View.Menu</node>
+    <node>View.ProductsMenu</node>
+    <node>View.ManageUsersMenu</node>
+    <node>View.SetSortTypeMenu</node>
+    <node>View.AdminProfileMenu</node>
+    <node>View.ProductMenu</node>
+    <node>View.LoginMenu</node>
+    <node>View.CustomerProfileMenu</node>
+    <node>View.SellerProfileMenu</node>
+    <node>View.SetFilteringTypeMenu</node>
+    <node>View.DisablingFiltersMenu</node>
+    <node>View.SortingMenu</node>
+    <node>View.DigestMenu</node>
+    <node>View.FilteringMenu</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
