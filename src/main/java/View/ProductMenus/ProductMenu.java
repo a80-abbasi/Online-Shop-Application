@@ -1,7 +1,9 @@
-package View;
+package View.ProductMenus;
 
 import Model.Product.CommentsMenu;
 import Model.Product.Product;
+import View.Menu;
+import View.ProductMenus.DigestMenu;
 
 import java.util.ArrayList;
 

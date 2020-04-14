@@ -1,8 +1,9 @@
-package View;
+package View.SellerProfileMenus;
 
 import Model.Account.Seller;
+import View.Menu;
 
-public class SellerProfileMenu extends Menu{
+public class SellerProfileMenu extends Menu {
     private Seller seller;
 
     public SellerProfileMenu(Seller seller) {

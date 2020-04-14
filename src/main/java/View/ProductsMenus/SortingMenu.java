@@ -1,8 +1,10 @@
-package View;
+package View.ProductsMenus;
+
+import View.Menu;
 
 import java.util.ArrayList;
 
-public class SortingMenu extends Menu{
+public class SortingMenu extends Menu {
     public SortingMenu(Menu parentMenu) {
         super("Sorting Menu", parentMenu);
         ArrayList<Menu> subMenus = new ArrayList<>();

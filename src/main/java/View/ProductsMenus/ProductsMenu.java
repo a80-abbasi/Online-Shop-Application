@@ -1,6 +1,8 @@
-package View;
+package View.ProductsMenus;
 
 import Model.Product.Product;
+import View.Menu;
+import View.ProductMenus.ProductMenu;
 
 import java.util.ArrayList;
 

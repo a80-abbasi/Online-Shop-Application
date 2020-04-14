@@ -1,6 +1,7 @@
-package View;
+package View.CustomerProfileMenus;
 
 import Model.Account.Customer;
+import View.Menu;
 
 import java.util.ArrayList;
 
@@ -16,11 +17,13 @@ public class ViewOrdersMenu extends Menu {
     private Menu getShowOrderMenu() {
         return null;
         //todo
+        return null;
     }
 
     private Menu getRateMenu() {
         return null;
         //todo
+        return null;
     }
 
     //todo: w8 for answer in group for adding override for execute to give inputs for rate
