@@ -98,4 +98,8 @@ public class Discount {
         }
         return null;
     }
+
+    public static void removeDiscount(Discount discount) {
+        allDiscounts.remove(discount);
+    }
 }

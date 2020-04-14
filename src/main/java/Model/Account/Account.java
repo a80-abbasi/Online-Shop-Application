@@ -85,4 +85,8 @@ public abstract class Account {
         }
         return null;
     }
+
+    public static void deleteAccount(Account account) {
+        allAccounts.remove(account);
+    }
 }
