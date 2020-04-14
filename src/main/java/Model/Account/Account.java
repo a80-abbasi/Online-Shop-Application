@@ -18,6 +18,7 @@ public abstract class Account {
         allAccounts.add(this);
     }
 
+
     public String getFieldValue(String name) {
         for (Field personalField : personalFields) {
             if (personalField.getName().equals(name)) {

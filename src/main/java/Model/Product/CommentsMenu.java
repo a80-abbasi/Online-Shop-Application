@@ -13,7 +13,7 @@ public class CommentsMenu extends Menu {
     @Override
     public void show() {
         for (Comment comment : productsManager.getProductComments(product)) {
-            System.out.println(comment.getAccount().getName() + ": " + comment.getTitle());
+            System.out.println(comment.getAccount().getFieldValue("name") + ": " + comment.getTitle());
             System.out.println(comment.getComment());
         }
         super.show();
