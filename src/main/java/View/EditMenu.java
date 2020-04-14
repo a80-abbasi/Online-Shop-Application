@@ -1,27 +1,25 @@
 package View;
 
-
-
 import Controller.EditManager;
 import Model.Account.Account;
 
 import java.util.ArrayList;
 
-public class ViewPersonalInfo extends Menu{
+public class EditMenu extends Menu {
     Account account;
-    public ViewPersonalInfo(Account gottenAccount, Menu parentMenu) {
-        super("View Personal Info Menu", parentMenu);
+    public EditMenu(Account account, Menu parentMenu) {
+        super("Edit Personal Info", parentMenu);
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getEditMenu());
+        this.account = account;
         this.submenus = submenus;
-        account = gottenAccount;
-    }
 
+    }
     private Menu getEditMenu() {
-        return new Menu("Edit Personal Info Menu", this) {
+        return new Menu("View Categories", this) {
             @Override
             public void execute() {
-
+                productsManager.showAllCategories();
                 parentMenu.execute();
             }
         };
@@ -44,7 +42,7 @@ public class ViewPersonalInfo extends Menu{
                             System.out.println("Enter New " + fieldToEdit + " : ");
                             String newThing = scanner.nextLine();
                             if (EditManager.canEditWithNewString(fieldToEdit, newThing)) {
-                                account.setField(fieldToEdit, newThing);
+                                account.setFieldValue(fieldToEdit, newThing);
                             }
                         } else {
                             System.err.println("you cant use this " + fieldToEdit);
@@ -63,7 +61,4 @@ public class ViewPersonalInfo extends Menu{
             execute();
         }
     }
-
-
 }
-
