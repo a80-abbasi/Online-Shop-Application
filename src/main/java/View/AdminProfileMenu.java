@@ -20,5 +20,4 @@ public class AdminProfileMenu extends Menu{
         this.adminProfileManager = new AdminProfileManager(admin);
         allAdminProfiles.add(this);
     }
-
 }
