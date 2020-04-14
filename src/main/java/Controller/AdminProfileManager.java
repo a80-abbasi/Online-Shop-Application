@@ -70,9 +70,6 @@ public class AdminProfileManager extends ProfileManager{
 
     }
 
-    public void manageAllProducts() {
-
-    }
 
     public void createDiscountCode() {
         String discountCode = scanner.nextLine().trim();
@@ -104,9 +101,6 @@ public class AdminProfileManager extends ProfileManager{
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
     }
 
-    public void manageRequests() {
-
-    }
 
     public void getDetailsOfRequest(String requestId) {
 
@@ -120,9 +114,6 @@ public class AdminProfileManager extends ProfileManager{
 
     }
 
-    public void manageCategories() {
-
-    }
 
     public void editCategory(Category category) {
         String editionField = scanner.nextLine().trim();
