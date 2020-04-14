@@ -1,6 +1,7 @@
-package View;
+package View.ProductsMenus;
 
 import Controller.SortType;
+import View.Menu;
 
 import java.util.ArrayList;
 

@@ -1,11 +1,13 @@
-package View;
+package View.CustomerProfileMenus;
 
 import Model.Account.Customer;
 import Model.Account.Discount;
+import View.Menu;
+import View.ViewPersonalInfoMenu;
 
 import java.util.ArrayList;
 
-public class CustomerProfileMenu extends Menu{
+public class CustomerProfileMenu extends Menu {
     Customer customer;
     public CustomerProfileMenu(Customer customerInCustomerProfileMenu, Menu parentMenu) {
         super("CustomerProfile Menu", parentMenu);

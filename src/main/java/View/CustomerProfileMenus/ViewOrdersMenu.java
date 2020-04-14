@@ -1,6 +1,7 @@
-package View;
+package View.CustomerProfileMenus;
 
 import Model.Account.Customer;
+import View.Menu;
 
 import java.util.ArrayList;
 

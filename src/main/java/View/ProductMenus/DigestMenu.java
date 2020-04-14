@@ -1,6 +1,7 @@
-package View;
+package View.ProductMenus;
 
 import Model.Product.Product;
+import View.Menu;
 
 public class DigestMenu extends Menu {
     private Product product;
