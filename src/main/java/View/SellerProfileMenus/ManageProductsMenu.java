@@ -14,7 +14,7 @@ public class ManageProductsMenu extends Menu {
         this.setSubmenus(subMenus);
     }
     public Menu getViewMenu() {
-        return new Menu("View Company Information", this) {
+        return new Menu("View Menu", this) {
             @Override
             public void execute() {
                 parentMenu.execute();
@@ -22,7 +22,7 @@ public class ManageProductsMenu extends Menu {
         };
     }
     public Menu getViewBuyersMenu() {
-        return new Menu("View Company Information", this) {
+        return new Menu("View Buyers Menu", this) {
             @Override
             public void execute() {
                 parentMenu.execute();
@@ -30,7 +30,7 @@ public class ManageProductsMenu extends Menu {
         };
     }
     public Menu getEditMenu() {
-        return new Menu("View Company Information", this) {
+        return new Menu("Edit Menu", this) {
             @Override
             public void execute() {
                 parentMenu.execute();

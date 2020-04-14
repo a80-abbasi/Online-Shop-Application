@@ -18,6 +18,6 @@ public class OffPageManager {
     }
 
     public void showProduct(String productId) {
-        Product product = Product.getProductByName(productId);
+        Product product = Product.getProductByID(productId);
     }
 }

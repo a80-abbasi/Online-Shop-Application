@@ -14,7 +14,7 @@ public class ViewOffsMenu extends Menu {
         this.setSubmenus(subMenus);
     }
     public Menu getViewMenu() {
-        return new Menu("View Off Menu", this) {
+        return new Menu("View Menu", this) {
             @Override
             public void execute() {
                 parentMenu.execute();
@@ -22,7 +22,7 @@ public class ViewOffsMenu extends Menu {
         };
     }
     public Menu getEditMenu() {
-        return new Menu("Edit Off Menu", this) {
+        return new Menu("Edit Menu", this) {
             @Override
             public void execute() {
                 parentMenu.execute();
