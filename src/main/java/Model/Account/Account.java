@@ -18,23 +18,19 @@ public abstract class Account {
         allAccounts.add(this);
     }
 
-    public Account() {
-        this("", "", "", "", "", "");
-    }
-
-    public String getField(String name) {
-        for (Field f : personalFields) {
-            if (f.getName().equals(name)) {
-                return f.value;
+    public String getFieldValue(String name) {
+        for (Field personalField : personalFields) {
+            if (personalField.getName().equals(name)) {
+                return personalField.getValue();
             }
         }
         return null;
     }
 
-    public void setField(String name, String newValue) {
+    public void setFieldValue(String name, String newValue) {
         for (Field personalField : personalFields) {
-            if (personalField.name.equals(name)) {
-                personalField.value = newValue;
+            if (personalField.getName().equals(name)) {
+                personalField.setValue(newValue);
             }
         }
     }
@@ -46,7 +42,7 @@ public abstract class Account {
     public static Account getAccountByUsername (String username) {
         for (Account account : allAccounts) {
             for (Field personalField : account.personalFields) {
-                if (personalField.name.equals("username")) {
+                if (personalField.getName().equals("username")) {
                     return account;
                 }
             }
@@ -56,7 +52,7 @@ public abstract class Account {
 
     public boolean hasField (String fieldName) {
         for (Field personalField : personalFields) {
-            if (personalField.name.equals(fieldName)) {
+            if (personalField.getName().equals(fieldName)) {
                 return true;
             }
         }
