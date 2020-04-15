@@ -21,6 +21,7 @@ public class ManageRequestsMenu extends Menu {
     public void show() {
         String allRequests = adminProfileManager.showAllRequests();
         System.out.println(allRequests);
+        super.show();
     }
 
     private Menu getDetailsOfRequestMenu() {

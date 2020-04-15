@@ -1,6 +1,7 @@
 package View.AdminMenus;
 
 import Controller.AdminProfileManager;
+import Model.Account.Discount;
 import View.Menu;
 
 import java.util.ArrayList;
@@ -19,8 +20,11 @@ public class ViewDiscountCodesMenu extends Menu {
 
     @Override
     public void show() {
-        String allDiscounts = adminProfileManager.viewAllDiscountCodes();
-        System.out.println(allDiscounts);
+        ArrayList<Discount> allDiscounts = adminProfileManager.getAllDiscountCodes();
+        for (Discount discount : allDiscounts) {
+            System.out.println(discount.toString());
+        }
+        super.show();
     }
 
     private Menu getViewDiscountCodeMenu() {
