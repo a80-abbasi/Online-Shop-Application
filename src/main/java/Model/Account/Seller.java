@@ -30,6 +30,10 @@ public class Seller extends Account {
         return nameOfCompany;
     }
 
+    public ArrayList<SellLog> getSellLogs() {
+        return sellLogs;
+    }
+
     public int getBalance() {
             return balance;
     }

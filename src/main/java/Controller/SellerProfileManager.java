@@ -1,11 +1,9 @@
 package Controller;
 
-import Model.Account.Account;
-import Model.Account.Log;
-import Model.Account.Off;
-import Model.Account.Seller;
+import Model.Account.*;
 import Model.Product.Category;
 import Model.Product.Product;
+import Model.Product.ProductStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,39 +16,59 @@ public class SellerProfileManager extends ProfileManager {
         this.seller = seller;
     }
 
-    public String viewCompanyInformation(Account account) {
+    public String getCompanyInformation() {
+        return seller.getNameOfCompany();
+    }
+
+    public ArrayList<String> getSalesHistory() {
+        ArrayList<String> salesHistory = new ArrayList<>();
+        for (SellLog sellLog : seller.getSellLogs()) {
+            salesHistory.add(sellLog.toString());
+        }
+        return salesHistory;
+    }
+
+    public ArrayList<Product> viewProductByID(String id) {
         return null;
     }
-    public ArrayList<Log> viewSalesHistory(Account account) {
-        return null;
-    }
-    public Product viewProductByID(String id) {
-        return null;
-    }
+
     public ArrayList<Account> viewBuyersByID(String id) {
         return null;
     }
-    public void editProductByID(String id, HashMap< String , String > newFields)  {
 
+    public void editByID(String id, HashMap< String , String > newFields)  {
     }
-    public boolean addProduct(ArrayList<String> properties) {
-        return true;
-    }
-    public void removeProduct(String id) {
 
+    public void addProduct(String productId, ProductStatus productStatus, String productName, String companyName, double price, int existingNumber, Seller seller) {
+        new AddProductRequest(productId, productStatus, productName, companyName, price, existingNumber, seller);
     }
-    public ArrayList<Category> showAllCategories() {
-        return null;
+
+    public void removeProduct(String productId) {
+        Product product = Product.getProductByID(productId);
+        Product.removeProduct(product);
     }
+
+    public ArrayList<String> getAllCategories() {
+        ArrayList<Category> allCategories = Category.getAllCategories();
+        ArrayList<String> allCategoriesNames = new ArrayList<>();
+        for (Category category : allCategories) {
+            allCategoriesNames.add(category.toString());
+        }
+        return allCategoriesNames;
+    }
+
     public ArrayList<Off> viewOffs(Account Seller) {
         return null;
     }
+
     public Off viewOff(String id) {
         return null;
     }
+
     public void editOff(String id) {
 
     }
+
     public void addOff (ArrayList<String> properties) {
 
     }
