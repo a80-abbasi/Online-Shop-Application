@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Account.*;
+import Model.Account.Request.*;
 import Model.Product.Category;
 import Model.Product.Product;
 import Model.Product.ProductStatus;
@@ -28,15 +29,32 @@ public class SellerProfileManager extends ProfileManager {
         return salesHistory;
     }
 
+    public ArrayList<String> getSellerProducts() {
+        ArrayList<Product> sellerProducts = seller.getProducts();
+        ArrayList<String> sellerProductsIds = new ArrayList<>();
+        for (Product product : sellerProducts) {
+            sellerProductsIds.add(product.getProductId());
+        }
+        return sellerProductsIds;
+    }
+
     public ArrayList<Product> viewProductByID(String id) {
         return null;
     }
 
-    public ArrayList<Account> viewBuyersByID(String id) {
-        return null;
+    public ArrayList<String> getProductBuyers(String productId) {
+        Product product = Product.getProductByID(productId);
+        ArrayList<Customer> allBuyers = product.getProductBuyers();
+        ArrayList<String> allBuyersNames = new ArrayList<>();
+        for (Customer buyer : allBuyers) {
+            allBuyersNames.add(buyer.getUsername());
+        }
+        return allBuyersNames;
     }
 
-    public void editByID(String id, HashMap< String , String > newFields)  {
+    public void editProductByID(String productId, HashMap<String, String> fieldChanges) {
+        Product product = Product.getProductByID(productId);
+        new EditProductRequest(product, fieldChanges);
     }
 
     public void addProduct(String productId, ProductStatus productStatus, String productName, String companyName, double price, int existingNumber, Seller seller) {
@@ -45,7 +63,7 @@ public class SellerProfileManager extends ProfileManager {
 
     public void removeProduct(String productId) {
         Product product = Product.getProductByID(productId);
-        Product.removeProduct(product);
+        new RemoveProductRequest(product);
     }
 
     public ArrayList<String> getAllCategories() {
@@ -57,20 +75,27 @@ public class SellerProfileManager extends ProfileManager {
         return allCategoriesNames;
     }
 
-    public ArrayList<Off> viewOffs(Account Seller) {
-        return null;
+    public ArrayList<String> viewOffs() {
+        ArrayList<String> allSellerOffIds = new ArrayList<>();
+        ArrayList<Off> allSellerOffs = seller.getOffs();
+        for (Off sellerOff : allSellerOffs) {
+            allSellerOffIds.add(sellerOff.getOffID());
+        }
+        return allSellerOffIds;
     }
 
-    public Off viewOff(String id) {
-        return null;
+    public String getOffStatus(String offId) {
+        Off off = Off.getOffById(offId);
+        return off.toString();
     }
 
-    public void editOff(String id) {
-
+    public void editOff(String offId, HashMap<String, String> fieldChanges) {
+        Off off = Off.getOffById(offId);
+        new EditOffRequest(off, fieldChanges);
     }
 
     public void addOff (ArrayList<String> properties) {
-
+        new AddOffRequest(properties);
     }
     public int viewBalance(Account account) {
         return 0;

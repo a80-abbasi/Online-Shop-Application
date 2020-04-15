@@ -3,7 +3,7 @@ package Controller;
 import Model.Account.Account;
 import Model.Account.Admin;
 import Model.Account.Discount;
-import Model.Account.Request;
+import Model.Account.Request.Request;
 import Model.Product.Category;
 import Model.Product.Product;
 
