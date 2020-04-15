@@ -1,36 +1,50 @@
 package View;
 
-import Controller.EditManager;
-import Model.Account.Account;
+import Controller.ProfileManager;
 
 import java.util.ArrayList;
 
 public class ViewPersonalInfoMenu extends Menu {
-    Account account;
-    String accountType;
-    public ViewPersonalInfoMenu(Account account, String accountType ,Menu parentMenu) {
+    private ProfileManager profileManager;
+
+    public ViewPersonalInfoMenu(Menu parentMenu, ProfileManager profileManager) {
         super("View Personal Info Menu", parentMenu);
+        this.profileManager = profileManager;
         ArrayList<Menu> submenus = new ArrayList<>();
-        submenus.add(new EditMenu(account, parentMenu));
-        this.account = account;
-        this.accountType = accountType;
-        this.submenus = submenus;
+        submenus.add(getEditFieldMenu());
+        this.setSubmenus(submenus);
     }
 
     @Override
-    public void execute() {
+    public void show() {
+        String personalInfo = profileManager.viewPersonalInfo();
+        System.out.println(personalInfo);
+    }
 
-        for (Field personalField : EditManager.getAnAccountPersonalFields(account)) {
-            System.out.println(personalField.getName() + " : " + personalField.getValue());
-        }
-        if (accountType.equals("Customer")) {
-            System.out.println();
-        } else if (accountType.equals("Seller")) {
-            System.out.println();
-        } else if (accountType.equals("Admin")) {
-            System.out.println();
-        }
-        //todo: print info about ...
-        super.execute();
+    private Menu getEditFieldMenu() {
+        return new Menu("Edit Field", this) {
+            @Override
+            public void show() {
+                System.out.println(this.getName() + ":");
+                System.out.println("Enter field you want to edit or (Back) to return");
+            }
+
+            @Override
+            public void execute() {
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("back")) {
+                    this.parentMenu.show();
+                    this.parentMenu.execute();
+                }
+                else {
+                    System.out.println("Enter the change you want to make:");
+                    String fieldChange = scanner.nextLine();
+                    String fieldName = input;
+                    profileManager.editFieldOfProfile(fieldName, fieldChange);
+                    this.show();
+                    this.execute();
+                }
+            }
+        };
     }
 }
