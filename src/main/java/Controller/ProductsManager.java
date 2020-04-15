@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Account.Account;
+import Model.Account.Customer;
 import Model.Product.*;
 
 import java.util.ArrayList;
@@ -114,5 +116,16 @@ public class ProductsManager {
     private static Matcher getMatcher(String input, String regex){
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(input);
+    }
+
+    public void addProductToCart(Product product){
+        Account account = Account.getLoggedInAccount();
+        if (account instanceof Customer){
+            Customer customer = (Customer) account;
+            customer.addToCart(product);
+        }
+        else {
+            throw new IllegalArgumentException("You are not logged-in as a customer");
+        }
     }
 }

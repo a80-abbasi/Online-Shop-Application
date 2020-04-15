@@ -26,4 +26,8 @@ public class Customer extends Account {
     public void setBalance(int newBalance) {
         this.balance = newBalance;
     }
+
+    public void addToCart(Product product){
+        cart.add(product);
+    }
 }

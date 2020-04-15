@@ -14,7 +14,7 @@ public abstract class Menu {
     protected static ProductsManager productsManager;
     protected static LoginAndRegisterManager loginAndRegisterManager;
     protected static ArrayList<Menu> allMenus = new ArrayList<>();
-    private Menu loginAndRegisterMenu = new LoginAndRegisterMenu(this);
+    protected Menu loginAndRegisterMenu = new LoginAndRegisterMenu(this);
 
     public Menu (String name, Menu parentMenu) {
         this.name = name;
