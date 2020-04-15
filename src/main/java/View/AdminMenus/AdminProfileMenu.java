@@ -8,13 +8,8 @@ import View.ViewPersonalInfoMenu;
 import java.util.ArrayList;
 
 public class AdminProfileMenu extends Menu {
-    private static ArrayList<AdminProfileMenu> allAdminProfiles;
     protected Admin admin;
     private AdminProfileManager adminProfileManager;
-
-    {
-        allAdminProfiles = new ArrayList<>();
-    }
 
     public AdminProfileMenu(Menu parentMenu, Admin admin) {
         super("Admin Profile Menu", parentMenu);
@@ -29,7 +24,6 @@ public class AdminProfileMenu extends Menu {
         submenus.add(new ManageRequestsMenu(this, adminProfileManager));
         submenus.add(new ManageCategoriesMenu(this, adminProfileManager));
         this.setSubmenus(submenus);
-        allAdminProfiles.add(this);
     }
 
     public Menu getCreateDiscountCodesMenu() {
