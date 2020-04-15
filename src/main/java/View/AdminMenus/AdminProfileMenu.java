@@ -21,8 +21,8 @@ public class AdminProfileMenu extends Menu {
         this.admin = admin;
         this.adminProfileManager = new AdminProfileManager(admin);
         ArrayList<Menu> submenus = new ArrayList<>();
-        submenus.add(new ViewPersonalInfoMenu(admin, "admin",  this));
-        submenus.add(new ManageUsersMenu(this, admin, adminProfileManager));
+        submenus.add(new ViewPersonalInfoMenu(this, adminProfileManager));
+        submenus.add(new ManageUsersMenu(this, adminProfileManager));
         submenus.add(new ManageAllProductsMenu(this, adminProfileManager));
         submenus.add(getCreateDiscountCodesMenu());
         submenus.add(new ViewDiscountCodesMenu(this, adminProfileManager));

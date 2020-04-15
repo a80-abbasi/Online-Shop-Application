@@ -7,17 +7,15 @@ import View.Menu;
 import java.util.ArrayList;
 
 public class ManageUsersMenu extends Menu {
-    private Admin admin;
     private AdminProfileManager adminProfileManager;
 
-    public ManageUsersMenu(Menu parentMenu, Admin admin, AdminProfileManager adminProfileManager) {
+    public ManageUsersMenu(Menu parentMenu, AdminProfileManager adminProfileManager) {
         super("Manage Users Menu", parentMenu);
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getViewUserMenu());
         submenus.add(getChangeTypeOfUserMenu());
         submenus.add(getDeleteUserMenu());
         submenus.add(getCreateManagerProfileMenu());
-        this.admin = admin;
     }
 
     @Override
