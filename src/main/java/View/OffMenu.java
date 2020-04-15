@@ -8,16 +8,13 @@ public class OffMenu extends Menu{
         super("Off Menu", parentMenu);
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getShowProductMenu());
+
+        this.setSubmenus(submenus);
     }
 
     @Override
     public void show() {
-
-    }
-
-    @Override
-    public void execute() {
-
+        super.show();
     }
 
     private Menu getShowProductMenu() {

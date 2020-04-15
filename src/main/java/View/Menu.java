@@ -2,6 +2,7 @@ package View;
 
 import Controller.LoginAndRegisterManager;
 import Controller.ProductsManager;
+import View.RegistrationMenus.LoginAndRegisterMenu;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ public abstract class Menu {
     protected static ProductsManager productsManager;
     protected static LoginAndRegisterManager loginAndRegisterManager;
     protected static ArrayList<Menu> allMenus = new ArrayList<>();
-    protected Menu loginAndRegisterMenu = new LoginAndRegisterMenu(this);
+    protected static Menu loginAndRegisterMenu;
 
     public Menu (String name, Menu parentMenu) {
         this.name = name;
@@ -47,6 +48,10 @@ public abstract class Menu {
         this.submenus = submenus;
     }
 
+    public static void setLoginAndRegisterMenu(Menu loginAndRegisterMenu) {
+        Menu.loginAndRegisterMenu = loginAndRegisterMenu;
+    }
+
     public void show() {
         System.out.println(this.name + ":");
         for (int i = 0; i < submenus.size(); i++) {
@@ -72,20 +77,24 @@ public abstract class Menu {
             int chosenMenu = Integer.parseInt(scanner.nextLine());
             if (chosenMenu == submenus.size() + 1){
                 if (loginAndRegisterManager.isLogin()) {
-                    loginAndRegisterMenu.execute();
-                }
-                else {
                     loginAndRegisterManager.logoutUser();
                 }
-                execute();
+                else {
+                    loginAndRegisterMenu.execute();
+                }
+                nextMenu = this;
             }
             else if (chosenMenu == submenus.size() + 2) {
-                if (this.parentMenu == null)
-                    System.exit(1);
-                else
+                if (this.parentMenu == null) {
+                    System.exit(0);
+                }
+                else {
                     nextMenu = this.parentMenu;
-            } else
+                }
+            }
+            else {
                 nextMenu = submenus.get(chosenMenu - 1);
+            }
 
             nextMenu.execute();
         }

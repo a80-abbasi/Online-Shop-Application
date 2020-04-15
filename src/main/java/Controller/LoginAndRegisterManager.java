@@ -44,7 +44,7 @@ public class LoginAndRegisterManager {
         Account.setLoggedInAccount(null);
     }
 
-    public boolean isLogin(){
+    public boolean isLogin() {
         return Account.getLoggedInAccount() != null;
     }
 }
