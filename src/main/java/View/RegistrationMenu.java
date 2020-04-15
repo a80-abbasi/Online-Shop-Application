@@ -23,7 +23,6 @@ public class RegistrationMenu extends Menu{
             public void execute() {
                 accountType = AccountType.CUSTOMER;
                 registerNewUser();
-                parentMenu.execute();
             }
         };
     }
@@ -34,7 +33,6 @@ public class RegistrationMenu extends Menu{
             public void execute() {
                 accountType = AccountType.SELLER;
                 registerNewUser();
-                parentMenu.execute();
             }
         };
     }
@@ -50,7 +48,6 @@ public class RegistrationMenu extends Menu{
                 else {
                     System.out.println("You can't create admin accounts any more");
                 }
-                parentMenu.execute();
             }
         };
     }

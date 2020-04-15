@@ -9,7 +9,7 @@ public class MainMenu extends Menu {
     public MainMenu() {
         super("Main Menu", null);
         ArrayList<Menu> submenus = new ArrayList<>();
-        submenus.add(new LoginAndRegisterMenu(this));
+        //todo: add profile menu
         submenus.add(new ProductsMenu(this));
         submenus.add(new OffMenu(this));
         this.setSubmenus(submenus);
