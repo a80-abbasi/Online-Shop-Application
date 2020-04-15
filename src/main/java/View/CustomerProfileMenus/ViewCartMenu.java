@@ -2,6 +2,7 @@ package View.CustomerProfileMenus;
 
 import Model.Product.Product;
 import View.Menu;
+import View.ProductMenus.ProductMenu;
 
 
 import java.util.ArrayList;
@@ -12,11 +13,39 @@ public class ViewCartMenu extends Menu {
         super("View Cart Menu", parentMenu);
         ArrayList<Menu> subMenus = new ArrayList<>();
         subMenus.add(getShowProductsMenu());
+        subMenus.add(new ProductMenu(this));
         subMenus.add(getIncreaseMenu());
         subMenus.add(getDecreaseMenu());
         subMenus.add(getShowTotalPriceMenu());
         //todo: create and add purchase menu
         this.submenus = subMenus;
+    }
+
+    @Override
+    public void execute() {
+        show();
+        try {
+            Menu nextMenu;
+            int chosenMenu = Integer.parseInt(scanner.nextLine());
+            if (chosenMenu == submenus.size() + 1) {
+                nextMenu = this.parentMenu;
+            } else {
+                if (chosenMenu == 1) {
+                    Product product = getProduct();
+                    if (product == null) {
+                        execute();
+                    } else {
+                        ProductMenu productMenu = (ProductMenu) submenus.get(1);
+                        productMenu.setProduct(product);
+                    }
+                }
+                nextMenu = submenus.get(chosenMenu - 1);
+            }
+            nextMenu.execute();
+        } catch (Exception e) {
+            System.out.println("Wrong Input\n");
+            execute();
+        }
     }
 
     private Menu getShowProductsMenu() {

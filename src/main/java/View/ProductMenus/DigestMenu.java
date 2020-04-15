@@ -30,7 +30,7 @@ public class DigestMenu extends Menu {
                     loginAndRegisterMenu.execute();
                 }
                 try {
-                    productsManager.addProductToCart(product);
+                    productsManager.addProductToCart(product, 1);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
