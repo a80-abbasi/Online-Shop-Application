@@ -20,8 +20,10 @@ public class ManageRequestsMenu extends Menu {
 
     @Override
     public void show() {
-        String allRequests = adminProfileManager.showAllRequests();
-        System.out.println(allRequests);
+        ArrayList<String> allRequests = adminProfileManager.getAllRequests();
+        for (String request : allRequests) {
+            System.out.println(request);
+        }
         super.show();
     }
 
@@ -29,12 +31,24 @@ public class ManageRequestsMenu extends Menu {
         return new Menu("Details of request", this) {
             @Override
             public void show() {
-                super.show();
+                System.out.println(this.getName() + ":");
+                System.out.println("Enter requestId to show details or (back) to return:");
             }
 
             @Override
             public void execute() {
-                super.execute();
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("back")) {
+                    this.parentMenu.show();
+                    this.parentMenu.execute();
+                }
+                else {
+                    String requestId = input;
+                    String requestDetails = adminProfileManager.getDetailsOfRequest(requestId);
+                    System.out.println(requestDetails);
+                    this.show();
+                    this.execute();
+                }
             }
         };
     }
@@ -43,12 +57,23 @@ public class ManageRequestsMenu extends Menu {
         return new Menu("Accept Request", this) {
             @Override
             public void show() {
-
+                System.out.println(this.getName() + ":");
+                System.out.println("Enter requestId to accept or (back) to return:");
             }
 
             @Override
             public void execute() {
-
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("back")) {
+                    this.parentMenu.show();
+                    this.parentMenu.execute();
+                }
+                else {
+                    String requestId = input;
+                    adminProfileManager.acceptRequest(requestId);
+                    this.show();
+                    this.execute();
+                }
             }
         };
     }
@@ -57,12 +82,23 @@ public class ManageRequestsMenu extends Menu {
         return new Menu("Decline Request", this) {
             @Override
             public void show() {
-
+                System.out.println(this.getName() + ":");
+                System.out.println("Enter requestId to decline or (back) to return:");
             }
 
             @Override
             public void execute() {
-
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("back")) {
+                    this.parentMenu.show();
+                    this.parentMenu.execute();
+                }
+                else {
+                    String requestId = input;
+                    adminProfileManager.declineRequest(requestId);
+                    this.show();
+                    this.execute();
+                }
             }
         };
     }
