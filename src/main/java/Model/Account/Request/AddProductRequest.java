@@ -1,5 +1,6 @@
-package Model.Account;
+package Model.Account.Request;
 
+import Model.Account.Seller;
 import Model.Product.Product;
 import Model.Product.ProductStatus;
 
