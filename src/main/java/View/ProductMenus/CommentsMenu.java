@@ -1,5 +1,7 @@
-package Model.Product;
+package View.ProductMenus;
 
+import Model.Product.Comment;
+import Model.Product.Product;
 import View.Menu;
 
 public class CommentsMenu extends Menu {

@@ -34,6 +34,9 @@ public class DigestMenu extends Menu {
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
+                finally {
+                    parentMenu.execute();
+                }
             }
         };
     }

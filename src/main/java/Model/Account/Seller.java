@@ -11,7 +11,8 @@ public class Seller extends Account {
     private ArrayList<Product> products;
     private ArrayList<Off> offs;
 
-    public Seller(String username, String password, String name, String lastName, String email, String phoneNumber, String nameOfCompany, int balance) {
+    public Seller(String username, String password, String name, String lastName, String email, String phoneNumber, String nameOfCompany,
+                  int balance) {
         super(username, password, name, lastName, email, phoneNumber);
         this.nameOfCompany = nameOfCompany;
         this.balance = balance;
@@ -21,7 +22,7 @@ public class Seller extends Account {
     }
 
     public Seller() {
-        super();
+        this("", "", "", "", "", "", "", 0);
         this.nameOfCompany = "";
     }
 }
