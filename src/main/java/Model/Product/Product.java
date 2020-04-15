@@ -1,6 +1,7 @@
 package Model.Product;
 
 import Model.Account.Account;
+import Model.Account.Customer;
 import Model.Account.Discount;
 import Model.Account.Seller;
 
@@ -23,11 +24,12 @@ public class Product {
     private Seller productSeller;
     private int visitNumber;
     private LocalDateTime timeOfCreation;
+    private ArrayList<Customer> productBuyers;
 
     {
         allScores = new ArrayList<>();
         productComments = new ArrayList<>();
-        ArrayList<Account> saveProductBuyersByID = new ArrayList<>();
+        productBuyers = new ArrayList<>();
 
     }
 
@@ -166,6 +168,10 @@ public class Product {
 
     public void setTimeOfCreation(LocalDateTime timeOfCreation) {
         this.timeOfCreation = timeOfCreation;
+    }
+
+    public ArrayList<Customer> getProductBuyers() {
+        return productBuyers;
     }
 
     public double getTotalScore() {
