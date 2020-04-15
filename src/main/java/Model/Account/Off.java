@@ -78,4 +78,12 @@ public class Off {
     public static ArrayList<Off> getAllOffs() {
         return allOffs;
     }
+
+    public static ArrayList<String> getAllOffsStatus() {
+        ArrayList<String> allOffsStatus = new ArrayList<>();
+        for (Off off : allOffs) {
+            allOffsStatus.add(off.toString());
+        }
+        return allOffsStatus;
+    }
 }
