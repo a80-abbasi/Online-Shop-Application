@@ -2,13 +2,20 @@ package Controller;
 
 import Model.Account.Account;
 import Model.Account.Off;
+import Model.Account.Seller;
 import Model.Product.Category;
 import Model.Product.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SellerProfileManager {
+public class SellerProfileManager extends ProfileManager {
+    private Seller seller;
+
+    public SellerProfileManager(Seller seller) {
+        super(seller);
+        this.seller = seller;
+    }
 
     public ArrayList<String> viewCompanyInformation(Account account) {
         return null;

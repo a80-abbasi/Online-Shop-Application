@@ -1,12 +1,19 @@
 package Controller;
 
 import Model.Account.Account;
+import Model.Account.Customer;
 import Model.Account.Discount;
 import Model.Product.Product;
 
 import java.util.ArrayList;
 
-public class CustomerProfileManager {
+public class CustomerProfileManager extends ProfileManager{
+    private Customer customer;
+
+    public CustomerProfileManager(Customer customer) {
+        super(customer);
+        this.customer = customer;
+    }
 
     public ArrayList<Product> showProducts(Account account) {
         return null;
