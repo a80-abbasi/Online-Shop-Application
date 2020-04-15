@@ -1,7 +1,6 @@
 package View.SellerProfileMenus;
 
 import Controller.SellerProfileManager;
-import Model.Account.AddProductRequest;
 import Model.Account.Seller;
 import Model.Product.ProductStatus;
 import View.Menu;
@@ -21,11 +20,11 @@ public class SellerProfileMenu extends Menu {
         subMenus.add(new ViewPersonalInfoMenu(parentMenu, sellerProfileManager));
         subMenus.add(getViewCompanyInformationMenu());
         subMenus.add(getViewSalesHistoryMenu());
-        subMenus.add(new ManageProductsMenu(parentMenu));
+        subMenus.add(new ManageProductsMenu(parentMenu, sellerProfileManager));
         subMenus.add(getAddProductMenu());
         subMenus.add(getRemoveProductMenu());
         subMenus.add(getShowCategoriesMenu());
-        subMenus.add(new ViewOffsMenu(parentMenu));
+        subMenus.add(new ViewOffsMenu(parentMenu, sellerProfileManager));
         subMenus.add(getViewBalanceMenu());
         this.setSubmenus(subMenus);
     }
