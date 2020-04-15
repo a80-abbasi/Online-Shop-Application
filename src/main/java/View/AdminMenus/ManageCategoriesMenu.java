@@ -1,6 +1,7 @@
 package View.AdminMenus;
 
 import Controller.AdminProfileManager;
+import Model.Product.Category;
 import View.Menu;
 
 import java.util.ArrayList;
@@ -19,8 +20,11 @@ public class ManageCategoriesMenu extends Menu {
 
     @Override
     public void show() {
-        String allCategoriesNames = adminProfileManager.showAllCategories();
-        System.out.println(allCategoriesNames);
+        ArrayList<Category> allCategories = adminProfileManager.getAllCategories();
+        for (Category category : allCategories) {
+            System.out.println(category.getName());
+        }
+        super.show();
     }
 
     private Menu getEditCategoryMenu() {

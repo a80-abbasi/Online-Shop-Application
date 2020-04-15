@@ -8,8 +8,6 @@ public class ScoreTest {
 
     @Test
     public void scoreTest () {
-        Score score = new Score(new Customer(), new Product(), ScoreEnumeration.GOOD);
 
-        System.out.println(score.getScore());
     }
 }

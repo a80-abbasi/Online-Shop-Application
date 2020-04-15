@@ -1,6 +1,7 @@
 package View.AdminMenus;
 
 import Controller.AdminProfileManager;
+import Model.Account.Account;
 import Model.Account.Admin;
 import View.Menu;
 
@@ -20,8 +21,11 @@ public class ManageUsersMenu extends Menu {
 
     @Override
     public void show() {
-        String allUserNames = adminProfileManager.viewAllUsers();
-        System.out.println(allUserNames);
+        ArrayList<Account> allUsers = adminProfileManager.getAllUsers();
+        for (Account user : allUsers) {
+            System.out.println(user.getUsername());
+        }
+        super.show();
     }
 
     public Menu getViewUserMenu() {

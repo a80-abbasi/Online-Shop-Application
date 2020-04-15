@@ -16,13 +16,9 @@ public class AdminProfileManager extends ProfileManager{
         this.admin = admin;
     }
 
-    public String viewAllUsers() {
+    public ArrayList<Account> getAllUsers() {
         ArrayList<Account> allAccounts = Account.getAllAccounts();
-        String allUserNames = "";
-        for (Account account : allAccounts) {
-            allUserNames.concat(account.getUsername() + "\n");
-        }
-        return allUserNames;
+        return allAccounts;
     }
 
     public String viewUser(String username) {
@@ -52,13 +48,9 @@ public class AdminProfileManager extends ProfileManager{
         new Discount(discountCode, startTime, endTime, discountPercent, maxPossibleDiscount, discountPerCustomer);
     }
 
-    public String viewAllDiscountCodes() {
+    public ArrayList<Discount> getAllDiscountCodes() {
         ArrayList<Discount> allDiscounts = Discount.getAllDiscounts();
-        String allDiscountsInfo = "";
-        for (Discount discount : allDiscounts) {
-            allDiscountsInfo.concat(discount.toString() + "\n");
-        }
-        return allDiscountsInfo;
+        return allDiscounts;
     }
 
     public void viewDiscount(String discountCode) {
@@ -93,13 +85,9 @@ public class AdminProfileManager extends ProfileManager{
 
     }
 
-    public String showAllCategories() {
+    public ArrayList<Category> getAllCategories() {
         ArrayList<Category> allCategories = Category.getAllCategories();
-        String allCategoriesNames = "";
-        for (Category category : allCategories) {
-            allCategoriesNames.concat(category.getName() + "\n");
-        }
-        return allCategoriesNames;
+        return allCategories;
     }
 
     public void editCategory(String categoryName, String changeField) {

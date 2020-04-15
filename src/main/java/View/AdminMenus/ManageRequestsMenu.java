@@ -11,16 +11,18 @@ public class ManageRequestsMenu extends Menu {
     public ManageRequestsMenu(Menu parentMenu, AdminProfileManager adminProfileManager) {
         super("Manage Requests Menu", parentMenu);
         this.adminProfileManager = adminProfileManager;
-        ArrayList<Menu> submenus = new ArrayList<>();
-        submenus.add(getDetailsOfRequestMenu());
-        submenus.add(getAcceptRequestMenu());
-        submenus.add(getDeclineRequestMenu());
+        ArrayList<Menu> subMenus = new ArrayList<>();
+        subMenus.add(getDetailsOfRequestMenu());
+        subMenus.add(getAcceptRequestMenu());
+        subMenus.add(getDeclineRequestMenu());
+        this.setSubmenus(subMenus);
     }
 
     @Override
     public void show() {
         String allRequests = adminProfileManager.showAllRequests();
         System.out.println(allRequests);
+        super.show();
     }
 
     private Menu getDetailsOfRequestMenu() {

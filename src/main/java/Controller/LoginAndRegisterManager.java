@@ -11,17 +11,17 @@ public class LoginAndRegisterManager {
     }
 
     public void registerCustomer(String username, String password, String name, String lastName, String email,
-                             String phoneNumber){
+                                 String phoneNumber){
         new Customer(username, password, name, lastName, email, phoneNumber, 0);
     }
 
     public void registerSeller(String username, String password, String name, String lastName, String email,
-                                 String phoneNumber, String companyName){
+                               String phoneNumber, String companyName){
         new Seller(username, password, name, lastName, email, phoneNumber, companyName, 0);
     }
 
     public void registerAdmin(String username, String password, String name, String lastName, String email,
-                                 String phoneNumber){
+                              String phoneNumber){
         new Admin(username, password, name, lastName, email, phoneNumber);
     }
 

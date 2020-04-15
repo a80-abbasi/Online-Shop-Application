@@ -1,4 +1,6 @@
-package View;
+package View.RegistrationMenus;
+
+import View.Menu;
 
 import java.util.ArrayList;
 
