@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Product.*;
-import com.sun.tools.javac.parser.Tokens;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -36,7 +35,7 @@ public class ProductsManager {
                 }
             }
             if (existenceFilter){
-                if (!product.getExistenceStatus()){
+                if (product.getExistingNumber() == 0){
                     continue;
                 }
             }

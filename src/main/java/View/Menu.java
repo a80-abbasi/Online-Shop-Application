@@ -1,5 +1,6 @@
 package View;
 
+import Controller.LoginAndRegisterManager;
 import Controller.ProductsManager;
 
 import java.util.ArrayList;
@@ -11,7 +12,9 @@ public abstract class Menu {
     protected Menu parentMenu;
     public static Scanner scanner;
     protected static ProductsManager productsManager;
+    protected static LoginAndRegisterManager loginAndRegisterManager;
     protected static ArrayList<Menu> allMenus = new ArrayList<>();
+    private Menu loginAndRegisterMenu = new LoginAndRegisterMenu(this);
 
     public Menu (String name, Menu parentMenu) {
         this.name = name;
@@ -25,6 +28,10 @@ public abstract class Menu {
 
     public static void setProductsManager(ProductsManager productsManager) {
         Menu.productsManager = productsManager;
+    }
+
+    public static void setLoginAndRegisterManager(LoginAndRegisterManager loginAndRegisterManager) {
+        Menu.loginAndRegisterManager = loginAndRegisterManager;
     }
 
     public void setParentMenu(Menu parentMenu) {
@@ -45,7 +52,13 @@ public abstract class Menu {
         for (int i = 0; i < submenus.size(); i++) {
             System.out.println(i + 1 + ". " + submenus.get(i).getName());
         }
-        System.out.println(submenus.size() + 1 + ". Help");
+        System.out.println();
+        if (loginAndRegisterManager.isLogin()) {
+            System.out.println(submenus.size() + 1 + ". Logout");
+        }
+        else {
+            System.out.println(submenus.size() + 1 + ". Login");
+        }
         if (this.parentMenu != null)
             System.out.println((submenus.size() + 2) + ". Back");
         else
@@ -57,7 +70,16 @@ public abstract class Menu {
         try {
             Menu nextMenu = null;
             int chosenMenu = Integer.parseInt(scanner.nextLine());
-            if (chosenMenu == submenus.size() + 1) {
+            if (chosenMenu == submenus.size() + 1){
+                if (loginAndRegisterManager.isLogin()) {
+                    loginAndRegisterMenu.execute();
+                }
+                else {
+                    loginAndRegisterManager.logoutUser();
+                }
+                execute();
+            }
+            else if (chosenMenu == submenus.size() + 2) {
                 if (this.parentMenu == null)
                     System.exit(1);
                 else
@@ -71,6 +93,5 @@ public abstract class Menu {
             System.out.println("Wrong input\n");
             execute();
         }
-
     }
 }

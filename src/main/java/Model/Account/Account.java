@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public abstract class Account {
     private static ArrayList<Account> allAccounts = new ArrayList<>();
+    private static Account loggedInAccount;
     private String username;
     private String password;
     private String name;
@@ -75,6 +76,14 @@ public abstract class Account {
 
     public static ArrayList<Account> getAllAccounts() {
         return allAccounts;
+    }
+
+    public static Account getLoggedInAccount() {
+        return loggedInAccount;
+    }
+
+    public static void setLoggedInAccount(Account loggedInAccount) {
+        Account.loggedInAccount = loggedInAccount;
     }
 
     public static Account getAccountByUsername (String username) {
