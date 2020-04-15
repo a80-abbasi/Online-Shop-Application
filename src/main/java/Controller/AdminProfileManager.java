@@ -3,6 +3,7 @@ package Controller;
 import Model.Account.Account;
 import Model.Account.Admin;
 import Model.Account.Discount;
+import Model.Account.Request;
 import Model.Product.Category;
 import Model.Product.Product;
 
@@ -67,22 +68,30 @@ public class AdminProfileManager extends ProfileManager{
         Discount.removeDiscount(discount);
     }
 
-    public String showAllRequests() {
-        //todo: make a class for requests
-        return null;
+    public ArrayList<String> getAllRequests() {
+        ArrayList<Request> allRequests = Request.getAllRequests();
+        ArrayList<String> allRequestIds = new ArrayList<>();
+        for (Request request : allRequests) {
+            allRequestIds.add(request.getRequestId());
+        }
+        return allRequestIds;
     }
 
 
-    public void getDetailsOfRequest(String requestId) {
-
+    public String getDetailsOfRequest(String requestId) {
+        Request request = Request.getRequestById(requestId);
+        return request.toString();
     }
 
     public void acceptRequest(String requestId) {
-
+        Request request = Request.getRequestById(requestId);
+        request.acceptRequest();
+        Request.removeRequest(request);
     }
 
     public void declineRequest(String requestId) {
-
+        Request request = Request.getRequestById(requestId);
+        Request.removeRequest(request);
     }
 
     public ArrayList<Category> getAllCategories() {
