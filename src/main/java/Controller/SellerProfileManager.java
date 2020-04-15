@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Account.Account;
+import Model.Account.Log;
 import Model.Account.Off;
 import Model.Account.Seller;
 import Model.Product.Category;
@@ -17,19 +18,19 @@ public class SellerProfileManager extends ProfileManager {
         this.seller = seller;
     }
 
-    public ArrayList<String> viewCompanyInformation(Account account) {
+    public String viewCompanyInformation(Account account) {
         return null;
     }
-    public ArrayList<String> viewSalesHistory(Account account) {
+    public ArrayList<Log> viewSalesHistory(Account account) {
         return null;
     }
-    public ArrayList<Product> viewProductByID(String id) {
+    public Product viewProductByID(String id) {
         return null;
     }
     public ArrayList<Account> viewBuyersByID(String id) {
         return null;
     }
-    public void editByID(String id, HashMap< String , String > newFields)  {
+    public void editProductByID(String id, HashMap< String , String > newFields)  {
 
     }
     public boolean addProduct(ArrayList<String> properties) {

@@ -25,4 +25,32 @@ public class Seller extends Account {
         this("", "", "", "", "", "", "", 0);
         this.nameOfCompany = "";
     }
+
+    public String getNameOfCompany() {
+        return nameOfCompany;
+    }
+
+    public int getBalance() {
+            return balance;
+    }
+
+    public void setNameOfCompany(String nameOfCompany) {
+        this.nameOfCompany = nameOfCompany;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public void setSellLogs(ArrayList<SellLog> sellLogs) {
+        this.sellLogs = sellLogs;
+    }
+
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
+    }
+
+    public void setOffs(ArrayList<Off> offs) {
+        this.offs = offs;
+    }
 }

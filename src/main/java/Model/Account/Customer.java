@@ -19,6 +19,7 @@ public class Customer extends Account {
         usedDiscounts = new HashMap<>();
     }
 
+
     public int getBalance() {
         return balance;
     }
@@ -29,5 +30,17 @@ public class Customer extends Account {
 
     public void addToCart(Product product){
         cart.add(product);
+    }
+
+    public ArrayList<Product> getCart() {
+        return cart;
+    }
+
+    public ArrayList<BuyLog> getBuyLogs() {
+        return buyLogs;
+    }
+
+    public HashMap<Discount, Integer> getUsedDiscounts() {
+        return usedDiscounts;
     }
 }

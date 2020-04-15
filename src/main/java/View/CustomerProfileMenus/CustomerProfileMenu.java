@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class CustomerProfileMenu extends Menu {
     private Customer customer;
     private CustomerProfileManager customerProfileManager;
-
+    private ArrayList<Discount> allDiscountCodes = new ArrayList<>();
     public CustomerProfileMenu(Customer customer, Menu parentMenu) {
         super("CustomerProfile Menu", parentMenu);
         ArrayList<Menu> subMenus = new ArrayList<>();
@@ -49,5 +49,5 @@ public class CustomerProfileMenu extends Menu {
         };
     }
 
-    //TODO: logout function or back function;
+
 }

@@ -1,5 +1,6 @@
 package Model.Product;
 
+import Model.Account.Account;
 import Model.Account.Discount;
 import Model.Account.Seller;
 
@@ -24,7 +25,10 @@ public class Product {
     private LocalDateTime timeOfCreation;
 
     {
+        allScores = new ArrayList<>();
         productComments = new ArrayList<>();
+        ArrayList<Account> saveProductBuyersByID = new ArrayList<>();
+
     }
 
     public Product (String productId, ProductStatus productStatus, String productName, String companyName, double price,
@@ -208,4 +212,5 @@ public class Product {
                 ", 'does" + (existingNumber != 0 ? "" :  "not") + "exist'" +
                 '}';
     }
+
 }
