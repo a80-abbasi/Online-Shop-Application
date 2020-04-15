@@ -1,4 +1,4 @@
-package Model.Account;
+package Model.Account.Request;
 
 import java.util.ArrayList;
 

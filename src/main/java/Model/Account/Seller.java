@@ -34,6 +34,14 @@ public class Seller extends Account {
         return sellLogs;
     }
 
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public ArrayList<Off> getOffs() {
+        return offs;
+    }
+
     public int getBalance() {
             return balance;
     }

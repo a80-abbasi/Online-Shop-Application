@@ -79,11 +79,28 @@ public class Off {
         return allOffs;
     }
 
+    public static Off getOffById(String offID) {
+        for (Off off : allOffs) {
+            if (off.getOffID().equals(offID)) {
+                return off;
+            }
+        }
+        return null;
+    }
+
     public static ArrayList<String> getAllOffsStatus() {
         ArrayList<String> allOffsStatus = new ArrayList<>();
         for (Off off : allOffs) {
             allOffsStatus.add(off.toString());
         }
         return allOffsStatus;
+    }
+
+    public static ArrayList<String> getAllOffIds() {
+        ArrayList<String> allOffIds = new ArrayList<>();
+        for (Off off : allOffs) {
+            allOffIds.add(off.getOffID());
+        }
+        return allOffIds;
     }
 }
