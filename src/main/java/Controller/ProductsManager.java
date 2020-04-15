@@ -6,6 +6,7 @@ import Model.Product.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -118,14 +119,27 @@ public class ProductsManager {
         return pattern.matcher(input);
     }
 
-    public void addProductToCart(Product product){
+    public void addProductToCart(Product product, int number){
         Account account = Account.getLoggedInAccount();
         if (account instanceof Customer){
             Customer customer = (Customer) account;
-            customer.addToCart(product);
+            customer.addToCart(product, number);
         }
         else {
             throw new IllegalArgumentException("You are not logged-in as a customer");
         }
+    }
+
+    public boolean hasProductInCart(Product product){
+        return ((Customer) Account.getLoggedInAccount()).getCart().containsKey(product);
+    }
+
+    public double getTotalPrice(){
+        Customer customer = (Customer) Account.getLoggedInAccount();
+        return customer.getTotalPrice();
+    }
+
+    public HashMap<Product, Integer> getCart(){
+        return ((Customer) Account.getLoggedInAccount()).getCart();
     }
 }

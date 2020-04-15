@@ -1,11 +1,12 @@
-package View;
+package View.RegistrationMenus;
 
 import Model.Account.AccountType;
+import View.Menu;
 
 
 import java.util.ArrayList;
 
-public class RegistrationMenu extends Menu{
+public class RegistrationMenu extends Menu {
     private AccountType accountType;
 
     public RegistrationMenu(Menu parentMenu) {
