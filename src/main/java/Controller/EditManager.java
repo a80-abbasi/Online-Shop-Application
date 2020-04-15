@@ -14,5 +14,4 @@ public class EditManager {
         return true;
         //todo:check is newThing true String, dependence its field;
     }
-
 }
