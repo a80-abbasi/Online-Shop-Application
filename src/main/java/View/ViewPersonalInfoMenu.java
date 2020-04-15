@@ -19,6 +19,7 @@ public class ViewPersonalInfoMenu extends Menu {
     public void show() {
         String personalInfo = profileManager.viewPersonalInfo();
         System.out.println(personalInfo);
+        super.show();
     }
 
     private Menu getEditFieldMenu() {

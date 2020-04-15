@@ -1,5 +1,6 @@
 package View.CustomerProfileMenus;
 
+import Controller.CustomerProfileManager;
 import Model.Account.Customer;
 import Model.Account.Discount;
 import View.Menu;
@@ -8,12 +9,15 @@ import View.ViewPersonalInfoMenu;
 import java.util.ArrayList;
 
 public class CustomerProfileMenu extends Menu {
-    Customer customer;
+    private Customer customer;
+    private CustomerProfileManager customerProfileManager;
+
     public CustomerProfileMenu(Customer customer, Menu parentMenu) {
         super("CustomerProfile Menu", parentMenu);
         ArrayList<Menu> subMenus = new ArrayList<>();
         this.customer = customer;
-        subMenus.add(new ViewPersonalInfoMenu(customer, "customer", parentMenu)); //todo: w8 answer in group to change it to father function or use it in every menu;
+        this.customerProfileManager = new CustomerProfileManager(customer);
+        subMenus.add(new ViewPersonalInfoMenu(parentMenu, customerProfileManager)); //todo: w8 answer in group to change it to father function or use it in every menu;
         subMenus.add(new ViewCartMenu(this));
         subMenus.add(new ViewOrdersMenu(customer,this));
         subMenus.add(getViewBalanceMenu());

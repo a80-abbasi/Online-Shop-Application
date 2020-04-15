@@ -1,5 +1,6 @@
 package View.SellerProfileMenus;
 
+import Controller.SellerProfileManager;
 import Model.Account.Seller;
 import View.Menu;
 import View.ViewPersonalInfoMenu;
@@ -8,11 +9,14 @@ import java.util.ArrayList;
 
 public class SellerProfileMenu extends Menu {
     private Seller seller;
+    private SellerProfileManager sellerProfileManager;
 
     public SellerProfileMenu(Seller seller, Menu parentMenu) {
         super("Seller Profile Menu", parentMenu);
+        this.seller = seller;
+        this.sellerProfileManager = new SellerProfileManager(seller);
         ArrayList<Menu> subMenus = new ArrayList<>();
-        subMenus.add(new ViewPersonalInfoMenu(seller, "seller", parentMenu));
+        subMenus.add(new ViewPersonalInfoMenu(parentMenu, sellerProfileManager));
         subMenus.add(getViewCompanyInformationMenu());
         subMenus.add(getViewSalesHistoryMenu());
         subMenus.add(new ManageProductsMenu(parentMenu));
@@ -21,7 +25,6 @@ public class SellerProfileMenu extends Menu {
         subMenus.add(getShowCategoriesMenu());
         subMenus.add(new ViewOffsMenu(parentMenu));
         subMenus.add(getViewBalanceMenu());
-        this.seller = seller;
         this.setSubmenus(subMenus);
     }
 
