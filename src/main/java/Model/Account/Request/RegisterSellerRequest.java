@@ -1,8 +1,8 @@
 package Model.Account.Request;
 
-public class RegisterCustomerRequest extends Request {
+public class RegisterSellerRequest extends Request {
 
-    public RegisterCustomerRequest() {
+    public RegisterSellerRequest() {
         super("register_customer_" + allRequests.size());
     }
 
