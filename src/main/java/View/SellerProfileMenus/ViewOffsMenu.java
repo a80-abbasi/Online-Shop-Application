@@ -1,7 +1,6 @@
 package View.SellerProfileMenus;
 
 import Controller.SellerProfileManager;
-import Model.Account.Off;
 import View.Menu;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class ViewOffsMenu extends Menu {
         subMenus.add(getViewMenu());
         subMenus.add(getEditMenu());
         subMenus.add(getAddOffMenu());
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     @Override

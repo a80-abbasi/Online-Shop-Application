@@ -44,7 +44,7 @@ public abstract class Menu {
         return name;
     }
 
-    public void setSubmenus(ArrayList<Menu> submenus) {
+    public void setSubMenus(ArrayList<Menu> submenus) {
         this.submenus = submenus;
     }
 

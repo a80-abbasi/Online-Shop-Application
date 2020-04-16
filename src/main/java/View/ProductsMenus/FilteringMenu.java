@@ -13,7 +13,7 @@ public class FilteringMenu extends Menu {
         subMenus.add(new SetFilteringTypeMenu(this));
         subMenus.add(getCurrentFiltersMenu());
         subMenus.add(new DisablingFiltersMenu(this));
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     private Menu getShowAvailableFiltersMenu(){

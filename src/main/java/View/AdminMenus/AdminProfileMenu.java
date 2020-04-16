@@ -15,15 +15,15 @@ public class AdminProfileMenu extends Menu {
         super("Admin Profile Menu", parentMenu);
         this.admin = admin;
         this.adminProfileManager = new AdminProfileManager(admin);
-        ArrayList<Menu> submenus = new ArrayList<>();
-        submenus.add(new ViewPersonalInfoMenu(this, adminProfileManager));
-        submenus.add(new ManageUsersMenu(this, adminProfileManager));
-        submenus.add(new ManageAllProductsMenu(this, adminProfileManager));
-        submenus.add(getCreateDiscountCodesMenu());
-        submenus.add(new ViewDiscountCodesMenu(this, adminProfileManager));
-        submenus.add(new ManageRequestsMenu(this, adminProfileManager));
-        submenus.add(new ManageCategoriesMenu(this, adminProfileManager));
-        this.setSubmenus(submenus);
+        ArrayList<Menu> subMenus = new ArrayList<>();
+        subMenus.add(new ViewPersonalInfoMenu(this, adminProfileManager));
+        subMenus.add(new ManageUsersMenu(this, adminProfileManager));
+        subMenus.add(new ManageAllProductsMenu(this, adminProfileManager));
+        subMenus.add(getCreateDiscountCodesMenu());
+        subMenus.add(new ViewDiscountCodesMenu(this, adminProfileManager));
+        subMenus.add(new ManageRequestsMenu(this, adminProfileManager));
+        subMenus.add(new ManageCategoriesMenu(this, adminProfileManager));
+        this.setSubMenus(subMenus);
     }
 
     public Menu getCreateDiscountCodesMenu() {

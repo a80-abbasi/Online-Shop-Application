@@ -12,7 +12,7 @@ public class SortingMenu extends Menu {
         subMenus.add(new SetFilteringTypeMenu(this));
         subMenus.add(getCurrentSortMenu());
         subMenus.add(getDisableSortMenu());
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     private Menu getShowAvailableSortsMenu(){

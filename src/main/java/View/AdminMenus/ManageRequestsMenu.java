@@ -15,7 +15,7 @@ public class ManageRequestsMenu extends Menu {
         subMenus.add(getDetailsOfRequestMenu());
         subMenus.add(getAcceptRequestMenu());
         subMenus.add(getDeclineRequestMenu());
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     @Override

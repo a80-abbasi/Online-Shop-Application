@@ -12,7 +12,7 @@ public class SetSortTypeMenu extends Menu {
         subMenus.add(getSortByTimeMenu());
         subMenus.add(getSortByScore());
         subMenus.add(getSortByVisitNumber());
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     private Menu getSortByTimeMenu(){

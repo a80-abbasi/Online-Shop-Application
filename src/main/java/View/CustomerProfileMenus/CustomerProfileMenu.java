@@ -22,7 +22,7 @@ public class CustomerProfileMenu extends Menu {
         subMenus.add(new ViewOrdersMenu(customer,this));
         subMenus.add(getViewBalanceMenu());
         subMenus.add(getViewDiscountCodesMenu());
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
 

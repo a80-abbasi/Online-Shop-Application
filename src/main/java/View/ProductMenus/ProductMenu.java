@@ -15,7 +15,7 @@ public class ProductMenu extends Menu {
         subMenus.add(getCompareMenu());
         subMenus.add(new CommentsMenu(this, product));
 
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     public void setProduct(Product product) {

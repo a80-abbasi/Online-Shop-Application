@@ -11,7 +11,7 @@ public class ViewOrdersMenu extends Menu {
         ArrayList<Menu> subMenus = new ArrayList<>();
         submenus.add(getShowOrderMenu());
         submenus.add(getRateMenu());
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     private Menu getShowOrderMenu() {

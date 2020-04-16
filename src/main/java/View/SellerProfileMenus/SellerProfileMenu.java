@@ -26,7 +26,7 @@ public class SellerProfileMenu extends Menu {
         subMenus.add(getShowCategoriesMenu());
         subMenus.add(new ViewOffsMenu(parentMenu, sellerProfileManager));
         subMenus.add(getViewBalanceMenu());
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     public Menu getViewCompanyInformationMenu() {

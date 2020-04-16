@@ -10,7 +10,7 @@ public class LoginAndRegisterMenu extends Menu {
         ArrayList<Menu> subMenus = new ArrayList<>();
         subMenus.add(new RegistrationMenu(this));
         subMenus.add(getLoginMenu());
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     private Menu getLoginMenu(){

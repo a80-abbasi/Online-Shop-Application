@@ -13,7 +13,7 @@ public class DisablingFiltersMenu extends Menu
         subMenus.add(getDisableCategoryFilterMenu());
         subMenus.add(getDisableNameFilteringMenu());
         subMenus.add(getDisableExistenceFilteringMenu());
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     private Menu getDisableCategoryFilterMenu(){

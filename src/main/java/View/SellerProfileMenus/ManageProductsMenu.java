@@ -1,8 +1,6 @@
 package View.SellerProfileMenus;
 
 import Controller.SellerProfileManager;
-import Model.Account.Admin;
-import Model.Account.Seller;
 import View.Menu;
 
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ public class ManageProductsMenu extends Menu {
         subMenus.add(getViewMenu());
         subMenus.add(getViewBuyersMenu());
         subMenus.add(getEditMenu());
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     @Override

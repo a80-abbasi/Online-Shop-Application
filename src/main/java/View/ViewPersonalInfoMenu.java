@@ -12,7 +12,7 @@ public class ViewPersonalInfoMenu extends Menu {
         this.profileManager = profileManager;
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getEditFieldMenu());
-        this.setSubmenus(submenus);
+        this.setSubMenus(submenus);
     }
 
     @Override

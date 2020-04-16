@@ -15,7 +15,7 @@ public class RegistrationMenu extends Menu {
         subMenus.add(getCreateCustomerAccountMenu());
         subMenus.add(getCreateSellerAccountMenu());
         subMenus.add(getCreateAdminAccountMenu());
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     private Menu getCreateCustomerAccountMenu(){

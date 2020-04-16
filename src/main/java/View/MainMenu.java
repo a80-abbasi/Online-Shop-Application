@@ -1,6 +1,5 @@
 package View;
 
-import View.ProductMenus.ProductMenu;
 import View.ProductsMenus.ProductsMenu;
 
 import java.util.ArrayList;
@@ -12,6 +11,6 @@ public class MainMenu extends Menu {
         //todo: add profile menu
         submenus.add(new ProductsMenu(this));
         submenus.add(new OffMenu(this));
-        this.setSubmenus(submenus);
+        this.setSubMenus(submenus);
     }
 }

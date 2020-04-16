@@ -45,5 +45,8 @@ public class CustomerProfileManager extends ProfileManager{
     public int viewBalance(Account account) {
         return 0;
     }
+    public boolean isDiscountCodeAvailableForCustomer(Account account, Discount discount) {
+        return true;
+    }
 
 }

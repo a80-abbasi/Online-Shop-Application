@@ -15,7 +15,7 @@ public class ProductsMenu extends Menu {
         subMenus.add(new SortingMenu(this));
         subMenus.add(getShowProductsMenu());
         subMenus.add(new ProductMenu(this));
-        this.setSubmenus(subMenus);
+        this.setSubMenus(subMenus);
     }
 
     private Menu getViewCategoriesMenu(){
