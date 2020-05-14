@@ -26,6 +26,10 @@ public abstract class Account {
         this("", "", "", "", "", "");
     }
 
+    public static void setAllAccounts(ArrayList<Account> allAccounts) {
+        Account.allAccounts = allAccounts;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -99,3 +103,4 @@ public abstract class Account {
         allAccounts.remove(account);
     }
 }
+
