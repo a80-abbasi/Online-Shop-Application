@@ -30,7 +30,7 @@ public class Main {
         Offs.deserializeXML();
     }
 
-    private static void serializeXML(){
+    public static void serializeXML(){
         Accounts.serializeXML();
         Products.serializeXML();
         Categories.serializeXML();

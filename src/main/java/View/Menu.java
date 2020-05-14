@@ -2,7 +2,6 @@ package View;
 
 import Controller.LoginAndRegisterManager;
 import Controller.ProductsManager;
-import View.RegistrationMenus.LoginAndRegisterMenu;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -71,6 +70,7 @@ public abstract class Menu {
     }
 
     public void execute() {
+        boolean flag = true;
         show();
         try {
             Menu nextMenu = null;
@@ -86,7 +86,7 @@ public abstract class Menu {
             }
             else if (chosenMenu == submenus.size() + 2) {
                 if (this.parentMenu == null) {
-                    System.exit(0);
+                    flag = false;
                 }
                 else {
                     nextMenu = this.parentMenu;
@@ -95,8 +95,9 @@ public abstract class Menu {
             else {
                 nextMenu = submenus.get(chosenMenu - 1);
             }
-
-            nextMenu.execute();
+            if (flag) {
+                nextMenu.execute();
+            }
         }
         catch (Exception e){
             System.out.println("Wrong input\n");
