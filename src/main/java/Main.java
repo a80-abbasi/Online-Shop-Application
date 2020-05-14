@@ -1,6 +1,8 @@
 import Controller.LoginAndRegisterManager;
 import Controller.ProductsManager;
+import Model.Product.Product;
 import Serializer.Accounts;
+import Serializer.Products;
 import View.MainMenu;
 import View.Menu;
 import View.RegistrationMenus.LoginAndRegisterMenu;
@@ -19,10 +21,12 @@ public class Main {
 
     private static void deserializeXML(){
         Accounts.deserializeXML();
+        Products.deserializeXML();
     }
 
     private static void serializeXML(){
         Accounts.serializeXML();
+        Products.serializeXML();
     }
 }
 //src\main\resources
