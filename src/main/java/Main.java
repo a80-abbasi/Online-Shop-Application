@@ -32,7 +32,8 @@ public class Main {
         AddOffRequests.deserializeXML();
         AddProductRequests.deserializeXML();
         EditOffRequests.deserializeXML();
-        RegisterSellerRequests.serializeXML();
+        RegisterSellerRequests.deserializeXML();
+        RemoveProductRequests.deserializeXML();
     }
 
     public static void serializeXML(){
@@ -47,5 +48,6 @@ public class Main {
         AddProductRequests.serializeXML();
         EditOffRequests.serializeXML();
         RegisterSellerRequests.serializeXML();
+        RemoveProductRequests.serializeXML();
     }
 }
