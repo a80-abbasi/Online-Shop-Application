@@ -22,8 +22,8 @@ public class Main {
     }
 
     private static void deserializeXML(){
-        Accounts.deserializeXML();
         Products.deserializeXML();
+        Accounts.deserializeXML();
         Categories.deserializeXML();
         Admins.deserializeXML();
         Discounts.deserializeXML();
