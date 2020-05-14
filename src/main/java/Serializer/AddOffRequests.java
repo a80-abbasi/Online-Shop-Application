@@ -1,4 +1,6 @@
-package Model.Request;
+package Serializer;
+
+import Model.Request.AddOffRequest;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlElement;
