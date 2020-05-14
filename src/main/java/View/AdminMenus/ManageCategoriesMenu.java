@@ -45,7 +45,15 @@ public class ManageCategoriesMenu extends Menu {
                 else {
                     String categoryName = input;
                     String changeField = scanner.nextLine();
-                    adminProfileManager.editCategory(categoryName, changeField);
+                    try {
+                        adminProfileManager.editCategory(categoryName, changeField);
+                    }
+                    catch (NullPointerException n) {
+                        System.out.println("There is no category with this name.");
+                    }
+                    catch (IllegalArgumentException e) {
+                        System.out.println("This category doesn't have this field.");
+                    }
                     this.show();
                     this.execute();
                 }
@@ -97,7 +105,13 @@ public class ManageCategoriesMenu extends Menu {
                 }
                 else {
                     String categoryName = input;
-                    adminProfileManager.removeCategory(categoryName);
+                    try {
+                        adminProfileManager.removeCategory(categoryName);
+                        System.out.println(categoryName + " category removed successfully.");
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no category with this name.");
+                    }
                     this.show();
                     this.execute();
                 }

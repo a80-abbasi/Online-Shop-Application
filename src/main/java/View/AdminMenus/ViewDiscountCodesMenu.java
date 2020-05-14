@@ -43,7 +43,13 @@ public class ViewDiscountCodesMenu extends Menu {
                     this.parentMenu.execute();
                 }
                 else {
-                    adminProfileManager.viewDiscount(input);
+                    try {
+                        String discountProperties = adminProfileManager.viewDiscount(input);
+                        System.out.println(discountProperties);
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no discount with this code.");
+                    }
                     this.show();
                     this.execute();
                 }
@@ -67,7 +73,12 @@ public class ViewDiscountCodesMenu extends Menu {
                     this.parentMenu.execute();
                 }
                 else {
-                    adminProfileManager.editDiscount(input);
+                    try{
+                        adminProfileManager.editDiscount(input);
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no discount with this code.");
+                    }
                     this.show();
                     this.execute();
                 }
@@ -91,7 +102,13 @@ public class ViewDiscountCodesMenu extends Menu {
                     this.parentMenu.execute();
                 }
                 else {
-                    adminProfileManager.removeDiscount(input);
+                    try {
+                        adminProfileManager.removeDiscount(input);
+                        System.out.println("Discount with code " + input + " removed successfully.");
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no discount with this code.");
+                    }
                     this.show();
                     this.execute();
                 }

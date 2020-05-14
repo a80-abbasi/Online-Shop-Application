@@ -44,7 +44,12 @@ public class ManageUsersMenu extends Menu {
                     this.parentMenu.execute();
                 }
                 else {
-                    String userInfo = adminProfileManager.viewUser(input);
+                    try {
+                        String userInfo = adminProfileManager.viewUser(input);
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no account with this username.");
+                    }
                     this.show();
                     this.execute();
                 }
@@ -65,7 +70,15 @@ public class ManageUsersMenu extends Menu {
                 String username = scanner.nextLine();
                 System.out.println("Enter the role you want this user to have:");
                 String role = scanner.nextLine();
-                adminProfileManager.changeTypeOfAccount(username, role);
+                try {
+                    adminProfileManager.changeTypeOfAccount(username, role);
+                }
+                catch (NullPointerException n) {
+                    System.out.println("There is no account with this username.");
+                }
+                catch (IllegalArgumentException i) {
+                    System.out.println("This role doesn't exist.");
+                }
                 System.out.println("Enter (Back) to return or (Change Type) to change another user's type:");
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
@@ -96,7 +109,13 @@ public class ManageUsersMenu extends Menu {
                     this.parentMenu.execute();
                 }
                 else {
-                    adminProfileManager.deleteUser(input);
+                    try {
+                        adminProfileManager.deleteUser(input);
+                        System.out.println("User deleted successfully.");
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no account with this username.");
+                    }
                     this.show();
                     this.execute();
                 }
@@ -104,6 +123,7 @@ public class ManageUsersMenu extends Menu {
         };
     }
 
+//todo: adding exceptions to this menu
     public Menu getCreateManagerProfileMenu() {
         return new Menu("Create Manager Profile", this) {
             @Override
