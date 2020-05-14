@@ -107,4 +107,16 @@ public class Off {
         }
         return allOffIds;
     }
+
+    @Override
+    public String toString() {
+        return "Off{" +
+                "offID='" + offID + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", offAmount=" + offAmount +
+                ", offStatus=" + offStatus +
+                ", products=" + products +
+                '}';
+    }
 }
