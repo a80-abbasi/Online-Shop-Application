@@ -23,18 +23,20 @@ public class Main {
 
     private static void deserializeXML(){
         Customers.deserializeXML();
+        Admins.deserializeXML();
+        Sellers.deserializeXML();
         Products.deserializeXML();
         Categories.deserializeXML();
-        Admins.deserializeXML();
         Discounts.deserializeXML();
         Offs.deserializeXML();
     }
 
     public static void serializeXML(){
         Customers.serializeXML();
+        Admins.serializeXML();
+        Sellers.serializeXML();
         Products.serializeXML();
         Categories.serializeXML();
-        Admins.serializeXML();
         Discounts.serializeXML();
         Offs.serializeXML();
     }

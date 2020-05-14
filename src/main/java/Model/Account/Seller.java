@@ -5,6 +5,7 @@ import Model.Product.Product;
 import java.util.ArrayList;
 
 public class Seller extends Account {
+    private static ArrayList<Seller> allSellers = new ArrayList<>();
     private String nameOfCompany;
     private int balance;
     private ArrayList<SellLog> sellLogs;
@@ -24,6 +25,14 @@ public class Seller extends Account {
     public Seller() {
         this("", "", "", "", "", "", "", 0);
         this.nameOfCompany = "";
+    }
+
+    public static ArrayList<Seller> getAllSellers() {
+        return allSellers;
+    }
+
+    public static void setAllSellers(ArrayList<Seller> allSellers) {
+        Seller.allSellers = allSellers;
     }
 
     public String getNameOfCompany() {
