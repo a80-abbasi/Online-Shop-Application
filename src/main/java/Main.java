@@ -1,7 +1,7 @@
 import Controller.LoginAndRegisterManager;
 import Controller.ProductsManager;
-import Model.Product.Product;
 import Serializer.Accounts;
+import Serializer.Categories;
 import Serializer.Products;
 import View.MainMenu;
 import View.Menu;
@@ -22,11 +22,13 @@ public class Main {
     private static void deserializeXML(){
         Accounts.deserializeXML();
         Products.deserializeXML();
+        Categories.deserializeXML();
     }
 
     private static void serializeXML(){
         Accounts.serializeXML();
         Products.serializeXML();
+        Categories.serializeXML();
     }
 }
 //src\main\resources

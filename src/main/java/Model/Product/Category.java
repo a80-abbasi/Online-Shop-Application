@@ -16,6 +16,10 @@ public class Category {
         allCategories.add(this);
     }
 
+    public static void setAllCategories(ArrayList<Category> allCategories) {
+        Category.allCategories = allCategories;
+    }
+
     public static ArrayList<Category> getAllCategories() {
         return allCategories;
     }

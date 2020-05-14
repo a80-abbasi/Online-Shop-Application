@@ -1,5 +1,6 @@
 package Serializer;
 
+import Model.Product.Category;
 import Model.Product.Product;
 
 import javax.xml.bind.JAXB;
@@ -12,20 +13,20 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class Products {
-    private final static String pathName = "src\\main\\resources\\products.xml";
+public class Categories {
+    private final static String pathName = "src\\main\\resources\\categories.xml";
 
-    @XmlElement(name = "product")
-    private ArrayList<Product> allProducts = new ArrayList<>();
-    private Products(){
+    @XmlElement(name = "category")
+    private ArrayList<Category> allCategories = new ArrayList<>();
+    private Categories(){
     }
 
     public static void deserializeXML(){
         File file = new File(pathName);
         if(file.exists() && !file.isDirectory() && file.length() > 0) {
             try(BufferedReader input = Files.newBufferedReader(Paths.get(pathName))) {
-                Products products = JAXB.unmarshal(input, Products.class);
-                Product.setAllProducts(products.allProducts);
+                Categories categories = JAXB.unmarshal(input, Categories.class);
+                Category.setAllCategories(categories.allCategories);
             } catch (IOException e) {
                 System.out.println("Error opening file");
             }
@@ -34,9 +35,9 @@ public class Products {
 
     public static void serializeXML(){
         try(BufferedWriter output = Files.newBufferedWriter(Paths.get(pathName))) {
-            Products products = new Products();
-            products.allProducts = Product.getAllProducts();
-            JAXB.marshal(products, output);
+            Categories categories = new Categories();
+            categories.allCategories = Category.getAllCategories();
+            JAXB.marshal(categories, output);
         }
         catch (IOException e) {
             System.out.println("Error opening file");
