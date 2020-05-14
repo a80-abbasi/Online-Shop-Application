@@ -27,6 +27,10 @@ public class Discount {
         this.discountPerCustomer = discountPerCustomer;
     }
 
+    public static void setAllDiscounts(ArrayList<Discount> allDiscounts) {
+        Discount.allDiscounts = allDiscounts;
+    }
+
     public double calculateTotalDiscount(double money){
         double discountAmount = money * discountPercent;
         return Math.min(discountAmount, maxPossibleDiscount);
