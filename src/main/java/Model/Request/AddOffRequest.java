@@ -5,11 +5,21 @@ import Model.Account.Off;
 import java.util.ArrayList;
 
 public class AddOffRequest extends Request {
+    private static ArrayList<AddOffRequest> allAddOffRequest = new ArrayList<>();
     private ArrayList<String> propertiesInOrder;
 
     public AddOffRequest(ArrayList<String> propertiesInOrder) {
         super("add_product_" + allRequests.size(), RequestType.Adding_Off_Request);
+        allAddOffRequest.add(this);
         this.propertiesInOrder = propertiesInOrder;
+    }
+
+    public static ArrayList<AddOffRequest> getAllAddOffRequest() {
+        return allAddOffRequest;
+    }
+
+    public static void setAllAddOffRequest(ArrayList<AddOffRequest> allAddOffRequest) {
+        AddOffRequest.allAddOffRequest = allAddOffRequest;
     }
 
     @Override
