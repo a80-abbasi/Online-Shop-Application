@@ -27,9 +27,19 @@ public class ViewCartMenu extends Menu {
         try {
             Menu nextMenu;
             int chosenMenu = Integer.parseInt(scanner.nextLine());
-            if (chosenMenu == submenus.size() + 1) {
+            if (chosenMenu == submenus.size() + 2) {
                 nextMenu = this.parentMenu;
-            } else {
+            }
+            else if (chosenMenu == submenus.size() + 1) {
+                if (loginAndRegisterManager.isLogin()) {
+                    loginAndRegisterManager.logoutUser();
+                }
+                else {
+                    loginAndRegisterMenu.execute();
+                }
+                nextMenu = this;
+            }
+            else {
                 if (chosenMenu == 1) {
                     Product product = getProduct();
                     if (product == null) {
