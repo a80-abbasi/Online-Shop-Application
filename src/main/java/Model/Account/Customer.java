@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Customer extends Account {
+    private static ArrayList<Customer> allCustomers = new ArrayList<>();
     private int balance;
     private HashMap<Product, Integer> cart;
     private ArrayList<BuyLog> buyLogs;
@@ -14,11 +15,23 @@ public class Customer extends Account {
     public Customer(String username, String password, String name, String lastName, String email, String phoneNumber, int balance) {
         super(username, password, name, lastName, email, phoneNumber);
         this.balance = balance;
+        allCustomers.add(this);
         cart = new HashMap<>();
         buyLogs = new ArrayList<>();
         usedDiscounts = new HashMap<>();
     }
 
+    public Customer(){
+        this("", "", "", "", "", "", 0);
+    }
+
+    public static ArrayList<Customer> getAllCustomers() {
+        return allCustomers;
+    }
+
+    public static void setAllCustomers(ArrayList<Customer> allCustomers) {
+        Customer.allCustomers = allCustomers;
+    }
 
     public int getBalance() {
         return balance;

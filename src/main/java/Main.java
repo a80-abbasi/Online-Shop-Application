@@ -22,8 +22,8 @@ public class Main {
     }
 
     private static void deserializeXML(){
+        Customers.deserializeXML();
         Products.deserializeXML();
-        Accounts.deserializeXML();
         Categories.deserializeXML();
         Admins.deserializeXML();
         Discounts.deserializeXML();
@@ -31,7 +31,7 @@ public class Main {
     }
 
     public static void serializeXML(){
-        Accounts.serializeXML();
+        Customers.serializeXML();
         Products.serializeXML();
         Categories.serializeXML();
         Admins.serializeXML();
