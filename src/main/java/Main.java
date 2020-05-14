@@ -1,6 +1,5 @@
 import Controller.LoginAndRegisterManager;
 import Controller.ProductsManager;
-import Model.Account.Discount;
 import Serializer.*;
 import View.MainMenu;
 import View.Menu;
@@ -28,6 +27,7 @@ public class Main {
         Categories.deserializeXML();
         Admins.deserializeXML();
         Discounts.deserializeXML();
+        Offs.deserializeXML();
     }
 
     private static void serializeXML(){
@@ -36,5 +36,6 @@ public class Main {
         Categories.serializeXML();
         Admins.serializeXML();
         Discounts.serializeXML();
+        Offs.serializeXML();
     }
 }

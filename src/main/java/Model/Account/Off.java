@@ -23,6 +23,10 @@ public class Off {
         allOffs.add(this);
     }
 
+    public static void setAllOffs(ArrayList<Off> allOffs) {
+        Off.allOffs = allOffs;
+    }
+
     public Off() {
         this("", "", "", 0);
     }
