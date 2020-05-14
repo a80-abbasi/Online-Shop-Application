@@ -31,6 +31,8 @@ public class Main {
         Offs.deserializeXML();
         AddOffRequests.deserializeXML();
         AddProductRequests.deserializeXML();
+        EditOffRequests.deserializeXML();
+        RegisterSellerRequests.serializeXML();
     }
 
     public static void serializeXML(){
@@ -43,5 +45,7 @@ public class Main {
         Offs.serializeXML();
         AddOffRequests.serializeXML();
         AddProductRequests.serializeXML();
+        EditOffRequests.serializeXML();
+        RegisterSellerRequests.serializeXML();
     }
 }
