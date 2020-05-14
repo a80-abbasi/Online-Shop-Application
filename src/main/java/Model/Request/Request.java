@@ -2,16 +2,18 @@ package Model.Request;
 
 import java.util.ArrayList;
 
-public class Request {
+public abstract class Request {
     protected static ArrayList<Request> allRequests;
     protected String requestId;
+    protected RequestType requestType;
 
     static {
         allRequests = new ArrayList<>();
     }
 
-    public Request(String requestId) {
+    public Request(String requestId, RequestType requestType) {
         this.requestId = requestId;
+        this.requestType = requestType;
         allRequests.add(this);
     }
 
@@ -23,9 +25,9 @@ public class Request {
         return requestId;
     }
 
-    public void acceptRequest() {
+    public abstract void acceptRequest();
 
-    }
+    public abstract String toString();
 
     public static Request getRequestById(String requestId) {
         for (Request request : allRequests) {

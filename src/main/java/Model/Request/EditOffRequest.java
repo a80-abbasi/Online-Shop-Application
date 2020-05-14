@@ -9,7 +9,7 @@ public class EditOffRequest extends Request {
     private HashMap<String, String> fieldChanges;
 
     public EditOffRequest(Off off, HashMap<String, String> fieldChanges) {
-        super("edit_off_" + allRequests.size());
+        super("edit_off_" + allRequests.size(), RequestType.Editing_Off_Request);
         this.off = off;
         this.fieldChanges = fieldChanges;
     }
@@ -19,4 +19,10 @@ public class EditOffRequest extends Request {
 
     }
 
+    @Override
+    public String toString() {
+        System.out.println("OffId = " + off.getOffID());
+        return null;
+        //todo: completing
+    }
 }

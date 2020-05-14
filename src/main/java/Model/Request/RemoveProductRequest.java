@@ -6,7 +6,7 @@ public class RemoveProductRequest extends Request {
     private Product product;
 
     public RemoveProductRequest(Product product) {
-        super("remove_product_" + allRequests.size());
+        super("remove_product_" + allRequests.size(), RequestType.Remove_Product_Request);
         this.product = product;
     }
 
@@ -15,4 +15,9 @@ public class RemoveProductRequest extends Request {
         Product.removeProduct(product);
     }
 
+    @Override
+    public String toString() {
+        return null;
+        //todo: completing
+    }
 }
