@@ -9,13 +9,12 @@ import Model.Product.Category;
 import Model.Product.Product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AdminProfileManager extends ProfileManager{
-    private Admin admin;
 
     public AdminProfileManager(Admin admin) {
         super(admin);
-        this.admin = admin;
     }
 
     public ArrayList<Account> getAllUsers() {
@@ -28,14 +27,6 @@ public class AdminProfileManager extends ProfileManager{
             throw new NullPointerException();
         }
         return account.toString();
-    }
-
-    public void changeTypeOfAccount(String username, String role) throws NullPointerException, IllegalArgumentException{
-        Account account = Account.getAccountByUsername(username);
-        if (account == null) {
-            throw new NullPointerException();
-        }
-        //todo: completing this method
     }
 
     public void deleteUser(String username) throws NullPointerException{
@@ -76,11 +67,12 @@ public class AdminProfileManager extends ProfileManager{
         return discount.toString();
     }
 
-    public void editDiscount(String discountCode) throws NullPointerException{
+    public void editDiscount(String discountCode, HashMap<String, String> discountEdition) throws NullPointerException{
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
             throw new NullPointerException();
         }
+
     }
 
     public void removeDiscount(String discountCode) throws NullPointerException{
