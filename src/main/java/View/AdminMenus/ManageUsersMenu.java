@@ -14,7 +14,6 @@ public class ManageUsersMenu extends Menu {
         super("Manage Users Menu", parentMenu);
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getViewUserMenu());
-        submenus.add(getChangeTypeOfUserMenu());
         submenus.add(getDeleteUserMenu());
         submenus.add(getCreateManagerProfileMenu());
     }
@@ -46,46 +45,11 @@ public class ManageUsersMenu extends Menu {
                 else {
                     try {
                         String userInfo = adminProfileManager.viewUser(input);
+                        System.out.println(userInfo);
                     }
                     catch (NullPointerException e) {
                         System.out.println("There is no account with this username.");
                     }
-                    this.show();
-                    this.execute();
-                }
-            }
-        };
-    }
-
-    public Menu getChangeTypeOfUserMenu() {
-        return new Menu("Change Type of User", this) {
-            @Override
-            public void show() {
-                System.out.println(this.getName() + ":");
-                System.out.println("Enter Username :");
-            }
-
-            @Override
-            public void execute() {
-                String username = scanner.nextLine();
-                System.out.println("Enter the role you want this user to have:");
-                String role = scanner.nextLine();
-                try {
-                    adminProfileManager.changeTypeOfAccount(username, role);
-                }
-                catch (NullPointerException n) {
-                    System.out.println("There is no account with this username.");
-                }
-                catch (IllegalArgumentException i) {
-                    System.out.println("This role doesn't exist.");
-                }
-                System.out.println("Enter (Back) to return or (Change Type) to change another user's type:");
-                String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
-                    this.parentMenu.execute();
-                }
-                else {
                     this.show();
                     this.execute();
                 }
