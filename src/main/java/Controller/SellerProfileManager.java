@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Account.*;
-import Model.Account.Request.*;
+import Model.Request.*;
 import Model.Product.Category;
 import Model.Product.Product;
 import Model.Product.ProductStatus;

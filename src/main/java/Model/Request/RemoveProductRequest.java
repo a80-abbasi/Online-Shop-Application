@@ -1,4 +1,4 @@
-package Model.Account.Request;
+package Model.Request;
 
 import Model.Product.Product;
 

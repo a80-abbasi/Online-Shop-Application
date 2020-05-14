@@ -3,7 +3,7 @@ package Controller;
 import Model.Account.Account;
 import Model.Account.Admin;
 import Model.Account.Discount;
-import Model.Account.Request.Request;
+import Model.Request.Request;
 import Model.Product.Category;
 import Model.Product.Product;
 
@@ -18,8 +18,7 @@ public class AdminProfileManager extends ProfileManager{
     }
 
     public ArrayList<Account> getAllUsers() {
-        ArrayList<Account> allAccounts = Account.getAllAccounts();
-        return allAccounts;
+        return Account.getAllAccounts();
     }
 
     public String viewUser(String username) {
@@ -50,8 +49,7 @@ public class AdminProfileManager extends ProfileManager{
     }
 
     public ArrayList<Discount> getAllDiscountCodes() {
-        ArrayList<Discount> allDiscounts = Discount.getAllDiscounts();
-        return allDiscounts;
+        return Discount.getAllDiscounts();
     }
 
     public void viewDiscount(String discountCode) {
@@ -95,8 +93,7 @@ public class AdminProfileManager extends ProfileManager{
     }
 
     public ArrayList<Category> getAllCategories() {
-        ArrayList<Category> allCategories = Category.getAllCategories();
-        return allCategories;
+        return Category.getAllCategories();
     }
 
     public void editCategory(String categoryName, String changeField) {
