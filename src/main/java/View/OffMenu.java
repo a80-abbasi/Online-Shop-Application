@@ -1,6 +1,7 @@
 package View;
 
 import Model.Account.Off;
+import Model.Product.Product;
 
 import java.util.ArrayList;
 
