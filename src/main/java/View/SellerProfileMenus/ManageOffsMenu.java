@@ -1,15 +1,16 @@
 package View.SellerProfileMenus;
 
 import Controller.SellerProfileManager;
+import Model.Account.OffStatus;
 import View.Menu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ViewOffsMenu extends Menu {
+public class ManageOffsMenu extends Menu {
     private SellerProfileManager sellerProfileManager;
 
-    public ViewOffsMenu(Menu parentMenu, SellerProfileManager sellerProfileManager) {
+    public ManageOffsMenu(Menu parentMenu, SellerProfileManager sellerProfileManager) {
         super("View Offs Menu", parentMenu);
         this.sellerProfileManager = sellerProfileManager;
         ArrayList<Menu> subMenus = new ArrayList<>();
@@ -103,7 +104,19 @@ public class ViewOffsMenu extends Menu {
                 }
                 else if (input.equalsIgnoreCase("add")) {
                     ArrayList<String> propertiesInOrder = new ArrayList<>();
-                    //todo: completing this
+                    System.out.println("Enter offID: ");
+                    String offID = scanner.nextLine();
+                    propertiesInOrder.add(offID);
+                    System.out.println("Enter startTime: ");
+                    String startTime = scanner.nextLine();
+                    propertiesInOrder.add(startTime);
+                    System.out.println("Enter endTime: ");
+                    String endTime = scanner.nextLine();
+                    propertiesInOrder.add(endTime);
+                    System.out.println("Enter off amount: ");
+                    String offAmount = scanner.nextLine();
+                    propertiesInOrder.add(offAmount);
+                    sellerProfileManager.addOff(propertiesInOrder);
                 }
             }
         };
