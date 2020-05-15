@@ -12,6 +12,15 @@ public class Off {
     private int offAmount;
     private OffStatus offStatus;
     private ArrayList<Product> products;
+    private static ArrayList<String> offFields = new ArrayList<>();
+    static {
+        offFields.add("offID");
+        offFields.add("startTime");
+        offFields.add("endTime");
+        offFields.add("offAmount");
+        offFields.add("offStatus");
+        offFields.add("products");
+    }
 
     public Off(String offID, String startTime, String endTime, int offAmount) {
         this.offID = offID;
@@ -81,6 +90,10 @@ public class Off {
 
     public static ArrayList<Off> getAllOffs() {
         return allOffs;
+    }
+
+    public static ArrayList<String> getOffFields() {
+        return offFields;
     }
 
     public static Off getOffById(String offID) {
