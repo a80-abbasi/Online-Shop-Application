@@ -21,10 +21,7 @@ public class ManageProductsMenu extends Menu {
 
     @Override
     public void show() {
-        ArrayList<String> allProductsIds = sellerProfileManager.getSellerProducts();
-        for (String productId : allProductsIds) {
-            System.out.println(productId);
-        }
+        System.out.println(sellerProfileManager.getSellerProductsNameAndID());
         super.show();
     }
 
@@ -33,19 +30,21 @@ public class ManageProductsMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter productId to view or (back) to return:");
+                System.out.println("Enter ProductId to view or (back) to return or (Logout) to leave your account:");
             }
 
             @Override
             public void execute() {
+                show();
                 String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
+                if (input.equalsIgnoreCase("Back")) {
                     this.parentMenu.execute();
-                }
-                else {
-                    String productId = input;
-                    //todo: go to product Menu
+                } else if (input.equals("Logout")) {
+                    loginAndRegisterManager.logoutUser();
+                } else {
+                    //todo: check is input valid
+                    System.out.println(sellerProfileManager.getProductByID(input));
+                    this.execute();
                 }
             }
         };
@@ -56,23 +55,20 @@ public class ManageProductsMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter productId to view buyers or (back) to return:");
+                System.out.println("Enter ProductId to view buyers or (back) to return or (Logout) to leave your account:");
             }
 
             @Override
             public void execute() {
+                show();
                 String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
+                if (input.equalsIgnoreCase("Back")) {
                     this.parentMenu.execute();
-                }
-                else {
-                    String productId = input;
-                    ArrayList<String> productBuyers = sellerProfileManager.getProductBuyers(productId);
-                    for (String productBuyer : productBuyers) {
-                        System.out.println(productBuyer);
-                    }
-                    this.show();
+                } else if (input.equals("Logout")) {
+                    loginAndRegisterManager.logoutUser();
+                } else {
+                    //todo: check is input valid
+                    System.out.println(sellerProfileManager.getProductBuyers(input));
                     this.execute();
                 }
             }
@@ -84,32 +80,41 @@ public class ManageProductsMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter productId to edit or (back) to return:");
+                System.out.println("Enter productID to edit or (Back) to return or (Logout) to leave your account:");
             }
 
             @Override
             public void execute() {
+                show();
+                HashMap<String, String> fieldChanges = new HashMap<>();
                 String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
-                    this.parentMenu.execute();
-                }
-                else {
-                    String productId = input;
-                    HashMap<String, String> fieldChanges = new HashMap<>();
-                    System.out.println("Enter the field you want to change or (end) to finish");
-                    String field = scanner.nextLine();
-                    while (!(field.equalsIgnoreCase("end"))) {
+                String productID = input;
+                System.out.println("Enter the field you want to edit or (End) to finish");
+                String field = scanner.nextLine();
+                while (!(field.equalsIgnoreCase("End"))) {
+                    if (input.equalsIgnoreCase("Back")) {
+                        this.parentMenu.execute();
+                    } else if (input.equalsIgnoreCase("Logout")) {
+                        loginAndRegisterManager.logoutUser();
+                    } else if (SellerProfileManager.isInputInProductFields(input)) {
                         System.out.println("Enter new value for the field:");
                         String value = scanner.nextLine();
-                        fieldChanges.put(field, value);
-                        System.out.println("Enter the field you want to change or (end) to finish");
+                        if (SellerProfileManager.isInputValidProductValue(value)) {
+                            fieldChanges.put(field, value);
+                        } else {
+                            System.out.println("This value is invalid");
+                            System.out.println("Enter the field you want to edit or (end) to finish");
+                            field = scanner.nextLine();
+                        }
+                    } else {
+                        System.out.println("This field doesn't exist");
+                        System.out.println("Enter the field you want to edit or (end) to finish");
                         field = scanner.nextLine();
                     }
-                    sellerProfileManager.editProductByID(productId, fieldChanges);
-                    this.show();
-                    this.execute();
                 }
+                sellerProfileManager.editProductByID(productID, fieldChanges);
+                System.out.println("Your request for edit this fields sent to admin please w8 for answer");
+                parentMenu.execute();
             }
         };
     }
