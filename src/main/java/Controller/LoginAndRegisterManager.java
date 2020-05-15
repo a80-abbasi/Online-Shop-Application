@@ -2,6 +2,7 @@ package Controller;
 
 
 import Model.Account.*;
+import View.MainMenu;
 
 public class LoginAndRegisterManager {
 
@@ -42,6 +43,7 @@ public class LoginAndRegisterManager {
 
     public void logoutUser(){
         Account.setLoggedInAccount(null);
+        new MainMenu().execute();
     }
 
     public boolean isLogin(){
