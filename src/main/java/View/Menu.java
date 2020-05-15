@@ -63,10 +63,12 @@ public abstract class Menu {
         else {
             System.out.println(submenus.size() + 1 + ". Login");
         }
-        if (this.parentMenu != null)
+        if (this.parentMenu != null) {
             System.out.println((submenus.size() + 2) + ". Back");
-        else
+        }
+        else {
             System.out.println((submenus.size() + 2) + ". Exit");
+        }
     }
 
     public void execute() {

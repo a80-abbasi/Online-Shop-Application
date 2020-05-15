@@ -5,6 +5,7 @@ import Model.Request.*;
 import Model.Product.Category;
 import Model.Product.Product;
 import Model.Product.ProductStatus;
+import View.SellerProfileMenus.SellerProfileMenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,8 +18,10 @@ public class SellerProfileManager extends ProfileManager {
         this.seller = seller;
     }
 
-    public String getCompanyInformation() {
-        return seller.getNameOfCompany();
+    public HashMap<String, String> getCompanyInformation() {
+        HashMap <String, String> companyInformation = new HashMap<String, String>();
+        companyInformation.put("Name", seller.getNameOfCompany());
+        return companyInformation;
     }
 
     public ArrayList<String> getSalesHistory() {
@@ -38,26 +41,42 @@ public class SellerProfileManager extends ProfileManager {
         return sellerProductsIds;
     }
 
-    public ArrayList<Product> viewProductByID(String id) {
-        return null;
+    public Product getProductByID(String id) {
+        return Product.getProductByID(id);
     }
 
-    public ArrayList<String> getProductBuyers(String productId) {
-        Product product = Product.getProductByID(productId);
-        ArrayList<Customer> allBuyers = product.getProductBuyers();
-        ArrayList<String> allBuyersNames = new ArrayList<>();
-        for (Customer buyer : allBuyers) {
-            allBuyersNames.add(buyer.getUsername());
+    public HashMap<String, String> getProductBuyers(String productId) {
+        HashMap<String, String> allBuyersUsernameAndPhoneNumber = new HashMap<>();
+        for (Customer customer : Product.getProductByID(productId).getProductBuyers()) {
+            allBuyersUsernameAndPhoneNumber.put(customer.getUsername(),customer.getPhoneNumber());
         }
-        return allBuyersNames;
+        return allBuyersUsernameAndPhoneNumber;
     }
 
     public void editProductByID(String productId, HashMap<String, String> fieldChanges) {
-        Product product = Product.getProductByID(productId);
-        new EditProductRequest(product, fieldChanges);
+        new EditProductRequest(Product.getProductByID(productId), fieldChanges);
     }
 
-    public void addProduct(String productId, ProductStatus productStatus, String productName, String companyName, double price, int existingNumber, Seller seller) {
+    public static boolean areNewProductFieldsValueValid(HashMap<String, String> ProductFields) {
+        //todo: check is wrong format in product fields?(when we adding a product we can write everything or nothing(null) for fields)
+        return true;
+    }
+
+    public static boolean areNewOffFieldsValueValid(HashMap<String, String> OffFields) {
+        //todo: check is wrong format in Off fields?(when we adding an Off we can write everything or nothing(null) for fields)
+        return true;
+    }
+
+    public static boolean isProductIdFormatValid(String productId) {
+        //todo:
+        return true;
+    }
+
+    public static ArrayList<String> getAllProductFields() {
+        return Product.getProductFields();
+    }
+
+    public void addProduct(HashMap<String, String> newProductInformation) {
         new AddProductRequest(productId, productStatus, productName, companyName, price, existingNumber, seller);
     }
 
@@ -75,30 +94,76 @@ public class SellerProfileManager extends ProfileManager {
         return allCategoriesNames;
     }
 
-    public ArrayList<String> viewOffs() {
-        ArrayList<String> allSellerOffIds = new ArrayList<>();
-        ArrayList<Off> allSellerOffs = seller.getOffs();
-        for (Off sellerOff : allSellerOffs) {
-            allSellerOffIds.add(sellerOff.getOffID());
+    public static boolean isInputInOffFields(String input) {
+        for (int i = 0; i < Off.getOffFields().size(); i++) {
+            if (Off.getOffFields().get(i).equals(input)) {
+                return true;
+            }
         }
-        return allSellerOffIds;
+        return false;
+    }
+
+    public static boolean isInputInProductFields(String input) {
+        for (int i = 0; i < Product.getProductFields().size(); i++) {
+            if (Product.getProductFields().get(i).equals(input)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isInputValidOffValue(String input) {
+        //todo:check is new value valid or not;
+        return true;
+    }
+
+    public static boolean isInputValidProductValue(String input) {
+        //todo:check is new value valid or not;
+        return true;
+    }
+
+    public HashMap<String, String> getOffsAmountAndID() {
+        HashMap<String, String> offsAmountAndID = new HashMap<>();
+        for (int i = 0; i < seller.getOffs().size(); i ++) {
+            offsAmountAndID.put(String.valueOf(seller.getOffs().get(i).getOffAmount()), seller.getOffs().get(i).getOffID());
+        }
+        return offsAmountAndID;
+    }
+
+    public HashMap<String, String> getSellerProductsNameAndID() {
+        HashMap<String, String> SellerProductsNameAndID = new HashMap<>();
+        for (int i = 0; i < seller.getProducts().size(); i ++) {
+            SellerProductsNameAndID.put(String.valueOf(seller.getProducts().get(i).getProductName()), seller.getProducts().get(i).getProductId());
+        }
+        return SellerProductsNameAndID;
+    }
+
+    public static Off getOffByID(String offID) {
+        return Off.getOffById(offID);
     }
 
     public String getOffStatus(String offId) {
-        Off off = Off.getOffById(offId);
-        return off.toString();
+        //todo:
+        return "CHANGE THIS MESSAGE";
     }
 
-    public void editOff(String offId, HashMap<String, String> fieldChanges) {
+    public static ArrayList<String> getOffFields() {
+        return Off.getOffFields();
+    }
+
+    public void editOffByID(String offId, HashMap<String, String> fieldChanges) {
         Off off = Off.getOffById(offId);
         new EditOffRequest(off, fieldChanges);
     }
 
-    public void addOff (ArrayList<String> properties) {
+    public void addOff (HashMap<String, String> properties) {
         new AddOffRequest(properties);
     }
+
     public int viewBalance(Account account) {
         return 0;
     }
+
+
 
 }
