@@ -16,6 +16,7 @@ public class ManageCategoriesMenu extends Menu {
         submenus.add(getEditCategoryMenu());
         submenus.add(getAddCategoryMenu());
         submenus.add(getRemoveCategoryMenu());
+        this.setSubMenus(submenus);
     }
 
     @Override
@@ -30,16 +31,11 @@ public class ManageCategoriesMenu extends Menu {
     private Menu getEditCategoryMenu() {
         return new Menu("Edit Category", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter category name to edit or (Back) to return:");
-            }
-
-            @Override
-            public void execute() {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
@@ -54,7 +50,6 @@ public class ManageCategoriesMenu extends Menu {
                     catch (IllegalArgumentException e) {
                         System.out.println("This category doesn't have this field.");
                     }
-                    this.show();
                     this.execute();
                 }
             }
@@ -64,16 +59,11 @@ public class ManageCategoriesMenu extends Menu {
     private Menu getAddCategoryMenu() {
         return new Menu("Add Category", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter category name to add or (Back) to return:");
-            }
-
-            @Override
-            public void execute() {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
@@ -81,7 +71,6 @@ public class ManageCategoriesMenu extends Menu {
                     System.out.println("Enter special properties:");
                     String specialProperties = scanner.nextLine();
                     adminProfileManager.addCategory(categoryName, specialProperties);
-                    this.show();
                     this.execute();
                 }
             }
@@ -91,16 +80,11 @@ public class ManageCategoriesMenu extends Menu {
     private Menu getRemoveCategoryMenu() {
         return new Menu("Remove Category", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter category name to remove or (Back) to return:");
-            }
-
-            @Override
-            public void execute() {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
@@ -112,7 +96,6 @@ public class ManageCategoriesMenu extends Menu {
                     catch (NullPointerException e) {
                         System.out.println("There is no category with this name.");
                     }
-                    this.show();
                     this.execute();
                 }
             }

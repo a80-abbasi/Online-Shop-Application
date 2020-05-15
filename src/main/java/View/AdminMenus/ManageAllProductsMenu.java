@@ -13,21 +13,17 @@ public class ManageAllProductsMenu extends Menu {
         this.adminProfileManager = adminProfileManager;
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getRemoveProductMenu());
+        this.setSubMenus(submenus);
     }
 
     private Menu getRemoveProductMenu() {
         return new Menu("Remove Product", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter product id to remove product or (Back) to return:");
-            }
-
-            @Override
-            public void execute() {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
@@ -38,7 +34,6 @@ public class ManageAllProductsMenu extends Menu {
                     catch (NullPointerException e) {
                         System.out.println("There is no product with this id.");
                     }
-                    this.show();
                     this.execute();
                 }
             }
