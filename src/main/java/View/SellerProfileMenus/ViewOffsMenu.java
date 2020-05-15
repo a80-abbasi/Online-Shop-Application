@@ -21,10 +21,7 @@ public class ViewOffsMenu extends Menu {
 
     @Override
     public void show() {
-        ArrayList<String> allOffIds = sellerProfileManager.viewOffs();
-        for (String offId : allOffIds) {
-            System.out.println(offId);
-        }
+        System.out.println(sellerProfileManager.getOffsAmountAndID());
         super.show();
     }
 
@@ -33,20 +30,21 @@ public class ViewOffsMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter offId to view or (back) to return:");
+                System.out.println("Enter offId to view or (back) to return or (Logout) to leave your account:");
+
             }
 
             @Override
             public void execute() {
+                show();
                 String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
+                if (input.equalsIgnoreCase("Back")) {
                     this.parentMenu.execute();
-                }
-                else {
-                    String offId = input;
-                    sellerProfileManager.getOffStatus(offId);
-                    this.show();
+                } else if (input.equals("Logout")) {
+                    loginAndRegisterManager.logoutUser();
+                } else {
+                    //todo: check is input valid
+                    System.out.println(SellerProfileManager.getOffByID(input));
                     this.execute();
                 }
             }
@@ -58,30 +56,41 @@ public class ViewOffsMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter OffId to edit or (back) to return:");
+                System.out.println("Enter OffId to edit or (Back) to return or (Logout) to leave your account:");
             }
 
             @Override
             public void execute() {
+                show();
+                HashMap<String, String> fieldChanges = new HashMap<>();
                 String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
-                    this.parentMenu.execute();
-                }
-                else {
-                    String offId = input;
-                    HashMap<String, String> fieldChanges = new HashMap<>();
-                    System.out.println("Enter the field you want to change or (end) to finish");
-                    String field = scanner.nextLine();
-                    while (!(field.equalsIgnoreCase("end"))) {
+                String offID = input;
+                System.out.println("Enter the field you want to edit or (End) to finish");
+                String field = scanner.nextLine();
+                while (!(field.equalsIgnoreCase("End"))) {
+                    if (input.equalsIgnoreCase("Back")) {
+                        this.parentMenu.execute();
+                    } else if (input.equalsIgnoreCase("Logout")) {
+                        loginAndRegisterManager.logoutUser();
+                    } else if (SellerProfileManager.isInputInOffFields(input)) {
                         System.out.println("Enter new value for the field:");
                         String value = scanner.nextLine();
-                        fieldChanges.put(field, value);
-                        System.out.println("Enter the field you want to change or (end) to finish");
+                        if (SellerProfileManager.isInputValidOffValue(value)) {
+                            fieldChanges.put(field, value);
+                        } else {
+                            System.out.println("This value is invalid");
+                            System.out.println("Enter the field you want to edit or (end) to finish");
+                            field = scanner.nextLine();
+                        }
+                    } else {
+                        System.out.println("This field doesn't exist");
+                        System.out.println("Enter the field you want to edit or (end) to finish");
                         field = scanner.nextLine();
                     }
-                    sellerProfileManager.editOff(offId, fieldChanges);
                 }
+                sellerProfileManager.editOffByID(offID, fieldChanges);
+                System.out.println("Your request for edit this fields sent to admin please w8 for answer");
+                parentMenu.execute();
             }
         };
     }
@@ -89,21 +98,56 @@ public class ViewOffsMenu extends Menu {
     public Menu getAddOffMenu() {
         return new Menu("Add Off Information", this) {
             @Override
-            public void show() {
-                System.out.println(this.getName() + ":");
-                System.out.println("Enter (add) to add a new off or (back) to return:");
-            }
-
-            @Override
             public void execute() {
-                String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
-                    this.parentMenu.execute();
-                }
-                else if (input.equalsIgnoreCase("add")) {
-                    ArrayList<String> propertiesInOrder = new ArrayList<>();
-                    //todo: completing this
+                ArrayList<String> offFieldsValue = new ArrayList<>(SellerProfileManager.getOffFields());
+                int pageNumber = 1;
+                while (true) {
+                    if (pageNumber == 1) {
+                        System.out.println(this.getName() + ":");
+                        System.out.println("In each Menu you can use (Back) to return, (Next) to go next page or (Logout) to leave your account!");
+                    }
+                    if(pageNumber <= SellerProfileManager.getOffFields().size()) {
+                        System.out.println("Enter " + SellerProfileManager.getOffFields().get(pageNumber - 1) + ":");
+                        String input = scanner.nextLine();
+                        if (input.equals("Back")) {
+                            if(pageNumber == 1) {
+                                this.parentMenu.execute();
+                            }
+                            else {
+                                pageNumber -= 1;
+                            }
+                        } else if(input.equals("Next")) {
+                            pageNumber += 1;
+                        } else if (input.equals("Logout")) {
+                            loginAndRegisterManager.logoutUser();
+                        } else {
+                            offFieldsValue.set(pageNumber - 1, input);
+                            pageNumber += 1;
+                        }
+                    } else if (pageNumber == SellerProfileManager.getOffFields().size() + 1) {
+                        System.out.println("are this fields true?(Write (Next) if they are true)");
+                        HashMap<String, String> newOffFields = new HashMap<>();
+                        for (int i = 0; i < SellerProfileManager.getOffFields().size(); i++) {
+                            newOffFields.put(SellerProfileManager.getOffFields().get(i), offFieldsValue.get(i));
+                        }
+                        System.out.println(newOffFields);
+                        String input = scanner.nextLine();
+                        if (input.equals("Back")) {
+                            pageNumber -= 1;
+                        } else if(input.equals("Next")) {
+                            if (SellerProfileManager.areNewOffFieldsValueValid(newOffFields)) {
+                                sellerProfileManager.addOff(newOffFields);
+                                System.out.println("Your Request Sent to Admin please w8 for answer");
+                                parentMenu.execute();
+                            } else {
+                                System.out.println("formats are invalid"); //todo: write a better message;
+                            }
+                        } else if (input.equals("Logout")) {
+                            loginAndRegisterManager.logoutUser();
+                        } else {
+                            System.out.println("invalid message");
+                        }
+                    }
                 }
             }
         };
