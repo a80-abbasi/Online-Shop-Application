@@ -83,4 +83,20 @@ public class Customer extends Account {
     public HashMap<Discount, Integer> getUsedDiscounts() {
         return usedDiscounts;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "balance=" + balance +
+                ", cart=" + cart +
+                ", buyLogs=" + buyLogs +
+                ", usedDiscounts=" + usedDiscounts +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
 }

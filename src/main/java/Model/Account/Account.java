@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public abstract class Account {
     private static ArrayList<Account> allAccounts = new ArrayList<>();
     private static Account loggedInAccount;
-    private String username;
-    private String password;
-    private String name;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
+    protected String username;
+    protected String password;
+    protected String name;
+    protected String lastName;
+    protected String email;
+    protected String phoneNumber;
 
     public Account(String username, String password, String name, String lastName, String email, String phoneNumber) {
         this.username = username;
@@ -102,5 +102,8 @@ public abstract class Account {
     public static void deleteAccount(Account account) {
         allAccounts.remove(account);
     }
+
+    @Override
+    public abstract String toString();
 }
 
