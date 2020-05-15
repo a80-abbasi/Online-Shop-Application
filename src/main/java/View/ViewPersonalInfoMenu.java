@@ -25,13 +25,9 @@ public class ViewPersonalInfoMenu extends Menu {
     private Menu getEditFieldMenu() {
         return new Menu("Edit Field", this) {
             @Override
-            public void show() {
-                System.out.println(this.getName() + ":");
-                System.out.println("Enter field you want to edit or (Back) to return");
-            }
-
-            @Override
             public void execute() {
+                System.out.println(this.getName() + ": ");
+                System.out.println("Enter field you want to edit or (Back) to return");
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
                     this.parentMenu.show();
@@ -41,8 +37,16 @@ public class ViewPersonalInfoMenu extends Menu {
                     System.out.println("Enter the change you want to make:");
                     String fieldChange = scanner.nextLine();
                     String fieldName = input;
-                    profileManager.editFieldOfProfile(fieldName, fieldChange);
-                    this.show();
+                    try {
+                        profileManager.editFieldOfProfile(fieldName, fieldChange);
+                        System.out.println(fieldName + " successfully changed to " + fieldChange);
+                    }
+                    catch (IllegalAccessException e) {
+                        System.out.println("This field cannot be changed.");
+                    }
+                    catch (IllegalArgumentException e) {
+                        System.out.println("Wrong field name.");
+                    }
                     this.execute();
                 }
             }
