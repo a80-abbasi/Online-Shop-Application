@@ -2,11 +2,11 @@ package View.SellerProfileMenus;
 
 import Controller.SellerProfileManager;
 import Model.Account.Seller;
-import Model.Product.ProductStatus;
 import View.Menu;
 import View.ViewPersonalInfoMenu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SellerProfileMenu extends Menu {
     private Seller seller;
@@ -35,20 +35,8 @@ public class SellerProfileMenu extends Menu {
             public void show() {
                 System.out.println(this.getName() + ":");
                 System.out.println(sellerProfileManager.getCompanyInformation());
-                System.out.println("Enter (View) to view company's information or (Back) to return:");
-            }
-
-            @Override
-            public void execute() {
-                String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
-                    this.parentMenu.execute();
-                }
-                else {
-                    this.show();
-                    this.execute();
-                }
+                System.out.println("1. Logout");
+                System.out.println("2. Back");
             }
         };
     }
@@ -59,21 +47,9 @@ public class SellerProfileMenu extends Menu {
             public void show() {
                 System.out.println(this.getName() + ":");
                 for (String saleHistory : sellerProfileManager.getSalesHistory()) {
-                    System.out.println(saleHistory);
-                }
-                System.out.println("Enter (View) to view sales history or (Back) to return:");
-            }
-
-            @Override
-            public void execute() {
-                String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
-                    this.parentMenu.execute();
-                }
-                else {
-                    this.show();
-                    this.execute();
+                    System.out.print(saleHistory + ", ");
+                    System.out.println("1. Logout");
+                    System.out.println("2. Back");
                 }
             }
         };
@@ -82,33 +58,57 @@ public class SellerProfileMenu extends Menu {
     public Menu getAddProductMenu() {
         return new Menu("Add Product Menu", this) {
             @Override
-            public void show() {
-                System.out.println(this.getName() + ":");
-                System.out.println("Enter productId or (Back) to return:");
-            }
-
-            @Override
             public void execute() {
-                String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
-                    this.parentMenu.execute();
-                }
-                else {
-                    String productId = input;
-                    System.out.println("Enter product status:");
-                    ProductStatus productStatus = ProductStatus.valueOf(scanner.nextLine());
-                    System.out.println("Enter product name:");
-                    String productName = scanner.nextLine();
-                    System.out.println("Enter product company name:");
-                    String companyName = scanner.nextLine();
-                    System.out.println("Enter product price:");
-                    double price = scanner.nextDouble();
-                    System.out.println("Enter existing number of product");
-                    int existingNumber = scanner.nextInt();
-                    sellerProfileManager.addProduct(productId, productStatus, productName, companyName, price, existingNumber, seller);
-                    this.show();
-                    this.execute();
+                ArrayList<String> productFieldsValue = new ArrayList<>(SellerProfileManager.getAllProductFields());
+                int pageNumber = 1;
+                while (true) {
+                    if (pageNumber == 1) {
+                        System.out.println(this.getName() + ":");
+                        System.out.println("In each Menu you can use (Back) to return, (Next) to go next page or (Logout) to leave your account!");
+                    }
+                    if(pageNumber <= SellerProfileManager.getAllProductFields().size()) {
+                        System.out.println("Enter " + SellerProfileManager.getAllProductFields().get(pageNumber - 1) + ":");
+                        String input = scanner.nextLine();
+                        if (input.equals("Back")) {
+                            if(pageNumber == 1) {
+                                this.parentMenu.execute();
+                            }
+                            else {
+                                pageNumber -= 1;
+                            }
+                        } else if(input.equals("Next")) {
+                            pageNumber += 1;
+                        } else if (input.equals("Logout")) {
+                            loginAndRegisterManager.logoutUser();
+                        } else {
+                            productFieldsValue.set(pageNumber - 1, input);
+                            pageNumber += 1;
+                        }
+                    }
+                    else if (pageNumber == SellerProfileManager.getAllProductFields().size() + 1) {
+                        System.out.println("are this fields true?(Write (Next) if they are true)");
+                        HashMap<String, String> newProductFields = new HashMap<>();
+                        for (int i = 0; i < productFieldsValue.size(); i++) {
+                            newProductFields.put(SellerProfileManager.getAllProductFields().get(i), productFieldsValue.get(i));
+                        }
+                        System.out.println(newProductFields);
+                        String input = scanner.nextLine();
+                        if (input.equals("Back")) {
+                            pageNumber -= 1;
+                        } else if(input.equals("Next")) {
+                            if (SellerProfileManager.areNewProductFieldsValueValid(newProductFields)) {
+                                sellerProfileManager.addProduct(newProductFields);
+                                System.out.println("Your Request Sent to Admin please w8 for answer");
+                                parentMenu.execute();
+                            } else {
+                                System.out.println("formats are invalid"); //todo: write a better message;
+                            }
+                        } else if (input.equals("Logout")) {
+                            loginAndRegisterManager.logoutUser();
+                        } else {
+                            System.out.println("invalid message");
+                        }
+                    }
                 }
             }
         };
@@ -119,21 +119,26 @@ public class SellerProfileMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter productId to remove or (Back) to return:");
+                System.out.println("Enter (productId) to remove a product, (Back) to return or (Logout) to leave your account:");
             }
 
             @Override
             public void execute() {
+                show();
                 String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
+                if (input.equalsIgnoreCase("Back")) {
                     this.parentMenu.execute();
-                }
-                else {
-                    String productId = input;
-                    sellerProfileManager.removeProduct(productId);
-                    this.show();
-                    this.execute();
+                } else if (input.equals("Logout")) {
+                    loginAndRegisterManager.logoutUser();
+                } else {
+                    if (SellerProfileManager.isProductIdFormatValid(input)) {
+                        sellerProfileManager.removeProduct(input);
+                        System.out.println("Your product removed successfully");
+                        parentMenu.execute();
+                    } else {
+                        System.out.println("ProductID is Invalid");
+                        this.execute();
+                    }
                 }
             }
         };
@@ -147,19 +152,8 @@ public class SellerProfileMenu extends Menu {
                 for (String category : sellerProfileManager.getAllCategories()) {
                     System.out.println(category);
                 }
-                System.out.println("Enter (show) to view categories or (back) to return:");
-            }
-            @Override
-            public void execute() {
-                String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
-                    this.parentMenu.execute();
-                }
-                else if (input.equalsIgnoreCase("show")) {
-                    this.show();
-                    this.execute();
-                }
+                System.out.println("1. Logout");
+                System.out.println("2. Back");
             }
         };
     }
@@ -169,13 +163,12 @@ public class SellerProfileMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println();
+                System.out.println("your balance is:" + seller.getBalance());
+                System.out.println("1. Logout");
+                System.out.println("2. Back");
             }
 
-            @Override
-            public void execute() {
-                parentMenu.execute();
-            }
         };
     }
+
 }
