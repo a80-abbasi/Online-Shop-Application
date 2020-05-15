@@ -22,20 +22,32 @@ public class Main {
     }
 
     private static void deserializeXML(){
-        Accounts.deserializeXML();
+        Customers.deserializeXML();
+        Admins.deserializeXML();
+        Sellers.deserializeXML();
         Products.deserializeXML();
         Categories.deserializeXML();
-        Admins.deserializeXML();
         Discounts.deserializeXML();
         Offs.deserializeXML();
+        AddOffRequests.deserializeXML();
+        AddProductRequests.deserializeXML();
+        EditOffRequests.deserializeXML();
+        RegisterSellerRequests.deserializeXML();
+        RemoveProductRequests.deserializeXML();
     }
 
     public static void serializeXML(){
-        Accounts.serializeXML();
+        Customers.serializeXML();
+        Admins.serializeXML();
+        Sellers.serializeXML();
         Products.serializeXML();
         Categories.serializeXML();
-        Admins.serializeXML();
         Discounts.serializeXML();
         Offs.serializeXML();
+        AddOffRequests.serializeXML();
+        AddProductRequests.serializeXML();
+        EditOffRequests.serializeXML();
+        RegisterSellerRequests.serializeXML();
+        RemoveProductRequests.serializeXML();
     }
 }

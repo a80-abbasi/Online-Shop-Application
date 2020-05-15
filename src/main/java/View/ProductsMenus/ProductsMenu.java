@@ -48,8 +48,16 @@ public class ProductsMenu extends Menu {
         try {
             Menu nextMenu;
             int chosenMenu = Integer.parseInt(scanner.nextLine());
-            if (chosenMenu == submenus.size() + 1) {
+            if (chosenMenu == submenus.size() + 2) {
                 nextMenu = this.parentMenu;
+            } else if (chosenMenu == submenus.size() + 1) {
+                if (loginAndRegisterManager.isLogin()) {
+                    loginAndRegisterManager.logoutUser();
+                }
+                else {
+                    loginAndRegisterMenu.execute();
+                }
+                nextMenu = this;
             } else {
                 if (chosenMenu == submenus.size()) {
                     System.out.println("Enter Product ID");

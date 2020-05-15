@@ -14,7 +14,6 @@ public class ManageUsersMenu extends Menu {
         super("Manage Users Menu", parentMenu);
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getViewUserMenu());
-        submenus.add(getChangeTypeOfUserMenu());
         submenus.add(getDeleteUserMenu());
         submenus.add(getCreateManagerProfileMenu());
     }
@@ -44,35 +43,13 @@ public class ManageUsersMenu extends Menu {
                     this.parentMenu.execute();
                 }
                 else {
-                    String userInfo = adminProfileManager.viewUser(input);
-                    this.show();
-                    this.execute();
-                }
-            }
-        };
-    }
-
-    public Menu getChangeTypeOfUserMenu() {
-        return new Menu("Change Type of User", this) {
-            @Override
-            public void show() {
-                System.out.println(this.getName() + ":");
-                System.out.println("Enter Username :");
-            }
-
-            @Override
-            public void execute() {
-                String username = scanner.nextLine();
-                System.out.println("Enter the role you want this user to have:");
-                String role = scanner.nextLine();
-                adminProfileManager.changeTypeOfAccount(username, role);
-                System.out.println("Enter (Back) to return or (Change Type) to change another user's type:");
-                String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
-                    this.parentMenu.execute();
-                }
-                else {
+                    try {
+                        String userInfo = adminProfileManager.viewUser(input);
+                        System.out.println(userInfo);
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no account with this username.");
+                    }
                     this.show();
                     this.execute();
                 }
@@ -96,7 +73,13 @@ public class ManageUsersMenu extends Menu {
                     this.parentMenu.execute();
                 }
                 else {
-                    adminProfileManager.deleteUser(input);
+                    try {
+                        adminProfileManager.deleteUser(input);
+                        System.out.println("User deleted successfully.");
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no account with this username.");
+                    }
                     this.show();
                     this.execute();
                 }
@@ -104,6 +87,7 @@ public class ManageUsersMenu extends Menu {
         };
     }
 
+//todo: adding exceptions to this menu
     public Menu getCreateManagerProfileMenu() {
         return new Menu("Create Manager Profile", this) {
             @Override

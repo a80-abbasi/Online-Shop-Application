@@ -20,7 +20,7 @@ public class AdminProfileMenu extends Menu {
         subMenus.add(new ManageUsersMenu(this, adminProfileManager));
         subMenus.add(new ManageAllProductsMenu(this, adminProfileManager));
         subMenus.add(getCreateDiscountCodesMenu());
-        subMenus.add(new ViewDiscountCodesMenu(this, adminProfileManager));
+        subMenus.add(new ManageDiscountCodesMenu(this, adminProfileManager));
         subMenus.add(new ManageRequestsMenu(this, adminProfileManager));
         subMenus.add(new ManageCategoriesMenu(this, adminProfileManager));
         this.setSubMenus(subMenus);

@@ -13,7 +13,7 @@ public class EditProductRequest extends Request {
     }
 
     public EditProductRequest(Product product, HashMap<String, String> fieldChanges) {
-        super("edit_product_" + allRequests.size());
+        super("edit_product_" + allRequests.size(), RequestType.Editing_Product_Request);
         this.product = product;
         this.fieldChanges = fieldChanges;
     }
@@ -21,5 +21,11 @@ public class EditProductRequest extends Request {
     @Override
     public void acceptRequest() {
 
+    }
+
+    @Override
+    public String toString() {
+        return null;
+        //todo: completing
     }
 }

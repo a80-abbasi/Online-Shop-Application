@@ -31,7 +31,13 @@ public class ManageAllProductsMenu extends Menu {
                     this.parentMenu.execute();
                 }
                 else {
-                    adminProfileManager.removeProduct(input);
+                    try {
+                        adminProfileManager.removeProduct(input);
+                        System.out.println("Product removed successfully.");
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no product with this id.");
+                    }
                     this.show();
                     this.execute();
                 }

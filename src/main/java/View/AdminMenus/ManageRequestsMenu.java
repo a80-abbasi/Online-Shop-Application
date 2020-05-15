@@ -43,9 +43,13 @@ public class ManageRequestsMenu extends Menu {
                     this.parentMenu.execute();
                 }
                 else {
-                    String requestId = input;
-                    String requestDetails = adminProfileManager.getDetailsOfRequest(requestId);
-                    System.out.println(requestDetails);
+                    try {
+                        String requestDetails = adminProfileManager.getDetailsOfRequest(input);
+                        System.out.println(requestDetails);
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no request with this id.");
+                    }
                     this.show();
                     this.execute();
                 }
@@ -69,8 +73,13 @@ public class ManageRequestsMenu extends Menu {
                     this.parentMenu.execute();
                 }
                 else {
-                    String requestId = input;
-                    adminProfileManager.acceptRequest(requestId);
+                    try {
+                        adminProfileManager.acceptRequest(input);
+                        System.out.println("Request accepted.");
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no request with this id.");
+                    }
                     this.show();
                     this.execute();
                 }
@@ -94,8 +103,13 @@ public class ManageRequestsMenu extends Menu {
                     this.parentMenu.execute();
                 }
                 else {
-                    String requestId = input;
-                    adminProfileManager.declineRequest(requestId);
+                    try {
+                        adminProfileManager.declineRequest(input);
+                        System.out.println("Request declined successfully.");
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no request with this id.");
+                    }
                     this.show();
                     this.execute();
                 }
