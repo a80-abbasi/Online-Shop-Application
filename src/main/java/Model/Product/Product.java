@@ -26,6 +26,17 @@ public class Product {
     private LocalDateTime timeOfCreation;
     private ArrayList<Customer> productBuyers;
 
+    private static ArrayList<String> productFields = new ArrayList<>();
+    static {
+        productFields.add("productId");
+        productFields.add("productStatus");
+        productFields.add("productName");
+        productFields.add("companyName");
+        productFields.add("price");
+        productFields.add("ProductSeller");
+        productFields.add("existingNumber");
+    }
+
     {
         allScores = new ArrayList<>();
         productComments = new ArrayList<>();
@@ -172,6 +183,10 @@ public class Product {
 
     public ArrayList<Customer> getProductBuyers() {
         return productBuyers;
+    }
+
+    public static ArrayList<String> getProductFields() {
+        return productFields;
     }
 
     public double getTotalScore() {
