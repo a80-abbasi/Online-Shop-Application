@@ -20,7 +20,7 @@ public class ViewOrdersMenu extends Menu {
 
     @Override
     public void show() {
-        System.out.println(customerProfileManager.showOrdersSellerNameAndDate());
+        todo:System.out.println(customerProfileManager.showOrdersSellerNameAndDate());
         super.show();
     }
 
@@ -41,8 +41,8 @@ public class ViewOrdersMenu extends Menu {
                         this.parentMenu.execute();
                     } else if (input.equals("Logout")) {
                         loginAndRegisterManager.logoutUser();
-                    } else if (input.matches("\\d+")) {
-                        if (customerProfileManager.isInputValidForBuyLogID(input)) {
+                    } else if (input.matches("\\A\\d+\\z")) {
+                        if (customerProfileManager.isInputValidForBuyLogID(input)) { //todo:if buylog be null we will give wrong input
                             System.out.println(customerProfileManager.showOrder(input));
                             parentMenu.execute();
                         } else {
@@ -73,7 +73,7 @@ public class ViewOrdersMenu extends Menu {
                         this.parentMenu.execute();
                     } else if (input.equals("Logout")) {
                         loginAndRegisterManager.logoutUser();
-                    } else if (input.matches("\\d+^$")) { //todo:
+                    } else if (input.matches("\\A\\d+\\z")) { //todo:
                         if (ProductsManager.isValidNumberForProductID(input)) {
                             System.out.println("Enter rate in range (1-5) or (back) to return or (Logout) to leave your account:");
                             String productID = input;
@@ -84,7 +84,7 @@ public class ViewOrdersMenu extends Menu {
                                     break;
                                 } else if (input.equals("Logout")) {
                                     loginAndRegisterManager.logoutUser();
-                                } else if (input.matches("\\d+^$")) { //todo:
+                                } else if (input.matches("\\A\\d+\\z")) { //todo:
                                     if (Integer.parseInt(input) <= 5 && Integer.parseInt(input) >= 1) {
                                         customerProfileManager.rateProduct(productID, Integer.parseInt(input));
                                         System.out.println("Your rate submitted");

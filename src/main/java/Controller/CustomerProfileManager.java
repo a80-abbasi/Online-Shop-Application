@@ -20,7 +20,7 @@ public class CustomerProfileManager extends ProfileManager{
     }
 
     public boolean isInputValidForBuyLogID(String ID) {
-        for (BuyLog buyLog : customer.getBuyLogs()) {
+        for (BuyLog buyLog : customer.getBuyLogs()) {//todo:if buy log be null we will give wrong input;
             if (buyLog.getID().equals(ID));
             return true;
         }

@@ -95,7 +95,7 @@ public class ViewCartMenu extends Menu {
                             this.parentMenu.execute();
                         } else if (input.equals("Logout")) {
                             loginAndRegisterManager.logoutUser();
-                        } else if (input.matches("\\d+")) {
+                        } else if (input.matches("\\A\\d+\\z")) {
                             int existingNumberInStore = CustomerProfileManager.getExistingNumberOfProductInStore(product, Integer.parseInt(input));
                             if (existingNumberInStore >= Integer.parseInt(input)) {
                                 productsManager.addProductToCart(product, Integer.parseInt(input));
@@ -130,7 +130,7 @@ public class ViewCartMenu extends Menu {
                             this.parentMenu.execute();
                         } else if (input.equals("Logout")) {
                             loginAndRegisterManager.logoutUser();
-                        } else if (input.matches("\\d+")) {
+                        } else if (input.matches("\\A\\d+\\z")) {
                             productsManager.addProductToCart(product, Integer.parseInt(input));
                             System.out.println("Product decreased successfully");
                             this.parentMenu.execute();
@@ -191,6 +191,7 @@ public class ViewCartMenu extends Menu {
                         String input = scanner.nextLine();
                         if (input.equals("Back")) {
                             if(pageNumber == 1) {
+                                System.out.println("salam");
                                 this.parentMenu.execute();
                             }
                             else {
