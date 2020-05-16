@@ -48,9 +48,9 @@ public class SellerProfileMenu extends Menu {
                 System.out.println(this.getName() + ":");
                 for (String saleHistory : sellerProfileManager.getSalesHistory()) {
                     System.out.print(saleHistory + ", ");
-                    System.out.println("1. Logout");
-                    System.out.println("2. Back");
                 }
+                System.out.println("1. Logout");
+                System.out.println("2. Back");
             }
         };
     }
@@ -87,7 +87,7 @@ public class SellerProfileMenu extends Menu {
                         }
                     }
                     else if (pageNumber == SellerProfileManager.getAllProductFields().size() + 1) {
-                        System.out.println("are this fields true?(Write (Next) if they are true)");
+                        System.out.println("are this fields true?(Write (Yes) if they are true)");
                         HashMap<String, String> newProductFields = new HashMap<>();
                         for (int i = 0; i < productFieldsValue.size(); i++) {
                             newProductFields.put(SellerProfileManager.getAllProductFields().get(i), productFieldsValue.get(i));

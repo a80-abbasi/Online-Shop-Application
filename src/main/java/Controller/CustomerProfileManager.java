@@ -55,7 +55,7 @@ public class CustomerProfileManager extends ProfileManager{
     public ArrayList<Discount> viewDiscountCodes(Account account) {
         return null;
     }
-    public int viewBalance(Account account) {
+    public int viewBalance() {
         return customer.getBalance();
     }
     public boolean isDiscountCodeAvailableForCustomer(Discount discount) {
