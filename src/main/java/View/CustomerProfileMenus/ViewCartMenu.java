@@ -3,6 +3,7 @@ package View.CustomerProfileMenus;
 import Model.Product.Product;
 import View.Menu;
 import View.ProductMenus.ProductMenu;
+import View.ProductsMenus.ProductsMenu;
 
 
 import java.util.ArrayList;
@@ -24,38 +25,7 @@ public class ViewCartMenu extends Menu {
     @Override
     public void execute() {
         show();
-        try {
-            Menu nextMenu;
-            int chosenMenu = Integer.parseInt(scanner.nextLine());
-            if (chosenMenu == submenus.size() + 2) {
-                nextMenu = this.parentMenu;
-            }
-            else if (chosenMenu == submenus.size() + 1) {
-                if (loginAndRegisterManager.isLogin()) {
-                    loginAndRegisterManager.logoutUser();
-                }
-                else {
-                    loginAndRegisterMenu.execute();
-                }
-                nextMenu = this;
-            }
-            else {
-                if (chosenMenu == 1) {
-                    Product product = getProduct();
-                    if (product == null) {
-                        execute();
-                    } else {
-                        ProductMenu productMenu = (ProductMenu) submenus.get(1);
-                        productMenu.setProduct(product);
-                    }
-                }
-                nextMenu = submenus.get(chosenMenu - 1);
-            }
-            nextMenu.execute();
-        } catch (Exception e) {
-            System.out.println("Wrong Input\n");
-            execute();
-        }
+        ProductsMenu.goToProductMenu(this, parentMenu, submenus, (ProductMenu) submenus.get(1));
     }
 
     private Menu getShowProductsMenu() {
@@ -76,7 +46,7 @@ public class ViewCartMenu extends Menu {
         return new Menu("Increase Product", this) {
             @Override
             public void execute() {
-                Product product = getProduct();
+                Product product = ProductsMenu.getProduct();
                 if (product != null) {
                     System.out.println("Enter the number you want to increase:");
                     String number = scanner.nextLine().trim();
@@ -96,7 +66,7 @@ public class ViewCartMenu extends Menu {
         return new Menu("Decrease Product", this) {
             @Override
             public void execute() {
-                Product product = getProduct();
+                Product product = ProductsMenu.getProduct();
                 if (product != null) {
                     System.out.println("Enter the number you want to decrease:");
                     String number = scanner.nextLine().trim();
@@ -119,19 +89,5 @@ public class ViewCartMenu extends Menu {
                 System.out.println("Total price of your order:  " + productsManager.getTotalPrice());
             }
         };
-    }
-
-    private Product getProduct(){
-        System.out.println("Enter product Id");
-        Product product = productsManager.getProductByID(scanner.nextLine().trim());
-        if (product == null){
-            System.out.println("There is no product with this Id");
-            return null;
-        }
-        if (productsManager.hasProductInCart(product)) {
-            System.out.println("You dont have this Product in your cart");
-            return null;
-        }
-        return product;
     }
 }
