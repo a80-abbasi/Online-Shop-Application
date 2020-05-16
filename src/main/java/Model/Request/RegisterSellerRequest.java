@@ -1,5 +1,6 @@
 package Model.Request;
 
+import Model.Account.Account;
 import Model.Account.Seller;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class RegisterSellerRequest extends Request {
 
     public RegisterSellerRequest(String username, String password, String name, String lastName, String email,
                                  String phoneNumber, String companyName) {
-        super("register_customer_" + allRequests.size(), RequestType.Register_Seller_Request);
+        super("register_seller_" + allRequests.size(), RequestType.Register_Seller_Request);
         this.username = username;
         this.password = password;
         this.name = name;
@@ -36,8 +37,13 @@ public class RegisterSellerRequest extends Request {
     }
 
     @Override
-    public void acceptRequest() {
-        new Seller(username, password, name, lastName, email, phoneNumber, companyName, 0);
+    public void acceptRequest() throws NullPointerException{
+        if (Account.getAccountByUsername(username) == null) {
+            new Seller(username, password, name, lastName, email, phoneNumber, companyName, 0);
+        }
+        else {
+            throw new NullPointerException();
+        }
     }
 
     @Override
