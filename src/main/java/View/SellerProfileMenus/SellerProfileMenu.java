@@ -17,14 +17,14 @@ public class SellerProfileMenu extends Menu {
         this.seller = seller;
         this.sellerProfileManager = new SellerProfileManager(seller);
         ArrayList<Menu> subMenus = new ArrayList<>();
-        subMenus.add(new ViewPersonalInfoMenu(parentMenu, sellerProfileManager));
+        subMenus.add(new ViewPersonalInfoMenu(this, sellerProfileManager));
         subMenus.add(getViewCompanyInformationMenu());
         subMenus.add(getViewSalesHistoryMenu());
-        subMenus.add(new ManageProductsMenu(parentMenu, sellerProfileManager));
-        subMenus.add(getAddProductMenu());
+        subMenus.add(new ManageProductsMenu(this, sellerProfileManager));
+        subMenus.add(new AddProductMenu(this, sellerProfileManager));
         subMenus.add(getRemoveProductMenu());
         subMenus.add(getShowCategoriesMenu());
-        subMenus.add(new ViewOffsMenu(parentMenu, sellerProfileManager));
+        subMenus.add(new ViewOffsMenu(this, sellerProfileManager));
         subMenus.add(getViewBalanceMenu());
         this.setSubMenus(subMenus);
     }
@@ -50,66 +50,6 @@ public class SellerProfileMenu extends Menu {
                     System.out.print(saleHistory + ", ");
                     System.out.println("1. Logout");
                     System.out.println("2. Back");
-                }
-            }
-        };
-    }
-
-    public Menu getAddProductMenu() {
-        return new Menu("Add Product Menu", this) {
-            @Override
-            public void execute() {
-                ArrayList<String> productFieldsValue = new ArrayList<>(SellerProfileManager.getAllProductFields());
-                int pageNumber = 1;
-                while (true) {
-                    if (pageNumber == 1) {
-                        System.out.println(this.getName() + ":");
-                        System.out.println("In each Menu you can use (Back) to return, (Next) to go next page or (Logout) to leave your account!");
-                    }
-                    if(pageNumber <= SellerProfileManager.getAllProductFields().size()) {
-                        System.out.println("Enter " + SellerProfileManager.getAllProductFields().get(pageNumber - 1) + ":");
-                        String input = scanner.nextLine();
-                        if (input.equals("Back")) {
-                            if(pageNumber == 1) {
-                                this.parentMenu.execute();
-                            }
-                            else {
-                                pageNumber -= 1;
-                            }
-                        } else if(input.equalsIgnoreCase("Next")) {
-                            pageNumber += 1;
-                        } else if (input.equalsIgnoreCase("Logout")) {
-                            loginAndRegisterManager.logoutUser();
-                        } else {
-                            //todo: check are inputs valid
-                            productFieldsValue.set(pageNumber - 1, input);
-                            pageNumber += 1;
-                        }
-                    }
-                    else if (pageNumber == SellerProfileManager.getAllProductFields().size() + 1) {
-                        System.out.println("are this fields true?(Write (Next) if they are true)");
-                        HashMap<String, String> newProductFields = new HashMap<>();
-                        for (int i = 0; i < productFieldsValue.size(); i++) {
-                            newProductFields.put(SellerProfileManager.getAllProductFields().get(i), productFieldsValue.get(i));
-                        }
-                        System.out.println(newProductFields);
-                        String input = scanner.nextLine();
-                        if (input.equalsIgnoreCase("Back")) {
-                            pageNumber -= 1;
-                        } else if(input.equalsIgnoreCase("Next")) {
-                            if (SellerProfileManager.areNewProductFieldsValueValid(newProductFields)) {
-                                sellerProfileManager.addProduct(newProductFields);
-                                System.out.println("Your Request Sent to Admin please w8 for answer");
-                                parentMenu.execute();
-                            } else {
-                                System.out.println("formats are invalid"); //todo: write a better message;
-                            }
-                        } else if (input.equalsIgnoreCase("Logout")) {
-                            loginAndRegisterManager.logoutUser();
-                        } else {
-                            System.out.println("invalid message");
-                        }
-                    }
                 }
             }
         };

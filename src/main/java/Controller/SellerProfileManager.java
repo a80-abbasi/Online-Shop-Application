@@ -9,6 +9,7 @@ import View.SellerProfileMenus.SellerProfileMenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 
 public class SellerProfileManager extends ProfileManager {
     private Seller seller;
@@ -57,27 +58,67 @@ public class SellerProfileManager extends ProfileManager {
         new EditProductRequest(Product.getProductByID(productId), fieldChanges);
     }
 
-    public static boolean areNewProductFieldsValueValid(HashMap<String, String> ProductFields) {
-        //todo: check is wrong format in product fields?(when we adding a product we can write everything or nothing(null) for fields)
-        return true;
-    }
-
-    public static boolean areNewOffFieldsValueValid(HashMap<String, String> OffFields) {
-        //todo: check is wrong format in Off fields?(when we adding an Off we can write everything or nothing(null) for fields)
-        return true;
-    }
-
-    public static boolean isProductIdFormatValid(String productId) {
-        //todo:
-        return true;
-    }
-
     public static ArrayList<String> getAllProductFields() {
         return Product.getProductFields();
     }
 
-    public void addProduct(HashMap<String, String> newProductInformation) {
-       // new AddProductRequest(newProductInformation);
+    public AddProductRequest addProductRequest() {
+       return new AddProductRequest();
+    }
+
+    public void addProductId(AddProductRequest addProductRequest, String productId) throws IllegalArgumentException {
+        if (Product.getProductByID(productId) != null) {
+            throw new IllegalArgumentException();
+        }
+        addProductRequest.setProductId(productId);
+    }
+
+    public void addProductName(AddProductRequest addProductRequest, String productName) {
+        addProductRequest.setProductName(productName);
+    }
+
+    public void addProductCompanyName(AddProductRequest addProductRequest, String companyName) {
+        addProductRequest.setCompanyName(companyName);
+    }
+
+    public void addProductPrice(AddProductRequest addProductRequest, String producePrice) throws InputMismatchException {
+        if (producePrice.matches("\\d+\\.?\\d.")) {
+            addProductRequest.setPrice(Double.parseDouble(producePrice));
+        }
+        else {
+            throw new InputMismatchException();
+        }
+    }
+
+    public void addExistingNumberOfProduct(AddProductRequest addProductRequest, String existingNumber) throws InputMismatchException {
+        if (existingNumber.matches("\\d+")) {
+            addProductRequest.setExistingNumber(Integer.parseInt(existingNumber));
+        }
+        else {
+            throw new InputMismatchException();
+        }
+    }
+
+    public void addProductSeller(AddProductRequest addProductRequest, String sellerUsername) throws NullPointerException, InputMismatchException {
+        Account account = Account.getAccountByUsername(sellerUsername);
+        if (account == null) {
+            throw new NullPointerException();
+        }
+        else if (account instanceof Seller) {
+            addProductRequest.setProductSeller((Seller) account);
+        }
+        else {
+            throw new InputMismatchException();
+        }
+    }
+
+    public static boolean isProductIdFormatValid(String productId) {
+        if (Product.getProductByID(productId) == null) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     public void removeProduct(String productId) {
