@@ -88,7 +88,7 @@ public class ViewCartMenu extends Menu {
                 Product product = getProduct();
                 if (product != null) {
                     System.out.println("Enter the number you want to increase or (back) to return or (Logout) to leave your account:");
-                    System.out.printf("You just have %d number of this product now!", customerProfileManager.getNumberOfProductInCart(product, customer));
+                    System.out.printf("You just have %d number of this product now!\n", customerProfileManager.getNumberOfProductInCart(product, customer));
                     while (true) {
                         String input = scanner.nextLine().trim();
                         if (input.equalsIgnoreCase("Back")) {
@@ -102,7 +102,7 @@ public class ViewCartMenu extends Menu {
                                 System.out.println("Product number increased successfully");
                                 parentMenu.execute();
                             } else {
-                                System.out.printf("we have just %d of this Product. Please enter another number:", existingNumberInStore);
+                                System.out.printf("we have just %d of this Product. Please enter another number:\n", existingNumberInStore);
                             }
                         } else {
                             System.out.println("Please enter valid number:");
@@ -123,7 +123,7 @@ public class ViewCartMenu extends Menu {
                 Product product = getProduct();
                 if (product != null) {
                     System.out.println("Enter the number you want to decrease or (back) to return or (Logout) to leave your account:");
-                    System.out.printf("You just have %d number of this product now!", customerProfileManager.getNumberOfProductInCart(product, customer));
+                    System.out.printf("You just have %d number of this product now!\n", customerProfileManager.getNumberOfProductInCart(product, customer));
                     while(true) {
                         String input = scanner.nextLine().trim();
                         if (input.equalsIgnoreCase("Back")) {
@@ -149,8 +149,8 @@ public class ViewCartMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Total price of your order:  " + productsManager.getTotalPrice());
-                System.out.println("Total Price with discount code and off"); //todo
+                System.out.println("Total price of your order: " + productsManager.getTotalPrice() + "$");
+                System.out.println("Total Price with discount code and off: "); //todo
                 System.out.println("1. Logout");
                 System.out.println("2. Back");
             }
@@ -244,7 +244,7 @@ public class ViewCartMenu extends Menu {
                                         while(true) {
                                             if (pageNumber == receiveInformationFields.size() + 3) {
                                                 System.out.println("Payment Menu:");
-                                                //System.out.printf("The total cost of your products is %s$ and with discount and off is %s$ do you want to pay?(Yes)(No)", Double.toString(ProductsManager.getTotalPrice()), Double.toString(ProductsManager.costWithOffAndDigest(discountCode)));
+                                                //System.out.printf("The total cost of your products is %s$ and with discount and off is %s$ do you want to pay?(Yes)(No)\n", Double.toString(ProductsManager.getTotalPrice()), Double.toString(ProductsManager.costWithOffAndDigest(discountCode)));
                                                 //todo;
                                             }
                                             input = scanner.nextLine();
