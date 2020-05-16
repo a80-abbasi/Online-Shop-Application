@@ -135,6 +135,36 @@ public class SellerProfileManager extends ProfileManager {
         return allCategoriesNames;
     }
 
+    public AddOffRequest addOffRequest () {
+        return new AddOffRequest();
+    }
+
+    public void addOffId(AddOffRequest addOffRequest, String offId) throws IllegalArgumentException{
+        if (Off.getOffById(offId) == null) {
+            addOffRequest.setOffID(offId);
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void addOffStartTime(AddOffRequest addOffRequest, String startTime) {
+        addOffRequest.setStartTime(startTime);
+    }
+
+    public void addOffEndTime(AddOffRequest addOffRequest, String endTime) {
+        addOffRequest.setEndTime(endTime);
+    }
+
+    public void addOffAmount(AddOffRequest addOffRequest, String offAmount) throws InputMismatchException{
+        if (offAmount.matches("\\d+")) {
+            addOffRequest.setOffAmount(Integer.parseInt(offAmount));
+        }
+        else {
+            throw new InputMismatchException();
+        }
+    }
+
     public static boolean isInputInOffFields(String input) {
         for (int i = 0; i < Off.getOffFields().size(); i++) {
             if (Off.getOffFields().get(i).equals(input)) {
@@ -197,9 +227,7 @@ public class SellerProfileManager extends ProfileManager {
         new EditOffRequest(off, fieldChanges);
     }
 
-    public void addOff (HashMap<String, String> properties) {
-        //new AddOffRequest(properties);
-    }
+
 
     public int viewBalance(Account account) {
         return 0;

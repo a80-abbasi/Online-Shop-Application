@@ -1,17 +1,22 @@
 package Model.Request;
 
 import Model.Account.Off;
+import Model.Account.OffStatus;
 
 import java.util.ArrayList;
 
 public class AddOffRequest extends Request {
     private static ArrayList<AddOffRequest> allAddOffRequest = new ArrayList<>();
-    private ArrayList<String> propertiesInOrder;
+    private String offID;
+    private String startTime;
+    private String endTime;
+    private int offAmount;
+    private OffStatus offStatus;
 
-    public AddOffRequest(ArrayList<String> propertiesInOrder) {
+    public AddOffRequest() {
         super("add_product_" + allRequests.size(), RequestType.Adding_Off_Request);
         allAddOffRequest.add(this);
-        this.propertiesInOrder = propertiesInOrder;
+        this.setOffStatus(OffStatus.PENDING_FOR_CREATION);
     }
 
     public static ArrayList<AddOffRequest> getAllAddOffRequest() {
@@ -22,20 +27,46 @@ public class AddOffRequest extends Request {
         AddOffRequest.allAddOffRequest = allAddOffRequest;
     }
 
+    public void setOffID(String offID) {
+        this.offID = offID;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setOffAmount(int offAmount) {
+        this.offAmount = offAmount;
+    }
+
+    public void setOffStatus(OffStatus offStatus) {
+        this.offStatus = offStatus;
+    }
+
     @Override
-    public void acceptRequest() {
-        new Off(propertiesInOrder.get(0), propertiesInOrder.get(1), propertiesInOrder.get(2), Integer.parseInt(propertiesInOrder.get(3)));
+    public void acceptRequest() throws IllegalArgumentException{
+        if (Off.getOffById(offID) == null) {
+            new Off(offID, startTime, endTime, offAmount);
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
     public String toString() {
-        return "Off{" +
-                "offID = '" + propertiesInOrder.get(0) + '\'' +
-                ", startTime = '" + propertiesInOrder.get(1) + '\'' +
-                ", endTime = '" + propertiesInOrder.get(2) + '\'' +
-                ", offAmount = " + propertiesInOrder.get(3) +
-                ", offStatus = " + propertiesInOrder.get(4) +
-                ", products = " + propertiesInOrder.get(5) +
+        return "AddOffRequest{" +
+                "offID='" + offID + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", offAmount=" + offAmount +
+                ", offStatus=" + offStatus +
+                ", requestId='" + requestId + '\'' +
+                ", requestType=" + requestType +
                 '}';
     }
 

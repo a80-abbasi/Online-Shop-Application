@@ -27,7 +27,7 @@ public class Off {
         this.startTime = startTime;
         this.endTime = endTime;
         this.offAmount = offAmount;
-        offStatus = OffStatus.PENDING_FOR_CREATION;
+        this.offStatus = OffStatus.CONFIRMED;
         products = new ArrayList<>();
         allOffs.add(this);
     }
