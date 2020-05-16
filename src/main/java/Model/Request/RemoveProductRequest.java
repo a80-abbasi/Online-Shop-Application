@@ -29,7 +29,10 @@ public class RemoveProductRequest extends Request {
 
     @Override
     public String toString() {
-        return null;
-        //todo: completing
+        return "RemoveProductRequest{" +
+                "product=" + product.toString() +
+                ", requestId='" + requestId + '\'' +
+                ", requestType=" + requestType +
+                '}';
     }
 }
