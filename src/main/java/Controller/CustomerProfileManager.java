@@ -86,11 +86,28 @@ public class CustomerProfileManager extends ProfileManager{
 
     public static boolean isDiscountCodeValid(String discountCode) { //todo: ali! complete please
         Discount.getDiscountByDiscountCode(discountCode);
-        if () {
-            return true;
-        } else {
-            return false;
-        }
+        //if () {
+        return true;
+        //} else {
+        //return false;
+        //}
+        //todo
     }
+
+    public static double costCalculator() {
+        return 0;
+        //todo;
+    }
+
+    public static void doingsAfterBuyProducts(String discount) {
+        return;
+        //todo;
+    }
+
+    public static boolean canCustomerPay() {
+        return true;
+        //todo;
+    }
+
 
 }
