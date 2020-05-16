@@ -44,18 +44,6 @@ public class CustomerProfileManager extends ProfileManager{
         return sellerNameAndDate;
     }
 
-    public ArrayList<Product> showProducts(Account account) {
-        return null;
-    }
-    public ArrayList<String> viewProduct(String id) {
-        return null;
-    }
-    public int showTotalPrice(Account account)  {
-        return 0;
-    }
-    public boolean purchase(ArrayList<String> properties, String discountCode) {
-        return true;
-    }
     public BuyLog showOrder(String id) {
         return customer.getBuyLogByID(id);
     }
@@ -70,7 +58,8 @@ public class CustomerProfileManager extends ProfileManager{
     public int viewBalance(Account account) {
         return customer.getBalance();
     }
-    public boolean isDiscountCodeAvailableForCustomer(Account account, Discount discount) {
+    public boolean isDiscountCodeAvailableForCustomer(Discount discount) {
+        //todo: ali! complete this please!
         return true;
     }
 
@@ -87,29 +76,43 @@ public class CustomerProfileManager extends ProfileManager{
         return true;
     }
 
-    public static boolean isDiscountCodeValid(String discountCode) { //todo: ali! complete please
-        Discount.getDiscountByDiscountCode(discountCode);
-        //if () {
+    public ArrayList<Discount> getDiscountCodes() {
+        return customer.getAllDiscountCodesForCustomer();
+    }
+
+    public static boolean isDiscountCodeValid(String discountCode) { //todo: ali! complete this please!
         return true;
-        //} else {
-        //return false;
-        //}
-        //todo
+        //todo: need time;
     }
 
-    public static double costCalculator() {
-        return 0;
-        //todo;
+    public double costCalculator(String discountCode) {
+        double lastPrice = 0;
+        lastPrice += customer.getTotalPrice();
+        //todo: ali! complete this!
+        //lastPrice -= lastPrice * off;
+        lastPrice -= lastPrice * (Discount.getDiscountByDiscountCode(discountCode).getDiscountPercent());
+        return lastPrice;
     }
 
-    public static void doingsAfterBuyProducts(String discount) {
-        return;
-        //todo;
+    public void doingsAfterBuyProducts(double cost, String UsedDiscountCode) {
+//        customer.getCart();
+//        for (Product product : customer.getCart().keySet()) {
+//            product.setExistingNumber(product.getExistingNumber());
+//            product.setVisitNumber();
+//            product.setProductStatus();
+//        }
+//        customer.setCart();
+//        customer.setBalance();
+//        customer.setUsedDiscounts();
+        //todo: complete this please
     }
 
-    public static boolean canCustomerPay() {
-        return true;
-        //todo;
+    public boolean canCustomerPay(double cost) {
+        if (customer.getBalance() >= cost) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

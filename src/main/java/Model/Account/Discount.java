@@ -9,8 +9,8 @@ public class Discount {
     private String endTime;
     private int discountPercent;
     private double maxPossibleDiscount;
-    private int discountPerCustomer;
-    private ArrayList<Customer> includingCustomers;
+    private int discountPerCustomer; // todo:
+    private ArrayList<Customer> includingCustomers; //todo:
 
     {
         allDiscounts = new ArrayList<>();

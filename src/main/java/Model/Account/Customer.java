@@ -11,6 +11,7 @@ public class Customer extends Account {
     private HashMap<Product, Integer> cart;
     private ArrayList<BuyLog> buyLogs;
     private HashMap<Discount, Integer> usedDiscounts;
+    private ArrayList<Discount> allDiscountCodesForCustomer; //todo:admin add codes to this array too!
     private static ArrayList<String> customerFieldsForPurchase = new ArrayList<>();
     {
         customerFieldsForPurchase.add("name");
@@ -93,6 +94,7 @@ public class Customer extends Account {
     public HashMap<Discount, Integer> getUsedDiscounts() {
         return usedDiscounts;
     }
+
     public BuyLog getBuyLogByID(String ID) {
         for (BuyLog buylog : buyLogs) {
             if (buylog.getID().equals(ID)) {
@@ -100,6 +102,10 @@ public class Customer extends Account {
             }
         }
         return null;
+    }
+
+    public ArrayList<Discount> getAllDiscountCodesForCustomer() {
+        return allDiscountCodesForCustomer;
     }
 
     public static ArrayList<String> getCustomerFieldsForPurchase() {
