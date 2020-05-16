@@ -41,7 +41,8 @@ public class CustomerProfileMenu extends Menu {
         return new Menu("Discount Codes" , this) {
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println(custome); //ali! please complete
+                //System.out.println(custome); //ali! please complete
+                //todo:
                 System.out.println("1. Logout");
                 System.out.println("2. Back");
             }

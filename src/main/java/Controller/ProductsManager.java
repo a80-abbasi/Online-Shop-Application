@@ -134,7 +134,7 @@ public class ProductsManager {
         return ((Customer) Account.getLoggedInAccount()).getCart().containsKey(product);
     }
 
-    public double getTotalPrice(){
+    public static double getTotalPrice(){
         Customer customer = (Customer) Account.getLoggedInAccount();
         return customer.getTotalPrice();
     }
@@ -150,5 +150,11 @@ public class ProductsManager {
 
     public HashMap<Product, Integer> getCart(){
         return ((Customer) Account.getLoggedInAccount()).getCart();
+    }
+
+    public static double costWithOffAndDigest (String discountCode) {
+        getTotalPrice();
+        //todo
+        return 0;
     }
 }
