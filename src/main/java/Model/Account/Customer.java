@@ -13,7 +13,7 @@ public class Customer extends Account {
     private HashMap<Discount, Integer> usedDiscounts;
     private ArrayList<Discount> allDiscountCodesForCustomer; //todo:admin add codes to this array too!
     private static ArrayList<String> customerFieldsForPurchase = new ArrayList<>();
-    {
+    static {
         customerFieldsForPurchase.add("name");
         customerFieldsForPurchase.add("lastName");
         customerFieldsForPurchase.add("phoneNumber");
@@ -21,7 +21,6 @@ public class Customer extends Account {
         customerFieldsForPurchase.add("HomeAddress");
         customerFieldsForPurchase.add("PostCode");
     }
-
 
     public Customer(String username, String password, String name, String lastName, String email, String phoneNumber, int balance) {
         super(username, password, name, lastName, email, phoneNumber);

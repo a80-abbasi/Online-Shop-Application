@@ -14,6 +14,10 @@ public class Admin extends Account{
         allAdmins.add(this);
     }
 
+    public Admin() {
+        this("", "", "", "", "", "");
+    }
+
     public static void setAllAdmins(ArrayList<Admin> allAdmins) {
         Admin.allAdmins = allAdmins;
     }
