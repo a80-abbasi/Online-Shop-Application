@@ -28,6 +28,7 @@ public class ManageCategoriesMenu extends Menu {
         super.show();
     }
 
+    //todo: completing category edition
     private Menu getEditCategoryMenu() {
         return new Menu("Edit Category", this) {
             @Override
@@ -56,6 +57,7 @@ public class ManageCategoriesMenu extends Menu {
         };
     }
 
+    //todo: completing add category
     private Menu getAddCategoryMenu() {
         return new Menu("Add Category", this) {
             @Override

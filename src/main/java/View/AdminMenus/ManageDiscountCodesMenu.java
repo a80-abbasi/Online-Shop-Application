@@ -11,7 +11,7 @@ public class ManageDiscountCodesMenu extends Menu {
     private AdminProfileManager adminProfileManager;
 
     public ManageDiscountCodesMenu(Menu parentMenu, AdminProfileManager adminProfileManager) {
-        super("View Discount Codes Menu", parentMenu);
+        super("Manage Discount Codes Menu", parentMenu);
         this.adminProfileManager = adminProfileManager;
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getViewDiscountCodeMenu());

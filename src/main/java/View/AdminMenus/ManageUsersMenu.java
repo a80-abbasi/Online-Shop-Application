@@ -34,7 +34,7 @@ public class ManageUsersMenu extends Menu {
             @Override
             public void execute() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter (Username) or (Back) to return:");
+                System.out.println("Enter username or (Back) to return:");
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
                     this.parentMenu.execute();
