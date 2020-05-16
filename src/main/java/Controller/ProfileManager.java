@@ -13,25 +13,28 @@ public class ProfileManager {
         return account.toString();
     }
 
-    public void editFieldOfProfile(String fieldName, String fieldChange) {
+    public void editFieldOfProfile(String fieldName, String fieldChange) throws IllegalArgumentException, IllegalAccessException{
         if (fieldName.equals("username")) {
-            throw new IllegalArgumentException();
+            throw new IllegalAccessException();
         }
         else {
-            if (fieldName.equals("password")) {
+            if (fieldName.equalsIgnoreCase("password")) {
                 account.setPassword(fieldChange);
             }
-            else if (fieldName.equals("name")) {
+            else if (fieldName.equalsIgnoreCase("name")) {
                 account.setName(fieldChange);
             }
-            else if (fieldName.equals("lastName")) {
+            else if (fieldName.equalsIgnoreCase("lastName")) {
                 account.setLastName(fieldChange);
             }
-            else if (fieldName.equals("email")) {
+            else if (fieldName.equalsIgnoreCase("email")) {
                 account.setEmail(fieldChange);
             }
-            else if (fieldName.equals("phone number")) {
+            else if (fieldName.equalsIgnoreCase("phone number")) {
                 account.setPhoneNumber(fieldChange);
+            }
+            else {
+                throw new IllegalArgumentException();
             }
         }
     }

@@ -21,4 +21,16 @@ public class Admin extends Account{
     public static ArrayList<Admin> getAllAdmins() {
         return allAdmins;
     }
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "username = '" + username + '\'' +
+                ", password = '" + password + '\'' +
+                ", name = '" + name + '\'' +
+                ", lastName = '" + lastName + '\'' +
+                ", email = '" + email + '\'' +
+                ", phoneNumber = '" + phoneNumber + '\'' +
+                '}';
+    }
 }

@@ -98,7 +98,7 @@ public class RegistrationMenu extends Menu {
     }
 
     private String getNameOfUser(boolean lastName){
-        System.out.println("Enter" + (lastName ? "last" : "") + "name:");
+        System.out.println("Enter" + (lastName ? " last" : "") + " name:");
         System.out.println("Enter back to cancel");
         String name = scanner.nextLine().trim();
         if (name.equalsIgnoreCase("back")){

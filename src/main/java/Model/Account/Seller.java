@@ -75,4 +75,21 @@ public class Seller extends Account {
     public void setOffs(ArrayList<Off> offs) {
         this.offs = offs;
     }
+
+    @Override
+    public String toString() {
+        return "Seller{" +
+                "nameOfCompany='" + nameOfCompany + '\'' +
+                ", balance=" + balance +
+                ", sellLogs=" + sellLogs +
+                ", products=" + products +
+                ", offs=" + offs +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
 }

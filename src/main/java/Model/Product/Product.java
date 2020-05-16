@@ -1,6 +1,5 @@
 package Model.Product;
 
-import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Discount;
 import Model.Account.Seller;

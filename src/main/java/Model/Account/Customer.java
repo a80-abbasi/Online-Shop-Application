@@ -93,7 +93,6 @@ public class Customer extends Account {
     public HashMap<Discount, Integer> getUsedDiscounts() {
         return usedDiscounts;
     }
-
     public BuyLog getBuyLogByID(String ID) {
         for (BuyLog buylog : buyLogs) {
             if (buylog.getID().equals(ID)) {
@@ -105,5 +104,21 @@ public class Customer extends Account {
 
     public static ArrayList<String> getCustomerFieldsForPurchase() {
         return customerFieldsForPurchase;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "balance=" + getBalance() +
+                ", cart=" + getCart() +
+                ", buyLogs=" + getBuyLogs() +
+                ", usedDiscounts=" + getUsedDiscounts() +
+                ", username='" + getUsername() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", lastName='" + getLastName() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", phoneNumber='" + getPhoneNumber() + '\'' +
+                '}';
     }
 }

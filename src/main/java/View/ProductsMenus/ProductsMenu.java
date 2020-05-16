@@ -45,28 +45,45 @@ public class ProductsMenu extends Menu {
     @Override
     public void execute() {
         show();
+        goToProductMenu(this, parentMenu, submenus, (ProductMenu) submenus.get(4));
+    }
+
+    public static Product getProduct(){
+        System.out.println("Enter product Id");
+        Product product = productsManager.getProductByID(scanner.nextLine().trim());
+        if (product == null){
+            System.out.println("There is no product with this Id");
+            return null;
+        }
+        if (productsManager.hasProductInCart(product)) {
+            System.out.println("You dont have this Product in your cart");
+            return null;
+        }
+        return product;
+    }
+
+    public static void goToProductMenu(Menu menu, Menu parentMenu, ArrayList<Menu> submenus, ProductMenu productMenu){
         try {
             Menu nextMenu;
             int chosenMenu = Integer.parseInt(scanner.nextLine());
             if (chosenMenu == submenus.size() + 2) {
-                nextMenu = this.parentMenu;
-            } else if (chosenMenu == submenus.size() + 1) {
+                nextMenu = parentMenu;
+            }
+            else if (chosenMenu == submenus.size() + 1) {
                 if (loginAndRegisterManager.isLogin()) {
                     loginAndRegisterManager.logoutUser();
                 }
                 else {
                     loginAndRegisterMenu.execute();
                 }
-                nextMenu = this;
-            } else {
-                if (chosenMenu == submenus.size()) {
-                    System.out.println("Enter Product ID");
-                    Product product = productsManager.getProductByID(scanner.nextLine().trim());
+                nextMenu = menu;
+            }
+            else {
+                if (chosenMenu == 1) {
+                    Product product = ProductsMenu.getProduct();
                     if (product == null) {
-                        System.out.println("There is no product with this Id");
-                        execute();
+                        menu.execute();
                     } else {
-                        ProductMenu productMenu = (ProductMenu) submenus.get(chosenMenu - 1);
                         productMenu.setProduct(product);
                     }
                 }
@@ -75,7 +92,7 @@ public class ProductsMenu extends Menu {
             nextMenu.execute();
         } catch (Exception e) {
             System.out.println("Wrong Input\n");
-            execute();
+            menu.execute();
         }
     }
 }

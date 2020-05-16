@@ -12,10 +12,12 @@ public class ManageUsersMenu extends Menu {
 
     public ManageUsersMenu(Menu parentMenu, AdminProfileManager adminProfileManager) {
         super("Manage Users Menu", parentMenu);
+        this.adminProfileManager = adminProfileManager;
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getViewUserMenu());
         submenus.add(getDeleteUserMenu());
         submenus.add(getCreateManagerProfileMenu());
+        this.setSubMenus(submenus);
     }
 
     @Override
@@ -30,16 +32,11 @@ public class ManageUsersMenu extends Menu {
     public Menu getViewUserMenu() {
         return new Menu("View User", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter (Username) or (Back) to return:");
-            }
-
-            @Override
-            public void execute() {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
@@ -50,7 +47,6 @@ public class ManageUsersMenu extends Menu {
                     catch (NullPointerException e) {
                         System.out.println("There is no account with this username.");
                     }
-                    this.show();
                     this.execute();
                 }
             }
@@ -60,16 +56,11 @@ public class ManageUsersMenu extends Menu {
     public Menu getDeleteUserMenu() {
         return new Menu("Delete User", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter Username or (Back) to return:");
-            }
-
-            @Override
-            public void execute() {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
@@ -80,7 +71,6 @@ public class ManageUsersMenu extends Menu {
                     catch (NullPointerException e) {
                         System.out.println("There is no account with this username.");
                     }
-                    this.show();
                     this.execute();
                 }
             }
@@ -91,13 +81,9 @@ public class ManageUsersMenu extends Menu {
     public Menu getCreateManagerProfileMenu() {
         return new Menu("Create Manager Profile", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter Following data to create manager profile:");
-            }
-
-            @Override
-            public void execute() {
                 System.out.println("Enter username:");
                 String username = scanner.nextLine();
                 System.out.println("Enter password:");
@@ -114,11 +100,9 @@ public class ManageUsersMenu extends Menu {
                 System.out.println("Enter (Back) to return or (Create Manager Profile) to create another manager profile:");
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
-                    this.show();
                     this.execute();
                 }
             }

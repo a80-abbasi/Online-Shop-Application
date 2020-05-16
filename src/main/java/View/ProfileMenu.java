@@ -20,6 +20,7 @@ public class ProfileMenu extends Menu {
         if (account == null) {
             System.out.println("You must login first.");
             loginAndRegisterMenu.execute();
+            parentMenu.execute();
         }
         else if (account instanceof Admin) {
             AdminProfileMenu adminProfileMenu = new AdminProfileMenu(parentMenu, (Admin) account);

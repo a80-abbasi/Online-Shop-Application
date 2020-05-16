@@ -30,16 +30,11 @@ public class ManageRequestsMenu extends Menu {
     private Menu getDetailsOfRequestMenu() {
         return new Menu("Details of request", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter requestId to show details or (back) to return:");
-            }
-
-            @Override
-            public void execute() {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
@@ -50,7 +45,6 @@ public class ManageRequestsMenu extends Menu {
                     catch (NullPointerException e) {
                         System.out.println("There is no request with this id.");
                     }
-                    this.show();
                     this.execute();
                 }
             }
@@ -60,16 +54,11 @@ public class ManageRequestsMenu extends Menu {
     private Menu getAcceptRequestMenu() {
         return new Menu("Accept Request", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter requestId to accept or (back) to return:");
-            }
-
-            @Override
-            public void execute() {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
@@ -80,7 +69,6 @@ public class ManageRequestsMenu extends Menu {
                     catch (NullPointerException e) {
                         System.out.println("There is no request with this id.");
                     }
-                    this.show();
                     this.execute();
                 }
             }
@@ -90,16 +78,11 @@ public class ManageRequestsMenu extends Menu {
     private Menu getDeclineRequestMenu() {
         return new Menu("Decline Request", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter requestId to decline or (back) to return:");
-            }
-
-            @Override
-            public void execute() {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
@@ -110,7 +93,6 @@ public class ManageRequestsMenu extends Menu {
                     catch (NullPointerException e) {
                         System.out.println("There is no request with this id.");
                     }
-                    this.show();
                     this.execute();
                 }
             }

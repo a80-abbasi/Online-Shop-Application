@@ -17,6 +17,7 @@ public class ManageDiscountCodesMenu extends Menu {
         submenus.add(getViewDiscountCodeMenu());
         submenus.add(getEditDiscountCodeMenu());
         submenus.add(getRemoveDiscountCode());
+        this.setSubMenus(submenus);
     }
 
     @Override
@@ -31,16 +32,11 @@ public class ManageDiscountCodesMenu extends Menu {
     private Menu getViewDiscountCodeMenu() {
         return new Menu("View Discount Code", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter discount code to view the discount or (Back) to return");
-            }
-
-            @Override
-            public void execute() {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
@@ -51,7 +47,6 @@ public class ManageDiscountCodesMenu extends Menu {
                     catch (NullPointerException e) {
                         System.out.println("There is no discount with this code.");
                     }
-                    this.show();
                     this.execute();
                 }
             }
@@ -62,16 +57,11 @@ public class ManageDiscountCodesMenu extends Menu {
     private Menu getEditDiscountCodeMenu() {
         return new Menu("Edit Discount Code", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter discount code to edit the discount or (Back) to return:");
-            }
-
-            @Override
-            public void execute() {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
@@ -94,7 +84,6 @@ public class ManageDiscountCodesMenu extends Menu {
                     catch (NullPointerException e) {
                         System.out.println("There is no discount with this code.");
                     }
-                    this.show();
                     this.execute();
                 }
             }
@@ -104,16 +93,11 @@ public class ManageDiscountCodesMenu extends Menu {
     private Menu getRemoveDiscountCode() {
         return new Menu("Remove Discount Code", this) {
             @Override
-            public void show() {
+            public void execute() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Enter discount code to remove or (Back) to return:");
-            }
-
-            @Override
-            public void execute() {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.show();
                     this.parentMenu.execute();
                 }
                 else {
@@ -124,7 +108,6 @@ public class ManageDiscountCodesMenu extends Menu {
                     catch (NullPointerException e) {
                         System.out.println("There is no discount with this code.");
                     }
-                    this.show();
                     this.execute();
                 }
             }
