@@ -193,7 +193,7 @@ public class Product {
             return 0;
         double productScore = 0;
         for (Score score : allScores) {
-            productScore += score.getScore().getScore();
+            productScore += score.getScore();
         }
         return productScore / allScores.size();
     }

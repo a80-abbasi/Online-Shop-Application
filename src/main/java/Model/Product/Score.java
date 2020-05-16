@@ -5,16 +5,16 @@ import Model.Account.Customer;
 public class Score {
     private Customer customer;
     private Product product;
-    private ScoreEnumeration score;
+    private int score;
 
-    public Score(Customer customer, Product product, ScoreEnumeration score) {
+    public Score(Customer customer, Product product, int score) {
         this.customer = customer;
         this.product = product;
         this.score = score;
     }
 
     public Score() {
-        this(null, null, null);
+        this(null, null, 0);
     }
 
     public Customer getCustomer() {
@@ -33,11 +33,13 @@ public class Score {
         this.product = product;
     }
 
-    public ScoreEnumeration getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(ScoreEnumeration score) {
+    public void setScore(int score) {
         this.score = score;
     }
+
+
 }
