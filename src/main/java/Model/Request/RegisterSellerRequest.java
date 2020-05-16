@@ -37,12 +37,12 @@ public class RegisterSellerRequest extends Request {
     }
 
     @Override
-    public void acceptRequest() throws NullPointerException{
+    public void acceptRequest() throws IllegalArgumentException{
         if (Account.getAccountByUsername(username) == null) {
             new Seller(username, password, name, lastName, email, phoneNumber, companyName, 0);
         }
         else {
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         }
     }
 

@@ -16,7 +16,8 @@ public class AddProductRequest extends Request {
     private int existingNumber;
     private Seller productSeller;
 
-    public AddProductRequest() {
+    public AddProductRequest(String productId, ProductStatus productStatus, String productName, String companyName,
+                             double price, int existingNumber, Seller productSeller) {
         super("add_product_" + allRequests.size(), RequestType.Adding_Product_Request);
         allAddProductRequest.add(this);
         this.setProductStatus(ProductStatus.WAITING_TO_PRODUCE);
@@ -59,8 +60,13 @@ public class AddProductRequest extends Request {
     }
 
     @Override
-    public void acceptRequest() {
-        new Product(productId, ProductStatus.CONFIRMED, productName, companyName, price, productSeller, existingNumber);
+    public void acceptRequest() throws IllegalArgumentException{
+        if (Product.getProductByID(productId) == null) {
+            new Product(productId, ProductStatus.CONFIRMED, productName, companyName, price, productSeller, existingNumber);
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override

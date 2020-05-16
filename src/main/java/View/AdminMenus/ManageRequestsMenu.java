@@ -69,6 +69,9 @@ public class ManageRequestsMenu extends Menu {
                     catch (NullPointerException e) {
                         System.out.println("There is no request with this id.");
                     }
+                    catch (IllegalArgumentException i) {
+                        System.out.println("Request cannot be accepted because there is another Object with this id.");
+                    }
                     this.execute();
                 }
             }
