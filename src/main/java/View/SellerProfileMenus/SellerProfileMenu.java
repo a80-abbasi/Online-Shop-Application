@@ -81,6 +81,7 @@ public class SellerProfileMenu extends Menu {
                         } else if (input.equalsIgnoreCase("Logout")) {
                             loginAndRegisterManager.logoutUser();
                         } else {
+                            //todo: check are inputs valid
                             productFieldsValue.set(pageNumber - 1, input);
                             pageNumber += 1;
                         }

@@ -11,6 +11,16 @@ public class Customer extends Account {
     private HashMap<Product, Integer> cart;
     private ArrayList<BuyLog> buyLogs;
     private HashMap<Discount, Integer> usedDiscounts;
+    private static ArrayList<String> customerFieldsForPurchase = new ArrayList<>();
+    {
+        customerFieldsForPurchase.add("name");
+        customerFieldsForPurchase.add("lastName");
+        customerFieldsForPurchase.add("phoneNumber");
+        customerFieldsForPurchase.add("email");
+        customerFieldsForPurchase.add("HomeAddress");
+        customerFieldsForPurchase.add("PostCode");
+    }
+
 
     public Customer(String username, String password, String name, String lastName, String email, String phoneNumber, int balance) {
         super(username, password, name, lastName, email, phoneNumber);
@@ -83,20 +93,32 @@ public class Customer extends Account {
     public HashMap<Discount, Integer> getUsedDiscounts() {
         return usedDiscounts;
     }
+    public BuyLog getBuyLogByID(String ID) {
+        for (BuyLog buylog : buyLogs) {
+            if (buylog.getID().equals(ID)) {
+                return buylog;
+            }
+        }
+        return null;
+    }
+
+    public static ArrayList<String> getCustomerFieldsForPurchase() {
+        return customerFieldsForPurchase;
+    }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "balance=" + balance +
-                ", cart=" + cart +
-                ", buyLogs=" + buyLogs +
-                ", usedDiscounts=" + usedDiscounts +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
+                "balance=" + getBalance() +
+                ", cart=" + getCart() +
+                ", buyLogs=" + getBuyLogs() +
+                ", usedDiscounts=" + getUsedDiscounts() +
+                ", username='" + getUsername() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", lastName='" + getLastName() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", phoneNumber='" + getPhoneNumber() + '\'' +
                 '}';
     }
 }

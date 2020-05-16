@@ -1,8 +1,11 @@
 package View.CustomerProfileMenus;
 
+import Controller.CustomerProfileManager;
+import Controller.SellerProfileManager;
 import View.Menu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PurchaseMenu extends Menu {
     public PurchaseMenu(Menu parentMenu) {
@@ -11,4 +14,11 @@ public class PurchaseMenu extends Menu {
         subMenus.add(new ReceiveInformationMenu(this));
         setSubMenus(subMenus);
     }
+
+        @Override
+        public void execute() {
+
+        }
+
 }
+
