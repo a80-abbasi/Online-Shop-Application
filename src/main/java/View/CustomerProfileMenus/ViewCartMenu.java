@@ -23,7 +23,7 @@ public class ViewCartMenu extends Menu {
         subMenus.add(getIncreaseMenu());
         subMenus.add(getDecreaseMenu());
         subMenus.add(getShowTotalPriceMenu());
-        subMenus.add(new PurchaseMenu(this));
+        subMenus.add(getPurchaseMenu());
         this.submenus = subMenus;
     }
 

@@ -77,7 +77,7 @@ public class SellerProfileManager extends ProfileManager {
     }
 
     public void addProduct(HashMap<String, String> newProductInformation) {
-        new AddProductRequest(newProductInformation);
+       // new AddProductRequest(newProductInformation);
     }
 
     public void removeProduct(String productId) {
@@ -157,7 +157,7 @@ public class SellerProfileManager extends ProfileManager {
     }
 
     public void addOff (HashMap<String, String> properties) {
-        new AddOffRequest(properties);
+        //new AddOffRequest(properties);
     }
 
     public int viewBalance(Account account) {
