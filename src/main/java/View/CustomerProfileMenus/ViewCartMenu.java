@@ -179,7 +179,7 @@ public class ViewCartMenu extends Menu {
                 ArrayList<String> receiveInformationFields = CustomerProfileManager.getReceiveFieldsForPurchase();
                 ArrayList<String> receiveInformationFieldsValue = new ArrayList<>(receiveInformationFields.size());
                 HashMap<String, String> FieldsAndNewValues = new HashMap<>();
-                String discountCode;
+                String discountCode = "";
                 int pageNumber = 1;
                 while (true) {
                     if (pageNumber == 1) {
@@ -254,7 +254,8 @@ public class ViewCartMenu extends Menu {
                                             }else if (input.equals("No")) {
                                                 ViewCartMenu.super.execute();
                                             } else if(input.equals("Yes")) {
-                                                if (customerProfileManager.canCustomerPay()) {
+                                                double cost = customerProfileManager.costCalculator(discountCode);
+                                                if (customerProfileManager.canCustomerPay(cost)) {
                                                     System.out.println("you payed successfully, have nice day!");
                                                     //customerProfileManager.doingsAfterBuyProducts();
                                                 } else {
