@@ -1,7 +1,7 @@
 package View.CustomerProfileMenus;
 
 import Controller.CustomerProfileManager;
-import Controller.SellerProfileManager;
+import Controller.ProductsManager;
 import Model.Account.Customer;
 import Model.Product.Product;
 import View.Menu;
@@ -27,42 +27,42 @@ public class ViewCartMenu extends Menu {
         this.submenus = subMenus;
     }
 
-    @Override
-    public void execute() {
-        show();
-        try {
-            Menu nextMenu;
-            int chosenMenu = Integer.parseInt(scanner.nextLine());
-            if (chosenMenu == submenus.size() + 2) {
-                nextMenu = this.parentMenu;
-            }
-            else if (chosenMenu == submenus.size() + 1) {
-                if (loginAndRegisterManager.isLogin()) {
-                    loginAndRegisterManager.logoutUser();
-                }
-                else {
-                    loginAndRegisterMenu.execute();
-                }
-                nextMenu = this;
-            }
-            else {
-                if (chosenMenu == 1) {
-                    Product product = getProduct();
-                    if (product == null) {
-                        execute();
-                    } else {
-                        ProductMenu productMenu = (ProductMenu) submenus.get(1);
-                        productMenu.setProduct(product);
-                    }
-                }
-                nextMenu = submenus.get(chosenMenu - 1);
-            }
-            nextMenu.execute();
-        } catch (Exception e) {
-            System.out.println("Wrong Input\n");
-            execute();
-        }
-    }
+//    @Override
+//    public void execute() {
+//        show();
+//        try {
+//            Menu nextMenu;
+//            int chosenMenu = Integer.parseInt(scanner.nextLine());
+//            if (chosenMenu == submenus.size() + 2) {
+//                nextMenu = this.parentMenu;
+//            }
+//            else if (chosenMenu == submenus.size() + 1) {
+//                if (loginAndRegisterManager.isLogin()) {
+//                    loginAndRegisterManager.logoutUser();
+//                }
+//                else {
+//                    loginAndRegisterMenu.execute();
+//                }
+//                nextMenu = this;
+//            }
+//            else {
+//                if (chosenMenu == 1) {
+//                    Product product = getProduct();
+//                    if (product == null) {
+//                        execute();
+//                    } else {
+//                        ProductMenu productMenu = (ProductMenu) submenus.get(1);
+//                        productMenu.setProduct(product);
+//                    }
+//                }
+//                nextMenu = submenus.get(chosenMenu - 1);
+//            }
+//            nextMenu.execute();
+//        } catch (Exception e) {
+//            System.out.println("Wrong Input\n");
+//            execute();
+//        }
+//    }
 
     private Menu getShowProductsMenu() {
         return new Menu("Show Products Menu", this) {
@@ -150,6 +150,7 @@ public class ViewCartMenu extends Menu {
             public void show() {
                 System.out.println(this.getName() + ":");
                 System.out.println("Total price of your order:  " + productsManager.getTotalPrice());
+                System.out.println("Total Price with discount code and off"); //todo
                 System.out.println("1. Logout");
                 System.out.println("2. Back");
             }
@@ -224,10 +225,10 @@ public class ViewCartMenu extends Menu {
                                     if(pageNumber == receiveInformationFields.size() + 2) {
                                         input = scanner.nextLine();
                                         if (input.equals("Back")) {
-                                            pageNumber = 1;
+                                            pageNumber -= 1;
                                             break;
                                         } else if(input.equals("Next")) {
-                                            discountCode = null; //todo: when you check discount code care about this!
+                                            //todo: discount code maybe be null;
                                             pageNumber += 1;
                                         } else if (input.equals("Logout")) {
                                             loginAndRegisterManager.logoutUser();
@@ -243,7 +244,28 @@ public class ViewCartMenu extends Menu {
                                         while(true) {
                                             if (pageNumber == receiveInformationFields.size() + 3) {
                                                 System.out.println("Payment Menu:");
-                                                System.out.println("In each Menu you can use (Back) to return, (Next) to go next page or (Logout) to leave your account!");                                            }
+                                                //System.out.printf("The total cost of your products is %s$ and with discount and off is %s$ do you want to pay?(Yes)(No)", Double.toString(ProductsManager.getTotalPrice()), Double.toString(ProductsManager.costWithOffAndDigest(discountCode)));
+                                                //todo;
+                                            }
+                                            input = scanner.nextLine();
+                                            if (input.equals("Back")) {
+                                                pageNumber -= 1;
+                                                break;
+                                            }else if (input.equals("No")) {
+                                                ViewCartMenu.super.execute();
+                                            } else if(input.equals("Yes")) {
+                                                if (customerProfileManager.canCustomerPay()) {
+                                                    System.out.println("you payed successfully, have nice day!");
+                                                    //customerProfileManager.doingsAfterBuyProducts();
+                                                } else {
+                                                    System.out.println("You don`t have enough money! Go work harder!");
+                                                    ViewCartMenu.super.execute();
+                                                }
+                                            } else if (input.equals("Logout")) {
+                                                loginAndRegisterManager.logoutUser();
+                                            } else {
+                                                System.out.println("Code is invalid.");
+                                            }
                                         }
                                     }
                                 }

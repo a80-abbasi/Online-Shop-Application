@@ -86,7 +86,8 @@ public class ViewOrdersMenu extends Menu {
                                     loginAndRegisterManager.logoutUser();
                                 } else if (input.matches("\\d^$")) { //todo:
                                     if (Integer.parseInt(input) <= 5 && Integer.parseInt(input) >= 1) {
-                                        customerProfileManage//todo:add rate ali! please complete
+                                        //customerProfileManage//todo:add rate ali! please complete
+                                        //todo;
                                         System.out.println("Your rate submitted");
                                         parentMenu.execute();
                                     } else {
