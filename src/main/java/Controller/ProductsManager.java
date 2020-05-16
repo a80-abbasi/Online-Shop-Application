@@ -139,6 +139,15 @@ public class ProductsManager {
         return customer.getTotalPrice();
     }
 
+    public static boolean isValidNumberForProductID(String ID) {
+        for (Product product : Product.getAllProducts()) {
+            if (product.getProductId().equals(ID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public HashMap<Product, Integer> getCart(){
         return ((Customer) Account.getLoggedInAccount()).getCart();
     }
