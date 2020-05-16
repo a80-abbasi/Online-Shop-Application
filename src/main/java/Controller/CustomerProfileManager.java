@@ -7,7 +7,6 @@ import Model.Account.Discount;
 import Model.Product.Product;
 import Model.Product.Score;
 import Model.Product.ScoreEnumeration;
-import com.sun.scenario.effect.impl.prism.PrMergePeer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
