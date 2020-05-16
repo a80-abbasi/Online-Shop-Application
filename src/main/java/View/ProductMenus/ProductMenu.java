@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class ProductMenu extends Menu {
     private Product product;
+
     public ProductMenu(Menu parentMenu) {
         super("Show Product By Id", parentMenu);
         ArrayList<Menu> subMenus = new ArrayList<>();
