@@ -165,6 +165,41 @@ public class SellerProfileManager extends ProfileManager {
         }
     }
 
+    public EditOffRequest makeNewEditOffRequest(String offID) throws NullPointerException {
+        if (Off.getOffById(offID) == null) {
+            throw new NullPointerException();
+        }
+        else {
+            return new EditOffRequest(Off.getOffById(offID));
+        }
+    }
+
+    public void editOffId(EditOffRequest editOffRequest, String offId) throws IllegalArgumentException{
+        if (Off.getOffById(offId) == null) {
+            editOffRequest.setOffID(offId);
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void editOffStartTime(EditOffRequest editOffRequest, String startTime) {
+        editOffRequest.setStartTime(startTime);
+    }
+
+    public void editOffEndTime(EditOffRequest editOffRequest, String endTime) {
+        editOffRequest.setEndTime(endTime);
+    }
+
+    public void editOffAmount(EditOffRequest editOffRequest, String offAmount) throws InputMismatchException{
+        if (offAmount.matches("\\d+")) {
+            editOffRequest.setOffAmount(Integer.parseInt(offAmount));
+        }
+        else {
+            throw new InputMismatchException();
+        }
+    }
+
     public static boolean isInputInOffFields(String input) {
         for (int i = 0; i < Off.getOffFields().size(); i++) {
             if (Off.getOffFields().get(i).equals(input)) {
@@ -224,7 +259,7 @@ public class SellerProfileManager extends ProfileManager {
 
     public void editOffByID(String offId, HashMap<String, String> fieldChanges) {
         Off off = Off.getOffById(offId);
-        new EditOffRequest(off, fieldChanges);
+        new EditOffRequest(off);
     }
 
 
