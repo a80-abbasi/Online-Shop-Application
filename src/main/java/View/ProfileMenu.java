@@ -24,17 +24,14 @@ public class ProfileMenu extends Menu {
         }
         else if (account instanceof Admin) {
             AdminProfileMenu adminProfileMenu = new AdminProfileMenu(parentMenu, (Admin) account);
-            adminProfileMenu.show();
             adminProfileMenu.execute();
         }
         else if (account instanceof Customer) {
             CustomerProfileMenu customerProfileMenu = new CustomerProfileMenu((Customer) account, parentMenu);
-            customerProfileMenu.show();
             customerProfileMenu.execute();
         }
         else if (account instanceof Seller) {
             SellerProfileMenu sellerProfileMenu = new SellerProfileMenu((Seller) account, parentMenu);
-            sellerProfileMenu.show();
             sellerProfileMenu.execute();
         }
     }
