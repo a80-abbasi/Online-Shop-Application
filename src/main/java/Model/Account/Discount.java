@@ -68,10 +68,6 @@ public class Discount {
         return maxPossibleDiscount;
     }
 
-    public void setMaxPossibleDiscount(int maxPossibleDiscount) {
-        this.maxPossibleDiscount = maxPossibleDiscount;
-    }
-
     public ArrayList<Customer> getIncludingCustomers() {
         return includingCustomers;
     }
@@ -79,6 +75,14 @@ public class Discount {
     public void setIncludingCustomers(ArrayList<Customer> includingCustomers) {
         this.includingCustomers = includingCustomers;
         allDiscounts.add(this);
+    }
+
+    public void setDiscountPerCustomer(int discountPerCustomer) {
+        this.discountPerCustomer = discountPerCustomer;
+    }
+
+    public void setMaxPossibleDiscount(double maxPossibleDiscount) {
+        this.maxPossibleDiscount = maxPossibleDiscount;
     }
 
     public String getDiscountCode() {

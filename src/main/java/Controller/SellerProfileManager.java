@@ -77,7 +77,7 @@ public class SellerProfileManager extends ProfileManager {
     }
 
     public void addProduct(HashMap<String, String> newProductInformation) {
-        new AddProductRequest(productId, productStatus, productName, companyName, price, existingNumber, seller);
+        new AddProductRequest(newProductInformation);
     }
 
     public void removeProduct(String productId) {

@@ -2,6 +2,7 @@ package Controller;
 
 
 import Model.Account.*;
+import Model.Request.RegisterSellerRequest;
 import View.MainMenu;
 
 public class LoginAndRegisterManager {
@@ -18,7 +19,7 @@ public class LoginAndRegisterManager {
 
     public void registerSeller(String username, String password, String name, String lastName, String email,
                                String phoneNumber, String companyName){
-        new Seller(username, password, name, lastName, email, phoneNumber, companyName, 0);
+        new RegisterSellerRequest(username, password, name, lastName, email, phoneNumber, companyName);
     }
 
     public void registerAdmin(String username, String password, String name, String lastName, String email,

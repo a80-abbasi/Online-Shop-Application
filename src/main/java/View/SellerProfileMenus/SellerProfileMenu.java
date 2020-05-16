@@ -76,9 +76,9 @@ public class SellerProfileMenu extends Menu {
                             else {
                                 pageNumber -= 1;
                             }
-                        } else if(input.equals("Next")) {
+                        } else if(input.equalsIgnoreCase("Next")) {
                             pageNumber += 1;
-                        } else if (input.equals("Logout")) {
+                        } else if (input.equalsIgnoreCase("Logout")) {
                             loginAndRegisterManager.logoutUser();
                         } else {
                             //todo: check are inputs valid
@@ -94,9 +94,9 @@ public class SellerProfileMenu extends Menu {
                         }
                         System.out.println(newProductFields);
                         String input = scanner.nextLine();
-                        if (input.equals("Back")) {
+                        if (input.equalsIgnoreCase("Back")) {
                             pageNumber -= 1;
-                        } else if(input.equals("Next")) {
+                        } else if(input.equalsIgnoreCase("Next")) {
                             if (SellerProfileManager.areNewProductFieldsValueValid(newProductFields)) {
                                 sellerProfileManager.addProduct(newProductFields);
                                 System.out.println("Your Request Sent to Admin please w8 for answer");
@@ -104,7 +104,7 @@ public class SellerProfileMenu extends Menu {
                             } else {
                                 System.out.println("formats are invalid"); //todo: write a better message;
                             }
-                        } else if (input.equals("Logout")) {
+                        } else if (input.equalsIgnoreCase("Logout")) {
                             loginAndRegisterManager.logoutUser();
                         } else {
                             System.out.println("invalid message");
@@ -129,7 +129,7 @@ public class SellerProfileMenu extends Menu {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("Back")) {
                     this.parentMenu.execute();
-                } else if (input.equals("Logout")) {
+                } else if (input.equalsIgnoreCase("Logout")) {
                     loginAndRegisterManager.logoutUser();
                 } else {
                     if (SellerProfileManager.isProductIdFormatValid(input)) {
@@ -164,11 +164,10 @@ public class SellerProfileMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("your balance is:" + seller.getBalance());
+                System.out.println("your balance is: " + seller.getBalance());
                 System.out.println("1. Logout");
                 System.out.println("2. Back");
             }
-
         };
     }
 

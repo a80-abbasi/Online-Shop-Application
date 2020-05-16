@@ -11,11 +11,11 @@ public class ManageDiscountCodesMenu extends Menu {
     private AdminProfileManager adminProfileManager;
 
     public ManageDiscountCodesMenu(Menu parentMenu, AdminProfileManager adminProfileManager) {
-        super("View Discount Codes Menu", parentMenu);
+        super("Manage Discount Codes Menu", parentMenu);
         this.adminProfileManager = adminProfileManager;
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getViewDiscountCodeMenu());
-        submenus.add(getEditDiscountCodeMenu());
+        submenus.add(new EditDiscountCodesMenu(this, adminProfileManager));
         submenus.add(getRemoveDiscountCode());
         this.setSubMenus(submenus);
     }
@@ -43,43 +43,6 @@ public class ManageDiscountCodesMenu extends Menu {
                     try {
                         String discountProperties = adminProfileManager.viewDiscount(input);
                         System.out.println(discountProperties);
-                    }
-                    catch (NullPointerException e) {
-                        System.out.println("There is no discount with this code.");
-                    }
-                    this.execute();
-                }
-            }
-        };
-    }
-
-    //todo: make a new Menu for editing discount codes
-    private Menu getEditDiscountCodeMenu() {
-        return new Menu("Edit Discount Code", this) {
-            @Override
-            public void execute() {
-                System.out.println(this.getName() + ":");
-                System.out.println("Enter discount code to edit the discount or (Back) to return:");
-                String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.execute();
-                }
-                else {
-                    String discountCode = input;
-                    String fieldName, fieldChange;
-                    HashMap<String, String> discountEdition = new HashMap<>();
-                    System.out.println("Enter the field you want to change, or (back) to finish editing:");
-                    fieldName = scanner.nextLine();
-                    while (!(fieldName.equalsIgnoreCase("back"))){
-                        System.out.println("Enter the change you want to make");
-                        fieldChange = scanner.nextLine();
-                        discountEdition.put(fieldName, fieldChange);
-                        System.out.println("Enter the field you want to change, or (back) to finish editing:");
-                        fieldName = scanner.nextLine();
-                    }
-                    try{
-                        adminProfileManager.editDiscount(discountCode, discountEdition);
-                        System.out.println("Discount with code " + discountCode + " edited successfully.");
                     }
                     catch (NullPointerException e) {
                         System.out.println("There is no discount with this code.");
