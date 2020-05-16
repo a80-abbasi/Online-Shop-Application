@@ -28,7 +28,7 @@ public class LoginAndRegisterManager {
     }
 
     public boolean canCreateAdminManually(){
-        return Account.getAllAccounts().size() == 0;
+        return Admin.getAllAdmins().size() == 0;
     }
 
     public void loginUser(String username, String password) throws IllegalAccessException {
