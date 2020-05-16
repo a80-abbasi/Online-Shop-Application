@@ -157,4 +157,6 @@ public class ProductsManager {
         //todo
         return 0;
     }
+
+    //public static double
 }

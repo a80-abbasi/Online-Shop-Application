@@ -75,7 +75,7 @@ public class ViewOrdersMenu extends Menu {
                         loginAndRegisterManager.logoutUser();
                     } else if (input.matches("\\d+^$")) { //todo:
                         if (ProductsManager.isValidNumberForProductID(input)) {
-                            System.out.println("Enter rate(1-5) or (back) to return or (Logout) to leave your account:");
+                            System.out.println("Enter rate in range (1-5) or (back) to return or (Logout) to leave your account:");
                             String productID = input;
                             while(true) {
                                 input = scanner.nextLine();
@@ -84,10 +84,9 @@ public class ViewOrdersMenu extends Menu {
                                     break;
                                 } else if (input.equals("Logout")) {
                                     loginAndRegisterManager.logoutUser();
-                                } else if (input.matches("\\d^$")) { //todo:
+                                } else if (input.matches("\\d+^$")) { //todo:
                                     if (Integer.parseInt(input) <= 5 && Integer.parseInt(input) >= 1) {
-                                        //customerProfileManage//todo:add rate ali! please complete
-                                        //todo;
+                                        customerProfileManager.rateProduct(productID, Integer.parseInt(input));
                                         System.out.println("Your rate submitted");
                                         parentMenu.execute();
                                     } else {
@@ -107,6 +106,4 @@ public class ViewOrdersMenu extends Menu {
             }
         };
     }
-
-    //todo: w8 for answer in group for adding override for execute to give inputs for rate
 }

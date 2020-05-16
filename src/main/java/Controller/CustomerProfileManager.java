@@ -5,6 +5,9 @@ import Model.Account.BuyLog;
 import Model.Account.Customer;
 import Model.Account.Discount;
 import Model.Product.Product;
+import Model.Product.Score;
+import Model.Product.ScoreEnumeration;
+import com.sun.scenario.effect.impl.prism.PrMergePeer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,8 +61,9 @@ public class CustomerProfileManager extends ProfileManager{
         return customer.getBuyLogByID(id);
     }
 
-    public boolean rateProduct(String id, int score) {
-        return true;
+    public void rateProduct(String id, int intScore) {
+        Score score = new Score(customer, Product.getProductByID(id), intScore);
+        Product.getProductByID(id).getAllScores().add(score);
     }
     public ArrayList<Discount> viewDiscountCodes(Account account) {
         return null;
