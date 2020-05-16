@@ -19,7 +19,7 @@ public class LoginAndRegisterManager {
 
     public void registerSeller(String username, String password, String name, String lastName, String email,
                                String phoneNumber, String companyName){
-        //new RegisterSellerRequest(username, password, name, lastName, email, phoneNumber, companyName);
+        new RegisterSellerRequest(username, password, name, lastName, email, phoneNumber, companyName);
     }
 
     public void registerAdmin(String username, String password, String name, String lastName, String email,
