@@ -13,9 +13,9 @@ public class ViewOrdersMenu extends Menu {
     public ViewOrdersMenu(Customer customer, Menu parentMenu) {
         super("View Orders Menu", parentMenu);
         ArrayList<Menu> subMenus = new ArrayList<>();
-        submenus.add(getShowOrderMenu());
-        submenus.add(getRateMenu());
-        this.setSubMenus(subMenus);
+        subMenus.add(getShowOrderMenu());
+        subMenus.add(getRateMenu());
+        this.submenus = subMenus;
     }
 
     @Override

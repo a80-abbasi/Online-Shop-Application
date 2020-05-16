@@ -11,7 +11,7 @@ public class AdminProfileMenu extends Menu {
     protected Admin admin;
     private AdminProfileManager adminProfileManager;
 
-    public AdminProfileMenu(Menu parentMenu, Admin admin) {
+    public AdminProfileMenu(Admin admin, Menu parentMenu) {
         super("Admin Profile Menu", parentMenu);
         this.admin = admin;
         this.adminProfileManager = new AdminProfileManager(admin);

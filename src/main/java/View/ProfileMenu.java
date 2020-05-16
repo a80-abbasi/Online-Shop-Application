@@ -23,7 +23,7 @@ public class ProfileMenu extends Menu {
             parentMenu.execute();
         }
         else if (account instanceof Admin) {
-            AdminProfileMenu adminProfileMenu = new AdminProfileMenu(parentMenu, (Admin) account);
+            AdminProfileMenu adminProfileMenu = new AdminProfileMenu((Admin) account, parentMenu);
             adminProfileMenu.execute();
         }
         else if (account instanceof Customer) {
