@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Account.Account;
-import Model.Account.AccountType;
 import Model.Account.Admin;
 import Model.Account.Discount;
 import Model.Request.Request;
@@ -9,7 +8,7 @@ import Model.Product.Category;
 import Model.Product.Product;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.InputMismatchException;
 
 public class AdminProfileManager extends ProfileManager{
 
@@ -67,12 +66,72 @@ public class AdminProfileManager extends ProfileManager{
         return discount.toString();
     }
 
-    public void editDiscount(String discountCode, HashMap<String, String> discountEdition) throws NullPointerException{
+    public void editDiscountCode(String discountCodeBefore, String discountCodeAfter) throws NullPointerException, IllegalArgumentException {
+        Discount discount = Discount.getDiscountByDiscountCode(discountCodeBefore);
+        if (discount == null) {
+            throw new NullPointerException();
+        }
+        else if (Discount.getDiscountByDiscountCode(discountCodeAfter) != null) {
+            throw new IllegalArgumentException();
+        }
+        else {
+            discount.setDiscountCode(discountCodeAfter);
+        }
+    }
+
+    public void editDiscountStartTime(String discountCode, String startTime) throws NullPointerException {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
             throw new NullPointerException();
         }
+        discount.setStartTime(startTime);
+    }
 
+    public void editDiscountEndTime(String discountCode, String endTime) throws NullPointerException {
+        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        if (discount == null) {
+            throw new NullPointerException();
+        }
+        discount.setEndTime(endTime);
+    }
+
+    public void editDiscountPercent(String discountCode, String discountPercent) throws NullPointerException, IllegalArgumentException {
+        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        if (discount == null) {
+            throw new NullPointerException();
+        }
+        else if (discountPercent.matches("\\d[1-2]")) {
+            discount.setDiscountPercent(Integer.parseInt(discountPercent));
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void editDiscountMaxPossibleDiscount(String discountCode, String maxPossibleDiscount) throws NullPointerException, InputMismatchException{
+        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        if (discount == null) {
+            throw new NullPointerException();
+        }
+        else if (maxPossibleDiscount.matches("\\d+\\.\\d+")) {
+            discount.setMaxPossibleDiscount(Double.parseDouble(maxPossibleDiscount));
+        }
+        else {
+            throw new InputMismatchException();
+        }
+    }
+
+    public void editDiscountPerCustomer(String discountCode, String discountPerCustomer) throws NullPointerException, InputMismatchException{
+        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        if (discount == null) {
+            throw new NullPointerException();
+        }
+        else if ((discountPerCustomer.matches("\\d+"))) {
+            discount.setDiscountPerCustomer(Integer.parseInt(discountPerCustomer));
+        }
+        else {
+            throw new InputMismatchException();
+        }
     }
 
     public void removeDiscount(String discountCode) throws NullPointerException{
@@ -122,6 +181,7 @@ public class AdminProfileManager extends ProfileManager{
         return Category.getAllCategories();
     }
 
+    //todo: completing this
     public void editCategory(String categoryName, String changeField) throws NullPointerException{
         Category category = Category.getCategoryByName(categoryName);
         if (category == null) {
@@ -130,6 +190,7 @@ public class AdminProfileManager extends ProfileManager{
 
     }
 
+    //todo: completing this
     public void addCategory(String categoryName, String specialProperties) {
         new Category(categoryName, specialProperties);
     }
