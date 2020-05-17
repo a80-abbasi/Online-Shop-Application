@@ -15,12 +15,12 @@ public class ViewOrdersMenu extends Menu {
         ArrayList<Menu> subMenus = new ArrayList<>();
         subMenus.add(getShowOrderMenu());
         subMenus.add(getRateMenu());
-        this.submenus = subMenus;
+        this.setSubMenus(subMenus);
     }
 
     @Override
     public void show() {
-        todo:System.out.println(customerProfileManager.showOrdersSellerNameAndDate());
+        System.out.println(customerProfileManager.showOrdersSellerNameAndDate()); // todo: wrong input if (null)
         super.show();
     }
 
