@@ -4,7 +4,9 @@ import Controller.SellerProfileManager;
 import Model.Request.AddOffRequest;
 import View.Menu;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 
 public class AddOffMenu extends Menu {
@@ -46,7 +48,10 @@ public class AddOffMenu extends Menu {
             @Override
             public void execute() {
                 System.out.println("Enter Off Start Time:");
-                String offStartTime = scanner.nextLine();
+                Date offStartTime = getDate();
+                if (offStartTime == null){
+                    execute();
+                }
                 sellerProfileManager.addOffStartTime(addOffRequest, offStartTime);
                 System.out.println("Off Start Time " + offStartTime + " successfully added to your request.");
                 this.parentMenu.execute();
@@ -59,7 +64,10 @@ public class AddOffMenu extends Menu {
             @Override
             public void execute() {
                 System.out.println("Enter Off End Time:");
-                String offEndTime = scanner.nextLine();
+                Date offEndTime = getDate();
+                if (offEndTime == null){
+                    execute();
+                }
                 sellerProfileManager.addOffEndTime(addOffRequest, offEndTime);
                 System.out.println("Off End Time " + offEndTime + " successfully added to your request.");
                 this.parentMenu.execute();
@@ -83,5 +91,29 @@ public class AddOffMenu extends Menu {
                 this.parentMenu.execute();
             }
         };
+    }
+
+    public static Date getDate(){
+        int year, month, day;
+        try {
+            System.out.println("Enter year");
+            year = scanner.nextInt();
+            System.out.println("Enter month");
+            month = scanner.nextInt();
+            if (month > 12 || month < 1){
+                System.out.println("Please enter a number between 1-12 for month");
+                return null;
+            }
+            System.out.println("Enter day");
+            day = scanner.nextInt();
+            if (day > 31 || day < 1){
+                System.out.println("Please enter a number between 1-31 for day");
+                return null;
+            }
+            return java.sql.Date.valueOf(LocalDate.of(year, month, day));
+        } catch (Exception e) {
+            System.out.println("Wrong format of Date. Please try again later");
+            return null;
+        }
     }
 }

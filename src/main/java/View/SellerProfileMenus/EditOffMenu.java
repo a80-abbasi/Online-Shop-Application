@@ -5,7 +5,10 @@ import Model.Request.EditOffRequest;
 import View.Menu;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
+
+import static View.SellerProfileMenus.AddOffMenu.getDate;
 
 public class EditOffMenu extends Menu {
     private SellerProfileManager sellerProfileManager;
@@ -59,7 +62,10 @@ public class EditOffMenu extends Menu {
             @Override
             public void execute() {
                 System.out.println("Enter Off Start Time:");
-                String offStartTime = scanner.nextLine();
+                Date offStartTime = getDate();
+                if (offStartTime == null){
+                    execute();
+                }
                 sellerProfileManager.editOffStartTime(editOffRequest, offStartTime);
                 System.out.println("Off Start Time " + offStartTime + " successfully added to your request.");
                 this.parentMenu.execute();
@@ -72,7 +78,10 @@ public class EditOffMenu extends Menu {
             @Override
             public void execute() {
                 System.out.println("Enter Off End Time:");
-                String offEndTime = scanner.nextLine();
+                Date offEndTime = getDate();
+                if (offEndTime == null){
+                    execute();
+                }
                 sellerProfileManager.editOffEndTime(editOffRequest, offEndTime);
                 System.out.println("Off End Time " + offEndTime + " successfully added to your request.");
                 this.parentMenu.execute();

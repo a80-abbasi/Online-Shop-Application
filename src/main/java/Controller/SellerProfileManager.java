@@ -4,10 +4,9 @@ import Model.Account.*;
 import Model.Request.*;
 import Model.Product.Category;
 import Model.Product.Product;
-import Model.Product.ProductStatus;
-import View.SellerProfileMenus.SellerProfileMenu;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 
@@ -194,11 +193,11 @@ public class SellerProfileManager extends ProfileManager {
         }
     }
 
-    public void addOffStartTime(AddOffRequest addOffRequest, String startTime) {
+    public void addOffStartTime(AddOffRequest addOffRequest, Date startTime) {
         addOffRequest.setStartTime(startTime);
     }
 
-    public void addOffEndTime(AddOffRequest addOffRequest, String endTime) {
+    public void addOffEndTime(AddOffRequest addOffRequest, Date endTime) {
         addOffRequest.setEndTime(endTime);
     }
 
@@ -229,11 +228,11 @@ public class SellerProfileManager extends ProfileManager {
         }
     }
 
-    public void editOffStartTime(EditOffRequest editOffRequest, String startTime) {
+    public void editOffStartTime(EditOffRequest editOffRequest, Date startTime) {
         editOffRequest.setStartTime(startTime);
     }
 
-    public void editOffEndTime(EditOffRequest editOffRequest, String endTime) {
+    public void editOffEndTime(EditOffRequest editOffRequest, Date endTime) {
         editOffRequest.setEndTime(endTime);
     }
 
