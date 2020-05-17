@@ -29,6 +29,11 @@ public class EditOffMenu extends Menu {
     public void show() {
         System.out.println("Enter ID of the Off you want to edit:");
         String offID = scanner.nextLine();
+        if (offID.equalsIgnoreCase("back")) {
+            parentMenu.execute();
+        } else if (offID.equalsIgnoreCase("logout")) {
+            loginAndRegisterManager.logoutUser();
+        }
         try {
             this.editOffRequest = sellerProfileManager.makeNewEditOffRequest(offID);
         }
@@ -45,6 +50,11 @@ public class EditOffMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Off ID:");
                 String offID = scanner.nextLine();
+                if (offID.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (offID.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.editOffId(editOffRequest, offID);
                     System.out.println("Off ID " + offID + " successfully added to your request.");
@@ -62,7 +72,7 @@ public class EditOffMenu extends Menu {
             @Override
             public void execute() {
                 System.out.println("Enter Off Start Time:");
-                Date offStartTime = getDate();
+                Date offStartTime = getDate(parentMenu);
                 if (offStartTime == null){
                     execute();
                 }
@@ -78,7 +88,7 @@ public class EditOffMenu extends Menu {
             @Override
             public void execute() {
                 System.out.println("Enter Off End Time:");
-                Date offEndTime = getDate();
+                Date offEndTime = getDate(parentMenu);
                 if (offEndTime == null){
                     execute();
                 }
@@ -95,6 +105,11 @@ public class EditOffMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Off Amount:");
                 String offAmount = scanner.nextLine();
+                if (offAmount.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (offAmount.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.editOffAmount(editOffRequest, offAmount);
                     System.out.println("Off Amount " + offAmount + " successfully added to your request.");

@@ -1,5 +1,6 @@
 package View.SellerProfileMenus;
 
+import Controller.OffManager;
 import Controller.SellerProfileManager;
 import View.Menu;
 
@@ -30,7 +31,7 @@ public class ViewOffsMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter offId to view or (back) to return or (Logout) to leave your account:");
+                System.out.println("Enter offId to view the off:");
             }
 
             @Override
@@ -41,11 +42,11 @@ public class ViewOffsMenu extends Menu {
                     this.parentMenu.execute();
                 } else if (input.equals("Logout")) {
                     loginAndRegisterManager.logoutUser();
-                } else {
-                    //todo: check is input valid
+                } else if (OffManager.isValidInputForOffID(input)){
                     System.out.println(SellerProfileManager.getOffByID(input));
                     this.execute();
                 }
+                System.out.println("There is no off with this ID");
             }
         };
     }

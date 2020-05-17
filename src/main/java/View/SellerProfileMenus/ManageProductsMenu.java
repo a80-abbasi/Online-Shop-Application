@@ -1,10 +1,10 @@
 package View.SellerProfileMenus;
 
+import Controller.ProductsManager;
 import Controller.SellerProfileManager;
 import View.Menu;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ManageProductsMenu extends Menu {
     private SellerProfileManager sellerProfileManager;
@@ -30,7 +30,7 @@ public class ManageProductsMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter ProductId to view or (back) to return or (Logout) to leave your account:");
+                System.out.println("Enter ProductId to view the product:");
             }
 
             @Override
@@ -41,11 +41,12 @@ public class ManageProductsMenu extends Menu {
                     this.parentMenu.execute();
                 } else if (input.equals("Logout")) {
                     loginAndRegisterManager.logoutUser();
-                } else {
-                    //todo: check is input valid
+                } else if (ProductsManager.isValidInputForProductID(input)){
                     System.out.println(sellerProfileManager.getProductByID(input));
                     this.execute();
                 }
+                System.out.println("There is no product with this productID");
+                this.execute();
             }
         };
     }
@@ -55,7 +56,7 @@ public class ManageProductsMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter ProductId to view buyers or (back) to return or (Logout) to leave your account:");
+                System.out.println("Enter ProductId to view the product buyers:");
             }
 
             @Override
@@ -66,11 +67,13 @@ public class ManageProductsMenu extends Menu {
                     this.parentMenu.execute();
                 } else if (input.equals("Logout")) {
                     loginAndRegisterManager.logoutUser();
-                } else {
-                    //todo: check is input valid
+                } else if (ProductsManager.isValidInputForProductID(input)) {
                     System.out.println(sellerProfileManager.getProductBuyers(input));
                     this.execute();
                 }
+                System.out.println("There is no product with this productID");
+                this.execute();
+
             }
         };
     }

@@ -28,6 +28,11 @@ public class EditProductMenu extends Menu {
     public void show() {
         System.out.println("Enter ID of Product you want to edit:");
         String productId = scanner.nextLine();
+        if (productId.equalsIgnoreCase("back")) {
+            parentMenu.execute();
+        } else if (productId.equalsIgnoreCase("logout")) {
+            loginAndRegisterManager.logoutUser();
+        }
         try {
             this.editProductRequest = sellerProfileManager.makeNewEditProductRequest(productId);
         }
@@ -43,6 +48,11 @@ public class EditProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter the Product ID:");
                 String productId = scanner.nextLine();
+                if (productId.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (productId.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.editProductId(editProductRequest, productId);
                     System.out.println("Product ID " + productId + " successfully added to your request.");
@@ -61,6 +71,11 @@ public class EditProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Product Name:");
                 String productName = scanner.nextLine();
+                if (productName.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (productName.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 sellerProfileManager.editProductName(editProductRequest, productName);
                 System.out.println("Product Name " + productName + " successfully added to your request.");
                 this.parentMenu.execute();
@@ -74,6 +89,11 @@ public class EditProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Company Name:");
                 String companyName = scanner.nextLine();
+                if (companyName.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (companyName.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 sellerProfileManager.editProductCompanyName(editProductRequest, companyName);
                 System.out.println("Company Name " + companyName + " successfully added to your request");
                 this.parentMenu.execute();
@@ -87,6 +107,11 @@ public class EditProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Product Price:");
                 String productPrice = scanner.nextLine();
+                if (productPrice.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (productPrice.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.editProductPrice(editProductRequest, productPrice);
                     System.out.println("Product Price " + productPrice + " successfully added to your request");
@@ -105,6 +130,11 @@ public class EditProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter the Number Of Existing Products:");
                 String existingNumber = scanner.nextLine();
+                if (existingNumber.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (existingNumber.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.editExistingNumberOfProduct(editProductRequest, existingNumber);
                     System.out.println("Existing Number Of Product " + existingNumber + " successfully added to your request.");
@@ -123,6 +153,11 @@ public class EditProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Seller Username:");
                 String sellerUsername = scanner.nextLine();
+                if (sellerUsername.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (sellerUsername.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.editProductSeller(editProductRequest, sellerUsername);
                     System.out.println("Product Seller " + sellerUsername + " successfully added to your request.");

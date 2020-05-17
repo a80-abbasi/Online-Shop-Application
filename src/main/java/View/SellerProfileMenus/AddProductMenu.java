@@ -31,6 +31,11 @@ public class AddProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter the Product ID:");
                 String productId = scanner.nextLine();
+                if (productId.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (productId.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.addProductId(addProductRequest, productId);
                     System.out.println("Product ID " + productId + " successfully added to your request.");
@@ -49,6 +54,11 @@ public class AddProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Product Name:");
                 String productName = scanner.nextLine();
+                if (productName.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (productName.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 sellerProfileManager.addProductName(addProductRequest, productName);
                 System.out.println("Product Name " + productName + " successfully added to your request.");
                 this.parentMenu.execute();
@@ -62,6 +72,11 @@ public class AddProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Company Name:");
                 String companyName = scanner.nextLine();
+                if (companyName.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (companyName.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 sellerProfileManager.addProductCompanyName(addProductRequest, companyName);
                 System.out.println("Company Name " + companyName + " successfully added to your request");
                 this.parentMenu.execute();
@@ -75,6 +90,11 @@ public class AddProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Product Price:");
                 String productPrice = scanner.nextLine();
+                if (productPrice.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (productPrice.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.addProductPrice(addProductRequest, productPrice);
                     System.out.println("Product Price " + productPrice + " successfully added to your request");
@@ -93,6 +113,11 @@ public class AddProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter the Number Of Existing Products:");
                 String existingNumber = scanner.nextLine();
+                if (existingNumber.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (existingNumber.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.addExistingNumberOfProduct(addProductRequest, existingNumber);
                     System.out.println("Existing Number Of Product " + existingNumber + " successfully added to your request.");
@@ -111,6 +136,11 @@ public class AddProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Seller Username:");
                 String sellerUsername = scanner.nextLine();
+                if (sellerUsername.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (sellerUsername.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.addProductSeller(addProductRequest, sellerUsername);
                     System.out.println("Product Seller " + sellerUsername + " successfully added to your request.");

@@ -191,7 +191,6 @@ public class ViewCartMenu extends Menu {
                         String input = scanner.nextLine();
                         if (input.equals("Back")) {
                             if(pageNumber == 1) {
-                                System.out.println("salam");
                                 this.parentMenu.execute();
                             }
                             else {

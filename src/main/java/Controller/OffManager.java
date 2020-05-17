@@ -1,16 +1,16 @@
 package Controller;
 
+import Model.Account.Off;
 import Model.Product.Product;
 
 public class OffManager {
 
-
-
-    public Product getProductById(String productId) throws NullPointerException{
-        Product product = Product.getProductByID(productId);
-        if (product == null) {
-            throw new NullPointerException();
+    public static boolean isValidInputForOffID (String ID) {
+        for (String offID : Off.getAllOffIds()) {
+            if (offID.equals(ID)) {
+                return true;
+            }
         }
-        return product;
+        return false;
     }
 }

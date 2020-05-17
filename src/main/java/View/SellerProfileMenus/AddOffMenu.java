@@ -1,6 +1,7 @@
 package View.SellerProfileMenus;
 
 import Controller.SellerProfileManager;
+import Model.Account.Account;
 import Model.Request.AddOffRequest;
 import View.Menu;
 
@@ -31,6 +32,11 @@ public class AddOffMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Off ID:");
                 String offID = scanner.nextLine();
+                if (offID.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (offID.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.addOffId(addOffRequest, offID);
                     System.out.println("Off ID " + offID + " successfully added to your request.");
@@ -48,7 +54,7 @@ public class AddOffMenu extends Menu {
             @Override
             public void execute() {
                 System.out.println("Enter Off Start Time:");
-                Date offStartTime = getDate();
+                Date offStartTime = getDate(parentMenu);
                 if (offStartTime == null){
                     execute();
                 }
@@ -64,7 +70,7 @@ public class AddOffMenu extends Menu {
             @Override
             public void execute() {
                 System.out.println("Enter Off End Time:");
-                Date offEndTime = getDate();
+                Date offEndTime = getDate(parentMenu);
                 if (offEndTime == null){
                     execute();
                 }
@@ -81,6 +87,11 @@ public class AddOffMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Off Amount:");
                 String offAmount = scanner.nextLine();
+                if (offAmount.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (offAmount.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.addOffAmount(addOffRequest, offAmount);
                     System.out.println("Off Amount " + offAmount + " successfully added to your request.");
@@ -93,22 +104,54 @@ public class AddOffMenu extends Menu {
         };
     }
 
-    public static Date getDate(){
+    public static Date getDate(Menu parentMenu){
         int year, month, day;
         try {
-            System.out.println("Enter year");
-            year = scanner.nextInt();
-            System.out.println("Enter month");
-            month = scanner.nextInt();
-            if (month > 12 || month < 1){
-                System.out.println("Please enter a number between 1-12 for month");
-                return null;
+            while (true) {
+                System.out.println("Enter year");
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (input.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                } else if (!input.matches("\\A\\d+\\z")) {
+                    System.out.println("please enter number");
+                } else {
+                    year = Integer.parseInt(input);
+                    break;
+                }
             }
-            System.out.println("Enter day");
-            day = scanner.nextInt();
-            if (day > 31 || day < 1){
-                System.out.println("Please enter a number between 1-31 for day");
-                return null;
+            while (true) {
+                System.out.println("Enter month");
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (input.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                } else if (!input.matches("\\A\\d+\\z")) {
+                    System.out.println("please enter number");
+                } else if (!(Integer.parseInt(input) > 12 || Integer.parseInt(input) < 1)) {
+                    System.out.println("Please enter a number between 1-12 for month");
+                } else {
+                    month = Integer.parseInt(input);
+                    break;
+                }
+            }
+            while (true) {
+                System.out.println("Enter day");
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (input.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                } else if (!input.matches("\\A\\d+\\z")) {
+                    System.out.println("please enter number");
+                } else if (!(Integer.parseInt(input) > 31 || Integer.parseInt(input) < 1)) {
+                    System.out.println("Please enter a number between 1-31 for day");
+                } else {
+                    day = Integer.parseInt(input);
+                    break;
+                }
             }
             return java.sql.Date.valueOf(LocalDate.of(year, month, day));
         } catch (Exception e) {

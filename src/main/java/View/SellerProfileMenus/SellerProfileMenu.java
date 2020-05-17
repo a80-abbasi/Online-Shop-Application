@@ -48,9 +48,9 @@ public class SellerProfileMenu extends Menu {
                 System.out.println(this.getName() + ":");
                 for (String saleHistory : sellerProfileManager.getSalesHistory()) {
                     System.out.print(saleHistory + ", ");
-                    System.out.println("1. Logout");
-                    System.out.println("2. Back");
                 }
+                System.out.println("1. Logout");
+                System.out.println("2. Back");
             }
         };
     }
@@ -60,7 +60,7 @@ public class SellerProfileMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter (productId) to remove a product, (Back) to return or (Logout) to leave your account:");
+                System.out.println("Enter (productId) to remove a product:");
             }
 
             @Override

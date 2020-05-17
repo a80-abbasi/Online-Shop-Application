@@ -139,7 +139,7 @@ public class ProductsManager {
         return customer.getTotalPrice();
     }
 
-    public static boolean isValidNumberForProductID(String ID) {
+    public static boolean isValidInputForProductID(String ID) {
         for (Product product : Product.getAllProducts()) {
             if (product.getProductId().equals(ID)) {
                 return true;
