@@ -16,7 +16,7 @@ public class CustomerProfileMenu extends Menu {
         ArrayList<Menu> subMenus = new ArrayList<>();
         this.customer = customer;
         this.customerProfileManager = new CustomerProfileManager(customer);
-        subMenus.add(new ViewPersonalInfoMenu(parentMenu, customerProfileManager));
+        subMenus.add(new ViewPersonalInfoMenu(this, customerProfileManager));
         subMenus.add(new ViewCartMenu(customer,this));
         subMenus.add(new ViewOrdersMenu(customer,this));
         subMenus.add(getViewBalanceMenu());
