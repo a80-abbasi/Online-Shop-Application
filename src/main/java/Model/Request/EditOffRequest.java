@@ -60,7 +60,7 @@ public class EditOffRequest extends Request {
 
     @Override
     public void acceptRequest() throws IllegalArgumentException{
-        if (Off.getOffById(offID) != null) {
+        if (Off.getOffById(offID) != null && (!(Off.getOffById(offID).equals(off)))) {
             throw new IllegalArgumentException();
         }
         else {

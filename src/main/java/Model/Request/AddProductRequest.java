@@ -16,8 +16,7 @@ public class AddProductRequest extends Request {
     private int existingNumber;
     private Seller productSeller;
 
-    public AddProductRequest(String productId, ProductStatus productStatus, String productName, String companyName,
-                             double price, int existingNumber, Seller productSeller) {
+    public AddProductRequest() {
         super("add_product_" + allRequests.size(), RequestType.Adding_Product_Request);
         allAddProductRequest.add(this);
         this.setProductStatus(ProductStatus.WAITING_TO_PRODUCE);
