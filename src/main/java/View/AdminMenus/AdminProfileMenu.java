@@ -38,12 +38,12 @@ public class AdminProfileMenu extends Menu {
                 System.out.println("Enter the discount code:");
                 String discountCode = scanner.nextLine();
                 System.out.println("Enter start time:");
-                Date startTime = getDate();
+                Date startTime = getDate(parentMenu);
                 if (startTime == null){
                     execute();
                 }
                 System.out.println("Enter end time:");
-                Date endTime = getDate();
+                Date endTime = getDate(parentMenu);
                 if (endTime == null){
                     execute();
                 }
