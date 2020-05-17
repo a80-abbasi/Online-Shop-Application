@@ -5,7 +5,7 @@ import Model.Account.Discount;
 import Model.Account.Seller;
 
 import java.util.ArrayList;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Product {
     private static ArrayList<Product> allProducts = new ArrayList<>();
@@ -22,7 +22,7 @@ public class Product {
     private ArrayList<Comment> productComments;
     private Seller productSeller;
     private int visitNumber;
-    private LocalDateTime timeOfCreation;
+    private Date timeOfCreation;
     private ArrayList<Customer> productBuyers;
 
     private static ArrayList<String> productFields = new ArrayList<>();
@@ -52,7 +52,7 @@ public class Product {
         this.price = price;
         this.productSeller = seller;
         this.existingNumber = existingNumber;
-        timeOfCreation = LocalDateTime.now();
+        timeOfCreation = new Date();
         allProducts.add(this);
     }
 
@@ -148,7 +148,7 @@ public class Product {
         this.visitNumber = visitNumber;
     }
 
-    public LocalDateTime getTimeOfCreation() {
+    public Date getTimeOfCreation() {
         return timeOfCreation;
     }
 
@@ -176,7 +176,7 @@ public class Product {
         this.discount = discount;
     }
 
-    public void setTimeOfCreation(LocalDateTime timeOfCreation) {
+    public void setTimeOfCreation(Date timeOfCreation) {
         this.timeOfCreation = timeOfCreation;
     }
 

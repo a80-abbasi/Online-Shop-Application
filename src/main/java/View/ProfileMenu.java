@@ -8,10 +8,13 @@ import View.AdminMenus.AdminProfileMenu;
 import View.CustomerProfileMenus.CustomerProfileMenu;
 import View.SellerProfileMenus.SellerProfileMenu;
 
+import java.util.ArrayList;
+
 public class ProfileMenu extends Menu {
 
     public ProfileMenu(Menu parentMenu) {
         super("Profile Menu", parentMenu);
+        submenus = new ArrayList<>();
     }
 
     @Override

@@ -30,6 +30,6 @@ public class OffMenu extends Menu{
     @Override
     public void execute() {
         show();
-        ProductsMenu.goToProductMenu(this, parentMenu, submenus, (ProductMenu) submenus.get(0));
+        ProductsMenu.goToProductMenu(this, parentMenu, submenus, 0);
     }
 }
