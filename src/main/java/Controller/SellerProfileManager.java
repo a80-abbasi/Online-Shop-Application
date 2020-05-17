@@ -46,16 +46,21 @@ public class SellerProfileManager extends ProfileManager {
         return Product.getProductByID(id);
     }
 
+    public ArrayList<String> getAllCategories() {
+        ArrayList<Category> allCategories = Category.getAllCategories();
+        ArrayList<String> allCategoriesNames = new ArrayList<>();
+        for (Category category : allCategories) {
+            allCategoriesNames.add(category.toString());
+        }
+        return allCategoriesNames;
+    }
+
     public HashMap<String, String> getProductBuyers(String productId) {
         HashMap<String, String> allBuyersUsernameAndPhoneNumber = new HashMap<>();
         for (Customer customer : Product.getProductByID(productId).getProductBuyers()) {
             allBuyersUsernameAndPhoneNumber.put(customer.getUsername(),customer.getPhoneNumber());
         }
         return allBuyersUsernameAndPhoneNumber;
-    }
-
-    public void editProductByID(String productId, HashMap<String, String> fieldChanges) {
-        new EditProductRequest(Product.getProductByID(productId), fieldChanges);
     }
 
     public static ArrayList<String> getAllProductFields() {
@@ -112,6 +117,56 @@ public class SellerProfileManager extends ProfileManager {
         }
     }
 
+    public EditProductRequest makeNewEditProductRequest(String productId) {
+        return new EditProductRequest(Product.getProductByID(productId));
+    }
+
+    public void editProductId(EditProductRequest editProductRequest, String productId) throws IllegalArgumentException {
+        if (Product.getProductByID(productId) != null) {
+            throw new IllegalArgumentException();
+        }
+        editProductRequest.setProductId(productId);
+    }
+
+    public void editProductName(EditProductRequest editProductRequest, String productName) {
+        editProductRequest.setProductName(productName);
+    }
+
+    public void editProductCompanyName(EditProductRequest editProductRequest, String companyName) {
+        editProductRequest.setCompanyName(companyName);
+    }
+
+    public void editProductPrice(EditProductRequest editProductRequest, String producePrice) throws InputMismatchException {
+        if (producePrice.matches("\\d+\\.?\\d.")) {
+            editProductRequest.setPrice(Double.parseDouble(producePrice));
+        }
+        else {
+            throw new InputMismatchException();
+        }
+    }
+
+    public void editExistingNumberOfProduct(EditProductRequest editProductRequest, String existingNumber) throws InputMismatchException {
+        if (existingNumber.matches("\\d+")) {
+            editProductRequest.setExistingNumber(Integer.parseInt(existingNumber));
+        }
+        else {
+            throw new InputMismatchException();
+        }
+    }
+
+    public void editProductSeller(EditProductRequest editProductRequest, String sellerUsername) throws NullPointerException, InputMismatchException {
+        Account account = Account.getAccountByUsername(sellerUsername);
+        if (account == null) {
+            throw new NullPointerException();
+        }
+        else if (account instanceof Seller) {
+            editProductRequest.setProductSeller((Seller) account);
+        }
+        else {
+            throw new InputMismatchException();
+        }
+    }
+
     public static boolean isProductIdFormatValid(String productId) {
         if (Product.getProductByID(productId) == null) {
             return false;
@@ -124,15 +179,6 @@ public class SellerProfileManager extends ProfileManager {
     public void removeProduct(String productId) {
         Product product = Product.getProductByID(productId);
         new RemoveProductRequest(product);
-    }
-
-    public ArrayList<String> getAllCategories() {
-        ArrayList<Category> allCategories = Category.getAllCategories();
-        ArrayList<String> allCategoriesNames = new ArrayList<>();
-        for (Category category : allCategories) {
-            allCategoriesNames.add(category.toString());
-        }
-        return allCategoriesNames;
     }
 
     public AddOffRequest addOffRequest () {
