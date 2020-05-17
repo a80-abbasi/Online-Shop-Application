@@ -7,13 +7,40 @@ public class Category {
     private String name;
     private ArrayList<Category> subCategories;
     private ArrayList<Product> products;
-    //vizhegi makhsus??!
+    private ArrayList<String> specialFeatures;
 
-    public Category(String name, String specialProperties) {
+    public Category(String name) {
         this.name = name;
         subCategories = new ArrayList<>();
         products = new ArrayList<>();
+        specialFeatures = new ArrayList<>();
         allCategories.add(this);
+    }
+
+    public Category() {
+        this("");
+    }
+
+    public void addAFeature(String feature){
+        specialFeatures.add(feature);
+        for (Product product : products) {
+            product.getSpecialFeatures().put(feature, 0);
+        }
+    }
+
+    public ArrayList<String> getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public void setSpecialFeatures(ArrayList<String> specialFeatures) {
+        this.specialFeatures = specialFeatures;
+    }
+
+    public void addProductToCategory(Product product){
+        for (String feature : specialFeatures) {
+            product.getSpecialFeatures().put(feature, 0);
+        }
+        products.add(product);
     }
 
     public static void setAllCategories(ArrayList<Category> allCategories) {
