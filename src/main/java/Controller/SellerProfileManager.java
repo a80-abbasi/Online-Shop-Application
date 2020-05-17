@@ -263,9 +263,13 @@ public class SellerProfileManager extends ProfileManager {
         return false;
     }
 
-    public static boolean isInputValidOffValue(String input) {
-        //todo:check is new value valid or not;
-        return true;
+    public static boolean isValidInputForOffID (String ID) {
+        for (String offID : Off.getAllOffIds()) {
+            if (offID.equals(ID)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean isInputValidProductValue(String input) {

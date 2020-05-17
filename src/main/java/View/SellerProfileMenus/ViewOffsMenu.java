@@ -42,7 +42,7 @@ public class ViewOffsMenu extends Menu {
                     this.parentMenu.execute();
                 } else if (input.equals("Logout")) {
                     loginAndRegisterManager.logoutUser();
-                } else if (OffManager.isValidInputForOffID(input)){
+                } else if (SellerProfileManager.isValidInputForOffID(input)){
                     System.out.println(SellerProfileManager.getOffByID(input));
                     this.execute();
                 }
