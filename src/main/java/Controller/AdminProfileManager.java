@@ -203,4 +203,25 @@ public class AdminProfileManager extends ProfileManager{
         }
         Category.removeCategory(category);
     }
+    public static boolean isDiscountWithThisID(String ID) {
+        for (Discount discount : Discount.getAllDiscounts()) {
+            if (discount.getDiscountCode().equals(ID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean isInputValidForDiscountCode(String input) {
+        if (!input.trim().matches("\\s")) {
+            return true;
+        }
+        return false;
+    }
+    public static boolean isInputValidForDiscountPercent(String input) {
+        if (input.matches("\\A\\d\\d\\z")) {
+            return true;
+        }
+        return false;
+    }
+
 }
