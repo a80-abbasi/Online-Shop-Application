@@ -1,6 +1,7 @@
 package Model.Request;
 
 import Model.Account.Off;
+import Model.Account.OffStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,13 +9,21 @@ import java.util.HashMap;
 public class EditOffRequest extends Request {
     private static ArrayList<EditOffRequest> allEditOffRequests = new ArrayList<>();
     private Off off;
-    private HashMap<String, String> fieldChanges;
+    private String offID;
+    private String startTime;
+    private String endTime;
+    private int offAmount;
+    private OffStatus offStatus;
 
-    public EditOffRequest(Off off, HashMap<String, String> fieldChanges) {
+    public EditOffRequest(Off off) {
         super("edit_off_" + allRequests.size(), RequestType.Editing_Off_Request);
         allEditOffRequests.add(this);
-        this.off = off;
-        this.fieldChanges = fieldChanges;
+        this.setOff(off);
+        this.setOffID(off.getOffID());
+        this.setStartTime(off.getStartTime());
+        this.setEndTime(off.getEndTime());
+        this.setOffAmount(off.getOffAmount());
+        this.setOffStatus(OffStatus.PENDING_FOR_EDITION);
     }
 
     public static ArrayList<EditOffRequest> getAllEditOffRequests() {
@@ -25,15 +34,57 @@ public class EditOffRequest extends Request {
         EditOffRequest.allEditOffRequests = allEditOffRequests;
     }
 
-    @Override
-    public void acceptRequest() {
+    public void setOff(Off off) {
+        this.off = off;
+    }
 
+    public void setOffID(String offID) {
+        this.offID = offID;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setOffAmount(int offAmount) {
+        this.offAmount = offAmount;
+    }
+
+    public void setOffStatus(OffStatus offStatus) {
+        this.offStatus = offStatus;
+    }
+
+    @Override
+    public void acceptRequest() throws IllegalArgumentException{
+        if (Off.getOffById(offID) != null && (!(Off.getOffById(offID).equals(off)))) {
+            throw new IllegalArgumentException();
+        }
+        else {
+            off.setOffID(offID);
+            off.setStartTime(startTime);
+            off.setEndTime(endTime);
+            off.setOffStatus(OffStatus.CONFIRMED);
+            off.setOffAmount(offAmount);
+            //off.setOffProducts():??
+            //todo: setOffProducts()??
+        }
     }
 
     @Override
     public String toString() {
-        System.out.println("OffId = " + off.getOffID());
-        return null;
-        //todo: completing
+        return "EditOffRequest{" +
+                "off=" + off +
+                ", offID='" + offID + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", offAmount=" + offAmount +
+                ", offStatus=" + offStatus +
+                ", requestId='" + requestId + '\'' +
+                ", requestType=" + requestType +
+                '}';
     }
 }

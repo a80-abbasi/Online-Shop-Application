@@ -15,7 +15,7 @@ public class ManageProductsMenu extends Menu {
         ArrayList<Menu> subMenus = new ArrayList<>();
         subMenus.add(getViewMenu());
         subMenus.add(getViewBuyersMenu());
-        subMenus.add(getEditMenu());
+        subMenus.add(new EditProductMenu(this, sellerProfileManager));
         this.setSubMenus(subMenus);
     }
 
@@ -71,50 +71,6 @@ public class ManageProductsMenu extends Menu {
                     System.out.println(sellerProfileManager.getProductBuyers(input));
                     this.execute();
                 }
-            }
-        };
-    }
-
-    public Menu getEditMenu() {
-        return new Menu("Edit Product Menu", this) {
-            @Override
-            public void show() {
-                System.out.println(this.getName() + ":");
-                System.out.println("Enter productID to edit or (Back) to return or (Logout) to leave your account:");
-            }
-
-            @Override
-            public void execute() {
-                show();
-                HashMap<String, String> fieldChanges = new HashMap<>();
-                String input = scanner.nextLine();
-                String productID = input;
-                System.out.println("Enter the field you want to edit or (End) to finish");
-                String field = scanner.nextLine();
-                while (!(field.equalsIgnoreCase("End"))) {
-                    if (input.equalsIgnoreCase("Back")) {
-                        this.parentMenu.execute();
-                    } else if (input.equalsIgnoreCase("Logout")) {
-                        loginAndRegisterManager.logoutUser();
-                    } else if (SellerProfileManager.isInputInProductFields(input)) {
-                        System.out.println("Enter new value for the field:");
-                        String value = scanner.nextLine();
-                        if (SellerProfileManager.isInputValidProductValue(value)) {
-                            fieldChanges.put(field, value);
-                        } else {
-                            System.out.println("This value is invalid");
-                            System.out.println("Enter the field you want to edit or (end) to finish");
-                            field = scanner.nextLine();
-                        }
-                    } else {
-                        System.out.println("This field doesn't exist");
-                        System.out.println("Enter the field you want to edit or (end) to finish");
-                        field = scanner.nextLine();
-                    }
-                }
-                sellerProfileManager.editProductByID(productID, fieldChanges);
-                System.out.println("Your request for edit this fields sent to admin please w8 for answer");
-                parentMenu.execute();
             }
         };
     }

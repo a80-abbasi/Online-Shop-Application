@@ -160,7 +160,7 @@ public class AdminProfileManager extends ProfileManager{
         return request.toString();
     }
 
-    public void acceptRequest(String requestId) throws NullPointerException{
+    public void acceptRequest(String requestId) throws NullPointerException, IllegalArgumentException{
         Request request = Request.getRequestById(requestId);
         if (request == null) {
             throw new NullPointerException();
