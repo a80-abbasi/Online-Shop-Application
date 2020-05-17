@@ -9,6 +9,7 @@ import Model.Product.Score;
 import Model.Product.ScoreEnumeration;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class CustomerProfileManager extends ProfileManager{
@@ -80,9 +81,16 @@ public class CustomerProfileManager extends ProfileManager{
         return customer.getAllDiscountCodesForCustomer();
     }
 
-    public static boolean isDiscountCodeValid(String discountCode) { //todo: ali! complete this please!
-        return true;
-        //todo: need time;
+    public static boolean isDiscountCodeValid(String discountCode) {
+        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        if (discount == null){
+            return false;
+        }
+        if (discount.getIncludingCustomers().contains((Customer) Account.getLoggedInAccount())){
+            Date date = new Date();
+            return date.compareTo(discount.getStartTime()) >= 0 && date.compareTo(discount.getEndTime()) <= 0;
+        }
+        return false;
     }
 
     public double costCalculator(String discountCode) {

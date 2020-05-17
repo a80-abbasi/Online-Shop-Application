@@ -8,6 +8,7 @@ import Model.Product.Category;
 import Model.Product.Product;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 
 public class AdminProfileManager extends ProfileManager{
@@ -50,7 +51,7 @@ public class AdminProfileManager extends ProfileManager{
         }
     }
 
-    public void createDiscountCode(String discountCode, String startTime, String endTime, int discountPercent, int maxPossibleDiscount, int discountPerCustomer) {
+    public void createDiscountCode(String discountCode, Date startTime, Date endTime, int discountPercent, int maxPossibleDiscount, int discountPerCustomer) {
         new Discount(discountCode, startTime, endTime, discountPercent, maxPossibleDiscount, discountPerCustomer);
     }
 
@@ -79,7 +80,7 @@ public class AdminProfileManager extends ProfileManager{
         }
     }
 
-    public void editDiscountStartTime(String discountCode, String startTime) throws NullPointerException {
+    public void editDiscountStartTime(String discountCode, Date startTime) throws NullPointerException {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
             throw new NullPointerException();
@@ -87,7 +88,7 @@ public class AdminProfileManager extends ProfileManager{
         discount.setStartTime(startTime);
     }
 
-    public void editDiscountEndTime(String discountCode, String endTime) throws NullPointerException {
+    public void editDiscountEndTime(String discountCode, Date endTime) throws NullPointerException {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
             throw new NullPointerException();
@@ -192,7 +193,7 @@ public class AdminProfileManager extends ProfileManager{
 
     //todo: completing this
     public void addCategory(String categoryName, String specialProperties) {
-        new Category(categoryName, specialProperties);
+        //new Category(categoryName, specialProperties);
     }
 
     public void removeCategory(String categoryName) throws NullPointerException{

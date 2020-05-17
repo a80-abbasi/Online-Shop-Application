@@ -4,7 +4,10 @@ import Controller.AdminProfileManager;
 import View.Menu;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
+
+import static View.SellerProfileMenus.AddOffMenu.getDate;
 
 public class EditDiscountCodesMenu extends Menu {
     private AdminProfileManager adminProfileManager;
@@ -52,7 +55,10 @@ public class EditDiscountCodesMenu extends Menu {
                 System.out.println("Enter the code of discount you want to change:");
                 String discountCode = scanner.nextLine();
                 System.out.println("Enter new Start Time");
-                String startTime = scanner.nextLine();
+                Date startTime = getDate();
+                if (startTime == null){
+                    execute();
+                }
                 try {
                     adminProfileManager.editDiscountStartTime(discountCode, startTime);
                     System.out.println("Discount Start Time successfully changed to " + startTime);
@@ -72,7 +78,10 @@ public class EditDiscountCodesMenu extends Menu {
                 System.out.println("Enter the code of discount you want to change:");
                 String discountCode = scanner.nextLine();
                 System.out.println("Enter new End Time");
-                String endTime = scanner.nextLine();
+                Date endTime = getDate();
+                if (endTime == null){
+                    execute();
+                }
                 try {
                     adminProfileManager.editDiscountEndTime(discountCode, endTime);
                     System.out.println("Discount end time successfully changed to " + endTime);

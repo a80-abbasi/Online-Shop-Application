@@ -6,6 +6,9 @@ import View.Menu;
 import View.ViewPersonalInfoMenu;
 
 import java.util.ArrayList;
+import java.util.Date;
+
+import static View.SellerProfileMenus.AddOffMenu.getDate;
 
 public class AdminProfileMenu extends Menu {
     protected Admin admin;
@@ -35,9 +38,15 @@ public class AdminProfileMenu extends Menu {
                 System.out.println("Enter the discount code:");
                 String discountCode = scanner.nextLine();
                 System.out.println("Enter start time:");
-                String startTime = scanner.nextLine();
+                Date startTime = getDate();
+                if (startTime == null){
+                    execute();
+                }
                 System.out.println("Enter end time:");
-                String endTime = scanner.nextLine();
+                Date endTime = getDate();
+                if (endTime == null){
+                    execute();
+                }
                 System.out.println("Enter discountPercent:");
                 int discountPercent = Integer.parseInt(scanner.nextLine());
                 System.out.println("Enter maximum possible discount:");
