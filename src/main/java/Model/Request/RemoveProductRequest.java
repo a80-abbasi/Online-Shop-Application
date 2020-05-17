@@ -14,6 +14,10 @@ public class RemoveProductRequest extends Request {
         allRemoveProductRequests.add(this);
     }
 
+    public RemoveProductRequest(){
+        this(null);
+    }
+
     public static ArrayList<RemoveProductRequest> getAllRemoveProductRequests() {
         return allRemoveProductRequests;
     }

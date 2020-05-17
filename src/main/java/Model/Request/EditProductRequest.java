@@ -30,6 +30,10 @@ public class EditProductRequest extends Request {
         this.setProductSeller(product.getProductSeller());
     }
 
+    public EditProductRequest(){
+        this(null);
+    }
+
     public static ArrayList<EditProductRequest> getAllEditProductRequests() {
         return allEditProductRequests;
     }

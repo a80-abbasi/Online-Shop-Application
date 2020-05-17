@@ -26,6 +26,10 @@ public class EditOffRequest extends Request {
         this.setOffStatus(OffStatus.PENDING_FOR_EDITION);
     }
 
+    public EditOffRequest() {
+        this(null);
+    }
+
     public static ArrayList<EditOffRequest> getAllEditOffRequests() {
         return allEditOffRequests;
     }

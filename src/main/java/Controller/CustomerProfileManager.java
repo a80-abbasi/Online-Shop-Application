@@ -53,16 +53,19 @@ public class CustomerProfileManager extends ProfileManager{
         Score score = new Score(customer, Product.getProductByID(id), intScore);
         Product.getProductByID(id).getAllScores().add(score);
     }
+
     public ArrayList<Discount> viewDiscountCodes(Account account) {
         return null;
     }
+
     public int viewBalance() {
         return customer.getBalance();
     }
-    public boolean isDiscountCodeAvailableForCustomer(Discount discount) {
+
+    /*public boolean isDiscountCodeAvailableForCustomer(Discount discount) {
         //todo: ali! complete this please!
         return true;
-    }
+    }*/
 
     public static int getExistingNumberOfProductInStore(Product product, int number) {
         return product.getExistingNumber();
