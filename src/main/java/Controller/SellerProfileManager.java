@@ -272,10 +272,6 @@ public class SellerProfileManager extends ProfileManager {
         return false;
     }
 
-    public static boolean isInputValidProductValue(String input) {
-        //todo:check is new value valid or not;
-        return true;
-    }
 
     public HashMap<String, String> getOffsAmountAndID() {
         HashMap<String, String> offsAmountAndID = new HashMap<>();
@@ -310,8 +306,6 @@ public class SellerProfileManager extends ProfileManager {
         Off off = Off.getOffById(offId);
         new EditOffRequest(off);
     }
-
-
 
     public int viewBalance(Account account) {
         return 0;

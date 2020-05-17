@@ -38,7 +38,7 @@ public class ViewOrdersMenu extends Menu {
                     String input = scanner.nextLine();
                     if (input.equalsIgnoreCase("Back")) {
                         this.parentMenu.execute();
-                    } else if (input.equals("Logout")) {
+                    } else if (input.equalsIgnoreCase("Logout")) {
                         loginAndRegisterManager.logoutUser();
                     } else if (input.matches("\\A\\d+\\z")) {
                         if (customerProfileManager.isInputValidForBuyLogID(input)) { //todo: wrong input if (null)
@@ -74,14 +74,14 @@ public class ViewOrdersMenu extends Menu {
                         loginAndRegisterManager.logoutUser();
                     } else if (input.matches("\\A\\d+\\z")) {
                         if (ProductsManager.isValidInputForProductID(input)) {
-                            System.out.println("Enter rate in range (1-5) or (back) to return or (Logout) to leave your account:");
+                            System.out.println("Enter rate in range (1-5):");
                             String productID = input;
                             while(true) {
                                 input = scanner.nextLine();
                                 if (input.equalsIgnoreCase("Back")) {
                                     this.show();
                                     break;
-                                } else if (input.equals("Logout")) {
+                                } else if (input.equalsIgnoreCase("Logout")) {
                                     loginAndRegisterManager.logoutUser();
                                 } else if (input.matches("\\A\\d+\\z")) {
                                     if (Integer.parseInt(input) <= 5 && Integer.parseInt(input) >= 1) {
