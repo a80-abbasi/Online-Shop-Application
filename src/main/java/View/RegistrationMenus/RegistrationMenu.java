@@ -142,6 +142,7 @@ public class RegistrationMenu extends Menu {
         else if (accountType.equals(AccountType.SELLER)){
             loginAndRegisterManager.registerSeller(getUserName(), getPassword(), getNameOfUser(false),
                     getNameOfUser(true), getEmail(), getPhoneNumber(), getCompanyName());
+            System.out.println("Your request has been sent to Admins. Please wait for verification\n");
         }
         else {
             loginAndRegisterManager.registerAdmin(getUserName(), getPassword(), getNameOfUser(false),

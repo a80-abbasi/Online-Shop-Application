@@ -5,7 +5,8 @@ import Model.Account.Discount;
 import Model.Account.Seller;
 
 import java.util.ArrayList;
-import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.HashMap;
 
 public class Product {
     private static ArrayList<Product> allProducts = new ArrayList<>();
@@ -22,8 +23,9 @@ public class Product {
     private ArrayList<Comment> productComments;
     private Seller productSeller;
     private int visitNumber;
-    private LocalDateTime timeOfCreation;
+    private Date timeOfCreation;
     private ArrayList<Customer> productBuyers;
+    private HashMap<String, Integer> specialFeatures;
 
     private static ArrayList<String> productFields = new ArrayList<>();
     static {
@@ -52,12 +54,39 @@ public class Product {
         this.price = price;
         this.productSeller = seller;
         this.existingNumber = existingNumber;
-        timeOfCreation = LocalDateTime.now();
+        specialFeatures = new HashMap<>();
+        timeOfCreation = new Date();
         allProducts.add(this);
     }
 
     public Product() {
         this("", null, "", "", 0, null, 0);
+    }
+
+    public HashMap<String, Integer> getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public void setSpecialFeatures(HashMap<String, Integer> specialFeatures) {
+        this.specialFeatures = specialFeatures;
+    }
+
+    public void setASpecialFeature(String feature, int value) throws Exception {
+        if (specialFeatures.containsKey(feature)){
+            specialFeatures.put(feature, value);
+        }
+        else {
+            throw new Exception("This product doesn't have such a feature");
+        }
+    }
+
+    public int getValueOfAFeature(String feature) throws Exception {
+        if (specialFeatures.containsKey(feature)){
+            return specialFeatures.get(feature);
+        }
+        else {
+            throw new Exception("This product doesn't have such a feature");
+        }
     }
 
     public String getProductId() {
@@ -148,7 +177,7 @@ public class Product {
         this.visitNumber = visitNumber;
     }
 
-    public LocalDateTime getTimeOfCreation() {
+    public Date getTimeOfCreation() {
         return timeOfCreation;
     }
 
@@ -176,7 +205,7 @@ public class Product {
         this.discount = discount;
     }
 
-    public void setTimeOfCreation(LocalDateTime timeOfCreation) {
+    public void setTimeOfCreation(Date timeOfCreation) {
         this.timeOfCreation = timeOfCreation;
     }
 
@@ -232,5 +261,4 @@ public class Product {
                 ", 'does" + (existingNumber != 0 ? "" :  "not") + "exist'" +
                 '}';
     }
-
 }

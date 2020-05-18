@@ -3,12 +3,13 @@ package Model.Account;
 import Model.Product.Product;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Off {
     private static ArrayList<Off> allOffs = new ArrayList<>();
     private String offID;
-    private String startTime;
-    private String endTime;
+    private Date startTime;
+    private Date endTime;
     private int offAmount;
     private OffStatus offStatus;
     private ArrayList<Product> products;
@@ -22,7 +23,7 @@ public class Off {
         offFields.add("products");
     }
 
-    public Off(String offID, String startTime, String endTime, int offAmount) {
+    public Off(String offID, Date startTime, Date endTime, int offAmount) {
         this.offID = offID;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -37,7 +38,7 @@ public class Off {
     }
 
     public Off() {
-        this("", "", "", 0);
+        this("", null, null, 0);
     }
 
     public String getOffID() {
@@ -48,19 +49,19 @@ public class Off {
         this.offID = offID;
     }
 
-    public String getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

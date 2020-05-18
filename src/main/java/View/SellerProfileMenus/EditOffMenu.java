@@ -5,7 +5,10 @@ import Model.Request.EditOffRequest;
 import View.Menu;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
+
+import static View.SellerProfileMenus.AddOffMenu.getDate;
 
 public class EditOffMenu extends Menu {
     private SellerProfileManager sellerProfileManager;
@@ -26,6 +29,11 @@ public class EditOffMenu extends Menu {
     public void show() {
         System.out.println("Enter ID of the Off you want to edit:");
         String offID = scanner.nextLine();
+        if (offID.equalsIgnoreCase("back")) {
+            parentMenu.execute();
+        } else if (offID.equalsIgnoreCase("logout")) {
+            loginAndRegisterManager.logoutUser();
+        }
         try {
             this.editOffRequest = sellerProfileManager.makeNewEditOffRequest(offID);
         }
@@ -42,6 +50,11 @@ public class EditOffMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Off ID:");
                 String offID = scanner.nextLine();
+                if (offID.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (offID.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.editOffId(editOffRequest, offID);
                     System.out.println("Off ID " + offID + " successfully added to your request.");
@@ -59,7 +72,10 @@ public class EditOffMenu extends Menu {
             @Override
             public void execute() {
                 System.out.println("Enter Off Start Time:");
-                String offStartTime = scanner.nextLine();
+                Date offStartTime = getDate(parentMenu);
+                if (offStartTime == null){
+                    execute();
+                }
                 sellerProfileManager.editOffStartTime(editOffRequest, offStartTime);
                 System.out.println("Off Start Time " + offStartTime + " successfully added to your request.");
                 this.parentMenu.execute();
@@ -72,7 +88,10 @@ public class EditOffMenu extends Menu {
             @Override
             public void execute() {
                 System.out.println("Enter Off End Time:");
-                String offEndTime = scanner.nextLine();
+                Date offEndTime = getDate(parentMenu);
+                if (offEndTime == null){
+                    execute();
+                }
                 sellerProfileManager.editOffEndTime(editOffRequest, offEndTime);
                 System.out.println("Off End Time " + offEndTime + " successfully added to your request.");
                 this.parentMenu.execute();
@@ -86,6 +105,11 @@ public class EditOffMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Off Amount:");
                 String offAmount = scanner.nextLine();
+                if (offAmount.equalsIgnoreCase("back")) {
+                    parentMenu.execute();
+                } else if (offAmount.equalsIgnoreCase("logout")) {
+                    loginAndRegisterManager.logoutUser();
+                }
                 try {
                     sellerProfileManager.editOffAmount(editOffRequest, offAmount);
                     System.out.println("Off Amount " + offAmount + " successfully added to your request.");

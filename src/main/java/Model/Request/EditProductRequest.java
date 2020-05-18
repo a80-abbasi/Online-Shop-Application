@@ -23,6 +23,10 @@ public class EditProductRequest extends EditAddProductRequest {
         this.setProductSpecialFeatures(product.getSpecialFeatures());
     }
 
+    public EditProductRequest(){
+        this(null);
+    }
+
     public static ArrayList<EditProductRequest> getAllEditProductRequests() {
         return allEditProductRequests;
     }

@@ -4,12 +4,13 @@ import Model.Account.Off;
 import Model.Account.OffStatus;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AddOffRequest extends Request {
     private static ArrayList<AddOffRequest> allAddOffRequest = new ArrayList<>();
     private String offID;
-    private String startTime;
-    private String endTime;
+    private Date startTime;
+    private Date endTime;
     private int offAmount;
     private OffStatus offStatus;
 
@@ -31,11 +32,11 @@ public class AddOffRequest extends Request {
         this.offID = offID;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

@@ -30,7 +30,7 @@ public class ViewPersonalInfoMenu extends Menu {
                 System.out.println("Enter field you want to edit or (Back) to return");
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {
-                    this.parentMenu.execute();
+                    parentMenu.execute();
                 }
                 else {
                     System.out.println("Enter the change you want to make:");

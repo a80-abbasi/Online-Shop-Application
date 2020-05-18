@@ -45,7 +45,7 @@ public class ProductsMenu extends Menu {
     @Override
     public void execute() {
         show();
-        goToProductMenu(this, parentMenu, submenus, (ProductMenu) submenus.get(4));
+        goToProductMenu(this, parentMenu, submenus, 4);
     }
 
     public static Product getProduct(){
@@ -62,7 +62,7 @@ public class ProductsMenu extends Menu {
         return product;
     }
 
-    public static void goToProductMenu(Menu menu, Menu parentMenu, ArrayList<Menu> submenus, ProductMenu productMenu){
+    public static void goToProductMenu(Menu menu, Menu parentMenu, ArrayList<Menu> submenus, int productMenuIndex){
         try {
             Menu nextMenu;
             int chosenMenu = Integer.parseInt(scanner.nextLine());
@@ -79,11 +79,12 @@ public class ProductsMenu extends Menu {
                 nextMenu = menu;
             }
             else {
-                if (chosenMenu == 1) {
+                if (chosenMenu == productMenuIndex) {
                     Product product = ProductsMenu.getProduct();
                     if (product == null) {
                         menu.execute();
                     } else {
+                        ProductMenu productMenu = (ProductMenu) submenus.get(productMenuIndex);
                         productMenu.setProduct(product);
                     }
                 }

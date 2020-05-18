@@ -77,31 +77,36 @@ public abstract class Menu {
         try {
             Menu nextMenu = null;
             int chosenMenu = Integer.parseInt(scanner.nextLine());
-            if (chosenMenu == submenus.size() + 1){
+            if (submenus == null) {
+                if (chosenMenu == 1) {
+                    loginAndRegisterManager.logoutUser();
+                    nextMenu = this;
+                } else if (chosenMenu == 2) {
+                    nextMenu = this.parentMenu;
+                }
+            } else if (chosenMenu == submenus.size() + 1){
                 if (loginAndRegisterManager.isLogin()) {
                     loginAndRegisterManager.logoutUser();
-                }
-                else {
+                } else {
                     loginAndRegisterMenu.execute();
                 }
                 nextMenu = this;
-            }
-            else if (chosenMenu == submenus.size() + 2) {
+            } else if (chosenMenu == submenus.size() + 2) {
                 if (this.parentMenu == null) {
                     flag = false;
-                }
-                else {
+                } else {
                     nextMenu = this.parentMenu;
                 }
             }
             else {
                 nextMenu = submenus.get(chosenMenu - 1);
             }
+
             if (flag) {
                 nextMenu.execute();
             }
         }
-        catch (Exception e){
+        catch (Exception e) {
             System.out.println("Wrong input\n");
             execute();
         }

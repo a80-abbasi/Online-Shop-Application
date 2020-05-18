@@ -24,45 +24,45 @@ public class ViewCartMenu extends Menu {
         subMenus.add(getDecreaseMenu());
         subMenus.add(getShowTotalPriceMenu());
         subMenus.add(getPurchaseMenu());
-        this.submenus = subMenus;
+        this.setSubMenus(subMenus);
     }
 
-//    @Override
-//    public void execute() {
-//        show();
-//        try {
-//            Menu nextMenu;
-//            int chosenMenu = Integer.parseInt(scanner.nextLine());
-//            if (chosenMenu == submenus.size() + 2) {
-//                nextMenu = this.parentMenu;
-//            }
-//            else if (chosenMenu == submenus.size() + 1) {
-//                if (loginAndRegisterManager.isLogin()) {
-//                    loginAndRegisterManager.logoutUser();
-//                }
-//                else {
-//                    loginAndRegisterMenu.execute();
-//                }
-//                nextMenu = this;
-//            }
-//            else {
-//                if (chosenMenu == 1) {
-//                    Product product = getProduct();
-//                    if (product == null) {
-//                        execute();
-//                    } else {
-//                        ProductMenu productMenu = (ProductMenu) submenus.get(1);
-//                        productMenu.setProduct(product);
-//                    }
-//                }
-//                nextMenu = submenus.get(chosenMenu - 1);
-//            }
-//            nextMenu.execute();
-//        } catch (Exception e) {
-//            System.out.println("Wrong Input\n");
-//            execute();
-//        }
-//    }
+    @Override
+    public void execute() {
+        show();
+        try {
+            Menu nextMenu;
+            int chosenMenu = Integer.parseInt(scanner.nextLine());
+            if (chosenMenu == submenus.size() + 2) {
+                nextMenu = this.parentMenu;
+            }
+            else if (chosenMenu == submenus.size() + 1) {
+                if (loginAndRegisterManager.isLogin()) {
+                    loginAndRegisterManager.logoutUser();
+                }
+                else {
+                    loginAndRegisterMenu.execute();
+                }
+                nextMenu = this;
+            }
+            else {
+                if (chosenMenu == 1) {
+                    Product product = getProduct();
+                    if (product == null) {
+                        execute();
+                    } else {
+                        ProductMenu productMenu = (ProductMenu) submenus.get(1);
+                        productMenu.setProduct(product);
+                    }
+                }
+                nextMenu = submenus.get(chosenMenu - 1);
+            }
+            nextMenu.execute();
+        } catch (Exception e) {
+            System.out.println("Wrong Input\n");
+            execute();
+        }
+    }
 
     private Menu getShowProductsMenu() {
         return new Menu("Show Products Menu", this) {
@@ -87,22 +87,22 @@ public class ViewCartMenu extends Menu {
                 System.out.println(this.getName() + ":");
                 Product product = getProduct();
                 if (product != null) {
-                    System.out.println("Enter the number you want to increase or (back) to return or (Logout) to leave your account:");
-                    System.out.printf("You just have %d number of this product now!", customerProfileManager.getNumberOfProductInCart(product, customer));
+                    System.out.println("Enter the number you want to increase:");
+                    System.out.printf("You just have %d number of this product now!\n", customerProfileManager.getNumberOfProductInCart(product, customer));
                     while (true) {
                         String input = scanner.nextLine().trim();
                         if (input.equalsIgnoreCase("Back")) {
                             this.parentMenu.execute();
                         } else if (input.equals("Logout")) {
                             loginAndRegisterManager.logoutUser();
-                        } else if (input.matches("\\d+")) {
+                        } else if (input.matches("\\A\\d+\\z")) {
                             int existingNumberInStore = CustomerProfileManager.getExistingNumberOfProductInStore(product, Integer.parseInt(input));
                             if (existingNumberInStore >= Integer.parseInt(input)) {
                                 productsManager.addProductToCart(product, Integer.parseInt(input));
                                 System.out.println("Product number increased successfully");
                                 parentMenu.execute();
                             } else {
-                                System.out.printf("we have just %d of this Product. Please enter another number:", existingNumberInStore);
+                                System.out.printf("we have just %d of this Product. Please enter another number:\n", existingNumberInStore);
                             }
                         } else {
                             System.out.println("Please enter valid number:");
@@ -122,15 +122,15 @@ public class ViewCartMenu extends Menu {
                 System.out.println(this.getName() + ":");
                 Product product = getProduct();
                 if (product != null) {
-                    System.out.println("Enter the number you want to decrease or (back) to return or (Logout) to leave your account:");
-                    System.out.printf("You just have %d number of this product now!", customerProfileManager.getNumberOfProductInCart(product, customer));
+                    System.out.println("Enter the number you want to decrease:");
+                    System.out.printf("You just have %d number of this product now!\n", customerProfileManager.getNumberOfProductInCart(product, customer));
                     while(true) {
                         String input = scanner.nextLine().trim();
                         if (input.equalsIgnoreCase("Back")) {
                             this.parentMenu.execute();
                         } else if (input.equals("Logout")) {
                             loginAndRegisterManager.logoutUser();
-                        } else if (input.matches("\\d+")) {
+                        } else if (input.matches("\\A\\d+\\z")) {
                             productsManager.addProductToCart(product, Integer.parseInt(input));
                             System.out.println("Product decreased successfully");
                             this.parentMenu.execute();
@@ -149,8 +149,7 @@ public class ViewCartMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Total price of your order:  " + productsManager.getTotalPrice());
-                System.out.println("Total Price with discount code and off"); //todo
+                System.out.println("Total price of your order: " + ProductsManager.getTotalPrice() + "$");
                 System.out.println("1. Logout");
                 System.out.println("2. Back");
             }
@@ -201,23 +200,23 @@ public class ViewCartMenu extends Menu {
                         } else if (input.equals("Logout")) {
                             loginAndRegisterManager.logoutUser();
                         } else {
-                            //todo: check are inputs valid
                             receiveInformationFieldsValue.set(pageNumber - 1, input);
                             pageNumber += 1;
                         }
                     }
                     else if (pageNumber == receiveInformationFields.size() + 1) {
-                        System.out.println("are this information true?(Write (Next) if they are true)");
+                        System.out.println("are this information true?(Write (Yes) if they are true)");
                         for (int i = 0; i < receiveInformationFieldsValue.size(); i++) {
                             FieldsAndNewValues.put(receiveInformationFields.get(i), receiveInformationFieldsValue.get(i));
                         }
                         System.out.println(FieldsAndNewValues);
                         String input = scanner.nextLine();
-                        if (input.equals("Back")) {
+                        if (input.equalsIgnoreCase("Back")) {
                             pageNumber -= 1;
-                        } else if(input.equals("Next")) {
-                            if (CustomerProfileManager.areNewReceivedFieldsValueValid(FieldsAndNewValues)) {
-                                System.out.println("Your information submitted");
+                        } else if(input.equalsIgnoreCase("Next")) {
+                            CustomerProfileManager.MyResult result = customerProfileManager.areNewReceivedFieldsValueValid(FieldsAndNewValues);
+                            if (result.getValid()) {
+                                System.out.println(result.getMessage());
                                 pageNumber += 1;
                                 System.out.println("DiscountCode Menu:");
                                 System.out.println("Please enter discount code if you have:");
@@ -240,12 +239,11 @@ public class ViewCartMenu extends Menu {
                                             System.out.println("Code is invalid.");
                                         }
                                     } else if (pageNumber == receiveInformationFields.size() + 3) {
-                                        //////////////////
                                         while(true) {
                                             if (pageNumber == receiveInformationFields.size() + 3) {
                                                 System.out.println("Payment Menu:");
-                                                //System.out.printf("The total cost of your products is %s$ and with discount and off is %s$ do you want to pay?(Yes)(No)", Double.toString(ProductsManager.getTotalPrice()), Double.toString(ProductsManager.costWithOffAndDigest(discountCode)));
-                                                //todo;
+                                                System.out.printf("The total cost of your products is %s$ and with discount and off is %s$ do you want to pay?(Yes)(No)\n", Double.toString(ProductsManager.getTotalPrice()), Double.toString(ProductsManager.costWithOffAndDigest(discountCode)));
+                                                //todo:wrong input if (null)
                                             }
                                             input = scanner.nextLine();
                                             if (input.equals("Back")) {
@@ -257,7 +255,7 @@ public class ViewCartMenu extends Menu {
                                                 double cost = customerProfileManager.costCalculator(discountCode);
                                                 if (customerProfileManager.canCustomerPay(cost)) {
                                                     System.out.println("you payed successfully, have nice day!");
-                                                    //customerProfileManager.doingsAfterBuyProducts();
+                                                    //todo: customerProfileManager.doingsAfterBuyProducts();
                                                 } else {
                                                     System.out.println("You don`t have enough money! Go work harder!");
                                                     ViewCartMenu.super.execute();
@@ -271,7 +269,7 @@ public class ViewCartMenu extends Menu {
                                     }
                                 }
                             } else {
-                                System.out.println("formats are invalid"); //todo: write a better message;
+                                System.out.println(result.getMessage());
                             }
                         } else if (input.equals("Logout")) {
                             loginAndRegisterManager.logoutUser();

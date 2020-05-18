@@ -1,12 +1,13 @@
 package Model.Account;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Discount {
     private static ArrayList<Discount> allDiscounts;
     private String discountCode;
-    private String startTime;
-    private String endTime;
+    private Date startTime;
+    private Date endTime;
     private int discountPercent;
     private double maxPossibleDiscount;
     private int discountPerCustomer; // todo:
@@ -17,7 +18,7 @@ public class Discount {
         includingCustomers = new ArrayList<>();
     }
 
-    public Discount (String discountCode, String startTime, String endTime, int discountPercent, int maxPossibleDiscount,
+    public Discount (String discountCode, Date startTime, Date endTime, int discountPercent, int maxPossibleDiscount,
                      int discountPerCustomer) {
         this.discountCode = discountCode;
         this.startTime = startTime;
@@ -40,19 +41,19 @@ public class Discount {
         this.discountCode = discountCode;
     }
 
-    public String getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
@@ -87,6 +88,10 @@ public class Discount {
 
     public String getDiscountCode() {
         return discountCode;
+    }
+
+    public int getDiscountPerCustomer() {
+        return discountPerCustomer;
     }
 
     @Override

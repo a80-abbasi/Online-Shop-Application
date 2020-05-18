@@ -8,10 +8,13 @@ import View.AdminMenus.AdminProfileMenu;
 import View.CustomerProfileMenus.CustomerProfileMenu;
 import View.SellerProfileMenus.SellerProfileMenu;
 
+import java.util.ArrayList;
+
 public class ProfileMenu extends Menu {
 
     public ProfileMenu(Menu parentMenu) {
         super("Profile Menu", parentMenu);
+        submenus = new ArrayList<>();
     }
 
     @Override
@@ -23,7 +26,7 @@ public class ProfileMenu extends Menu {
             parentMenu.execute();
         }
         else if (account instanceof Admin) {
-            AdminProfileMenu adminProfileMenu = new AdminProfileMenu(parentMenu, (Admin) account);
+            AdminProfileMenu adminProfileMenu = new AdminProfileMenu((Admin) account, parentMenu);
             adminProfileMenu.execute();
         }
         else if (account instanceof Customer) {

@@ -18,7 +18,7 @@ public class LoginAndRegisterManager {
     }
 
     public void registerSeller(String username, String password, String name, String lastName, String email,
-                               String phoneNumber, String companyName){
+                               String phoneNumber, String companyName) {
         new RegisterSellerRequest(username, password, name, lastName, email, phoneNumber, companyName);
     }
 
@@ -28,7 +28,7 @@ public class LoginAndRegisterManager {
     }
 
     public boolean canCreateAdminManually(){
-        return Account.getAllAccounts().size() == 0;
+        return Admin.getAllAdmins().size() == 0;
     }
 
     public void loginUser(String username, String password) throws IllegalAccessException {

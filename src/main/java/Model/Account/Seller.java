@@ -25,7 +25,6 @@ public class Seller extends Account {
 
     public Seller() {
         this("", "", "", "", "", "", "", 0);
-        this.nameOfCompany = "";
     }
 
     public static ArrayList<Seller> getAllSellers() {

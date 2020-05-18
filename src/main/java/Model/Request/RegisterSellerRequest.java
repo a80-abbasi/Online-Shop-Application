@@ -28,6 +28,10 @@ public class RegisterSellerRequest extends Request {
         allRegisterSellerRequests.add(this);
     }
 
+    public RegisterSellerRequest(){
+        this("", "", "", "", "", "", "");
+    }
+
     public static ArrayList<RegisterSellerRequest> getAllRegisterSellerRequests() {
         return allRegisterSellerRequests;
     }

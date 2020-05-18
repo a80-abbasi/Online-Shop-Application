@@ -4,14 +4,14 @@ import Model.Account.Off;
 import Model.Account.OffStatus;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 
 public class EditOffRequest extends Request {
     private static ArrayList<EditOffRequest> allEditOffRequests = new ArrayList<>();
     private Off off;
     private String offID;
-    private String startTime;
-    private String endTime;
+    private Date startTime;
+    private Date endTime;
     private int offAmount;
     private OffStatus offStatus;
 
@@ -24,6 +24,10 @@ public class EditOffRequest extends Request {
         this.setEndTime(off.getEndTime());
         this.setOffAmount(off.getOffAmount());
         this.setOffStatus(OffStatus.PENDING_FOR_EDITION);
+    }
+
+    public EditOffRequest() {
+        this(null);
     }
 
     public static ArrayList<EditOffRequest> getAllEditOffRequests() {
@@ -42,11 +46,11 @@ public class EditOffRequest extends Request {
         this.offID = offID;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

@@ -3,7 +3,6 @@ package View.CustomerProfileMenus;
 import Controller.CustomerProfileManager;
 import Controller.ProductsManager;
 import Model.Account.Customer;
-import Model.Product.Product;
 import View.Menu;
 
 import java.util.ArrayList;
@@ -13,14 +12,14 @@ public class ViewOrdersMenu extends Menu {
     public ViewOrdersMenu(Customer customer, Menu parentMenu) {
         super("View Orders Menu", parentMenu);
         ArrayList<Menu> subMenus = new ArrayList<>();
-        submenus.add(getShowOrderMenu());
-        submenus.add(getRateMenu());
+        subMenus.add(getShowOrderMenu());
+        subMenus.add(getRateMenu());
         this.setSubMenus(subMenus);
     }
 
     @Override
     public void show() {
-        System.out.println(customerProfileManager.showOrdersSellerNameAndDate());
+        System.out.println(customerProfileManager.showOrdersSellerNameAndDate()); // todo: wrong input if (null)
         super.show();
     }
 
@@ -29,7 +28,7 @@ public class ViewOrdersMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter orderID to view order or (back) to return or (Logout) to leave your account:");
+                System.out.println("Enter orderID to view order:");
             }
 
             @Override
@@ -39,10 +38,10 @@ public class ViewOrdersMenu extends Menu {
                     String input = scanner.nextLine();
                     if (input.equalsIgnoreCase("Back")) {
                         this.parentMenu.execute();
-                    } else if (input.equals("Logout")) {
+                    } else if (input.equalsIgnoreCase("Logout")) {
                         loginAndRegisterManager.logoutUser();
-                    } else if (input.matches("\\d+")) {
-                        if (customerProfileManager.isInputValidForBuyLogID(input)) {
+                    } else if (input.matches("\\A\\d+\\z")) {
+                        if (customerProfileManager.isInputValidForBuyLogID(input)) { //todo: wrong input if (null)
                             System.out.println(customerProfileManager.showOrder(input));
                             parentMenu.execute();
                         } else {
@@ -61,7 +60,7 @@ public class ViewOrdersMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println("Enter productID or (back) to return or (Logout) to leave your account:");
+                System.out.println("Enter productID:");
             }
 
             @Override
@@ -73,18 +72,18 @@ public class ViewOrdersMenu extends Menu {
                         this.parentMenu.execute();
                     } else if (input.equals("Logout")) {
                         loginAndRegisterManager.logoutUser();
-                    } else if (input.matches("\\d+^$")) { //todo:
-                        if (ProductsManager.isValidNumberForProductID(input)) {
-                            System.out.println("Enter rate in range (1-5) or (back) to return or (Logout) to leave your account:");
+                    } else if (input.matches("\\A\\d+\\z")) {
+                        if (ProductsManager.isValidInputForProductID(input)) {
+                            System.out.println("Enter rate in range (1-5):");
                             String productID = input;
                             while(true) {
                                 input = scanner.nextLine();
                                 if (input.equalsIgnoreCase("Back")) {
                                     this.show();
                                     break;
-                                } else if (input.equals("Logout")) {
+                                } else if (input.equalsIgnoreCase("Logout")) {
                                     loginAndRegisterManager.logoutUser();
-                                } else if (input.matches("\\d+^$")) { //todo:
+                                } else if (input.matches("\\A\\d+\\z")) {
                                     if (Integer.parseInt(input) <= 5 && Integer.parseInt(input) >= 1) {
                                         customerProfileManager.rateProduct(productID, Integer.parseInt(input));
                                         System.out.println("Your rate submitted");

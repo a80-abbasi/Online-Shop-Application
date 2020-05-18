@@ -2,7 +2,6 @@ package View.CustomerProfileMenus;
 
 import Controller.CustomerProfileManager;
 import Model.Account.Customer;
-import Model.Account.Discount;
 import View.Menu;
 import View.ViewPersonalInfoMenu;
 
@@ -11,13 +10,13 @@ import java.util.ArrayList;
 public class CustomerProfileMenu extends Menu {
     private Customer customer;
     private CustomerProfileManager customerProfileManager;
-    private ArrayList<Discount> allDiscountCodes = new ArrayList<>();
+
     public CustomerProfileMenu(Customer customer, Menu parentMenu) {
         super("CustomerProfile Menu", parentMenu);
         ArrayList<Menu> subMenus = new ArrayList<>();
         this.customer = customer;
         this.customerProfileManager = new CustomerProfileManager(customer);
-        subMenus.add(new ViewPersonalInfoMenu(parentMenu, customerProfileManager));
+        subMenus.add(new ViewPersonalInfoMenu(this, customerProfileManager));
         subMenus.add(new ViewCartMenu(customer,this));
         subMenus.add(new ViewOrdersMenu(customer,this));
         subMenus.add(getViewBalanceMenu());
@@ -30,7 +29,7 @@ public class CustomerProfileMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                System.out.println(customerProfileManager.viewBalance(customer));
+                System.out.println(customerProfileManager.viewBalance());
                 System.out.println("1. Logout");
                 System.out.println("2. Back");
             }
