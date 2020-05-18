@@ -101,6 +101,11 @@ public class Category {
         return subCategory;
     }
 
+    //todo: completing this
+    public void removeProduct(Product product) {
+
+    }
+
     public static void showAllCategories(){
         for (Category category : allCategories) {
             System.out.println(category);

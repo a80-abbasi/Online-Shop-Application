@@ -14,6 +14,8 @@ public class AddOffRequest extends Request {
     private int offAmount;
     private OffStatus offStatus;
 
+    //todo: making StartTime and EndTime Date instead of String
+
     public AddOffRequest() {
         super("add_product_" + allRequests.size(), RequestType.Adding_Off_Request);
         allAddOffRequest.add(this);

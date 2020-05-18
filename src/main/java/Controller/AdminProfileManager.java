@@ -9,6 +9,7 @@ import Model.Product.Product;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 
 public class AdminProfileManager extends ProfileManager{
@@ -183,6 +184,30 @@ public class AdminProfileManager extends ProfileManager{
     }
 
     //todo: completing this
+    public void addCategory(String categoryName, ArrayList<String> specialFeatures) {
+        Category category = new Category(categoryName);
+        for (String feature : specialFeatures) {
+            category.addAFeature(feature);
+        }
+    }
+
+    public void addProductToCategory(String categoryName, String productID, HashMap<String, Integer> specialFeatures) {
+        Category category = Category.getCategoryByName(categoryName);
+        Product product = Product.getProductByID(productID);
+        if (category != null) {
+            category.addProductToCategory(product);
+        }
+        if (product != null) {
+            product.setSpecialFeatures(specialFeatures);
+        }
+    }
+
+    public void addSubCategory(String subCategoryName, String parentCategory) {
+        Category category = Category.getCategoryByName(parentCategory);
+        category.addSubCategoryWithName(subCategoryName);
+    }
+
+    //todo: completing this
     public void editCategory(String categoryName, String changeField) throws NullPointerException{
         Category category = Category.getCategoryByName(categoryName);
         if (category == null) {
@@ -191,9 +216,18 @@ public class AdminProfileManager extends ProfileManager{
 
     }
 
-    //todo: completing this
-    public void addCategory(String categoryName, String specialProperties) {
-        //new Category(categoryName, specialProperties);
+    public void editCategoryName(Category category, String newCategoryName) throws IllegalArgumentException {
+        if (Category.getCategoryByName(newCategoryName) != null) {
+            throw new IllegalArgumentException();
+        }
+        category.setName(newCategoryName);
+    }
+
+    public void removeCategoryProduct(Category category, String productId) throws NullPointerException{
+        if (Product.getProductByID(productId) == null) {
+            throw new NullPointerException();
+        }
+        category.removeProduct(Product.getProductByID(productId));
     }
 
     public void removeCategory(String categoryName) throws NullPointerException{
@@ -203,6 +237,25 @@ public class AdminProfileManager extends ProfileManager{
         }
         Category.removeCategory(category);
     }
+
+    public static boolean isProductWithThisID(String productID) {
+        for (Product product : Product.getAllProducts()) {
+            if (product.getProductId().equals(productID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isCategoryWithThisName(String categoryName) {
+        for (Category category : Category.getAllCategories()) {
+            if (category.getName().equals(categoryName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean isDiscountWithThisID(String ID) {
         for (Discount discount : Discount.getAllDiscounts()) {
             if (discount.getDiscountCode().equals(ID)) {
@@ -211,12 +264,14 @@ public class AdminProfileManager extends ProfileManager{
         }
         return false;
     }
+
     public static boolean isInputValidForDiscountCode(String input) {
         if (!input.trim().matches("\\s")) {
             return true;
         }
         return false;
     }
+
     public static boolean isInputValidForDiscountPercent(String input) {
         if (input.matches("\\A\\d\\d\\z")) {
             return true;
