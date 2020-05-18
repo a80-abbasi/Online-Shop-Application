@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class Customer extends Account {
     private static ArrayList<Customer> allCustomers = new ArrayList<>();
+    private static HashMap<Product, Integer> tmpCart = new HashMap<>();
     private int balance;
     private HashMap<Product, Integer> cart;
     private ArrayList<BuyLog> buyLogs;
@@ -109,6 +110,23 @@ public class Customer extends Account {
 
     public static ArrayList<String> getCustomerFieldsForPurchase() {
         return customerFieldsForPurchase;
+    }
+
+    public static void addProductToTmpCart(Product product){
+        if (tmpCart.containsKey(product)) {
+            tmpCart.put(product, tmpCart.get(product) + 1);
+        }
+        else {
+            tmpCart.put(product, 1);
+        }
+    }
+
+    public static HashMap<Product, Integer> getTmpCart() {
+        return tmpCart;
+    }
+
+    public static void setTmpCart(HashMap<Product, Integer> tmpCart) {
+        Customer.tmpCart = tmpCart;
     }
 
     @Override

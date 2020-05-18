@@ -1,5 +1,6 @@
 package View.ProductMenus;
 
+import Model.Account.Customer;
 import Model.Product.Product;
 import View.Menu;
 
@@ -13,11 +14,13 @@ public class DigestMenu extends Menu {
         this.product = product;
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getAddToCartMenu());
+        this.setSubMenus(submenus);
     }
 
     @Override
     public void show() {
         product.digest();
+        System.out.println();
         super.show();
     }
 
@@ -26,16 +29,17 @@ public class DigestMenu extends Menu {
             @Override
             public void execute() {
                 if (!loginAndRegisterManager.isLogin()){
-                    System.out.println("You must login first\n");
-                    loginAndRegisterMenu.execute();
-                }
-                try {
-                    productsManager.addProductToCart(product, 1);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-                finally {
+                    Customer.addProductToTmpCart(product);
                     parentMenu.execute();
+                }
+                else {
+                    try {
+                        productsManager.addProductToCart(product, 1);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        parentMenu.execute();
+                    }
                 }
             }
         };

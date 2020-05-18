@@ -2,6 +2,7 @@ package Controller;
 
 
 import Model.Account.*;
+import Model.Product.Product;
 import Model.Request.RegisterSellerRequest;
 import View.MainMenu;
 
@@ -38,6 +39,12 @@ public class LoginAndRegisterManager {
         }
         if (!account.getPassword().equals(password)){
             throw new IllegalArgumentException("Your Password is wrong");
+        }
+        if (account instanceof Customer){
+            Customer customer = (Customer) account;
+            for (Product product : Customer.getTmpCart().keySet()) {
+                customer.addToCart(product, Customer.getTmpCart().get(product));
+            }
         }
         Account.setLoggedInAccount(account);
     }
