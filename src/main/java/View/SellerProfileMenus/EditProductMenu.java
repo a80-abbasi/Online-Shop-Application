@@ -78,7 +78,6 @@ public class EditProductMenu extends Menu {
                 } else if (productName.equalsIgnoreCase("logout")) {
                     loginAndRegisterManager.logoutUser();
                 }
-                sellerProfileManager.editProductName(editProductRequest, productName);
                 sellerProfileManager.setProductName(editProductRequest, productName);
                 System.out.println("Product Name " + productName + " successfully added to your request.");
                 this.parentMenu.execute();
@@ -98,7 +97,7 @@ public class EditProductMenu extends Menu {
                 } else if (companyName.equalsIgnoreCase("logout")) {
                     loginAndRegisterManager.logoutUser();
                 }
-                sellerProfileManager.editProductCompanyName(editProductRequest, companyName);
+                sellerProfileManager.setProductCompanyName(editProductRequest, companyName);
                 System.out.println("Company Name " + companyName + " successfully added to your request");
                 this.parentMenu.execute();
             }
