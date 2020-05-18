@@ -22,7 +22,7 @@ public class ManageRequestsMenu extends Menu {
     public void show() {
         ArrayList<String> allRequests = adminProfileManager.getAllRequests();
         for (String request : allRequests) {
-            System.out.println(request);
+            System.out.println("Request ID: " + request);
         }
         super.show();
     }

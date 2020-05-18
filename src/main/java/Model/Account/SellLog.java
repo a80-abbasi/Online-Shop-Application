@@ -64,4 +64,15 @@ public class SellLog extends Log {
     public void setHasSent(boolean hasSent) {
         this.hasSent = hasSent;
     }
+
+    @Override
+    public String toString() {
+        return "SellLog{" +
+                "received=" + received +
+                ", offAmount=" + offAmount +
+                ", product=" + product +
+                ", buyerName='" + buyerName + '\'' +
+                ", hasSent=" + hasSent +
+                '}';
+    }
 }

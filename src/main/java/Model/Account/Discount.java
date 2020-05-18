@@ -99,11 +99,6 @@ public class Discount {
         return currentDate.compareTo(startTime) >= 0 && currentDate.compareTo(endTime) <= 0;
     }
 
-    @Override
-    public String toString() {
-        return null;
-    }
-
     public static ArrayList<Discount> getAllDiscounts() {
         return allDiscounts;
     }
@@ -119,5 +114,18 @@ public class Discount {
 
     public static void removeDiscount(Discount discount) {
         allDiscounts.remove(discount);
+    }
+
+    @Override
+    public String toString() {
+        return "Discount{" +
+                "discountCode='" + discountCode + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", discountPercent=" + discountPercent +
+                ", maxPossibleDiscount=" + maxPossibleDiscount +
+                ", discountPerCustomer=" + discountPerCustomer +
+                ", includingCustomers=" + includingCustomers +
+                '}';
     }
 }

@@ -131,8 +131,8 @@ public class Off {
     public String toString() {
         return "Off{" +
                 "offID='" + offID + '\'' +
-                ", startTime='" + startTime + '\'' +
-                ", endTime='" + endTime + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
                 ", offAmount=" + offAmount +
                 ", offStatus=" + offStatus +
                 ", products=" + products +

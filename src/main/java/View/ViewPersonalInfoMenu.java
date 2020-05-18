@@ -22,6 +22,7 @@ public class ViewPersonalInfoMenu extends Menu {
         super.show();
     }
 
+    //todo: editing other fields like companyName, other than just normal account fields?
     private Menu getEditFieldMenu() {
         return new Menu("Edit Field", this) {
             @Override

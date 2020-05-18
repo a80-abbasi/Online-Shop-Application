@@ -41,5 +41,12 @@ public class Score {
         this.score = score;
     }
 
-
+    @Override
+    public String toString() {
+        return "Score{" +
+                "customer=" + customer +
+                ", product=" + product +
+                ", score=" + score +
+                '}';
+    }
 }

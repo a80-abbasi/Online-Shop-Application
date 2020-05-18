@@ -28,4 +28,7 @@ public abstract class Log {
     public void setDate(String date) {
         this.date = date;
     }
+
+    @Override
+    public abstract String toString();
 }

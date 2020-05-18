@@ -60,4 +60,16 @@ public class Comment {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "account=" + account +
+                ", product=" + product +
+                ", title='" + title + '\'' +
+                ", comment='" + comment + '\'' +
+                ", status=" + status +
+                ", checkBuy=" + checkBuy +
+                '}';
+    }
 }

@@ -27,6 +27,7 @@ public class SellerProfileMenu extends Menu {
         this.setSubMenus(subMenus);
     }
 
+    //todo: does this work right?
     public Menu getViewCompanyInformationMenu() {
         return new Menu("View Company Information Menu", this) {
             @Override

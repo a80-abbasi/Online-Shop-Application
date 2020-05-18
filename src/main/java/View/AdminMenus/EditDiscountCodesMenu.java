@@ -116,7 +116,7 @@ public class EditDiscountCodesMenu extends Menu {
             public void execute() {
                 String discountCode;
                 while(true){
-                    System.out.println("Enter the code of discount you want to change:");
+                    System.out.println("Enter the code of discount you want to change, (back) to return or (logout) to log out:");
                     String input = scanner.nextLine();
                     if (input.equalsIgnoreCase("Back")) {
                         this.parentMenu.execute();
@@ -151,7 +151,7 @@ public class EditDiscountCodesMenu extends Menu {
             public void execute() {
                 String discountCode;
                 while(true){
-                    System.out.println("Enter the code of discount you want to change:");
+                    System.out.println("Enter the code of discount you want to change, (back) to return or (logout) to log out:");
                     String input = scanner.nextLine();
                     if (input.equalsIgnoreCase("Back")) {
                         this.parentMenu.execute();
@@ -198,7 +198,7 @@ public class EditDiscountCodesMenu extends Menu {
             public void execute() {
                 String discountCode;
                 while(true){
-                    System.out.println("Enter the code of discount you want to change:");
+                    System.out.println("Enter the code of discount you want to change, (back) to return or (logout) to log out:");
                     String input = scanner.nextLine();
                     if (input.equalsIgnoreCase("Back")) {
                         this.parentMenu.execute();
@@ -212,7 +212,7 @@ public class EditDiscountCodesMenu extends Menu {
                 }
                 String maxPossibleDiscount = "0";
                 while(true){
-                    System.out.println("Enter new maximum possible discount");
+                    System.out.println("Enter new maximum possible discount, (back) to return or (logout) to log out:");
                     String input = scanner.nextLine();
                     if (input.equalsIgnoreCase("Back")) {
                         this.parentMenu.execute();
@@ -245,7 +245,7 @@ public class EditDiscountCodesMenu extends Menu {
             public void execute() {
                 String discountCode;
                 while(true){
-                    System.out.println("Enter the code of discount you want to change:");
+                    System.out.println("Enter the code of discount you want to change, (back) to return or (logout) to log out:");
                     String input = scanner.nextLine();
                     if (input.equalsIgnoreCase("Back")) {
                         this.parentMenu.execute();
@@ -284,6 +284,5 @@ public class EditDiscountCodesMenu extends Menu {
             }
         };
     }
-
 
 }

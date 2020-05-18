@@ -58,4 +58,15 @@ public class BuyLog extends Log {
     public void addProductToLog(Product product){
         boughtProducts.add(product);
     }
+
+    @Override
+    public String toString() {
+        return "BuyLog{" +
+                "paidAmount=" + paidAmount +
+                ", discountAmount=" + discountAmount +
+                ", seller=" + seller +
+                ", hasDelivered=" + hasDelivered +
+                ", boughtProducts=" + boughtProducts +
+                '}';
+    }
 }

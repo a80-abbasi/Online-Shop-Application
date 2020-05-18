@@ -18,6 +18,7 @@ public class SellerProfileManager extends ProfileManager {
         this.seller = seller;
     }
 
+    //todo: does company have other information?
     public HashMap<String, String> getCompanyInformation() {
         HashMap <String, String> companyInformation = new HashMap<String, String>();
         companyInformation.put("Name", seller.getNameOfCompany());

@@ -141,16 +141,18 @@ public class Customer extends Account {
     @Override
     public String toString() {
         return "Customer{" +
-                "balance=" + getBalance() +
-                ", cart=" + getCart() +
-                ", buyLogs=" + getBuyLogs() +
-                ", usedDiscounts=" + getUsedDiscounts() +
-                ", username='" + getUsername() + '\'' +
-                ", password='" + getPassword() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", lastName='" + getLastName() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", phoneNumber='" + getPhoneNumber() + '\'' +
+                "balance=" + balance +
+                ", cart=" + cart +
+                ", buyLogs=" + buyLogs +
+                ", usedDiscounts=" + usedDiscounts +
+                ", allDiscountCodesForCustomer=" + allDiscountCodesForCustomer +
+                ", numberOfDiscountGifts=" + numberOfDiscountGifts +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }
