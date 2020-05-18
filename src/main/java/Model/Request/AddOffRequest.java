@@ -4,15 +4,9 @@ import Model.Account.Off;
 import Model.Account.OffStatus;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-public class AddOffRequest extends Request {
+public class AddOffRequest extends EditAddOffRequest {
     private static ArrayList<AddOffRequest> allAddOffRequest = new ArrayList<>();
-    private String offID;
-    private Date startTime;
-    private Date endTime;
-    private int offAmount;
-    private OffStatus offStatus;
 
     //todo: making StartTime and EndTime Date instead of String
 
@@ -28,26 +22,6 @@ public class AddOffRequest extends Request {
 
     public static void setAllAddOffRequest(ArrayList<AddOffRequest> allAddOffRequest) {
         AddOffRequest.allAddOffRequest = allAddOffRequest;
-    }
-
-    public void setOffID(String offID) {
-        this.offID = offID;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public void setOffAmount(int offAmount) {
-        this.offAmount = offAmount;
-    }
-
-    public void setOffStatus(OffStatus offStatus) {
-        this.offStatus = offStatus;
     }
 
     @Override

@@ -6,14 +6,9 @@ import Model.Account.OffStatus;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class EditOffRequest extends Request {
+public class EditOffRequest extends EditAddOffRequest {
     private static ArrayList<EditOffRequest> allEditOffRequests = new ArrayList<>();
     private Off off;
-    private String offID;
-    private Date startTime;
-    private Date endTime;
-    private int offAmount;
-    private OffStatus offStatus;
 
     public EditOffRequest(Off off) {
         super("edit_off_" + allRequests.size(), RequestType.Editing_Off_Request);
@@ -40,26 +35,6 @@ public class EditOffRequest extends Request {
 
     public void setOff(Off off) {
         this.off = off;
-    }
-
-    public void setOffID(String offID) {
-        this.offID = offID;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public void setOffAmount(int offAmount) {
-        this.offAmount = offAmount;
-    }
-
-    public void setOffStatus(OffStatus offStatus) {
-        this.offStatus = offStatus;
     }
 
     @Override
