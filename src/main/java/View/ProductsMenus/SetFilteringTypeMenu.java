@@ -19,6 +19,9 @@ public class SetFilteringTypeMenu extends Menu {
         return new Menu(FilteringType.CATEGORY_FILTER.getFilterType(), this) {
             @Override
             public void execute() {
+                System.out.println("Categories:");
+                productsManager.showAllCategories();
+                System.out.println("\nEnter category name.");
                 String categoryName = scanner.nextLine().trim();
                 try {
                     productsManager.addCategoryFilter(categoryName);

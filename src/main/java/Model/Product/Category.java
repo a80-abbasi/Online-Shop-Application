@@ -109,7 +109,7 @@ public class Category {
 
     public static Category getCategoryByName(String name){
         for (Category category : allCategories) {
-            if (category.name.equals(name)){
+            if (category.name.equalsIgnoreCase(name)){
                 return category;
             }
         }

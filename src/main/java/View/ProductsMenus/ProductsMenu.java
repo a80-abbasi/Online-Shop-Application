@@ -79,7 +79,7 @@ public class ProductsMenu extends Menu {
                 nextMenu = menu;
             }
             else {
-                if (chosenMenu == productMenuIndex) {
+                if (chosenMenu == productMenuIndex + 1) {
                     Product product = ProductsMenu.getProduct();
                     if (product == null) {
                         menu.execute();

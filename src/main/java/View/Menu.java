@@ -38,6 +38,9 @@ public abstract class Menu {
         this.parentMenu = parentMenu;
     }
 
+    public ArrayList<Menu> getSubmenus() {
+        return submenus;
+    }
 
     public String getName() {
         return name;

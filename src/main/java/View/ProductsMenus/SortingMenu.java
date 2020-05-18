@@ -8,18 +8,22 @@ public class SortingMenu extends Menu {
     public SortingMenu(Menu parentMenu) {
         super("Sorting Menu", parentMenu);
         ArrayList<Menu> subMenus = new ArrayList<>();
-        subMenus.add(getShowAvailableSortsMenu());
-        subMenus.add(new SetFilteringTypeMenu(this));
+        subMenus.add(getShowAvailableSortsOrFiltersMenu("Show Available Sorts", this));
+        subMenus.add(new SetSortTypeMenu(this));
         subMenus.add(getCurrentSortMenu());
         subMenus.add(getDisableSortMenu());
         this.setSubMenus(subMenus);
     }
 
-    private Menu getShowAvailableSortsMenu(){
-        return new Menu("Show Available Sorts", this) {
+    public static Menu getShowAvailableSortsOrFiltersMenu(String name, Menu parentMenu){
+        return new Menu(name, parentMenu) {
             @Override
             public void execute() {
-                submenus.get(1).show();
+                int i = 1;
+                for (Menu menu : parentMenu.getSubmenus().get(1).getSubmenus()) {
+                    System.out.println(i++ + ": " + menu.getName());
+                }
+                System.out.println();
                 parentMenu.execute();
             }
         };

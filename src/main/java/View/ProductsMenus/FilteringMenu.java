@@ -9,21 +9,11 @@ public class FilteringMenu extends Menu {
     public FilteringMenu(Menu parentMenu) {
         super("Filtering Menu", parentMenu);
         ArrayList<Menu> subMenus = new ArrayList<>();
-        subMenus.add(getShowAvailableFiltersMenu());
+        subMenus.add(SortingMenu.getShowAvailableSortsOrFiltersMenu("Show Available Filters", this));
         subMenus.add(new SetFilteringTypeMenu(this));
         subMenus.add(getCurrentFiltersMenu());
         subMenus.add(new DisablingFiltersMenu(this));
         this.setSubMenus(subMenus);
-    }
-
-    private Menu getShowAvailableFiltersMenu(){
-        return new Menu("Show Available Filters", this) {
-            @Override
-            public void execute() {
-                submenus.get(1).show();
-                parentMenu.execute();
-            }
-        };
     }
 
     private Menu getCurrentFiltersMenu(){
