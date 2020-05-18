@@ -92,6 +92,10 @@ public class Product {
         }
     }
 
+    public void removeSpecialFeature(String specialFeature) {
+        specialFeatures.remove(specialFeature);
+    }
+
     public Off getOff() {
         return off;
     }
@@ -254,6 +258,7 @@ public class Product {
         return null;
     }
 
+    //todo: checking this, removing from offs, discounts and categories?
     public static void removeProduct(Product product) {
         allProducts.remove(product);
     }

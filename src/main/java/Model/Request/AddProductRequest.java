@@ -25,7 +25,8 @@ public class AddProductRequest extends EditAddProductRequest {
     @Override
     public void acceptRequest() throws IllegalArgumentException{
         if (Product.getProductByID(productId) == null) {
-            new Product(productId, ProductStatus.CONFIRMED, productName, companyName, price, productSeller, existingNumber, productCategory, productSpecialFeatures);
+            Product product = new Product(productId, ProductStatus.CONFIRMED, productName, companyName, price, productSeller, existingNumber, productCategory, productSpecialFeatures);
+            productCategory.addProductToCategory(product);
         }
         else {
             throw new IllegalArgumentException();

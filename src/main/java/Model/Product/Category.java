@@ -32,13 +32,6 @@ public class Category {
         this("");
     }
 
-    public void addAFeature(String feature){
-        specialFeatures.add(feature);
-        for (Product product : products) {
-            product.getSpecialFeatures().put(feature, 0);
-        }
-    }
-
     public ArrayList<String> getSpecialFeatures() {
         return specialFeatures;
     }
@@ -47,13 +40,12 @@ public class Category {
         this.specialFeatures = specialFeatures;
     }
 
+    //todo: completing this
+    public void addSpecialFeature(String specialFeature) {
+        specialFeatures.add(specialFeature);
+    }
+
     public void addProductToCategory(Product product){
-        for (String feature : specialFeatures) {
-            HashMap<String, Integer> productSpecialFeatures = product.getSpecialFeatures();
-            if (!productSpecialFeatures.containsKey(feature)){
-                productSpecialFeatures.put(feature, 0);
-            }
-        }
         products.add(product);
         if (parentCategory != null){
             parentCategory.addProductToCategory(product);
@@ -92,18 +84,21 @@ public class Category {
         this.products = products;
     }
 
+    //todo: completing this
     public Category addSubCategoryWithName(String name){
         Category subCategory = new Category(name, this);
         for (String feature : specialFeatures) {
-            subCategory.addAFeature(feature);
+            subCategory.addSpecialFeature(feature);
         }
         subCategories.add(subCategory);
         return subCategory;
     }
 
-    //todo: completing this
-    public void removeProduct(Product product) {
-
+    public void removeSpecialFeature(String specialFeature) {
+        for (Product product : products) {
+            product.removeSpecialFeature(specialFeature);
+        }
+        specialFeatures.remove(specialFeature);
     }
 
     public static void showAllCategories(){
@@ -121,7 +116,14 @@ public class Category {
         return null;
     }
 
+    //todo: checking this
     public static void removeCategory(Category category) {
+        for (Product product : category.getProducts()) {
+            Product.removeProduct(product);
+        }
+        for (Category subCategory : category.getSubCategories()) {
+            allCategories.remove(subCategory);
+        }
         allCategories.remove(category);
     }
 

@@ -27,6 +27,7 @@ public class AdminProfileManager extends ProfileManager{
         return account.toString();
     }
 
+    //todo: checking this
     public void deleteUser(String username) throws NullPointerException{
         Account account = Account.getAccountByUsername(username);
         if (account == null) {
@@ -53,10 +54,12 @@ public class AdminProfileManager extends ProfileManager{
         return String.valueOf(code);
     }
 
+    //todo: adding Exceptions
     public void createManagerProfile(String username, String password, String name, String lastName, String email, String phoneNumber) {
         new Admin(username, password, name, lastName, email, phoneNumber);
     }
 
+    //todo: checking this
     public void removeProduct(String productId) throws NullPointerException{
         Product product = Product.getProductByID(productId);
         if (product == null) {
@@ -67,6 +70,7 @@ public class AdminProfileManager extends ProfileManager{
         }
     }
 
+    //todo: completing this and adding exceptions
     public static void createDiscountCode(String discountCode, Date startTime, Date endTime, int discountPercent, int maxPossibleDiscount, int discountPerCustomer) {
         new Discount(discountCode, startTime, endTime, discountPercent, maxPossibleDiscount, discountPerCustomer);
     }
@@ -112,6 +116,7 @@ public class AdminProfileManager extends ProfileManager{
         discount.setEndTime(endTime);
     }
 
+    //todo: checking this
     public void editDiscountPercent(String discountCode, String discountPercent) throws NullPointerException, IllegalArgumentException {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
@@ -125,6 +130,7 @@ public class AdminProfileManager extends ProfileManager{
         }
     }
 
+    //todo: checking this
     public void editDiscountMaxPossibleDiscount(String discountCode, String maxPossibleDiscount) throws NullPointerException, InputMismatchException{
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
@@ -138,6 +144,7 @@ public class AdminProfileManager extends ProfileManager{
         }
     }
 
+    //todo: checking this
     public void editDiscountPerCustomer(String discountCode, String discountPerCustomer) throws NullPointerException, InputMismatchException{
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
@@ -151,6 +158,7 @@ public class AdminProfileManager extends ProfileManager{
         }
     }
 
+    //todo: checking this
     public void removeDiscount(String discountCode) throws NullPointerException{
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
@@ -167,7 +175,6 @@ public class AdminProfileManager extends ProfileManager{
         }
         return allRequestIds;
     }
-
 
     public String getDetailsOfRequest(String requestId) throws NullPointerException{
         Request request = Request.getRequestById(requestId);
@@ -198,37 +205,15 @@ public class AdminProfileManager extends ProfileManager{
         return Category.getAllCategories();
     }
 
-    //todo: completing this
     public void addCategory(String categoryName, ArrayList<String> specialFeatures) {
         Category category = new Category(categoryName);
-        for (String feature : specialFeatures) {
-            category.addAFeature(feature);
-        }
+        category.setSpecialFeatures(specialFeatures);
     }
 
-    public void addProductToCategory(String categoryName, String productID, HashMap<String, Integer> specialFeatures) {
-        Category category = Category.getCategoryByName(categoryName);
-        Product product = Product.getProductByID(productID);
-        if (category != null) {
-            category.addProductToCategory(product);
-        }
-        if (product != null) {
-            product.setSpecialFeatures(specialFeatures);
-        }
-    }
-
+    //todo: completing this
     public void addSubCategory(String subCategoryName, String parentCategory) {
         Category category = Category.getCategoryByName(parentCategory);
         category.addSubCategoryWithName(subCategoryName);
-    }
-
-    //todo: completing this
-    public void editCategory(String categoryName, String changeField) throws NullPointerException{
-        Category category = Category.getCategoryByName(categoryName);
-        if (category == null) {
-            throw new NullPointerException();
-        }
-
     }
 
     public void editCategoryName(Category category, String newCategoryName) throws IllegalArgumentException {
@@ -238,11 +223,22 @@ public class AdminProfileManager extends ProfileManager{
         category.setName(newCategoryName);
     }
 
-    public void removeCategoryProduct(Category category, String productId) throws NullPointerException{
-        if (Product.getProductByID(productId) == null) {
+    public void removeCategorySpecialFeature(Category category, String specialFeature) throws NullPointerException {
+        if (category.getSpecialFeatures().contains(specialFeature)) {
+            category.removeSpecialFeature(specialFeature);
+        }
+        else {
             throw new NullPointerException();
         }
-        category.removeProduct(Product.getProductByID(productId));
+    }
+
+    public void addSpecialFeature(Category category, String specialFeature) throws IllegalArgumentException {
+        if (category.getSpecialFeatures().contains(specialFeature)) {
+            throw new IllegalArgumentException();
+        }
+        else {
+            category.addSpecialFeature(specialFeature);
+        }
     }
 
     public void removeCategory(String categoryName) throws NullPointerException{

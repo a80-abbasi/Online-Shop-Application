@@ -54,6 +54,9 @@ public class EditProductRequest extends EditAddProductRequest {
             product.setProductSeller(productSeller);
             product.setProductCategory(productCategory);
             product.setSpecialFeatures(productSpecialFeatures);
+            if (!(productCategory.getProducts().contains(product))) {
+                productCategory.addProductToCategory(product);
+            }
         }
     }
 
