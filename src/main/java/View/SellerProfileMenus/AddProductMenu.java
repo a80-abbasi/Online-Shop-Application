@@ -21,7 +21,6 @@ public class AddProductMenu extends Menu {
         submenus.add(getAddCompanyName());
         submenus.add(getAddPrice());
         submenus.add(getAddExistingNumberOfProduct());
-        submenus.add(getAddSellerOfProduct());
         submenus.add(getAddProductCategory());
         submenus.add(getAddSpecialFeatureValues());
         this.setSubMenus(submenus);
@@ -128,32 +127,6 @@ public class AddProductMenu extends Menu {
                 }
                 catch (InputMismatchException e) {
                     System.out.println("You must enter an integer number.");
-                }
-                this.parentMenu.execute();
-            }
-        };
-    }
-
-    private Menu getAddSellerOfProduct() {
-        return new Menu("Add Seller of Product", this) {
-            @Override
-            public void execute() {
-                System.out.println("Enter Seller Username:");
-                String sellerUsername = scanner.nextLine();
-                if (sellerUsername.equalsIgnoreCase("back")) {
-                    parentMenu.execute();
-                } else if (sellerUsername.equalsIgnoreCase("logout")) {
-                    loginAndRegisterManager.logoutUser();
-                }
-                try {
-                    sellerProfileManager.setProductSeller(addProductRequest, sellerUsername);
-                    System.out.println("Product Seller " + sellerUsername + " successfully added to your request.");
-                }
-                catch (NullPointerException n) {
-                    System.out.println("There is no Seller with this username.");
-                }
-                catch (InputMismatchException i) {
-                    System.out.println("This username doesn't belong to a seller.");
                 }
                 this.parentMenu.execute();
             }

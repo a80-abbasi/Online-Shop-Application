@@ -20,7 +20,6 @@ public class EditProductMenu extends Menu {
         submenus.add(getEditCompanyName());
         submenus.add(getEditPrice());
         submenus.add(getEditExistingNumberOfProduct());
-        submenus.add(getEditSellerOfProduct());
         submenus.add(getEditProductCategory());
         submenus.add(getEditSpecialFeatureValues());
         this.setSubMenus(submenus);
@@ -41,6 +40,9 @@ public class EditProductMenu extends Menu {
         catch (NullPointerException e) {
             System.out.println("There is no Product with this ID.");
             this.show();
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println("You don't have this product.");
         }
     }
 
@@ -144,32 +146,6 @@ public class EditProductMenu extends Menu {
                 }
                 catch (InputMismatchException e) {
                     System.out.println("You must enter an integer number.");
-                }
-                this.parentMenu.execute();
-            }
-        };
-    }
-
-    private Menu getEditSellerOfProduct() {
-        return new Menu("Edit Seller of Product", this) {
-            @Override
-            public void execute() {
-                System.out.println("Enter Seller Username:");
-                String sellerUsername = scanner.nextLine();
-                if (sellerUsername.equalsIgnoreCase("back")) {
-                    parentMenu.execute();
-                } else if (sellerUsername.equalsIgnoreCase("logout")) {
-                    loginAndRegisterManager.logoutUser();
-                }
-                try {
-                    sellerProfileManager.setProductSeller(editProductRequest, sellerUsername);
-                    System.out.println("Product Seller " + sellerUsername + " successfully added to your request.");
-                }
-                catch (NullPointerException n) {
-                    System.out.println("There is no Seller with this username.");
-                }
-                catch (InputMismatchException i) {
-                    System.out.println("This username doesn't belong to a seller.");
                 }
                 this.parentMenu.execute();
             }

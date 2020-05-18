@@ -76,11 +76,24 @@ public class SellerProfileManager extends ProfileManager {
     }
 
     public AddProductRequest addProductRequest() {
-       return new AddProductRequest();
+        AddProductRequest addProductRequest = new AddProductRequest();
+        addProductRequest.setProductSeller(this.seller);
+        return addProductRequest;
     }
 
-    public EditProductRequest makeNewEditProductRequest(String productId) {
-        return new EditProductRequest(Product.getProductByID(productId));
+    public EditProductRequest makeNewEditProductRequest(String productId) throws NullPointerException, IllegalArgumentException{
+        Product product = Product.getProductByID(productId);
+        if (product == null){
+            throw new NullPointerException();
+        }
+        else if (seller.getProducts().contains(product)) {
+            EditProductRequest editProductRequest = new EditProductRequest(product);
+            editProductRequest.setProductSeller(this.seller);
+            return editProductRequest;
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
     }
 
     public void setProductId(EditAddProductRequest editAddProductRequest, String productId) throws IllegalArgumentException {
@@ -110,19 +123,6 @@ public class SellerProfileManager extends ProfileManager {
     public void setExistingNumberOfProduct(EditAddProductRequest editAddProductRequest, String existingNumber) throws InputMismatchException {
         if (existingNumber.matches("\\d+")) {
             editAddProductRequest.setExistingNumber(Integer.parseInt(existingNumber));
-        }
-        else {
-            throw new InputMismatchException();
-        }
-    }
-
-    public void setProductSeller(EditAddProductRequest editAddProductRequest, String sellerUsername) throws NullPointerException, InputMismatchException {
-        Account account = Account.getAccountByUsername(sellerUsername);
-        if (account == null) {
-            throw new NullPointerException();
-        }
-        else if (account instanceof Seller) {
-            editAddProductRequest.setProductSeller((Seller) account);
         }
         else {
             throw new InputMismatchException();
@@ -252,7 +252,6 @@ public class SellerProfileManager extends ProfileManager {
         return false;
     }
 
-
     public HashMap<String, String> getOffsAmountAndID() {
         HashMap<String, String> offsAmountAndID = new HashMap<>();
         for (int i = 0; i < seller.getOffs().size(); i ++) {
@@ -271,20 +270,6 @@ public class SellerProfileManager extends ProfileManager {
 
     public static Off getOffByID(String offID) {
         return Off.getOffById(offID);
-    }
-
-    public String getOffStatus(String offId) {
-        //todo:
-        return "CHANGE THIS MESSAGE";
-    }
-
-    public static ArrayList<String> getOffFields() {
-        return Off.getOffFields();
-    }
-
-    public void editOffByID(String offId, HashMap<String, String> fieldChanges) {
-        Off off = Off.getOffById(offId);
-        new EditOffRequest(off);
     }
 
     public int viewBalance(Account account) {
