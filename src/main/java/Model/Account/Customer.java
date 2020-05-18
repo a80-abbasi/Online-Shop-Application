@@ -13,6 +13,7 @@ public class Customer extends Account {
     private ArrayList<BuyLog> buyLogs;
     private HashMap<Discount, Integer> usedDiscounts;
     private ArrayList<Discount> allDiscountCodesForCustomer; //todo:admin add codes to this array too!
+    private int numberOfDiscountGifts;
     private static ArrayList<String> customerFieldsForPurchase = new ArrayList<>();
     static {
         customerFieldsForPurchase.add("name");
@@ -34,6 +35,14 @@ public class Customer extends Account {
 
     public Customer(){
         this("", "", "", "", "", "", 0);
+    }
+
+    public int getNumberOfDiscountGifts() {
+        return numberOfDiscountGifts;
+    }
+
+    public void setNumberOfDiscountGifts(int numberOfDiscountGifts) {
+        this.numberOfDiscountGifts = numberOfDiscountGifts;
     }
 
     public static ArrayList<Customer> getAllCustomers() {

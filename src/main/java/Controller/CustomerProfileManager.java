@@ -1,12 +1,8 @@
 package Controller;
 
-import Model.Account.Account;
-import Model.Account.BuyLog;
-import Model.Account.Customer;
-import Model.Account.Discount;
+import Model.Account.*;
 import Model.Product.Product;
 import Model.Product.Score;
-import Model.Product.ScoreEnumeration;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +14,32 @@ public class CustomerProfileManager extends ProfileManager{
     public CustomerProfileManager(Customer customer) {
         super(customer);
         this.customer = customer;
+    }
+
+    public void checkForDiscountGift(){
+        final int minimumAmountOfMoney = 1000;
+        final int discountPercentage = 10;
+        final int discountPerCustomer = 1;
+        final int maxPossibleDiscount = 100;
+        final long duration = 1000L * 60 * 60 * 24 * 30;
+
+        int totalMoneyPaid = 0;
+        for (BuyLog buyLog : customer.getBuyLogs()) {
+            totalMoneyPaid += buyLog.getPaidAmount();
+        }
+
+        if (totalMoneyPaid > minimumAmountOfMoney * (customer.getNumberOfDiscountGifts() + 1)){
+            customer.setBalance(customer.getNumberOfDiscountGifts() + 1);
+            System.out.println("Congratulations! you have won" + discountPercentage + "% discount up to" + maxPossibleDiscount +
+                    "$ for buying more than" + customer.getNumberOfDiscountGifts() * minimumAmountOfMoney + "dollars from Us!");
+            System.out.println("Note! you can use it once till next month.");
+            System.out.println("Your discount code is:");
+            String code = AdminProfileManager.generateRandomDiscountCode();
+            System.out.println(code);
+            Date now = new Date();
+            AdminProfileManager.createDiscountCode(code, now, new Date(now.getTime() + duration), discountPercentage,
+                    maxPossibleDiscount, discountPerCustomer);
+        }
     }
 
     public boolean isInputValidForBuyLogID(String ID) {
@@ -37,10 +59,10 @@ public class CustomerProfileManager extends ProfileManager{
         return 0;
     }
 
-    public HashMap<String, String> showOrdersSellerNameAndDate () {
-        HashMap<String, String> sellerNameAndDate = new HashMap<>();
+    public HashMap<Seller, String> showOrdersSellerNameAndDate () {
+        HashMap<Seller, String> sellerNameAndDate = new HashMap<>();
         for (BuyLog buyLog : customer.getBuyLogs()) {
-            sellerNameAndDate.put(buyLog.getSellerName(),buyLog.getDate());
+            sellerNameAndDate.put(buyLog.getSeller(),buyLog.getDate());
         }
         return sellerNameAndDate;
     }

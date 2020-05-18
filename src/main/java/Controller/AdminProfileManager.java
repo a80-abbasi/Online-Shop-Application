@@ -7,10 +7,7 @@ import Model.Request.Request;
 import Model.Product.Category;
 import Model.Product.Product;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.InputMismatchException;
+import java.util.*;
 
 public class AdminProfileManager extends ProfileManager{
 
@@ -38,6 +35,24 @@ public class AdminProfileManager extends ProfileManager{
         Account.deleteAccount(account);
     }
 
+    public static String generateRandomDiscountCode(){
+        char[] code = new char[8];
+        Random random = new Random();
+        for(int i = 0; i < 8; ++i)
+        {
+            int a = random.nextInt(62);
+
+            if (a < 10)
+                code[i] = (char)(a + 48);
+
+            else if (a < 36)
+                code[i] = (char)(a + 55);
+            else
+                code[i] = (char)(a + 61);
+        }
+        return String.valueOf(code);
+    }
+
     public void createManagerProfile(String username, String password, String name, String lastName, String email, String phoneNumber) {
         new Admin(username, password, name, lastName, email, phoneNumber);
     }
@@ -52,7 +67,7 @@ public class AdminProfileManager extends ProfileManager{
         }
     }
 
-    public void createDiscountCode(String discountCode, Date startTime, Date endTime, int discountPercent, int maxPossibleDiscount, int discountPerCustomer) {
+    public static void createDiscountCode(String discountCode, Date startTime, Date endTime, int discountPercent, int maxPossibleDiscount, int discountPerCustomer) {
         new Discount(discountCode, startTime, endTime, discountPercent, maxPossibleDiscount, discountPerCustomer);
     }
 

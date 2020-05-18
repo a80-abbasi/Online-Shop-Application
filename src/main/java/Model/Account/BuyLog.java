@@ -7,23 +7,20 @@ import java.util.ArrayList;
 public class BuyLog extends Log {
     private int paidAmount;
     private int discountAmount;
-    private String sellerName; //could be replace by a Seller object?
+    private Seller seller;
     private boolean hasDelivered;
     private ArrayList<Product> boughtProducts;
 
-    public BuyLog(String ID, String date, int paidAmount, int discountAmount, String sellerName) {
+    public BuyLog(String ID, String date, int paidAmount, int discountAmount, Seller sellerName) {
         super(ID, date);
         this.paidAmount = paidAmount;
         this.discountAmount = discountAmount;
-        this.sellerName = sellerName;
+        this.seller = sellerName;
         boughtProducts = new ArrayList<>();
     }
 
     public BuyLog() {
-        super();
-        this.paidAmount = 0;
-        this.discountAmount = 0;
-        this.sellerName = "";
+        this("", "", 0, 0, null);
     }
 
     public int getPaidAmount() {
@@ -42,12 +39,12 @@ public class BuyLog extends Log {
         this.discountAmount = discountAmount;
     }
 
-    public String getSellerName() {
-        return sellerName;
+    public Seller getSeller() {
+        return seller;
     }
 
-    public void setSellerName(String sellerName) {
-        this.sellerName = sellerName;
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
 
     public boolean isHasDelivered() {
