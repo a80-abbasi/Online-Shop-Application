@@ -1,6 +1,7 @@
 package View.SellerProfileMenus;
 
 import Controller.SellerProfileManager;
+import Model.Product.Category;
 import Model.Request.AddProductRequest;
 import View.Menu;
 
@@ -22,6 +23,8 @@ public class AddProductMenu extends Menu {
         submenus.add(getAddPrice());
         submenus.add(getAddExistingNumberOfProduct());
         submenus.add(getAddSellerOfProduct());
+        submenus.add(getAddProductCategory());
+        submenus.add(getAddSpecialFeatureValues());
         this.setSubMenus(submenus);
     }
 
@@ -32,7 +35,7 @@ public class AddProductMenu extends Menu {
                 System.out.println("Enter the Product ID:");
                 String productId = scanner.nextLine();
                 try {
-                    sellerProfileManager.addProductId(addProductRequest, productId);
+                    sellerProfileManager.setProductId(addProductRequest, productId);
                     System.out.println("Product ID " + productId + " successfully added to your request.");
                 }
                 catch (IllegalArgumentException e) {
@@ -49,7 +52,7 @@ public class AddProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Product Name:");
                 String productName = scanner.nextLine();
-                sellerProfileManager.addProductName(addProductRequest, productName);
+                sellerProfileManager.setProductName(addProductRequest, productName);
                 System.out.println("Product Name " + productName + " successfully added to your request.");
                 this.parentMenu.execute();
             }
@@ -62,7 +65,7 @@ public class AddProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Company Name:");
                 String companyName = scanner.nextLine();
-                sellerProfileManager.addProductCompanyName(addProductRequest, companyName);
+                sellerProfileManager.setProductCompanyName(addProductRequest, companyName);
                 System.out.println("Company Name " + companyName + " successfully added to your request");
                 this.parentMenu.execute();
             }
@@ -76,7 +79,7 @@ public class AddProductMenu extends Menu {
                 System.out.println("Enter Product Price:");
                 String productPrice = scanner.nextLine();
                 try {
-                    sellerProfileManager.addProductPrice(addProductRequest, productPrice);
+                    sellerProfileManager.setProductPrice(addProductRequest, productPrice);
                     System.out.println("Product Price " + productPrice + " successfully added to your request");
                 }
                 catch (InputMismatchException e) {
@@ -94,7 +97,7 @@ public class AddProductMenu extends Menu {
                 System.out.println("Enter the Number Of Existing Products:");
                 String existingNumber = scanner.nextLine();
                 try {
-                    sellerProfileManager.addExistingNumberOfProduct(addProductRequest, existingNumber);
+                    sellerProfileManager.setExistingNumberOfProduct(addProductRequest, existingNumber);
                     System.out.println("Existing Number Of Product " + existingNumber + " successfully added to your request.");
                 }
                 catch (InputMismatchException e) {
@@ -112,7 +115,7 @@ public class AddProductMenu extends Menu {
                 System.out.println("Enter Seller Username:");
                 String sellerUsername = scanner.nextLine();
                 try {
-                    sellerProfileManager.addProductSeller(addProductRequest, sellerUsername);
+                    sellerProfileManager.setProductSeller(addProductRequest, sellerUsername);
                     System.out.println("Product Seller " + sellerUsername + " successfully added to your request.");
                 }
                 catch (NullPointerException n) {
@@ -122,6 +125,66 @@ public class AddProductMenu extends Menu {
                     System.out.println("This username doesn't belong to a seller.");
                 }
                 this.parentMenu.execute();
+            }
+        };
+    }
+
+    private Menu getAddProductCategory() {
+        return new Menu("Add Product Category", this) {
+            @Override
+            public void execute() {
+                System.out.println("Enter Category Name or (back) to return:");
+                String categoryName = scanner.nextLine();
+                if (categoryName.equalsIgnoreCase("back")) {
+                    this.parentMenu.execute();
+                }
+                else {
+                    try {
+                        sellerProfileManager.setProductCategory(addProductRequest, categoryName);
+                        System.out.println("Category " + categoryName + " successfully added to your request.");
+                    } catch (NullPointerException e) {
+                        System.out.println("There is no category with this name.");
+                    }
+                    this.execute();
+                }
+            }
+        };
+    }
+
+    private Menu getAddSpecialFeatureValues() {
+        return new Menu("Add Special Feature Values Menu", this) {
+            @Override
+            public void execute() {
+                if (sellerProfileManager.getProductCategoryInRequest(addProductRequest) == null) {
+                    System.out.println("You must first add category for this product.");
+                    getAddProductCategory().execute();
+                }
+                else {
+                    ArrayList<String> categorySpecialFeatures = sellerProfileManager.getProductCategorySpecialFeatures(addProductRequest);
+                    for (int i = 0 ; i < categorySpecialFeatures.size() ; i++) {
+                        System.out.println((i + 1) + ". " + categorySpecialFeatures.get(i));
+                    }
+                    System.out.println("Enter the number of feature or (back) to return:");
+                    String index = scanner.nextLine();
+                    if (index.equalsIgnoreCase("back")) {
+                        this.parentMenu.execute();
+                    }
+                    else if (index.matches("\\d+") && Integer.parseInt(index) <= categorySpecialFeatures.size()) {
+                        System.out.println("Now enter value for this specialFeature:");
+                        String value = scanner.nextLine();
+                        if (value.matches("\\d+")) {
+                            sellerProfileManager.setValueForProductSpecialFeature(addProductRequest, Integer.parseInt(index), Integer.parseInt(value));
+                            System.out.println("Value " + Integer.parseInt(value) + " added to " + categorySpecialFeatures.get(Integer.parseInt(index)));
+                        }
+                        else {
+                            System.out.println("You must enter an integer number");
+                        }
+                    }
+                    else {
+                        System.out.println("You must enter the index of the feature.");
+                    }
+                }
+                this.execute();
             }
         };
     }

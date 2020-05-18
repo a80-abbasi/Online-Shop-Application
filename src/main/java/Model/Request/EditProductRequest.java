@@ -1,22 +1,13 @@
 package Model.Request;
 
-import Model.Account.Seller;
 import Model.Product.Product;
 import Model.Product.ProductStatus;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class EditProductRequest extends Request {
+public class EditProductRequest extends EditAddProductRequest {
     private static ArrayList<EditProductRequest> allEditProductRequests = new ArrayList<>();
     private Product product;
-    private String productId;
-    private ProductStatus productStatus;
-    private String productName;
-    private String companyName;
-    private double price;
-    private int existingNumber;
-    private Seller productSeller;
 
     public EditProductRequest(Product product) {
         super("edit_product_" + allRequests.size(), RequestType.Editing_Product_Request);
@@ -28,6 +19,8 @@ public class EditProductRequest extends Request {
         this.setPrice(product.getPrice());
         this.setExistingNumber(product.getExistingNumber());
         this.setProductSeller(product.getProductSeller());
+        this.setProductCategory(product.getProductCategory());
+        this.setProductSpecialFeatures(product.getSpecialFeatures());
     }
 
     public static ArrayList<EditProductRequest> getAllEditProductRequests() {
@@ -40,34 +33,6 @@ public class EditProductRequest extends Request {
 
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public void setProductStatus(ProductStatus productStatus) {
-        this.productStatus = productStatus;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public void setExistingNumber(int existingNumber) {
-        this.existingNumber = existingNumber;
-    }
-
-    public void setProductSeller(Seller productSeller) {
-        this.productSeller = productSeller;
     }
 
     @Override
@@ -83,6 +48,8 @@ public class EditProductRequest extends Request {
             product.setPrice(price);
             product.setExistingNumber(existingNumber);
             product.setProductSeller(productSeller);
+            product.setProductCategory(productCategory);
+            product.setSpecialFeatures(productSpecialFeatures);
         }
     }
 
