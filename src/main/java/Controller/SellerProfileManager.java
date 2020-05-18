@@ -32,15 +32,6 @@ public class SellerProfileManager extends ProfileManager {
         return salesHistory;
     }
 
-    public ArrayList<String> getSellerProducts() {
-        ArrayList<Product> sellerProducts = seller.getProducts();
-        ArrayList<String> sellerProductsIds = new ArrayList<>();
-        for (Product product : sellerProducts) {
-            sellerProductsIds.add(product.getProductId());
-        }
-        return sellerProductsIds;
-    }
-
     public Product getProductByID(String id) {
         return Product.getProductByID(id);
     }
@@ -60,10 +51,6 @@ public class SellerProfileManager extends ProfileManager {
             allBuyersUsernameAndPhoneNumber.put(customer.getUsername(),customer.getPhoneNumber());
         }
         return allBuyersUsernameAndPhoneNumber;
-    }
-
-    public static ArrayList<String> getAllProductFields() {
-        return Product.getProductFields();
     }
 
     public AddProductRequest addProductRequest() {
@@ -231,7 +218,6 @@ public class SellerProfileManager extends ProfileManager {
     public void editOffStartTime(EditOffRequest editOffRequest, Date startTime) {
         editOffRequest.setStartTime(startTime);
     }
-
     public void editOffEndTime(EditOffRequest editOffRequest, Date endTime) {
         editOffRequest.setEndTime(endTime);
     }
@@ -245,24 +231,6 @@ public class SellerProfileManager extends ProfileManager {
         }
     }
 
-    public static boolean isInputInOffFields(String input) {
-        for (int i = 0; i < Off.getOffFields().size(); i++) {
-            if (Off.getOffFields().get(i).equals(input)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean isInputInProductFields(String input) {
-        for (int i = 0; i < Product.getProductFields().size(); i++) {
-            if (Product.getProductFields().get(i).equals(input)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static boolean isValidInputForOffID (String ID) {
         for (String offID : Off.getAllOffIds()) {
             if (offID.equals(ID)) {
@@ -271,7 +239,6 @@ public class SellerProfileManager extends ProfileManager {
         }
         return false;
     }
-
 
     public HashMap<String, String> getOffsAmountAndID() {
         HashMap<String, String> offsAmountAndID = new HashMap<>();
@@ -293,11 +260,6 @@ public class SellerProfileManager extends ProfileManager {
         return Off.getOffById(offID);
     }
 
-    public String getOffStatus(String offId) {
-        //todo:
-        return "CHANGE THIS MESSAGE";
-    }
-
     public static ArrayList<String> getOffFields() {
         return Off.getOffFields();
     }
@@ -308,7 +270,43 @@ public class SellerProfileManager extends ProfileManager {
     }
 
     public int viewBalance(Account account) {
-        return 0;
+        return seller.getBalance();
+    }
+
+    public static boolean isInputInOffFields(String input) {
+        for (int i = 0; i < Off.getOffFields().size(); i++) {
+            if (Off.getOffFields().get(i).equals(input)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isInputInProductFields(String input) {
+        for (int i = 0; i < Product.getProductFields().size(); i++) {
+            if (Product.getProductFields().get(i).equals(input)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static ArrayList<String> getAllProductFields() {
+        return Product.getProductFields();
+    }
+
+    public ArrayList<String> getSellerProducts() {
+        ArrayList<Product> sellerProducts = seller.getProducts();
+        ArrayList<String> sellerProductsIds = new ArrayList<>();
+        for (Product product : sellerProducts) {
+            sellerProductsIds.add(product.getProductId());
+        }
+        return sellerProductsIds;
+    }
+
+    public String getOffStatus(String offId) {
+        //todo:
+        return "CHANGE THIS MESSAGE";
     }
 
 
