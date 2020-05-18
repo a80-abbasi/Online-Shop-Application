@@ -2,6 +2,7 @@ package Model.Product;
 
 import Model.Account.Customer;
 import Model.Account.Discount;
+import Model.Account.Off;
 import Model.Account.Seller;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class Product {
     private int visitNumber;
     private Date timeOfCreation;
     private ArrayList<Customer> productBuyers;
+    private Off off;
 
     private static ArrayList<String> productFields = new ArrayList<>();
     static {
@@ -226,6 +228,10 @@ public class Product {
             productScore += score.getScore();
         }
         return productScore / allScores.size();
+    }
+
+    public void setOff(Off off) {
+        this.off = off;
     }
 
     public static Product getProductByID(String ID){

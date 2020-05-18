@@ -23,6 +23,7 @@ public class AddOffMenu extends Menu {
         submenus.add(getAddOffStartTime());
         submenus.add(getAddOffEndTime());
         submenus.add(getAddOffAmount());
+        submenus.add(getAddOffProductsMenu());
         this.setSubMenus(submenus);
     }
 
@@ -100,6 +101,32 @@ public class AddOffMenu extends Menu {
                     System.out.println("You should enter an integer number.");
                 }
                 this.parentMenu.execute();
+            }
+        };
+    }
+
+    private Menu getAddOffProductsMenu() {
+        return new Menu("Add Off Products Menu", this) {
+            @Override
+            public void execute() {
+                System.out.println("Enter ID of product you want to add, or (back) to return:");
+                String productId = scanner.nextLine();
+                if (productId.equalsIgnoreCase("back")) {
+                    this.parentMenu.execute();
+                }
+                else {
+                    try {
+                        sellerProfileManager.setOffProduct(addOffRequest, productId);
+                        System.out.println("Product " + productId + " successfully added to your request.");
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no product with this ID.");
+                    }
+                    catch (IllegalArgumentException e) {
+                        System.out.println("You don't have this product.");
+                    }
+                    this.execute();
+                }
             }
         };
     }

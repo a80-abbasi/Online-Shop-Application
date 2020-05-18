@@ -203,6 +203,32 @@ public class SellerProfileManager extends ProfileManager {
         }
     }
 
+    public void setOffProduct(EditAddOffRequest editAddOffRequest, String productID) throws NullPointerException, IllegalArgumentException {
+        Product product = Product.getProductByID(productID);
+        if (product == null) {
+            throw new NullPointerException();
+        }
+        else if (!(seller.getProducts().contains(product))) {
+            throw new IllegalArgumentException();
+        }
+        else {
+            editAddOffRequest.addOffProduct(product);
+        }
+    }
+
+    public void removeProductInOffRequest(EditOffRequest editOffRequest, String productID) throws NullPointerException, IllegalArgumentException {
+        Product product = Product.getProductByID(productID);
+        if (product == null) {
+            throw new NullPointerException();
+        }
+        else if (editOffRequest.getOffProducts().contains(product)) {
+            editOffRequest.removeProduct(product);
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public static boolean isInputInOffFields(String input) {
         for (int i = 0; i < Off.getOffFields().size(); i++) {
             if (Off.getOffFields().get(i).equals(input)) {

@@ -23,13 +23,13 @@ public class Off {
         offFields.add("products");
     }
 
-    public Off(String offID, Date startTime, Date endTime, int offAmount) {
+    public Off(String offID, Date startTime, Date endTime, int offAmount, ArrayList<Product> products) {
         this.offID = offID;
         this.startTime = startTime;
         this.endTime = endTime;
         this.offAmount = offAmount;
         this.offStatus = OffStatus.CONFIRMED;
-        products = new ArrayList<>();
+        this.products = products;
         allOffs.add(this);
     }
 
@@ -38,7 +38,7 @@ public class Off {
     }
 
     public Off() {
-        this("", null, null, 0);
+        this("", null, null, 0, null);
     }
 
     public String getOffID() {

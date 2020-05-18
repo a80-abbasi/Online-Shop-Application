@@ -1,7 +1,9 @@
 package Model.Request;
 
 import Model.Account.OffStatus;
+import Model.Product.Product;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class EditAddOffRequest extends Request {
@@ -10,9 +12,14 @@ public abstract class EditAddOffRequest extends Request {
     protected Date endTime;
     protected int offAmount;
     protected OffStatus offStatus;
+    protected ArrayList<Product> offProducts;
 
     public EditAddOffRequest(String requestID, RequestType requestType) {
         super(requestID, requestType);
+    }
+
+    public ArrayList<Product> getOffProducts() {
+        return offProducts;
     }
 
     public void setOffID(String offID) {
@@ -33,6 +40,14 @@ public abstract class EditAddOffRequest extends Request {
 
     public void setOffStatus(OffStatus offStatus) {
         this.offStatus = offStatus;
+    }
+
+    public void setOffProducts(ArrayList<Product> offProducts) {
+        this.offProducts = offProducts;
+    }
+
+    public void addOffProduct(Product product) {
+        offProducts.add(product);
     }
 
     @Override

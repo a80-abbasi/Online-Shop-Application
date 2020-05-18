@@ -22,6 +22,7 @@ public class EditOffMenu extends Menu {
         submenus.add(getEditOffStartTime());
         submenus.add(getEditOffEndTime());
         submenus.add(getEditOffAmount());
+        submenus.add(getEditOffProductsMenu());
         this.setSubMenus(submenus);
     }
 
@@ -122,6 +123,55 @@ public class EditOffMenu extends Menu {
                     System.out.println("You should enter an integer number.");
                 }
                 this.parentMenu.execute();
+            }
+        };
+    }
+
+    private Menu getEditOffProductsMenu() {
+        return new Menu("Edit Off Products Menu", this) {
+            @Override
+            public void execute() {
+                System.out.println("Select one of these options or enter (back) to return:");
+                System.out.println("1. Remove Product");
+                System.out.println("2. Add Product");
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("back")) {
+                    this.parentMenu.execute();
+                }
+                else if (input.equals("1")) {
+                    System.out.println("Enter ID of Product:");
+                    String productId = scanner.nextLine();
+                    try {
+                        sellerProfileManager.removeProductInOffRequest(editOffRequest, productId);
+                        System.out.println("Product " + productId + " removed successfully in request.");
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no product with this ID.");
+                    }
+                    catch (IllegalArgumentException e) {
+                        System.out.println("This Product isn't in off");
+                    }
+                    this.execute();
+                }
+                else if (input.equals("2")) {
+                    System.out.println("Enter ID of Product:");
+                    String productId = scanner.nextLine();
+                    try {
+                        sellerProfileManager.setOffProduct(editOffRequest, productId);
+                        System.out.println("Product " + productId + " added successfully to your request.");
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("There is no product with this ID");
+                    }
+                    catch (IllegalArgumentException e) {
+                        System.out.println("You don't have this product.");
+                    }
+                    this.execute();
+                }
+                else {
+                    System.out.println("Wrong input");
+                    this.execute();
+                }
             }
         };
     }
