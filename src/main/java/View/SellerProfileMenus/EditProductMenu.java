@@ -36,6 +36,7 @@ public class EditProductMenu extends Menu {
         }
         try {
             this.editProductRequest = sellerProfileManager.makeNewEditProductRequest(productId);
+            super.show();
         }
         catch (NullPointerException e) {
             System.out.println("There is no Product with this ID.");
@@ -43,6 +44,7 @@ public class EditProductMenu extends Menu {
         }
         catch (IllegalArgumentException e) {
             System.out.println("You don't have this product.");
+            this.show();
         }
     }
 

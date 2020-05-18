@@ -164,61 +164,39 @@ public class SellerProfileManager extends ProfileManager {
         return new AddOffRequest();
     }
 
-    public void addOffId(AddOffRequest addOffRequest, String offId) throws IllegalArgumentException{
-        if (Off.getOffById(offId) == null) {
-            addOffRequest.setOffID(offId);
-        }
-        else {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public void addOffStartTime(AddOffRequest addOffRequest, Date startTime) {
-        addOffRequest.setStartTime(startTime);
-    }
-
-    public void addOffEndTime(AddOffRequest addOffRequest, Date endTime) {
-        addOffRequest.setEndTime(endTime);
-    }
-
-    public void addOffAmount(AddOffRequest addOffRequest, String offAmount) throws InputMismatchException{
-        if (offAmount.matches("\\d+")) {
-            addOffRequest.setOffAmount(Integer.parseInt(offAmount));
-        }
-        else {
-            throw new InputMismatchException();
-        }
-    }
-
-    public EditOffRequest makeNewEditOffRequest(String offID) throws NullPointerException {
-        if (Off.getOffById(offID) == null) {
+    public EditOffRequest makeNewEditOffRequest(String offID) throws NullPointerException, IllegalArgumentException {
+        Off off = Off.getOffById(offID);
+        if (off == null) {
             throw new NullPointerException();
         }
-        else {
-            return new EditOffRequest(Off.getOffById(offID));
-        }
-    }
-
-    public void editOffId(EditOffRequest editOffRequest, String offId) throws IllegalArgumentException{
-        if (Off.getOffById(offId) == null) {
-            editOffRequest.setOffID(offId);
+        else if (this.seller.getOffs().contains(off)) {
+            return new EditOffRequest();
         }
         else {
             throw new IllegalArgumentException();
         }
     }
 
-    public void editOffStartTime(EditOffRequest editOffRequest, Date startTime) {
-        editOffRequest.setStartTime(startTime);
+    public void setOffId(EditAddOffRequest editAddOffRequest, String offId) throws IllegalArgumentException{
+        if (Off.getOffById(offId) == null) {
+            editAddOffRequest.setOffID(offId);
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
     }
 
-    public void editOffEndTime(EditOffRequest editOffRequest, Date endTime) {
-        editOffRequest.setEndTime(endTime);
+    public void setOffStartTime(EditAddOffRequest editAddOffRequest, Date startTime) {
+        editAddOffRequest.setStartTime(startTime);
     }
 
-    public void editOffAmount(EditOffRequest editOffRequest, String offAmount) throws InputMismatchException{
+    public void setOffEndTime(EditAddOffRequest editAddOffRequest, Date endTime) {
+        editAddOffRequest.setEndTime(endTime);
+    }
+
+    public void setOffAmount(EditAddOffRequest editAddOffRequest, String offAmount) throws InputMismatchException{
         if (offAmount.matches("\\d+")) {
-            editOffRequest.setOffAmount(Integer.parseInt(offAmount));
+            editAddOffRequest.setOffAmount(Integer.parseInt(offAmount));
         }
         else {
             throw new InputMismatchException();

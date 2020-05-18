@@ -36,12 +36,16 @@ public class EditOffMenu extends Menu {
         }
         try {
             this.editOffRequest = sellerProfileManager.makeNewEditOffRequest(offID);
+            super.show();
         }
         catch (NullPointerException e) {
             System.out.println("There is no Off with this ID.");
             this.show();
         }
-        super.show();
+        catch (IllegalArgumentException e) {
+            System.out.println("You don't have this off.");
+            this.show();
+        }
     }
 
     private Menu getEditOffID() {
@@ -56,7 +60,7 @@ public class EditOffMenu extends Menu {
                     loginAndRegisterManager.logoutUser();
                 }
                 try {
-                    sellerProfileManager.editOffId(editOffRequest, offID);
+                    sellerProfileManager.setOffId(editOffRequest, offID);
                     System.out.println("Off ID " + offID + " successfully added to your request.");
                 }
                 catch (IllegalArgumentException e) {
@@ -76,7 +80,7 @@ public class EditOffMenu extends Menu {
                 if (offStartTime == null){
                     execute();
                 }
-                sellerProfileManager.editOffStartTime(editOffRequest, offStartTime);
+                sellerProfileManager.setOffStartTime(editOffRequest, offStartTime);
                 System.out.println("Off Start Time " + offStartTime + " successfully added to your request.");
                 this.parentMenu.execute();
             }
@@ -92,7 +96,7 @@ public class EditOffMenu extends Menu {
                 if (offEndTime == null){
                     execute();
                 }
-                sellerProfileManager.editOffEndTime(editOffRequest, offEndTime);
+                sellerProfileManager.setOffEndTime(editOffRequest, offEndTime);
                 System.out.println("Off End Time " + offEndTime + " successfully added to your request.");
                 this.parentMenu.execute();
             }
@@ -111,7 +115,7 @@ public class EditOffMenu extends Menu {
                     loginAndRegisterManager.logoutUser();
                 }
                 try {
-                    sellerProfileManager.editOffAmount(editOffRequest, offAmount);
+                    sellerProfileManager.setOffAmount(editOffRequest, offAmount);
                     System.out.println("Off Amount " + offAmount + " successfully added to your request.");
                 }
                 catch (InputMismatchException e) {

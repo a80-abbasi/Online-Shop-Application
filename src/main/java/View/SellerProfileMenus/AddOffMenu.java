@@ -38,7 +38,7 @@ public class AddOffMenu extends Menu {
                     loginAndRegisterManager.logoutUser();
                 }
                 try {
-                    sellerProfileManager.addOffId(addOffRequest, offID);
+                    sellerProfileManager.setOffId(addOffRequest, offID);
                     System.out.println("Off ID " + offID + " successfully added to your request.");
                 }
                 catch (IllegalArgumentException e) {
@@ -58,7 +58,7 @@ public class AddOffMenu extends Menu {
                 if (offStartTime == null){
                     execute();
                 }
-                sellerProfileManager.addOffStartTime(addOffRequest, offStartTime);
+                sellerProfileManager.setOffStartTime(addOffRequest, offStartTime);
                 System.out.println("Off Start Time " + offStartTime + " successfully added to your request.");
                 this.parentMenu.execute();
             }
@@ -74,7 +74,7 @@ public class AddOffMenu extends Menu {
                 if (offEndTime == null){
                     execute();
                 }
-                sellerProfileManager.addOffEndTime(addOffRequest, offEndTime);
+                sellerProfileManager.setOffEndTime(addOffRequest, offEndTime);
                 System.out.println("Off End Time " + offEndTime + " successfully added to your request.");
                 this.parentMenu.execute();
             }
@@ -93,7 +93,7 @@ public class AddOffMenu extends Menu {
                     loginAndRegisterManager.logoutUser();
                 }
                 try {
-                    sellerProfileManager.addOffAmount(addOffRequest, offAmount);
+                    sellerProfileManager.setOffAmount(addOffRequest, offAmount);
                     System.out.println("Off Amount " + offAmount + " successfully added to your request.");
                 }
                 catch (InputMismatchException e) {
