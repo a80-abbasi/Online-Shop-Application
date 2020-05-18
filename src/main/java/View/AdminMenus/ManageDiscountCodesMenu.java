@@ -3,8 +3,10 @@ package View.AdminMenus;
 import Controller.AdminProfileManager;
 import Model.Account.Discount;
 import View.Menu;
+import View.SellerProfileMenus.AddOffMenu;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class ManageDiscountCodesMenu extends Menu {
@@ -40,9 +42,9 @@ public class ManageDiscountCodesMenu extends Menu {
                 System.out.println("Enter the discount code:");
                 String discountCode = scanner.nextLine();
                 System.out.println("Enter start time:");
-                String startTime = scanner.nextLine();
+                Date startTime = AddOffMenu.getDate(parentMenu);
                 System.out.println("Enter end time:");
-                String endTime = scanner.nextLine();
+                Date endTime = AddOffMenu.getDate(parentMenu);
                 System.out.println("Enter discountPercent:");
                 int discountPercent = Integer.parseInt(scanner.nextLine());
                 System.out.println("Enter maximum possible discount:");

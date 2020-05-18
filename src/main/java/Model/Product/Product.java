@@ -92,6 +92,10 @@ public class Product {
         }
     }
 
+    public Off getOff() {
+        return off;
+    }
+
     public String getProductId() {
         return productId;
     }
