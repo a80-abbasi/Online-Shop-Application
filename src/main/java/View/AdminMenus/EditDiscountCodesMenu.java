@@ -73,6 +73,7 @@ public class EditDiscountCodesMenu extends Menu {
         };
     }
 
+    //todo: make StartTime a Date instead of String
     private Menu getEditStartTime() {
         return new Menu("Edit Start Time", this) {
             @Override
@@ -108,6 +109,7 @@ public class EditDiscountCodesMenu extends Menu {
         };
     }
 
+    //todo: make EndTime a Date instead of String
     private Menu getEditEndTime() {
         return new Menu("Edit End Time", this) {
             @Override

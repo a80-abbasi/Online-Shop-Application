@@ -21,8 +21,6 @@ public class SellerProfileMenu extends Menu {
         subMenus.add(getViewCompanyInformationMenu());
         subMenus.add(getViewSalesHistoryMenu());
         subMenus.add(new ManageProductsMenu(this, sellerProfileManager));
-        subMenus.add(new AddProductMenu(this, sellerProfileManager));
-        subMenus.add(getRemoveProductMenu());
         subMenus.add(getShowCategoriesMenu());
         subMenus.add(new ViewOffsMenu(this, sellerProfileManager));
         subMenus.add(getViewBalanceMenu());
@@ -48,38 +46,8 @@ public class SellerProfileMenu extends Menu {
                 System.out.println(this.getName() + ":");
                 for (String saleHistory : sellerProfileManager.getSalesHistory()) {
                     System.out.print(saleHistory + ", ");
-                }
-                System.out.println("1. Logout");
-                System.out.println("2. Back");
-            }
-        };
-    }
-
-    public Menu getRemoveProductMenu() {
-        return new Menu("Remove Product Menu", this) {
-            @Override
-            public void show() {
-                System.out.println(this.getName() + ":");
-                System.out.println("Enter (productId) to remove a product:");
-            }
-
-            @Override
-            public void execute() {
-                show();
-                String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("Back")) {
-                    this.parentMenu.execute();
-                } else if (input.equalsIgnoreCase("Logout")) {
-                    loginAndRegisterManager.logoutUser();
-                } else {
-                    if (SellerProfileManager.isProductIdFormatValid(input)) {
-                        sellerProfileManager.removeProduct(input);
-                        System.out.println("Your product removed successfully");
-                        parentMenu.execute();
-                    } else {
-                        System.out.println("ProductID is Invalid");
-                        this.execute();
-                    }
+                    System.out.println("1. Logout");
+                    System.out.println("2. Back");
                 }
             }
         };

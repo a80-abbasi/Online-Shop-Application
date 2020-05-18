@@ -17,6 +17,7 @@ public class Product {
     private double price;
     private int existingNumber;
     private Category productCategory;
+    private HashMap<String, Integer> specialFeatures;
     private String explanations;
     private Discount discount;
     private ArrayList<Score> allScores;
@@ -25,7 +26,6 @@ public class Product {
     private int visitNumber;
     private Date timeOfCreation;
     private ArrayList<Customer> productBuyers;
-    private HashMap<String, Integer> specialFeatures;
 
     private static ArrayList<String> productFields = new ArrayList<>();
     static {
@@ -46,7 +46,7 @@ public class Product {
     }
 
     public Product (String productId, ProductStatus productStatus, String productName, String companyName, double price,
-                    Seller seller, int existingNumber) {
+                    Seller seller, int existingNumber, Category productCategory, HashMap<String, Integer> specialFeatures) {
         this.productId = productId;
         this.productStatus = productStatus;
         this.productName = productName;
@@ -54,13 +54,14 @@ public class Product {
         this.price = price;
         this.productSeller = seller;
         this.existingNumber = existingNumber;
-        specialFeatures = new HashMap<>();
+        this.productCategory = productCategory;
+        this.specialFeatures = specialFeatures;
         timeOfCreation = new Date();
         allProducts.add(this);
     }
 
     public Product() {
-        this("", null, "", "", 0, null, 0);
+        this("", null, "", "", 0, null, 0, null, null);
     }
 
     public HashMap<String, Integer> getSpecialFeatures() {

@@ -32,6 +32,15 @@ public class SellerProfileManager extends ProfileManager {
         return salesHistory;
     }
 
+    public ArrayList<String> getSellerProducts() {
+        ArrayList<Product> sellerProducts = seller.getProducts();
+        ArrayList<String> sellerProductsIds = new ArrayList<>();
+        for (Product product : sellerProducts) {
+            sellerProductsIds.add(product.getProductId());
+        }
+        return sellerProductsIds;
+    }
+
     public Product getProductByID(String id) {
         return Product.getProductByID(id);
     }
@@ -53,104 +62,8 @@ public class SellerProfileManager extends ProfileManager {
         return allBuyersUsernameAndPhoneNumber;
     }
 
-    public AddProductRequest addProductRequest() {
-       return new AddProductRequest();
-    }
-
-    public void addProductId(AddProductRequest addProductRequest, String productId) throws IllegalArgumentException {
-        if (Product.getProductByID(productId) != null) {
-            throw new IllegalArgumentException();
-        }
-        addProductRequest.setProductId(productId);
-    }
-
-    public void addProductName(AddProductRequest addProductRequest, String productName) {
-        addProductRequest.setProductName(productName);
-    }
-
-    public void addProductCompanyName(AddProductRequest addProductRequest, String companyName) {
-        addProductRequest.setCompanyName(companyName);
-    }
-
-    public void addProductPrice(AddProductRequest addProductRequest, String producePrice) throws InputMismatchException {
-        if (producePrice.matches("\\d+\\.?\\d.")) {
-            addProductRequest.setPrice(Double.parseDouble(producePrice));
-        }
-        else {
-            throw new InputMismatchException();
-        }
-    }
-
-    public void addExistingNumberOfProduct(AddProductRequest addProductRequest, String existingNumber) throws InputMismatchException {
-        if (existingNumber.matches("\\d+")) {
-            addProductRequest.setExistingNumber(Integer.parseInt(existingNumber));
-        }
-        else {
-            throw new InputMismatchException();
-        }
-    }
-
-    public void addProductSeller(AddProductRequest addProductRequest, String sellerUsername) throws NullPointerException, InputMismatchException {
-        Account account = Account.getAccountByUsername(sellerUsername);
-        if (account == null) {
-            throw new NullPointerException();
-        }
-        else if (account instanceof Seller) {
-            addProductRequest.setProductSeller((Seller) account);
-        }
-        else {
-            throw new InputMismatchException();
-        }
-    }
-
-    public EditProductRequest makeNewEditProductRequest(String productId) {
-        return new EditProductRequest(Product.getProductByID(productId));
-    }
-
-    public void editProductId(EditProductRequest editProductRequest, String productId) throws IllegalArgumentException {
-        if (Product.getProductByID(productId) != null) {
-            throw new IllegalArgumentException();
-        }
-        editProductRequest.setProductId(productId);
-    }
-
-    public void editProductName(EditProductRequest editProductRequest, String productName) {
-        editProductRequest.setProductName(productName);
-    }
-
-    public void editProductCompanyName(EditProductRequest editProductRequest, String companyName) {
-        editProductRequest.setCompanyName(companyName);
-    }
-
-    public void editProductPrice(EditProductRequest editProductRequest, String producePrice) throws InputMismatchException {
-        if (producePrice.matches("\\d+\\.?\\d.")) {
-            editProductRequest.setPrice(Double.parseDouble(producePrice));
-        }
-        else {
-            throw new InputMismatchException();
-        }
-    }
-
-    public void editExistingNumberOfProduct(EditProductRequest editProductRequest, String existingNumber) throws InputMismatchException {
-        if (existingNumber.matches("\\d+")) {
-            editProductRequest.setExistingNumber(Integer.parseInt(existingNumber));
-        }
-        else {
-            throw new InputMismatchException();
-        }
-    }
-
-    public void editProductSeller(EditProductRequest editProductRequest, String sellerUsername) throws NullPointerException, InputMismatchException {
-        Account account = Account.getAccountByUsername(sellerUsername);
-        if (account == null) {
-            throw new NullPointerException();
-        }
-        else if (account instanceof Seller) {
-            editProductRequest.setProductSeller((Seller) account);
-        }
-        else {
-            throw new InputMismatchException();
-        }
+    public static ArrayList<String> getAllProductFields() {
+        return Product.getProductFields();
     }
 
     public static boolean isProductIdFormatValid(String productId) {
@@ -160,6 +73,86 @@ public class SellerProfileManager extends ProfileManager {
         else {
             return true;
         }
+    }
+
+    public AddProductRequest addProductRequest() {
+       return new AddProductRequest();
+    }
+
+    public EditProductRequest makeNewEditProductRequest(String productId) {
+        return new EditProductRequest(Product.getProductByID(productId));
+    }
+
+    public void setProductId(EditAddProductRequest editAddProductRequest, String productId) throws IllegalArgumentException {
+        if (Product.getProductByID(productId) != null) {
+            throw new IllegalArgumentException();
+        }
+        editAddProductRequest.setProductId(productId);
+    }
+
+    public void setProductName(EditAddProductRequest editAddProductRequest, String productName) {
+        editAddProductRequest.setProductName(productName);
+    }
+
+    public void setProductCompanyName(EditAddProductRequest editAddProductRequest, String companyName) {
+        editAddProductRequest.setCompanyName(companyName);
+    }
+
+    public void setProductPrice(EditAddProductRequest editAddProductRequest, String producePrice) throws InputMismatchException {
+        if (producePrice.matches("\\d+\\.?\\d.")) {
+            editAddProductRequest.setPrice(Double.parseDouble(producePrice));
+        }
+        else {
+            throw new InputMismatchException();
+        }
+    }
+
+    public void setExistingNumberOfProduct(EditAddProductRequest editAddProductRequest, String existingNumber) throws InputMismatchException {
+        if (existingNumber.matches("\\d+")) {
+            editAddProductRequest.setExistingNumber(Integer.parseInt(existingNumber));
+        }
+        else {
+            throw new InputMismatchException();
+        }
+    }
+
+    public void setProductSeller(EditAddProductRequest editAddProductRequest, String sellerUsername) throws NullPointerException, InputMismatchException {
+        Account account = Account.getAccountByUsername(sellerUsername);
+        if (account == null) {
+            throw new NullPointerException();
+        }
+        else if (account instanceof Seller) {
+            editAddProductRequest.setProductSeller((Seller) account);
+        }
+        else {
+            throw new InputMismatchException();
+        }
+    }
+
+    public void setProductCategory(EditAddProductRequest editAddProductRequest, String categoryName) throws NullPointerException{
+        Category category = Category.getCategoryByName(categoryName);
+        if (category == null) {
+            throw new NullPointerException();
+        }
+        editAddProductRequest.setProductCategory(category);
+        HashMap<String, Integer> productSpecialFeatures = new HashMap<>();
+        for (String specialFeature : category.getSpecialFeatures()) {
+            productSpecialFeatures.put(specialFeature, 0);
+        }
+        editAddProductRequest.setProductSpecialFeatures(productSpecialFeatures);
+    }
+
+    public Category getProductCategoryInRequest(EditAddProductRequest editAddProductRequest) {
+        return editAddProductRequest.getProductCategory();
+    }
+
+    public ArrayList<String> getProductCategorySpecialFeatures(EditAddProductRequest editAddProductRequest) {
+        return editAddProductRequest.getProductCategory().getSpecialFeatures();
+    }
+
+    public void setValueForProductSpecialFeature(EditAddProductRequest editAddProductRequest, int keyIndex, int value) {
+        Category category = editAddProductRequest.getProductCategory();
+        editAddProductRequest.setProductSpecialFeatureValue(category.getSpecialFeatures().get(keyIndex), value);
     }
 
     public void removeProduct(String productId) {
@@ -218,6 +211,7 @@ public class SellerProfileManager extends ProfileManager {
     public void editOffStartTime(EditOffRequest editOffRequest, Date startTime) {
         editOffRequest.setStartTime(startTime);
     }
+
     public void editOffEndTime(EditOffRequest editOffRequest, Date endTime) {
         editOffRequest.setEndTime(endTime);
     }
@@ -231,6 +225,24 @@ public class SellerProfileManager extends ProfileManager {
         }
     }
 
+    public static boolean isInputInOffFields(String input) {
+        for (int i = 0; i < Off.getOffFields().size(); i++) {
+            if (Off.getOffFields().get(i).equals(input)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isInputInProductFields(String input) {
+        for (int i = 0; i < Product.getProductFields().size(); i++) {
+            if (Product.getProductFields().get(i).equals(input)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean isValidInputForOffID (String ID) {
         for (String offID : Off.getAllOffIds()) {
             if (offID.equals(ID)) {
@@ -239,6 +251,7 @@ public class SellerProfileManager extends ProfileManager {
         }
         return false;
     }
+
 
     public HashMap<String, String> getOffsAmountAndID() {
         HashMap<String, String> offsAmountAndID = new HashMap<>();
@@ -260,6 +273,11 @@ public class SellerProfileManager extends ProfileManager {
         return Off.getOffById(offID);
     }
 
+    public String getOffStatus(String offId) {
+        //todo:
+        return "CHANGE THIS MESSAGE";
+    }
+
     public static ArrayList<String> getOffFields() {
         return Off.getOffFields();
     }
@@ -270,45 +288,7 @@ public class SellerProfileManager extends ProfileManager {
     }
 
     public int viewBalance(Account account) {
-        return seller.getBalance();
+        return 0;
     }
-
-    public static boolean isInputInOffFields(String input) {
-        for (int i = 0; i < Off.getOffFields().size(); i++) {
-            if (Off.getOffFields().get(i).equals(input)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean isInputInProductFields(String input) {
-        for (int i = 0; i < Product.getProductFields().size(); i++) {
-            if (Product.getProductFields().get(i).equals(input)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static ArrayList<String> getAllProductFields() {
-        return Product.getProductFields();
-    }
-
-    public ArrayList<String> getSellerProducts() {
-        ArrayList<Product> sellerProducts = seller.getProducts();
-        ArrayList<String> sellerProductsIds = new ArrayList<>();
-        for (Product product : sellerProducts) {
-            sellerProductsIds.add(product.getProductId());
-        }
-        return sellerProductsIds;
-    }
-
-    public String getOffStatus(String offId) {
-        //todo:
-        return "CHANGE THIS MESSAGE";
-    }
-
-
 
 }

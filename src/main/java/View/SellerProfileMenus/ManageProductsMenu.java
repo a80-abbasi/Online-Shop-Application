@@ -15,7 +15,9 @@ public class ManageProductsMenu extends Menu {
         ArrayList<Menu> subMenus = new ArrayList<>();
         subMenus.add(getViewMenu());
         subMenus.add(getViewBuyersMenu());
+        subMenus.add(new AddProductMenu(this, sellerProfileManager));
         subMenus.add(new EditProductMenu(this, sellerProfileManager));
+        subMenus.add(getRemoveProductMenu());
         this.setSubMenus(subMenus);
     }
 
@@ -73,7 +75,36 @@ public class ManageProductsMenu extends Menu {
                 }
                 System.out.println("There is no product with this productID");
                 this.execute();
+            }
+        };
+    }
 
+    public Menu getRemoveProductMenu() {
+        return new Menu("Remove Product Menu", this) {
+            @Override
+            public void show() {
+                System.out.println(this.getName() + ":");
+                System.out.println("Enter (productId) to remove a product, (Back) to return or (Logout) to leave your account:");
+            }
+
+            @Override
+            public void execute() {
+                show();
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("Back")) {
+                    this.parentMenu.execute();
+                } else if (input.equalsIgnoreCase("Logout")) {
+                    loginAndRegisterManager.logoutUser();
+                } else {
+                    if (SellerProfileManager.isProductIdFormatValid(input)) {
+                        sellerProfileManager.removeProduct(input);
+                        System.out.println("Your product removed successfully");
+                        parentMenu.execute();
+                    } else {
+                        System.out.println("ProductID is Invalid");
+                        this.execute();
+                    }
+                }
             }
         };
     }

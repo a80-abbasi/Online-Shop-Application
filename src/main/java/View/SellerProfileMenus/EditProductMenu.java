@@ -21,6 +21,8 @@ public class EditProductMenu extends Menu {
         submenus.add(getEditPrice());
         submenus.add(getEditExistingNumberOfProduct());
         submenus.add(getEditSellerOfProduct());
+        submenus.add(getEditProductCategory());
+        submenus.add(getEditSpecialFeatureValues());
         this.setSubMenus(submenus);
     }
 
@@ -54,7 +56,7 @@ public class EditProductMenu extends Menu {
                     loginAndRegisterManager.logoutUser();
                 }
                 try {
-                    sellerProfileManager.editProductId(editProductRequest, productId);
+                    sellerProfileManager.setProductId(editProductRequest, productId);
                     System.out.println("Product ID " + productId + " successfully added to your request.");
                 }
                 catch (IllegalArgumentException e) {
@@ -76,7 +78,7 @@ public class EditProductMenu extends Menu {
                 } else if (productName.equalsIgnoreCase("logout")) {
                     loginAndRegisterManager.logoutUser();
                 }
-                sellerProfileManager.editProductName(editProductRequest, productName);
+                sellerProfileManager.setProductName(editProductRequest, productName);
                 System.out.println("Product Name " + productName + " successfully added to your request.");
                 this.parentMenu.execute();
             }
@@ -89,12 +91,13 @@ public class EditProductMenu extends Menu {
             public void execute() {
                 System.out.println("Enter Company Name:");
                 String companyName = scanner.nextLine();
+                sellerProfileManager.setProductCompanyName(editProductRequest, companyName);
                 if (companyName.equalsIgnoreCase("back")) {
                     parentMenu.execute();
                 } else if (companyName.equalsIgnoreCase("logout")) {
                     loginAndRegisterManager.logoutUser();
                 }
-                sellerProfileManager.editProductCompanyName(editProductRequest, companyName);
+                sellerProfileManager.setProductCompanyName(editProductRequest, companyName);
                 System.out.println("Company Name " + companyName + " successfully added to your request");
                 this.parentMenu.execute();
             }
@@ -113,7 +116,7 @@ public class EditProductMenu extends Menu {
                     loginAndRegisterManager.logoutUser();
                 }
                 try {
-                    sellerProfileManager.editProductPrice(editProductRequest, productPrice);
+                    sellerProfileManager.setProductPrice(editProductRequest, productPrice);
                     System.out.println("Product Price " + productPrice + " successfully added to your request");
                 }
                 catch (InputMismatchException e) {
@@ -136,7 +139,7 @@ public class EditProductMenu extends Menu {
                     loginAndRegisterManager.logoutUser();
                 }
                 try {
-                    sellerProfileManager.editExistingNumberOfProduct(editProductRequest, existingNumber);
+                    sellerProfileManager.setExistingNumberOfProduct(editProductRequest, existingNumber);
                     System.out.println("Existing Number Of Product " + existingNumber + " successfully added to your request.");
                 }
                 catch (InputMismatchException e) {
@@ -159,7 +162,7 @@ public class EditProductMenu extends Menu {
                     loginAndRegisterManager.logoutUser();
                 }
                 try {
-                    sellerProfileManager.editProductSeller(editProductRequest, sellerUsername);
+                    sellerProfileManager.setProductSeller(editProductRequest, sellerUsername);
                     System.out.println("Product Seller " + sellerUsername + " successfully added to your request.");
                 }
                 catch (NullPointerException n) {
@@ -169,6 +172,66 @@ public class EditProductMenu extends Menu {
                     System.out.println("This username doesn't belong to a seller.");
                 }
                 this.parentMenu.execute();
+            }
+        };
+    }
+
+    private Menu getEditProductCategory() {
+        return new Menu("Edit Product Category", this) {
+            @Override
+            public void execute() {
+                System.out.println("Enter Category Name or (back) to return:");
+                String categoryName = scanner.nextLine();
+                if (categoryName.equalsIgnoreCase("back")) {
+                    this.parentMenu.execute();
+                }
+                else {
+                    try {
+                        sellerProfileManager.setProductCategory(editProductRequest, categoryName);
+                        System.out.println("Category " + categoryName + " successfully added to your request.");
+                    } catch (NullPointerException e) {
+                        System.out.println("There is no category with this name.");
+                    }
+                    this.execute();
+                }
+            }
+        };
+    }
+
+    private Menu getEditSpecialFeatureValues() {
+        return new Menu("Edit Special Feature Values Menu", this) {
+            @Override
+            public void execute() {
+                if (sellerProfileManager.getProductCategoryInRequest(editProductRequest) == null) {
+                    System.out.println("You must first Edit category for this product.");
+                    getEditProductCategory().execute();
+                }
+                else {
+                    ArrayList<String> categorySpecialFeatures = sellerProfileManager.getProductCategorySpecialFeatures(editProductRequest);
+                    for (int i = 0 ; i < categorySpecialFeatures.size() ; i++) {
+                        System.out.println((i + 1) + ". " + categorySpecialFeatures.get(i));
+                    }
+                    System.out.println("Enter the number of feature or (back) to return:");
+                    String index = scanner.nextLine();
+                    if (index.equalsIgnoreCase("back")) {
+                        this.parentMenu.execute();
+                    }
+                    else if (index.matches("\\d+") && Integer.parseInt(index) <= categorySpecialFeatures.size()) {
+                        System.out.println("Now enter value for this specialFeature:");
+                        String value = scanner.nextLine();
+                        if (value.matches("\\d+")) {
+                            sellerProfileManager.setValueForProductSpecialFeature(editProductRequest, Integer.parseInt(index), Integer.parseInt(value));
+                            System.out.println("Value " + Integer.parseInt(value) + " added to " + categorySpecialFeatures.get(Integer.parseInt(index)));
+                        }
+                        else {
+                            System.out.println("You must enter an integer number");
+                        }
+                    }
+                    else {
+                        System.out.println("You must enter the index of the feature.");
+                    }
+                }
+                this.execute();
             }
         };
     }
