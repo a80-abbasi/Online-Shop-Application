@@ -24,6 +24,15 @@ public class ProductsManager {
         Category.showAllCategories();
     }
 
+    public Category getCategoryFilter(){
+        return categoryFilter;
+    }
+
+    public void useSortBySpecialFeature(String feature) {
+        currentSort = SortType.SORT_BY_SPECIAL_FEATURE;
+        currentSortMode = new ProductComparatorForSpecialFeature(feature);
+    }
+
     public ArrayList<Product> showProducts () {
         ArrayList<Product> sortedFilteredProducts = new ArrayList<>();
         for (Product product : allProducts) {
@@ -91,14 +100,17 @@ public class ProductsManager {
     }
 
     public void useSortByTime(){
+        currentSort = SortType.SORT_BY_TIME;
         currentSortMode = new ProductComparatorForTime();
     }
 
     public void useSortByScore(){
+        currentSort = SortType.SORT_BY_SCORE;
         currentSortMode = new ProductComparatorForScore();
     }
 
     public void useSortByVisit(){
+        currentSort = SortType.SORT_BY_VISIT;
         currentSortMode = new ProductComparatorForVisitNumber();
     }
 
@@ -158,5 +170,4 @@ public class ProductsManager {
         return 0;
     }
 
-    //public static double
 }
