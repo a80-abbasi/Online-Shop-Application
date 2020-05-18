@@ -12,6 +12,8 @@ public class DisablingFiltersMenu extends Menu
         ArrayList<Menu> subMenus = new ArrayList<>();
         subMenus.add(getDisableCategoryFilterMenu());
         subMenus.add(getDisableNameFilteringMenu());
+        subMenus.add(getDisableMaximumPriceFilteringMenu());
+        subMenus.add(getDisableMinimumPriceFilteringMenu());
         subMenus.add(getDisableExistenceFilteringMenu());
         this.setSubMenus(subMenus);
     }
@@ -31,6 +33,26 @@ public class DisablingFiltersMenu extends Menu
             @Override
             public void execute() {
                 productsManager.disableNameFiltering();
+                parentMenu.execute();
+            }
+        };
+    }
+
+    private Menu getDisableMaximumPriceFilteringMenu(){
+        return new Menu("Disable Maximum Price Filtering", this) {
+            @Override
+            public void execute() {
+                productsManager.disableMaximumPriceFilter();
+                parentMenu.execute();
+            }
+        };
+    }
+
+    private Menu getDisableMinimumPriceFilteringMenu(){
+        return new Menu("Disable Minimum Price Filtering", this) {
+            @Override
+            public void execute() {
+                productsManager.disableMinimumPriceFilter();
                 parentMenu.execute();
             }
         };

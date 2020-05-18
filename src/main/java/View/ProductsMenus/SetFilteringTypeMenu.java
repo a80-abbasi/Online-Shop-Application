@@ -11,6 +11,8 @@ public class SetFilteringTypeMenu extends Menu {
         ArrayList<Menu> subMenus = new ArrayList<>();
         subMenus.add(getCategoryFilterMenu());
         subMenus.add(getNameFilteringMenu());
+        subMenus.add(getMaximumPriceFilteringMenu());
+        subMenus.add(getMinimumPriceFilteringMenu());
         subMenus.add(getExistenceFilteringMenu());
         this.setSubMenus(subMenus);
     }
@@ -36,11 +38,47 @@ public class SetFilteringTypeMenu extends Menu {
         };
     }
 
-    private Menu getNameFilteringMenu(){
+    private Menu getNameFilteringMenu() {
         return new Menu(FilteringType.NAME_FILTER.getFilterType(), this) {
             @Override
             public void execute() {
                 productsManager.addNameFiltering(scanner.nextLine().trim());
+                parentMenu.execute();
+            }
+        };
+    }
+
+    private Menu getMaximumPriceFilteringMenu(){
+        return new Menu(FilteringType.MAXIMUM_PRICE_FILTER.getFilterType(), this) {
+            @Override
+            public void execute() {
+                System.out.println("Enter maximum price:");
+                String max = scanner.nextLine().trim();
+                int maxPrice;
+                if (max.matches("\\d+") && (maxPrice = Integer.parseInt(max)) > 0){
+                    productsManager.addMaximumPriceFilter(maxPrice);
+                }
+                else {
+                    System.out.println("Wrong Input");
+                }
+                parentMenu.execute();
+            }
+        };
+    }
+
+    private Menu getMinimumPriceFilteringMenu(){
+        return new Menu(FilteringType.MINIMUM_PRICE_FILTER.getFilterType(), this) {
+            @Override
+            public void execute() {
+                System.out.println("Enter minimum price:");
+                String min = scanner.nextLine().trim();
+                int minPrice;
+                if (min.matches("\\d+") && (minPrice = Integer.parseInt(min)) > 0){
+                    productsManager.addMinimumPriceFilter(minPrice);
+                }
+                else {
+                    System.out.println("Wrong Input");
+                }
                 parentMenu.execute();
             }
         };

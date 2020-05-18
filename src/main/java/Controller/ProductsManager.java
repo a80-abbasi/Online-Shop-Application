@@ -19,6 +19,8 @@ public class ProductsManager {
     private String nameFilter;
     private Category categoryFilter;
     private boolean existenceFilter;
+    private int maximumPriceFilter;
+    private int minimumPriceFilter;
 
     public void showAllCategories () {
         Category.showAllCategories();
@@ -35,14 +37,16 @@ public class ProductsManager {
 
     public ArrayList<Product> showProducts () {
         ArrayList<Product> sortedFilteredProducts = new ArrayList<>();
-        for (Product product : allProducts) {
+        ArrayList<Product> products;
+        if (categoryFilter != null){
+            products = categoryFilter.getProducts();
+        }
+        else {
+            products = allProducts;
+        }
+        for (Product product : products) {
             if (nameFilter != null) {
                 if (!getMatcher(product.getProductName(), "(?i)" + nameFilter).find()){
-                    continue;
-                }
-            }
-            if (categoryFilter != null){
-                if (!product.getProductCategory().equals(categoryFilter)){
                     continue;
                 }
             }
@@ -51,11 +55,22 @@ public class ProductsManager {
                     continue;
                 }
             }
+            if (maximumPriceFilter > 0){
+                if (product.getPrice() > maximumPriceFilter){
+                    continue;
+                }
+            }
+            if (minimumPriceFilter > 0){
+                if (product.getPrice() < minimumPriceFilter){
+                    continue;
+                }
+            }
             sortedFilteredProducts.add(product);
         }
         sortedFilteredProducts.sort(currentSortMode);
         return sortedFilteredProducts;
     }
+
 
     public void addCategoryFilter(String name) throws IllegalArgumentException{
         Category category = Category.getCategoryByName(name);
@@ -66,6 +81,30 @@ public class ProductsManager {
         if (!currentFilters.contains(FilteringType.CATEGORY_FILTER)){
             currentFilters.add(FilteringType.CATEGORY_FILTER);
         }
+    }
+
+    public void addMaximumPriceFilter(int maxPrice){
+        maximumPriceFilter = maxPrice;
+        if (!currentFilters.contains(FilteringType.MAXIMUM_PRICE_FILTER)) {
+            currentFilters.add(FilteringType.MAXIMUM_PRICE_FILTER);
+        }
+    }
+
+    public void addMinimumPriceFilter(int minPrice){
+        minimumPriceFilter = minPrice;
+        if (!currentFilters.contains(FilteringType.MINIMUM_PRICE_FILTER)) {
+            currentFilters.add(FilteringType.MINIMUM_PRICE_FILTER);
+        }
+    }
+
+    public void disableMaximumPriceFilter(){
+        currentFilters.remove(FilteringType.MAXIMUM_PRICE_FILTER);
+        maximumPriceFilter = 0;
+    }
+
+    public void disableMinimumPriceFilter(){
+        currentFilters.remove(FilteringType.MINIMUM_PRICE_FILTER);
+        minimumPriceFilter = 0;
     }
 
     public void disableCategoryFilter(){

@@ -77,6 +77,7 @@ public class SetSortTypeMenu extends Menu {
                 else {
                     System.out.println("you must use category filter in order to use sorting based on special features");
                 }
+                parentMenu.execute();
             }
         };
     }
