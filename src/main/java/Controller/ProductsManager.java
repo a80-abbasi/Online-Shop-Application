@@ -56,12 +56,12 @@ public class ProductsManager {
                 }
             }
             if (maximumPriceFilter > 0){
-                if (product.getPrice() > maximumPriceFilter){
+                if (product.getPriceWithOff() > maximumPriceFilter){
                     continue;
                 }
             }
             if (minimumPriceFilter > 0){
-                if (product.getPrice() < minimumPriceFilter){
+                if (product.getPriceWithOff() < minimumPriceFilter){
                     continue;
                 }
             }

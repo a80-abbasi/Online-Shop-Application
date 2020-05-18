@@ -89,6 +89,11 @@ public class Off {
         this.products = products;
     }
 
+    public boolean isAvailable(){
+        Date currentDate = new Date();
+        return currentDate.compareTo(startTime) >= 0 && currentDate.compareTo(endTime) <= 0;
+    }
+
     public static ArrayList<Off> getAllOffs() {
         return allOffs;
     }

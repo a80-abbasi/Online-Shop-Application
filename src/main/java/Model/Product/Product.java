@@ -234,6 +234,13 @@ public class Product {
         return productScore / allScores.size();
     }
 
+    public double getPriceWithOff(){
+        if (off != null && off.isAvailable()){
+            return price * (100 - off.getOffAmount()) / 100;
+        }
+        return price;
+    }
+
     public void setOff(Off off) {
         this.off = off;
     }
@@ -252,9 +259,10 @@ public class Product {
     }
 
     public void digest(){
-        System.out.printf("%s: %s%n%s: %f%n%s: %d %s: %f%n%s: %s%n%s: %s%n%s: %f%n%n",
+        System.out.printf("%s: %s%n%s: %f%n%s: %d%n%s: %d %s: %f%n%s: %s%n%s: %s%n%s: %f%n%n",
                 "explanations", explanations,
                 "price", price,
+                "Off Percentage", (off == null || !off.isAvailable() ? 0 : off.getOffAmount()),
                 "discount percentage", discount.getDiscountPercent(), "max discount amount", discount.getMaxPossibleDiscount(),
                 "category", productCategory.getName(),
                 "seller", productSeller.getName(),
@@ -267,7 +275,8 @@ public class Product {
                 "productName='" + productName + '\'' +
                 ", productId='" + productId + '\'' +
                 ", companyName='" + companyName + '\'' +
-                ", price=" + price +
+                ", Original Price=" + price +
+                ", price after off=" + getPriceWithOff() +
                 ", score=" + getTotalScore() +
                 ", 'does" + (existingNumber != 0 ? "" :  "not") + "exist'" +
                 '}';

@@ -94,6 +94,11 @@ public class Discount {
         return discountPerCustomer;
     }
 
+    public boolean isAvailable(){
+        Date currentDate = new Date();
+        return currentDate.compareTo(startTime) >= 0 && currentDate.compareTo(endTime) <= 0;
+    }
+
     @Override
     public String toString() {
         return null;
