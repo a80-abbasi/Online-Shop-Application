@@ -31,7 +31,7 @@ public class AddOffMenu extends Menu {
         return new Menu("Add Off ID", this) {
             @Override
             public void execute() {
-                System.out.println("Enter Off ID:");
+                System.out.println("Enter Off ID, (back) to return or (logout) to log out::");
                 String offID = scanner.nextLine();
                 if (offID.equalsIgnoreCase("back")) {
                     parentMenu.execute();
@@ -86,7 +86,7 @@ public class AddOffMenu extends Menu {
         return new Menu("Add Off Amount", this) {
             @Override
             public void execute() {
-                System.out.println("Enter Off Amount:");
+                System.out.println("Enter Off Amount, (back) to return or (logout) to log out::");
                 String offAmount = scanner.nextLine();
                 if (offAmount.equalsIgnoreCase("back")) {
                     parentMenu.execute();

@@ -27,7 +27,7 @@ public class EditProductMenu extends Menu {
 
     @Override
     public void show() {
-        System.out.println("Enter ID of Product you want to edit:");
+        System.out.println("Enter ID of Product you want to edit, (back) to return or (logout) to log out::");
         String productId = scanner.nextLine();
         if (productId.equalsIgnoreCase("back")) {
             parentMenu.execute();
@@ -52,7 +52,7 @@ public class EditProductMenu extends Menu {
         return new Menu("Edit ProductId", this) {
             @Override
             public void execute() {
-                System.out.println("Enter the Product ID:");
+                System.out.println("Enter the Product ID, (back) to return or (logout) to log out::");
                 String productId = scanner.nextLine();
                 if (productId.equalsIgnoreCase("back")) {
                     parentMenu.execute();
@@ -75,7 +75,7 @@ public class EditProductMenu extends Menu {
         return new Menu("Edit Product Name", this) {
             @Override
             public void execute() {
-                System.out.println("Enter Product Name:");
+                System.out.println("Enter Product Name, (back) to return or (logout) to log out::");
                 String productName = scanner.nextLine();
                 if (productName.equalsIgnoreCase("back")) {
                     parentMenu.execute();
@@ -93,7 +93,7 @@ public class EditProductMenu extends Menu {
         return new Menu("Edit Company Name", this) {
             @Override
             public void execute() {
-                System.out.println("Enter Company Name:");
+                System.out.println("Enter Company Name, (back) to return or (logout) to log out::");
                 String companyName = scanner.nextLine();
                 sellerProfileManager.setProductCompanyName(editProductRequest, companyName);
                 if (companyName.equalsIgnoreCase("back")) {
@@ -112,7 +112,7 @@ public class EditProductMenu extends Menu {
         return new Menu("Edit Price", this) {
             @Override
             public void execute() {
-                System.out.println("Enter Product Price:");
+                System.out.println("Enter Product Price, (back) to return or (logout) to log out::");
                 String productPrice = scanner.nextLine();
                 if (productPrice.equalsIgnoreCase("back")) {
                     parentMenu.execute();
@@ -135,7 +135,7 @@ public class EditProductMenu extends Menu {
         return new Menu("Edit Existing Number of Product", this) {
             @Override
             public void execute() {
-                System.out.println("Enter the Number Of Existing Products:");
+                System.out.println("Enter the Number Of Existing Products, (back) to return or (logout) to log out::");
                 String existingNumber = scanner.nextLine();
                 if (existingNumber.equalsIgnoreCase("back")) {
                     parentMenu.execute();

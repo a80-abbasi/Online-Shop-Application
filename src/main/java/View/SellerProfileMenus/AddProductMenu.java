@@ -30,7 +30,7 @@ public class AddProductMenu extends Menu {
         return new Menu("Add ProductId", this) {
             @Override
             public void execute() {
-                System.out.println("Enter the Product ID:");
+                System.out.println("Enter the Product ID, (back) to return or (logout) to log out::");
                 String productId = scanner.nextLine();
                 if (productId.equalsIgnoreCase("back")) {
                     parentMenu.execute();
