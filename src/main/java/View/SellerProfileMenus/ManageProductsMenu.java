@@ -43,7 +43,7 @@ public class ManageProductsMenu extends Menu {
                     this.parentMenu.execute();
                 } else if (input.equals("Logout")) {
                     loginAndRegisterManager.logoutUser();
-                } else if (ProductsManager.isValidInputForProductID(input)){
+                } else if (ProductsManager.isValidIDForProductID(input)){
                     System.out.println(sellerProfileManager.getProductByID(input));
                     this.execute();
                 }
@@ -69,7 +69,7 @@ public class ManageProductsMenu extends Menu {
                     this.parentMenu.execute();
                 } else if (input.equals("Logout")) {
                     loginAndRegisterManager.logoutUser();
-                } else if (ProductsManager.isValidInputForProductID(input)) {
+                } else if (ProductsManager.isValidIDForProductID(input)) {
                     System.out.println(sellerProfileManager.getProductBuyers(input));
                     this.execute();
                 }

@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Customer extends Account {
     private static ArrayList<Customer> allCustomers = new ArrayList<>();
     private static HashMap<Product, Integer> tmpCart = new HashMap<>();
-    private int balance;
+    private double balance;
     private HashMap<Product, Integer> cart;
     private ArrayList<BuyLog> buyLogs;
     private HashMap<Discount, Integer> usedDiscounts;
@@ -53,11 +53,11 @@ public class Customer extends Account {
         Customer.allCustomers = allCustomers;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int newBalance) {
+    public void setBalance(double newBalance) {
         this.balance = newBalance;
     }
 

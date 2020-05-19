@@ -1,7 +1,7 @@
 package Model.Account;
 
 public abstract class Log {
-    private String ID;
+    private String ID; // (seller or customer) userName + (buyLog or SellLog) size)
     private String date;
 
     public Log(String ID, String date) {

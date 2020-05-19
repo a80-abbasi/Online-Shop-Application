@@ -7,13 +7,13 @@ import java.util.ArrayList;
 public class Seller extends Account {
     private static ArrayList<Seller> allSellers = new ArrayList<>();
     private String nameOfCompany;
-    private int balance;
+    private double balance;
     private ArrayList<SellLog> sellLogs;
     private ArrayList<Product> products;
     private ArrayList<Off> offs;
 
     public Seller(String username, String password, String name, String lastName, String email, String phoneNumber, String nameOfCompany,
-                  int balance) {
+                  double balance) {
         super(username, password, name, lastName, email, phoneNumber);
         allSellers.add(this);
         this.nameOfCompany = nameOfCompany;
@@ -51,7 +51,7 @@ public class Seller extends Account {
         return offs;
     }
 
-    public int getBalance() {
+    public double getBalance() {
             return balance;
     }
 
@@ -59,7 +59,7 @@ public class Seller extends Account {
         this.nameOfCompany = nameOfCompany;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

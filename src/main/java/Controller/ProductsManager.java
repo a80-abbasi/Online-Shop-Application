@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Account.Account;
 import Model.Account.Customer;
+import Model.Account.Discount;
 import Model.Product.*;
 
 import java.util.ArrayList;
@@ -172,7 +173,7 @@ public class ProductsManager {
 
     public void addProductToCart(Product product, int number){
         Account account = Account.getLoggedInAccount();
-        if (account instanceof Customer){
+        if (account instanceof Customer) {
             Customer customer = (Customer) account;
             customer.addToCart(product, number);
         }
@@ -190,7 +191,7 @@ public class ProductsManager {
         return customer.getTotalPrice();
     }
 
-    public static boolean isValidInputForProductID(String ID) {
+    public static boolean isValidIDForProductID(String ID) {
         for (Product product : Product.getAllProducts()) {
             if (product.getProductId().equals(ID)) {
                 return true;
