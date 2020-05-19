@@ -1,5 +1,6 @@
 package View;
 
+import Controller.CustomerProfileManager;
 import Controller.LoginAndRegisterManager;
 import Controller.ProductsManager;
 
@@ -114,4 +115,54 @@ public abstract class Menu {
             execute();
         }
     }
+
+    public static String scan(Menu parentMenu) {
+        String input = scanner.nextLine();
+        if (input.equalsIgnoreCase("back")) {
+            parentMenu.execute();
+        } else if (input.equalsIgnoreCase("logout")) {
+            loginAndRegisterManager.logoutUser();
+        }
+        return input;
+    }
+
+    public static MyResult scanAdvance(int pageNumber, int startPage, Menu parentMenu) {
+        String input = scanner.nextLine();
+        if (input.equalsIgnoreCase("back")) {
+            if (pageNumber == startPage) {
+                parentMenu.execute();
+            }
+            return new MyResult(true, "-1", "");
+        } else if (input.equalsIgnoreCase("logout")) {
+            loginAndRegisterManager.logoutUser();
+        } else if (input.equalsIgnoreCase("next")) {
+            return new MyResult(true, "1", "");
+        }
+        return new MyResult(false, input, "");
+    }
+
+    public static final class MyResult {
+        private final boolean valid;
+        private final String  message;
+        private final String secondMessage;
+
+        public MyResult(boolean valid, String message, String secondMessage) {
+            this.valid = valid;
+            this.message = message;
+            this.secondMessage = secondMessage;
+        }
+
+        public boolean getValid() {
+            return valid;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public String getSecondMessage() {
+            return secondMessage;
+        }
+    }
+
 }
