@@ -35,6 +35,10 @@ public class ProductsManager {
         currentSortMode = new ProductComparatorForSpecialFeature(feature);
     }
 
+    public HashMap<String, Integer> getSpecialFeatures(Product product){
+        return product.getSpecialFeatures();
+    }
+
     public ArrayList<Product> showProducts () {
         ArrayList<Product> sortedFilteredProducts = new ArrayList<>();
         ArrayList<Product> products;
