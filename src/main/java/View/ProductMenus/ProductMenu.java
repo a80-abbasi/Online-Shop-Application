@@ -27,7 +27,12 @@ public class ProductMenu extends Menu {
         return new Menu("Attributes", this) {
             @Override
             public void execute() {
-                //todo: print attributes
+                product.digest();
+                System.out.println();
+
+                for (String feature : productsManager.getSpecialFeatures(product).keySet()) {
+                    System.out.println(feature + ":  " + productsManager.getSpecialFeatures(product).get(feature));
+                }
             }
         };
     }

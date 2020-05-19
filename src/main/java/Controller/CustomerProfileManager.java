@@ -19,7 +19,7 @@ public class CustomerProfileManager extends ProfileManager{
         this.customer = customer;
     }
 
-    public void checkForDiscountGift(){
+    public String checkForDiscountGift(){
         final int minimumAmountOfMoney = 1000;
         final int discountPercentage = 10;
         final int discountPerCustomer = 1;
@@ -31,18 +31,23 @@ public class CustomerProfileManager extends ProfileManager{
             totalMoneyPaid += buyLog.getPaidAmount();
         }
 
+        String output;
         if (totalMoneyPaid > minimumAmountOfMoney * (customer.getNumberOfDiscountGifts() + 1)){
             customer.setBalance(customer.getNumberOfDiscountGifts() + 1);
-            System.out.println("Congratulations! you have won" + discountPercentage + "% discount up to" + maxPossibleDiscount +
-                    "$ for buying more than" + customer.getNumberOfDiscountGifts() * minimumAmountOfMoney + "dollars from Us!");
-            System.out.println("Note! you can use it once till next month.");
-            System.out.println("Your discount code is:");
+            output = ("Congratulations! you have won" + discountPercentage + "% discount up to" + maxPossibleDiscount +
+                    "$ for buying more than" + customer.getNumberOfDiscountGifts() * minimumAmountOfMoney + "dollars from Us!") +
+            ("\nNote! you can use it once till next month.") +
+            ("\nYour discount code is:");
             String code = AdminProfileManager.generateRandomDiscountCode();
-            System.out.println(code);
+            output += code;
             Date now = new Date();
             AdminProfileManager.createDiscountCode(code, now, new Date(now.getTime() + duration), discountPercentage,
                     maxPossibleDiscount, discountPerCustomer);
         }
+        else {
+            output = "";
+        }
+        return output;
     }
 
     public boolean isInputValidForBuyLogID(String ID) {
