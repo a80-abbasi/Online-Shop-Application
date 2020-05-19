@@ -1,7 +1,9 @@
 package View.CustomerProfileMenus;
 
 import Controller.CustomerProfileManager;
+import Controller.ProductsManager;
 import Model.Account.Customer;
+import Model.Product.Product;
 import View.Menu;
 import View.ViewPersonalInfoMenu;
 
@@ -46,4 +48,111 @@ public class CustomerProfileMenu extends Menu {
             }
         };
     }
+
+    public String getProductIdInView(Menu parentMenu) {
+        while(true) {
+            while (true) {
+                String input = scan(parentMenu);
+                if (!isNumericAndPositive(input)) {
+                    break;
+                }
+                if (!ProductsManager.isValidIDForProductID(input)) {
+                    System.out.println("There is no product with this ID");
+                    break;
+                }
+                return input;
+            }
+        }
+
+    }
+
+    public String getProductRateInView(Menu parentMenu) {
+        while(true) {
+            while(true) {
+                String input = scan(parentMenu);
+                if (!isNumericAndPositive(input)) {
+                    break;
+                }
+                if (Integer.parseInt(input) > 5 && Integer.parseInt(input) < 1) {
+                    System.out.println("please enter the number in range(1-5):");
+                    break;
+                }
+                return input;
+            }
+        }
+    }
+
+    public String getBuyLogInView(Menu parentMenu) {
+        while(true) {
+            while(true) {
+                String input = scan(parentMenu);
+                if (!isNumericAndPositive(input)) {
+                    break;
+                }
+                if (!customerProfileManager.isInputValidForBuyLogID(input)) {
+                    System.out.println("There is no order with this ID");
+                    break;
+                }
+                return input;
+            }
+        }
+    }
+
+    public String getIncreaseProductInView(Menu parentMenu, Product product) {
+        while(true) {
+            while(true) {
+                String input = scan(parentMenu);
+                if (!isNumericAndPositive(input)) {
+                    break;
+                }
+                int existingNumberInStore = CustomerProfileManager.getExistingNumberOfProductInStore(product, Integer.parseInt(input));
+                if (existingNumberInStore < Integer.parseInt(input)) {
+                    System.out.printf("we have just %d of this Product. Please enter another number:\n", existingNumberInStore);
+                    break;
+                }
+                return input;
+            }
+        }
+    }
+
+    public String getDecreaseProductInView(Menu parentMenu, Product product) {
+        while(true) {
+            while(true) {
+                String input = scan(parentMenu);
+                if (!isNumericAndPositive(input)) {
+                    break;
+                }
+                return input;
+            }
+        }
+    }
+
+    public static boolean isNumericAndPositive(String input) {
+        if (!input.matches("\\A\\d+\\z")) {
+            System.out.println("please enter valid number:");
+            return false;
+        }
+        return true;
+    }
+
+    public Product getProduct(Menu parentMenu) {
+        while(true) {
+            while (true) {
+                System.out.println("Enter product Id");
+                Product product = productsManager.getProductByID(scan(parentMenu));
+                if (product == null) {
+                    System.out.println("There is no product with this Id");
+                    break;
+                }
+                if (!productsManager.hasProductInCart(product)) {
+                    System.out.println("You don't have this Product in your cart");
+                    break;
+                }
+                return product;
+            }
+        }
+
+    }
+
+
 }
