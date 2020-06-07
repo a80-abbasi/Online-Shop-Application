@@ -4,11 +4,19 @@ import Serializer.*;
 import View.MainMenu;
 import View.Menu;
 import View.RegistrationMenus.LoginAndRegisterMenu;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Scanner;
 
-public class Main {
+public class Main{
+
     public static void main(String[] args) {
+
         deserializeXML();
 
         Menu.setLoginAndRegisterMenu(new LoginAndRegisterMenu(null));
