@@ -158,6 +158,16 @@ public class ProductsManager {
         currentSortMode = new ProductComparatorForVisitNumber();
     }
 
+    public void useSortByHighestPrice(){
+        currentSort = SortType.SORT_BY_HIGHEST_PRICE;
+        currentSortMode = Comparator.comparing(Product::getPrice).reversed();
+    }
+
+    public void useSortByLowestPrice(){
+        currentSort = SortType.SORT_BY_LOWEST_PRICE;
+        currentSortMode = Comparator.comparing(Product::getPrice);
+    }
+
     public String getCurrentSort(){
         return currentSort.getSortType();
     }
