@@ -172,6 +172,10 @@ public class ProductsManager {
         return currentSort.getSortType();
     }
 
+    public SortType getCurrentSortType(){
+        return currentSort;
+    }
+
     public Product getProductByID(String ID){
         return Product.getProductByID(ID);
     }

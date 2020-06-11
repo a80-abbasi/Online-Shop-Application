@@ -4,6 +4,7 @@ import Model.Account.Customer;
 import Model.Account.Discount;
 import Model.Account.Off;
 import Model.Account.Seller;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 public class Product {
     private static ArrayList<Product> allProducts = new ArrayList<>();
     private String productId;
+    private Image image;
     private ProductStatus productStatus; 
     private String productName;
     private String companyName;
@@ -72,6 +74,14 @@ public class Product {
 
     public void setSpecialFeatures(HashMap<String, Integer> specialFeatures) {
         this.specialFeatures = specialFeatures;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public void setASpecialFeature(String feature, int value) throws Exception {
