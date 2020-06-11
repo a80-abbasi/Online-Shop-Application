@@ -3,6 +3,7 @@ package Model.Account;
 import Model.Product.Product;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BuyLog extends Log {
     private int paidAmount;
@@ -11,16 +12,16 @@ public class BuyLog extends Log {
     private boolean hasDelivered;
     private ArrayList<Product> boughtProducts;
 
-    public BuyLog(String ID, String date, int paidAmount, int discountAmount, Seller sellerName) {
+    public BuyLog(String ID, Date date, int paidAmount, int discountAmount, Seller seller) {
         super(ID, date);
         this.paidAmount = paidAmount;
         this.discountAmount = discountAmount;
-        this.seller = sellerName;
+        this.seller = seller;
         boughtProducts = new ArrayList<>();
     }
 
     public BuyLog() {
-        this("", "", 0, 0, null);
+        this("", null, 0, 0, null);
     }
 
     public int getPaidAmount() {

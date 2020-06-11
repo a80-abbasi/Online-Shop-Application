@@ -1,16 +1,18 @@
 package Model.Account;
 
-public abstract class Log {
-    private String ID; // (seller or customer) userName + (buyLog or SellLog) size)
-    private String date;
+import java.util.Date;
 
-    public Log(String ID, String date) {
+public abstract class Log {
+    private String ID;
+    private Date date;
+
+    public Log(String ID, Date date) {
         this.ID = ID;
         this.date = date;
     }
 
     public Log() {
-        this("", "");
+        this("", null);
     }
 
     public String getID() {
@@ -21,11 +23,11 @@ public abstract class Log {
         this.ID = ID;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

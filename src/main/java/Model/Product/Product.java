@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Product {
     private static ArrayList<Product> allProducts = new ArrayList<>();
     private String productId;
-    private ProductStatus productStatus;
+    private ProductStatus productStatus; 
     private String productName;
     private String companyName;
     private double price;

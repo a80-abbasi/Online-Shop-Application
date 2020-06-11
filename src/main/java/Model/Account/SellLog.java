@@ -2,6 +2,8 @@ package Model.Account;
 
 import Model.Product.Product;
 
+import java.util.Date;
+
 public class SellLog extends Log {
     private int received;
     private int offAmount;
@@ -9,7 +11,7 @@ public class SellLog extends Log {
     private String buyerName;
     private boolean hasSent;
 
-    public SellLog(String ID, String date, int received, int offAmount, Product product, String buyerName) {
+    public SellLog(String ID, Date date, int received, int offAmount, Product product, String buyerName) {
         super(ID, date);
         this.received = received;
         this.offAmount = offAmount;

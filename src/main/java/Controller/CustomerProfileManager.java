@@ -67,8 +67,8 @@ public class CustomerProfileManager extends ProfileManager{
         return 0;
     }
 
-    public HashMap<Seller, String> showOrdersSellerNameAndDate () {
-        HashMap<Seller, String> sellerNameAndDate = new HashMap<>();
+    public HashMap<Seller, Date> showOrdersSellerNameAndDate () {
+        HashMap<Seller, Date> sellerNameAndDate = new HashMap<>();
         for (BuyLog buyLog : customer.getBuyLogs()) {
             sellerNameAndDate.put(buyLog.getSeller(),buyLog.getDate());
         }
