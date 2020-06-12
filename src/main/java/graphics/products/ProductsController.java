@@ -6,16 +6,25 @@ import Model.Product.Product;
 import graphics.ToggleSwitch;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.PickResult;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import org.controlsfx.control.Rating;
 
 import java.util.ArrayList;
 import java.util.OptionalDouble;
 
 public class ProductsController {
-    private final static String selectedColor = " #7ec7f6";
     public Label latestLabel;
     public Label visitNumberLabel;
     public Label lowestPriceLabel;
@@ -31,22 +40,36 @@ public class ProductsController {
     public Label maxPriceLabel;
     public Button setPriceRangeButton;
     public Pane productsWIthOffPane;
+    public Pane productsPane;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
     private int maxPrice;
     private int minPrice;
+    private int pageIndex;
+
+    private final static String selectedColor = " #7ec7f6";
+    private static final int numberOfProductsPerPage = 15;
 
     public void initialize() {
         productsManager = new ProductsManager();
         addToggleButtonForExistingFilter();
         addToggleButtonForOffFilter();
+        addPageFactoryForPagination();
+
 
         showProducts();
-        minPriceSlider.setValue(minPrice);
-        maxPriceSlider.setValue(maxPrice);
-        minPriceLabel.setText(String.valueOf(minPrice));
-        maxPriceLabel.setText(String.valueOf(maxPrice));
+        setSliders();
+
+    }
+
+    private void addPageFactoryForPagination(){
+        pagination.setPageFactory(page -> {
+            pageIndex = page;
+
+            showProducts();
+            return productsPane;
+        });
     }
 
     private void addToggleButtonForOffFilter(){
@@ -91,22 +114,90 @@ public class ProductsController {
 
     private void showProducts() {
         showingProducts = productsManager.showProducts();
-        setSliders();
-        //todo: add products?
+        pagination.setPageCount(showingProducts.size() % numberOfProductsPerPage == 0 ?
+                showingProducts.size() / numberOfProductsPerPage : showingProducts.size() / numberOfProductsPerPage + 1);
+
+        productsPane.getChildren().clear();
+        productsPane.setPadding(new Insets(100, 100, 100, 100));
+        //todo: add products...
+        /*ArrayList<Node> products = new ArrayList<>();
+        for (Product product : showingProducts) {
+            Pane pane = getProductPane(product);
+            productsPane.getChildren().add(pane);
+        }*/
+        int count = pageIndex * numberOfProductsPerPage;
+        Outer: for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (count >= showingProducts.size()){
+                    break Outer;
+                }
+                Pane pane = getProductPane(showingProducts.get(count++));
+                productsPane.getChildren().add(pane);
+                pane.setLayoutX(j * (200 + 30) + 30);
+                pane.setLayoutY(i * (280 + 30) + 30);
+            }
+        }
+    }
+
+    private Pane getProductPane(Product product){
+        StackPane stackPane = new StackPane();
+        stackPane.setAlignment(Pos.CENTER);
+        ImageView productImage = new ImageView();
+        productImage.setImage(product.getImage());
+        productImage.setPreserveRatio(true);
+        productImage.setFitWidth(125);
+        stackPane.getChildren().add(productImage);
+        if (product.getExistingNumber() <= 0) {
+            ImageView soldOutImage = new ImageView(new Image("file:src\\main\\resources\\Images\\soldOut.png"));
+            soldOutImage.setPreserveRatio(true);
+            soldOutImage.setFitWidth(125);
+            stackPane.getChildren().add(soldOutImage);
+        }
+
+        Label name = new Label(product.getProductName());
+        name.setStyle("-fx-font-family: 'Times New Roman' ; -fx-font-size: 20");
+        Text price = new Text(product.getPrice() + "$");
+        name.setWrapText(true);
+        price.setStyle("-fx-font-family: 'Times New Roman' ; -fx-font-size: 20");
+        Rating rating = new Rating(5);
+        rating.setUpdateOnHover(false);
+        rating.setPartialRating(true);
+        rating.setDisable(true);
+        rating.setRating(product.getTotalScore());
+        rating.setMaxSize(10, 10);
+
+        VBox vBox;
+        if (product.getPriceWithOff() != product.getPrice()){
+            Label priceWithOff = new Label(product.getOff().getOffAmount() + "%:  " + product.getPriceWithOff() + "$");
+            priceWithOff.setTextFill(Color.RED);
+            priceWithOff.setStyle("-fx-font-family: 'Times New Roman' ; -fx-font-size: 20");
+            price.setStrikethrough(true);
+            vBox = new VBox(stackPane, name, price, priceWithOff, rating);
+        }
+        else {
+            vBox = new VBox(stackPane, name, price, rating);
+        }
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setStyle("-fx-border-color :  #c5c5c5");
+        vBox.setPadding(new Insets(10, 10, 10, 10));
+        vBox.setPrefWidth(150);
+        vBox.setPrefHeight(280);
+        vBox.setSpacing(8);
+        return vBox;
     }
 
     private void setSliders(){
         OptionalDouble min = showingProducts.stream().mapToDouble(Product::getPrice).min();
         OptionalDouble max = showingProducts.stream().mapToDouble(Product::getPrice).max();
-        /*if (max.isPresent()){
-            maxPrice = max.getAsDouble();
+        if (max.isPresent()){
+            maxPrice = (int)max.getAsDouble();
         }
         if (min.isPresent()){
-            minPrice = min.getAsDouble();
-        }*/
+            minPrice = (int)min.getAsDouble();
+        }
         //todo: change after it is complete
         minPrice = 0;
-        maxPrice = 100;
+        /*maxPrice = 100;*/
         if (maxPriceSlider.getValue() > maxPrice){
             maxPriceSlider.setValue(maxPrice);
         }
@@ -117,14 +208,20 @@ public class ProductsController {
         minPriceSlider.setMax(maxPrice);
         maxPriceSlider.setMin(minPrice);
         maxPriceSlider.setMax(maxPrice);
+
+        minPriceSlider.setValue(minPrice);
+        maxPriceSlider.setValue(maxPrice);
+        minPriceLabel.setText(String.valueOf(minPrice));
+        maxPriceLabel.setText(String.valueOf(maxPrice));
+
         maxPriceSlider.valueProperty().addListener((observableValue, oldValue, newValue) ->{
-            maxPriceLabel.setText(String.format("%.1f", (double)newValue));
+            maxPriceLabel.setText(String.format("%.1f$", (double)newValue));
             if ((Double)newValue < minPriceSlider.getValue()){
                 minPriceSlider.setValue((Double) newValue);
             }
         });
         minPriceSlider.valueProperty().addListener((observableValue, oldValue, newValue) ->{
-            minPriceLabel.setText(String.format("%.1f", (double)newValue));
+            minPriceLabel.setText(String.format("%.1f$", (double)newValue));
             if ((Double)newValue > maxPriceSlider.getValue()){
                 maxPriceSlider.setValue((Double) newValue);
             }
