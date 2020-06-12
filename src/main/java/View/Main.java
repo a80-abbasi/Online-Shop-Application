@@ -1,3 +1,5 @@
+package View;
+
 import Controller.LoginAndRegisterManager;
 import Controller.ProductsManager;
 import Serializer.*;
