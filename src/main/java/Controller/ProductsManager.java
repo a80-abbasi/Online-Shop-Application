@@ -40,15 +40,27 @@ public class ProductsManager {
         return product.getSpecialFeatures();
     }
 
+    private ArrayList<Product> getProductsWithOff(ArrayList<Product> products){
+        ArrayList<Product> selectedProducts = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getOff() != null && product.getOff().isAvailable()){
+                selectedProducts.add(product);
+            }
+        }
+        return selectedProducts;
+    }
+
     public ArrayList<Product> showProducts () {
         ArrayList<Product> sortedFilteredProducts = new ArrayList<>();
         ArrayList<Product> products;
-        //todo: off filter
         if (categoryFilter != null){
             products = categoryFilter.getProducts();
         }
         else {
             products = allProducts;
+        }
+        if (currentFilters.contains(FilteringType.OFF_FILTER)){
+            products = getProductsWithOff(products);
         }
         for (Product product : products) {
             if (nameFilter != null) {
