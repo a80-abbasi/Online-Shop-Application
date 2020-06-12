@@ -59,7 +59,7 @@
          <image>
             <Image url="@../Images/zoom.png" />
          </image></ImageView>
-      <Pane layoutX="1270.0" layoutY="138.0" prefHeight="201.0" prefWidth="260.0" style="-fx-border-color: #c5c5c5;">
+      <Pane layoutX="1268.0" layoutY="209.0" prefHeight="201.0" prefWidth="260.0" style="-fx-border-color: #c5c5c5;">
          <children>
             <Slider fx:id="minPriceSlider" layoutX="12.0" layoutY="41.0" prefHeight="14.0" prefWidth="236.0" value="100.0" />
             <Label layoutX="22.0" layoutY="14.0" text="From Price:">
@@ -79,6 +79,15 @@
                <font>
                   <Font name="Times New Roman Bold" size="19.0" />
                </font></Button>
+         </children>
+      </Pane>
+      <Pane fx:id="productsWIthOffPane" layoutX="1268.0" layoutY="137.0" prefHeight="60.0" prefWidth="260.0" style="-fx-border-color: #c5c5c5;">
+         <children>
+            <Label layoutX="14.0" layoutY="16.0" prefHeight="28.0" prefWidth="155.0" text="Only Products  With Off:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
