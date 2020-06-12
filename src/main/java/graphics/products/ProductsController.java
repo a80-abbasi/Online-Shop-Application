@@ -4,12 +4,11 @@ import Controller.ProductsManager;
 import Controller.SortType;
 import Model.Product.Product;
 import graphics.ToggleSwitch;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -32,6 +31,7 @@ public class ProductsController {
     public Slider maxPriceSlider;
     public Label minPriceLabel;
     public Label maxPriceLabel;
+    public Button setPriceRangeButton;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
@@ -72,15 +72,17 @@ public class ProductsController {
     }
 
     private void setSliders(){
-        double max = 0, min = 0;
+        int max = 0, min = 0;
         OptionalDouble minPrice = showingProducts.stream().mapToDouble(Product::getPrice).min();
         OptionalDouble maxPrice = showingProducts.stream().mapToDouble(Product::getPrice).max();
-        if (maxPrice.isPresent()){
+        /*if (maxPrice.isPresent()){
             max = maxPrice.getAsDouble();
         }
         if (minPrice.isPresent()){
             min = minPrice.getAsDouble();
-        }
+        }*/
+        min = 0;
+        max = 100;
         minPriceLabel.setText(String.valueOf(min));
         maxPriceLabel.setText(String.valueOf(max));
         minPriceSlider.setMin(min);
@@ -89,7 +91,22 @@ public class ProductsController {
         maxPriceSlider.setMin(min);
         maxPriceSlider.setMax(max);
         maxPriceSlider.setValue(max);
-        //todo: bind sliders and labels
+        maxPriceSlider.valueProperty().addListener((observableValue, oldValue, newValue) ->{
+            maxPriceLabel.setText(String.format("%.1f", (double)newValue));
+            if ((Double)newValue < minPriceSlider.getValue()){
+                minPriceSlider.setValue((Double) newValue);
+            }
+        });
+        minPriceSlider.valueProperty().addListener((observableValue, oldValue, newValue) ->{
+            minPriceLabel.setText(String.format("%.1f", (double)newValue));
+            if ((Double)newValue > maxPriceSlider.getValue()){
+                maxPriceSlider.setValue((Double) newValue);
+            }
+        });
+        setPriceRangeButton.setOnAction(e -> {
+            productsManager.addMinimumPriceFilter((int) minPriceSlider.getValue());
+            productsManager.addMaximumPriceFilter((int) maxPriceSlider.getValue() + 1);
+        });
     }
 
     private void mouseEntered(Label label){
