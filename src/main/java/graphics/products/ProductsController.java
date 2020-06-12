@@ -4,8 +4,6 @@ import Controller.ProductsManager;
 import Controller.SortType;
 import Model.Product.Product;
 import graphics.ToggleSwitch;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
@@ -32,21 +30,46 @@ public class ProductsController {
     public Label minPriceLabel;
     public Label maxPriceLabel;
     public Button setPriceRangeButton;
+    public Pane productsWIthOffPane;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
+    private int maxPrice;
+    private int minPrice;
 
     public void initialize() {
         productsManager = new ProductsManager();
         addToggleButtonForExistingFilter();
-
-
+        addToggleButtonForOffFilter();
 
         showProducts();
+        minPriceSlider.setValue(minPrice);
+        maxPriceSlider.setValue(maxPrice);
+        minPriceLabel.setText(String.valueOf(minPrice));
+        maxPriceLabel.setText(String.valueOf(maxPrice));
+    }
+
+    private void addToggleButtonForOffFilter(){
+        ToggleSwitch toggleSwitch = new ToggleSwitch(50, new EventHandler<Event>() {
+            boolean isOn = false;
+            @Override
+            public void handle(Event event) {
+                isOn = !isOn;
+                if (isOn){
+                    productsManager.addOffFilter();
+                }
+                else {
+                    productsManager.disableOffFilter();
+                }
+                showProducts();
+            }
+        });
+        toggleSwitch.setLayoutX(200);
+        toggleSwitch.setLayoutY(20);
+        productsWIthOffPane.getChildren().add(toggleSwitch);
     }
 
     private void addToggleButtonForExistingFilter(){
-        latestLabelClicked(null);
         ToggleSwitch toggleSwitch = new ToggleSwitch(50, new EventHandler<Event>() {
             boolean isOn = false;
             @Override
@@ -58,6 +81,7 @@ public class ProductsController {
                 else {
                     productsManager.addExistenceFilter(false);
                 }
+                showProducts();
             }
         });
         toggleSwitch.setLayoutX(200);
@@ -72,25 +96,27 @@ public class ProductsController {
     }
 
     private void setSliders(){
-        int max = 0, min = 0;
-        OptionalDouble minPrice = showingProducts.stream().mapToDouble(Product::getPrice).min();
-        OptionalDouble maxPrice = showingProducts.stream().mapToDouble(Product::getPrice).max();
-        /*if (maxPrice.isPresent()){
-            max = maxPrice.getAsDouble();
+        OptionalDouble min = showingProducts.stream().mapToDouble(Product::getPrice).min();
+        OptionalDouble max = showingProducts.stream().mapToDouble(Product::getPrice).max();
+        /*if (max.isPresent()){
+            maxPrice = max.getAsDouble();
         }
-        if (minPrice.isPresent()){
-            min = minPrice.getAsDouble();
+        if (min.isPresent()){
+            minPrice = min.getAsDouble();
         }*/
-        min = 0;
-        max = 100;
-        minPriceLabel.setText(String.valueOf(min));
-        maxPriceLabel.setText(String.valueOf(max));
-        minPriceSlider.setMin(min);
-        minPriceSlider.setMax(max);
-        minPriceSlider.setValue(min);
-        maxPriceSlider.setMin(min);
-        maxPriceSlider.setMax(max);
-        maxPriceSlider.setValue(max);
+        //todo: change after it is complete
+        minPrice = 0;
+        maxPrice = 100;
+        if (maxPriceSlider.getValue() > maxPrice){
+            maxPriceSlider.setValue(maxPrice);
+        }
+        if (minPriceSlider.getValue() < minPrice){
+            minPriceSlider.setValue(minPrice);
+        }
+        minPriceSlider.setMin(minPrice);
+        minPriceSlider.setMax(maxPrice);
+        maxPriceSlider.setMin(minPrice);
+        maxPriceSlider.setMax(maxPrice);
         maxPriceSlider.valueProperty().addListener((observableValue, oldValue, newValue) ->{
             maxPriceLabel.setText(String.format("%.1f", (double)newValue));
             if ((Double)newValue < minPriceSlider.getValue()){
@@ -106,6 +132,7 @@ public class ProductsController {
         setPriceRangeButton.setOnAction(e -> {
             productsManager.addMinimumPriceFilter((int) minPriceSlider.getValue());
             productsManager.addMaximumPriceFilter((int) maxPriceSlider.getValue() + 1);
+            showProducts();
         });
     }
 
