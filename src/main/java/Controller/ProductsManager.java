@@ -43,6 +43,7 @@ public class ProductsManager {
     public ArrayList<Product> showProducts () {
         ArrayList<Product> sortedFilteredProducts = new ArrayList<>();
         ArrayList<Product> products;
+        //todo: off filter
         if (categoryFilter != null){
             products = categoryFilter.getProducts();
         }
@@ -76,10 +77,9 @@ public class ProductsManager {
         return sortedFilteredProducts;
     }
 
-
     public void addCategoryFilter(String name) throws IllegalArgumentException{
         Category category = Category.getCategoryByName(name);
-        if (categoryFilter == null){
+        if (category == null){
             throw new IllegalArgumentException();
         }
         categoryFilter = category;
@@ -100,6 +100,16 @@ public class ProductsManager {
         if (!currentFilters.contains(FilteringType.MINIMUM_PRICE_FILTER)) {
             currentFilters.add(FilteringType.MINIMUM_PRICE_FILTER);
         }
+    }
+
+    public void addOffFilter(){
+        if (!currentFilters.contains(FilteringType.OFF_FILTER)){
+            currentFilters.add(FilteringType.OFF_FILTER);
+        }
+    }
+
+    public void disableOffFilter(){
+        currentFilters.remove(FilteringType.OFF_FILTER);
     }
 
     public void disableMaximumPriceFilter(){
