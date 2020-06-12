@@ -8,7 +8,10 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -49,7 +52,7 @@ public class ProductsController {
     private int pageIndex;
 
     private final static String selectedColor = " #7ec7f6";
-    private static final int numberOfProductsPerPage = 15;
+    private static final int numberOfProductsPerPage = 10;
 
     public void initialize() {
         productsManager = new ProductsManager();
@@ -119,14 +122,8 @@ public class ProductsController {
 
         productsPane.getChildren().clear();
         productsPane.setPadding(new Insets(100, 100, 100, 100));
-        //todo: add products...
-        /*ArrayList<Node> products = new ArrayList<>();
-        for (Product product : showingProducts) {
-            Pane pane = getProductPane(product);
-            productsPane.getChildren().add(pane);
-        }*/
         int count = pageIndex * numberOfProductsPerPage;
-        Outer: for (int i = 0; i < 3; i++) {
+        Outer: for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 5; j++) {
                 if (count >= showingProducts.size()){
                     break Outer;
@@ -135,6 +132,8 @@ public class ProductsController {
                 productsPane.getChildren().add(pane);
                 pane.setLayoutX(j * (200 + 30) + 30);
                 pane.setLayoutY(i * (280 + 30) + 30);
+                pane.setOnMouseClicked(event -> {//todo: open product
+                    });
             }
         }
     }
@@ -183,7 +182,29 @@ public class ProductsController {
         vBox.setPrefWidth(150);
         vBox.setPrefHeight(280);
         vBox.setSpacing(8);
+        shadowOnMouseHover(vBox);
         return vBox;
+    }
+
+    private void shadowOnMouseHover(Node node){
+        shadowOnMouseEntered(node);
+        shadowOnMouseExited(node);
+    }
+
+    private void shadowOnMouseEntered(Node node){
+        node.setOnMouseEntered(e -> {
+            node.setOpacity(0.75);
+            node.setStyle("-fx-border-color :  #c5c5c5; -fx-border-radius: 10");
+            node.getScene().setCursor(Cursor.HAND);
+        });
+    }
+
+    private void shadowOnMouseExited(Node node){
+        node.setOnMouseExited(e -> {
+            node.setOpacity(1);
+            node.setStyle("-fx-border-color :  #c5c5c5; -fx-border-radius: 0");
+            node.getScene().setCursor(Cursor.DEFAULT);
+        });
     }
 
     private void setSliders(){
@@ -197,7 +218,6 @@ public class ProductsController {
         }
         //todo: change after it is complete
         minPrice = 0;
-        /*maxPrice = 100;*/
         if (maxPriceSlider.getValue() > maxPrice){
             maxPriceSlider.setValue(maxPrice);
         }
