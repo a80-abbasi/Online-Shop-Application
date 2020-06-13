@@ -11,8 +11,7 @@ import java.io.IOException;
 public class LoginMenu {
     private LoginAndRegisterManager loginAndRegisterManager;
     public Button loginButton;
-    public Button customerRegister;
-    public Button sellerRegister;
+    public Button signUpButton;
     public TextField usernameField;
     public TextField passwordField;
 
