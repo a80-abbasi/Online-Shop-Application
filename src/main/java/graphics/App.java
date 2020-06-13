@@ -23,13 +23,13 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("productsMenu"));
+        scene = new Scene(loadFXML("LoginMenu"));
         stage.setScene(scene);
         /*stage.setFullScreen(true);*/
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
