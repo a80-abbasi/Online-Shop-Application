@@ -2,14 +2,21 @@ package graphics.products;
 
 import Model.Account.Account;
 import Model.Account.Customer;
+import Model.Product.Comment;
 import Model.Product.Product;
 import Model.Product.Score;
 import graphics.App;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,11 +24,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import jfxtras.labs.scene.control.Magnifier;
+import javafx.util.Duration;
 import org.controlsfx.control.Rating;
 
+import java.beans.BeanProperty;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +49,7 @@ public class ProductPageController {
     public Pane addToCartButton;
     public AnchorPane explanationPane;
     public AnchorPane propertiesPane;
-    public AnchorPane commentsPane;
+    public Pane commentsPane;
     public AnchorPane ratePane;
     public ProgressBar progressBar5;
     public Label scoreLabel;
@@ -60,8 +69,16 @@ public class ProductPageController {
     public Label numberOfScores3;
     public Label numberOfScores2;
     public Label numberOfScores1;
+    public Pane imagePane;
+    public Label productAddedLabel;
+    public Label timeLeftLabel;
+    public Label calculatedLeftTime;
+    public Label numberOfCommentsLabel;
+    public Button LeaveCommentButton;
+
 
     private Product product;
+    private ArrayList<Pane> showingComments = new ArrayList<>();
 
     public void initialize(){
 
@@ -85,6 +102,75 @@ public class ProductPageController {
         else {
             previousPriceLabel.setOpacity(0);
             offPercentageLabel.setOpacity(0);
+        }
+        setAddToCartButton();
+        setComments();
+    }
+
+    private void setComments(){
+        ArrayList<Comment> comments = product.getProductComments();
+        numberOfCommentsLabel.setText(comments.size() + " comments");
+        for (Comment comment : comments) {
+            showingComments.add(getCommentsPane(comment));
+        }
+        showComments();
+    }
+
+    private void showComments(){
+        int x = 20;
+        int y = 150;
+        for (Pane pane : showingComments) {
+            commentsPane.getChildren().add(pane);
+            pane.setLayoutX(x);
+            pane.setLayoutY(y);
+            System.out.println(pane.getBoundsInParent().getHeight());
+            y += (int) (pane.getBoundsInParent().getHeight()) + 60;
+            if (y > commentsPane.getBoundsInParent().getHeight()){
+                commentsPane.setPrefHeight(y);
+            }
+        }
+    }
+
+    private Pane getCommentsPane(Comment comment){
+        Pane pane = new Pane();
+        pane.setPadding(new Insets(10, 10, 10, 10));
+        pane.setStyle("-fx-background-radius: 20 20 20 0; -fx-background-color: #83d3ff");
+        Label title = new Label("title: " + comment.getTitle());
+        Label cm = new Label(comment.getComment());
+        Account account = comment.getAccount();
+        Label name = new Label("name: " + account.getName() + account.getLastName());
+        Label[] labels = {title, cm, name};
+        Arrays.stream(labels).forEach(e -> {
+            e.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-weight: bold; -fx-font-size: 20");
+            e.setLayoutX(10);
+            e.setWrapText(true);
+        });
+        pane.getChildren().addAll(labels);
+        int x = 0;
+        if (comment.isBought()){
+            ImageView imageView = new ImageView(new Image("file:src\\main\\resources\\Images\\blueTick.png"));
+            imageView.setPreserveRatio(true);
+            imageView.setFitWidth(40);
+            pane.getChildren().add(imageView);
+            x = 10;
+            name.setLayoutX(50);
+        }
+        name.setLayoutY(10);
+        title.setLayoutY(30 + x);
+        cm.setLayoutY(55 + x);
+        return pane;
+    }
+
+    private void setAddToCartButton(){
+        if (product.getExistingNumber() > 0){
+            addToCartButton.setOnMouseClicked(e -> {
+                productAddedLabel.setOpacity(1);
+                //todo: add Product
+                Customer.addProductToTmpCart(product);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), actionEvent -> productAddedLabel.setOpacity(0)));
+                timeline.setCycleCount(1);
+                timeline.play();
+            });
         }
     }
 
