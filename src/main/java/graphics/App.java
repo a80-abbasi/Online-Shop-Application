@@ -59,6 +59,13 @@ public class App extends Application {
         products.add(product);
         Off off = new Off("1", new Date(), new Date(new Date().getTime() + 1000000000), 20, products);
         product.setOff(off);
+        Comment comment = new Comment(seller, product, "kheili khoobeee", "mobile");
+        comment.setBought(true);
+        Comment comment1 = new Comment(seller, product, "Aree", "mobile");
+        comment1.setBought(true);
+        Comment comment2 = new Comment(seller, product, "kheili khoobeee kheili", "mobile");
+        Comment comment3 = new Comment(seller, product, "kheili khoobeee kheili", "mobile");
+        Comment comment4 = new Comment(seller, product, "kheili khoobeee kheili", "mobile");
     }
 
 }

@@ -1,9 +1,6 @@
 package Model.Product;
 
-import Model.Account.Customer;
-import Model.Account.Discount;
-import Model.Account.Off;
-import Model.Account.Seller;
+import Model.Account.*;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -96,6 +93,10 @@ public class Product {
         else {
             throw new Exception("This product doesn't have such a feature");
         }
+    }
+
+    public void addAComment(Comment comment){
+        productComments.add(comment);
     }
 
     public int getValueOfAFeature(String feature) throws Exception {

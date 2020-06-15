@@ -167,7 +167,7 @@ public class ProductsManager {
 
     public void useSortByTime(){
         currentSort = SortType.SORT_BY_TIME;
-        currentSortMode = new ProductComparatorForTime();
+        currentSortMode = new ProductComparatorForTime().reversed();
     }
 
     public void useSortByScore(){
