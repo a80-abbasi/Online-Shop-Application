@@ -18,6 +18,10 @@ public class SellerProfileManager extends ProfileManager {
         this.seller = seller;
     }
 
+    public void editCompanyName(String companyName) {
+        this.seller.setNameOfCompany(companyName);
+    }
+
     //todo: does company have other information?
     public HashMap<String, String> getCompanyInformation() {
         HashMap <String, String> companyInformation = new HashMap<String, String>();
@@ -113,21 +117,11 @@ public class SellerProfileManager extends ProfileManager {
     }
 
     public void setProductPrice(EditAddProductRequest editAddProductRequest, String producePrice) throws InputMismatchException {
-        if (producePrice.matches("\\d+\\.?\\d.")) {
-            editAddProductRequest.setPrice(Double.parseDouble(producePrice));
-        }
-        else {
-            throw new InputMismatchException();
-        }
+        editAddProductRequest.setPrice(Double.parseDouble(producePrice));
     }
 
     public void setExistingNumberOfProduct(EditAddProductRequest editAddProductRequest, String existingNumber) throws InputMismatchException {
-        if (existingNumber.matches("\\d+")) {
-            editAddProductRequest.setExistingNumber(Integer.parseInt(existingNumber));
-        }
-        else {
-            throw new InputMismatchException();
-        }
+        editAddProductRequest.setExistingNumber(Integer.parseInt(existingNumber));
     }
 
     public void setProductCategory(EditAddProductRequest editAddProductRequest, String categoryName) throws NullPointerException{

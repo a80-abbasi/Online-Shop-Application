@@ -189,8 +189,10 @@ public class AdminProfileManager extends ProfileManager{
         if (request == null) {
             throw new NullPointerException();
         }
-        request.acceptRequest();
-        Request.removeRequest(request);
+        else {
+            request.acceptRequest();
+            Request.removeRequest(request);
+        }
     }
 
     public void declineRequest(String requestId) throws NullPointerException{
