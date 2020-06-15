@@ -84,6 +84,11 @@ public class Product {
         this.image = image;
     }
 
+    public void addRate(Customer customer, int score){
+        Score newScore = new Score(customer, this, score);
+        this.allScores.add(newScore);
+    }
+
     public void setASpecialFeature(String feature, int value) throws Exception {
         if (specialFeatures.containsKey(feature)){
             specialFeatures.put(feature, value);

@@ -7,7 +7,6 @@ import Model.Product.ProductStatus;
 import Model.Product.Score;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -23,23 +22,24 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("LoginMenu"));
+        scene = new Scene(loadFXML("productsMenu").load());
         stage.setScene(scene);
         /*stage.setFullScreen(true);*/
         stage.show();
     }
 
-    public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    public static Object setRoot(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = loadFXML(fxml);
+        scene.setRoot(fxmlLoader.load());
+        return fxmlLoader.getController();
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
+    private static FXMLLoader loadFXML(String fxml){
+        return new FXMLLoader(App.class.getResource(fxml + ".fxml"));
     }
 
     public static void main(String[] args) {
-        Product product = new Product("1", ProductStatus.CONFIRMED, "name", "Samsung", 1000, null, 2, null, null);
+        Product product = new Product("1", ProductStatus.CONFIRMED, "name", "Samsung", 1000, new Seller("a", "a", "a", "a", "A", "A", "a0", 10), 2, null, null);
         product.setImage(new Image("file:src\\main\\resources\\Images\\phone.jpg"));
         product.getAllScores().add(new Score(null, product, 4));
 

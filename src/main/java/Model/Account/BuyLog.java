@@ -60,6 +60,10 @@ public class BuyLog extends Log {
         boughtProducts.add(product);
     }
 
+    public ArrayList<Product> getBoughtProducts() {
+        return boughtProducts;
+    }
+
     @Override
     public String toString() {
         return "BuyLog{" +
