@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
@@ -17,7 +18,7 @@
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2000.0" prefWidth="1543.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.products.ProductPageController">
    <content>
-      <Pane prefHeight="1195.0" prefWidth="1523.0">
+      <Pane prefHeight="1198.0" prefWidth="1523.0">
          <children>
             <Pane layoutX="12.0" layoutY="8.0" prefHeight="51.0" prefWidth="1513.0" style="-fx-border-color: #c5c5c5;">
                <children>
@@ -64,8 +65,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <StackPane fx:id="imageStackPane" layoutX="35.0" layoutY="30.0" prefHeight="483.0" prefWidth="450.0" />
-                  <Pane layoutX="1181.0" layoutY="110.0" prefHeight="304.0" prefWidth="262.0" style="-fx-background-color: #d5d5d5; -fx-background-radius: 30;">
+                  <Pane layoutX="1181.0" layoutY="110.0" prefHeight="304.0" prefWidth="262.0" style="-fx-background-color: #d5d5d5; -fx-background-radius: 30 0 30 0;">
                      <children>
                         <Label layoutX="21.0" layoutY="31.0" prefHeight="34.0" prefWidth="70.0" text="Seller:">
                            <font>
@@ -119,6 +119,26 @@
                         </Pane>
                      </children>
                   </Pane>
+                  <Pane fx:id="imagePane" layoutX="23.0" layoutY="30.0" prefHeight="482.0" prefWidth="461.0">
+                     <children>
+                        <StackPane fx:id="imageStackPane" layoutX="9.0" prefHeight="483.0" prefWidth="450.0" />
+                     </children>
+                  </Pane>
+                  <Label fx:id="productAddedLabel" layoutX="1200.0" layoutY="466.0" opacity="0.0" text="Product Added To Your Cart" textFill="#fd1313">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="timeLeftLabel" layoutX="1277.0" layoutY="17.0" opacity="0.0" text="time left:" textFill="#fd1313">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="calculatedLeftTime" layoutX="1280.0" layoutY="58.0" opacity="0.0" text="leftTime" textFill="#fd1313">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <TabPane layoutX="15.0" layoutY="628.0" prefHeight="567.0" prefWidth="1508.0" style="-fx-border-color: #c5c5c5;" tabClosingPolicy="UNAVAILABLE">
@@ -135,7 +155,41 @@
                 </Tab>
                   <Tab text="comments">
                     <content>
-                      <AnchorPane fx:id="commentsPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #c5c5c5;" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #c5c5c5;">
+                           <children>
+                              <ScrollPane layoutX="23.0" layoutY="14.0" prefHeight="499.0" prefWidth="1468.0">
+                                 <content>
+                                    <Pane fx:id="commentsPane" maxHeight="1.7976931348623157E308" prefHeight="966.0" prefWidth="1450.0">
+                                       <children>
+                                          <Pane layoutX="15.0" layoutY="25.0" prefHeight="94.0" prefWidth="1429.0" style="-fx-border-color: #c5c5c5;">
+                                             <children>
+                                                <Label layoutX="36.0" layoutY="33.0" text="Number Of Comments:">
+                                                   <font>
+                                                      <Font name="System Bold" size="19.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="numberOfCommentsLabel" layoutX="262.0" layoutY="33.0" text="NumberOfCommentsLabel">
+                                                   <font>
+                                                      <Font size="19.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="832.0" layoutY="35.0" text="Help Us Get Better!">
+                                                   <font>
+                                                      <Font name="Times New Roman" size="22.0" />
+                                                   </font>
+                                                </Label>
+                                                <Button fx:id="LeaveCommentButton" layoutX="1040.0" layoutY="29.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="194.0" text="Leave a comment">
+                                                   <font>
+                                                      <Font name="Times New Roman Bold" size="20.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </Pane>
+                                 </content>
+                              </ScrollPane>
+                           </children></AnchorPane>
                     </content>
                   </Tab>
                   <Tab text="rates">
