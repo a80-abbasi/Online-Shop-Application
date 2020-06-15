@@ -145,7 +145,14 @@
               <tabs>
                 <Tab text="explanations">
                   <content>
-                    <AnchorPane fx:id="explanationPane" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="1506.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="1506.0">
+                           <children>
+                              <Label fx:id="explanationsLabel" alignment="TOP_LEFT" layoutX="43.0" layoutY="38.0" maxHeight="1.7976931348623157E308" prefHeight="451.0" prefWidth="1420.0">
+                                 <font>
+                                    <Font name="Times New Roman" size="35.0" />
+                                 </font>
+                              </Label>
+                           </children></AnchorPane>
                   </content>
                 </Tab>
                 <Tab text="properties">
@@ -159,7 +166,7 @@
                            <children>
                               <ScrollPane layoutX="23.0" layoutY="14.0" prefHeight="499.0" prefWidth="1468.0">
                                  <content>
-                                    <Pane fx:id="commentsPane" maxHeight="1.7976931348623157E308" prefHeight="966.0" prefWidth="1450.0">
+                                    <Pane fx:id="commentsPane" maxHeight="1.7976931348623157E308" prefHeight="497.0" prefWidth="1450.0">
                                        <children>
                                           <Pane layoutX="15.0" layoutY="25.0" prefHeight="94.0" prefWidth="1429.0" style="-fx-border-color: #c5c5c5;">
                                              <children>

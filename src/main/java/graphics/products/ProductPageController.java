@@ -8,7 +8,6 @@ import Model.Product.Score;
 import graphics.App;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -27,7 +26,6 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import org.controlsfx.control.Rating;
 
-import java.beans.BeanProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,7 +45,7 @@ public class ProductPageController {
     public Text previousPriceLabel;
     public Label offPercentageLabel;
     public Pane addToCartButton;
-    public AnchorPane explanationPane;
+    public Pane explanationPane;
     public AnchorPane propertiesPane;
     public Pane commentsPane;
     public AnchorPane ratePane;
@@ -75,7 +73,7 @@ public class ProductPageController {
     public Label calculatedLeftTime;
     public Label numberOfCommentsLabel;
     public Button LeaveCommentButton;
-
+    public Label explanationsLabel;
 
     private Product product;
     private ArrayList<Pane> showingComments = new ArrayList<>();
@@ -105,6 +103,11 @@ public class ProductPageController {
         }
         setAddToCartButton();
         setComments();
+        setExplanations();
+    }
+
+    private void setExplanations(){
+        explanationsLabel.setText(product.getExplanations() == null ? "" : product.getExplanations());
     }
 
     private void setComments(){
@@ -123,7 +126,6 @@ public class ProductPageController {
             commentsPane.getChildren().add(pane);
             pane.setLayoutX(x);
             pane.setLayoutY(y);
-            System.out.println(pane.getBoundsInParent().getHeight());
             y += (int) (pane.getBoundsInParent().getHeight()) + 60;
             if (y > commentsPane.getBoundsInParent().getHeight()){
                 commentsPane.setPrefHeight(y);
@@ -165,7 +167,6 @@ public class ProductPageController {
         if (product.getExistingNumber() > 0){
             addToCartButton.setOnMouseClicked(e -> {
                 productAddedLabel.setOpacity(1);
-                //todo: add Product
                 Customer.addProductToTmpCart(product);
                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), actionEvent -> productAddedLabel.setOpacity(0)));
                 timeline.setCycleCount(1);
@@ -251,7 +252,7 @@ public class ProductPageController {
     private void setPropertiesLabel(){
         HashMap<String, Integer> properties = product.getSpecialFeatures();
         if (properties != null) {
-            StringBuilder features = new StringBuilder("");
+            StringBuilder features = new StringBuilder();
             for (Map.Entry<String, Integer> entry : properties.entrySet()) {
                 features.append(entry.getKey()).append(": ").append(entry.getValue());
             }
