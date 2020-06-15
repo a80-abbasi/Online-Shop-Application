@@ -3,6 +3,7 @@ package graphics.products;
 import Controller.ProductsManager;
 import Controller.SortType;
 import Model.Product.Product;
+import graphics.App;
 import graphics.ToggleSwitch;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -21,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.controlsfx.control.Rating;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.OptionalDouble;
 
@@ -57,10 +59,8 @@ public class ProductsController {
         addToggleButtonForOffFilter();
         addPageFactoryForPagination();
 
-
         showProducts();
         setSliders();
-
     }
 
     private void addPageFactoryForPagination(){
@@ -129,8 +129,6 @@ public class ProductsController {
                 productsPane.getChildren().add(pane);
                 pane.setLayoutX(j * (200 + 30) + 30);
                 pane.setLayoutY(i * (280 + 30) + 30);
-                pane.setOnMouseClicked(event -> {//todo: open product
-                    });
             }
         }
     }
@@ -180,7 +178,20 @@ public class ProductsController {
         vBox.setPrefHeight(280);
         vBox.setSpacing(8);
         shadowOnMouseHover(vBox);
+        vBox.setOnMouseClicked(event -> openProduct(product, stackPane));
         return vBox;
+    }
+
+    private void openProduct(Product product, StackPane imageStackPane){
+        try {
+            imageStackPane.getScene().setCursor(Cursor.DEFAULT);
+            ProductPageController productPageController = (ProductPageController) App.setRoot("productPage");
+            productPageController.setProduct(product);
+            productPageController.getImageStackPane().getChildren().addAll(imageStackPane.getChildren());
+            productPageController.setEveryThing();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void shadowOnMouseHover(Node node){
@@ -200,7 +211,10 @@ public class ProductsController {
         node.setOnMouseExited(e -> {
             node.setOpacity(1);
             node.setStyle("-fx-border-color :  #c5c5c5; -fx-border-radius: 0");
-            node.getScene().setCursor(Cursor.DEFAULT);
+            try {
+                node.getScene().setCursor(Cursor.DEFAULT);
+            } catch (Exception ignored) {
+            }
         });
     }
 
@@ -213,7 +227,6 @@ public class ProductsController {
         if (min.isPresent()){
             minPrice = (int)min.getAsDouble();
         }
-        //todo: change after it is complete
         minPrice = 0;
         if (maxPriceSlider.getValue() > maxPrice){
             maxPriceSlider.setValue(maxPrice);
@@ -352,8 +365,9 @@ public class ProductsController {
     }
 
     public void magnifierClicked(MouseEvent mouseEvent) {
-        if (searchField.getText().isBlank()) {
+        if (!searchField.getText().isBlank()) {
             productsManager.addNameFiltering(searchField.getText());
+            showProducts();
         }
     }
 
