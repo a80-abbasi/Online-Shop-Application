@@ -1,11 +1,9 @@
 package View.SellerProfileMenus;
 
-import Controller.OffManager;
 import Controller.SellerProfileManager;
 import View.Menu;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ViewOffsMenu extends Menu {
     private SellerProfileManager sellerProfileManager;
