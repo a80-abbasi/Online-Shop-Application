@@ -49,7 +49,7 @@ public class MagnifyingGlass extends Pane {
         bgImageView.requestFocus();
         this.getChildren().addAll(glassGroup);
 
-        pane.getChildren().addAll(this);
+        /*pane.getChildren().addAll(this);*/
     }
 
     public void adjustMagnification(final double amount) {

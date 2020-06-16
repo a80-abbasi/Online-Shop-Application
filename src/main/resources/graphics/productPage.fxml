@@ -48,19 +48,29 @@
                               <Font name="Times New Roman" size="27.0" />
                            </font>
                         </Label>
-                        <Label fx:id="propertiesTitleLabel" layoutX="28.0" layoutY="169.0" text="properties:">
+                        <Label fx:id="propertiesTitleLabel" layoutX="28.0" layoutY="205.0" text="properties:">
                            <font>
                               <Font name="Times New Roman" size="27.0" />
                            </font>
                         </Label>
-                        <Label fx:id="propertiesLabel" layoutX="28.0" layoutY="211.0" text="propertiesLabel">
+                        <Label fx:id="propertiesLabel" layoutX="28.0" layoutY="247.0" text="propertiesLabel">
                            <font>
-                              <Font name="Times New Roman" size="27.0" />
+                              <Font name="Times New Roman" size="19.0" />
                            </font>
                         </Label>
                         <Label fx:id="ratesLabel" layoutX="36.0" layoutY="381.0" text="rates:">
                            <font>
                               <Font size="21.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="26.0" layoutY="154.0" text="Company :">
+                           <font>
+                              <Font name="Times New Roman" size="27.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="companyNameLabel" layoutX="167.0" layoutY="154.0" text="CompanyNameLabel">
+                           <font>
+                              <Font name="Times New Roman" size="27.0" />
                            </font>
                         </Label>
                      </children>
@@ -139,6 +149,8 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Label layoutX="210.0" layoutY="521.0" text="visit number:" />
+                  <Label fx:id="visitNumberLabel" layoutX="296.0" layoutY="521.0" text="visitNumberLabel" />
                </children>
             </Pane>
             <TabPane layoutX="15.0" layoutY="628.0" prefHeight="567.0" prefWidth="1508.0" style="-fx-border-color: #c5c5c5;" tabClosingPolicy="UNAVAILABLE">
@@ -147,7 +159,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="1506.0">
                            <children>
-                              <Label fx:id="explanationsLabel" alignment="TOP_LEFT" layoutX="43.0" layoutY="38.0" maxHeight="1.7976931348623157E308" prefHeight="451.0" prefWidth="1420.0">
+                              <Label fx:id="explanationsLabel" alignment="TOP_LEFT" layoutX="43.0" layoutY="38.0" maxHeight="1.7976931348623157E308" prefHeight="451.0" prefWidth="1420.0" wrapText="true">
                                  <font>
                                     <Font name="Times New Roman" size="35.0" />
                                  </font>
@@ -157,7 +169,14 @@
                 </Tab>
                 <Tab text="properties">
                   <content>
-                    <AnchorPane fx:id="propertiesPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane prefHeight="535.0" prefWidth="1507.0">
+                                 <content>
+                                    <Pane fx:id="propertiesPane" prefHeight="524.0" prefWidth="1489.0" />
+                                 </content>
+                              </ScrollPane>
+                           </children></AnchorPane>
                   </content>
                 </Tab>
                   <Tab text="comments">
@@ -185,7 +204,7 @@
                                                       <Font name="Times New Roman" size="22.0" />
                                                    </font>
                                                 </Label>
-                                                <Button fx:id="LeaveCommentButton" layoutX="1040.0" layoutY="29.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="194.0" text="Leave a comment">
+                                                <Button fx:id="LeaveCommentButton" layoutX="1040.0" layoutY="29.0" mnemonicParsing="false" onAction="#LeaveCommentButtonPressed" prefHeight="37.0" prefWidth="194.0" text="Leave a comment">
                                                    <font>
                                                       <Font name="Times New Roman Bold" size="20.0" />
                                                    </font>

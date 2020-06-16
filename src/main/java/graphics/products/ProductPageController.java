@@ -1,5 +1,6 @@
 package graphics.products;
 
+import Controller.LoginAndRegisterManager;
 import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Product.Comment;
@@ -8,6 +9,7 @@ import Model.Product.Score;
 import graphics.App;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -45,8 +47,7 @@ public class ProductPageController {
     public Text previousPriceLabel;
     public Label offPercentageLabel;
     public Pane addToCartButton;
-    public Pane explanationPane;
-    public AnchorPane propertiesPane;
+    public Pane propertiesPane;
     public Pane commentsPane;
     public AnchorPane ratePane;
     public ProgressBar progressBar5;
@@ -74,21 +75,76 @@ public class ProductPageController {
     public Label numberOfCommentsLabel;
     public Button LeaveCommentButton;
     public Label explanationsLabel;
+    public Label companyNameLabel;
+    public Label visitNumberLabel;
 
     private Product product;
     private ArrayList<Pane> showingComments = new ArrayList<>();
+    private boolean hasVote;
 
     public void initialize(){
 
     }
 
     public void setEveryThing(){
-        nameLabel.setText(product.getProductName());
-        categoryLabel.setText(product.getProductCategory() == null ? "Others" : product.getProductCategory().getName());
-        setPropertiesLabel();
+        product.setVisitNumber(product.getVisitNumber() + 1);
+        setLabels();
         setRates();
         resizeImage();
-        sellerNameLabel.setText(product.getProductSeller().getName());
+        setPrice();
+
+        setAddToCartButton();
+        setComments();
+        setExplanations();
+        setPropertiesPane();
+    }
+
+    private void setPropertiesPane() {
+        int x = 20;
+        int y = 50;
+        HashMap<String, Integer> properties = product.getSpecialFeatures();
+        for (Map.Entry<String, Integer> entry : properties.entrySet()) {
+            Pane pane = getPaneOfProperty(entry);
+            propertiesPane.getChildren().add(pane);
+            pane.setLayoutX(x);
+            pane.setLayoutY(y);
+            y += (int) (pane.getBoundsInParent().getHeight()) + 60;
+            if (y > propertiesPane.getBoundsInParent().getHeight()){
+                propertiesPane.setPrefHeight(y);
+            }
+        }
+    }
+
+    private Pane getPaneOfProperty(Map.Entry<String, Integer> property){
+        Label featureLabel = new Label(property.getKey());
+        Pane featurePane = new Pane(featureLabel);
+
+        Label valueLabel = new Label(String.valueOf(property.getValue()));
+        Pane valuePane = new Pane(valueLabel);
+
+        Pane[] panes = {featurePane, valuePane};
+        Label[] labels = {featureLabel, valueLabel};
+
+        Arrays.stream(labels).forEach(e -> {
+            e.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 20");
+            e.setWrapText(true);
+            e.setLayoutY(13);
+            e.setLayoutX(30);
+        });
+        Arrays.stream(panes).forEach(e -> {
+            e.setStyle("-fx-background-color:  #d5d5d5");
+            e.setMinHeight(50);
+            e.setPadding(new Insets(10, 10, 10, 10));
+        });
+        featureLabel.setPrefWidth(propertiesPane.getPrefWidth() / 3 - 40);
+        valueLabel.setPrefWidth(2 * propertiesPane.getPrefWidth() / 3 - 40 - 90);
+
+        Pane mainPane = new Pane(featurePane, valuePane);
+        valuePane.setLayoutX(propertiesPane.getPrefWidth() / 3 + 40);
+        return mainPane;
+    }
+
+    private void setPrice(){
         if (product.getExistingNumber() <= 0){
             soldOutPane.setOpacity(1);
         }
@@ -101,9 +157,15 @@ public class ProductPageController {
             previousPriceLabel.setOpacity(0);
             offPercentageLabel.setOpacity(0);
         }
-        setAddToCartButton();
-        setComments();
-        setExplanations();
+    }
+
+    private void setLabels(){
+        nameLabel.setText(product.getProductName());
+        categoryLabel.setText(product.getProductCategory() == null ? "Others" : product.getProductCategory().getName());
+        companyNameLabel.setText(product.getCompanyName());
+        sellerNameLabel.setText(product.getProductSeller().getName());
+        visitNumberLabel.setText(String.valueOf(product.getVisitNumber()));
+        setPropertiesLabel();
     }
 
     private void setExplanations(){
@@ -190,7 +252,13 @@ public class ProductPageController {
         rate.setLayoutX(noteForRateLabel.getLayoutX() + 25);
         rate.setLayoutY(noteForRateLabel.getLayoutY() - 50);
         rateBox.getChildren().add(rate);
-        rate.setOnMouseClicked(e->rateProduct(rate));
+        rate.setOnMouseClicked(e -> {
+            if (hasVote) {
+                e.consume();
+            } else {
+                rateProduct(rate);
+            }
+        });
         setRatesAndProgresses();
     }
 
@@ -228,6 +296,8 @@ public class ProductPageController {
             if (customer.getBuyLogs().stream().anyMatch(e -> e.getBoughtProducts().contains(product))){
                 product.addRate(customer, (int) (rating.getRating() + 0.5));
                 rating.setDisable(true);
+                hasVote = true;
+                setRates();
             }
             else {
                 noteForRateLabel.setText("You Haven't bought this product");
@@ -318,5 +388,9 @@ public class ProductPageController {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public void LeaveCommentButtonPressed(ActionEvent actionEvent) {
+
     }
 }

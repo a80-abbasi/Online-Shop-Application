@@ -2,6 +2,7 @@ package graphics;
 
 import Model.Account.Off;
 import Model.Account.Seller;
+import Model.Product.Comment;
 import Model.Product.Product;
 import Model.Product.ProductStatus;
 import Model.Product.Score;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 
 public class App extends Application {
@@ -24,7 +26,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("productsMenu").load());
         stage.setScene(scene);
-        stage.setFullScreen(true);
+        /*stage.setFullScreen(true);*/
         stage.show();
     }
 
@@ -51,6 +53,7 @@ public class App extends Application {
 
     private static void addProduct(String name) {
         Seller seller = new Seller();
+        seller.setName("Ali");
         Product product = new Product("1", ProductStatus.CONFIRMED, name, "Samsung", 1000, seller, 0, null, null);
         product.setImage(new Image("file:src\\main\\resources\\Images\\phone.jpg"));
         product.getAllScores().add(new Score(null, product, 4));
@@ -65,7 +68,10 @@ public class App extends Application {
         comment1.setBought(true);
         Comment comment2 = new Comment(seller, product, "kheili khoobeee kheili", "mobile");
         Comment comment3 = new Comment(seller, product, "kheili khoobeee kheili", "mobile");
-        Comment comment4 = new Comment(seller, product, "kheili khoobeee kheili", "mobile");
+        Comment comment4 = new Comment(seller, product, "kheili khoobeee\nkheili", "mobile");
+        product.setExplanations("Salam hatman bekharid:)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))");
+        product.setSpecialFeatures(new HashMap<>());
+        product.getSpecialFeatures().put("Ram", 6);
     }
 
 }
