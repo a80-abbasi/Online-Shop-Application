@@ -204,7 +204,7 @@
                                                       <Font name="Times New Roman" size="22.0" />
                                                    </font>
                                                 </Label>
-                                                <Button fx:id="LeaveCommentButton" layoutX="1040.0" layoutY="29.0" mnemonicParsing="false" onAction="#LeaveCommentButtonPressed" prefHeight="37.0" prefWidth="194.0" text="Leave a comment">
+                                                <Button fx:id="LeaveCommentButton" layoutX="1040.0" layoutY="29.0" mnemonicParsing="false" onAction="#leaveCommentButtonPressed" prefHeight="37.0" prefWidth="194.0" text="Leave a comment">
                                                    <font>
                                                       <Font name="Times New Roman Bold" size="20.0" />
                                                    </font>

@@ -1,6 +1,5 @@
 package graphics.products;
 
-import Controller.LoginAndRegisterManager;
 import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Product.Comment;
@@ -10,13 +9,12 @@ import graphics.App;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +23,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.control.Rating;
 
@@ -78,9 +78,16 @@ public class ProductPageController {
     public Label companyNameLabel;
     public Label visitNumberLabel;
 
+    public TextField titleTextField;
+    public TextArea commentTextArea;
+    public Label XLabel;
+    public Label commentNoteLabel;
+
     private Product product;
     private ArrayList<Pane> showingComments = new ArrayList<>();
     private boolean hasVote;
+    private Stage commentPopUp;
+    private ProductPageController parentForCommentPage;
 
     public void initialize(){
 
@@ -174,6 +181,7 @@ public class ProductPageController {
 
     private void setComments(){
         ArrayList<Comment> comments = product.getProductComments();
+        showingComments.clear();
         numberOfCommentsLabel.setText(comments.size() + " comments");
         for (Comment comment : comments) {
             showingComments.add(getCommentsPane(comment));
@@ -390,7 +398,57 @@ public class ProductPageController {
         this.product = product;
     }
 
-    public void LeaveCommentButtonPressed(ActionEvent actionEvent) {
+    public void leaveCommentButtonPressed(ActionEvent actionEvent) {
+        if (commentPopUp == null) {
+            commentPopUp = new Stage();
+            Scene scene;
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("commentPage.fxml"));
+                scene = new Scene(fxmlLoader.load());
+                ProductPageController newPage = ((ProductPageController) fxmlLoader.getController());
+                newPage.setProduct(product);
+                newPage.setParentForCommentPage(this);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+            commentPopUp.setScene(scene);
+            commentPopUp.setTitle("Leave a comment");
+            commentPopUp.setResizable(false);
+            commentPopUp.initStyle(StageStyle.UNDECORATED);
+            commentPopUp.showAndWait();
+        }
+    }
 
+    public void sendCommentButtonPressed(ActionEvent actionEvent) {
+        if (!commentTextArea.getText().isBlank()){
+            String comment = commentTextArea.getText();
+            String title = titleTextField.getText();
+            new Comment(Account.getLoggedInAccount(), product, comment, title);
+            parentForCommentPage.setComments();
+            parentForCommentPage.commentPopUp.close();
+            parentForCommentPage.commentPopUp = null;
+        }
+        else {
+            commentNoteLabel.setText("Comment Text Can't Be Blank");
+            commentNoteLabel.setTextFill(Color.RED);
+        }
+    }
+
+    public void XMouseEntered(MouseEvent mouseEvent) {
+        mouseEntered(XLabel);
+    }
+
+    public void XMouseExited(MouseEvent mouseEvent) {
+        mouseExited(XLabel);
+    }
+
+    public void XMouseClicked(MouseEvent mouseEvent) {
+        parentForCommentPage.commentPopUp.close();
+        parentForCommentPage.commentPopUp = null;
+    }
+
+    public void setParentForCommentPage(ProductPageController parentForCommentPage) {
+        this.parentForCommentPage = parentForCommentPage;
     }
 }
