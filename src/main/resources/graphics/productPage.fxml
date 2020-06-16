@@ -199,7 +199,7 @@
                                                       <Font size="19.0" />
                                                    </font>
                                                 </Label>
-                                                <Label layoutX="832.0" layoutY="35.0" text="Help Us Get Better!">
+                                                <Label fx:id="helpUsLabel" layoutX="815.0" layoutY="8.0" prefHeight="79.0" prefWidth="212.0" text="Help Us Get Better!" textAlignment="CENTER" wrapText="true">
                                                    <font>
                                                       <Font name="Times New Roman" size="22.0" />
                                                    </font>

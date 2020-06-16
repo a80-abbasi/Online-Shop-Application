@@ -77,11 +77,13 @@ public class ProductPageController {
     public Label explanationsLabel;
     public Label companyNameLabel;
     public Label visitNumberLabel;
+    public Label helpUsLabel;
 
     public TextField titleTextField;
     public TextArea commentTextArea;
     public Label XLabel;
     public Label commentNoteLabel;
+
 
     private Product product;
     private ArrayList<Pane> showingComments = new ArrayList<>();
@@ -301,16 +303,7 @@ public class ProductPageController {
         }
         else if (account instanceof Customer){
             Customer customer = (Customer) account;
-            if (customer.getBuyLogs().stream().anyMatch(e -> e.getBoughtProducts().contains(product))){
-                product.addRate(customer, (int) (rating.getRating() + 0.5));
-                rating.setDisable(true);
-                hasVote = true;
-                setRates();
-            }
-            else {
-                noteForRateLabel.setText("You Haven't bought this product");
-                flag = true;
-            }
+
         }
         else {
             noteForRateLabel.setText("You must be logged in as a customer");
@@ -399,6 +392,26 @@ public class ProductPageController {
     }
 
     public void leaveCommentButtonPressed(ActionEvent actionEvent) {
+        Account account = Account.getLoggedInAccount();
+        boolean flag = false;
+        if (account == null){
+            helpUsLabel.setText("You must log in to rate product");
+            flag = true;
+        }
+        else if (account instanceof Customer){
+            Customer customer = (Customer) account;
+            openCommentPage();
+        }
+        else {
+            helpUsLabel.setText("You must be logged in as a customer");
+            flag = true;
+        }
+        if (flag){
+            helpUsLabel.setTextFill(Color.RED);
+        }
+    }
+
+    private void openCommentPage(){
         if (commentPopUp == null) {
             commentPopUp = new Stage();
             Scene scene;
