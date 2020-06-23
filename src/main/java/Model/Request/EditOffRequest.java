@@ -5,7 +5,6 @@ import Model.Account.OffStatus;
 import Model.Product.Product;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class EditOffRequest extends EditAddOffRequest {
     private static ArrayList<EditOffRequest> allEditOffRequests = new ArrayList<>();
@@ -20,7 +19,7 @@ public class EditOffRequest extends EditAddOffRequest {
         this.setEndTime(off.getEndTime());
         this.setOffAmount(off.getOffAmount());
         this.setOffStatus(OffStatus.PENDING_FOR_EDITION);
-        this.setOffProducts(off.getProducts());
+        this.setOffProductIDs(off.getProductIDs());
     }
 
     public EditOffRequest() {
@@ -40,7 +39,7 @@ public class EditOffRequest extends EditAddOffRequest {
     }
 
     public void removeProduct(Product product) {
-        offProducts.remove(product);
+        offProductIDs.remove(product.getProductId());
     }
 
     @Override
@@ -49,17 +48,17 @@ public class EditOffRequest extends EditAddOffRequest {
             throw new IllegalArgumentException();
         }
         else {
-            for (Product product : off.getProducts()) {
-                product.setOff(null);
+            for (String productID : off.getProductIDs()) {
+                Product.getProductByID(productID).setOff(null);
             }
             off.setOffID(offID);
             off.setStartTime(startTime);
             off.setEndTime(endTime);
             off.setOffStatus(OffStatus.CONFIRMED);
             off.setOffAmount(offAmount);
-            off.setProducts(offProducts);
-            for (Product product : offProducts) {
-                product.setOff(off);
+            off.setProductsIDs(offProductIDs);
+            for (String productID : offProductIDs) {
+                Product.getProductByID(productID).setOff(off);
             }
         }
     }
@@ -72,7 +71,7 @@ public class EditOffRequest extends EditAddOffRequest {
                 ", endTime=" + endTime +
                 ", offAmount=" + offAmount +
                 ", offStatus=" + offStatus +
-                ", offProducts=" + offProducts +
+                ", offProductIDs=" + offProductIDs +
                 ", requestId='" + requestId + '\'' +
                 ", requestType=" + requestType +
                 '}';

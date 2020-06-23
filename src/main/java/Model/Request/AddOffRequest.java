@@ -10,10 +10,10 @@ public class AddOffRequest extends EditAddOffRequest {
     private static ArrayList<AddOffRequest> allAddOffRequest = new ArrayList<>();
 
     public AddOffRequest() {
-        super("add_product_" + allRequests.size(), RequestType.Adding_Off_Request);
+        super("add_off_" + allRequests.size(), RequestType.Adding_Off_Request);
         allAddOffRequest.add(this);
         this.setOffStatus(OffStatus.PENDING_FOR_CREATION);
-        this.offProducts = new ArrayList<>();
+        this.offProductIDs = new ArrayList<>();
     }
 
     public static ArrayList<AddOffRequest> getAllAddOffRequest() {
@@ -27,6 +27,10 @@ public class AddOffRequest extends EditAddOffRequest {
     @Override
     public void acceptRequest() throws IllegalArgumentException{
         if (Off.getOffById(offID) == null) {
+            ArrayList<Product> offProducts = new ArrayList<>();
+            for (String offProductID : offProductIDs) {
+                offProducts.add(Product.getProductByID(offProductID));
+            }
             Off off = new Off(offID, startTime, endTime, offAmount, offProducts);
             for (Product product : offProducts) {
                 product.setOff(off);
@@ -45,7 +49,7 @@ public class AddOffRequest extends EditAddOffRequest {
                 ", endTime=" + endTime +
                 ", offAmount=" + offAmount +
                 ", offStatus=" + offStatus +
-                ", offProducts=" + offProducts +
+                ", offProductIDs=" + offProductIDs +
                 ", requestId='" + requestId + '\'' +
                 ", requestType=" + requestType +
                 '}';

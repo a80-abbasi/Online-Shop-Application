@@ -14,7 +14,6 @@ public class AddProductMenu extends Menu {
     public AddProductMenu(Menu parentMenu, SellerProfileManager sellerProfileManager) {
         super("Add Product Menu", parentMenu);
         this.sellerProfileManager = sellerProfileManager;
-        this.addProductRequest = sellerProfileManager.addProductRequest();
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getAddProductId());
         submenus.add(getAddProductName());
@@ -24,6 +23,14 @@ public class AddProductMenu extends Menu {
         submenus.add(getAddProductCategory());
         submenus.add(getAddSpecialFeatureValues());
         this.setSubMenus(submenus);
+    }
+
+    @Override
+    public void show() {
+        if (addProductRequest == null) {
+            this.addProductRequest = sellerProfileManager.addProductRequest();
+        }
+        super.show();
     }
 
     private Menu getAddProductId() {

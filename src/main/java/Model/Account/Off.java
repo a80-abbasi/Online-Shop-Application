@@ -12,7 +12,7 @@ public class Off {
     private Date endTime;
     private int offAmount;
     private OffStatus offStatus;
-    private ArrayList<Product> products;
+    private ArrayList<String> productIDs;
     private static ArrayList<String> offFields = new ArrayList<>();
     static {
         offFields.add("offID");
@@ -29,7 +29,10 @@ public class Off {
         this.endTime = endTime;
         this.offAmount = offAmount;
         this.offStatus = OffStatus.CONFIRMED;
-        this.products = products;
+        this.productIDs = new ArrayList<>();
+        for (Product product : products) {
+            productIDs.add(product.getProductId());
+        }
         allOffs.add(this);
     }
 
@@ -81,12 +84,12 @@ public class Off {
         this.offStatus = offStatus;
     }
 
-    public ArrayList<Product> getProducts() {
-        return products;
+    public ArrayList<String> getProductIDs() {
+        return productIDs;
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+    public void setProductsIDs(ArrayList<String> productIDs) {
+        this.productIDs = productIDs;
     }
 
     public boolean isAvailable(){
@@ -135,7 +138,7 @@ public class Off {
                 ", endTime=" + endTime +
                 ", offAmount=" + offAmount +
                 ", offStatus=" + offStatus +
-                ", products=" + products +
+                ", productIDs=" + productIDs +
                 '}';
     }
 }

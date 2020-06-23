@@ -12,14 +12,14 @@ public abstract class EditAddOffRequest extends Request {
     protected Date endTime;
     protected int offAmount;
     protected OffStatus offStatus;
-    protected ArrayList<Product> offProducts;
+    protected ArrayList<String> offProductIDs;
 
     public EditAddOffRequest(String requestID, RequestType requestType) {
         super(requestID, requestType);
     }
 
-    public ArrayList<Product> getOffProducts() {
-        return offProducts;
+    public ArrayList<String> getOffProductIDs() {
+        return offProductIDs;
     }
 
     public void setOffID(String offID) {
@@ -42,12 +42,12 @@ public abstract class EditAddOffRequest extends Request {
         this.offStatus = offStatus;
     }
 
-    public void setOffProducts(ArrayList<Product> offProducts) {
-        this.offProducts = offProducts;
+    public void setOffProductIDs(ArrayList<String> offProductIDs) {
+        this.offProductIDs = offProductIDs;
     }
 
     public void addOffProduct(Product product) {
-        offProducts.add(product);
+        offProductIDs.add(product.getProductId());
     }
 
     @Override

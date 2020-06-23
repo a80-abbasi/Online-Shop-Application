@@ -216,7 +216,7 @@ public class SellerProfileManager extends ProfileManager {
         if (product == null) {
             throw new NullPointerException();
         }
-        else if (editOffRequest.getOffProducts().contains(product)) {
+        else if (editOffRequest.getOffProductIDs().contains(product)) {
             editOffRequest.removeProduct(product);
         }
         else {

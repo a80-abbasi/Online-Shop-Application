@@ -17,7 +17,6 @@ public class AddOffMenu extends Menu {
     public AddOffMenu(Menu parentMenu, SellerProfileManager sellerProfileManager) {
         super("Add Off Menu", parentMenu);
         this.sellerProfileManager = sellerProfileManager;
-        this.addOffRequest = sellerProfileManager.addOffRequest();
         ArrayList<Menu> submenus = new ArrayList<>();
         submenus.add(getAddOffID());
         submenus.add(getAddOffStartTime());
@@ -25,6 +24,14 @@ public class AddOffMenu extends Menu {
         submenus.add(getAddOffAmount());
         submenus.add(getAddOffProductsMenu());
         this.setSubMenus(submenus);
+    }
+
+    @Override
+    public void show() {
+        if (addOffRequest == null) {
+            this.addOffRequest = sellerProfileManager.addOffRequest();
+        }
+        super.show();
     }
 
     private Menu getAddOffID() {

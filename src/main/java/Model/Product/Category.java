@@ -42,6 +42,9 @@ public class Category {
     //todo: completing this
     public void addSpecialFeature(String specialFeature) {
         specialFeatures.add(specialFeature);
+        for (Category subCategory : subCategories) {
+            subCategory.addSpecialFeature(specialFeature);
+        }
     }
 
     public void addProductToCategory(Product product){
