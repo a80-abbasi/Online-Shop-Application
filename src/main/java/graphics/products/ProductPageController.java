@@ -109,7 +109,7 @@ public class ProductPageController {
     }
 
     private void setOffLeftTimeLabel() {
-        if (product.getOff().isAvailable()){
+        if (product.getOff() != null && product.getOff().isAvailable()){
             timeLeftLabel.setOpacity(1);
             timeLabel.setOpacity(1);
             setOffEndTime(product, timeLabel);

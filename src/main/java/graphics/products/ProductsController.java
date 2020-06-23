@@ -43,6 +43,7 @@ public class ProductsController {
     public Button setPriceRangeButton;
     public Pane productsWIthOffPane;
     public Pane productsPane;
+    public Label disableSearchFilterLabel;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
@@ -52,6 +53,7 @@ public class ProductsController {
 
     private final static String selectedColor = " #7ec7f6";
     private static final int numberOfProductsPerPage = 10;
+    private boolean disableSearchIsHidden = true;
 
     public void initialize() {
         productsManager = new ProductsManager();
@@ -161,12 +163,17 @@ public class ProductsController {
         rating.setMaxSize(10, 10);
 
         VBox vBox;
-        if (product.getPriceWithOff() != product.getPrice()){
+        if (product.getOff() != null && product.getOff().isAvailable()){
             Label priceWithOff = new Label(product.getOff().getOffAmount() + "%:  " + product.getPriceWithOff() + "$");
             priceWithOff.setTextFill(Color.RED);
             priceWithOff.setStyle("-fx-font-family: 'Times New Roman' ; -fx-font-size: 20");
             price.setStrikethrough(true);
-            vBox = new VBox(stackPane, name, price, priceWithOff, rating);
+            Label endTime = new Label();
+            endTime.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 15");
+            endTime.setTextFill(Color.RED);
+            endTime.setWrapText(true);
+            ProductPageController.setOffEndTime(product, endTime);
+            vBox = new VBox(stackPane, name, price, priceWithOff, endTime, rating);
         }
         else {
             vBox = new VBox(stackPane, name, price, rating);
@@ -367,8 +374,15 @@ public class ProductsController {
     public void magnifierClicked(MouseEvent mouseEvent) {
         if (!searchField.getText().isBlank()) {
             productsManager.addNameFiltering(searchField.getText());
-            showProducts();
+            disableSearchFilterLabel.setOpacity(1);
+            disableSearchFilterLabel.setText("X " + searchField.getText());
+            disableSearchIsHidden = false;
         }
+        else {
+            productsManager.disableNameFiltering();
+            disableSearchFilterLabel.setOpacity(0);
+        }
+        showProducts();
     }
 
     public void magnifierMouseEntered(MouseEvent mouseEvent) {
@@ -377,5 +391,25 @@ public class ProductsController {
 
     public void magnifierMouseExited(MouseEvent mouseEvent) {
         magnifier.setOpacity(1);
+    }
+
+    public void disableSearchFilterLabelClicked(MouseEvent event) {
+        searchField.setText("");
+        productsManager.disableNameFiltering();
+        showProducts();
+        disableSearchFilterLabel.setOpacity(0);
+        disableSearchIsHidden = true;
+    }
+
+    public void disableSearchFilterLabelMouseEntered(MouseEvent event) {
+        if (!disableSearchIsHidden) {
+            mouseEntered(disableSearchFilterLabel);
+        }
+    }
+
+    public void disableSearchFilterLabelMouseExited(MouseEvent event) {
+        if (!disableSearchIsHidden) {
+            mouseExited(disableSearchFilterLabel);
+        }
     }
 }

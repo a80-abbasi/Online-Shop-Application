@@ -96,5 +96,10 @@
          </children>
       </Pane>
       <Pane fx:id="productsPane" layoutX="27.0" layoutY="89.0" prefHeight="638.0" prefWidth="1196.0" />
+      <Label fx:id="disableSearchFilterLabel" layoutX="1296.0" layoutY="468.0" onMouseClicked="#disableSearchFilterLabelClicked" onMouseEntered="#disableSearchFilterLabelMouseEntered" onMouseExited="#disableSearchFilterLabelMouseExited" opacity="0.0" style="-fx-border-color: #c5c5c5; -fx-border-radius: 10;" text="Label" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
