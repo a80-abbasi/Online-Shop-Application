@@ -3,8 +3,10 @@ package graphics.LoginAndRegister;
 import Controller.LoginAndRegisterManager;
 import graphics.AlertBox;
 import graphics.App;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 

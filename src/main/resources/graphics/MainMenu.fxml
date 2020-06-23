@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.MainMenu">
+   <children>
+      <Button fx:id="productsMenuButton" layoutX="524.0" layoutY="148.0" mnemonicParsing="false" onAction="#goToProductsMenu" prefHeight="105.0" prefWidth="502.0" text="Products Menu">
+         <font>
+            <Font name="Times New Roman" size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="offMenuButton" layoutX="524.0" layoutY="288.0" mnemonicParsing="false" onAction="#goToOffMenu" prefHeight="105.0" prefWidth="502.0" text="Off Menu">
+         <font>
+            <Font name="Times New Roman" size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="profileButton" layoutX="524.0" layoutY="426.0" mnemonicParsing="false" onAction="#goToProfileMenu" prefHeight="105.0" prefWidth="502.0" text="Profile">
+         <font>
+            <Font name="Times New Roman" size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="backButton" layoutX="687.0" layoutY="624.0" mnemonicParsing="false" onAction="#goBack" prefHeight="86.0" prefWidth="176.0" text="Back">
+         <font>
+            <Font name="Times New Roman" size="36.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
