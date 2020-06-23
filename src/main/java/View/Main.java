@@ -24,7 +24,7 @@ public class Main{
         serializeXML();
     }
 
-    private static void deserializeXML(){
+    public static void deserializeXML(){
         Customers.deserializeXML();
         Admins.deserializeXML();
         Sellers.deserializeXML();

@@ -6,6 +6,7 @@ import Model.Product.Comment;
 import Model.Product.Product;
 import Model.Product.ProductStatus;
 import Model.Product.Score;
+import View.Main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,6 +29,7 @@ public class App extends Application {
         stage.setScene(scene);
         /*stage.setFullScreen(true);*/
         stage.show();
+        stage.setOnCloseRequest(e -> Main.serializeXML());
     }
 
     public static Object setRoot(String fxml) throws IOException {
@@ -44,10 +46,10 @@ public class App extends Application {
         Product product = new Product("1", ProductStatus.CONFIRMED, "name", "Samsung", 1000, new Seller("a", "a", "a", "a", "A", "A", "a0", 10), 2, null, null);
         product.setImage(new Image("file:src\\main\\resources\\Images\\phone.jpg"));
         product.getAllScores().add(new Score(null, product, 4));
-
         for (int i = 0; i < 16; i++) {
             addProduct("product" + i);
         }
+        Main.deserializeXML();
         launch();
     }
 
