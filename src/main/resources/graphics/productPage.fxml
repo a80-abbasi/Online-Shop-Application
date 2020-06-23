@@ -139,11 +139,6 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="timeLeftLabel" layoutX="1277.0" layoutY="17.0" opacity="0.0" text="time left:" textFill="#fd1313">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
                   <Label fx:id="calculatedLeftTime" layoutX="1280.0" layoutY="58.0" opacity="0.0" text="leftTime" textFill="#fd1313">
                      <font>
                         <Font size="18.0" />
@@ -151,6 +146,16 @@
                   </Label>
                   <Label layoutX="210.0" layoutY="521.0" text="visit number:" />
                   <Label fx:id="visitNumberLabel" layoutX="296.0" layoutY="521.0" text="visitNumberLabel" />
+                  <Label fx:id="timeLeftLabel" layoutX="1129.0" layoutY="47.0" text="Off ends in:" textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="timeLabel" layoutX="1249.0" layoutY="24.0" prefHeight="73.0" prefWidth="226.0" text="leftTime" textFill="RED" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <TabPane layoutX="15.0" layoutY="628.0" prefHeight="567.0" prefWidth="1508.0" style="-fx-border-color: #c5c5c5;" tabClosingPolicy="UNAVAILABLE">

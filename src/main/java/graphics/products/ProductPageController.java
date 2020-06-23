@@ -29,10 +29,7 @@ import javafx.util.Duration;
 import org.controlsfx.control.Rating;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ProductPageController {
 
@@ -71,6 +68,7 @@ public class ProductPageController {
     public Pane imagePane;
     public Label productAddedLabel;
     public Label timeLeftLabel;
+    public Label timeLabel;
     public Label calculatedLeftTime;
     public Label numberOfCommentsLabel;
     public Button LeaveCommentButton;
@@ -87,7 +85,7 @@ public class ProductPageController {
 
     private Product product;
     private ArrayList<Pane> showingComments = new ArrayList<>();
-    private boolean hasVote;
+    private boolean hasRated;
     private Stage commentPopUp;
     private ProductPageController parentForCommentPage;
 
@@ -106,6 +104,27 @@ public class ProductPageController {
         setComments();
         setExplanations();
         setPropertiesPane();
+
+        setOffLeftTimeLabel();
+    }
+
+    private void setOffLeftTimeLabel() {
+        if (product.getOff().isAvailable()){
+            timeLeftLabel.setOpacity(1);
+            timeLabel.setOpacity(1);
+            setOffEndTime(product, timeLabel);
+        }
+        else {
+            timeLeftLabel.setOpacity(0);
+            timeLabel.setOpacity(0);
+        }
+    }
+
+    public static void setOffEndTime(Product product, Label label){
+        String endTime = product.getOff().getEndTime().toString();
+        String firstAndTimeZone = endTime.substring(0, endTime.lastIndexOf(" "));
+        label.setText(firstAndTimeZone.substring(0, firstAndTimeZone.lastIndexOf(" ")) +
+                endTime.substring(endTime.lastIndexOf(" ")));
     }
 
     private void setPropertiesPane() {
@@ -263,9 +282,10 @@ public class ProductPageController {
         rate.setLayoutY(noteForRateLabel.getLayoutY() - 50);
         rateBox.getChildren().add(rate);
         rate.setOnMouseClicked(e -> {
-            if (hasVote) {
+            if (hasRated) {
                 e.consume();
             } else {
+                hasRated = true;
                 rateProduct(rate);
             }
         });
@@ -303,7 +323,8 @@ public class ProductPageController {
         }
         else if (account instanceof Customer){
             Customer customer = (Customer) account;
-
+            product.addRate(customer, (int) (rating.getRating() + 0.5));
+            setRates();
         }
         else {
             noteForRateLabel.setText("You must be logged in as a customer");
