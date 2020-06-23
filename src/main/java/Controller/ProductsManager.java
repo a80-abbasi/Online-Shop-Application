@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Account.Account;
 import Model.Account.Customer;
-import Model.Account.Discount;
 import Model.Product.*;
 
 import java.util.ArrayList;

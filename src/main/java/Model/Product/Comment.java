@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Comment {
     private Account account;
-    private Product product;
+    private String productId;
     private String title;
     private String comment;
     private CommentStatus status;
@@ -15,7 +15,7 @@ public class Comment {
 
     public Comment(Account account, Product product, String comment, String title) {
         this.account = account;
-        this.product = product;
+        this.productId = product.getProductId();
         this.comment = comment;
         this.title = title;
         date = new Date();
@@ -35,12 +35,12 @@ public class Comment {
         this.account = account;
     }
 
-    public Product getProduct() {
-        return product;
+    public Product getProductId() {
+        return Product.getProductByID(productId);
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(Product product) {
+        this.productId = product.getProductId();
     }
 
     public String getComment() {
@@ -87,7 +87,7 @@ public class Comment {
     public String toString() {
         return "Comment{" +
                 "account=" + account +
-                ", product=" + product +
+                ", product=" + productId +
                 ", title='" + title + '\'' +
                 ", comment='" + comment + '\'' +
                 ", status=" + status +

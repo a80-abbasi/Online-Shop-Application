@@ -1,20 +1,19 @@
 package Model.Product;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Category {
     private static ArrayList<Category> allCategories = new ArrayList<>();
     private String name;
     private Category parentCategory;
     private ArrayList<Category> subCategories;
-    private ArrayList<Product> products;
+    private ArrayList<String> productIds;
     private ArrayList<String> specialFeatures;
 
     public Category(String name) {
         this.name = name;
         subCategories = new ArrayList<>();
-        products = new ArrayList<>();
+        productIds = new ArrayList<>();
         specialFeatures = new ArrayList<>();
         allCategories.add(this);
     }
@@ -23,7 +22,7 @@ public class Category {
         this.name = name;
         this.parentCategory = parentCategory;
         subCategories = new ArrayList<>();
-        products = new ArrayList<>();
+        productIds = new ArrayList<>();
         specialFeatures = new ArrayList<>();
         allCategories.add(this);
     }
@@ -46,7 +45,7 @@ public class Category {
     }
 
     public void addProductToCategory(Product product){
-        products.add(product);
+        productIds.add(product.getProductId());
         if (parentCategory != null){
             parentCategory.addProductToCategory(product);
         }
@@ -77,11 +76,9 @@ public class Category {
     }
 
     public ArrayList<Product> getProducts() {
+        ArrayList<Product> products = new ArrayList<>();
+        productIds.forEach(x -> products.add(Product.getProductByID(x)));
         return products;
-    }
-
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
     }
 
     //todo: completing this
@@ -95,8 +92,11 @@ public class Category {
     }
 
     public void removeSpecialFeature(String specialFeature) {
-        for (Product product : products) {
-            product.removeSpecialFeature(specialFeature);
+        for (String productId : productIds) {
+            Product product = Product.getProductByID(productId);
+            if (product != null){
+                product.removeSpecialFeature(specialFeature);
+            }
         }
         specialFeatures.remove(specialFeature);
     }
@@ -118,8 +118,8 @@ public class Category {
 
     //todo: checking this
     public static void removeCategory(Category category) {
-        for (Product product : category.getProducts()) {
-            Product.removeProduct(product);
+        for (String productId : category.productIds) {
+            Product.removeProduct(Product.getProductByID(productId));
         }
         for (Category subCategory : category.getSubCategories()) {
             allCategories.remove(subCategory);
