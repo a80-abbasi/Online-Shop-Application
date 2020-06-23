@@ -1,2 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<products/>
+<products>
+    <product>
+        <allScores>
+            <score>4</score>
+        </allScores>
+        <companyName>Samsung</companyName>
+        <existingNumber>2</existingNumber>
+        <image/>
+        <price>1000.0</price>
+        <productId>1</productId>
+        <productName>name</productName>
+        <productSeller>
+            <email>A</email>
+            <lastName>a</lastName>
+            <name>a</name>
+            <password>a</password>
+            <phoneNumber>A</phoneNumber>
+            <username>a</username>
+            <balance>10.0</balance>
+            <nameOfCompany>a0</nameOfCompany>
+        </productSeller>
+        <productStatus>CONFIRMED</productStatus>
+        <timeOfCreation>2020-06-24T00:54:51.744+04:30</timeOfCreation>
+        <visitNumber>0</visitNumber>
+    </product>
+    <product>
+        <allScores>
+            <score>4</score>
+        </allScores>
+        <allScores>
+            <score>3</score>
+        </allScores>
+        <companyName>Samsung</companyName>
+        <existingNumber>0</existingNumber>
+        <explanations>Salam hatman bekharid:)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))</explanations>
+        <image/>
+        <off>
+            <endTime>2020-07-05T14:41:31.756+04:30</endTime>
+            <offAmount>20</offAmount>
+            <offID>1</offID>
+            <offStatus>CONFIRMED</offStatus>

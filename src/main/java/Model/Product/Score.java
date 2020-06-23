@@ -4,12 +4,10 @@ import Model.Account.Customer;
 
 public class Score {
     private Customer customer;
-    private Product product;
     private int score;
 
     public Score(Customer customer, Product product, int score) {
         this.customer = customer;
-        this.product = product;
         this.score = score;
     }
 
@@ -25,14 +23,6 @@ public class Score {
         this.customer = customer;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     public int getScore() {
         return score;
     }
@@ -45,7 +35,6 @@ public class Score {
     public String toString() {
         return "Score{" +
                 "customer=" + customer +
-                ", product=" + product +
                 ", score=" + score +
                 '}';
     }

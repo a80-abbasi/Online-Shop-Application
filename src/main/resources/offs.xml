@@ -1,2 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<offs/>
+<offs>
+    <off>
+        <endTime>2020-07-05T14:47:37.478+04:30</endTime>
+        <offAmount>20</offAmount>
+        <offID>1</offID>
+        <offStatus>CONFIRMED</offStatus>
+        <products>
+            <allScores>
+                <score>4</score>
+            </allScores>
+            <allScores>
+                <score>3</score>
+            </allScores>
+            <companyName>Samsung</companyName>
+            <existingNumber>0</existingNumber>
+            <explanations>Salam hatman bekharid:)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))</explanations>
+            <image/>

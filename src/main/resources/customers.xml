@@ -7,7 +7,7 @@
         <password>a</password>
         <phoneNumber>09977878</phoneNumber>
         <username>a</username>
-        <balance>0</balance>
+        <balance>0.0</balance>
         <cart/>
         <numberOfDiscountGifts>0</numberOfDiscountGifts>
         <usedDiscounts/>
@@ -19,7 +19,7 @@
         <password>3</password>
         <phoneNumber>577676</phoneNumber>
         <username>back</username>
-        <balance>0</balance>
+        <balance>0.0</balance>
         <cart/>
         <numberOfDiscountGifts>0</numberOfDiscountGifts>
         <usedDiscounts/>
@@ -31,7 +31,7 @@
         <password>b</password>
         <phoneNumber>899898</phoneNumber>
         <username>b</username>
-        <balance>0</balance>
+        <balance>0.0</balance>
         <cart/>
         <numberOfDiscountGifts>0</numberOfDiscountGifts>
         <usedDiscounts/>
@@ -43,7 +43,7 @@
         <password>q</password>
         <phoneNumber>1</phoneNumber>
         <username>q</username>
-        <balance>0</balance>
+        <balance>0.0</balance>
         <cart/>
         <numberOfDiscountGifts>0</numberOfDiscountGifts>
         <usedDiscounts/>
