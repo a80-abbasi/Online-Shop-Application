@@ -99,6 +99,13 @@ public class ProductsManager {
         }
     }
 
+    public void addCategoryFilter(Category category){
+        categoryFilter = category;
+        if (!currentFilters.contains(FilteringType.CATEGORY_FILTER)){
+            currentFilters.add(FilteringType.CATEGORY_FILTER);
+        }
+    }
+
     public void addMaximumPriceFilter(int maxPrice){
         maximumPriceFilter = maxPrice;
         if (!currentFilters.contains(FilteringType.MAXIMUM_PRICE_FILTER)) {

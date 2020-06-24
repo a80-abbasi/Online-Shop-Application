@@ -2,6 +2,7 @@ package graphics.products;
 
 import Controller.ProductsManager;
 import Controller.SortType;
+import Model.Product.Category;
 import Model.Product.Product;
 import graphics.App;
 import graphics.ToggleSwitch;
@@ -46,6 +47,7 @@ public class ProductsController {
     public Label disableSearchFilterLabel;
     public ImageView backImage;
     public ImageView cartImage;
+    public MenuButton categories;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
@@ -66,9 +68,21 @@ public class ProductsController {
 
         showProducts();
         setSliders();
+        setCategories();
 
         ProductPageController.setCartButton(cartImage);
         App.setBackButton(backImage, parentAddress);
+    }
+
+    private void setCategories(){
+        MenuItem allCategoriesItem = new MenuItem("All Categories");
+        allCategoriesItem.setOnAction(e -> productsManager.disableCategoryFilter());
+        categories.getItems().add(allCategoriesItem);
+        for (Category category : Category.getAllCategories()) {
+            MenuItem categoriesItem = new MenuItem(category.getName());
+            allCategoriesItem.setOnAction(e -> productsManager.addCategoryFilter(category));
+            categories.getItems().add(categoriesItem);
+        }
     }
 
     private void addPageFactoryForPagination(){
