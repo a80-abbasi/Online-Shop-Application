@@ -91,4 +91,9 @@ public class Seller extends Account {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
+
+    @Override
+    public void removeUser() {
+        allSellers.remove(this);
+    }
 }

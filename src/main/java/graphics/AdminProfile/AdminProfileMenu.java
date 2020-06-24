@@ -104,8 +104,10 @@ public class AdminProfileMenu {
                 ObservableList selectedUsers = allUsersTable.getSelectionModel().getSelectedItems();
 
                 for (Object selectedUser : selectedUsers) {
-                    adminProfileManager.deleteUser(((Account) selectedUser).getUsername());
-                    //todo: is it correct??
+                    String selectedUsername = ((Account) selectedUser).getUsername();
+                    adminProfileManager.deleteUser(selectedUsername);
+                    AlertBox.showMessage("Delete User", "User with ID : <" + selectedUsername + "> , deleted!");
+                    allUsersTable.getItems().remove(selectedUser);
                 }
             }
         });
