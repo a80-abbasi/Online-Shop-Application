@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane prefHeight="486.0" prefWidth="723.0" style="-fx-background-color: #ffefbb;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.products.CartController">
+   <children>
+      <ScrollPane layoutX="4.0" layoutY="30.0" prefHeight="451.0" prefWidth="714.0" style="-fx-background-color: #ffefbb;">
+         <content>
+            <Pane fx:id="mainPane" prefHeight="10.0" prefWidth="706.0" />
+         </content>
+      </ScrollPane>
+      <Label fx:id="XLabel" layoutX="695.0" layoutY="-1.0" text="X">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
