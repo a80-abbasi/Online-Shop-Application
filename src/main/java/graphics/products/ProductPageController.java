@@ -131,14 +131,16 @@ public class ProductPageController {
         int x = 20;
         int y = 50;
         HashMap<String, Integer> properties = product.getSpecialFeatures();
-        for (Map.Entry<String, Integer> entry : properties.entrySet()) {
-            Pane pane = getPaneOfProperty(entry);
-            propertiesPane.getChildren().add(pane);
-            pane.setLayoutX(x);
-            pane.setLayoutY(y);
-            y += (int) (pane.getBoundsInParent().getHeight()) + 60;
-            if (y > propertiesPane.getBoundsInParent().getHeight()){
-                propertiesPane.setPrefHeight(y);
+        if (properties != null) {
+            for (Map.Entry<String, Integer> entry : properties.entrySet()) {
+                Pane pane = getPaneOfProperty(entry);
+                propertiesPane.getChildren().add(pane);
+                pane.setLayoutX(x);
+                pane.setLayoutY(y);
+                y += (int) (pane.getBoundsInParent().getHeight()) + 60;
+                if (y > propertiesPane.getBoundsInParent().getHeight()) {
+                    propertiesPane.setPrefHeight(y);
+                }
             }
         }
     }

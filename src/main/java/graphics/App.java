@@ -48,13 +48,12 @@ public class App extends Application {
     public static void main(String[] args) {
         Main.deserializeXML();
 
-        Product product = new Product("1", ProductStatus.CONFIRMED, "name", "Samsung", 1000, new Seller("a", "a", "a", "a", "A", "A", "a0", 10), 2, null, null);
+        /*Product product = new Product("1", ProductStatus.CONFIRMED, "name", "Samsung", 1000, new Seller("a", "a", "a", "a", "A", "A", "a0", 10), 2, null, null);
         product.setImage(new Image("file:src\\main\\resources\\Images\\phone.jpg"));
-        product.getAllScores().add(new Score(null, product, 4));
-        for (int i = 0; i < 16; i++) {
+        product.getAllScores().add(new Score(null, product, 4));*/
+        /*for (int i = 0; i < 16; i++) {
             addProduct("product" + i);
-        }
-
+        }*/
         launch();
     }
 
@@ -62,7 +61,7 @@ public class App extends Application {
         Seller seller = new Seller();
         seller.setName("Ali");
         Product product = new Product("1", ProductStatus.CONFIRMED, name, "Samsung", 1000, seller, 0, null, null);
-        product.setImage(new Image("file:src\\main\\resources\\Images\\phone.jpg"));
+        product.setImageAddress(new Image("file:src\\main\\resources\\Images\\phone.jpg"));
         product.getAllScores().add(new Score(null, product, 4));
         product.getAllScores().add(new Score(null, product, 3));
         ArrayList<Product> products = new ArrayList<>();

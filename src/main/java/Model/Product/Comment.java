@@ -24,7 +24,7 @@ public class Comment {
     }
 
     public Comment() {
-        this(null, null, "", "");
+
     }
 
     public Account getAccount() {

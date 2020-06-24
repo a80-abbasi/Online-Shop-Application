@@ -26,10 +26,10 @@ public class Main{
         Customers.deserializeXML();
         Admins.deserializeXML();
         Sellers.deserializeXML();
-        /*Products.deserializeXML();*/
+        Products.deserializeXML();
         Categories.deserializeXML();
         Discounts.deserializeXML();
-        /*Offs.deserializeXML();*/
+        Offs.deserializeXML();
         AddOffRequests.deserializeXML();
         AddProductRequests.deserializeXML();
         EditOffRequests.deserializeXML();
@@ -41,10 +41,10 @@ public class Main{
         Customers.serializeXML();
         Admins.serializeXML();
         Sellers.serializeXML();
-        /*Products.serializeXML(); *///todo: bring them back
+        Products.serializeXML(); //todo: bring them back
         Categories.serializeXML();
         Discounts.serializeXML();
-        /*Offs.serializeXML();*/
+        Offs.serializeXML();
         AddOffRequests.serializeXML();
         AddProductRequests.serializeXML();
         EditOffRequests.serializeXML();

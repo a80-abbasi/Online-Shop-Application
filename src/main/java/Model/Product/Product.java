@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class Product {
     private static ArrayList<Product> allProducts = new ArrayList<>();
     private String productId;
-    private Image image;
+    private String imageAddress;
     private ProductStatus productStatus; 
     private String productName;
     private String companyName;
@@ -57,6 +57,7 @@ public class Product {
         this.existingNumber = existingNumber;
         this.productCategory = productCategory;
         this.specialFeatures = specialFeatures;
+        imageAddress = "";
         timeOfCreation = new Date();
         allProducts.add(this);
     }
@@ -73,12 +74,20 @@ public class Product {
         this.specialFeatures = specialFeatures;
     }
 
-    public Image getImage() {
-        return image;
+    public void setImageAddress(String imageAddress) {
+        this.imageAddress = imageAddress;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public String getImageAddress() {
+        return imageAddress;
+    }
+
+    public Image getImage() {
+        return new Image(imageAddress);
+    }
+
+    public void setImageAddress(Image image) {
+        this.imageAddress = image.getUrl();
     }
 
     public void addRate(Customer customer, int score){
