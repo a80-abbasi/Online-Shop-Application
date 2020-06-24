@@ -57,23 +57,13 @@ public class ProfileManager {
         return account.getPhoneNumber();
     }
 
-    public void editUsername(String username) throws IllegalArgumentException {
-        if (username.matches("[a-zA-Z0-9.]+") && !username.contains("..")){
-            Account account = Account.getAccountByUsername(username);
-            if (account == null || account.equals(this.account)) {
-                this.account.setUsername(username);
-            }
-            else {
-                throw new IllegalArgumentException("There is another account with this username.");
-            }
+    public void editPassword(String password) throws IllegalArgumentException{
+        if (password.equals("") || password.trim().isEmpty()) {
+            throw new IllegalArgumentException("Invalid Password.");
         }
         else {
-            throw new IllegalArgumentException("Invalid Username : " + "UserNames can only contain letters (a-z), numbers (0-9), and periods (.)" + "(UserNames cannot contain ore than one dot in a row)\n");
+            this.account.setPassword(password);
         }
-    }
-
-    public void editPassword(String password) {
-        this.account.setPassword(password);
     }
 
     public void editFirstName(String firstName) throws IllegalArgumentException {

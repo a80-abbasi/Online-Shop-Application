@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 
 public class SellerProfileMenu {
     public TextField usernameField;
-    public PasswordField passwordField;
+    public TextField passwordField;
     public TextField firstNameField;
     public TextField lastNameField;
     public TextField emailField;
@@ -44,7 +44,11 @@ public class SellerProfileMenu {
 
     private void changePassword() {
         String password = passwordField.getText();
-        sellerProfileManager.editPassword(password);
+        try {
+            sellerProfileManager.editPassword(password);
+        } catch (IllegalArgumentException e) {
+            AlertBox.showMessage("Failed to edit password", e.getMessage());
+        }
     }
 
     private void changeFirstName() {

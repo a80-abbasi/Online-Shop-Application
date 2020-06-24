@@ -7,6 +7,7 @@ import Model.Request.Request;
 import graphics.AlertBox;
 
 import graphics.App;
+import graphics.LoginAndRegister.CreateAdminAccount;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -50,7 +51,11 @@ public class AdminProfileMenu {
 
     private void changePassword() {
         String password = passwordField.getText();
-        adminProfileManager.editPassword(password);
+        try {
+            adminProfileManager.editPassword(password);
+        } catch (IllegalArgumentException e) {
+            AlertBox.showMessage("Failed to edit password", e.getMessage());
+        }
     }
 
     private void changeFirstName() {
@@ -89,10 +94,6 @@ public class AdminProfileMenu {
         }
     }
 
-    public void createManagerAccount(MouseEvent mouseEvent) {
-
-    }
-
     public void manageUsers(MouseEvent mouseEvent) {
         TableView allUsersTable = adminProfileManager.getAllUsersTable();
         allUsersTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -114,6 +115,15 @@ public class AdminProfileMenu {
         Stage stage = new Stage();
         stage.setScene(new Scene(vBox));
         stage.show();
+    }
+
+    public void addAdmin(MouseEvent mouseEvent) {
+        CreateAdminAccount.setParentMenu("AdminProfileMenu");
+        try {
+            App.setRoot("CreateAdminAccount");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void manageRequests(MouseEvent mouseEvent) {
@@ -189,10 +199,6 @@ public class AdminProfileMenu {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void addAdmin(MouseEvent mouseEvent) {
-
     }
 
     public void manageDiscounts(MouseEvent mouseEvent) {
