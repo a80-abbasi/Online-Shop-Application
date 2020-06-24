@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<admins/>
+<admins>
+    <admin>
+        <email>amir@amir.amir</email>
+        <lastName>amir</lastName>
+        <name>amir</name>
+        <password>amir</password>
+        <phoneNumber>29834209483</phoneNumber>
+        <username>amirreza</username>
+    </admin>
+</admins>
