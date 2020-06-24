@@ -7,10 +7,12 @@ import Model.Product.Product;
 import Model.Product.ProductStatus;
 import Model.Product.Score;
 import View.Main;
+import graphics.products.ProductPageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,7 +27,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("productsMenu").load());
+        scene = new Scene(loadFXML("mainMenu").load());
         stage.setScene(scene);
         /*stage.setFullScreen(true);*/
         stage.show();
@@ -55,6 +57,17 @@ public class App extends Application {
             addProduct("product" + i);
         }*/
         launch();
+    }
+
+    public static void setBackButton(ImageView back, String parentMenuAddress){
+        ProductPageController.shadowOnMouseHover(back);
+        back.setOnMouseClicked(e -> {
+            try {
+                App.setRoot(parentMenuAddress);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     private static void addProduct(String name) {

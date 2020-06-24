@@ -109,7 +109,7 @@ public class ProductPageController {
         setPropertiesPane();
 
         setOffLeftTimeLabel();
-        setBackButton(backImage, parentAddress);
+        App.setBackButton(backImage, parentAddress);
         setCartButton(cartImage);
     }
 
@@ -122,7 +122,6 @@ public class ProductPageController {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("cart.fxml"));
                     scene = new Scene(fxmlLoader.load());
-                    /*CartController cartController = (CartController) fxmlLoader.getController();*/
                 } catch (IOException ex) {
                     ex.printStackTrace();
                     return;
@@ -132,17 +131,6 @@ public class ProductPageController {
                 cartPopUp.setResizable(false);
                 cartPopUp.initStyle(StageStyle.UNDECORATED);
                 cartPopUp.showAndWait();
-            }
-        });
-    }
-
-    public static void setBackButton(ImageView back, String parentMenuAddress){
-        shadowOnMouseHover(back);
-        back.setOnMouseClicked(e -> {
-            try {
-                App.setRoot(parentMenuAddress);
-            } catch (IOException ex) {
-                ex.printStackTrace();
             }
         });
     }

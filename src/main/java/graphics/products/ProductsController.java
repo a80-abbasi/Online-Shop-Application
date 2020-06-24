@@ -68,7 +68,7 @@ public class ProductsController {
         setSliders();
 
         ProductPageController.setCartButton(cartImage);
-        ProductPageController.setBackButton(backImage, parentAddress);
+        App.setBackButton(backImage, parentAddress);
     }
 
     private void addPageFactoryForPagination(){
