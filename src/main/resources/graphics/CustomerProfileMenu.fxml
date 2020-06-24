@@ -1,82 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="graphics.CustomerProfile.CustomerProfileMenu"
-            prefHeight="800.0" prefWidth="1550.0">
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.CustomerProfile.CustomerProfileMenu">
     <children>
-        <TextField fx:id="usernameField" layoutX="1028.0" layoutY="150.0">
+        <TextField fx:id="usernameField" layoutX="1028.0" layoutY="169.0">
             <font>
                 <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <PasswordField fx:id="passwordField" layoutX="1028.0" layoutY="220.0">
+            </font></TextField>
+        <TextField fx:id="firstNameField" layoutX="1028.0" layoutY="323.0">
             <font>
                 <Font name="Times New Roman" size="24.0" />
-            </font>
-        </PasswordField>
-        <TextField fx:id="firstNameField" layoutX="1028.0" layoutY="290.0">
+            </font></TextField>
+        <TextField fx:id="lastNameField" layoutX="1028.0" layoutY="404.0">
             <font>
                 <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <TextField fx:id="lastNameField" layoutX="1028.0" layoutY="360.0">
+            </font></TextField>
+        <TextField fx:id="emailField" layoutX="1028.0" layoutY="494.0">
             <font>
                 <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <TextField fx:id="emailField" layoutX="1028.0" layoutY="430.0">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <TextField fx:id="phoneNumberField" layoutX="1028.0" layoutY="500.0">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <Label layoutX="864.0" layoutY="158.0" text="Username">
+            </font></TextField>
+        <Label layoutX="863.0" layoutY="177.0" text="Username">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </Label>
-        <Label layoutX="862.0" layoutY="228.0" text="Password">
+        <Label layoutX="863.0" layoutY="249.0" text="Password">
+            <font>
+                <Font name="Times New Roman" size="24.0" />
+            </font></Label>
+        <Label layoutX="863.0" layoutY="331.0" text="First name">
+            <font>
+                <Font name="Times New Roman" size="24.0" />
+            </font></Label>
+        <Label layoutX="862.0" layoutY="412.0" text="Last name">
+            <font>
+                <Font name="Times New Roman" size="24.0" />
+            </font></Label>
+        <Label layoutX="863.0" layoutY="502.0" text="Email">
+            <font>
+                <Font name="Times New Roman" size="24.0" />
+            </font></Label>
+        <PasswordField fx:id="passwordField" layoutX="1028.0" layoutY="241.0">
+            <font>
+                <Font name="Times New Roman" size="24.0" />
+            </font></PasswordField>
+        <TextField fx:id="phoneNumberField" layoutX="1047.0" layoutY="574.0" prefHeight="46.0" prefWidth="281.0">
+            <font>
+                <Font name="Times New Roman" size="24.0" />
+            </font></TextField>
+        <Label layoutX="862.0" layoutY="582.0" text="Phone Number">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </Label>
-        <Label layoutX="862.0" layoutY="298.0" text="First name">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <Label layoutX="863.0" layoutY="368.0" text="Last name">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <Label layoutX="863.0" layoutY="438.0" text="Email">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <Label layoutX="863.0" layoutY="508.0" text="Phone Number">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="confirmButton" layoutX="1028.0" layoutY="570.0" mnemonicParsing="false" onAction="#confirm" prefHeight="44.0" prefWidth="300.0" text="Confirm">
+        <Button fx:id="confirmButton" layoutX="1028.0" layoutY="651.0" mnemonicParsing="false" onAction="#confirm" prefHeight="44.0" prefWidth="300.0" text="Confirm">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </Button>
+      <Accordion layoutX="98.0" layoutY="138.0" prefHeight="558.0" prefWidth="343.0">
+        <panes>
+          <TitledPane animated="false" text="View Cart">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="53.0" prefWidth="313.0" text="show Products">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="67.0" prefHeight="58.0" prefWidth="313.0" text="View Product">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="129.0" prefHeight="54.0" prefWidth="313.0" text="Increase">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="190.0" prefHeight="56.0" prefWidth="313.0" text="Decrease">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="236.0" prefHeight="61.0" prefWidth="313.0" text="Show Total Price">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="305.0" prefHeight="46.0" prefWidth="313.0" text="Purchase">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+            </content>
+               <font>
+                  <Font name="System Italic" size="24.0" />
+               </font>
+          </TitledPane>
+            <TitledPane animated="false" text="View Orders">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" prefHeight="61.0" prefWidth="300.0" text="Show Order">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="13.0" layoutY="64.0" prefHeight="72.0" prefWidth="306.0" text="Rate">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </content>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TitledPane>
+          <TitledPane animated="false" text="Discount Codes">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+               <font>
+                  <Font size="24.0" />
+               </font>
+          </TitledPane>
+        </panes>
+      </Accordion>
+      <Label layoutX="98.0" layoutY="36.0" prefHeight="67.0" prefWidth="152.0" text="Your Balance : ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="balanceLabel" layoutX="252.0" layoutY="53.0" prefHeight="38.0" prefWidth="114.0" />
     </children>
-
 </AnchorPane>
