@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="parent" prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AdminProfile.ManageUsersMenu">
+   <children>
+      <ListView fx:id="usersList" layoutX="319.0" layoutY="74.0" prefHeight="631.0" prefWidth="913.0" />
+   </children>
+</AnchorPane>

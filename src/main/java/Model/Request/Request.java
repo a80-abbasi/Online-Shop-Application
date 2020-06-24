@@ -1,5 +1,7 @@
 package Model.Request;
 
+import javafx.scene.control.TableView;
+
 import java.util.ArrayList;
 
 public abstract class Request {
@@ -28,6 +30,8 @@ public abstract class Request {
     public abstract void acceptRequest();
 
     public abstract String toString();
+
+    public abstract TableView getRequestDetails();
 
     public static Request getRequestById(String requestId) {
         for (Request request : allRequests) {

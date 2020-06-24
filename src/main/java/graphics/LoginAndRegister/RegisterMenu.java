@@ -2,6 +2,7 @@ package graphics.LoginAndRegister;
 
 import Controller.LoginAndRegisterManager;
 import Model.Account.AccountType;
+import graphics.App;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,6 +10,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+
+import java.io.IOException;
 
 public class RegisterMenu {
     public AnchorPane registerPane;
@@ -25,6 +28,8 @@ public class RegisterMenu {
 
     private LoginAndRegisterManager loginAndRegisterManager;
     private AccountType accountType;
+
+    private static String parentMenu;
 
     public void initialize() {
         this.loginAndRegisterManager = new LoginAndRegisterManager();
@@ -44,6 +49,11 @@ public class RegisterMenu {
         else if (accountType == AccountType.SELLER) {
             String companyName = companyField.getText();
             loginAndRegisterManager.registerSeller(username, password, firstName, lastName, email, phoneNumber, companyName);
+        }
+        try {
+            App.setRoot(parentMenu);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -72,5 +82,9 @@ public class RegisterMenu {
         this.confirmButton.setLayoutY(340);
 
         this.registerPane.getChildren().addAll(companyField, companyLabel);
+    }
+
+    public static void setParentMenu(String parentMenu) {
+        RegisterMenu.setParentMenu(parentMenu);
     }
 }

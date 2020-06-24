@@ -20,6 +20,8 @@ public class CustomerProfileMenu {
     public PasswordField passwordField;
     public TextField usernameField;
 
+    private static String parentMenu;
+
     private CustomerProfileManager customerProfileManager;
 
     public void initialize() {
@@ -33,21 +35,11 @@ public class CustomerProfileMenu {
     }
 
     public void confirm(ActionEvent event) {
-        changeUsername();
         changePassword();
         changeFirstName();
         changeLastName();
         changeEmail();
         changePhoneNumber();
-    }
-
-    private void changeUsername() {
-        String userName = usernameField.getText();
-        try {
-            customerProfileManager.editUsername(userName);
-        } catch (IllegalArgumentException e) {
-            AlertBox.showMessage("Failed to edit username.", e.getMessage());
-        }
     }
 
     private void changePassword() {
@@ -89,5 +81,9 @@ public class CustomerProfileMenu {
         } catch (IllegalArgumentException e) {
             AlertBox.showMessage("Failed to edit phone number", e.getMessage());
         }
+    }
+
+    public static void setParentMenu(String parentMenu) {
+        CustomerProfileMenu.parentMenu = parentMenu;
     }
 }

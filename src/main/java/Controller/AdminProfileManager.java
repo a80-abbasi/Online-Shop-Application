@@ -6,20 +6,83 @@ import Model.Account.Discount;
 import Model.Request.Request;
 import Model.Product.Category;
 import Model.Product.Product;
+import Model.Request.RequestType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.*;
 
-public class AdminProfileManager extends ProfileManager{
+public class AdminProfileManager extends ProfileManager {
 
     public AdminProfileManager(Admin admin) {
         super(admin);
+    }
+
+    public static boolean isThereAdmin() {
+        if (Admin.getAllAdmins().isEmpty()) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     public ArrayList<Account> getAllUsers() {
         return Account.getAllAccounts();
     }
 
-    public String viewUser(String username) throws NullPointerException{
+    public TableView getAllUsersTable() {
+        TableView allUsers = new TableView();
+
+        TableColumn<String, Account> column1 = new TableColumn<>("Username");
+        column1.setCellValueFactory(new PropertyValueFactory<>("username"));
+
+        TableColumn<String, Account> column2 = new TableColumn<>("First Name");
+        column2.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn<String, Account> column3 = new TableColumn<>("Last Name");
+        column3.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+
+        TableColumn<String, Account> column4 = new TableColumn<>("Email");
+        column4.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        TableColumn<String, Account> column5 = new TableColumn<>("Phone Number");
+        column5.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+
+        allUsers.getColumns().addAll(column1, column2, column3, column4, column5);
+        for (Account account : Account.getAllAccounts()) {
+            allUsers.getItems().add(account);
+        }
+        allUsers.setPlaceholder(new Label("No Data to display"));
+        return allUsers;
+    }
+
+    public TableView getAllRequestsTable() {
+        TableView allRequests = new TableView();
+
+        TableColumn<String, Request> column1 = new TableColumn<>("Request ID");
+        column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
+
+        TableColumn<RequestType, Request> column2 = new TableColumn<>("Request Type");
+        column2.setCellValueFactory(new PropertyValueFactory<>("requestType"));
+
+        allRequests.getColumns().addAll(column1, column2);
+        for (Request request : Request.getAllRequests()) {
+            allRequests.getItems().add(request);
+        }
+        allRequests.setPlaceholder(new Label("No Data to display"));
+        return allRequests;
+    }
+
+    public TableView getDetailsOfRequestTable(String requestID) {
+        Request request = Request.getRequestById(requestID);
+        TableView requestDetails = request.getRequestDetails();
+        return requestDetails;
+    }
+
+    public String viewUser(String username) throws NullPointerException {
         Account account = Account.getAccountByUsername(username);
         if (account == null) {
             throw new NullPointerException();
@@ -27,29 +90,31 @@ public class AdminProfileManager extends ProfileManager{
         return account.toString();
     }
 
-    //todo: checking this
-    public void deleteUser(String username) throws NullPointerException{
-        Account account = Account.getAccountByUsername(username);
-        if (account == null) {
-            throw new NullPointerException();
+    public void deleteUser(String username) throws NullPointerException, IllegalArgumentException {
+        if (username.equals("")) {
+            throw new IllegalArgumentException("You must enter username.");
+        } else {
+            Account account = Account.getAccountByUsername(username);
+            if (account == null) {
+                throw new NullPointerException("There is no account with this username.");
+            }
+            Account.deleteAccount(account);
         }
-        Account.deleteAccount(account);
     }
 
-    public static String generateRandomDiscountCode(){
+    public static String generateRandomDiscountCode() {
         char[] code = new char[8];
         Random random = new Random();
-        for(int i = 0; i < 8; ++i)
-        {
+        for (int i = 0; i < 8; ++i) {
             int a = random.nextInt(62);
 
             if (a < 10)
-                code[i] = (char)(a + 48);
+                code[i] = (char) (a + 48);
 
             else if (a < 36)
-                code[i] = (char)(a + 55);
+                code[i] = (char) (a + 55);
             else
-                code[i] = (char)(a + 61);
+                code[i] = (char) (a + 61);
         }
         return String.valueOf(code);
     }
@@ -60,12 +125,11 @@ public class AdminProfileManager extends ProfileManager{
     }
 
     //todo: checking this
-    public void removeProduct(String productId) throws NullPointerException{
+    public void removeProduct(String productId) throws NullPointerException {
         Product product = Product.getProductByID(productId);
         if (product == null) {
             throw new NullPointerException();
-        }
-        else {
+        } else {
             Product.removeProduct(product);
         }
     }
@@ -79,7 +143,7 @@ public class AdminProfileManager extends ProfileManager{
         return Discount.getAllDiscounts();
     }
 
-    public String viewDiscount(String discountCode) throws NullPointerException{
+    public String viewDiscount(String discountCode) throws NullPointerException {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
             throw new NullPointerException();
@@ -91,11 +155,9 @@ public class AdminProfileManager extends ProfileManager{
         Discount discount = Discount.getDiscountByDiscountCode(discountCodeBefore);
         if (discount == null) {
             throw new NullPointerException();
-        }
-        else if (Discount.getDiscountByDiscountCode(discountCodeAfter) != null) {
+        } else if (Discount.getDiscountByDiscountCode(discountCodeAfter) != null) {
             throw new IllegalArgumentException();
-        }
-        else {
+        } else {
             discount.setDiscountCode(discountCodeAfter);
         }
     }
@@ -121,45 +183,39 @@ public class AdminProfileManager extends ProfileManager{
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
             throw new NullPointerException();
-        }
-        else if (discountPercent.matches("\\d[1-2]")) {
+        } else if (discountPercent.matches("\\d[1-2]")) {
             discount.setDiscountPercent(Integer.parseInt(discountPercent));
-        }
-        else {
+        } else {
             throw new IllegalArgumentException();
         }
     }
 
     //todo: checking this
-    public void editDiscountMaxPossibleDiscount(String discountCode, String maxPossibleDiscount) throws NullPointerException, InputMismatchException{
+    public void editDiscountMaxPossibleDiscount(String discountCode, String maxPossibleDiscount) throws NullPointerException, InputMismatchException {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
             throw new NullPointerException();
-        }
-        else if (maxPossibleDiscount.matches("\\d+\\.\\d+")) {
+        } else if (maxPossibleDiscount.matches("\\d+\\.\\d+")) {
             discount.setMaxPossibleDiscount(Double.parseDouble(maxPossibleDiscount));
-        }
-        else {
+        } else {
             throw new InputMismatchException();
         }
     }
 
     //todo: checking this
-    public void editDiscountPerCustomer(String discountCode, String discountPerCustomer) throws NullPointerException, InputMismatchException{
+    public void editDiscountPerCustomer(String discountCode, String discountPerCustomer) throws NullPointerException, InputMismatchException {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
             throw new NullPointerException();
-        }
-        else if ((discountPerCustomer.matches("\\d+"))) {
+        } else if ((discountPerCustomer.matches("\\d+"))) {
             discount.setDiscountPerCustomer(Integer.parseInt(discountPerCustomer));
-        }
-        else {
+        } else {
             throw new InputMismatchException();
         }
     }
 
     //todo: checking this
-    public void removeDiscount(String discountCode) throws NullPointerException{
+    public void removeDiscount(String discountCode) throws NullPointerException {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
             throw new NullPointerException();
@@ -176,7 +232,7 @@ public class AdminProfileManager extends ProfileManager{
         return allRequestIds;
     }
 
-    public String getDetailsOfRequest(String requestId) throws NullPointerException{
+    public String getDetailsOfRequest(String requestId) throws NullPointerException {
         Request request = Request.getRequestById(requestId);
         if (request == null) {
             throw new NullPointerException();
@@ -184,18 +240,17 @@ public class AdminProfileManager extends ProfileManager{
         return request.toString();
     }
 
-    public void acceptRequest(String requestId) throws NullPointerException, IllegalArgumentException{
+    public void acceptRequest(String requestId) throws NullPointerException, IllegalArgumentException {
         Request request = Request.getRequestById(requestId);
         if (request == null) {
             throw new NullPointerException();
-        }
-        else {
+        } else {
             request.acceptRequest();
             Request.removeRequest(request);
         }
     }
 
-    public void declineRequest(String requestId) throws NullPointerException{
+    public void declineRequest(String requestId) throws NullPointerException {
         Request request = Request.getRequestById(requestId);
         if (request == null) {
             throw new NullPointerException();
@@ -228,8 +283,7 @@ public class AdminProfileManager extends ProfileManager{
     public void removeCategorySpecialFeature(Category category, String specialFeature) throws NullPointerException {
         if (category.getSpecialFeatures().contains(specialFeature)) {
             category.removeSpecialFeature(specialFeature);
-        }
-        else {
+        } else {
             throw new NullPointerException();
         }
     }
@@ -237,13 +291,12 @@ public class AdminProfileManager extends ProfileManager{
     public void addSpecialFeature(Category category, String specialFeature) throws IllegalArgumentException {
         if (category.getSpecialFeatures().contains(specialFeature)) {
             throw new IllegalArgumentException();
-        }
-        else {
+        } else {
             category.addSpecialFeature(specialFeature);
         }
     }
 
-    public void removeCategory(String categoryName) throws NullPointerException{
+    public void removeCategory(String categoryName) throws NullPointerException {
         Category category = Category.getCategoryByName(categoryName);
         if (category == null) {
             throw new NullPointerException();

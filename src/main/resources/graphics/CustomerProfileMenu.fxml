@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="graphics.CustomerProfile.CustomerProfileMenu"
-            prefHeight="800.0" prefWidth="1550.0">
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.CustomerProfile.CustomerProfileMenu">
     <children>
-        <TextField fx:id="usernameField" layoutX="1028.0" layoutY="150.0">
+        <TextField fx:id="usernameField" editable="false" layoutX="1028.0" layoutY="150.0">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>
@@ -78,5 +72,4 @@
             </font>
         </Button>
     </children>
-
 </AnchorPane>

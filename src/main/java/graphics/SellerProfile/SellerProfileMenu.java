@@ -19,6 +19,8 @@ public class SellerProfileMenu {
     public TextField companyField;
     public Button confirmButton;
 
+    private static String parentMenu;
+
     private SellerProfileManager sellerProfileManager;
 
     public void initialize() {
@@ -32,22 +34,12 @@ public class SellerProfileMenu {
     }
 
     public void confirm(ActionEvent event) {
-        changeUsername();
         changePassword();
         changeFirstName();
         changeLastName();
         changeEmail();
         changePhoneNumber();
         changeCompanyName();
-    }
-
-    private void changeUsername() {
-        String userName = usernameField.getText();
-        try {
-            sellerProfileManager.editUsername(userName);
-        } catch (IllegalArgumentException e) {
-            AlertBox.showMessage("Failed to edit username.", e.getMessage());
-        }
     }
 
     private void changePassword() {
@@ -96,4 +88,7 @@ public class SellerProfileMenu {
         sellerProfileManager.editCompanyName(companyName);
     }
 
+    public static void setParentMenu(String parentMenu) {
+        SellerProfileMenu.setParentMenu(parentMenu);
+    }
 }
