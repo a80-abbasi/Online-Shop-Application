@@ -5,8 +5,6 @@ import Model.Account.Customer;
 import Model.Product.Product;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -18,7 +16,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import java.security.Key;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
@@ -92,7 +89,7 @@ public class CartController {
 
     private void setProductRow(Product product, int number, GridPane gridPane, int row){
         Label serial, name, price, quantity, amount;
-        serial = new Label(String.valueOf(row + 1));
+        serial = new Label(String.valueOf(row));
         name = new Label(product.getProductName());
         price = new Label(String.valueOf(product.getPriceWithOff()));
         quantity = new Label(String.valueOf(number));
@@ -126,9 +123,7 @@ public class CartController {
             else {
                 messageLabel.setText("There is no more of this product currently");
                 messageLabel.setOpacity(1);
-                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), actionEvent -> {
-                    messageLabel.setOpacity(0);
-                }));
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), actionEvent -> messageLabel.setOpacity(0)));
                 timeline.setCycleCount(1);
                 timeline.play();
             }
