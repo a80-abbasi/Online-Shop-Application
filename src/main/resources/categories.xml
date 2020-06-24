@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<categories/>
+<categories>
+    <category>
+        <name>phone</name>
+    </category>
+    <category>
+        <name>laptop</name>
+        <subCategories>
+            <name>asus</name>
+        </subCategories>
+    </category>
+    <category>
+        <name>asus</name>
+    </category>
+</categories>
