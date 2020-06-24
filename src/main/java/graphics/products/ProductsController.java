@@ -6,6 +6,8 @@ import Model.Product.Category;
 import Model.Product.Product;
 import graphics.App;
 import graphics.ToggleSwitch;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -26,6 +28,7 @@ import org.controlsfx.control.Rating;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.OptionalDouble;
+import java.util.stream.Stream;
 
 public class ProductsController {
     public Label latestLabel;
@@ -76,11 +79,17 @@ public class ProductsController {
 
     private void setCategories(){
         MenuItem allCategoriesItem = new MenuItem("All Categories");
-        allCategoriesItem.setOnAction(e -> productsManager.disableCategoryFilter());
+        allCategoriesItem.setOnAction(e -> {
+            productsManager.disableCategoryFilter();
+            showProducts();
+        });
         categories.getItems().add(allCategoriesItem);
         for (Category category : Category.getAllCategories()) {
             MenuItem categoriesItem = new MenuItem(category.getName());
-            allCategoriesItem.setOnAction(e -> productsManager.addCategoryFilter(category));
+            categoriesItem.setOnAction(e -> {
+                productsManager.addCategoryFilter(category);
+                showProducts();
+            });
             categories.getItems().add(categoriesItem);
         }
     }
