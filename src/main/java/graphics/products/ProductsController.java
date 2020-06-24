@@ -6,8 +6,6 @@ import Model.Product.Category;
 import Model.Product.Product;
 import graphics.App;
 import graphics.ToggleSwitch;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -28,7 +26,7 @@ import org.controlsfx.control.Rating;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.OptionalDouble;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class ProductsController {
     public Label latestLabel;
@@ -51,6 +49,7 @@ public class ProductsController {
     public ImageView backImage;
     public ImageView cartImage;
     public MenuButton categories;
+    public Pane mainPane;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
@@ -71,26 +70,50 @@ public class ProductsController {
 
         showProducts();
         setSliders();
-        setCategories();
+        MenuItem allCategoriesItem = new MenuItem("All Categories");
+        allCategoriesItem.setOnAction(e -> {
+            productsManager.disableCategoryFilter();
+            categories.setText("All Categories");
+            mainPane.getChildren().removeAll(mainPane.getChildren().stream().filter(node -> node instanceof MenuButton).
+                    filter(menuButton -> menuButton != categories).collect(Collectors.toList()));
+            showProducts();
+        });
+        categories.getItems().add(allCategoriesItem);
+        setCategories(Category.getAllCategories(), categories);
 
         ProductPageController.setCartButton(cartImage);
         App.setBackButton(backImage, parentAddress);
     }
 
-    private void setCategories(){
-        MenuItem allCategoriesItem = new MenuItem("All Categories");
-        allCategoriesItem.setOnAction(e -> {
-            productsManager.disableCategoryFilter();
-            showProducts();
-        });
-        categories.getItems().add(allCategoriesItem);
-        for (Category category : Category.getAllCategories()) {
+    private void setCategories(ArrayList<Category> allCategories, MenuButton menuButton) {
+        for (Category category : allCategories) {
             MenuItem categoriesItem = new MenuItem(category.getName());
             categoriesItem.setOnAction(e -> {
+                menuButton.setText(category.getName());
                 productsManager.addCategoryFilter(category);
+                if (!category.getSubCategories().isEmpty()){
+                    MenuButton subMenuButton = new MenuButton();
+                    subMenuButton.setText("Select sub category");
+                    MenuItem allCategoriesItem = new MenuItem("All sub categories");
+                    allCategoriesItem.setOnAction(event -> {
+                        productsManager.addCategoryFilter(category);
+                        subMenuButton.setText("All sub categories");
+                        showProducts();
+                    });
+                    subMenuButton.getItems().add(allCategoriesItem);
+                    mainPane.getChildren().add(subMenuButton);
+                    subMenuButton.setLayoutX(menuButton.getLayoutX() + 50);
+                    subMenuButton.setPrefWidth(menuButton.getPrefWidth() - 50);
+                    subMenuButton.setLayoutY(menuButton.getLayoutY() + 50);
+                    setCategories(category.getSubCategories(), subMenuButton);
+                }
+                else {
+                    mainPane.getChildren().removeAll(mainPane.getChildren().stream().filter(node -> node instanceof MenuButton).
+                            filter(node -> node != categories && node != menuButton).collect(Collectors.toList()));
+                }
                 showProducts();
             });
-            categories.getItems().add(categoriesItem);
+            menuButton.getItems().add(categoriesItem);
         }
     }
 
