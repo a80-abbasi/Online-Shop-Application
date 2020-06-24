@@ -3,21 +3,32 @@ package graphics.AdminProfile;
 import Controller.AdminProfileManager;
 import Model.Account.Account;
 import Model.Account.Admin;
+import Model.Request.Request;
 import graphics.AlertBox;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+
+import graphics.App;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class AdminProfileMenu {
     private AdminProfileManager adminProfileManager;
     public TextField usernameField;
-    public PasswordField passwordField;
+    public TextField passwordField;
     public TextField firstNameField;
     public TextField lastNameField;
     public TextField emailField;
     public TextField phoneNumberField;
     public Button confirmButton;
+
+    private static String parentMenu;
 
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
@@ -30,21 +41,11 @@ public class AdminProfileMenu {
     }
 
     public void confirm() {
-        changeUsername();
         changePassword();
         changeFirstName();
         changeLastName();
         changeEmail();
         changePhoneNumber();
-    }
-
-    private void changeUsername() {
-        String userName = usernameField.getText();
-        try {
-            adminProfileManager.editUsername(userName);
-        } catch (IllegalArgumentException e) {
-            AlertBox.showMessage("Failed to edit username.", e.getMessage());
-        }
     }
 
     private void changePassword() {
@@ -92,63 +93,117 @@ public class AdminProfileMenu {
 
     }
 
-    public void showAllUsers(MouseEvent mouseEvent) {
+    public void manageUsers(MouseEvent mouseEvent) {
+        TableView allUsersTable = adminProfileManager.getAllUsersTable();
+        allUsersTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        Button deleteUserButton = new Button("Delete User");
+        deleteUserButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ObservableList selectedUsers = allUsersTable.getSelectionModel().getSelectedItems();
+
+                for (Object selectedUser : selectedUsers) {
+                    adminProfileManager.deleteUser(((Account) selectedUser).getUsername());
+                    //todo: is it correct??
+                }
+            }
+        });
+
+        VBox vBox = new VBox();
+        vBox.getChildren().addAll(allUsersTable, deleteUserButton);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(vBox));
+        stage.show();
+    }
+
+    public void manageRequests(MouseEvent mouseEvent) {
+        TableView allRequestsTable = adminProfileManager.getAllRequestsTable();
+        allRequestsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        VBox vBox = new VBox();
+        vBox.getChildren().addAll(allRequestsTable, acceptRequestButton(allRequestsTable), declineRequestButton(allRequestsTable), requestDetailsButton(allRequestsTable));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(vBox));
+        stage.show();
+    }
+
+    private Button acceptRequestButton(TableView allRequestsTable) {
+        Button acceptRequestButton = new Button("Accept Request");
+
+        acceptRequestButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ObservableList selectedRequests = allRequestsTable.getSelectionModel().getSelectedItems();
+
+                for (Object selectedRequest : selectedRequests) {
+                    adminProfileManager.acceptRequest(((Request) selectedRequest).getRequestId());
+                }
+            }
+        });
+
+        return acceptRequestButton;
+    }
+
+    private Button declineRequestButton(TableView allRequestsTable) {
+        Button declineRequestButton = new Button("Decline Request");
+        declineRequestButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ObservableList selectedRequests = allRequestsTable.getSelectionModel().getSelectedItems();
+
+                for (Object selectedRequest : selectedRequests) {
+                    adminProfileManager.declineRequest(((Request) selectedRequest).getRequestId());
+                }
+            }
+        });
+        return declineRequestButton;
+    }
+
+    private Button requestDetailsButton(TableView allRequestsTable) {
+        Button requestDetailsButton = new Button("Show Details");
+        requestDetailsButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ObservableList selectedRequests = allRequestsTable.getSelectionModel().getSelectedItems();
+
+                for (Object selectedRequest : selectedRequests) {
+                    TableView requestDetails = adminProfileManager.getDetailsOfRequestTable(((Request) selectedRequest).getRequestId());
+                    showTable(requestDetails);
+                }
+            }
+        });
+        return requestDetailsButton;
+    }
+
+    private void showTable(TableView tableView) {
+        VBox vBox = new VBox();
+        vBox.getChildren().add(tableView);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(vBox));
+        stage.show();
+    }
+
+    public void manageProducts(MouseEvent mouseEvent) {
+        try {
+            App.setRoot("ProductsMenu");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addAdmin(MouseEvent mouseEvent) {
 
     }
 
-    public void deleteUser(MouseEvent mouseEvent) {
+    public void manageDiscounts(MouseEvent mouseEvent) {
 
     }
 
-    public void showAllRequests(MouseEvent mouseEvent) {
-
+    public static void setParentMenu(String parentMenu) {
+        AdminProfileMenu.parentMenu = parentMenu;
     }
 
-    public void getRequestDetail(MouseEvent mouseEvent) {
-
-    }
-
-    public void acceptRequest(MouseEvent mouseEvent) {
-
-    }
-
-    public void declineRequest(MouseEvent mouseEvent) {
-
-    }
-
-    public void removeProduct(MouseEvent mouseEvent) {
-
-    }
-
-    public void showAllCategories(MouseEvent mouseEvent) {
-
-    }
-
-    public void addCategory(MouseEvent mouseEvent) {
-
-    }
-
-    public void editCategory(MouseEvent mouseEvent) {
-
-    }
-
-    public void removeCategory(MouseEvent mouseEvent) {
-
-    }
-
-    public void showAllDiscounts(MouseEvent mouseEvent) {
-
-    }
-
-    public void editDiscount(MouseEvent mouseEvent) {
-
-    }
-
-    public void removeDiscount(MouseEvent mouseEvent) {
-
-    }
-
-    public void createDiscount(MouseEvent mouseEvent) {
+    public void addDiscount(MouseEvent mouseEvent) {
 
     }
 }
