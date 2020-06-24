@@ -8,6 +8,7 @@ import Model.Account.Seller;
 import graphics.AlertBox;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -19,6 +20,7 @@ public class CustomerProfileMenu {
     public TextField firstNameField;
     public PasswordField passwordField;
     public TextField usernameField;
+    public Label balanceField;
 
     private CustomerProfileManager customerProfileManager;
 
@@ -30,6 +32,7 @@ public class CustomerProfileMenu {
         lastNameField.setText(customerProfileManager.getLastName());
         emailField.setText(customerProfileManager.getEmail());
         phoneNumberField.setText(customerProfileManager.getPhoneNumber());
+        balanceField.setText(Double.toString(customerProfileManager.viewBalance()));
     }
 
     public void confirm(ActionEvent event) {
