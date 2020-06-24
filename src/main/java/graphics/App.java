@@ -1,5 +1,6 @@
 package graphics;
 
+import Controller.AdminProfileManager;
 import Model.Account.Off;
 import Model.Account.Seller;
 import Model.Product.Comment;
@@ -7,6 +8,7 @@ import Model.Product.Product;
 import Model.Product.ProductStatus;
 import Model.Product.Score;
 import View.Main;
+import graphics.LoginAndRegister.CreateAdminAccount;
 import graphics.products.ProductPageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +29,14 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("mainMenu").load());
+        if (AdminProfileManager.isThereAdmin()) {
+            scene = new Scene(loadFXML("mainMenu").load());
+        }
+        else {
+            AlertBox.showMessage("Register Admin", "You must first register admin");
+            scene = new Scene(loadFXML("CreateAdminAccount").load());
+            CreateAdminAccount.setParentMenu("MainMenu");
+        }
         stage.setScene(scene);
         /*stage.setFullScreen(true);*/
         stage.show();
