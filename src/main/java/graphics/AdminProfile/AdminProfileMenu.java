@@ -12,12 +12,14 @@ import javafx.scene.input.MouseEvent;
 public class AdminProfileMenu {
     private AdminProfileManager adminProfileManager;
     public TextField usernameField;
-    public PasswordField passwordField;
+    public TextField passwordField;
     public TextField firstNameField;
     public TextField lastNameField;
     public TextField emailField;
     public TextField phoneNumberField;
     public Button confirmButton;
+
+    private static String parentMenu;
 
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
@@ -30,21 +32,11 @@ public class AdminProfileMenu {
     }
 
     public void confirm() {
-        changeUsername();
         changePassword();
         changeFirstName();
         changeLastName();
         changeEmail();
         changePhoneNumber();
-    }
-
-    private void changeUsername() {
-        String userName = usernameField.getText();
-        try {
-            adminProfileManager.editUsername(userName);
-        } catch (IllegalArgumentException e) {
-            AlertBox.showMessage("Failed to edit username.", e.getMessage());
-        }
     }
 
     private void changePassword() {
@@ -120,35 +112,19 @@ public class AdminProfileMenu {
 
     }
 
-    public void showAllCategories(MouseEvent mouseEvent) {
+    public void addAdmin(MouseEvent mouseEvent) {
 
     }
 
-    public void addCategory(MouseEvent mouseEvent) {
+    public void manageDiscounts(MouseEvent mouseEvent) {
 
     }
 
-    public void editCategory(MouseEvent mouseEvent) {
-
+    public static void setParentMenu(String parentMenu) {
+        AdminProfileMenu.parentMenu = parentMenu;
     }
 
-    public void removeCategory(MouseEvent mouseEvent) {
-
-    }
-
-    public void showAllDiscounts(MouseEvent mouseEvent) {
-
-    }
-
-    public void editDiscount(MouseEvent mouseEvent) {
-
-    }
-
-    public void removeDiscount(MouseEvent mouseEvent) {
-
-    }
-
-    public void createDiscount(MouseEvent mouseEvent) {
+    public void addDiscount(MouseEvent mouseEvent) {
 
     }
 }
