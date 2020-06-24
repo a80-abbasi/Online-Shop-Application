@@ -1,75 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.CustomerProfile.CustomerProfileMenu">
     <children>
-        <TextField fx:id="usernameField" editable="false" layoutX="1028.0" layoutY="150.0">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <TextField fx:id="passwordField" layoutX="1028.0" layoutY="220.0">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <TextField fx:id="firstNameField" layoutX="1028.0" layoutY="290.0">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <TextField fx:id="lastNameField" layoutX="1028.0" layoutY="360.0">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <TextField fx:id="emailField" layoutX="1028.0" layoutY="430.0">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <TextField fx:id="phoneNumberField" layoutX="1028.0" layoutY="500.0">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <Label layoutX="864.0" layoutY="158.0" text="Username">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <Label layoutX="862.0" layoutY="228.0" text="Password">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <Label layoutX="862.0" layoutY="298.0" text="First name">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <Label layoutX="863.0" layoutY="368.0" text="Last name">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <Label layoutX="863.0" layoutY="438.0" text="Email">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <Label layoutX="863.0" layoutY="508.0" text="Phone Number">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="confirmButton" layoutX="1028.0" layoutY="570.0" mnemonicParsing="false" onAction="#confirm" prefHeight="44.0" prefWidth="300.0" text="Confirm">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Button>
+      <TabPane layoutX="335.0" prefHeight="800.0" prefWidth="1012.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Cart">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="767.0" prefWidth="1097.0" />
+            </content>
+          </Tab>
+          <Tab text="Show Orders">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane layoutY="521.0" prefHeight="246.0" prefWidth="758.0">
+                          <content>
+                            <AnchorPane fx:id="ShowOrdersScroll" minHeight="0.0" minWidth="0.0" prefHeight="456.0" prefWidth="1056.0" />
+                          </content>
+                        </ScrollPane>
+                        <TabPane prefHeight="521.0" prefWidth="1012.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="Show Order">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="19.0" prefHeight="46.0" prefWidth="106.0" text="Order ID">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="orderIDForShowOrder" layoutX="136.0" layoutY="19.0" prefHeight="46.0" prefWidth="171.0" />
+                                          <ScrollPane layoutX="17.0" layoutY="82.0" prefHeight="362.0" prefWidth="530.0">
+                                            <content>
+                                              <AnchorPane fx:id="ShowOrderScroll" minHeight="0.0" minWidth="0.0" prefHeight="576.0" prefWidth="851.0" />
+                                            </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Rate">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Label layoutX="46.0" layoutY="59.0" text="Product ID">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="productIDForRate" layoutX="166.0" layoutY="50.0" onKeyPressed="#Enter" prefHeight="39.0" prefWidth="183.0" />
+                                          <Label fx:id="messageAfterSubmitProductIDForRate" layoutX="46.0" layoutY="103.0" prefHeight="46.0" prefWidth="293.0" text="Your id is wrong!!!!!!!!&gt;&gt;&gt;!&gt;!&gt;!&gt;!&gt;&gt;!">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ImageView fx:id="star1" fitHeight="70.0" fitWidth="72.0" layoutX="52.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="star2" fitHeight="72.0" fitWidth="73.0" layoutX="130.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="star3" fitHeight="72.0" fitWidth="74.0" layoutX="221.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="star4" fitHeight="73.0" fitWidth="78.0" layoutX="310.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="star5" fitHeight="75.0" fitWidth="77.0" layoutX="388.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Show Discount Codes">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="482.0" prefWidth="658.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="581.0" prefWidth="800.0" />
+                          </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
+                </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Pane prefHeight="800.0" prefWidth="335.0">
+         <children>
+            <Label fx:id="balanceLabel" layoutX="124.0" layoutY="639.0" prefHeight="39.0" prefWidth="173.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="639.0" prefHeight="39.0" prefWidth="95.0" text="Balance">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="174.0" fitWidth="243.0" layoutX="43.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+              <Label layoutX="20.0" layoutY="329.0" prefHeight="46.0" prefWidth="106.0" text="Username">
+                  <font>
+                      <Font size="18.0" />
+                  </font>
+              </Label>
+              <Label layoutX="22.0" layoutY="400.0" text="Password">
+                  <font>
+                      <Font size="18.0" />
+                  </font>
+              </Label>
+              <Label layoutX="18.0" layoutY="217.0" prefHeight="39.0" prefWidth="128.0" text="First name">
+                  <font>
+                      <Font size="18.0" />
+                  </font>
+              </Label>
+              <Label layoutX="18.0" layoutY="275.0" prefHeight="39.0" prefWidth="106.0" text="Last name">
+                  <font>
+                      <Font size="18.0" />
+                  </font>
+              </Label>
+              <Label layoutX="36.0" layoutY="459.0" text="Email">
+                  <font>
+                      <Font size="18.0" />
+                  </font>
+              </Label>
+              <Label layoutX="5.0" layoutY="509.0" prefHeight="30.0" prefWidth="137.0" text="Phone Number">
+                  <font>
+                      <Font size="18.0" />
+                  </font>
+              </Label>
+              <TextField fx:id="usernameField" editable="false" layoutX="140.0" layoutY="329.0" prefHeight="46.0" prefWidth="183.0">
+                  <font>
+                      <Font name="Times New Roman" size="24.0" />
+                  </font>
+              </TextField>
+              <TextField fx:id="passwordField" layoutX="140.0" layoutY="388.0" prefHeight="46.0" prefWidth="183.0">
+                  <font>
+                      <Font name="Times New Roman" size="24.0" />
+                  </font>
+              </TextField>
+              <TextField fx:id="firstNameField" layoutX="141.0" layoutY="212.0" prefHeight="46.0" prefWidth="183.0">
+                  <font>
+                      <Font name="Times New Roman" size="24.0" />
+                  </font>
+              </TextField>
+              <TextField fx:id="lastNameField" layoutX="140.0" layoutY="272.0" prefHeight="46.0" prefWidth="183.0">
+                  <font>
+                      <Font name="Times New Roman" size="24.0" />
+                  </font>
+              </TextField>
+              <TextField fx:id="emailField" layoutX="140.0" layoutY="447.0" prefHeight="46.0" prefWidth="183.0">
+                  <font>
+                      <Font name="Times New Roman" size="24.0" />
+                  </font>
+              </TextField>
+              <TextField fx:id="phoneNumberField" layoutX="140.0" layoutY="501.0" prefHeight="46.0" prefWidth="183.0">
+                  <font>
+                      <Font name="Times New Roman" size="24.0" />
+                  </font>
+              </TextField>
+              <Button fx:id="confirmButton" layoutX="89.0" layoutY="570.0" mnemonicParsing="false" onAction="#confirm" prefHeight="30.0" prefWidth="158.0" text="Confirm">
+                  <font>
+                      <Font size="18.0" />
+                  </font>
+              </Button>
+         </children>
+      </Pane>
     </children>
 </AnchorPane>
