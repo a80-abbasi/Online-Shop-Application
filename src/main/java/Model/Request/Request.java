@@ -44,5 +44,8 @@ public abstract class Request {
 
     public static void removeRequest(Request request) {
         allRequests.remove(request);
+        request.remove();
     }
+
+    public abstract void remove();
 }

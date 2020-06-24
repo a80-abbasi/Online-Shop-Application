@@ -93,4 +93,9 @@ public class EditProductRequest extends EditAddProductRequest {
 
         return requestDetails;
     }
+
+    @Override
+    public void remove() {
+        allEditProductRequests.remove(this);
+    }
 }

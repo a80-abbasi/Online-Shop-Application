@@ -59,4 +59,9 @@ public class RemoveProductRequest extends Request {
         requestDetails.getItems().add(this);
         return requestDetails;
     }
+
+    @Override
+    public void remove() {
+        allRemoveProductRequests.remove(this);
+    }
 }

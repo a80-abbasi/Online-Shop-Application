@@ -82,4 +82,9 @@ public class RegisterSellerRequest extends Request {
 
         return requestDetails;
     }
+
+    @Override
+    public void remove() {
+        allRegisterSellerRequests.remove(this);
+    }
 }

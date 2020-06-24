@@ -106,7 +106,7 @@ public class AdminProfileMenu {
                 for (Object selectedUser : selectedUsers) {
                     String selectedUsername = ((Account) selectedUser).getUsername();
                     adminProfileManager.deleteUser(selectedUsername);
-                    AlertBox.showMessage("Delete User", "User with ID : <" + selectedUsername + "> , deleted!");
+                    AlertBox.showMessage("Delete User", "User with ID : <" + selectedUsername + "> deleted");
                     allUsersTable.getItems().remove(selectedUser);
                 }
             }
@@ -148,11 +148,13 @@ public class AdminProfileMenu {
                 ObservableList selectedRequests = allRequestsTable.getSelectionModel().getSelectedItems();
 
                 for (Object selectedRequest : selectedRequests) {
-                    adminProfileManager.acceptRequest(((Request) selectedRequest).getRequestId());
+                    String selectedRequestID = ((Request) selectedRequest).getRequestId();
+                    adminProfileManager.acceptRequest(selectedRequestID);
+                    AlertBox.showMessage("Accept Request", "Request with ID : <" + selectedRequestID + "> accepted.");
+                    allRequestsTable.getItems().remove(selectedRequest);
                 }
             }
         });
-
         return acceptRequestButton;
     }
 
@@ -164,7 +166,10 @@ public class AdminProfileMenu {
                 ObservableList selectedRequests = allRequestsTable.getSelectionModel().getSelectedItems();
 
                 for (Object selectedRequest : selectedRequests) {
-                    adminProfileManager.declineRequest(((Request) selectedRequest).getRequestId());
+                    String selectedRequestID = ((Request) selectedRequest).getRequestId();
+                    adminProfileManager.declineRequest(selectedRequestID);
+                    AlertBox.showMessage("Decline Request", "Request with ID : <" + selectedRequestID + "> declined.");
+                    allRequestsTable.getItems().remove(selectedRequest);
                 }
             }
         });
@@ -195,6 +200,7 @@ public class AdminProfileMenu {
         stage.show();
     }
 
+    //todo: adding delete button in productsMenu
     public void manageProducts(MouseEvent mouseEvent) {
         try {
             App.setRoot("ProductsMenu");
