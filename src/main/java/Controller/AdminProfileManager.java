@@ -59,29 +59,6 @@ public class AdminProfileManager extends ProfileManager {
         return allUsers;
     }
 
-    public TableView getAllRequestsTable() {
-        TableView allRequests = new TableView();
-
-        TableColumn<String, Request> column1 = new TableColumn<>("Request ID");
-        column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
-
-        TableColumn<RequestType, Request> column2 = new TableColumn<>("Request Type");
-        column2.setCellValueFactory(new PropertyValueFactory<>("requestType"));
-
-        allRequests.getColumns().addAll(column1, column2);
-        for (Request request : Request.getAllRequests()) {
-            allRequests.getItems().add(request);
-        }
-        allRequests.setPlaceholder(new Label("No Data to display"));
-        return allRequests;
-    }
-
-    public TableView getDetailsOfRequestTable(String requestID) {
-        Request request = Request.getRequestById(requestID);
-        TableView requestDetails = request.getRequestDetails();
-        return requestDetails;
-    }
-
     public String viewUser(String username) throws NullPointerException {
         Account account = Account.getAccountByUsername(username);
         if (account == null) {
@@ -119,7 +96,6 @@ public class AdminProfileManager extends ProfileManager {
         return String.valueOf(code);
     }
 
-    //todo: adding Exceptions
     public void createManagerProfile(String username, String password, String name, String lastName, String email, String phoneNumber) {
         new Admin(username, password, name, lastName, email, phoneNumber);
     }
@@ -221,6 +197,29 @@ public class AdminProfileManager extends ProfileManager {
             throw new NullPointerException();
         }
         Discount.removeDiscount(discount);
+    }
+
+    public TableView getAllRequestsTable() {
+        TableView allRequests = new TableView();
+
+        TableColumn<String, Request> column1 = new TableColumn<>("Request ID");
+        column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
+
+        TableColumn<RequestType, Request> column2 = new TableColumn<>("Request Type");
+        column2.setCellValueFactory(new PropertyValueFactory<>("requestType"));
+
+        allRequests.getColumns().addAll(column1, column2);
+        for (Request request : Request.getAllRequests()) {
+            allRequests.getItems().add(request);
+        }
+        allRequests.setPlaceholder(new Label("No Data to display"));
+        return allRequests;
+    }
+
+    public TableView getDetailsOfRequestTable(String requestID) {
+        Request request = Request.getRequestById(requestID);
+        TableView requestDetails = request.getRequestDetails();
+        return requestDetails;
     }
 
     public ArrayList<String> getAllRequests() {

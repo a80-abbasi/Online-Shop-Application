@@ -57,7 +57,7 @@ public class RegisterMenu {
                 String companyName = companyField.getText();
                 try {
                     loginAndRegisterManager.registerSeller(username, password, firstName, lastName, email, phoneNumber, companyName);
-                    AlertBox.showMessage("Register Seller", "Seller Registered Successfully");
+                    AlertBox.showMessage("Register Seller", "Your Request Was Sent to Admin Successfully");
                 } catch (IllegalArgumentException e) {
                     AlertBox.showMessage("Failed to Register", e.getMessage());
                 }
