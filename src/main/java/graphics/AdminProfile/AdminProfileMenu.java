@@ -7,6 +7,7 @@ import Model.Request.Request;
 import graphics.AlertBox;
 
 import graphics.App;
+import graphics.LoginAndRegister.CreateAdminAccount;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -50,7 +51,11 @@ public class AdminProfileMenu {
 
     private void changePassword() {
         String password = passwordField.getText();
-        adminProfileManager.editPassword(password);
+        try {
+            adminProfileManager.editPassword(password);
+        } catch (IllegalArgumentException e) {
+            AlertBox.showMessage("Failed to edit password", e.getMessage());
+        }
     }
 
     private void changeFirstName() {
@@ -89,10 +94,6 @@ public class AdminProfileMenu {
         }
     }
 
-    public void createManagerAccount(MouseEvent mouseEvent) {
-
-    }
-
     public void manageUsers(MouseEvent mouseEvent) {
         TableView allUsersTable = adminProfileManager.getAllUsersTable();
         allUsersTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -103,8 +104,10 @@ public class AdminProfileMenu {
                 ObservableList selectedUsers = allUsersTable.getSelectionModel().getSelectedItems();
 
                 for (Object selectedUser : selectedUsers) {
-                    adminProfileManager.deleteUser(((Account) selectedUser).getUsername());
-                    //todo: is it correct??
+                    String selectedUsername = ((Account) selectedUser).getUsername();
+                    adminProfileManager.deleteUser(selectedUsername);
+                    AlertBox.showMessage("Delete User", "User with ID : <" + selectedUsername + "> deleted");
+                    allUsersTable.getItems().remove(selectedUser);
                 }
             }
         });
@@ -114,6 +117,15 @@ public class AdminProfileMenu {
         Stage stage = new Stage();
         stage.setScene(new Scene(vBox));
         stage.show();
+    }
+
+    public void addAdmin(MouseEvent mouseEvent) {
+        CreateAdminAccount.setParentMenu("AdminProfileMenu");
+        try {
+            App.setRoot("CreateAdminAccount");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void manageRequests(MouseEvent mouseEvent) {
@@ -136,11 +148,13 @@ public class AdminProfileMenu {
                 ObservableList selectedRequests = allRequestsTable.getSelectionModel().getSelectedItems();
 
                 for (Object selectedRequest : selectedRequests) {
-                    adminProfileManager.acceptRequest(((Request) selectedRequest).getRequestId());
+                    String selectedRequestID = ((Request) selectedRequest).getRequestId();
+                    adminProfileManager.acceptRequest(selectedRequestID);
+                    AlertBox.showMessage("Accept Request", "Request with ID : <" + selectedRequestID + "> accepted.");
+                    allRequestsTable.getItems().remove(selectedRequest);
                 }
             }
         });
-
         return acceptRequestButton;
     }
 
@@ -152,7 +166,10 @@ public class AdminProfileMenu {
                 ObservableList selectedRequests = allRequestsTable.getSelectionModel().getSelectedItems();
 
                 for (Object selectedRequest : selectedRequests) {
-                    adminProfileManager.declineRequest(((Request) selectedRequest).getRequestId());
+                    String selectedRequestID = ((Request) selectedRequest).getRequestId();
+                    adminProfileManager.declineRequest(selectedRequestID);
+                    AlertBox.showMessage("Decline Request", "Request with ID : <" + selectedRequestID + "> declined.");
+                    allRequestsTable.getItems().remove(selectedRequest);
                 }
             }
         });
@@ -183,16 +200,13 @@ public class AdminProfileMenu {
         stage.show();
     }
 
+    //todo: adding delete button in productsMenu
     public void manageProducts(MouseEvent mouseEvent) {
         try {
             App.setRoot("ProductsMenu");
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void addAdmin(MouseEvent mouseEvent) {
-
     }
 
     public void manageDiscounts(MouseEvent mouseEvent) {

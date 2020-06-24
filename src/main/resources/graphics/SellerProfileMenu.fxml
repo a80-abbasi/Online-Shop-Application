@@ -11,11 +11,11 @@
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </TextField>
-        <PasswordField fx:id="passwordField" layoutX="1028.0" layoutY="220.0">
+        <TextField fx:id="passwordField" layoutX="1028.0" layoutY="220.0">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>
-        </PasswordField>
+        </TextField>
         <TextField fx:id="firstNameField" layoutX="1028.0" layoutY="290.0">
             <font>
                 <Font name="Times New Roman" size="24.0" />

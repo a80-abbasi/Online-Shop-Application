@@ -8,27 +8,36 @@ import View.MainMenu;
 
 public class LoginAndRegisterManager {
 
-    public boolean isThereAccountWithUserName(String username){
+    public boolean isThereAccountWithUserName(String username) {
         Account account = Account.getAccountByUsername(username);
         return account != null;
     }
 
     public void registerCustomer(String username, String password, String name, String lastName, String email,
-                                 String phoneNumber){
-        new Customer(username, password, name, lastName, email, phoneNumber, 0);
+                                 String phoneNumber) throws IllegalArgumentException {
+        if (checkUsernameValidity(username) && checkPasswordValidity(password) && checkNameValidity(name) && checkNameValidity(lastName)
+                && checkEmailValidity(email) && checkPhoneNumberValidity(phoneNumber)) {
+            new Customer(username, password, name, lastName, email, phoneNumber, 0);
+        }
     }
 
     public void registerSeller(String username, String password, String name, String lastName, String email,
-                               String phoneNumber, String companyName) {
-        new RegisterSellerRequest(username, password, name, lastName, email, phoneNumber, companyName);
+                               String phoneNumber, String companyName) throws IllegalArgumentException {
+        if (checkUsernameValidity(username) && checkPasswordValidity(password) && checkNameValidity(name) && checkNameValidity(lastName)
+                && checkEmailValidity(email) && checkPhoneNumberValidity(phoneNumber) && checkNameValidity(companyName)) {
+            new RegisterSellerRequest(username, password, name, lastName, email, phoneNumber, companyName);
+        }
     }
 
     public void registerAdmin(String username, String password, String name, String lastName, String email,
-                              String phoneNumber){
-        new Admin(username, password, name, lastName, email, phoneNumber);
+                              String phoneNumber) throws IllegalArgumentException {
+        if (checkUsernameValidity(username) && checkPasswordValidity(password) && checkNameValidity(name) && checkNameValidity(lastName)
+                && checkEmailValidity(email) && checkPhoneNumberValidity(phoneNumber)) {
+            new Admin(username, password, name, lastName, email, phoneNumber);
+        }
     }
 
-    public boolean canCreateAdminManually(){
+    public boolean canCreateAdminManually() {
         return Admin.getAllAdmins().size() == 0;
     }
 
@@ -37,10 +46,10 @@ public class LoginAndRegisterManager {
         if (account == null) {
             throw new IllegalAccessException("There is no Account with this Username");
         }
-        if (!account.getPassword().equals(password)){
+        if (!account.getPassword().equals(password)) {
             throw new IllegalArgumentException("Your Password is wrong");
         }
-        if (account instanceof Customer){
+        if (account instanceof Customer) {
             Customer customer = (Customer) account;
             for (Product product : Customer.getTmpCart().keySet()) {
                 customer.addToCart(product, Customer.getTmpCart().get(product));
@@ -49,12 +58,57 @@ public class LoginAndRegisterManager {
         Account.setLoggedInAccount(account);
     }
 
-    public void logoutUser(){
+    public void logoutUser() {
         Account.setLoggedInAccount(null);
         new MainMenu().execute();
     }
 
-    public boolean isLogin(){
+    private boolean checkUsernameValidity(String username) throws IllegalArgumentException {
+        if (username.matches("[a-zA-Z0-9.]+") && !username.contains("..") && !(username.contains("\\s"))) {
+            Account account = Account.getAccountByUsername(username);
+            if (account == null) {
+                return true;
+            } else {
+                throw new IllegalArgumentException("There is another account with this username.");
+            }
+        } else {
+            throw new IllegalArgumentException("Invalid Username : " + "UserNames can only contain letters (a-z), numbers (0-9), and periods (.)" + "(UserNames cannot contain more than one dot in a row)\n");
+        }
+    }
+
+    private boolean checkPasswordValidity(String password) throws IllegalArgumentException {
+        if (password.equals("") || password.contains("\\s")) {
+            throw new IllegalArgumentException("Invalid Password.");
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkNameValidity(String name) throws IllegalArgumentException {
+        if (name.matches("[a-zA-Z ]+")) {
+            return true;
+        } else {
+            throw new IllegalArgumentException("Invalid Name.");
+        }
+    }
+
+    private boolean checkEmailValidity(String email) {
+        if (email.matches(".+?@\\w+\\.\\w+")) {
+            return true;
+        } else {
+            throw new IllegalArgumentException("Invalid Email.");
+        }
+    }
+
+    private boolean checkPhoneNumberValidity(String phoneNumber) {
+        if (phoneNumber.matches("\\d+")) {
+            return true;
+        } else {
+            throw new IllegalArgumentException("Invalid Phone Number.");
+        }
+    }
+
+    public boolean isLogin() {
         return Account.getLoggedInAccount() != null;
     }
 

@@ -18,7 +18,7 @@ public class CustomerProfileMenu {
     public TextField emailField;
     public TextField lastNameField;
     public TextField firstNameField;
-    public PasswordField passwordField;
+    public TextField passwordField;
     public TextField usernameField;
     public Label balanceField;
 
@@ -47,7 +47,11 @@ public class CustomerProfileMenu {
 
     private void changePassword() {
         String password = passwordField.getText();
-        customerProfileManager.editPassword(password);
+        try {
+            customerProfileManager.editPassword(password);
+        } catch (IllegalArgumentException e) {
+            AlertBox.showMessage("Failed to edit password", e.getMessage());
+        }
     }
 
     private void changeFirstName() {

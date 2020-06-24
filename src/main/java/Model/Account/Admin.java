@@ -37,4 +37,9 @@ public class Admin extends Account{
                 ", phoneNumber = '" + phoneNumber + '\'' +
                 '}';
     }
+
+    @Override
+    public void removeUser() {
+        allAdmins.remove(this);
+    }
 }

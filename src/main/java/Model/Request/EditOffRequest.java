@@ -94,4 +94,9 @@ public class EditOffRequest extends EditAddOffRequest {
 
         return requestDetails;
     }
+
+    @Override
+    public void remove() {
+        allEditOffRequests.remove(this);
+    }
 }

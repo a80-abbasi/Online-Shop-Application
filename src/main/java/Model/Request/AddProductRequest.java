@@ -67,4 +67,9 @@ public class AddProductRequest extends EditAddProductRequest {
 
         return requestDetails;
     }
+
+    @Override
+    public void remove() {
+        allAddProductRequest.remove(this);
+    }
 }

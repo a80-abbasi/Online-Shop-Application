@@ -71,4 +71,9 @@ public class AddOffRequest extends EditAddOffRequest {
         //todo
         return requestDetails;
     }
+
+    @Override
+    public void remove() {
+        allAddOffRequest.remove(this);
+    }
 }

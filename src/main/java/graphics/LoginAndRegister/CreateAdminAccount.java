@@ -1,7 +1,6 @@
 package graphics.LoginAndRegister;
 
 import Controller.LoginAndRegisterManager;
-import Model.Account.AccountType;
 import graphics.AlertBox;
 import graphics.App;
 import javafx.event.ActionEvent;
@@ -35,12 +34,19 @@ public class CreateAdminAccount {
         String lastName = lastNameField.getText();
         String email = emailField.getText();
         String phoneNumber = phoneNumberField.getText();
-        loginAndRegisterManager.registerAdmin(username, password, firstName, lastName, email, phoneNumber);
-        AlertBox.showMessage("Admin Register", "Admin Successfully registered");
-        try {
-            App.setRoot(parentMenu);
-        } catch (IOException e) {
-            e.printStackTrace();
+        boolean confirmButtonInability = username.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty();
+        if (!(confirmButtonInability)) {
+            try {
+                loginAndRegisterManager.registerAdmin(username, password, firstName, lastName, email, phoneNumber);
+                AlertBox.showMessage("Admin Register", "Admin Successfully registered");
+            } catch (IllegalArgumentException e) {
+                AlertBox.showMessage("Failed to Register", e.getMessage());
+            }
+            try {
+                App.setRoot(parentMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
