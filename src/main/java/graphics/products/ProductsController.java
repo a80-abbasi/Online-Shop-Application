@@ -44,6 +44,8 @@ public class ProductsController {
     public Pane productsWIthOffPane;
     public Pane productsPane;
     public Label disableSearchFilterLabel;
+    public ImageView backImage;
+    public ImageView cartImage;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
@@ -54,6 +56,7 @@ public class ProductsController {
     private final static String selectedColor = " #7ec7f6";
     private static final int numberOfProductsPerPage = 10;
     private boolean disableSearchIsHidden = true;
+    private static String parentAddress = "mainMenu";
 
     public void initialize() {
         productsManager = new ProductsManager();
@@ -63,12 +66,14 @@ public class ProductsController {
 
         showProducts();
         setSliders();
+
+        ProductPageController.setCartButton(cartImage);
+        ProductPageController.setBackButton(backImage, parentAddress);
     }
 
     private void addPageFactoryForPagination(){
         pagination.setPageFactory(page -> {
             pageIndex = page;
-
             showProducts();
             return productsPane;
         });
@@ -193,6 +198,7 @@ public class ProductsController {
         try {
             imageStackPane.getScene().setCursor(Cursor.DEFAULT);
             ProductPageController productPageController = (ProductPageController) App.setRoot("productPage");
+            ProductPageController.setParentAddress("productsMenu");
             productPageController.setProduct(product);
             productPageController.getImageStackPane().getChildren().addAll(imageStackPane.getChildren());
             productPageController.setEveryThing();

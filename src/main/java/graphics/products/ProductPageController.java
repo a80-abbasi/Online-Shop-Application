@@ -76,18 +76,21 @@ public class ProductPageController {
     public Label companyNameLabel;
     public Label visitNumberLabel;
     public Label helpUsLabel;
+    public ImageView backImage;
+    public ImageView cartImage;
 
     public TextField titleTextField;
     public TextArea commentTextArea;
     public Label XLabel;
     public Label commentNoteLabel;
 
-
     private Product product;
     private ArrayList<Pane> showingComments = new ArrayList<>();
     private boolean hasRated;
     private Stage commentPopUp;
+    private static Stage cartPopUp;
     private ProductPageController parentForCommentPage;
+    private static String parentAddress;
 
     public void initialize(){
 
@@ -106,6 +109,42 @@ public class ProductPageController {
         setPropertiesPane();
 
         setOffLeftTimeLabel();
+        setBackButton(backImage, parentAddress);
+        setCartButton(cartImage);
+    }
+
+    public static void setCartButton(ImageView cartImage){
+        shadowOnMouseHover(cartImage);
+        cartImage.setOnMouseClicked(e -> {
+            if (cartPopUp == null) {
+                cartPopUp = new Stage();
+                Scene scene;
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("cart.fxml"));
+                    scene = new Scene(fxmlLoader.load());
+                    /*CartController cartController = (CartController) fxmlLoader.getController();*/
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    return;
+                }
+                cartPopUp.setScene(scene);
+                cartPopUp.setTitle("Cart");
+                cartPopUp.setResizable(false);
+                cartPopUp.initStyle(StageStyle.UNDECORATED);
+                cartPopUp.showAndWait();
+            }
+        });
+    }
+
+    public static void setBackButton(ImageView back, String parentMenuAddress){
+        shadowOnMouseHover(back);
+        back.setOnMouseClicked(e -> {
+            try {
+                App.setRoot(parentMenuAddress);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     private void setOffLeftTimeLabel() {
@@ -385,24 +424,27 @@ public class ProductPageController {
         label.setOpacity(1);
     }
 
-    private void shadowOnMouseHover(Node node){
+    public static void shadowOnMouseHover(Node node){
         shadowOnMouseEntered(node);
         shadowOnMouseExited(node);
     }
 
-    private void shadowOnMouseEntered(Node node){
+    private static void shadowOnMouseEntered(Node node){
         node.setOnMouseEntered(e -> {
-            node.setOpacity(0.75);
+            node.setOpacity(0.5);
             node.setStyle("-fx-border-color :  #c5c5c5; -fx-border-radius: 10");
             node.getScene().setCursor(Cursor.HAND);
         });
     }
 
-    private void shadowOnMouseExited(Node node){
+    private static void shadowOnMouseExited(Node node){
         node.setOnMouseExited(e -> {
-            node.setOpacity(1);
-            node.setStyle("-fx-border-color :  #c5c5c5; -fx-border-radius: 0");
-            node.getScene().setCursor(Cursor.DEFAULT);
+            try {
+                node.setOpacity(1);
+                node.setStyle("-fx-border-color :  #c5c5c5; -fx-border-radius: 0");
+                node.getScene().setCursor(Cursor.DEFAULT);
+            } catch (Exception ignore) {
+            }
         });
     }
 
@@ -486,5 +528,21 @@ public class ProductPageController {
 
     public void setParentForCommentPage(ProductPageController parentForCommentPage) {
         this.parentForCommentPage = parentForCommentPage;
+    }
+
+    public static String getParentAddress() {
+        return parentAddress;
+    }
+
+    public static void setParentAddress(String parentAddress) {
+        ProductPageController.parentAddress = parentAddress;
+    }
+
+    public static void setCartPopUp(Stage cartPopUp) {
+        ProductPageController.cartPopUp = cartPopUp;
+    }
+
+    public static Stage getCartPopUp() {
+        return cartPopUp;
     }
 }
