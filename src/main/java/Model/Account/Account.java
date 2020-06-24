@@ -101,7 +101,10 @@ public abstract class Account {
 
     public static void deleteAccount(Account account) {
         allAccounts.remove(account);
+        account.removeUser();
     }
+
+    public abstract void removeUser();
 
     @Override
     public abstract String toString();

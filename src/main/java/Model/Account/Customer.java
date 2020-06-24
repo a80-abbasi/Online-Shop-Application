@@ -155,4 +155,9 @@ public class Customer extends Account {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
+
+    @Override
+    public void removeUser() {
+        allCustomers.remove(this);
+    }
 }
