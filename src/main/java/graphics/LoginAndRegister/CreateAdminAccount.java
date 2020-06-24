@@ -39,13 +39,13 @@ public class CreateAdminAccount {
             try {
                 loginAndRegisterManager.registerAdmin(username, password, firstName, lastName, email, phoneNumber);
                 AlertBox.showMessage("Admin Register", "Admin Successfully registered");
+                try {
+                    App.setRoot(parentMenu);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } catch (IllegalArgumentException e) {
                 AlertBox.showMessage("Failed to Register", e.getMessage());
-            }
-            try {
-                App.setRoot(parentMenu);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }

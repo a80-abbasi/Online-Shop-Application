@@ -176,6 +176,7 @@ public class AdminProfileMenu {
         return declineRequestButton;
     }
 
+    //todo: completing this
     private Button requestDetailsButton(TableView allRequestsTable) {
         Button requestDetailsButton = new Button("Show Details");
         requestDetailsButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -209,7 +210,7 @@ public class AdminProfileMenu {
         }
     }
 
-    public void manageDiscounts(MouseEvent mouseEvent) {
+    public void manageDiscountCodes(MouseEvent mouseEvent) {
 
     }
 
@@ -217,7 +218,19 @@ public class AdminProfileMenu {
         AdminProfileMenu.parentMenu = parentMenu;
     }
 
-    public void addDiscount(MouseEvent mouseEvent) {
+    public void createDiscountCode(MouseEvent mouseEvent) {
+        try {
+            App.setRoot("CreateDiscountCode");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void manageCategories(MouseEvent mouseEvent) {
+
+    }
+
+    public void addCategory(MouseEvent mouseEvent) {
 
     }
 }
