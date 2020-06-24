@@ -2,6 +2,7 @@ package graphics.LoginAndRegister;
 
 import Controller.LoginAndRegisterManager;
 import Model.Account.AccountType;
+import graphics.AlertBox;
 import graphics.App;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -43,17 +44,29 @@ public class RegisterMenu {
         String lastName = lastNameField.getText();
         String email = emailField.getText();
         String phoneNumber = phoneNumberField.getText();
-        if (accountType == AccountType.CUSTOMER) {
-            loginAndRegisterManager.registerCustomer(username, password, firstName, lastName, email, phoneNumber);
-        }
-        else if (accountType == AccountType.SELLER) {
-            String companyName = companyField.getText();
-            loginAndRegisterManager.registerSeller(username, password, firstName, lastName, email, phoneNumber, companyName);
-        }
-        try {
-            App.setRoot(parentMenu);
-        } catch (IOException e) {
-            e.printStackTrace();
+        boolean confirmButtonInability = username.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty();
+        if (!(confirmButtonInability)) {
+            if (accountType == AccountType.CUSTOMER) {
+                try {
+                    loginAndRegisterManager.registerCustomer(username.trim(), password.trim(), firstName.trim(), lastName, email, phoneNumber);
+                    AlertBox.showMessage("Register Customer", "Customer Registered Successfully");
+                } catch (IllegalArgumentException e) {
+                    AlertBox.showMessage("Failed to Register", e.getMessage());
+                }
+            } else if (accountType == AccountType.SELLER) {
+                String companyName = companyField.getText();
+                try {
+                    loginAndRegisterManager.registerSeller(username, password, firstName, lastName, email, phoneNumber, companyName);
+                    AlertBox.showMessage("Register Seller", "Seller Registered Successfully");
+                } catch (IllegalArgumentException e) {
+                    AlertBox.showMessage("Failed to Register", e.getMessage());
+                }
+            }
+            try {
+                App.setRoot(parentMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
