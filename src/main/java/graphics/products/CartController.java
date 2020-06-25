@@ -33,6 +33,8 @@ public class CartController {
     public Button purchaseButton;
     public Button clearButton;
     public Label messageLabel;
+    public Label totalLabel;
+    public Label totalAmountLabel;
 
     private HashMap<Product, Integer> cart;
 
@@ -47,6 +49,8 @@ public class CartController {
         }
         if (cart == null || cart.isEmpty()){
             setEmptyLabel();
+            totalLabel.setOpacity(0);
+            totalAmountLabel.setOpacity(0);
         }
         else {
             fillCart();
@@ -119,6 +123,9 @@ public class CartController {
         cart.forEach(((product, number) -> setProductRow(product, number, gridPane, row.getAndIncrement())));
         mainPane.getChildren().add(gridPane);
         gridPane.setAlignment(Pos.CENTER);
+        totalLabel.setOpacity(1);
+        totalAmountLabel.setOpacity(1);
+        totalAmountLabel.setText(cart.entrySet().stream().mapToDouble(entry -> entry.getKey().getPriceWithOff() * entry.getValue()).sum() + "$");
     }
 
     private void setProductRow(Product product, int number, GridPane gridPane, int row){

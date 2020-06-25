@@ -23,10 +23,12 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Label fx:id="messageLabel" layoutX="43.0" layoutY="476.0" textFill="RED">
+      <Label fx:id="messageLabel" layoutX="306.0" layoutY="466.0" prefHeight="43.0" prefWidth="210.0" textFill="RED" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
+      <Label fx:id="totalLabel" layoutX="21.0" layoutY="477.0" text="total:" />
+      <Label fx:id="totalAmountLabel" layoutX="59.0" layoutY="477.0" text="totalAmountLabel" />
    </children>
 </Pane>
