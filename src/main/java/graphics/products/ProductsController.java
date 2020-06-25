@@ -50,6 +50,7 @@ public class ProductsController {
     public ImageView cartImage;
     public MenuButton categories;
     public Pane mainPane;
+    public ImageView profileImage;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
@@ -83,6 +84,7 @@ public class ProductsController {
 
         ProductPageController.setCartButton(cartImage);
         App.setBackButton(backImage, parentAddress);
+        ProductPageController.setProfileButton(profileImage, "productsMenu");
     }
 
     private void setCategories(ArrayList<Category> allCategories, MenuButton menuButton) {

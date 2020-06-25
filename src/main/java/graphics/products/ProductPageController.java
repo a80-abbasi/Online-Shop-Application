@@ -6,6 +6,7 @@ import Model.Product.Comment;
 import Model.Product.Product;
 import Model.Product.Score;
 import graphics.App;
+import graphics.LoginAndRegister.LoginMenu;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -83,12 +84,14 @@ public class ProductPageController {
     public TextArea commentTextArea;
     public Label XLabel;
     public Label commentNoteLabel;
+    public ImageView profileImage;
 
     private Product product;
     private ArrayList<Pane> showingComments = new ArrayList<>();
     private boolean hasRated;
     private Stage commentPopUp;
     private static Stage cartPopUp;
+    public static Stage loginPopUp;
     private ProductPageController parentForCommentPage;
     private static String parentAddress;
 
@@ -111,6 +114,34 @@ public class ProductPageController {
         setOffLeftTimeLabel();
         App.setBackButton(backImage, parentAddress);
         setCartButton(cartImage);
+        setProfileButton(profileImage, "productPage");
+    }
+
+    public static void setProfileButton(ImageView profileImage, String parentAddress){
+        shadowOnMouseHover(profileImage);
+        profileImage.setOnMouseClicked(e -> {
+            if (loginPopUp == null){
+                loginPopUp = new Stage();
+                Scene scene;
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("loginMenu.fxml"));
+                    scene = new Scene(fxmlLoader.load());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    return;
+                }
+                loginPopUp.setOnCloseRequest(windowEvent -> {
+                    loginPopUp.close();
+                    loginPopUp = null;
+                });
+                LoginMenu.setParentMenu(parentAddress);
+                loginPopUp.setScene(scene);
+                loginPopUp.setTitle("login");
+                loginPopUp.setResizable(false);
+                /*loginPopUp.initStyle(StageStyle.UNDECORATED);*/
+                loginPopUp.showAndWait();
+            }
+        });
     }
 
     public static void setCartButton(ImageView cartImage){
