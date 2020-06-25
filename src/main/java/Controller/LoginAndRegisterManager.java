@@ -41,10 +41,10 @@ public class LoginAndRegisterManager {
         return Admin.getAllAdmins().size() == 0;
     }
 
-    public void loginUser(String username, String password) throws IllegalAccessException {
+    public void loginUser(String username, String password) throws IllegalArgumentException {
         Account account = Account.getAccountByUsername(username);
         if (account == null) {
-            throw new IllegalAccessException("There is no Account with this Username");
+            throw new IllegalArgumentException("There is no Account with this Username");
         }
         if (!account.getPassword().equals(password)) {
             throw new IllegalArgumentException("Your Password is wrong");

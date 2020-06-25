@@ -55,7 +55,7 @@ public class LoginAndRegisterMenu extends Menu {
                 String password = scanner.nextLine().trim();
                 try {
                     loginAndRegisterManager.loginUser(userName, password);
-                } catch (IllegalAccessException e) {
+                } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
             }
