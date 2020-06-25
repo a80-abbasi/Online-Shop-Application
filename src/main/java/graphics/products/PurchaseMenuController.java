@@ -1,8 +1,9 @@
-package graphics;
+package graphics.products;
 
 import Controller.CustomerProfileManager;
 import Model.Account.*;
 import Model.Product.Product;
+import graphics.AlertBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.*;
@@ -34,9 +35,6 @@ public class PurchaseMenuController {
     private HashMap<Product, Integer> cart;
 
     public void initialize(){
-        totalAmount = cart.entrySet().stream().mapToDouble(entry -> entry.getKey().getPriceWithOff() * entry.getValue()).sum();
-        setValidateButton();
-        setBuyItemButton();
         customer = (Customer) Account.getLoggedInAccount();
     }
 
@@ -82,9 +80,16 @@ public class PurchaseMenuController {
         });
     }
 
-    private void setBuyItemButton(){
+    private void setBuyItemsButton(){
+        totalAmount = cart.entrySet().stream().mapToDouble(entry -> entry.getKey().getPriceWithOff() * entry.getValue()).sum();
         AtomicBoolean flag = new AtomicBoolean(true);
-        double finalPrice = totalAmount - discount.calculateTotalDiscount(totalAmount);
+        double finalPrice;
+        if (discount != null) {
+            finalPrice = totalAmount - discount.calculateTotalDiscount(totalAmount);
+        }
+        else {
+            finalPrice = totalAmount;
+        }
         buyItemsButton.setOnAction(e -> {
             Stream.of(addressTextArea, phoneNumberTextField, nameTextField).forEach(field -> {
                 if (field.getText().isBlank()) {
@@ -102,7 +107,7 @@ public class PurchaseMenuController {
                     nameTextField.selectAll();
                     flag.set(false);
                 }
-                else if (!phoneNumberTextField.getText().matches("^\\d+$")){
+                else if (!phoneNumberTextField.getText().matches("\\d+")){
                     alertLabel.setText("phone number is invalid");
                     phoneNumberTextField.requestFocus();
                     phoneNumberTextField.selectAll();
@@ -114,15 +119,23 @@ public class PurchaseMenuController {
                 }
                 else {
                     finishBuying(finalPrice);
+                    showBoughtProducts();
+                    buyItemsButton.setDisable(true);
+                    buyItemsButton.setOpacity(0.5);
                 }
             }
             if (!flag.get()){
+                tabPane.getSelectionModel().select(0);
                 alertLabel.setOpacity(1);
                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> alertLabel.setOpacity(0)));
                 timeline.setCycleCount(1);
                 timeline.play();
             }
         });
+    }
+
+    private void showBoughtProducts(){
+
     }
 
     private void finishBuying(double finalAmount){
@@ -149,5 +162,7 @@ public class PurchaseMenuController {
 
     public void setCart(HashMap<Product, Integer> cart) {
         this.cart = cart;
+        setValidateButton();
+        setBuyItemsButton();
     }
 }

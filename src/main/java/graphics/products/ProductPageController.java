@@ -90,7 +90,7 @@ public class ProductPageController {
     private ArrayList<Pane> showingComments = new ArrayList<>();
     private boolean hasRated;
     private Stage commentPopUp;
-    private static Stage cartPopUp;
+    public static Stage cartPopUp;
     public static Stage loginPopUp;
     private ProductPageController parentForCommentPage;
     private static String parentAddress;
@@ -360,9 +360,13 @@ public class ProductPageController {
         rate.setOnMouseClicked(e -> {
             if (hasRated) {
                 e.consume();
+                noteForRateLabel.setText("You cant rate anymore");
             } else {
                 hasRated = true;
                 rateProduct(rate);
+                rate.setDisable(true);
+                rate.setUpdateOnHover(false);
+                setRates();
             }
         });
         setRatesAndProgresses();
