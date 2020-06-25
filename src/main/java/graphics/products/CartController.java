@@ -3,6 +3,7 @@ package graphics.products;
 import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Product.Product;
+import graphics.AlertBox;
 import graphics.App;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -54,14 +56,33 @@ public class CartController {
                 initialize();
             });
             purchaseButton.setOnAction(e -> {
-                try {
-                    Stage thisStage = (Stage) mainPane.getScene().getWindow();
-                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("cart.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load());
-                    thisStage.setScene(scene);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+                Stage thisStage = (Stage) mainPane.getScene().getWindow();
+                if (Account.getLoggedInAccount() != null && Account.getLoggedInAccount() instanceof Customer) {
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("purchaseMenu.fxml"));
+                        Scene scene = new Scene(fxmlLoader.load());
+                        ((PurchaseMenuController) fxmlLoader.getController()).setCart(cart);
+                        thisStage.setScene(scene);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
+                else {
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("loginMenu.fxml"));
+                        Scene scene = new Scene(fxmlLoader.load());
+                        thisStage.setScene(scene);
+                        thisStage.setTitle("login");
+                        thisStage.setResizable(false);
+                        AlertBox.showMessage("login error", "you must login as a customer in order to purchase");
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                thisStage.setOnCloseRequest(windowEvent -> {
+                    thisStage.close();
+                    ProductPageController.cartPopUp = null;
+                });
             });
         }
     }
