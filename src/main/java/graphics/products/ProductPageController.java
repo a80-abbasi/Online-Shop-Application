@@ -1,6 +1,8 @@
 package graphics.products;
 
+import Controller.ProductsManager;
 import Model.Account.Account;
+import Model.Account.Admin;
 import Model.Account.Customer;
 import Model.Product.Comment;
 import Model.Product.Product;
@@ -85,6 +87,7 @@ public class ProductPageController {
     public Label XLabel;
     public Label commentNoteLabel;
     public ImageView profileImage;
+    public Button deleteProductButton;
 
     private Product product;
     private ArrayList<Pane> showingComments = new ArrayList<>();
@@ -94,9 +97,25 @@ public class ProductPageController {
     public static Stage loginPopUp;
     private ProductPageController parentForCommentPage;
     private static String parentAddress;
+    private ProductsManager productsManager;
 
     public void initialize(){
-
+        productsManager = new ProductsManager();
+        if (Account.getLoggedInAccount() instanceof Admin){
+            deleteProductButton.setOpacity(1);
+            deleteProductButton.setOnAction(e -> {
+                productsManager.deleteAProduct(product);
+                try {
+                    App.setRoot(parentAddress);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
+        }
+        else {
+            deleteProductButton.setOpacity(0);
+            deleteProductButton.setDisable(false);
+        }
     }
 
     public void setEveryThing(){

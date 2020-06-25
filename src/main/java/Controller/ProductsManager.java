@@ -15,6 +15,7 @@ public class ProductsManager {
 
     private Comparator<Product> currentSortMode = new ProductComparatorForVisitNumber();
     private ArrayList<FilteringType> currentFilters = new ArrayList<>();
+    private ArrayList<Product> deletedProducts = new ArrayList<>();
     private SortType currentSort = SortType.SORT_BY_VISIT;
     private String nameFilter;
     private Category categoryFilter;
@@ -49,6 +50,10 @@ public class ProductsManager {
         return selectedProducts;
     }
 
+    public void deleteAProduct(Product product){
+        deletedProducts.add(product);
+    }
+
     public ArrayList<Product> showProducts () {
         ArrayList<Product> sortedFilteredProducts = new ArrayList<>();
         ArrayList<Product> products;
@@ -61,6 +66,7 @@ public class ProductsManager {
         if (currentFilters.contains(FilteringType.OFF_FILTER)){
             products = getProductsWithOff(products);
         }
+        products.removeAll(deletedProducts);
         for (Product product : products) {
             if (nameFilter != null) {
                 if (!getMatcher(product.getProductName(), "(?i)" + nameFilter).find()){

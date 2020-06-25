@@ -130,6 +130,15 @@ public class Customer extends Account {
         }
     }
 
+    public static Customer getCustomerById(String username){
+        for (Customer customer : allCustomers) {
+            if (customer.getUsername().equals(username)){
+                return customer;
+            }
+        }
+        return null;
+    }
+
     public static HashMap<Product, Integer> getTmpCart() {
         return tmpCart;
     }

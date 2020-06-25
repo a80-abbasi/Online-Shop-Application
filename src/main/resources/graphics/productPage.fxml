@@ -43,6 +43,11 @@
                         <Image url="@../Images/account.png" />
                      </image>
                   </ImageView>
+                  <Button fx:id="deleteProductButton" layoutX="548.0" layoutY="3.0" mnemonicParsing="false" opacity="0.0" prefHeight="47.0" prefWidth="413.0" style="-fx-background-color: #EF394E; -fx-background-radius: 50;" text="ADMIN: delete product">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
             <Pane layoutX="15.0" layoutY="67.0" prefHeight="552.0" prefWidth="1510.0" style="-fx-border-color: #c5c5c5;">
@@ -173,7 +178,7 @@
                   </Label>
                </children>
             </Pane>
-            <TabPane fx:id="tabs" layoutX="15.0" layoutY="628.0" prefHeight="567.0" prefWidth="1508.0" style="-fx-border-color: #c5c5c5;" tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutX="15.0" layoutY="628.0" prefHeight="567.0" prefWidth="1508.0" style="-fx-border-color: #c5c5c5;" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="explanations">
                   <content>

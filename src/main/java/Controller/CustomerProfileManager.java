@@ -8,7 +8,7 @@ import View.Menu;
 import java.util.*;
 
 public class CustomerProfileManager extends ProfileManager{
-    private Customer customer;
+    public Customer customer;
 
     public CustomerProfileManager(Customer customer) {
         super(customer);
@@ -201,6 +201,9 @@ public class CustomerProfileManager extends ProfileManager{
         }
         //discount.getDiscountPerCustomer();
         //todo: check discount code use less than
+
+        //Sell log
+
     }
 
     public boolean canCustomerPay(double cost) {

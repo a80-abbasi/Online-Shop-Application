@@ -6,13 +6,17 @@ import Model.Product.Product;
 import graphics.AlertBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class PurchaseMenuController {
@@ -28,11 +32,14 @@ public class PurchaseMenuController {
     public Button buyItemsButton;
     public Button validateButton;
     public TabPane tabPane;
+    public Label totalLabel;
+    public Label totalAmountLabel;
 
     private Discount discount;
     private Customer customer;
     private double totalAmount;
     private HashMap<Product, Integer> cart;
+    double finalPrice;
 
     public void initialize(){
         customer = (Customer) Account.getLoggedInAccount();
@@ -83,7 +90,6 @@ public class PurchaseMenuController {
     private void setBuyItemsButton(){
         totalAmount = cart.entrySet().stream().mapToDouble(entry -> entry.getKey().getPriceWithOff() * entry.getValue()).sum();
         AtomicBoolean flag = new AtomicBoolean(true);
-        double finalPrice;
         if (discount != null) {
             finalPrice = totalAmount - discount.calculateTotalDiscount(totalAmount);
         }
@@ -135,7 +141,44 @@ public class PurchaseMenuController {
     }
 
     private void showBoughtProducts(){
+        GridPane gridPane = new GridPane();
+        gridPane.setPadding(new Insets(10, 10, 10, 10));
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
 
+        Label label1, label2, label3, label4, label5;
+        gridPane.add((label1 = new Label("serial")), 0, 0);
+        gridPane.add(label2 = new Label("name"), 1, 0);
+        gridPane.add(label3 = new Label("Price"),2, 0);
+        gridPane.add(label4 = new Label("quantity"), 3, 0);
+        gridPane.add(label5 = new Label("amount"),4, 0);
+        Stream.of(label1, label2, label3, label4, label5).forEach(label ->
+                label.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 25; -fx-font-weight: bold"));
+        AtomicInteger row = new AtomicInteger(1);
+        cart.forEach(((product, number) -> setProductRow(product, number, gridPane, row.getAndIncrement())));
+        buyLogPane.getChildren().add(gridPane);
+        gridPane.setAlignment(Pos.CENTER);
+        totalLabel.setOpacity(1);
+        totalAmountLabel.setOpacity(1);
+        totalAmountLabel.setText(finalPrice + "$");
+    }
+
+    private void setProductRow(Product product, int number, GridPane gridPane, int row) {
+        Label serial, name, price, quantity, amount;
+        serial = new Label(String.valueOf(row));
+        name = new Label(product.getProductName());
+        price = new Label(String.valueOf(product.getPriceWithOff()));
+        quantity = new Label(String.valueOf(number));
+        amount = new Label(String.valueOf(product.getPriceWithOff() * number));
+        Stream.of(serial, name, price, quantity, amount).forEach(label -> {
+            label.setAlignment(Pos.CENTER);
+            label.setStyle("-fx-font-size: 20");
+        });
+        gridPane.add(serial, 0, row);
+        gridPane.add(name, 1, row);
+        gridPane.add(price, 2, row);
+        gridPane.add(quantity, 3, row);
+        gridPane.add(amount, 4, row);
     }
 
     private void finishBuying(double finalAmount){
