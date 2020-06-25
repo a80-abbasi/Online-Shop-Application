@@ -10,22 +10,14 @@ public class BuyLog extends Log {
     private double paidAmount;
     private double discountAmount;
     private boolean hasDelivered;
-    private ArrayList<Product> products;
-    private ArrayList<Integer> numbers;
-    private ArrayList<Seller> sellers;
+    private HashMap<Product, Integer> boughtProducts;
 
-    public BuyLog(String ID, Date date, double paidAmount, double discountAmount, ArrayList<Product> products, ArrayList<Integer> numbers, ArrayList<Seller> sellers) {
+    public BuyLog(String ID, Date date, double paidAmount, double discountAmount, HashMap<Product, Integer> cart) {
         super(ID, date);
         this.paidAmount = paidAmount;
         this.discountAmount = discountAmount;
-        this.products = products;
-        this. numbers = numbers;
-        this.sellers = sellers;
+        this.boughtProducts = new HashMap<>(cart);
     }
-
-//    public BuyLog() {
-//        this("", null, 0, 0, null);
-//    }
 
     public double getPaidAmount() {
         return paidAmount;
@@ -51,18 +43,29 @@ public class BuyLog extends Log {
         this.hasDelivered = hasDelivered;
     }
 
+    public void setPaidAmount(double paidAmount) {
+        this.paidAmount = paidAmount;
+    }
 
+    public void setDiscountAmount(double discountAmount) {
+        this.discountAmount = discountAmount;
+    }
 
+    public HashMap<Product, Integer> getBoughtProducts() {
+        return boughtProducts;
+    }
 
+    public void setBoughtProducts(HashMap<Product, Integer> boughtProducts) {
+        this.boughtProducts = boughtProducts;
+    }
 
     @Override
     public String toString() {
         return "BuyLog{" +
                 "paidAmount=" + paidAmount +
                 ", discountAmount=" + discountAmount +
-                //", seller=" + seller + // todo: add hashmap
                 ", hasDelivered=" + hasDelivered +
-                //", boughtProducts=" + boughtProducts +
+                ", boughtProducts=" + boughtProducts +
                 '}';
     }
 }
