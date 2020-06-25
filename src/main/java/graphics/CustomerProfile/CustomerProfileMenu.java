@@ -46,7 +46,7 @@ public class CustomerProfileMenu {
     public TextField firstNameField;
     public TextField passwordField;
     public TextField usernameField;
-    public Label balanceField;
+    public Label balanceLabel;
     private TableView table = new TableView();
 
     private ArrayList<Pane> showingBuyLogs = new ArrayList<>();
@@ -66,7 +66,7 @@ public class CustomerProfileMenu {
         lastNameField.setText(customerProfileManager.getLastName());
         emailField.setText(customerProfileManager.getEmail());
         phoneNumberField.setText(customerProfileManager.getPhoneNumber());
-        balanceField.setText(customerProfileManager.viewBalance() + "$");
+        balanceLabel.setText(customerProfileManager.viewBalance() + "$");
     }
 
     public void confirm(ActionEvent event) {
