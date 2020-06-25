@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AdminProfile.ManageDiscountsMenu">
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AdminProfile.ManageDiscounts.ManageDiscountsMenu">
     <children>
         <Label layoutX="876.0" layoutY="178.0" text="Discount Code">
             <font>
@@ -74,7 +74,7 @@
             </font>
         </Label>
         <TextField fx:id="includingCustomersField" editable="false" layoutX="1171.0" layoutY="533.0" prefHeight="44.0" prefWidth="300.0" />
-      <Button layoutX="1340.0" layoutY="577.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="131.0" text="all customers">
+      <Button layoutX="1334.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#showNotIncludingCustomers" prefHeight="44.0" prefWidth="137.0" text="Add Customers">
          <font>
             <Font name="Times New Roman" size="18.0" />
          </font>
@@ -86,6 +86,11 @@
          </font>
       </Button>
       <Button layoutX="90.0" layoutY="599.0" mnemonicParsing="false" onMouseClicked="#removeDiscount" prefHeight="44.0" prefWidth="150.0" text="Remove">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="1171.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#clearIncludingCustomers" prefHeight="44.0" prefWidth="102.0" text="Clear">
          <font>
             <Font name="Times New Roman" size="18.0" />
          </font>

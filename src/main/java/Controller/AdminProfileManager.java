@@ -270,7 +270,6 @@ public class AdminProfileManager extends ProfileManager {
         return true;
     }
 
-    //todo: checking this
     public void removeDiscount(String discountCode) throws NullPointerException {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {

@@ -1,15 +1,24 @@
-package graphics.AdminProfile;
+package graphics.AdminProfile.ManageDiscounts;
 
 import Controller.AdminProfileManager;
 import Model.Account.Account;
 import Model.Account.Admin;
+import Model.Account.Customer;
 import Model.Account.Discount;
 import graphics.AlertBox;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,6 +32,7 @@ public class ManageDiscountsMenu {
     public DatePicker endTimeDate;
 
     public TableView allDiscountsTable;
+    public TableView notIncludingCustomers;
 
     private ArrayList<String> includingCustomers;
 
@@ -32,11 +42,31 @@ public class ManageDiscountsMenu {
 
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
+        {
+            allDiscountsTable = new TableView();
+            notIncludingCustomers = new TableView();
+        }
         allDiscountsTable = adminProfileManager.getAllDiscountsTable(allDiscountsTable);
+        notIncludingCustomers = adminProfileManager.getAllCustomersTable(notIncludingCustomers);
+
+        includingCustomers = new ArrayList<>();
     }
 
     public void showDetails() {
-
+        Discount selectedDiscount = (Discount) allDiscountsTable.getSelectionModel().getSelectedItem();
+        discountCodeField.setText(selectedDiscount.getDiscountCode());
+        startTimeDate.setValue(selectedDiscount.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        endTimeDate.setValue(selectedDiscount.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        maxPossibleDiscountField.setText(String.valueOf(selectedDiscount.getMaxPossibleDiscount()));
+        discountPercentField.setText(String.valueOf(selectedDiscount.getDiscountPercent()));
+        discountPerCustomerField.setText(String.valueOf(selectedDiscount.getDiscountPerCustomer()));
+        for (String s : selectedDiscount.getIncludingCustomerUsername()) {
+            includingCustomersField.setText(includingCustomersField.getText() + s + ", ");
+        }
+        includingCustomers = selectedDiscount.getIncludingCustomerUsername();
+        for (String includingCustomer : includingCustomers) {
+            notIncludingCustomers.getItems().remove(Account.getAccountByUsername(includingCustomer));
+        }
     }
 
     public void confirm(MouseEvent mouseEvent) {
@@ -97,7 +127,47 @@ public class ManageDiscountsMenu {
     }
 
     public void removeDiscount(MouseEvent mouseEvent) {
-        Discount selectedDiscount = (Discount) allDiscountsTable.getSelectionModel().getSelectedItem();
+        Object selectedItem = allDiscountsTable.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            return;
+        }
+        Discount selectedDiscount = (Discount) selectedItem;
         adminProfileManager.removeDiscount(selectedDiscount.getDiscountCode());
+        allDiscountsTable.getItems().remove(selectedDiscount);
+    }
+
+    public void clearIncludingCustomers(MouseEvent mouseEvent) {
+        notIncludingCustomers = new TableView();
+        notIncludingCustomers = adminProfileManager.getAllCustomersTable(notIncludingCustomers);
+        includingCustomers.clear();
+        includingCustomersField.setText("");
+    }
+
+    public void showNotIncludingCustomers(MouseEvent mouseEvent) {
+        VBox vBox = new VBox();
+        vBox.setSpacing(20);
+
+        Button addCustomerButton = new Button("Add Customer");
+        addCustomerButton.setFont(Font.font("Times New Roman", 16));
+        addCustomerButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Object selectedItem = notIncludingCustomers.getSelectionModel().getSelectedItem();
+                if (selectedItem == null) {
+                    return;
+                }
+                Customer customer = (Customer) selectedItem;
+                includingCustomers.add(customer.getUsername());
+                includingCustomersField.setText(includingCustomersField.getText() + customer.getUsername() + ", ");
+                notIncludingCustomers.getItems().remove(customer);
+            }
+        });
+        vBox.setAlignment(Pos.CENTER);
+        vBox.getChildren().addAll(notIncludingCustomers, addCustomerButton);
+        Stage window = new Stage();
+        window.setTitle("Not Including Customers");
+        Scene scene = new Scene(vBox);
+        window.setScene(scene);
+        window.show();
     }
 }

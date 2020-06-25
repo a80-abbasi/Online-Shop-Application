@@ -211,7 +211,11 @@ public class AdminProfileMenu {
     }
 
     public void manageDiscountCodes(MouseEvent mouseEvent) {
-
+        try {
+            App.setRoot("ManageDiscountsMenu");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void setParentMenu(String parentMenu) {

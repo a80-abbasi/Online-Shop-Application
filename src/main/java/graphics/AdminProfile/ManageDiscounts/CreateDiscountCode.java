@@ -1,4 +1,4 @@
-package graphics.AdminProfile;
+package graphics.AdminProfile.ManageDiscounts;
 
 import Controller.AdminProfileManager;
 import Model.Account.Account;
@@ -65,10 +65,19 @@ public class CreateDiscountCode {
 
     public void addCustomerToDiscount(MouseEvent mouseEvent) {
         Object selectedUser = customerTable.getSelectionModel().getSelectedItem();
+        if (selectedUser == null) {
+            return;
+        }
         String customerUsername = ((Customer) selectedUser).getUsername();
         includingCustomers.add(customerUsername);
 
         includingCustomersField.setText(includingCustomersField.getText() + (customerUsername + ", "));
         customerTable.getItems().remove(selectedUser);
+    }
+
+    public void clearIncludingCustomers(MouseEvent mouseEvent) {
+        customerTable.getItems().addAll(includingCustomers);
+        includingCustomers.clear();
+        includingCustomersField.setText("");
     }
 }
