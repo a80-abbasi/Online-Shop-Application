@@ -1,7 +1,6 @@
 package graphics;
 
 import Controller.AdminProfileManager;
-import Model.Account.Customer;
 import Model.Account.Off;
 import Model.Account.Seller;
 import Model.Product.*;
