@@ -420,4 +420,34 @@
         <balance>10.0</balance>
         <nameOfCompany>a0</nameOfCompany>
     </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>am@am.am</email>
+        <lastName>am</lastName>
+        <name>am</name>
+        <password>am</password>
+        <phoneNumber>298349438</phoneNumber>
+        <username>am</username>
+        <balance>0.0</balance>
+        <nameOfCompany>amirCompany</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
 </sellers>

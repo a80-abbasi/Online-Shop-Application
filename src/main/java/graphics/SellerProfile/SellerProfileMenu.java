@@ -4,11 +4,14 @@ import Controller.SellerProfileManager;
 import Model.Account.Account;
 import Model.Account.Seller;
 import graphics.AlertBox;
+import graphics.App;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+
+import java.io.IOException;
 
 public class SellerProfileMenu {
     public TextField usernameField;
@@ -32,6 +35,7 @@ public class SellerProfileMenu {
         lastNameField.setText(sellerProfileManager.getLastName());
         emailField.setText(sellerProfileManager.getEmail());
         phoneNumberField.setText(sellerProfileManager.getPhoneNumber());
+        companyField.setText(sellerProfileManager.getCompanyName());
     }
 
     public void confirm(ActionEvent event) {
@@ -93,16 +97,16 @@ public class SellerProfileMenu {
         sellerProfileManager.editCompanyName(companyName);
     }
 
-    public static void setParentMenu(String parentMenu) {
-        SellerProfileMenu.setParentMenu(parentMenu);
-    }
-
     public void manageOffs(MouseEvent mouseEvent) {
 
     }
 
     public void addOff(MouseEvent mouseEvent) {
-
+        try {
+            App.setRoot("AddOff");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void manageProducts(MouseEvent mouseEvent) {
@@ -111,5 +115,9 @@ public class SellerProfileMenu {
 
     public void addProduct(MouseEvent mouseEvent) {
 
+    }
+
+    public static void setParentMenu(String parentMenu) {
+        SellerProfileMenu.parentMenu = parentMenu;
     }
 }

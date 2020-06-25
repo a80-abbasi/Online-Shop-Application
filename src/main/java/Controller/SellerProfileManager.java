@@ -4,6 +4,10 @@ import Model.Account.*;
 import Model.Request.*;
 import Model.Product.Category;
 import Model.Product.Product;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -155,6 +159,49 @@ public class SellerProfileManager extends ProfileManager {
         new RemoveProductRequest(product);
     }
 
+    public TableView getSellerProductsTable(TableView sellerProductsTable) {
+        TableColumn<String, Product> column = new TableColumn<>("Product ID");
+        column.setCellValueFactory(new PropertyValueFactory<>("productId"));
+
+        TableColumn<String, Product> column1 = new TableColumn<>("Product Name");
+        column1.setCellValueFactory(new PropertyValueFactory<>("productName"));
+
+        sellerProductsTable.getColumns().addAll(column, column1);
+        for (Product product : this.seller.getProducts()) {
+            sellerProductsTable.getItems().add(product);
+        }
+        sellerProductsTable.setPlaceholder(new Label("No Data To Display"));
+        return sellerProductsTable;
+    }
+
+    public void makeNewAddOffRequest(String offID, Date offStartTime, Date offEndTime, String offAmount, ArrayList<String> offProductIDs) throws Exception {
+        try {
+            if (checkOffAmountValidity(offAmount) && checkOffIDValidity(offID)) {
+                new AddOffRequest(offID, offStartTime, offEndTime, Integer.parseInt(offAmount), offProductIDs);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    private boolean checkOffIDValidity(String offID) throws Exception{
+        if (Off.getOffById(offID) != null) {
+            throw new Exception("There is another off with this ID");
+        }
+        else {
+            return true;
+        }
+    }
+
+    private boolean checkOffAmountValidity(String offAmount) throws Exception {
+        try {
+            Integer.parseInt(offAmount);
+            return true;
+        } catch (Exception e) {
+            throw new Exception("Invalid Off Amount");
+        }
+    }
+
     public AddOffRequest addOffRequest () {
         return new AddOffRequest();
     }
@@ -273,6 +320,10 @@ public class SellerProfileManager extends ProfileManager {
 
     public int viewBalance(Account account) {
         return 0;
+    }
+
+    public String getCompanyName() {
+        return this.seller.getNameOfCompany();
     }
 
 }
