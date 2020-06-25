@@ -293,12 +293,6 @@ public class AdminProfileManager extends ProfileManager {
         return allRequests;
     }
 
-    public TableView getDetailsOfRequestTable(String requestID) {
-        Request request = Request.getRequestById(requestID);
-        TableView requestDetails = request.getRequestDetails();
-        return requestDetails;
-    }
-
     public ArrayList<String> getAllRequests() {
         ArrayList<Request> allRequests = Request.getAllRequests();
         ArrayList<String> allRequestIds = new ArrayList<>();

@@ -129,76 +129,11 @@ public class AdminProfileMenu {
     }
 
     public void manageRequests(MouseEvent mouseEvent) {
-        TableView allRequestsTable = adminProfileManager.getAllRequestsTable();
-        allRequestsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        VBox vBox = new VBox();
-        vBox.getChildren().addAll(allRequestsTable, acceptRequestButton(allRequestsTable), declineRequestButton(allRequestsTable), requestDetailsButton(allRequestsTable));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(vBox));
-        stage.show();
-    }
-
-    private Button acceptRequestButton(TableView allRequestsTable) {
-        Button acceptRequestButton = new Button("Accept Request");
-
-        acceptRequestButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ObservableList selectedRequests = allRequestsTable.getSelectionModel().getSelectedItems();
-
-                for (Object selectedRequest : selectedRequests) {
-                    String selectedRequestID = ((Request) selectedRequest).getRequestId();
-                    adminProfileManager.acceptRequest(selectedRequestID);
-                    AlertBox.showMessage("Accept Request", "Request with ID : <" + selectedRequestID + "> accepted.");
-                    allRequestsTable.getItems().remove(selectedRequest);
-                }
-            }
-        });
-        return acceptRequestButton;
-    }
-
-    private Button declineRequestButton(TableView allRequestsTable) {
-        Button declineRequestButton = new Button("Decline Request");
-        declineRequestButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ObservableList selectedRequests = allRequestsTable.getSelectionModel().getSelectedItems();
-
-                for (Object selectedRequest : selectedRequests) {
-                    String selectedRequestID = ((Request) selectedRequest).getRequestId();
-                    adminProfileManager.declineRequest(selectedRequestID);
-                    AlertBox.showMessage("Decline Request", "Request with ID : <" + selectedRequestID + "> declined.");
-                    allRequestsTable.getItems().remove(selectedRequest);
-                }
-            }
-        });
-        return declineRequestButton;
-    }
-
-    //todo: completing this
-    private Button requestDetailsButton(TableView allRequestsTable) {
-        Button requestDetailsButton = new Button("Show Details");
-        requestDetailsButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ObservableList selectedRequests = allRequestsTable.getSelectionModel().getSelectedItems();
-
-                for (Object selectedRequest : selectedRequests) {
-                    TableView requestDetails = adminProfileManager.getDetailsOfRequestTable(((Request) selectedRequest).getRequestId());
-                    showTable(requestDetails);
-                }
-            }
-        });
-        return requestDetailsButton;
-    }
-
-    private void showTable(TableView tableView) {
-        VBox vBox = new VBox();
-        vBox.getChildren().add(tableView);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(vBox));
-        stage.show();
+        try {
+            App.setRoot("ManageRequests");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //todo: adding delete button in productsMenu
@@ -218,10 +153,6 @@ public class AdminProfileMenu {
         }
     }
 
-    public static void setParentMenu(String parentMenu) {
-        AdminProfileMenu.parentMenu = parentMenu;
-    }
-
     public void createDiscountCode(MouseEvent mouseEvent) {
         try {
             App.setRoot("CreateDiscountCode");
@@ -231,10 +162,14 @@ public class AdminProfileMenu {
     }
 
     public void manageCategories(MouseEvent mouseEvent) {
-
+        //todo
     }
 
     public void addCategory(MouseEvent mouseEvent) {
+        //todo
+    }
 
+    public static void setParentMenu(String parentMenu) {
+        AdminProfileMenu.parentMenu = parentMenu;
     }
 }
