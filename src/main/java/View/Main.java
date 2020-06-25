@@ -41,7 +41,7 @@ public class Main{
         Customers.serializeXML();
         Admins.serializeXML();
         Sellers.serializeXML();
-        Products.serializeXML(); //todo: bring them back
+        Products.serializeXML();
         Categories.serializeXML();
         Discounts.serializeXML();
         Offs.serializeXML();

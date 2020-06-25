@@ -134,55 +134,10 @@ public class AdminProfileManager extends ProfileManager {
         }
     }
 
-    public void createDiscountCode(String discountCode, Date startTime, Date endTime, String discountPercent, String maxPossibleDiscount, String discountPerCustomer, String[] includingCustomers) {
+    public void createDiscountCode(String discountCode, Date startTime, Date endTime, String discountPercent, String maxPossibleDiscount, String discountPerCustomer, ArrayList<String> includingCustomers) throws Exception{
         if (checkDiscountCodeValidity(discountCode) && checkDiscountPercentValidity(discountPercent) && checkMaxPossibleDiscountValidity(maxPossibleDiscount) && checkDiscountPerCustomerValidity(discountPerCustomer) && checkCustomersValidity(includingCustomers)) {
-            new Discount(discountCode, startTime, endTime, Integer.parseInt(discountPercent), Integer.parseInt(maxPossibleDiscount), Integer.parseInt(discountPerCustomer), includingCustomers);
+            new Discount(discountCode, startTime, endTime, Double.parseDouble(discountPercent), Double.parseDouble(maxPossibleDiscount), Integer.parseInt(discountPerCustomer), includingCustomers);
         }
-    }
-
-    private boolean checkDiscountCodeValidity(String discountCode) throws IllegalArgumentException {
-        if (discountCode.trim().equals("")) {
-            throw new IllegalArgumentException("Invalid Discount Code");
-        } else {
-            return true;
-        }
-    }
-
-    private boolean checkDiscountPercentValidity(String discountPercent) throws IllegalArgumentException {
-        if (discountPercent.trim().equals("") || !(discountPercent.matches("\\d+"))) {
-            throw new IllegalArgumentException("Invalid Discount Percent");
-        } else {
-            if (Integer.parseInt(discountPercent) > 100) {
-                throw new IllegalArgumentException("Discount Percent should be less than 100");
-            } else {
-                return true;
-            }
-        }
-    }
-
-    private boolean checkMaxPossibleDiscountValidity(String maxPossibleDiscount) throws IllegalArgumentException {
-        if (maxPossibleDiscount.trim().equals("") || !(maxPossibleDiscount.matches("\\d+"))) {
-            throw new IllegalArgumentException("Invalid maximum possible discount");
-        } else {
-            return true;
-        }
-    }
-
-    private boolean checkDiscountPerCustomerValidity(String discountPerCustomer) throws IllegalArgumentException {
-        if (discountPerCustomer.trim().equals("") || !(discountPerCustomer.matches("\\d+"))) {
-            throw new IllegalArgumentException("Invalid number of discount user per customer.");
-        } else {
-            return true;
-        }
-    }
-
-    private boolean checkCustomersValidity(String[] customersUsername) throws IllegalArgumentException{
-        for (String s : customersUsername) {
-            if (Account.getAccountByUsername(s) == null || !(Account.getAccountByUsername(s) instanceof Customer)) {
-                throw new IllegalArgumentException("Invalid Customer Username.");
-            }
-        }
-        return true;
     }
 
     public TableView getAllDiscountsTable(TableView allDiscountsTable) {
@@ -238,43 +193,83 @@ public class AdminProfileManager extends ProfileManager {
         discount.setEndTime(endTime);
     }
 
-    //todo: checking this
-    public void editDiscountPercent(String discountCode, String discountPercent) throws NullPointerException, IllegalArgumentException {
+    public void editDiscountPercent(String discountCode, String discountPercent) throws NullPointerException, Exception {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
             throw new NullPointerException();
-        } else if (discountPercent.matches("\\d[1-2]")) {
+        } else if (checkDiscountPercentValidity(discountPercent)) {
             discount.setDiscountPercent(Integer.parseInt(discountPercent));
-        } else {
-            throw new IllegalArgumentException();
         }
     }
 
-    //todo: checking this
-    public void editDiscountMaxPossibleDiscount(String discountCode, String maxPossibleDiscount) throws NullPointerException, InputMismatchException {
+    public void editDiscountMaxPossibleDiscount(String discountCode, String maxPossibleDiscount) throws NullPointerException, Exception {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
             throw new NullPointerException();
-        } else if (maxPossibleDiscount.matches("\\d+\\.\\d+")) {
+        } else if (checkMaxPossibleDiscountValidity(maxPossibleDiscount)) {
             discount.setMaxPossibleDiscount(Double.parseDouble(maxPossibleDiscount));
-        } else {
-            throw new InputMismatchException();
         }
     }
 
-    //todo: checking this
-    public void editDiscountPerCustomer(String discountCode, String discountPerCustomer) throws NullPointerException, InputMismatchException {
+    public void editDiscountPerCustomer(String discountCode, String discountPerCustomer) throws NullPointerException, Exception {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {
             throw new NullPointerException();
-        } else if ((discountPerCustomer.matches("\\d+"))) {
+        } else if (checkDiscountPercentValidity(discountPerCustomer)) {
             discount.setDiscountPerCustomer(Integer.parseInt(discountPerCustomer));
-        } else {
-            throw new InputMismatchException();
         }
     }
 
-    //todo: checking this
+    public void editDiscountIncludingCustomers(String discountCode, ArrayList<String> customersUsername) throws Exception{
+        if (checkCustomersValidity(customersUsername) && checkDiscountCodeValidity(discountCode)) {
+            Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+            discount.setIncludingCustomers(customersUsername);
+        }
+    }
+
+    private boolean checkDiscountCodeValidity(String discountCode) throws IllegalArgumentException {
+        if (discountCode.trim().equals("")) {
+            throw new IllegalArgumentException("Invalid Discount Code");
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkDiscountPercentValidity(String discountPercent) throws Exception {
+        try {
+            Double.parseDouble(discountPercent);
+            return true;
+        } catch (Exception e) {
+            throw new Exception("Invalid Discount Percent");
+        }
+    }
+
+    private boolean checkMaxPossibleDiscountValidity(String maxPossibleDiscount) throws Exception {
+        try {
+            Double.parseDouble(maxPossibleDiscount);
+            return true;
+        } catch (Exception e) {
+            throw new Exception("Invalid Maximum Possible Discount");
+        }
+    }
+
+    private boolean checkDiscountPerCustomerValidity(String discountPerCustomer) throws IllegalArgumentException {
+        if (discountPerCustomer.trim().equals("") || !(discountPerCustomer.matches("\\d+"))) {
+            throw new IllegalArgumentException("Invalid number of discount user per customer.");
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkCustomersValidity(ArrayList<String> customersUsername) throws IllegalArgumentException{
+        for (String s : customersUsername) {
+            if (Account.getAccountByUsername(s) == null || !(Account.getAccountByUsername(s) instanceof Customer)) {
+                throw new IllegalArgumentException("Invalid Customer Username.");
+            }
+        }
+        return true;
+    }
+
     public void removeDiscount(String discountCode) throws NullPointerException {
         Discount discount = Discount.getDiscountByDiscountCode(discountCode);
         if (discount == null) {

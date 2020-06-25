@@ -186,6 +186,8 @@ public class EditDiscountCodesMenu extends Menu {
                 }
                 catch (IllegalArgumentException i) {
                     System.out.println("You must enter a 2 digit number.");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 this.parentMenu.execute();
             }
@@ -233,6 +235,8 @@ public class EditDiscountCodesMenu extends Menu {
                 }
                 catch (InputMismatchException i) {
                     System.out.println("You must enter a number.");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 this.parentMenu.execute();
             }
@@ -279,6 +283,8 @@ public class EditDiscountCodesMenu extends Menu {
                 }
                 catch (IllegalArgumentException e) {
                     System.out.println("You must enter an integer number.");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 this.parentMenu.execute();
             }

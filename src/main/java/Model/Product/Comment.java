@@ -5,22 +5,22 @@ import Model.Account.Account;
 import java.util.Date;
 
 public class Comment {
-    private Account account;
-    private String productId;
+    private String accountUserName;
+    private String id;
     private String title;
     private String comment;
     private CommentStatus status;
     private Date date;
     private boolean bought;
 
-    public Comment(Account account, Product product, String comment, String title) {
-        this.account = account;
-        this.productId = product.getProductId();
+    public Comment(Account account, String id, String comment, String title) {
+        this.accountUserName = account.getUsername();
+        this.id = id;
         this.comment = comment;
         this.title = title;
         date = new Date();
-        product.addAComment(this);
         status = CommentStatus.WAITING_FOR_CONFIRM;
+        Product.getProductByID(id).addAComment(this);
     }
 
     public Comment() {
@@ -28,19 +28,11 @@ public class Comment {
     }
 
     public Account getAccount() {
-        return account;
+        return Account.getAccountByUsername(accountUserName);
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public Product getProductId() {
-        return Product.getProductByID(productId);
-    }
-
-    public void setProductId(Product product) {
-        this.productId = product.getProductId();
+    public void setAccountUserName(Account account) {
+        this.accountUserName = account.getUsername();
     }
 
     public String getComment() {
@@ -83,11 +75,27 @@ public class Comment {
         this.bought = bought;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setAccountUserName(String accountUserName) {
+        this.accountUserName = accountUserName;
+    }
+
+    public String getAccountUserName() {
+        return accountUserName;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
-                "account=" + account +
-                ", product=" + productId +
+                "account=" + accountUserName +
+                ", product=" + id +
                 ", title='" + title + '\'' +
                 ", comment='" + comment + '\'' +
                 ", status=" + status +

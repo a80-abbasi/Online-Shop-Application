@@ -1,6 +1,7 @@
 package graphics;
 
 import Controller.AdminProfileManager;
+import Model.Account.Customer;
 import Model.Account.Off;
 import Model.Account.Seller;
 import Model.Product.*;
@@ -56,12 +57,12 @@ public class App extends Application {
     public static void main(String[] args) {
         Main.deserializeXML();
 
-        /*Product product = new Product("1", ProductStatus.CONFIRMED, "name", "Samsung", 1000, new Seller("a", "a", "a", "a", "A", "A", "a0", 10), 2, null, null);
-        product.setImage(new Image("file:src\\main\\resources\\Images\\phone.jpg"));
-        product.getAllScores().add(new Score(null, product, 4));*/
-        /*for (int i = 0; i < 16; i++) {
-            addProduct("product" + i);
-        }*/
+        /*new Customer("ab", "ab", "ab", "ab", "ab@ab.ab", "9089090", 100);
+        new Customer("ac", "ac", "ac", "ac", "ac@ac.ac", "9089090", 100);*/
+        /*Product product = Product.getAllProducts().get(0);
+        Comment comment1 = new Comment(Customer.getAllCustomers().get(0), product.getProductId(), "hatman bekharid <3", "hi");
+        Comment comment2 = new Comment(Customer.getAllCustomers().get(0), product.getProductId(), "love this porduct", "phone");*/
+
         launch();
     }
 
@@ -87,13 +88,13 @@ public class App extends Application {
         products.add(product);
         Off off = new Off("1", new Date(), new Date(new Date().getTime() + 1000000000), 20, products);
         product.setOff(off);
-        Comment comment = new Comment(seller, product, "kheili khoobeee", "mobile");
+        Comment comment = new Comment(seller, product.getProductId(), "kheili khoobeee", "mobile");
         comment.setBought(true);
-        Comment comment1 = new Comment(seller, product, "Aree", "mobile");
+        Comment comment1 = new Comment(seller, product.getProductId(), "Aree", "mobile");
         comment1.setBought(true);
-        Comment comment2 = new Comment(seller, product, "kheili khoobeee kheili", "mobile");
-        Comment comment3 = new Comment(seller, product, "kheili khoobeee kheili", "mobile");
-        Comment comment4 = new Comment(seller, product, "kheili khoobeee\nkheili", "mobile");
+        Comment comment2 = new Comment(seller, product.getProductId(), "kheili khoobeee kheili", "mobile");
+        Comment comment3 = new Comment(seller, product.getProductId(), "kheili khoobeee kheili", "mobile");
+        Comment comment4 = new Comment(seller, product.getProductId(), "kheili khoobeee\nkheili", "mobile");
         product.setExplanations("Salam hatman bekharid:)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))");
         product.setSpecialFeatures(new HashMap<>());
         product.getSpecialFeatures().put("Ram", 6);

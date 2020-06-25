@@ -1,4 +1,4 @@
-package graphics.AdminProfile;
+package graphics.AdminProfile.ManageDiscounts;
 
 import Controller.AdminProfileManager;
 import Model.Account.Account;
@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CreateDiscountCode {
@@ -28,9 +29,12 @@ public class CreateDiscountCode {
     public DatePicker endTimeDate;
     public TextField includingCustomersField;
 
+    private ArrayList<String> includingCustomers;
+
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
         customerTable = adminProfileManager.getAllCustomersTable(customerTable);
+        includingCustomers = new ArrayList<>();
     }
 
     public void confirm() {
@@ -41,19 +45,19 @@ public class CreateDiscountCode {
         String discountPercent = discountPercentField.getText();
         String maxPossibleDiscount = maxPossibleDiscountField.getText();
         String discountPerCustomer = discountPerCustomerField.getText();
-        String includingCustomers = includingCustomersField.getText();
+        String includingCustomersFieldText = includingCustomersField.getText();
         boolean checkConfirmButtonInability;
-        checkConfirmButtonInability = discountCode.isEmpty() || startTimeDate.getValue() == null || endTimeDate.getValue() == null || discountPercent.isEmpty() || maxPossibleDiscount.isEmpty() || discountPerCustomer.isEmpty() || includingCustomers.isEmpty();
+        checkConfirmButtonInability = discountCode.isEmpty() || startTimeDate.getValue() == null || endTimeDate.getValue() == null || discountPercent.isEmpty() || maxPossibleDiscount.isEmpty() || discountPerCustomer.isEmpty() || includingCustomersFieldText.isEmpty();
         if (!(checkConfirmButtonInability)) {
             try {
-                adminProfileManager.createDiscountCode(discountCode, startTime, endTime, discountPercent, maxPossibleDiscount, discountPerCustomer, includingCustomers.trim().split(", "));
+                adminProfileManager.createDiscountCode(discountCode, startTime, endTime, discountPercent, maxPossibleDiscount, discountPerCustomer, includingCustomers);
                 AlertBox.showMessage("Create Discount Code", "Discount Code : " + discountCode + " successfully created.");
                 try {
                     App.setRoot(parentMenu);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (Exception e) {
                 AlertBox.showMessage("Failed to Create", e.getMessage());
             }
         }
@@ -61,6 +65,19 @@ public class CreateDiscountCode {
 
     public void addCustomerToDiscount(MouseEvent mouseEvent) {
         Object selectedUser = customerTable.getSelectionModel().getSelectedItem();
-        includingCustomersField.setText(includingCustomersField.getText() + ((Customer) selectedUser).getUsername() + ", ");
+        if (selectedUser == null) {
+            return;
+        }
+        String customerUsername = ((Customer) selectedUser).getUsername();
+        includingCustomers.add(customerUsername);
+
+        includingCustomersField.setText(includingCustomersField.getText() + (customerUsername + ", "));
+        customerTable.getItems().remove(selectedUser);
+    }
+
+    public void clearIncludingCustomers(MouseEvent mouseEvent) {
+        customerTable.getItems().addAll(includingCustomers);
+        includingCustomers.clear();
+        includingCustomersField.setText("");
     }
 }

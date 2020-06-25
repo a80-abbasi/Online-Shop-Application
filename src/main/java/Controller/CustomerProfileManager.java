@@ -5,9 +5,7 @@ import Model.Product.Product;
 import Model.Product.Score;
 import View.Menu;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 public class CustomerProfileManager extends ProfileManager{
     private Customer customer;
@@ -39,8 +37,14 @@ public class CustomerProfileManager extends ProfileManager{
             String code = AdminProfileManager.generateRandomDiscountCode();
             output += code;
             Date now = new Date();
-            AdminProfileManager.createDiscountCode(code, now, new Date(now.getTime() + duration), discountPercentage,
-                    maxPossibleDiscount, discountPerCustomer);
+            ArrayList<String> includingCustomers = new ArrayList<>();
+            includingCustomers.add(customer.getUsername());
+            try {
+                new AdminProfileManager(null).createDiscountCode(code, now, new Date(now.getTime() + duration), String.valueOf(discountPercentage),
+                        String.valueOf(maxPossibleDiscount), String.valueOf(discountPerCustomer), includingCustomers);
+            } catch (Exception e) {
+                System.out.println("couldn't give bonus discount code");
+            }
         }
         else {
             output = "";
