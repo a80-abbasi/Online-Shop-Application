@@ -43,7 +43,6 @@ public class Product {
         allScores = new ArrayList<>();
         productComments = new ArrayList<>();
         productBuyers = new ArrayList<>();
-
     }
 
     public Product (String productId, ProductStatus productStatus, String productName, String companyName, double price,
@@ -298,7 +297,7 @@ public class Product {
     }
 
     public void digest(){
-        System.out.printf("%s: %s%n%s: %f%n%s: %d%n%s: %d %s: %f%n%s: %s%n%s: %s%n%s: %f%n%n",
+        System.out.printf("%s: %s%n%s: %f%n%s: %d%n%s: %f %s: %f%n%s: %s%n%s: %s%n%s: %f%n%n",
                 "explanations", explanations,
                 "price", price,
                 "Off Percentage", (off == null || !off.isAvailable() ? 0 : off.getOffAmount()),

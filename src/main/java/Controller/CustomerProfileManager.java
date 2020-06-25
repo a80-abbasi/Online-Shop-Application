@@ -201,6 +201,9 @@ public class CustomerProfileManager extends ProfileManager{
         }
         //discount.getDiscountPerCustomer();
         //todo: check discount code use less than
+
+        //Sell log
+
     }
 
     public boolean canCustomerPay(double cost) {

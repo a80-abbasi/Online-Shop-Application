@@ -35,8 +35,7 @@ public class CustomerProfileMenu {
         lastNameField.setText(customerProfileManager.getLastName());
         emailField.setText(customerProfileManager.getEmail());
         phoneNumberField.setText(customerProfileManager.getPhoneNumber());
-        balanceField.setText(Double.toString(customerProfileManager.viewBalance()) + "$");
-
+        balanceField.setText(customerProfileManager.viewBalance() + "$");
     }
 
     public void confirm(ActionEvent event) {

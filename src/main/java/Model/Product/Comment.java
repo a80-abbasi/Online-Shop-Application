@@ -1,6 +1,7 @@
 package Model.Product;
 
 import Model.Account.Account;
+import Model.Account.Customer;
 
 import java.util.Date;
 
@@ -68,7 +69,7 @@ public class Comment {
     }
 
     public boolean isBought() {
-        return bought;
+        return bought || Product.getProductByID(id).getProductBuyers().contains(Customer.getCustomerById(accountUserName));
     }
 
     public void setBought(boolean bought) {
