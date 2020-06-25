@@ -8,14 +8,26 @@ import graphics.AdminProfile.AdminProfileMenu;
 import graphics.CustomerProfile.CustomerProfileMenu;
 import graphics.LoginAndRegister.LoginMenu;
 import graphics.SellerProfile.SellerProfileMenu;
+import graphics.products.ProductPageController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MainMenu {
     public Button productsMenuButton;
     public Button profileButton;
+    public ImageView accountImage;
+
+    private boolean isLoginMenuOpen;
+
+    public void initialize(){
+        ProductPageController.setProfileButton(accountImage, "MainMenu");
+    }
 
     public void goToProductsMenu(ActionEvent event) {
         try {
@@ -28,10 +40,25 @@ public class MainMenu {
     public void goToProfileMenu(ActionEvent event) {
         Account account = Account.getLoggedInAccount();
         if (account == null) {
-            AlertBox.showMessage("Login Error", "You must login first!");
             try {
-                App.setRoot("LoginMenu");
-                LoginMenu.setParentMenu("MainMenu");
+                if (ProductPageController.loginPopUp == null && !isLoginMenuOpen) {
+                    Stage registerPopUp = new Stage();
+                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("loginMenu.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load());
+                    registerPopUp.setScene(scene);
+                    registerPopUp.setTitle("login");
+                    registerPopUp.setResizable(false);
+                    ProductPageController.loginPopUp = registerPopUp;
+                    isLoginMenuOpen = true;
+                    registerPopUp.setOnCloseRequest(e -> {
+                        registerPopUp.close();
+                        ProductPageController.loginPopUp = null;
+                        isLoginMenuOpen = false;
+                    });
+                    registerPopUp.show();
+                    LoginMenu.setParentMenu("MainMenu");
+                     AlertBox.showMessage("Login Error", "You must login first!");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -49,7 +49,6 @@ public class LoginMenu {
             registerPopUp.setTitle("register");
             registerPopUp.setResizable(false);
             /*loginPopUp.initStyle(StageStyle.UNDECORATED);*/
-            registerPopUp.showAndWait();
             RegisterMenu.setParentMenu(parentMenu);
         } catch (IOException e) {
             e.printStackTrace();
