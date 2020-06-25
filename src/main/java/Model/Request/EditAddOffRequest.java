@@ -22,6 +22,26 @@ public abstract class EditAddOffRequest extends Request {
         return offProductIDs;
     }
 
+    public String getOffID() {
+        return offID;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public int getOffAmount() {
+        return offAmount;
+    }
+
+    public OffStatus getOffStatus() {
+        return offStatus;
+    }
+
     public void setOffID(String offID) {
         this.offID = offID;
     }
