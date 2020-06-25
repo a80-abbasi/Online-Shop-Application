@@ -1,7 +1,6 @@
 package Model.Account;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 public class Discount {
@@ -35,7 +34,7 @@ public class Discount {
     }
 
     public double calculateTotalDiscount(double money){
-        double discountAmount = money * discountPercent;
+        double discountAmount = money * discountPercent / 100;
         return Math.min(discountAmount, maxPossibleDiscount);
     }
 
