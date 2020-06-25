@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 
 import java.io.IOException;
+import java.util.stream.Stream;
 
 public class RegisterMenu {
     public AnchorPane registerPane;
@@ -72,6 +73,13 @@ public class RegisterMenu {
                     AlertBox.showMessage("Failed to Register", e.getMessage());
                 }
             }
+        }
+        else {
+            Stream.of(phoneNumberField, emailField, lastNameField, firstNameField, passwordField, usernameField).forEach(textField -> {
+                if (textField.getText().isBlank()){
+                    textField.requestFocus();
+                }
+            });
         }
     }
 

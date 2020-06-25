@@ -42,14 +42,9 @@ public class LoginMenu {
 
     public void signUp() {
         try {
-            /*App.setRoot("RegisterMenu");*/
-            ((Stage) usernameField.getScene().getWindow()).close();
-            ProductPageController.loginPopUp = null;
-            Stage registerPopUp = new Stage();
-            Scene scene;
+            Stage registerPopUp = (Stage) usernameField.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("RegisterMenu.fxml"));
-            scene = new Scene(fxmlLoader.load());
-            registerPopUp.setOnCloseRequest(windowEvent -> registerPopUp.close());
+            Scene scene = new Scene(fxmlLoader.load());
             registerPopUp.setScene(scene);
             registerPopUp.setTitle("register");
             registerPopUp.setResizable(false);
