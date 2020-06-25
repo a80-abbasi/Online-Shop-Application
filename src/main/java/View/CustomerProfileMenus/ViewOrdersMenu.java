@@ -21,7 +21,7 @@ public class ViewOrdersMenu extends Menu {
     @Override
     public void show() {
         try {
-            System.out.println(customerProfileManager.showOrdersSellerNameAndDate()); // todo: wrong input if (null)
+//            System.out.println(customerProfileManager.showOrdersSellerNameAndDate()); // todo: wrong input if (null)
         } catch (Exception e) {
         }
         super.show();

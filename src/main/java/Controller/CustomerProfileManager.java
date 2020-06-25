@@ -250,8 +250,8 @@ public class CustomerProfileManager extends ProfileManager{
 
     public void addBuyLog(double price, double totalPrice, ArrayList<Product> products, ArrayList<Integer> numbers, ArrayList<Seller> sellers) { //todo
         String buyLogID = customer.getUsername() + customer.getBuyLogs().size();
-        BuyLog buyLog = new BuyLog(buyLogID, new Date(), price, totalPrice - price, products, numbers, sellers);
-        customer.getBuyLogs().add(buyLog);
+//        BuyLog buyLog = new BuyLog(buyLogID, new Date(), price, totalPrice - price, products, numbers, sellers);
+//        customer.getBuyLogs().add(buyLog);
     }
 
     public void addSellLog() { //todo
