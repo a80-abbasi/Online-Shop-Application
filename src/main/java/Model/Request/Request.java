@@ -35,8 +35,6 @@ public abstract class Request {
 
     public abstract String toString();
 
-    public abstract TableView getRequestDetails();
-
     public static Request getRequestById(String requestId) {
         for (Request request : allRequests) {
             if (request.getRequestId().equals(requestId)) {

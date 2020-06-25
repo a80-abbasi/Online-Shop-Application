@@ -93,21 +93,6 @@ public class EditOffRequest extends EditAddOffRequest {
     }
 
     @Override
-    public TableView getRequestDetails() {
-        TableView requestDetails = new TableView();
-
-        TableColumn<String, Request> column1 = new TableColumn<>("Request ID");
-        column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
-
-        TableColumn<RequestType, Request> column2 = new TableColumn<>("Request Type");
-        column2.setCellValueFactory(new PropertyValueFactory<>("requestType"));
-
-        //todo
-
-        return requestDetails;
-    }
-
-    @Override
     public void remove() {
         allEditOffRequests.remove(this);
     }

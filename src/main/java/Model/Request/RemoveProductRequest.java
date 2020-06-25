@@ -44,23 +44,6 @@ public class RemoveProductRequest extends Request {
     }
 
     @Override
-    public TableView getRequestDetails() {
-        TableView requestDetails = new TableView();
-
-        TableColumn<String, Request> column1 = new TableColumn<>("Request ID");
-        column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
-
-        TableColumn<RequestType, Request> column2 = new TableColumn<>("Request Type");
-        column2.setCellValueFactory(new PropertyValueFactory<>("requestType"));
-
-        TableColumn<Product, RemoveProductRequest> column3 = new TableColumn<>("Product");
-        column3.setCellValueFactory(new PropertyValueFactory<>("product"));
-
-        requestDetails.getItems().add(this);
-        return requestDetails;
-    }
-
-    @Override
     public void remove() {
         allRemoveProductRequests.remove(this);
     }
