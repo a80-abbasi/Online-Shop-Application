@@ -43,6 +43,34 @@ public class RegisterSellerRequest extends Request {
         RegisterSellerRequest.allRegisterSellerRequests = allRegisterSellerRequests;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
     @Override
     public void acceptRequest() throws IllegalArgumentException{
         if (Account.getAccountByUsername(username) == null) {
@@ -66,21 +94,6 @@ public class RegisterSellerRequest extends Request {
                 ", requestId='" + requestId + '\'' +
                 ", requestType=" + requestType +
                 '}';
-    }
-
-    @Override
-    public TableView getRequestDetails() {
-        TableView requestDetails = new TableView();
-
-        TableColumn<String, Request> column1 = new TableColumn<>("Request ID");
-        column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
-
-        TableColumn<RequestType, Request> column2 = new TableColumn<>("Request Type");
-        column2.setCellValueFactory(new PropertyValueFactory<>("requestType"));
-
-        //todo
-
-        return requestDetails;
     }
 
     @Override
