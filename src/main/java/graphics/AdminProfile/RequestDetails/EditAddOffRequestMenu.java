@@ -25,7 +25,7 @@ public class EditAddOffRequestMenu {
     public DatePicker offEndTimeDatePicker;
 
     private static EditAddOffRequest editAddOffRequest;
-    private static String parentMenu = "AdminProfileMenu";
+    private static String parentMenu = "ManageRequests";
 
     private AdminProfileManager adminProfileManager;
 

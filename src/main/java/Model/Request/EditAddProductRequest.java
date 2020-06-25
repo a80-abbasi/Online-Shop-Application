@@ -25,6 +25,38 @@ public abstract class EditAddProductRequest extends Request {
         return productCategory;
     }
 
+    public String getProductId() {
+        return productId;
+    }
+
+    public ProductStatus getProductStatus() {
+        return productStatus;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getExistingNumber() {
+        return existingNumber;
+    }
+
+    public Seller getProductSeller() {
+        return productSeller;
+    }
+
+    public HashMap<String, Integer> getProductSpecialFeatures() {
+        return productSpecialFeatures;
+    }
+
     public void setProductId(String productId) {
         this.productId = productId;
     }
