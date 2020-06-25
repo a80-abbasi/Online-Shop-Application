@@ -3,10 +3,13 @@ package graphics.products;
 import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Product.Product;
+import graphics.App;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -14,8 +17,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
@@ -23,7 +28,6 @@ import java.util.stream.Stream;
 public class CartController {
 
     public Pane mainPane;
-    public Label XLabel;
     public Button purchaseButton;
     public Button clearButton;
     public Label messageLabel;
@@ -44,17 +48,22 @@ public class CartController {
         }
         else {
             fillCart();
+            clearButton.setOnAction(e -> {
+                cart.clear();
+                mainPane.getChildren().clear();
+                initialize();
+            });
+            purchaseButton.setOnAction(e -> {
+                try {
+                    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("cart.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load());
+                    thisStage.setScene(scene);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
         }
-        ProductPageController.shadowOnMouseHover(XLabel);
-        XLabel.setOnMouseClicked(e -> {
-            ProductPageController.getCartPopUp().close();
-            ProductPageController.setCartPopUp(null);
-        });
-        clearButton.setOnAction(e -> {
-            cart.clear();
-            mainPane.getChildren().clear();
-            initialize();
-        });
     }
 
     private void setEmptyLabel(){
@@ -64,6 +73,10 @@ public class CartController {
         mainPane.getChildren().add(label);
         label.setLayoutX(mainPane.getPrefWidth() / 3);
         label.setLayoutY(50);
+        clearButton.setDisable(true);
+        clearButton.setOpacity(0.5);
+        purchaseButton.setDisable(true);
+        purchaseButton.setOpacity(0.5);
     }
 
     private void fillCart(){

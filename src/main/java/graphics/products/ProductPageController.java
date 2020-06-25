@@ -162,7 +162,10 @@ public class ProductPageController {
                     cartPopUp.setScene(scene);
                     cartPopUp.setTitle("Cart");
                     cartPopUp.setResizable(false);
-                    cartPopUp.initStyle(StageStyle.UNDECORATED);
+                    cartPopUp.setOnCloseRequest(event -> {
+                        cartPopUp.close();
+                        cartPopUp = null;
+                    });
                     cartPopUp.showAndWait();
                 }
             });
