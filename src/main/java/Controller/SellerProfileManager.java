@@ -380,4 +380,55 @@ public class SellerProfileManager extends ProfileManager {
         productBuyersTable.setPlaceholder(new Label("No Data to display"));
         return productBuyersTable;
     }
+
+    public TableView getAllCategoriesTable() {
+        TableView allCategoriesTable = new TableView();
+
+        TableColumn<String, Category> column = new TableColumn<>("Category Name");
+        column.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        allCategoriesTable.getColumns().add(column);
+        for (Category category : Category.getAllCategories()) {
+            allCategoriesTable.getItems().add(category);
+        }
+        allCategoriesTable.setPlaceholder(new Label("No Data To Display"));
+        return allCategoriesTable;
+    }
+
+    public TableView getSellerSalesHistoryTable() {
+        TableView sellerSalesHistoryTable = new TableView();
+
+        //todo: check These columns
+        TableColumn<String, SellLog> column = new TableColumn<>("Sell Log ID");
+        column.setCellValueFactory(new PropertyValueFactory<>("ID"));
+
+        TableColumn<Double, SellLog> column1 = new TableColumn<>("Received Amount");
+        column1.setCellValueFactory(new PropertyValueFactory<>("received"));
+
+        TableColumn<Double, SellLog> column2 = new TableColumn<>("Off Amount");
+        column2.setCellValueFactory(new PropertyValueFactory<>("offAmount"));
+
+        TableColumn<Product, SellLog> column3 = new TableColumn<>("Product");
+        column3.setCellValueFactory(new PropertyValueFactory<>("product"));
+
+        TableColumn<String, SellLog> column4 = new TableColumn<>("Buyer Name");
+        column4.setCellValueFactory(new PropertyValueFactory<>("buyerName"));
+
+        TableColumn<Boolean, SellLog> column5 = new TableColumn<>("Has Sent");
+        column5.setCellValueFactory(new PropertyValueFactory<>("hasSent"));
+
+        TableColumn<Integer, SellLog> column6 = new TableColumn<>("Number");
+        column6.setCellValueFactory(new PropertyValueFactory<>("number"));
+
+        TableColumn<Date, SellLog> column7 = new TableColumn<>("Date");
+        column7.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        sellerSalesHistoryTable.getColumns().addAll(column, column1, column2, column3, column4, column5, column6, column7);
+
+        for (SellLog sellLog : this.seller.getSellLogs()) {
+            sellerSalesHistoryTable.getItems().add(sellLog);
+        }
+        sellerSalesHistoryTable.setPlaceholder(new Label("No Data To Display"));
+        return sellerSalesHistoryTable;
+    }
 }
