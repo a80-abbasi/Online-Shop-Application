@@ -3,8 +3,12 @@ package graphics.LoginAndRegister;
 import Controller.LoginAndRegisterManager;
 import graphics.AlertBox;
 import graphics.App;
+import graphics.products.ProductPageController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -38,8 +42,14 @@ public class LoginMenu {
 
     public void signUp() {
         try {
-            App.setRoot("RegisterMenu");
-            RegisterMenu.setParentMenu("MainMenu");
+            Stage registerPopUp = (Stage) usernameField.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("RegisterMenu.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            registerPopUp.setScene(scene);
+            registerPopUp.setTitle("register");
+            registerPopUp.setResizable(false);
+            /*loginPopUp.initStyle(StageStyle.UNDECORATED);*/
+            RegisterMenu.setParentMenu(parentMenu);
         } catch (IOException e) {
             e.printStackTrace();
         }

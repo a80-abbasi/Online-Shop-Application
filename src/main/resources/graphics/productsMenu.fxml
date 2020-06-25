@@ -60,6 +60,11 @@
                   <Image url="@../Images/cart.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="profileImage" fitHeight="35.0" fitWidth="35.0" layoutX="100.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/account.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="existingFilterPane" layoutX="1268.0" layoutY="61.0" prefHeight="60.0" prefWidth="260.0" style="-fx-border-color: #c5c5c5;">

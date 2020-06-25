@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class CustomerProfileMenu {
     public Button confirmButton;
@@ -34,7 +35,8 @@ public class CustomerProfileMenu {
         lastNameField.setText(customerProfileManager.getLastName());
         emailField.setText(customerProfileManager.getEmail());
         phoneNumberField.setText(customerProfileManager.getPhoneNumber());
-        balanceField.setText(Double.toString(customerProfileManager.viewBalance()));
+        balanceField.setText(Double.toString(customerProfileManager.viewBalance()) + "$");
+
     }
 
     public void confirm(ActionEvent event) {
@@ -92,5 +94,13 @@ public class CustomerProfileMenu {
 
     public static void setParentMenu(String parentMenu) {
         CustomerProfileMenu.parentMenu = parentMenu;
+    }
+
+    public static void ShowOrders() {
+        //Customer
+    }
+
+    public void showOrderByID(MouseEvent mouseEvent) {
+      //
     }
 }
