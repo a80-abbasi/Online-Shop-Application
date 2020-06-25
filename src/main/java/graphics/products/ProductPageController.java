@@ -114,25 +114,31 @@ public class ProductPageController {
     }
 
     public static void setCartButton(ImageView cartImage){
-        shadowOnMouseHover(cartImage);
-        cartImage.setOnMouseClicked(e -> {
-            if (cartPopUp == null) {
-                cartPopUp = new Stage();
-                Scene scene;
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("cart.fxml"));
-                    scene = new Scene(fxmlLoader.load());
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    return;
+        Account account = Account.getLoggedInAccount();
+        if (account == null || account instanceof Customer) {
+            shadowOnMouseHover(cartImage);
+            cartImage.setOnMouseClicked(e -> {
+                if (cartPopUp == null) {
+                    cartPopUp = new Stage();
+                    Scene scene;
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("cart.fxml"));
+                        scene = new Scene(fxmlLoader.load());
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        return;
+                    }
+                    cartPopUp.setScene(scene);
+                    cartPopUp.setTitle("Cart");
+                    cartPopUp.setResizable(false);
+                    cartPopUp.initStyle(StageStyle.UNDECORATED);
+                    cartPopUp.showAndWait();
                 }
-                cartPopUp.setScene(scene);
-                cartPopUp.setTitle("Cart");
-                cartPopUp.setResizable(false);
-                cartPopUp.initStyle(StageStyle.UNDECORATED);
-                cartPopUp.showAndWait();
-            }
-        });
+            });
+        }
+        else {
+            cartImage.setOpacity(0);
+        }
     }
 
     private void setOffLeftTimeLabel() {
@@ -260,7 +266,7 @@ public class ProductPageController {
         Label title = new Label("title: " + comment.getTitle());
         Label cm = new Label(comment.getComment());
         Account account = comment.getAccount();
-        Label name = new Label("name: " + account.getName() + account.getLastName());
+        Label name = new Label("name: " + account.getName() + " " + account.getLastName());
         Label[] labels = {title, cm, name};
         Arrays.stream(labels).forEach(e -> {
             e.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-weight: bold; -fx-font-size: 20");
@@ -286,6 +292,13 @@ public class ProductPageController {
     private void setAddToCartButton(){
         if (product.getExistingNumber() > 0){
             addToCartButton.setOnMouseClicked(e -> {
+                Account account = Account.getLoggedInAccount();
+                if (account == null || account instanceof Customer){
+                    productAddedLabel.setText("Product Added to Your Cart.");
+                }
+                else {
+                    productAddedLabel.setText("Admins And Sellers Cant buy Products!");
+                }
                 productAddedLabel.setOpacity(1);
                 Customer.addProductToTmpCart(product);
                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), actionEvent -> productAddedLabel.setOpacity(0)));

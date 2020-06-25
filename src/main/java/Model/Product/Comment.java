@@ -5,7 +5,7 @@ import Model.Account.Account;
 import java.util.Date;
 
 public class Comment {
-    private Account account;
+    private String accountUserName;
     private String productId;
     private String title;
     private String comment;
@@ -14,13 +14,13 @@ public class Comment {
     private boolean bought;
 
     public Comment(Account account, Product product, String comment, String title) {
-        this.account = account;
+        this.accountUserName = account.getUsername();
         this.productId = product.getProductId();
         this.comment = comment;
         this.title = title;
         date = new Date();
-        product.addAComment(this);
         status = CommentStatus.WAITING_FOR_CONFIRM;
+        Product.getProductByID(productId).addAComment(this);
     }
 
     public Comment() {
@@ -28,11 +28,11 @@ public class Comment {
     }
 
     public Account getAccount() {
-        return account;
+        return Account.getAccountByUsername(accountUserName);
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccountUserName(Account account) {
+        this.accountUserName = account.getUsername();
     }
 
     public Product getProductId() {
@@ -83,10 +83,22 @@ public class Comment {
         this.bought = bought;
     }
 
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public void setAccountUserName(String accountUserName) {
+        this.accountUserName = accountUserName;
+    }
+
+    public String getAccountUserName() {
+        return accountUserName;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
-                "account=" + account +
+                "account=" + accountUserName +
                 ", product=" + productId +
                 ", title='" + title + '\'' +
                 ", comment='" + comment + '\'' +
