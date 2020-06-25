@@ -10,9 +10,9 @@ public class Customer extends Account {
     private static HashMap<Product, Integer> tmpCart = new HashMap<>();
     private double balance;
     private HashMap<Product, Integer> cart;
-    private ArrayList<BuyLog> buyLogs;
-    private HashMap<Discount, Integer> usedDiscounts;
-    private ArrayList<Discount> allDiscountCodesForCustomer; //todo:admin add codes to this array too!
+    private ArrayList<BuyLog> buyLogs = new ArrayList<>();
+    private HashMap<Discount, Integer> usedDiscounts = new HashMap<>();
+    private ArrayList<Discount> allDiscountCodesForCustomer = new ArrayList<>(); //todo:admin add codes to this array too!
     private int numberOfDiscountGifts;
     private static ArrayList<String> customerFieldsForPurchase = new ArrayList<>();
     static {

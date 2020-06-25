@@ -268,6 +268,7 @@ public class Product {
             return price * (100 - off.getOffAmount()) / 100;
         }
         return price;
+
     }
 
     public void setOff(Off off) {

@@ -2,20 +2,24 @@ package Model.Account;
 
 import Model.Product.Product;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class SellLog extends Log {
-    private int received;
-    private int offAmount;
+    private double received;
+    private double offAmount;
     private Product product;
     private String buyerName;
     private boolean hasSent;
+    private int number;
 
-    public SellLog(String ID, Date date, int received, int offAmount, Product product, String buyerName) {
+    public SellLog(String ID, Date date, double received, double offAmount, Product product,int  number, String buyerName) {
         super(ID, date);
         this.received = received;
         this.offAmount = offAmount;
         this.product = product;
+        this.number = number;
         this.buyerName = buyerName;
     }
 
@@ -27,7 +31,7 @@ public class SellLog extends Log {
         this.buyerName = "";
     }
 
-    public int getReceived() {
+    public double getReceived() {
         return received;
     }
 
@@ -35,7 +39,7 @@ public class SellLog extends Log {
         this.received = received;
     }
 
-    public int getOffAmount() {
+    public double getOffAmount() {
         return offAmount;
     }
 

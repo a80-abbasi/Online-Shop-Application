@@ -86,6 +86,7 @@ public class PurchaseMenu extends Menu {
         }
         System.out.println("You payed successfully.have nice day!");
         customerProfileManager.doingsAfterBuyProducts(price, totalPrice ,discountCodeForPurchase);
+
     }
 
 }
