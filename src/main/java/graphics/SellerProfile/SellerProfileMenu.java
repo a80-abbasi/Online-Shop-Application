@@ -97,7 +97,11 @@ public class SellerProfileMenu {
     }
 
     public void manageOffs(MouseEvent mouseEvent) {
-
+        try {
+            App.setRoot("ManageOffs");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addOff(MouseEvent mouseEvent) {
