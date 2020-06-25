@@ -336,7 +336,7 @@ public class SellerProfileManager extends ProfileManager {
         return this.seller.getNameOfCompany();
     }
 
-    public TableView getSellerOffs(TableView offsTable) {
+    public TableView getSellerOffsTable(TableView offsTable) {
         TableColumn<String, Off> column = new TableColumn<>("Off ID");
         column.setCellValueFactory(new PropertyValueFactory<>("offID"));
 
@@ -346,5 +346,32 @@ public class SellerProfileManager extends ProfileManager {
         }
         offsTable.setPlaceholder(new Label("No Data To Display"));
         return offsTable;
+    }
+
+    public TableView getProductBuyersTable(String productId) {
+        Product product = Product.getProductByID(productId);
+        TableView productBuyersTable = new TableView();
+
+        TableColumn<String, Customer> column1 = new TableColumn<>("Username");
+        column1.setCellValueFactory(new PropertyValueFactory<>("username"));
+
+        TableColumn<String, Customer> column2 = new TableColumn<>("First Name");
+        column2.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn<String, Customer> column3 = new TableColumn<>("Last Name");
+        column3.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+
+        TableColumn<String, Customer> column4 = new TableColumn<>("Email");
+        column4.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        TableColumn<String, Customer> column5 = new TableColumn<>("Phone Number");
+        column5.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+
+        productBuyersTable.getColumns().addAll(column1, column2, column3, column4, column5);
+        for (Customer customer : product.getProductBuyers()) {
+            productBuyersTable.getItems().add(customer);
+        }
+        productBuyersTable.setPlaceholder(new Label("No Data to display"));
+        return productBuyersTable;
     }
 }
