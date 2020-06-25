@@ -6,9 +6,16 @@ import Model.Account.Seller;
 import graphics.AlertBox;
 import graphics.App;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -122,5 +129,47 @@ public class SellerProfileMenu {
 
     public static void setParentMenu(String parentMenu) {
         SellerProfileMenu.parentMenu = parentMenu;
+    }
+
+    public void showSalesHistory(MouseEvent mouseEvent) {
+        TableView salesHistory = sellerProfileManager.getSellerSalesHistoryTable();
+        showTable(salesHistory, "Sales History");
+    }
+
+    public void showCompanyInformation(MouseEvent mouseEvent) {
+
+    }
+
+    public void showBalance(MouseEvent mouseEvent) {
+
+    }
+
+    private void showTable(TableView tableView, String stageTitle) {
+        Stage window = new Stage();
+        window.setTitle(stageTitle);
+
+        VBox vBox = new VBox();
+        vBox.setSpacing(20);
+        vBox.setAlignment(Pos.CENTER);
+
+        Button OKButton = new Button("OK!");
+        OKButton.setFont(Font.font("Times New Roman", 16));
+        OKButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                window.close();
+            }
+        });
+
+        vBox.getChildren().addAll(tableView, OKButton);
+
+        Scene scene = new Scene(vBox);
+        window.setScene(scene);
+        window.show();
+    }
+
+    public void showCategories(MouseEvent mouseEvent) {
+        TableView allCategoriesTable = sellerProfileManager.getAllCategoriesTable();
+        showTable(allCategoriesTable, "All Categories");
     }
 }
