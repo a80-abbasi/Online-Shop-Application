@@ -31,7 +31,7 @@ public class LoginMenu {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException e) {
             AlertBox.showMessage("Login Failed", e.getMessage());
         }
     }

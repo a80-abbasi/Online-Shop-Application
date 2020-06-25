@@ -1,6 +1,7 @@
 package Model.Account;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Discount {
@@ -10,22 +11,23 @@ public class Discount {
     private Date endTime;
     private int discountPercent;
     private double maxPossibleDiscount;
-    private int discountPerCustomer; // todo:
-    private ArrayList<Customer> includingCustomers; //todo:
+    private int discountPerCustomer;
+    private ArrayList<String> includingCustomerUsername;
 
     {
         allDiscounts = new ArrayList<>();
-        includingCustomers = new ArrayList<>();
+        includingCustomerUsername = new ArrayList<>();
     }
 
     public Discount (String discountCode, Date startTime, Date endTime, int discountPercent, int maxPossibleDiscount,
-                     int discountPerCustomer) {
+                     int discountPerCustomer, String[] includingCustomerUsername) {
         this.discountCode = discountCode;
         this.startTime = startTime;
         this.endTime = endTime;
         this.discountPercent = discountPercent;
         this.maxPossibleDiscount = maxPossibleDiscount;
         this.discountPerCustomer = discountPerCustomer;
+        this.includingCustomerUsername.addAll(Arrays.asList(includingCustomerUsername));
     }
 
     public static void setAllDiscounts(ArrayList<Discount> allDiscounts) {
@@ -69,13 +71,8 @@ public class Discount {
         return maxPossibleDiscount;
     }
 
-    public ArrayList<Customer> getIncludingCustomers() {
-        return includingCustomers;
-    }
-
-    public void setIncludingCustomers(ArrayList<Customer> includingCustomers) {
-        this.includingCustomers = includingCustomers;
-        allDiscounts.add(this);
+    public ArrayList<String> getIncludingCustomerUsername() {
+        return includingCustomerUsername;
     }
 
     public void setDiscountPerCustomer(int discountPerCustomer) {
@@ -125,7 +122,7 @@ public class Discount {
                 ", discountPercent=" + discountPercent +
                 ", maxPossibleDiscount=" + maxPossibleDiscount +
                 ", discountPerCustomer=" + discountPerCustomer +
-                ", includingCustomers=" + includingCustomers +
+                ", includingCustomers=" + includingCustomerUsername +
                 '}';
     }
 }

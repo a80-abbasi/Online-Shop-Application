@@ -51,7 +51,7 @@ public class ManageDiscountCodesMenu extends Menu {
                 int maxPossibleDiscount = Integer.parseInt(scanner.nextLine());
                 System.out.println("Enter number of times each customer can use discount:");
                 int discountPerCustomer = Integer.parseInt(scanner.nextLine());
-                AdminProfileManager.createDiscountCode(discountCode, startTime, endTime, discountPercent, maxPossibleDiscount, discountPerCustomer);
+                //AdminProfileManager.createDiscountCode(discountCode, startTime, endTime, discountPercent, maxPossibleDiscount, discountPerCustomer);
                 System.out.println("Enter (Back) to return or (Create Discount Code) to create another discount code");
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {

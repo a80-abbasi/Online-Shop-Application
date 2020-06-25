@@ -96,6 +96,8 @@ public class ProductsController {
                     subMenuButton.setText("Select sub category");
                     MenuItem allCategoriesItem = new MenuItem("All sub categories");
                     allCategoriesItem.setOnAction(event -> {
+                        mainPane.getChildren().removeAll(mainPane.getChildren().stream().filter(node -> node instanceof MenuButton).
+                                filter(node -> node != categories && node != menuButton && node != subMenuButton).collect(Collectors.toList()));
                         productsManager.addCategoryFilter(category);
                         subMenuButton.setText("All sub categories");
                         showProducts();

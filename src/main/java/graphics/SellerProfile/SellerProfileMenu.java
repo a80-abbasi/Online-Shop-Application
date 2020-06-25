@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class SellerProfileMenu {
     public TextField usernameField;
@@ -94,5 +95,21 @@ public class SellerProfileMenu {
 
     public static void setParentMenu(String parentMenu) {
         SellerProfileMenu.setParentMenu(parentMenu);
+    }
+
+    public void manageOffs(MouseEvent mouseEvent) {
+
+    }
+
+    public void addOff(MouseEvent mouseEvent) {
+
+    }
+
+    public void manageProducts(MouseEvent mouseEvent) {
+
+    }
+
+    public void addProduct(MouseEvent mouseEvent) {
+
     }
 }

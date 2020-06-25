@@ -1,13 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sellers>
     <seller>
-        <email>A</email>
-        <lastName>ali</lastName>
+        <email>a@a.a</email>
+        <lastName>a</lastName>
         <name>a</name>
-        <password>ali</password>
-        <phoneNumber>2</phoneNumber>
-        <username>ali</username>
+        <password>a</password>
+        <phoneNumber>322332</phoneNumber>
+        <username>a</username>
         <balance>10.0</balance>
-        <nameOfCompany></nameOfCompany>
+        <nameOfCompany>apple</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
     </seller>
 </sellers>

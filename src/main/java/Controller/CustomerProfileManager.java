@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-import static Controller.ProductsManager.getTotalPrice;
-
 public class CustomerProfileManager extends ProfileManager{
     private Customer customer;
 
@@ -142,7 +140,7 @@ public class CustomerProfileManager extends ProfileManager{
         if (discount == null){
             return new Menu.MyResult(false, "There is no discount with this ID", "") ;
         }
-        if (!discount.getIncludingCustomers().contains((Customer) Account.getLoggedInAccount())) {
+        if (!discount.getIncludingCustomerUsername().contains((Customer) Account.getLoggedInAccount())) {
             return new Menu.MyResult(false, "You cant use this discount!", "");
         }
         Date date = new Date();

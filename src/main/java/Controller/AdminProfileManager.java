@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Account.Account;
 import Model.Account.Admin;
+import Model.Account.Customer;
 import Model.Account.Discount;
 import Model.Request.Request;
 import Model.Product.Category;
@@ -23,8 +24,7 @@ public class AdminProfileManager extends ProfileManager {
     public static boolean isThereAdmin() {
         if (Admin.getAllAdmins().isEmpty()) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -57,6 +57,30 @@ public class AdminProfileManager extends ProfileManager {
         }
         allUsers.setPlaceholder(new Label("No Data to display"));
         return allUsers;
+    }
+
+    public TableView getAllCustomersTable(TableView allCustomers) {
+        TableColumn<String, Customer> column1 = new TableColumn<>("Username");
+        column1.setCellValueFactory(new PropertyValueFactory<>("username"));
+
+        TableColumn<String, Customer> column2 = new TableColumn<>("First Name");
+        column2.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn<String, Customer> column3 = new TableColumn<>("Last Name");
+        column3.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+
+        TableColumn<String, Customer> column4 = new TableColumn<>("Email");
+        column4.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        TableColumn<String, Customer> column5 = new TableColumn<>("Phone Number");
+        column5.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+
+        allCustomers.getColumns().addAll(column1, column2, column3, column4, column5);
+        for (Customer customer : Customer.getAllCustomers()) {
+            allCustomers.getItems().add(customer);
+        }
+        allCustomers.setPlaceholder(new Label("No Data to display"));
+        return allCustomers;
     }
 
     public String viewUser(String username) throws NullPointerException {
@@ -110,9 +134,69 @@ public class AdminProfileManager extends ProfileManager {
         }
     }
 
-    //todo: completing this and adding exceptions
-    public static void createDiscountCode(String discountCode, Date startTime, Date endTime, int discountPercent, int maxPossibleDiscount, int discountPerCustomer) {
-        new Discount(discountCode, startTime, endTime, discountPercent, maxPossibleDiscount, discountPerCustomer);
+    public void createDiscountCode(String discountCode, Date startTime, Date endTime, String discountPercent, String maxPossibleDiscount, String discountPerCustomer, String[] includingCustomers) {
+        if (checkDiscountCodeValidity(discountCode) && checkDiscountPercentValidity(discountPercent) && checkMaxPossibleDiscountValidity(maxPossibleDiscount) && checkDiscountPerCustomerValidity(discountPerCustomer) && checkCustomersValidity(includingCustomers)) {
+            new Discount(discountCode, startTime, endTime, Integer.parseInt(discountPercent), Integer.parseInt(maxPossibleDiscount), Integer.parseInt(discountPerCustomer), includingCustomers);
+        }
+    }
+
+    private boolean checkDiscountCodeValidity(String discountCode) throws IllegalArgumentException {
+        if (discountCode.trim().equals("")) {
+            throw new IllegalArgumentException("Invalid Discount Code");
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkDiscountPercentValidity(String discountPercent) throws IllegalArgumentException {
+        if (discountPercent.trim().equals("") || !(discountPercent.matches("\\d+"))) {
+            throw new IllegalArgumentException("Invalid Discount Percent");
+        } else {
+            if (Integer.parseInt(discountPercent) > 100) {
+                throw new IllegalArgumentException("Discount Percent should be less than 100");
+            } else {
+                return true;
+            }
+        }
+    }
+
+    private boolean checkMaxPossibleDiscountValidity(String maxPossibleDiscount) throws IllegalArgumentException {
+        if (maxPossibleDiscount.trim().equals("") || !(maxPossibleDiscount.matches("\\d+"))) {
+            throw new IllegalArgumentException("Invalid maximum possible discount");
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkDiscountPerCustomerValidity(String discountPerCustomer) throws IllegalArgumentException {
+        if (discountPerCustomer.trim().equals("") || !(discountPerCustomer.matches("\\d+"))) {
+            throw new IllegalArgumentException("Invalid number of discount user per customer.");
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkCustomersValidity(String[] customersUsername) throws IllegalArgumentException{
+        for (String s : customersUsername) {
+            if (Account.getAccountByUsername(s) == null || !(Account.getAccountByUsername(s) instanceof Customer)) {
+                throw new IllegalArgumentException("Invalid Customer Username.");
+            }
+        }
+        return true;
+    }
+
+    public TableView getAllDiscountsTable(TableView allDiscountsTable) {
+        TableColumn<String, Discount> column = new TableColumn<>("Discount Code");
+        column.setCellValueFactory(new PropertyValueFactory<>("discountCode"));
+
+        allDiscountsTable.getColumns().add(column);
+
+        for (Discount discount : Discount.getAllDiscounts()) {
+            allDiscountsTable.getItems().add(discount);
+        }
+
+        allDiscountsTable.setPlaceholder(new Label("No Data To Display"));
+        return allDiscountsTable;
     }
 
     public ArrayList<Discount> getAllDiscountCodes() {

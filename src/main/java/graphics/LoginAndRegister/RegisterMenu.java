@@ -50,6 +50,11 @@ public class RegisterMenu {
                 try {
                     loginAndRegisterManager.registerCustomer(username.trim(), password.trim(), firstName.trim(), lastName, email, phoneNumber);
                     AlertBox.showMessage("Register Customer", "Customer Registered Successfully");
+                    try {
+                        App.setRoot(parentMenu);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } catch (IllegalArgumentException e) {
                     AlertBox.showMessage("Failed to Register", e.getMessage());
                 }
@@ -58,14 +63,14 @@ public class RegisterMenu {
                 try {
                     loginAndRegisterManager.registerSeller(username, password, firstName, lastName, email, phoneNumber, companyName);
                     AlertBox.showMessage("Register Seller", "Your Request Was Sent to Admin Successfully");
+                    try {
+                        App.setRoot(parentMenu);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } catch (IllegalArgumentException e) {
                     AlertBox.showMessage("Failed to Register", e.getMessage());
                 }
-            }
-            try {
-                App.setRoot(parentMenu);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -98,6 +103,6 @@ public class RegisterMenu {
     }
 
     public static void setParentMenu(String parentMenu) {
-        RegisterMenu.setParentMenu(parentMenu);
+        RegisterMenu.parentMenu = parentMenu;
     }
 }
