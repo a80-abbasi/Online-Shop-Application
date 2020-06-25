@@ -30,11 +30,8 @@ public class LoginMenu {
         String password = passwordField.getText();
         try {
             loginAndRegisterManager.loginUser(username, password);
-            try {
-                App.setRoot(parentMenu);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            ((Stage) usernameField.getScene().getWindow()).close();
+            ProductPageController.loginPopUp = null;
         } catch (IllegalArgumentException e) {
             AlertBox.showMessage("Login Failed", e.getMessage());
         }
