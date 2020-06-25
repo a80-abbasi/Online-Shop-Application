@@ -278,9 +278,7 @@ public class AdminProfileManager extends ProfileManager {
         Discount.removeDiscount(discount);
     }
 
-    public TableView getAllRequestsTable() {
-        TableView allRequests = new TableView();
-
+    public TableView getAllRequestsTable(TableView allRequests) {
         TableColumn<String, Request> column1 = new TableColumn<>("Request ID");
         column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
 
