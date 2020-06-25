@@ -59,9 +59,7 @@ public class AdminProfileManager extends ProfileManager {
         return allUsers;
     }
 
-    public TableView getAllCustomersTable() {
-        TableView allCustomers = new TableView();
-
+    public TableView getAllCustomersTable(TableView allCustomers) {
         TableColumn<String, Customer> column1 = new TableColumn<>("Username");
         column1.setCellValueFactory(new PropertyValueFactory<>("username"));
 
@@ -137,7 +135,7 @@ public class AdminProfileManager extends ProfileManager {
     }
 
     public void createDiscountCode(String discountCode, Date startTime, Date endTime, String discountPercent, String maxPossibleDiscount, String discountPerCustomer, String[] includingCustomers) {
-        if (checkDiscountCodeValidity(discountCode) && checkDiscountPercentValidity(discountPercent) && checkMaxPossibleDiscountValidity(maxPossibleDiscount) && checkDiscountPerCustomerValidity(discountPerCustomer)) {
+        if (checkDiscountCodeValidity(discountCode) && checkDiscountPercentValidity(discountPercent) && checkMaxPossibleDiscountValidity(maxPossibleDiscount) && checkDiscountPerCustomerValidity(discountPerCustomer) && checkCustomersValidity(includingCustomers)) {
             new Discount(discountCode, startTime, endTime, Integer.parseInt(discountPercent), Integer.parseInt(maxPossibleDiscount), Integer.parseInt(discountPerCustomer), includingCustomers);
         }
     }
@@ -176,6 +174,29 @@ public class AdminProfileManager extends ProfileManager {
         } else {
             return true;
         }
+    }
+
+    private boolean checkCustomersValidity(String[] customersUsername) throws IllegalArgumentException{
+        for (String s : customersUsername) {
+            if (Account.getAccountByUsername(s) == null || !(Account.getAccountByUsername(s) instanceof Customer)) {
+                throw new IllegalArgumentException("Invalid Customer Username.");
+            }
+        }
+        return true;
+    }
+
+    public TableView getAllDiscountsTable(TableView allDiscountsTable) {
+        TableColumn<String, Discount> column = new TableColumn<>("Discount Code");
+        column.setCellValueFactory(new PropertyValueFactory<>("discountCode"));
+
+        allDiscountsTable.getColumns().add(column);
+
+        for (Discount discount : Discount.getAllDiscounts()) {
+            allDiscountsTable.getItems().add(discount);
+        }
+
+        allDiscountsTable.setPlaceholder(new Label("No Data To Display"));
+        return allDiscountsTable;
     }
 
     public ArrayList<Discount> getAllDiscountCodes() {

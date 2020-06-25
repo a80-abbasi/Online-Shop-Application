@@ -30,7 +30,7 @@ public class CreateDiscountCode {
 
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
-        customerTable = adminProfileManager.getAllCustomersTable();
+        customerTable = adminProfileManager.getAllCustomersTable(customerTable);
     }
 
     public void confirm() {
