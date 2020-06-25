@@ -27,6 +27,10 @@ public abstract class Request {
         return requestId;
     }
 
+    public String getRequestType() {
+        return requestType.getRequestType();
+    }
+
     public abstract void acceptRequest();
 
     public abstract String toString();
