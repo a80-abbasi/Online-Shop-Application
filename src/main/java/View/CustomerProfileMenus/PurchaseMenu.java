@@ -76,6 +76,7 @@ public class PurchaseMenu extends Menu {
     public void payment(HashMap<String, String> customerInformationForPurchase, String discountCodeForPurchase) {
         System.out.println("Payment:");
         double price = customerProfileManager.costCalculatorWithOffAndDiscount(discountCodeForPurchase);
+        double totalPrice = customerProfileManager.costCalculator();
         System.out.printf("The total cost of your products is %s$ and with discount and off is %s$ do you want to pay?(write (next) if your want to pay)\n", (ProductsManager.getTotalPrice()), price);
         while(scanAdvance(1,1,parentMenu).getValid())
             System.out.println("please enter a valid command!");
@@ -84,7 +85,7 @@ public class PurchaseMenu extends Menu {
             parentMenu.execute();
         }
         System.out.println("You payed successfully.have nice day!");
-        customerProfileManager.doingsAfterBuyProducts(price, discountCodeForPurchase);
+        customerProfileManager.doingsAfterBuyProducts(price, totalPrice ,discountCodeForPurchase);
     }
 
 }

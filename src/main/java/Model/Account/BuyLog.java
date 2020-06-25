@@ -4,27 +4,30 @@ import Model.Product.Product;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class BuyLog extends Log {
-    private int paidAmount;
-    private int discountAmount;
-    private Seller seller;
+    private double paidAmount;
+    private double discountAmount;
     private boolean hasDelivered;
-    private ArrayList<Product> boughtProducts;
+    private ArrayList<Product> products;
+    private ArrayList<Integer> numbers;
+    private ArrayList<Seller> sellers;
 
-    public BuyLog(String ID, Date date, int paidAmount, int discountAmount, Seller seller) {
+    public BuyLog(String ID, Date date, double paidAmount, double discountAmount, ArrayList<Product> products, ArrayList<Integer> numbers, ArrayList<Seller> sellers) {
         super(ID, date);
         this.paidAmount = paidAmount;
         this.discountAmount = discountAmount;
-        this.seller = seller;
-        boughtProducts = new ArrayList<>();
+        this.products = products;
+        this. numbers = numbers;
+        this.sellers = sellers;
     }
 
-    public BuyLog() {
-        this("", null, 0, 0, null);
-    }
+//    public BuyLog() {
+//        this("", null, 0, 0, null);
+//    }
 
-    public int getPaidAmount() {
+    public double getPaidAmount() {
         return paidAmount;
     }
 
@@ -32,20 +35,12 @@ public class BuyLog extends Log {
         this.paidAmount = paidAmount;
     }
 
-    public int getDiscountAmount() {
+    public double getDiscountAmount() {
         return discountAmount;
     }
 
     public void setDiscountAmount(int discountAmount) {
         this.discountAmount = discountAmount;
-    }
-
-    public Seller getSeller() {
-        return seller;
-    }
-
-    public void setSeller(Seller seller) {
-        this.seller = seller;
     }
 
     public boolean isHasDelivered() {
@@ -56,22 +51,18 @@ public class BuyLog extends Log {
         this.hasDelivered = hasDelivered;
     }
 
-    public void addProductToLog(Product product){
-        boughtProducts.add(product);
-    }
 
-    public ArrayList<Product> getBoughtProducts() {
-        return boughtProducts;
-    }
+
+
 
     @Override
     public String toString() {
         return "BuyLog{" +
                 "paidAmount=" + paidAmount +
                 ", discountAmount=" + discountAmount +
-                ", seller=" + seller +
+                //", seller=" + seller + // todo: add hashmap
                 ", hasDelivered=" + hasDelivered +
-                ", boughtProducts=" + boughtProducts +
+                //", boughtProducts=" + boughtProducts +
                 '}';
     }
 }
