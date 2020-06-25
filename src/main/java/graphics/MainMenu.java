@@ -4,6 +4,7 @@ import Model.Account.Account;
 import Model.Account.Admin;
 import Model.Account.Customer;
 import Model.Account.Seller;
+import View.Main;
 import graphics.AdminProfile.AdminProfileMenu;
 import graphics.CustomerProfile.CustomerProfileMenu;
 import graphics.LoginAndRegister.LoginMenu;
@@ -90,6 +91,7 @@ public class MainMenu {
     }
 
     public void exit(ActionEvent event) {
+        Main.serializeXML();
         System.exit(0);
     }
 }

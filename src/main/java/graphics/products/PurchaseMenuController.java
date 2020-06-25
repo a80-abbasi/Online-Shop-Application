@@ -144,7 +144,7 @@ public class PurchaseMenuController {
             Seller seller = product.getProductSeller();
             seller.setBalance(product.getProductSeller().getBalance() + product.getPriceWithOff() * number);
             SellLog sellLog = new SellLog("SellLog" + (SellLog.getAllSellLogs().size() + 1), new Date(), product.getPriceWithOff(),
-                    product.getPrice() - product.getPriceWithOff(), product, customer.getName());
+                    product.getPrice() - product.getPriceWithOff(), product, number, customer.getName());
             seller.getSellLogs().add(sellLog);
             product.setExistingNumber(product.getExistingNumber() - number); //decrease product existing number
             if (!product.getProductBuyers().contains(customer)){ //set product buyers
