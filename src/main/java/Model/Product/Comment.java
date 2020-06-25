@@ -6,21 +6,21 @@ import java.util.Date;
 
 public class Comment {
     private String accountUserName;
-    private String productId;
+    private String id;
     private String title;
     private String comment;
     private CommentStatus status;
     private Date date;
     private boolean bought;
 
-    public Comment(Account account, Product product, String comment, String title) {
+    public Comment(Account account, String id, String comment, String title) {
         this.accountUserName = account.getUsername();
-        this.productId = product.getProductId();
+        this.id = id;
         this.comment = comment;
         this.title = title;
         date = new Date();
         status = CommentStatus.WAITING_FOR_CONFIRM;
-        Product.getProductByID(productId).addAComment(this);
+        Product.getProductByID(id).addAComment(this);
     }
 
     public Comment() {
@@ -33,14 +33,6 @@ public class Comment {
 
     public void setAccountUserName(Account account) {
         this.accountUserName = account.getUsername();
-    }
-
-    public Product getProductId() {
-        return Product.getProductByID(productId);
-    }
-
-    public void setProductId(Product product) {
-        this.productId = product.getProductId();
     }
 
     public String getComment() {
@@ -83,8 +75,12 @@ public class Comment {
         this.bought = bought;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setAccountUserName(String accountUserName) {
@@ -99,7 +95,7 @@ public class Comment {
     public String toString() {
         return "Comment{" +
                 "account=" + accountUserName +
-                ", product=" + productId +
+                ", product=" + id +
                 ", title='" + title + '\'' +
                 ", comment='" + comment + '\'' +
                 ", status=" + status +

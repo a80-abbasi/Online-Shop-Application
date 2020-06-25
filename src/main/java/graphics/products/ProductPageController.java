@@ -503,7 +503,7 @@ public class ProductPageController {
         if (!commentTextArea.getText().isBlank()){
             String comment = commentTextArea.getText();
             String title = titleTextField.getText();
-            new Comment(Account.getLoggedInAccount(), product, comment, title);
+            new Comment(Account.getLoggedInAccount(), product.getProductId(), comment, title);
             parentForCommentPage.setComments();
             parentForCommentPage.commentPopUp.close();
             parentForCommentPage.commentPopUp = null;

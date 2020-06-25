@@ -274,6 +274,14 @@ public class Product {
         this.off = off;
     }
 
+    public void setProductBuyers(ArrayList<Customer> productBuyers) {
+        this.productBuyers = productBuyers;
+    }
+
+    public static void setProductFields(ArrayList<String> productFields) {
+        Product.productFields = productFields;
+    }
+
     public static Product getProductByID(String ID){
         for (Product product : allProducts) {
             if (product.productId.equals(ID)){

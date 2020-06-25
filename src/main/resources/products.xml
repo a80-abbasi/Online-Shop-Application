@@ -8,6 +8,33 @@
         <existingNumber>2</existingNumber>
         <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
         <price>1000.0</price>
+        <productComments>
+            <accountUserName>amir</accountUserName>
+            <bought>false</bought>
+            <comment>hatman bekharid &lt;3</comment>
+            <date>2020-06-25T13:09:05.030+04:30</date>
+            <id>1</id>
+            <status>WAITING_FOR_CONFIRM</status>
+            <title>hi</title>
+        </productComments>
+        <productComments>
+            <accountUserName>amir</accountUserName>
+            <bought>false</bought>
+            <comment>hatman bekharid &lt;3</comment>
+            <date>2020-06-25T13:16:25.851+04:30</date>
+            <id>1</id>
+            <status>WAITING_FOR_CONFIRM</status>
+            <title>hi</title>
+        </productComments>
+        <productComments>
+            <accountUserName>amir</accountUserName>
+            <bought>false</bought>
+            <comment>love this porduct</comment>
+            <date>2020-06-25T13:16:25.851+04:30</date>
+            <id>1</id>
+            <status>WAITING_FOR_CONFIRM</status>
+            <title>phone</title>
+        </productComments>
         <productId>1</productId>
         <productName>name</productName>
         <productSeller>
@@ -22,6 +49,6 @@
         </productSeller>
         <productStatus>CONFIRMED</productStatus>
         <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
-        <visitNumber>30</visitNumber>
+        <visitNumber>31</visitNumber>
     </product>
 </products>
