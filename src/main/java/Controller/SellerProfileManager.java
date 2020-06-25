@@ -184,6 +184,16 @@ public class SellerProfileManager extends ProfileManager {
         }
     }
 
+    public void makeNewEditOffRequest(String offID, Date offStartTime, Date offEndTime, String offAmount, ArrayList<String> offProductIDs) throws Exception {
+        try {
+            if (checkOffAmountValidity(offAmount) && checkOffIDValidity(offID)) {
+                new EditOffRequest(offID, offStartTime, offEndTime, Integer.parseInt(offAmount), offProductIDs);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     private boolean checkOffIDValidity(String offID) throws Exception{
         if (Off.getOffById(offID) != null) {
             throw new Exception("There is another off with this ID");
@@ -326,4 +336,15 @@ public class SellerProfileManager extends ProfileManager {
         return this.seller.getNameOfCompany();
     }
 
+    public TableView getSellerOffs(TableView offsTable) {
+        TableColumn<String, Off> column = new TableColumn<>("Off ID");
+        column.setCellValueFactory(new PropertyValueFactory<>("offID"));
+
+        offsTable.getColumns().add(column);
+        for (Off sellerOff : this.seller.getOffs()) {
+            offsTable.getItems().add(sellerOff);
+        }
+        offsTable.setPlaceholder(new Label("No Data To Display"));
+        return offsTable;
+    }
 }

@@ -43,6 +43,7 @@ public class AddOff {
         if (!(checkConfirmButtonInability)) {
             try {
                 sellerProfileManager.makeNewAddOffRequest(offID, offStartTime, offEndTime, offAmount, offProductIDs);
+                AlertBox.showMessage("Add Off", "Your Request Was Successfully Sent To Admins");
             } catch (Exception e) {
                 AlertBox.showMessage("Failed To Add", e.getMessage());
             }

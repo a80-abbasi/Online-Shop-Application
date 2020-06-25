@@ -8,6 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class EditOffRequest extends EditAddOffRequest {
     private static ArrayList<EditOffRequest> allEditOffRequests = new ArrayList<>();
@@ -23,6 +24,17 @@ public class EditOffRequest extends EditAddOffRequest {
         this.setOffAmount(off.getOffAmount());
         this.setOffStatus(OffStatus.PENDING_FOR_EDITION);
         this.setOffProductIDs(off.getProductIDs());
+    }
+
+    public EditOffRequest(String offID, Date offStartTime, Date offEndTime, int offAmount, ArrayList<String> offProductIDs) {
+        super("edit_off_" + allRequests.size(), RequestType.Editing_Off_Request);
+        this.setOff(Off.getOffById(offID));
+        this.setOffID(offID);
+        this.setStartTime(offStartTime);
+        this.setEndTime(offEndTime);
+        this.setOffAmount(offAmount);
+        this.setOffStatus(OffStatus.PENDING_FOR_EDITION);
+        this.setOffProductIDs(offProductIDs);
     }
 
     public EditOffRequest() {

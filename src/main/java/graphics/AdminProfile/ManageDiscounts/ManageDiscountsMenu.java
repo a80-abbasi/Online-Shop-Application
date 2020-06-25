@@ -53,17 +53,24 @@ public class ManageDiscountsMenu {
     }
 
     public void showDetails() {
+        if (allDiscountsTable.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
         Discount selectedDiscount = (Discount) allDiscountsTable.getSelectionModel().getSelectedItem();
+
         discountCodeField.setText(selectedDiscount.getDiscountCode());
         startTimeDate.setValue(selectedDiscount.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         endTimeDate.setValue(selectedDiscount.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         maxPossibleDiscountField.setText(String.valueOf(selectedDiscount.getMaxPossibleDiscount()));
         discountPercentField.setText(String.valueOf(selectedDiscount.getDiscountPercent()));
         discountPerCustomerField.setText(String.valueOf(selectedDiscount.getDiscountPerCustomer()));
+
+        includingCustomers = selectedDiscount.getIncludingCustomerUsername();
         for (String s : selectedDiscount.getIncludingCustomerUsername()) {
             includingCustomersField.setText(includingCustomersField.getText() + s + ", ");
         }
-        includingCustomers = selectedDiscount.getIncludingCustomerUsername();
+
         for (String includingCustomer : includingCustomers) {
             notIncludingCustomers.getItems().remove(Account.getAccountByUsername(includingCustomer));
         }
