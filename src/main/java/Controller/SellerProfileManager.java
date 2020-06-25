@@ -41,6 +41,12 @@ public class SellerProfileManager extends ProfileManager {
         return salesHistory;
     }
 
+    public void addSellLog(double received, double offAmount, Product product, int number, String buyerName) {
+        String sellLogID = seller.getUsername() + seller.getSellLogs().size();
+        SellLog sellLog = new SellLog(sellLogID, new Date(), received, offAmount, product, number, buyerName);
+        seller.getSellLogs().add(sellLog);
+    }
+
     public ArrayList<String> getSellerProducts() {
         ArrayList<Product> sellerProducts = seller.getProducts();
         ArrayList<String> sellerProductsIds = new ArrayList<>();

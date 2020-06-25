@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class BuyLog extends Log {
+    private static ArrayList<BuyLog> allBuyLogs = new ArrayList<>();
     private double paidAmount;
     private double discountAmount;
     private boolean hasDelivered;
@@ -15,6 +16,7 @@ public class BuyLog extends Log {
     public BuyLog(String ID, Date date, double paidAmount, double discountAmount, HashMap<Product, Integer> cart) {
         super(ID, date);
         this.paidAmount = paidAmount;
+        allBuyLogs.add(this);
         this.discountAmount = discountAmount;
         this.boughtProducts = new HashMap<>(cart);
     }
@@ -57,6 +59,10 @@ public class BuyLog extends Log {
 
     public void setBoughtProducts(HashMap<Product, Integer> boughtProducts) {
         this.boughtProducts = boughtProducts;
+    }
+
+    public static ArrayList<BuyLog> getAllBuyLogs() {
+        return allBuyLogs;
     }
 
     @Override

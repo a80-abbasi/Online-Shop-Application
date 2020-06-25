@@ -69,13 +69,13 @@ public class CustomerProfileManager extends ProfileManager{
         return 0;
     }
 
-//    public HashMap<Seller, Date> showOrdersSellerNameAndDate () { //todo:
-//        HashMap<Seller, Date> sellerNameAndDate = new HashMap<>();
-//        for (BuyLog buyLog : customer.getBuyLogs()) {
-//            sellerNameAndDate.put(buyLog.getSeller(),buyLog.getDate());
-//        }
-//        return sellerNameAndDate;
-//    }
+    public HashMap<String, Date> showOrderIDAndDate () {
+        HashMap<String, Date> iDAndDate = new HashMap<>();
+        for (BuyLog buyLog : customer.getBuyLogs()) {
+            iDAndDate.put(buyLog.getID(),buyLog.getDate());
+        }
+        return iDAndDate;
+    }
 
     public BuyLog showOrder(String id) {
         return customer.getBuyLogByID(id);
@@ -185,15 +185,7 @@ public class CustomerProfileManager extends ProfileManager{
     public void doingsAfterBuyProducts(double price, double totalPrice, String usedDiscountCode) {
         customer.setBalance(customer.getBalance() - price);
         setUsedDiscountCodes(usedDiscountCode);
-        ArrayList<Product> products = new ArrayList<>();
-        products.addAll(customer.getCart().keySet());
-        ArrayList<Integer> numbers = new ArrayList<>();
-        numbers.addAll(customer.getCart().values());
-        ArrayList<Seller> sellers= new ArrayList<>();
-        for (Product product : products) {
-            sellers.add(product.getProductSeller());
-        }
-        addBuyLog(price,totalPrice, products, numbers, sellers);
+        addBuyLog(price,totalPrice, customer.getCart());
         //System.out.println(checkForDiscountGift());
         for (Product product : customer.getCart().keySet()) {
             Seller seller = product.getProductSeller();
@@ -203,11 +195,12 @@ public class CustomerProfileManager extends ProfileManager{
             if (!product.getProductBuyers().contains(customer))
                 product.getProductBuyers().add(customer); //Product setProductBuyers
         }
+        for (Product product :customer.getCart().keySet()) {
+            double received = product.getPriceWithOff();
+            addSellLog(received, product.getPrice() - received, product, customer.getCart().get(product),customer.getName(), product.getProductSeller());
+        }
         //discount.getDiscountPerCustomer();
         //todo: check discount code use less than
-
-        //Sell log
-
     }
 
     public boolean canCustomerPay(double cost) {
@@ -248,16 +241,16 @@ public class CustomerProfileManager extends ProfileManager{
         }
     }
 
-    public void addBuyLog(double price, double totalPrice, ArrayList<Product> products, ArrayList<Integer> numbers, ArrayList<Seller> sellers) { //todo
+    public void addBuyLog(double price, double totalPrice, HashMap<Product, Integer> Cart) { //todo
         String buyLogID = customer.getUsername() + customer.getBuyLogs().size();
-        BuyLog buyLog = new BuyLog(buyLogID, new Date(), price, totalPrice - price, products, numbers, sellers);
+        BuyLog buyLog = new BuyLog(buyLogID, new Date(), price, totalPrice - price, customer.getCart());
         customer.getBuyLogs().add(buyLog);
     }
 
-    public void addSellLog() { //todo
-//        String buyLogID = customer.getUsername() + customer.getBuyLogs().size();
-//        BuyLog buyLog = new BuyLog(buyLogID, new Date(), price, getTotalPrice() - price, /*todo*/);
-//        customer.getBuyLogs().add(buyLog);
+    public void addSellLog(double received, double offAmount, Product product, int number, String buyerName, Seller seller) {
+        String sellLogID = seller.getUsername() + seller.getSellLogs().size();
+        SellLog sellLog = new SellLog(sellLogID, new Date(), received, offAmount, product, number, buyerName);
+        seller.getSellLogs().add(sellLog);
     }
 
 }

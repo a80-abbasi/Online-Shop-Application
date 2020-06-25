@@ -6,29 +6,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="525.0" prefWidth="723.0" style="-fx-background-color: #ffefbb;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.products.CartController">
+<Pane prefHeight="511.0" prefWidth="723.0" style="-fx-background-color: #ffefbb;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.products.CartController">
    <children>
-      <ScrollPane layoutX="4.0" layoutY="30.0" prefHeight="451.0" prefWidth="714.0" style="-fx-background-color: #ffefbb;">
+      <ScrollPane layoutX="5.0" layoutY="14.0" prefHeight="451.0" prefWidth="714.0" style="-fx-background-color: #ffefbb;">
          <content>
             <Pane fx:id="mainPane" prefHeight="10.0" prefWidth="706.0" />
          </content>
       </ScrollPane>
-      <Label fx:id="XLabel" layoutX="695.0" layoutY="-1.0" text="X">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="purchaseButton" layoutX="635.0" layoutY="486.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="78.0" text="Purchase">
+      <Button fx:id="purchaseButton" layoutX="631.0" layoutY="471.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="78.0" text="Purchase">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="clearButton" layoutX="538.0" layoutY="486.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="78.0" text="Clear Cart">
+      <Button fx:id="clearButton" layoutX="534.0" layoutY="471.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="78.0" text="Clear Cart">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Label fx:id="messageLabel" layoutX="49.0" layoutY="491.0" textFill="RED">
+      <Label fx:id="messageLabel" layoutX="43.0" layoutY="476.0" textFill="RED">
          <font>
             <Font size="14.0" />
          </font>

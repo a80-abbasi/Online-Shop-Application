@@ -23,6 +23,7 @@ public class AlertBox {
         VBox vBox = new VBox(30);
         vBox.setPrefSize(300, 100);
         Label label = new Label(message);
+        label.setWrapText(true);
         Button OKButton = new Button("OK!");
         OKButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
