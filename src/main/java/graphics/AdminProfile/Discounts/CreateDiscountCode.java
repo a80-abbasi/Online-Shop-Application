@@ -1,4 +1,4 @@
-package graphics.AdminProfile.ManageDiscounts;
+package graphics.AdminProfile.Discounts;
 
 import Controller.AdminProfileManager;
 import Model.Account.Account;

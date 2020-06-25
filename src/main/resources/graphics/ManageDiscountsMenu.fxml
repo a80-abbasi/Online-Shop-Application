@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AdminProfile.ManageDiscounts.ManageDiscountsMenu">
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AdminProfile.Discounts.ManageDiscountsMenu">
     <children>
         <Label layoutX="876.0" layoutY="178.0" text="Discount Code">
             <font>

@@ -1,4 +1,4 @@
-package graphics.SellerProfile;
+package graphics.SellerProfile.Offs;
 
 import Controller.SellerProfileManager;
 import Model.Account.Account;

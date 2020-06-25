@@ -1,4 +1,4 @@
-package graphics.SellerProfile;
+package graphics.SellerProfile.Offs;
 
 import Controller.SellerProfileManager;
 import Model.Account.Account;
@@ -42,7 +42,7 @@ public class ManageOffs {
 
         offsTable = new TableView();
         notIncludingProducts = new TableView();
-        offsTable = sellerProfileManager.getSellerOffs(offsTable);
+        offsTable = sellerProfileManager.getSellerOffsTable(offsTable);
         notIncludingProducts = sellerProfileManager.getSellerProductsTable(notIncludingProducts);
     }
 
