@@ -79,12 +79,7 @@
             <Font name="Times New Roman" size="18.0" />
          </font>
       </Button>
-      <TableView fx:id="allDiscountsTable" layoutX="90.0" layoutY="169.0" prefHeight="415.0" prefWidth="544.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
+      <TableView fx:id="allDiscountsTable" layoutX="90.0" layoutY="169.0" prefHeight="415.0" prefWidth="544.0" />
       <Button layoutX="484.0" layoutY="599.0" mnemonicParsing="false" onMouseClicked="#showDetails" prefHeight="44.0" prefWidth="150.0" text="Show Details">
          <font>
             <Font name="Times New Roman" size="18.0" />
