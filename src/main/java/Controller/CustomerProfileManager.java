@@ -8,7 +8,7 @@ import View.Menu;
 import java.util.*;
 
 public class CustomerProfileManager extends ProfileManager{
-    private Customer customer;
+    public Customer customer;
 
     public CustomerProfileManager(Customer customer) {
         super(customer);

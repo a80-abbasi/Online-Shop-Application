@@ -35,11 +35,6 @@
                                              </font>
                                           </Label>
                                           <TextField fx:id="orderIDForShowOrder" layoutX="136.0" layoutY="19.0" prefHeight="46.0" prefWidth="171.0" />
-                                          <ScrollPane layoutX="17.0" layoutY="82.0" prefHeight="362.0" prefWidth="530.0">
-                                            <content>
-                                              <AnchorPane fx:id="ShowOrderScroll" minHeight="0.0" minWidth="0.0" prefHeight="576.0" prefWidth="851.0" />
-                                            </content>
-                                          </ScrollPane>
                                           <Button fx:id="showOrderByIDButton" layoutX="335.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#showOrderByID" text="show" />
                                        </children>
                                     </AnchorPane>
