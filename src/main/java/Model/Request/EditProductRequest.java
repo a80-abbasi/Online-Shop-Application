@@ -1,9 +1,12 @@
 package Model.Request;
 
+import Model.Account.Seller;
+import Model.Product.Category;
 import Model.Product.Product;
 import Model.Product.ProductStatus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EditProductRequest extends EditAddProductRequest {
     private static ArrayList<EditProductRequest> allEditProductRequests = new ArrayList<>();
@@ -23,6 +26,23 @@ public class EditProductRequest extends EditAddProductRequest {
         this.setProductCategory(product.getProductCategory());
         this.setProductSpecialFeatures(product.getSpecialFeatures());
         this.setProductSeller(product.getProductSeller());
+    }
+
+    public EditProductRequest(Product product, String productID, String productName, String productCompanyName, double productPrice,
+                             int productExistingNumber, String productExplanations, String productImageAddress,
+                             Category productCategory, HashMap<String, Integer> productSpecialFeatures, Seller productSeller) {
+        super("add_product_" + allRequests.size(), RequestType.Adding_Product_Request);
+        this.product = product;
+        this.productId = productID;
+        this.productName = productName;
+        this.productCompanyName = productCompanyName;
+        this.productPrice = productPrice;
+        this.productExistingNumber = productExistingNumber;
+        this.productExplanations = productExplanations;
+        this.productImageAddress = productImageAddress;
+        this.productCategory = productCategory;
+        this.productSpecialFeatures = productSpecialFeatures;
+        this.productSeller = productSeller;
     }
 
     public EditProductRequest(){

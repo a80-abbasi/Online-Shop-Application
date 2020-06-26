@@ -185,6 +185,31 @@ public class SellerProfileManager extends ProfileManager {
         return values;
     }
 
+    public void makeNewEditProductRequest(String productID, String productName, String productCompanyName,
+                                         String productPrice, String productExistingNumber, String productExplanations,
+                                         Category productCategory, ArrayList<String> specialFeatureValues,
+                                         String productImageAddress) throws Exception{
+        try {
+            ArrayList<String> specialFeatures = productCategory.getSpecialFeatures();
+            ArrayList<Integer> values = getSpecialFeatureValuesInInteger(specialFeatureValues);
+            HashMap<String, Integer> productSpecialFeatures = new HashMap<>();
+            int i = 0;
+            for (String specialFeature : specialFeatures) {
+                productSpecialFeatures.put(specialFeature, values.get(i));
+                i++;
+            }
+            if (checkProductIDValidity(productID) && checkProductNameValidity(productName) &&
+                    checkProductCompanyName(productCompanyName) && checkProductPrice(productPrice) &&
+                    checkProductExistingNumber(productExistingNumber) && checkProductExplanations(productExplanations)) {
+                Product product = Product.getProductByID(productID);
+                new EditProductRequest(product, productID, productName, productCompanyName, Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber),
+                        productExplanations, productImageAddress, productCategory, productSpecialFeatures, this.seller);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     public EditProductRequest makeNewEditProductRequest(String productId) throws NullPointerException, IllegalArgumentException{
         Product product = Product.getProductByID(productId);
         if (product == null){
