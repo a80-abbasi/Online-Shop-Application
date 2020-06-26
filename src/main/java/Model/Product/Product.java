@@ -46,17 +46,19 @@ public class Product {
     }
 
     public Product (String productId, ProductStatus productStatus, String productName, String companyName, double price,
-                    Seller seller, int existingNumber, Category productCategory, HashMap<String, Integer> specialFeatures) {
+                    int existingNumber, String explanations, String productImageAddress, Category productCategory,
+                    HashMap<String, Integer> specialFeatures, Seller productSeller) {
         this.productId = productId;
         this.productStatus = productStatus;
         this.productName = productName;
         this.companyName = companyName;
         this.price = price;
-        this.productSeller = seller;
         this.existingNumber = existingNumber;
+        this.explanations = explanations;
+        this.setImageAddress(productImageAddress);
         this.productCategory = productCategory;
         this.specialFeatures = specialFeatures;
-        imageAddress = "";
+        this.productSeller = productSeller;
         timeOfCreation = new Date();
         allProducts.add(this);
     }

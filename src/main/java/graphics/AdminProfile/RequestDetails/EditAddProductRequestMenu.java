@@ -40,9 +40,9 @@ public class EditAddProductRequestMenu {
         requestTypeField.setText(editAddProductRequest.getRequestType());
         productIDField.setText(editAddProductRequest.getProductId());
         productNameField.setText(editAddProductRequest.getProductName());
-        productPriceField.setText(String.valueOf(editAddProductRequest.getPrice()));
-        productCompanyNameField.setText(editAddProductRequest.getCompanyName());
-        productExistingNumberField.setText(String.valueOf(editAddProductRequest.getExistingNumber()));
+        productPriceField.setText(String.valueOf(editAddProductRequest.getProductPrice()));
+        productCompanyNameField.setText(editAddProductRequest.getProductCompanyName());
+        productExistingNumberField.setText(String.valueOf(editAddProductRequest.getProductExistingNumber()));
         productCategoryField.setText(editAddProductRequest.getProductCategory().getName());
         for (String s : editAddProductRequest.getProductSpecialFeatures().keySet()) {
             productSpecialFeaturesField.setText(productSpecialFeaturesField.getText() + s + ": " + editAddProductRequest.getProductSpecialFeatures().get(s) + ", ");
