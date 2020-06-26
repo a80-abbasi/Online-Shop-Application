@@ -190,7 +190,7 @@ public class SellerProfileMenu {
 
     public void addCompanyInformation(MouseEvent mouseEvent) {
             try {
-                App.setRoot("addCompanyInformation");
+                App.setRoot("AddCompanyInformation");
             } catch (IOException e) {
                 e.printStackTrace();
             }
