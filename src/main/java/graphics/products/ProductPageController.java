@@ -7,7 +7,6 @@ import Model.Account.Customer;
 import Model.Product.Comment;
 import Model.Product.Product;
 import Model.Product.Score;
-import com.sun.javafx.scene.control.inputmap.InputMap;
 import graphics.App;
 import graphics.LoginAndRegister.LoginMenu;
 import graphics.MainMenu;
