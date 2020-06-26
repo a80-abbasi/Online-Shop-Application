@@ -9,15 +9,13 @@ import Model.Account.Seller;
 import Model.Product.Comment;
 import Model.Product.Product;
 import graphics.AlertBox;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,8 +27,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -48,7 +44,9 @@ public class CustomerProfileMenu {
     public TextField usernameField;
     public Label balanceLabel;
     public AnchorPane showDiscountCodesScroll;
-    public TableView showOrderTable;
+    public Tab showOrdersTab;
+    public ScrollPane showOrdersScrollPane;
+    public TableView ordersTable;
     private TableView table = new TableView();
 
     private ArrayList<Pane> showingBuyLogs = new ArrayList<>();
@@ -56,7 +54,6 @@ public class CustomerProfileMenu {
 
     private static String parentMenu;
     public TextField orderIDForShowOrder;
-    public AnchorPane showOrderScroll;
 
     private CustomerProfileManager customerProfileManager;
 
@@ -144,7 +141,7 @@ public class CustomerProfileMenu {
         productSellerCol.setCellValueFactory(new PropertyValueFactory<>("productSeller"));
 
         table.getColumns().addAll(productNameCol, productNumberCol, productSellerCol);
-        table.getItems().add(new Data("a", "a", "a"));
+        //table.getItems().add(new Data("a", "a", "a"));
 
         try{
             String orderID =  orderIDForShowOrder.getText();
@@ -177,7 +174,46 @@ public class CustomerProfileMenu {
     }
 
 
+    public void showAllOrders(MouseEvent mouseEvent) throws Exception{
 
+        TableView table = new TableView<>();
+        TableColumn<String, OrderData> orderIdCol = new TableColumn("Order ID");
+        orderIdCol.setMinWidth(300);
+        orderIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 
+        TableColumn<String, OrderData> orderDateCol = new TableColumn("Date");
+        orderDateCol.setMinWidth(300);
+        orderDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        table.getColumns().addAll(orderIdCol, orderDateCol);
+
+        try{
+            table.getItems().add(new OrderData("Isabella",  "Johnson"));
+            ArrayList<BuyLog> buyLogs = customerProfileManager.customer.getBuyLogs();
+            for (int i = 0; i < buyLogs.size(); i++) {
+                table.getItems().add(new OrderData(buyLogs.get(i).getID(),buyLogs.get(i).getDate().toString()));
+            }
+            final Label label = new Label("Orders ID And DAte");
+            label.setFont(new Font("Arial", 20));
+            Stage stage = new Stage();
+
+            stage.setTitle("Orders");
+            stage.setWidth(600);
+            stage.setHeight(500);
+
+            VBox vbox = new VBox();
+            vbox.setSpacing(5);
+            vbox.setPadding(new Insets(10, 0, 0, 10));
+            vbox.getChildren().addAll(label, table);
+
+            Scene scene1 = new Scene(vbox);
+
+            stage.setScene(scene1);
+            stage.show();
+        } catch (NullPointerException e) {
+            AlertBox.showMessage("null exception", "There is no BuyLog");
+        }
+
+    }
 }
 

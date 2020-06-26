@@ -9,40 +9,23 @@
     <children>
       <TabPane layoutX="335.0" prefHeight="800.0" prefWidth="1012.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Cart">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="767.0" prefWidth="1097.0" />
-            </content>
-          </Tab>
-          <Tab text="Show Orders">
+          <Tab fx:id="showOrdersTab" text="Show Orders">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane layoutY="521.0" prefHeight="246.0" prefWidth="758.0">
-                          <content>
-                            <AnchorPane fx:id="ShowOrdersScroll" minHeight="0.0" minWidth="0.0" prefHeight="456.0" prefWidth="1056.0" />
-                          </content>
-                        </ScrollPane>
-                        <TabPane prefHeight="521.0" prefWidth="1012.0" tabClosingPolicy="UNAVAILABLE">
-                          <tabs>
-                            <Tab text="Show Order">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <Label layoutX="14.0" layoutY="19.0" prefHeight="46.0" prefWidth="106.0" text="Order ID">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="orderIDForShowOrder" layoutX="136.0" layoutY="19.0" prefHeight="46.0" prefWidth="171.0" />
-                                          <Button fx:id="showOrderByIDButton" layoutX="335.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#showOrderByID" text="show" />
-                                          <TableView fx:id="showOrderTable" layoutX="14.0" layoutY="79.0" prefHeight="401.0" prefWidth="494.0" />
-                                       </children>
-                                    </AnchorPane>
-                              </content>
-                            </Tab>
-                          </tabs>
-                        </TabPane>
+                        <TabPane prefHeight="770.0" prefWidth="1012.0" tabClosingPolicy="UNAVAILABLE" />
+                    <AnchorPane layoutY="-2.0" minHeight="0.0" minWidth="0.0" prefHeight="904.0" prefWidth="863.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="19.0" prefHeight="46.0" prefWidth="106.0" text="Order ID">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="orderIDForShowOrder" layoutX="136.0" layoutY="19.0" prefHeight="46.0" prefWidth="171.0" />
+                              <Button fx:id="showOrderByIDButton" layoutX="335.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#showOrderByID" text="show" />
+                              <Button layoutX="135.0" layoutY="94.0" mnemonicParsing="false" onMouseClicked="#showAllOrders" prefHeight="46.0" prefWidth="173.0" text="Show All Orders?" />
+                           </children>
+                        </AnchorPane>
                      </children></AnchorPane>
             </content>
           </Tab>
