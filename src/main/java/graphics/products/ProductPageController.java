@@ -605,4 +605,13 @@ public class ProductPageController {
     public static Stage getCartPopUp() {
         return cartPopUp;
     }
+
+    public void compareButtonPressed(ActionEvent event) {
+        try {
+            ProductsController productsController = (ProductsController) App.setRoot("productsMenu");
+            productsController.prepareForComparison(product, imageStackPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

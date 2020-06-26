@@ -135,5 +135,10 @@
       </ImageView>
       <TextField fx:id="filterBySellerTextField" layoutX="1324.0" layoutY="718.0" prefHeight="29.0" prefWidth="213.0" promptText="filter by seller" />
       <TextField fx:id="filterByCompanyTextField" layoutX="1324.0" layoutY="760.0" prefHeight="25.0" prefWidth="213.0" promptText="filter by company" />
+      <Label fx:id="messageLabel" layoutX="202.0" layoutY="53.0" opacity="0.0" prefHeight="46.0" prefWidth="701.0" text="message" textFill="RED">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
