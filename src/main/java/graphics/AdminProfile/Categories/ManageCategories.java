@@ -46,9 +46,9 @@ public class ManageCategories {
         Category category = (Category) selectedItem;
         categoryNameField.setText(category.getName());
         specialFeaturesField.setEditable(true);
-        for (String specialFeature : category.getSpecialFeatures()) {
-            specialFeaturesList.getItems().add(specialFeature);
-        }
+        specialFeaturesList.getItems().setAll(category.getSpecialFeatures());
+
+        subCategoriesList.getItems().clear();
         for (Category subCategory : category.getSubCategories()) {
             subCategoriesList.getItems().add(subCategory.getName());
         }
@@ -92,9 +92,9 @@ public class ManageCategories {
         if (selectedSubCategory == null) {
             return;
         }
-        Category subCategory = (Category) selectedSubCategory;
-        adminProfileManager.removeSubCategory(selectedCategory, subCategory);
-        subCategoriesList.getItems().remove(subCategory);
+        String subCategoryName = (String) selectedSubCategory;
+        adminProfileManager.removeSubCategory(selectedCategory, subCategoryName);
+        subCategoriesList.getItems().remove(subCategoryName);
     }
 
     public void removeSpecialFeature(MouseEvent mouseEvent) {
