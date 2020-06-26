@@ -4,15 +4,11 @@ import Controller.AdminProfileManager;
 import Model.Account.Account;
 import Model.Account.Admin;
 import Model.Product.Category;
-import Model.Product.Product;
 import graphics.AlertBox;
 import graphics.App;
-import graphics.products.ProductPageController;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -26,10 +22,9 @@ public class AddCategory {
     public TextField subCategoryFeaturesField;
     public ListView<String> subCategoryFeaturesList;
     public Button confirmButton;
-    public ImageView backImage;
-    public ImageView mainMenuImage;
 
-    private Category category;
+    private static Category category;
+    public TextField subCategoriesField;
 
     private ArrayList<String> specialFeatures;
     private ArrayList<Category> subCategories;
@@ -41,12 +36,14 @@ public class AddCategory {
 
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
-        specialFeatures = new ArrayList<>();
-        category = null;
-        subCategories = new ArrayList<>();
-        subCategorySpecialFeatures = new ArrayList<>();
-        App.setBackButton(backImage, "AdminProfileMenu");
-        ProductPageController.setMainMenuButton(mainMenuImage);
+        if (category == null) {
+            specialFeatures = new ArrayList<>();
+            category = null;
+            subCategories = new ArrayList<>();
+            subCategorySpecialFeatures = new ArrayList<>();
+        } else {
+            turnToAddSubCategoryMode();
+        }
     }
 
     public void addFeature(MouseEvent mouseEvent) {
@@ -70,27 +67,35 @@ public class AddCategory {
     }
 
     public void confirm(MouseEvent mouseEvent) {
-        String categoryName = categoryNameField.getText();
-        try {
-            adminProfileManager.addCategory(categoryName, specialFeatures);
-            AlertBox.showMessage("Add Category", categoryName + " Category Added Successfully" + "\n" + "You can now add SubCategories");
-            subCategoryNameField.setEditable(true);
-            subCategoryFeaturesField.setEditable(true);
-            categoryNameField.setEditable(false);
-            specialFeaturesField.setEditable(false);
-            confirmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    AlertBox.showMessage("Add Categories", "Category and its SubCategories Added Successfully");
-                    try {
-                        App.setRoot(parentMenu);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        } catch (Exception e) {
-            AlertBox.showMessage("Failed To Add Category", e.getMessage());
+        if (category == null) {
+            String categoryName = categoryNameField.getText();
+            try {
+                category = adminProfileManager.addAndGetCategory(categoryName, specialFeatures);
+                AlertBox.showMessage("Add Category", categoryName + " Category Added Successfully" + "\n" + "You can now add SubCategories");
+                turnToAddSubCategoryMode();
+            } catch (Exception e) {
+                AlertBox.showMessage("Failed To Add Category", e.getMessage());
+            }
+        } else {
+            AlertBox.showMessage("Add Categories", "Category and its SubCategories Added Successfully");
+            try {
+                App.setRoot(parentMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void turnToAddSubCategoryMode() {
+        subCategoryNameField.setEditable(true);
+        subCategoryFeaturesField.setEditable(true);
+        categoryNameField.setEditable(false);
+        specialFeaturesField.setEditable(false);
+        categoryNameField.setText(category.getName());
+        for (String specialFeature : category.getSpecialFeatures()) {
+            if (!(specialFeaturesList.getItems().contains(specialFeature))) {
+                specialFeaturesList.getItems().add(specialFeature);
+            }
         }
     }
 
@@ -99,9 +104,14 @@ public class AddCategory {
         try {
             Category subCategory = adminProfileManager.addAndGetSubCategory(subCategoryName, category, subCategorySpecialFeatures);
             AlertBox.showMessage("Add SubCategory", subCategoryName + " SubCategory Successfully Added");
+            subCategoriesField.setText(subCategoriesField.getText() + subCategoryName + ", ");
             subCategories.add(subCategory);
         } catch (Exception e) {
             AlertBox.showMessage("Failed To Add SubCategory", e.getMessage());
         }
+    }
+
+    public static void setCategory(Category category) {
+        AddCategory.category = category;
     }
 }

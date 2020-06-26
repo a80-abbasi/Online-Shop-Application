@@ -53,7 +53,7 @@ public class ManageCategoriesMenu extends Menu {
                         }
                         specialFeatures.add(specialFeature);
                     }
-                    /*adminProfileManager.addCategory(categoryName, specialFeatures);*/
+                    //adminProfileManager.addCategory(categoryName, specialFeatures);
                     System.out.println("Category " + categoryName + " successfully created.");
                 }
                 this.execute();
