@@ -179,4 +179,22 @@ public class SellerProfileMenu {
         TableView allCategoriesTable = sellerProfileManager.getAllCategoriesTable();
         showTable(allCategoriesTable, "All Categories");
     }
+
+    public void addCompanyInformation(MouseEvent mouseEvent) {
+            try {
+                App.setRoot("addCompanyInformation");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    }
+
+    public void ShowCompanyInformation(MouseEvent mouseEvent) {
+            try {
+                App.setRoot("ShowCompanyInformation");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    }
 }

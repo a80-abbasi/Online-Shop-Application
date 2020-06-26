@@ -20,7 +20,7 @@
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </Label>
-        <Label layoutX="511.0" layoutY="315.0" text="Company Name">
+        <Label layoutX="511.0" layoutY="315.0" text="graphics.SellerProfile.Company Name">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>

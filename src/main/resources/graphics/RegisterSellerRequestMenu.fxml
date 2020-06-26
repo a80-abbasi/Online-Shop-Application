@@ -94,7 +94,7 @@
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </Label>
-        <Label layoutX="540.0" layoutY="595.0" text="Company">
+        <Label layoutX="540.0" layoutY="595.0" text="graphics.SellerProfile.Company">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>

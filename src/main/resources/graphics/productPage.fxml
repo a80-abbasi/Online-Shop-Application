@@ -93,7 +93,7 @@
                               <Font size="21.0" />
                            </font>
                         </Label>
-                        <Label layoutX="26.0" layoutY="154.0" text="Company :">
+                        <Label layoutX="26.0" layoutY="154.0" text="graphics.SellerProfile.Company :">
                            <font>
                               <Font name="Times New Roman" size="27.0" />
                            </font>

@@ -11,6 +11,9 @@ public class Seller extends Account {
     private ArrayList<SellLog> sellLogs;
     private ArrayList<Product> products;
     private ArrayList<Off> offs;
+    private String phoneNumberOfCompany;
+    private String CompanyAddress;
+    private String CompanyOpenYear;
 
     public Seller(String username, String password, String name, String lastName, String email, String phoneNumber, String nameOfCompany,
                   double balance) {
@@ -73,6 +76,30 @@ public class Seller extends Account {
 
     public void setOffs(ArrayList<Off> offs) {
         this.offs = offs;
+    }
+
+    public String getPhoneNumberOfCompany() {
+        return phoneNumberOfCompany;
+    }
+
+    public void setPhoneNumberOfCompany(String phoneNumberOfCompany) {
+        this.phoneNumberOfCompany = phoneNumberOfCompany;
+    }
+
+    public String getCompanyAddress() {
+        return CompanyAddress;
+    }
+
+    public void setCompanyAddress(String companyAddress) {
+        CompanyAddress = companyAddress;
+    }
+
+    public String getCompanyOpenYear() {
+        return CompanyOpenYear;
+    }
+
+    public void setCompanyOpenYear(String companyOpenYear) {
+        CompanyOpenYear = companyOpenYear;
     }
 
     @Override

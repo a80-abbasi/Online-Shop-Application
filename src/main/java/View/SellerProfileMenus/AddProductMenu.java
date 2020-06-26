@@ -76,10 +76,10 @@ public class AddProductMenu extends Menu {
     }
 
     private Menu getAddCompanyName() {
-        return new Menu("Add Company Name", this) {
+        return new Menu("Add graphics.SellerProfile.Company Name", this) {
             @Override
             public void execute() {
-                System.out.println("Enter Company Name:");
+                System.out.println("Enter graphics.SellerProfile.Company Name:");
                 String companyName = scanner.nextLine();
                 sellerProfileManager.setProductCompanyName(addProductRequest, companyName);
                 if (companyName.equalsIgnoreCase("back")) {
@@ -88,7 +88,7 @@ public class AddProductMenu extends Menu {
                     loginAndRegisterManager.logoutUser();
                 }
                 sellerProfileManager.setProductCompanyName(addProductRequest, companyName);
-                System.out.println("Company Name " + companyName + " successfully added to your request");
+                System.out.println("graphics.SellerProfile.Company Name " + companyName + " successfully added to your request");
                 this.parentMenu.execute();
             }
         };
