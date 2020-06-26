@@ -4,6 +4,7 @@ import Controller.SellerProfileManager;
 import Model.Account.Account;
 import Model.Account.Seller;
 import Model.Product.Product;
+import graphics.AlertBox;
 import graphics.App;
 import graphics.products.ProductPageController;
 import javafx.event.EventHandler;
@@ -32,10 +33,6 @@ public class ManageProducts {
     public ImageView mainMenuImage;
 
     private SellerProfileManager sellerProfileManager;
-
-    {
-        productsTable = new TableView();
-    }
 
     public void initialize() {
         this.sellerProfileManager = new SellerProfileManager((Seller) Account.getLoggedInAccount());
@@ -80,7 +77,14 @@ public class ManageProducts {
     }
 
     public void removeProduct(MouseEvent mouseEvent) {
-
+        Object selectedProduct = productsTable.getSelectionModel().getSelectedItem();
+        if (selectedProduct == null) {
+            return;
+        }
+        Product product = (Product) selectedProduct;
+        sellerProfileManager.removeProduct(product.getProductId());
+        AlertBox.showMessage("Remove Product", "Product With ID <" + product.getProductId() + "> Removed Successfully");
+        productsTable.getItems().remove(product);
     }
 
     public void showProductDetails(MouseEvent mouseEvent) {

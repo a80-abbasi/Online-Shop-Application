@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -429,6 +430,7 @@ public class SellerProfileManager extends ProfileManager {
             sellerSalesHistoryTable.getItems().add(sellLog);
         }
         sellerSalesHistoryTable.setPlaceholder(new Label("No Data To Display"));
+        sellerSalesHistoryTable.setPrefWidth(Region.USE_COMPUTED_SIZE);
         return sellerSalesHistoryTable;
     }
 }

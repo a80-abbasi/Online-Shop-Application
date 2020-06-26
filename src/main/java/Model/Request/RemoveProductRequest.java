@@ -21,6 +21,10 @@ public class RemoveProductRequest extends Request {
         this(null);
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
     public static ArrayList<RemoveProductRequest> getAllRemoveProductRequests() {
         return allRemoveProductRequests;
     }
@@ -46,5 +50,14 @@ public class RemoveProductRequest extends Request {
     @Override
     public void remove() {
         allRemoveProductRequests.remove(this);
+    }
+
+    public static RemoveProductRequest getRequestById(String removeProductRequestID) {
+        for (RemoveProductRequest removeProductRequest : allRemoveProductRequests) {
+            if (removeProductRequest.getRequestId().equals(removeProductRequestID)) {
+                return removeProductRequest;
+            }
+        }
+        return null;
     }
 }

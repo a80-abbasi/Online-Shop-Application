@@ -3,13 +3,11 @@ package graphics.AdminProfile;
 import Controller.AdminProfileManager;
 import Model.Account.Account;
 import Model.Account.Admin;
-import Model.Request.EditAddOffRequest;
-import Model.Request.EditAddProductRequest;
-import Model.Request.RegisterSellerRequest;
-import Model.Request.Request;
+import Model.Request.*;
 import graphics.AdminProfile.RequestDetails.EditAddOffRequestMenu;
 import graphics.AdminProfile.RequestDetails.EditAddProductRequestMenu;
 import graphics.AdminProfile.RequestDetails.RegisterSellerRequestMenu;
+import graphics.AdminProfile.RequestDetails.RemoveProductRequestMenu;
 import graphics.AlertBox;
 import graphics.App;
 import graphics.products.ProductPageController;
@@ -62,19 +60,24 @@ public class ManageRequests {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else if (request instanceof EditAddProductRequest) {
+        } else if (request instanceof EditAddProductRequest) {
             try {
                 EditAddProductRequestMenu.setEditAddProductRequest(EditAddProductRequest.getRequestById(request.getRequestId()));
                 App.setRoot("EditAddProductRequestMenu");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else if (request instanceof RegisterSellerRequest) {
+        } else if (request instanceof RegisterSellerRequest) {
             try {
                 RegisterSellerRequestMenu.setRegisterSellerRequest(RegisterSellerRequest.getRequestById(request.getRequestId()));
                 App.setRoot("RegisterSellerRequestMenu");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (request instanceof RemoveProductRequest) {
+            try {
+                RemoveProductRequestMenu.setRemoveProductRequest(RemoveProductRequest.getRequestById(request.getRequestId()));
+                App.setRoot("RemoveProductRequestMenu");
             } catch (IOException e) {
                 e.printStackTrace();
             }

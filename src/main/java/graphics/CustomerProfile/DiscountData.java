@@ -14,4 +14,24 @@ public class DiscountData {
         this.percent = percent;
         this.maxPossibleUsage = maxPossibleUsage;
     }
+
+    public String getDiscountId() {
+        return discountId;
+    }
+
+    public String getDiscountStartTime() {
+        return discountStartTime;
+    }
+
+    public String getDiscountEndTime() {
+        return discountEndTime;
+    }
+
+    public String getPercent() {
+        return percent;
+    }
+
+    public String getMaxPossibleUsage() {
+        return maxPossibleUsage;
+    }
 }

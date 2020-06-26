@@ -9,4 +9,11 @@ public class OrderData {
         this.date = Date;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getDate() {
+        return date;
+    }
 }
