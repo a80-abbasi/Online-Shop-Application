@@ -101,28 +101,24 @@ public class SellerProfileManager extends ProfileManager {
                                          String productPrice, String productExistingNumber, String productExplanations,
                                          Category productCategory, ArrayList<String> specialFeatureValues,
                                          String productImageAddress) throws Exception{
-        try {
-            ArrayList<String> specialFeatures = productCategory.getSpecialFeatures();
-            ArrayList<Integer> values = getSpecialFeatureValuesInInteger(specialFeatureValues);
-            HashMap<String, Integer> productSpecialFeatures = new HashMap<>();
-            int i = 0;
-            for (String specialFeature : specialFeatures) {
-                productSpecialFeatures.put(specialFeature, values.get(i));
-                i++;
-            }
-            if (checkProductIDValidity(productID) && checkProductNameValidity(productName) &&
-                    checkProductCompanyName(productCompanyName) && checkProductPrice(productPrice) &&
-                    checkProductExistingNumber(productExistingNumber) && checkProductExplanations(productExplanations)) {
-                new AddProductRequest(productID, productName, productCompanyName, Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber),
-                        productExplanations, productImageAddress, productCategory, productSpecialFeatures, this.seller);
-            }
-        } catch (Exception e) {
-            throw e;
+        ArrayList<String> specialFeatures = productCategory.getSpecialFeatures();
+        ArrayList<Integer> values = getSpecialFeatureValuesInInteger(specialFeatureValues);
+        HashMap<String, Integer> productSpecialFeatures = new HashMap<>();
+        int i = 0;
+        for (String specialFeature : specialFeatures) {
+            productSpecialFeatures.put(specialFeature, values.get(i));
+            i++;
+        }
+        if (checkProductIDValidity(productID) && checkProductNameValidity(productName) &&
+                checkProductCompanyName(productCompanyName) && checkProductPrice(productPrice) &&
+                checkProductExistingNumber(productExistingNumber) && checkProductExplanations(productExplanations)) {
+            new AddProductRequest(productID, productName, productCompanyName, Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber),
+                    productExplanations, productImageAddress, productCategory, productSpecialFeatures, this.seller);
         }
     }
 
     private boolean checkProductIDValidity(String productID) throws Exception {
-        if (Product.getProductByID(productID) != null && !(productID.trim().isEmpty())) {
+        if (Product.getProductByID(productID) == null && !(productID.trim().isEmpty())) {
             return true;
         }
         else {

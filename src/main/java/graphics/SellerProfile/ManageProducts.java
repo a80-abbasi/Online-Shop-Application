@@ -8,8 +8,10 @@ import Model.Product.Product;
 import graphics.AlertBox;
 import graphics.App;
 import graphics.products.ProductPageController;
+import graphics.products.SelectProductImage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ManageProducts {
@@ -41,6 +44,7 @@ public class ManageProducts {
     public static String productImageAddress;
 
     private Category category;
+    private Product product;
 
     private SellerProfileManager sellerProfileManager;
 
@@ -141,7 +145,7 @@ public class ManageProducts {
         if (selectedProduct == null) {
             return;
         }
-        Product product = (Product) selectedProduct;
+        product = (Product) selectedProduct;
         productIDField.setText(product.getProductId());
         productNameField.setText(product.getProductName());
         productCompanyNameField.setText(product.getCompanyName());
@@ -152,5 +156,22 @@ public class ManageProducts {
         category = product.getProductCategory();
         productSpecialFeaturesTable.getItems().setAll(category.getSpecialFeatures());
         categoriesMenuButton.setText(product.getProductCategory().getName());
+    }
+
+    public void changeImagePressed(ActionEvent event) {
+        Stage selectImagePopUp = new Stage();
+        Scene scene;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("selectProductImage.fxml"));
+            scene = new Scene(fxmlLoader.load());
+            ((SelectProductImage)fxmlLoader.getController()).prepareForChangingPhoto();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        selectImagePopUp.setScene(scene);
+        selectImagePopUp.setTitle("select product image");
+        selectImagePopUp.setResizable(false);
+        selectImagePopUp.showAndWait();
     }
 }
