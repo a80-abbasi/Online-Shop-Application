@@ -32,7 +32,7 @@ public class MainMenu {
 
     public void goToProductsMenu(ActionEvent event) {
         try {
-            App.setRoot("ProductsMenu");
+            App.setRoot("productsMenu");
         } catch (IOException e) {
             e.printStackTrace();
         }
