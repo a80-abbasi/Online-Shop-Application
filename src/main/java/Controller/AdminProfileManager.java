@@ -445,7 +445,7 @@ public class AdminProfileManager extends ProfileManager {
     }
 
     //todo: checking this
-    public void removeSubCategory(Category parentCategory, Category subCategory) {
-        parentCategory.removeSubCategory(subCategory);
+    public void removeSubCategory(Category parentCategory, String subCategory) {
+        parentCategory.removeSubCategory(Category.getCategoryByName(subCategory));
     }
 }

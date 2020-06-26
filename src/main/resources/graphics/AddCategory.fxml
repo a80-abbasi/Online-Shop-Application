@@ -32,7 +32,7 @@
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </TextField>
-        <TextField editable="false" layoutX="314.0" layoutY="638.0">
+        <TextField fx:id="subCategoriesField" editable="false" layoutX="314.0" layoutY="638.0">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>

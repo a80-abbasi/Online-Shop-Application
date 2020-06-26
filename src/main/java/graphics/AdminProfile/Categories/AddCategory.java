@@ -24,6 +24,7 @@ public class AddCategory {
     public Button confirmButton;
 
     private static Category category;
+    public TextField subCategoriesField;
 
     private ArrayList<String> specialFeatures;
     private ArrayList<Category> subCategories;
@@ -40,8 +41,7 @@ public class AddCategory {
             category = null;
             subCategories = new ArrayList<>();
             subCategorySpecialFeatures = new ArrayList<>();
-        }
-        else {
+        } else {
             turnToAddSubCategoryMode();
         }
     }
@@ -76,8 +76,7 @@ public class AddCategory {
             } catch (Exception e) {
                 AlertBox.showMessage("Failed To Add Category", e.getMessage());
             }
-        }
-        else {
+        } else {
             AlertBox.showMessage("Add Categories", "Category and its SubCategories Added Successfully");
             try {
                 App.setRoot(parentMenu);
@@ -93,7 +92,11 @@ public class AddCategory {
         categoryNameField.setEditable(false);
         specialFeaturesField.setEditable(false);
         categoryNameField.setText(category.getName());
-        specialFeaturesList.getItems().addAll(category.getSpecialFeatures());
+        for (String specialFeature : category.getSpecialFeatures()) {
+            if (!(specialFeaturesList.getItems().contains(specialFeature))) {
+                specialFeaturesList.getItems().add(specialFeature);
+            }
+        }
     }
 
     public void addSubCategory(MouseEvent mouseEvent) {
@@ -101,6 +104,7 @@ public class AddCategory {
         try {
             Category subCategory = adminProfileManager.addAndGetSubCategory(subCategoryName, category, subCategorySpecialFeatures);
             AlertBox.showMessage("Add SubCategory", subCategoryName + " SubCategory Successfully Added");
+            subCategoriesField.setText(subCategoriesField.getText() + subCategoryName + ", ");
             subCategories.add(subCategory);
         } catch (Exception e) {
             AlertBox.showMessage("Failed To Add SubCategory", e.getMessage());
