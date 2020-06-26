@@ -9,6 +9,8 @@ import Model.Account.Seller;
 import Model.Product.Comment;
 import Model.Product.Product;
 import graphics.AlertBox;
+import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,6 +50,9 @@ public class CustomerProfileMenu {
     public TextField usernameField;
     public Label balanceLabel;
     public AnchorPane showDiscountCodesScroll;
+    public ImageView backImage;
+    public ImageView mainMenuImage;
+    public ImageView cartImage;
     private TableView table = new TableView();
 
     private ArrayList<Pane> showingBuyLogs = new ArrayList<>();
@@ -68,6 +73,9 @@ public class CustomerProfileMenu {
         emailField.setText(customerProfileManager.getEmail());
         phoneNumberField.setText(customerProfileManager.getPhoneNumber());
         balanceLabel.setText(customerProfileManager.viewBalance() + "$");
+        App.setBackButton(backImage, "MainMenu");
+        ProductPageController.setMainMenuButton(mainMenuImage);
+        ProductPageController.setCartButton(cartImage);
     }
 
     public void confirm(ActionEvent event) {

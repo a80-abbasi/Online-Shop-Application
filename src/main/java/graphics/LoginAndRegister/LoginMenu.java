@@ -1,28 +1,53 @@
 package graphics.LoginAndRegister;
 
 import Controller.LoginAndRegisterManager;
+import Model.Account.Account;
 import graphics.AlertBox;
 import graphics.App;
 import graphics.products.ProductPageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 public class LoginMenu {
-    private LoginAndRegisterManager loginAndRegisterManager;
+    public AnchorPane pane;
     public Button loginButton;
     public Button signUpButton;
     public TextField usernameField;
     public TextField passwordField;
+    public Button logOutButton;
+    public Label loggedInLabel;
 
+    private LoginAndRegisterManager loginAndRegisterManager;
     private static String parentMenu;
 
     public void initialize() {
         this.loginAndRegisterManager = new LoginAndRegisterManager();
+        Account account = Account.getLoggedInAccount();
+        if (account != null){
+            pane.getChildren().removeAll(pane.getChildren().stream().filter(node ->
+                    !node.equals(loginButton) && !node.equals(loggedInLabel)).collect(Collectors.toList()));
+            logOutButton.setOnAction(e -> {
+                Account.setLoggedInAccount(null);
+                try {
+                    App.setRoot("MainMenu");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
+        }
+        else {
+            logOutButton.setDisable(true);
+            logOutButton.setOpacity(0);
+            loggedInLabel.setOpacity(0);
+        }
     }
 
     public void login() {

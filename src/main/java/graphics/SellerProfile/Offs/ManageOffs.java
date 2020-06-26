@@ -5,7 +5,10 @@ import Model.Account.Account;
 import Model.Account.Off;
 import Model.Account.Seller;
 import Model.Product.Product;
+import com.sun.xml.fastinfoset.algorithm.BASE64EncodingAlgorithm;
 import graphics.AlertBox;
+import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -31,6 +35,8 @@ public class ManageOffs {
 
     public TableView offsTable;
     public TableView notIncludingProducts;
+    public ImageView backImage;
+    public ImageView mainMenuImage;
 
     private ArrayList<String> offProductIDs;
 
@@ -44,6 +50,8 @@ public class ManageOffs {
         notIncludingProducts = new TableView();
         offsTable = sellerProfileManager.getSellerOffsTable(offsTable);
         notIncludingProducts = sellerProfileManager.getSellerProductsTable(notIncludingProducts);
+        App.setBackButton(backImage, "AdminProfileMenu");
+        ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
     public void showOffDetails(MouseEvent mouseEvent) {

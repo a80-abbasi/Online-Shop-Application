@@ -5,6 +5,7 @@ import Model.Account.Account;
 import Model.Account.Seller;
 import graphics.AlertBox;
 import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -12,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -30,6 +32,7 @@ public class SellerProfileMenu {
     public Button confirmButton;
 
     private static String parentMenu;
+    public ImageView mainMenuImage;
 
     private SellerProfileManager sellerProfileManager;
 
@@ -42,6 +45,8 @@ public class SellerProfileMenu {
         emailField.setText(sellerProfileManager.getEmail());
         phoneNumberField.setText(sellerProfileManager.getPhoneNumber());
         companyField.setText(sellerProfileManager.getCompanyName());
+
+        ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
     public void confirm(ActionEvent event) {

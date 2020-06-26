@@ -6,9 +6,11 @@ import Model.Account.Admin;
 import Model.Account.Customer;
 import graphics.AlertBox;
 import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -17,6 +19,8 @@ import java.util.Date;
 
 public class CreateDiscountCode {
     private static String parentMenu = "AdminProfileMenu";
+    public ImageView backImage;
+    public ImageView mainMenuImage;
     private AdminProfileManager adminProfileManager;
 
     public TableView customerTable;
@@ -35,6 +39,8 @@ public class CreateDiscountCode {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
         customerTable = adminProfileManager.getAllCustomersTable(customerTable);
         includingCustomers = new ArrayList<>();
+        App.setBackButton(backImage, "AdminProfileMenu");
+        ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
     public void confirm() {
