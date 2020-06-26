@@ -47,6 +47,7 @@ public class CustomerProfileMenu {
     public TextField passwordField;
     public TextField usernameField;
     public Label balanceLabel;
+    public AnchorPane showDiscountCodesScroll;
     private TableView table = new TableView();
 
     private ArrayList<Pane> showingBuyLogs = new ArrayList<>();
@@ -127,57 +128,53 @@ public class CustomerProfileMenu {
     }
 
 
-    public void showOrderByID(MouseEvent mouseEvent) {
+    public void showOrderByID(MouseEvent mouseEvent) throws Exception{
         String orderID =  orderIDForShowOrder.getText();
-        BuyLog buylog = customerProfileManager.customer.getBuyLogByID(orderID);
-        TableView<Data> table = new TableView<Data>();
-        final ObservableList<Data> data = FXCollections.observableArrayList();
-        for (int i = 0; i < buylog.getBoughtProducts().keySet().size(); i++) {
-            ArrayList<Product> products = new ArrayList<>();
-            products.addAll(buylog.getBoughtProducts().keySet());
-            FXCollections.observableArrayList().add(new Data(products.get(i).getProductName(), buylog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getProductSeller().getName()));
-        }
+        //BuyLog buyLog = customerProfileManager.customer.getBuyLogByID(orderID);
+        TableView table = new TableView<>();
+        TableColumn<String, Data> productNameCol = new TableColumn("Product Name");
+        productNameCol.setMinWidth(200);
+        productNameCol.setCellValueFactory(
+                new PropertyValueFactory<>("productName"));
+
+        TableColumn<String, Data> productNumberCol = new TableColumn("Product Number");
+        productNumberCol.setMinWidth(100);
+        productNumberCol.setCellValueFactory(
+                new PropertyValueFactory<>("productNumber"));
+
+        TableColumn<String, Data> productSellerCol = new TableColumn("Product Seller");
+        productSellerCol.setMinWidth(200);
+        productSellerCol.setCellValueFactory(
+                new PropertyValueFactory<>("productSeller"));
+
+        table.getColumns().addAll(productNameCol, productNumberCol, productSellerCol);
+        table.getItems().add(new Data("a", "a", "a"));
+
+        //table.setEditable(true);
+
+        //        for (int i = 0; i < buyLog.getBoughtProducts().keySet().size(); i++) {
+    //            ArrayList<Product> products = new ArrayList<>(buyLog.getBoughtProducts().keySet());
+    //            FXCollections.observableArrayList().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getProductSeller().getName()));
+    //        }
+
         Stage stage = new Stage();
         //public void start(Stage stage) {
-        Scene scene = new Scene(new Group());
         stage.setTitle("Order");
         stage.setWidth(550);
         stage.setHeight(500);
 
-        final Label label = new Label("Order");
+        final Label label = new Label("Date" + "1.2.3" + "Price:" + "10$");
         label.setFont(new Font("Arial", 20));
-        
-        //table.setEditable(true);
 
-        TableColumn productNameCol = new TableColumn("Product Name");
-        productNameCol.setMinWidth(200);
-        productNameCol.setCellValueFactory(
-                new PropertyValueFactory<Data, String>("productName"));
-
-        TableColumn productNumberCol = new TableColumn("Product Number");
-        productNumberCol.setMinWidth(100);
-        productNumberCol.setCellValueFactory(
-                new PropertyValueFactory<Data, String>("productNumber"));
-
-        TableColumn productSellerCol = new TableColumn("Product Seller");
-        productSellerCol.setMinWidth(200);
-        productSellerCol.setCellValueFactory(
-                new PropertyValueFactory<Data, String>("productSeller"));
-
-        table.setItems(data);
-        table.getColumns().addAll(productNameCol, productNumberCol, productSellerCol);
-
-        final VBox vbox = new VBox();
+        VBox vbox = new VBox();
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 0, 0, 10));
         vbox.getChildren().addAll(label, table);
 
-        ((Group) scene.getRoot()).getChildren().addAll(vbox);
+        Scene scene1 = new Scene(vbox);
 
-        stage.setScene(scene);
+        stage.setScene(scene1);
         stage.show();
-
-
     }
 
 
@@ -185,50 +182,3 @@ public class CustomerProfileMenu {
 
 }
 
-class Data {
-    private final SimpleStringProperty productName;
-    private final SimpleStringProperty productNumber;
-    private final SimpleStringProperty productSeller;
-
-    Data(String pName, String pNumber, String pSeller) {
-        this.productName = new SimpleStringProperty(pName);
-        this.productNumber = new SimpleStringProperty(pNumber);
-        this.productSeller = new SimpleStringProperty(pSeller);
-    }
-
-    public String getProductName() {
-        return productName.get();
-    }
-
-    public SimpleStringProperty productNameProperty() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName.set(productName);
-    }
-
-    public String getProductNumber() {
-        return productNumber.get();
-    }
-
-    public SimpleStringProperty productNumberProperty() {
-        return productNumber;
-    }
-
-    public void setProductNumber(String productNumber) {
-        this.productNumber.set(productNumber);
-    }
-
-    public String getProductSeller() {
-        return productSeller.get();
-    }
-
-    public SimpleStringProperty productSellerProperty() {
-        return productSeller;
-    }
-
-    public void setProductSeller(String productSeller) {
-        this.productSeller.set(productSeller);
-    }
-}
