@@ -53,13 +53,15 @@ public class ProductsController {
     public ImageView cartImage;
     public MenuButton categories;
     public Pane mainPane;
-    public ImageView profileImage;
+    public ImageView loginImage;
     public MenuButton sortByFeatureMenuButton;
     public ImageView magnifier2;
     public ImageView magnifier3;
     public TextField filterBySellerTextField;
     public TextField filterByCompanyTextField;
     public Label messageLabel;
+    public ImageView mainMenuButton;
+    public ImageView profileImage1;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
@@ -100,7 +102,9 @@ public class ProductsController {
 
         ProductPageController.setCartButton(cartImage);
         App.setBackButton(backImage, parentAddress);
-        ProductPageController.setProfileButton(profileImage, "productsMenu");
+        ProductPageController.setLoginButton(loginImage, "productsMenu");
+        ProductPageController.setMainMenuButton(mainMenuButton);
+        ProductPageController.setProfileButton(profileImage1);
     }
 
     public void prepareForComparison(Product firstProductForComparison, StackPane firstProductStackPane){

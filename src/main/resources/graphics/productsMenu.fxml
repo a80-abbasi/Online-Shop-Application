@@ -60,9 +60,19 @@
                   <Image url="@../Images/cart.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="profileImage" fitHeight="35.0" fitWidth="35.0" layoutX="100.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="loginImage" fitHeight="35.0" fitWidth="35.0" layoutX="100.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/account.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="mainMenuButton" fitHeight="38.0" fitWidth="36.0" layoutX="153.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/mainMenu.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="profileImage1" fitHeight="32.0" fitWidth="37.0" layoutX="212.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/profileMenu.png" />
                </image>
             </ImageView>
          </children>
@@ -135,9 +145,9 @@
       </ImageView>
       <TextField fx:id="filterBySellerTextField" layoutX="1324.0" layoutY="718.0" prefHeight="29.0" prefWidth="213.0" promptText="filter by seller" />
       <TextField fx:id="filterByCompanyTextField" layoutX="1324.0" layoutY="760.0" prefHeight="25.0" prefWidth="213.0" promptText="filter by company" />
-      <Label fx:id="messageLabel" layoutX="202.0" layoutY="53.0" opacity="0.0" prefHeight="46.0" prefWidth="701.0" text="message" textFill="RED">
+      <Label fx:id="messageLabel" layoutX="352.0" layoutY="61.0" opacity="0.0" prefHeight="38.0" prefWidth="432.0" text="Label" textFill="RED" wrapText="true">
          <font>
-            <Font name="System Bold" size="31.0" />
+            <Font name="System Bold" size="19.0" />
          </font>
       </Label>
    </children>
