@@ -32,4 +32,28 @@
         <specialFeatures>heady</specialFeatures>
         <specialFeatures>shooty</specialFeatures>
     </category>
+    <category>
+        <name>Haji</name>
+        <specialFeatures>hajAmir</specialFeatures>
+        <specialFeatures>hajAli</specialFeatures>
+        <specialFeatures>hajMohammadReza</specialFeatures>
+        <subCategories>
+            <name>karbalayyiiiiii</name>
+            <specialFeatures>sisi</specialFeatures>
+            <specialFeatures>bibi</specialFeatures>
+            <specialFeatures>mimi</specialFeatures>
+        </subCategories>
+        <subCategories>
+            <name>karbalayyiiiiii</name>
+            <specialFeatures>sisi</specialFeatures>
+            <specialFeatures>bibi</specialFeatures>
+            <specialFeatures>mimi</specialFeatures>
+        </subCategories>
+    </category>
+    <category>
+        <name>karbalayyiiiiii</name>
+        <specialFeatures>sisi</specialFeatures>
+        <specialFeatures>bibi</specialFeatures>
+        <specialFeatures>mimi</specialFeatures>
+    </category>
 </categories>
