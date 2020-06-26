@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.CustomerProfile.CustomerProfileMenu">
@@ -51,7 +52,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="141.0" fitWidth="183.0" layoutX="76.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="141.0" fitWidth="183.0" layoutX="77.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
               <Label layoutX="20.0" layoutY="329.0" prefHeight="46.0" prefWidth="106.0" text="Username">
                   <font>
                       <Font size="18.0" />
@@ -122,6 +123,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <Ellipse fill="#bcbcbc" layoutX="168.0" layoutY="110.0" radiusX="43.0" radiusY="59.0" stroke="BLACK" strokeType="INSIDE" />
+            <Line endX="135.0" endY="141.2928924560547" startX="87.5" startY="181.5" />
          </children>
       </Pane>
       <ImageView fx:id="backImage" fitHeight="40.0" fitWidth="34.0" layoutX="1404.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
@@ -139,5 +142,6 @@
             <Image url="@../Images/cart.png" />
          </image>
       </ImageView>
+      <Line endX="203.5" endY="146.5" startX="231.2928924560547" startY="183.2928924560547" />
     </children>
 </AnchorPane>
