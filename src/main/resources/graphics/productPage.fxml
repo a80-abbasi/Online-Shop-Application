@@ -93,6 +93,8 @@
                               <Font name="Times New Roman" size="27.0" />
                            </font>
                         </Label>
+                        <Label layoutX="47.0" layoutY="438.0" text="remaining:" />
+                        <Label fx:id="remainingLabel" layoutX="119.0" layoutY="438.0" text="remainingLabel" />
                      </children>
                   </Pane>
                   <Pane layoutX="1181.0" layoutY="110.0" prefHeight="304.0" prefWidth="262.0" style="-fx-background-color: #d5d5d5; -fx-background-radius: 30 0 30 0;">
