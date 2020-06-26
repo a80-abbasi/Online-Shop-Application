@@ -4,12 +4,15 @@ import Controller.AdminProfileManager;
 import Model.Account.Account;
 import Model.Account.Admin;
 import Model.Product.Category;
+import Model.Product.Product;
 import graphics.AlertBox;
 import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -23,6 +26,8 @@ public class AddCategory {
     public TextField subCategoryFeaturesField;
     public ListView<String> subCategoryFeaturesList;
     public Button confirmButton;
+    public ImageView backImage;
+    public ImageView mainMenuImage;
 
     private Category category;
 
@@ -40,6 +45,8 @@ public class AddCategory {
         category = null;
         subCategories = new ArrayList<>();
         subCategorySpecialFeatures = new ArrayList<>();
+        App.setBackButton(backImage, "AdminProfileMenu");
+        ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
     public void addFeature(MouseEvent mouseEvent) {

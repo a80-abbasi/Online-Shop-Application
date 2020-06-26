@@ -6,8 +6,10 @@ import Model.Account.Admin;
 import Model.Request.EditAddProductRequest;
 import graphics.AlertBox;
 import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -25,6 +27,8 @@ public class EditAddProductRequestMenu {
     public TextField requestIDField;
 
     private static String parentMenu = "ManageRequests";
+    public ImageView backImage;
+    public ImageView mainMenuImage;
 
     private AdminProfileManager adminProfileManager;
 
@@ -44,6 +48,9 @@ public class EditAddProductRequestMenu {
             productSpecialFeaturesField.setText(productSpecialFeaturesField.getText() + s + ": " + editAddProductRequest.getProductSpecialFeatures().get(s) + ", ");
         }
         requestTitle.setText(editAddProductRequest.getRequestType());
+
+        App.setBackButton(backImage, parentMenu);
+        ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
     public void declineRequest(MouseEvent mouseEvent) {

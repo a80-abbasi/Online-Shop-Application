@@ -6,9 +6,11 @@ import Model.Account.Admin;
 import Model.Request.EditAddOffRequest;
 import graphics.AlertBox;
 import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -26,6 +28,8 @@ public class EditAddOffRequestMenu {
 
     private static EditAddOffRequest editAddOffRequest;
     private static String parentMenu = "ManageRequests";
+    public ImageView backImage;
+    public ImageView mainMenuImage;
 
     private AdminProfileManager adminProfileManager;
 
@@ -42,6 +46,8 @@ public class EditAddOffRequestMenu {
             offProductsField.setText(offProductsField.getText() + offProductID + ", ");
         }
         requestTitle.setText(editAddOffRequest.getRequestType());
+        ProductPageController.setMainMenuButton(mainMenuImage);
+        App.setBackButton(backImage, "ManageRequests");
     }
 
     public void declineRequest(MouseEvent mouseEvent) {

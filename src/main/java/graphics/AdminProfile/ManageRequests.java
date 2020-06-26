@@ -12,7 +12,9 @@ import graphics.AdminProfile.RequestDetails.EditAddProductRequestMenu;
 import graphics.AdminProfile.RequestDetails.RegisterSellerRequestMenu;
 import graphics.AlertBox;
 import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -20,6 +22,8 @@ import java.io.IOException;
 public class ManageRequests {
 
     public TableView allRequestsTable;
+    public ImageView backImage;
+    public ImageView mainMenuImage;
 
     private AdminProfileManager adminProfileManager;
 
@@ -28,6 +32,9 @@ public class ManageRequests {
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
         allRequestsTable = adminProfileManager.getAllRequestsTable(allRequestsTable);
+
+        App.setBackButton(backImage, parentMenu);
+        ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
     public void acceptRequest(MouseEvent mouseEvent) {
