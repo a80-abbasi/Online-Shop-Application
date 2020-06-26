@@ -181,7 +181,11 @@ public class AdminProfileMenu {
     }
 
     public void addCategory(MouseEvent mouseEvent) {
-        //todo
+        try {
+            App.setRoot("AddCategory");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void setParentMenu(String parentMenu) {
