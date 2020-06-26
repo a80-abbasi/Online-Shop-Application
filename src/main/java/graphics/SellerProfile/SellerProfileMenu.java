@@ -125,11 +125,19 @@ public class SellerProfileMenu {
     }
 
     public void manageProducts(MouseEvent mouseEvent) {
-
+        try {
+            App.setRoot("ManageProducts");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addProduct(MouseEvent mouseEvent) {
-
+        try {
+            App.setRoot("AddProduct");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void setParentMenu(String parentMenu) {
