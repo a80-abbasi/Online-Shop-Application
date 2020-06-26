@@ -51,6 +51,11 @@ public class ProductsController {
     public MenuButton categories;
     public Pane mainPane;
     public ImageView profileImage;
+    public MenuButton sortByFeatureMenuButton;
+    public ImageView magnifier2;
+    public ImageView magnifier3;
+    public TextField filterBySellerTextField;
+    public TextField filterByCompanyTextField;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
@@ -71,12 +76,16 @@ public class ProductsController {
 
         showProducts();
         setSliders();
+        setFilterBySellerAndCompany();
         MenuItem allCategoriesItem = new MenuItem("All Categories");
         allCategoriesItem.setOnAction(e -> {
             productsManager.disableCategoryFilter();
             categories.setText("All Categories");
             mainPane.getChildren().removeAll(mainPane.getChildren().stream().filter(node -> node instanceof MenuButton).
                     filter(menuButton -> menuButton != categories).collect(Collectors.toList()));
+            sortByFeatureMenuButton.setDisable(true);
+            sortByFeatureMenuButton.setOpacity(0);
+            productsManager.disableSpecialFeatureSort();
             showProducts();
         });
         categories.getItems().add(allCategoriesItem);
@@ -87,12 +96,58 @@ public class ProductsController {
         ProductPageController.setProfileButton(profileImage, "productsMenu");
     }
 
+    private void setFilterBySellerAndCompany() {
+        shadowOnMouseHover(magnifier2);
+        shadowOnMouseHover(magnifier3);
+        magnifier2.setOnMouseClicked(e -> {
+            if (filterBySellerTextField.getText().isBlank()){
+                productsManager.disableFilterBySeller();
+            }
+            else {
+                productsManager.addFilterBySeller(filterBySellerTextField.getText());
+            }
+            showProducts();
+        });
+        magnifier3.setOnMouseClicked(e -> {
+            if (filterByCompanyTextField.getText().isBlank()){
+                productsManager.disableFilterByCompany();
+            }
+            else {
+                productsManager.addFilterByCompany(filterByCompanyTextField.getText());
+            }
+            showProducts();
+        });
+    }
+
+    private void setSortBySpecialFeatureMenuButton(Category category){
+        sortByFeatureMenuButton.setOpacity(1);
+        sortByFeatureMenuButton.setDisable(false);
+        sortByFeatureMenuButton.getItems().clear();
+        MenuItem doNot = new MenuItem("don't sort by special feature");
+        sortByFeatureMenuButton.getItems().add(doNot);
+        doNot.setOnAction(e -> {
+            productsManager.disableSpecialFeatureSort();
+            sortByFeatureMenuButton.setText("don't sort by special feature");
+            showProducts();
+        });
+        for (String feature : category.getSpecialFeatures()) {
+            MenuItem featureItem = new MenuItem(feature);
+            sortByFeatureMenuButton.getItems().add(featureItem);
+            featureItem.setOnAction(e -> {
+                sortByFeatureMenuButton.setText("sort by: " + feature);
+                productsManager.useSpecialFeatureSort(feature);
+                showProducts();
+            });
+        }
+    }
+
     private void setCategories(ArrayList<Category> allCategories, MenuButton menuButton) {
         for (Category category : allCategories) {
             MenuItem categoriesItem = new MenuItem(category.getName());
             categoriesItem.setOnAction(e -> {
                 menuButton.setText(category.getName());
                 productsManager.addCategoryFilter(category);
+                setSortBySpecialFeatureMenuButton(category);
                 if (!category.getSubCategories().isEmpty()){
                     MenuButton subMenuButton = new MenuButton();
                     subMenuButton.setText("Select sub category");

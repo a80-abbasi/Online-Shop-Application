@@ -88,6 +88,7 @@ public class ProductPageController {
     public Label commentNoteLabel;
     public ImageView profileImage;
     public Button deleteProductButton;
+    public Label remainingLabel;
 
     private Product product;
     private ArrayList<Pane> showingComments = new ArrayList<>();
@@ -281,6 +282,7 @@ public class ProductPageController {
         companyNameLabel.setText(product.getCompanyName());
         sellerNameLabel.setText(product.getProductSeller().getName());
         visitNumberLabel.setText(String.valueOf(product.getVisitNumber()));
+        remainingLabel.setText(String.valueOf(product.getExistingNumber()));
         setPropertiesLabel();
     }
 
