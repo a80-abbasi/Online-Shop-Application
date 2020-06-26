@@ -6,6 +6,8 @@ import Model.Account.Admin;
 import Model.Account.Customer;
 import Model.Account.Discount;
 import graphics.AlertBox;
+import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -33,6 +36,8 @@ public class ManageDiscountsMenu {
 
     public TableView allDiscountsTable;
     public TableView notIncludingCustomers;
+    public ImageView backImage;
+    public ImageView mainMenuImage;
 
     private ArrayList<String> includingCustomers;
 
@@ -50,6 +55,8 @@ public class ManageDiscountsMenu {
         notIncludingCustomers = adminProfileManager.getAllCustomersTable(notIncludingCustomers);
 
         includingCustomers = new ArrayList<>();
+        App.setBackButton(backImage, "AdminProfileMenu");
+        ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
     public void showDetails() {

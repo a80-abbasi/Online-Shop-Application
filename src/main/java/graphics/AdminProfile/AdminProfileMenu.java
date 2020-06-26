@@ -8,12 +8,14 @@ import graphics.AlertBox;
 
 import graphics.App;
 import graphics.LoginAndRegister.CreateAdminAccount;
+import graphics.products.ProductPageController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class AdminProfileMenu {
+    public ImageView mainMenuImage;
     private AdminProfileManager adminProfileManager;
     public TextField usernameField;
     public TextField passwordField;
@@ -41,6 +44,7 @@ public class AdminProfileMenu {
         lastNameField.setText(adminProfileManager.getLastName());
         emailField.setText(adminProfileManager.getEmail());
         phoneNumberField.setText(adminProfileManager.getPhoneNumber());
+        ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
     public void confirm() {
@@ -177,7 +181,11 @@ public class AdminProfileMenu {
     }
 
     public void manageCategories(MouseEvent mouseEvent) {
-        //todo
+        try {
+            App.setRoot("ManageCategories");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addCategory(MouseEvent mouseEvent) {

@@ -4,12 +4,15 @@ import Controller.SellerProfileManager;
 import Model.Account.Account;
 import Model.Account.Seller;
 import Model.Product.Product;
+import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -25,6 +28,8 @@ public class ManageProducts {
     public TextField productSpecialFeaturesField;
 
     public TableView productsTable;
+    public ImageView backImage;
+    public ImageView mainMenuImage;
 
     private SellerProfileManager sellerProfileManager;
 
@@ -35,6 +40,9 @@ public class ManageProducts {
     public void initialize() {
         this.sellerProfileManager = new SellerProfileManager((Seller) Account.getLoggedInAccount());
         productsTable = sellerProfileManager.getSellerProductsTable(productsTable);
+
+        ProductPageController.setMainMenuButton(mainMenuImage);
+        App.setBackButton(backImage, "SellerProfileMenu");
     }
 
     public void confirm(MouseEvent mouseEvent) {

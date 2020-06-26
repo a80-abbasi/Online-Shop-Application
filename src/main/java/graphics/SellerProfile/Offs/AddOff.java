@@ -5,9 +5,12 @@ import Model.Account.Account;
 import Model.Account.Seller;
 import Model.Product.Product;
 import graphics.AlertBox;
+import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
@@ -22,6 +25,8 @@ public class AddOff {
     public TableView productsTable;
 
     private static String parentMenu = "SellerProfileMenu";
+    public ImageView backImage;
+    public ImageView mainMenuImage;
 
     private ArrayList<String> offProductIDs;
 
@@ -32,6 +37,8 @@ public class AddOff {
         offProductIDs = new ArrayList<>();
         productsTable = new TableView();
         productsTable = sellerProfileManager.getSellerProductsTable(productsTable);
+        App.setBackButton(backImage, "AdminProfileMenu");
+        ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
     public void confirm(MouseEvent mouseEvent) {

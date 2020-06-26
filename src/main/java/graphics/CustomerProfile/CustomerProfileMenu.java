@@ -10,6 +10,8 @@ import Model.Product.Comment;
 import Model.Product.Product;
 import graphics.AlertBox;
 import javafx.beans.Observable;
+import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +29,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -44,6 +48,9 @@ public class CustomerProfileMenu {
     public TextField usernameField;
     public Label balanceLabel;
     public AnchorPane showDiscountCodesScroll;
+    public ImageView backImage;
+    public ImageView mainMenuImage;
+    public ImageView cartImage;
     public Tab showOrdersTab;
     public ScrollPane showOrdersScrollPane;
     public TableView ordersTable;
@@ -54,6 +61,7 @@ public class CustomerProfileMenu {
 
     private static String parentMenu;
     public TextField orderIDForShowOrder;
+    public AnchorPane showOrderScroll;
 
     private CustomerProfileManager customerProfileManager;
 
@@ -66,6 +74,9 @@ public class CustomerProfileMenu {
         emailField.setText(customerProfileManager.getEmail());
         phoneNumberField.setText(customerProfileManager.getPhoneNumber());
         balanceLabel.setText(customerProfileManager.viewBalance() + "$");
+        App.setBackButton(backImage, "MainMenu");
+        ProductPageController.setMainMenuButton(mainMenuImage);
+        ProductPageController.setCartButton(cartImage);
     }
 
     public void confirm(ActionEvent event) {
@@ -216,4 +227,3 @@ public class CustomerProfileMenu {
 
     }
 }
-

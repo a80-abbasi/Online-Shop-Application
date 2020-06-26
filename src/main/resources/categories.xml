@@ -12,4 +12,24 @@
     <category>
         <name>asus</name>
     </category>
+    <category>
+        <name>amir</name>
+        <specialFeatures>shoot</specialFeatures>
+        <specialFeatures>head</specialFeatures>
+        <subCategories>
+            <name>am</name>
+            <specialFeatures>heady</specialFeatures>
+            <specialFeatures>shooty</specialFeatures>
+        </subCategories>
+        <subCategories>
+            <name>am</name>
+            <specialFeatures>heady</specialFeatures>
+            <specialFeatures>shooty</specialFeatures>
+        </subCategories>
+    </category>
+    <category>
+        <name>am</name>
+        <specialFeatures>heady</specialFeatures>
+        <specialFeatures>shooty</specialFeatures>
+    </category>
 </categories>

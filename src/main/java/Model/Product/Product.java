@@ -117,7 +117,9 @@ public class Product {
     }
 
     public void removeSpecialFeature(String specialFeature) {
-        specialFeatures.remove(specialFeature);
+        if (specialFeatures.keySet().contains(specialFeature)) {
+            specialFeatures.remove(specialFeature);
+        }
     }
 
     public Off getOff() {
@@ -276,6 +278,12 @@ public class Product {
 
     public void setProductBuyers(ArrayList<Customer> productBuyers) {
         this.productBuyers = productBuyers;
+    }
+
+    //todo: checking this
+    public void removeCategory(Category category) {
+        productCategory = null;
+        specialFeatures.clear();
     }
 
     public static void setProductFields(ArrayList<String> productFields) {
