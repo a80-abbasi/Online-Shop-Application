@@ -7,6 +7,7 @@ import Model.Account.Customer;
 import Model.Product.Comment;
 import Model.Product.Product;
 import Model.Product.Score;
+import com.sun.javafx.scene.control.inputmap.InputMap;
 import graphics.App;
 import graphics.LoginAndRegister.LoginMenu;
 import graphics.MainMenu;
@@ -372,13 +373,25 @@ public class ProductPageController {
             addToCartButton.setOnMouseClicked(e -> {
                 Account account = Account.getLoggedInAccount();
                 if (account == null || account instanceof Customer){
-                    productAddedLabel.setText("Product Added to Your Cart.");
+                    HashMap<Product, Integer> cart;
+                    if (account == null){
+                        cart = Customer.getTmpCart();
+                    }
+                    else {
+                        cart = ((Customer)account).getCart();
+                    }
+                    if (cart.containsKey(product) && cart.get(product) == product.getExistingNumber()){
+                        productAddedLabel.setText("There is no more of this product");
+                    }
+                    else {
+                        productAddedLabel.setText("Product Added to Your Cart.");
+                        cart.put(product, cart.getOrDefault(product, 0) + 1);
+                    }
                 }
                 else {
                     productAddedLabel.setText("Admins And Sellers Cant buy Products!");
                 }
                 productAddedLabel.setOpacity(1);
-                Customer.addProductToTmpCart(product);
                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), actionEvent -> productAddedLabel.setOpacity(0)));
                 timeline.setCycleCount(1);
                 timeline.play();

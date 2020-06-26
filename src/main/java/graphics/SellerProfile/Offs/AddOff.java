@@ -37,7 +37,7 @@ public class AddOff {
         offProductIDs = new ArrayList<>();
         productsTable = new TableView();
         productsTable = sellerProfileManager.getSellerProductsTable(productsTable);
-        App.setBackButton(backImage, "AdminProfileMenu");
+        App.setBackButton(backImage, "SellerProfileMenu");
         ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
