@@ -23,6 +23,8 @@ public class ProductsManager {
     private int maximumPriceFilter;
     private int minimumPriceFilter;
     private String specialFeatureSort = null;
+    private String filterBySeller = null;
+    private String filterByCompany = null;
 
     public void showAllCategories () {
         Category.showAllCategories();
@@ -63,6 +65,22 @@ public class ProductsManager {
         specialFeatureSort = null;
     }
 
+    public void addFilterBySeller(String name){
+        filterBySeller = name;
+    }
+
+    public void disableFilterBySeller(){
+        filterBySeller = null;
+    }
+
+    public void addFilterByCompany(String name){
+        filterByCompany = name;
+    }
+
+    public void disableFilterByCompany(){
+        filterByCompany = null;
+    }
+
     public ArrayList<Product> showProducts () {
         ArrayList<Product> sortedFilteredProducts = new ArrayList<>();
         ArrayList<Product> products;
@@ -94,6 +112,16 @@ public class ProductsManager {
             }
             if (minimumPriceFilter > 0){
                 if (product.getPriceWithOff() < minimumPriceFilter){
+                    continue;
+                }
+            }
+            if (filterBySeller != null){
+                if (!product.getProductSeller().getName().contains(filterBySeller)){
+                    continue;
+                }
+            }
+            if (filterByCompany != null){
+                if (!product.getCompanyName().contains(filterByCompany)){
                     continue;
                 }
             }

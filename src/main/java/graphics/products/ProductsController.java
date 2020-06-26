@@ -52,6 +52,10 @@ public class ProductsController {
     public Pane mainPane;
     public ImageView profileImage;
     public MenuButton sortByFeatureMenuButton;
+    public ImageView magnifier2;
+    public ImageView magnifier3;
+    public TextField filterBySellerTextField;
+    public TextField filterByCompanyTextField;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
@@ -72,6 +76,7 @@ public class ProductsController {
 
         showProducts();
         setSliders();
+        setFilterBySellerAndCompany();
         MenuItem allCategoriesItem = new MenuItem("All Categories");
         allCategoriesItem.setOnAction(e -> {
             productsManager.disableCategoryFilter();
@@ -89,6 +94,29 @@ public class ProductsController {
         ProductPageController.setCartButton(cartImage);
         App.setBackButton(backImage, parentAddress);
         ProductPageController.setProfileButton(profileImage, "productsMenu");
+    }
+
+    private void setFilterBySellerAndCompany() {
+        shadowOnMouseHover(magnifier2);
+        shadowOnMouseHover(magnifier3);
+        magnifier2.setOnMouseClicked(e -> {
+            if (filterBySellerTextField.getText().isBlank()){
+                productsManager.disableFilterBySeller();
+            }
+            else {
+                productsManager.addFilterBySeller(filterBySellerTextField.getText());
+            }
+            showProducts();
+        });
+        magnifier3.setOnMouseClicked(e -> {
+            if (filterByCompanyTextField.getText().isBlank()){
+                productsManager.disableFilterByCompany();
+            }
+            else {
+                productsManager.addFilterByCompany(filterByCompanyTextField.getText());
+            }
+            showProducts();
+        });
     }
 
     private void setSortBySpecialFeatureMenuButton(Category category){
