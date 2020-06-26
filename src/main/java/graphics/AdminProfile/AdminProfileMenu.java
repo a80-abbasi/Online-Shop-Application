@@ -177,7 +177,11 @@ public class AdminProfileMenu {
     }
 
     public void manageCategories(MouseEvent mouseEvent) {
-        //todo
+        try {
+            App.setRoot("ManageCategories");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addCategory(MouseEvent mouseEvent) {

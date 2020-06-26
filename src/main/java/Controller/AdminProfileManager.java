@@ -328,13 +328,14 @@ public class AdminProfileManager extends ProfileManager {
         return Category.getAllCategories();
     }
 
-    public void addCategory(String categoryName, ArrayList<String> specialFeatures) throws Exception {
+    public Category addAndGetCategory(String categoryName, ArrayList<String> specialFeatures) throws Exception {
         if (Category.getCategoryByName(categoryName) == null) {
             if (specialFeatures.isEmpty()) {
                 throw new Exception("Special Features Field is Empty");
             } else {
                 Category category = new Category(categoryName);
                 category.setSpecialFeatures(specialFeatures);
+                return category;
             }
         } else {
             throw new Exception("There is another Category with this name");
@@ -363,6 +364,7 @@ public class AdminProfileManager extends ProfileManager {
         category.setName(newCategoryName);
     }
 
+    //todo: checking this
     public void removeCategorySpecialFeature(Category category, String specialFeature) throws NullPointerException {
         if (category.getSpecialFeatures().contains(specialFeature)) {
             category.removeSpecialFeature(specialFeature);
@@ -371,6 +373,7 @@ public class AdminProfileManager extends ProfileManager {
         }
     }
 
+    //todo: checking this
     public void addSpecialFeature(Category category, String specialFeature) throws IllegalArgumentException {
         if (category.getSpecialFeatures().contains(specialFeature)) {
             throw new IllegalArgumentException();
@@ -379,6 +382,7 @@ public class AdminProfileManager extends ProfileManager {
         }
     }
 
+    //todo: checking this
     public void removeCategory(String categoryName) throws NullPointerException {
         Category category = Category.getCategoryByName(categoryName);
         if (category == null) {
@@ -428,4 +432,20 @@ public class AdminProfileManager extends ProfileManager {
         return false;
     }
 
+    public TableView getAllCategoriesTable(TableView allCategoriesTable) {
+        TableColumn<String, Category> column = new TableColumn<>("Category Name");
+        column.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        allCategoriesTable.getColumns().add(column);
+        for (Category category : Category.getAllCategories()) {
+            allCategoriesTable.getItems().add(category);
+        }
+        allCategoriesTable.setPlaceholder(new Label("No Data To Display"));
+        return allCategoriesTable;
+    }
+
+    //todo: checking this
+    public void removeSubCategory(Category parentCategory, Category subCategory) {
+        parentCategory.removeSubCategory(subCategory);
+    }
 }

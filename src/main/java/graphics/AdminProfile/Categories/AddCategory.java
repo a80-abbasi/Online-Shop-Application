@@ -6,7 +6,6 @@ import Model.Account.Admin;
 import Model.Product.Category;
 import graphics.AlertBox;
 import graphics.App;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -24,7 +23,7 @@ public class AddCategory {
     public ListView<String> subCategoryFeaturesList;
     public Button confirmButton;
 
-    private Category category;
+    private static Category category;
 
     private ArrayList<String> specialFeatures;
     private ArrayList<Category> subCategories;
@@ -36,10 +35,15 @@ public class AddCategory {
 
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
-        specialFeatures = new ArrayList<>();
-        category = null;
-        subCategories = new ArrayList<>();
-        subCategorySpecialFeatures = new ArrayList<>();
+        if (category == null) {
+            specialFeatures = new ArrayList<>();
+            category = null;
+            subCategories = new ArrayList<>();
+            subCategorySpecialFeatures = new ArrayList<>();
+        }
+        else {
+            turnToAddSubCategoryMode();
+        }
     }
 
     public void addFeature(MouseEvent mouseEvent) {
@@ -63,28 +67,33 @@ public class AddCategory {
     }
 
     public void confirm(MouseEvent mouseEvent) {
-        String categoryName = categoryNameField.getText();
-        try {
-            adminProfileManager.addCategory(categoryName, specialFeatures);
-            AlertBox.showMessage("Add Category", categoryName + " Category Added Successfully" + "\n" + "You can now add SubCategories");
-            subCategoryNameField.setEditable(true);
-            subCategoryFeaturesField.setEditable(true);
-            categoryNameField.setEditable(false);
-            specialFeaturesField.setEditable(false);
-            confirmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    AlertBox.showMessage("Add Categories", "Category and its SubCategories Added Successfully");
-                    try {
-                        App.setRoot(parentMenu);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        } catch (Exception e) {
-            AlertBox.showMessage("Failed To Add Category", e.getMessage());
+        if (category == null) {
+            String categoryName = categoryNameField.getText();
+            try {
+                category = adminProfileManager.addAndGetCategory(categoryName, specialFeatures);
+                AlertBox.showMessage("Add Category", categoryName + " Category Added Successfully" + "\n" + "You can now add SubCategories");
+                turnToAddSubCategoryMode();
+            } catch (Exception e) {
+                AlertBox.showMessage("Failed To Add Category", e.getMessage());
+            }
         }
+        else {
+            AlertBox.showMessage("Add Categories", "Category and its SubCategories Added Successfully");
+            try {
+                App.setRoot(parentMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void turnToAddSubCategoryMode() {
+        subCategoryNameField.setEditable(true);
+        subCategoryFeaturesField.setEditable(true);
+        categoryNameField.setEditable(false);
+        specialFeaturesField.setEditable(false);
+        categoryNameField.setText(category.getName());
+        specialFeaturesList.getItems().addAll(category.getSpecialFeatures());
     }
 
     public void addSubCategory(MouseEvent mouseEvent) {
@@ -96,5 +105,9 @@ public class AddCategory {
         } catch (Exception e) {
             AlertBox.showMessage("Failed To Add SubCategory", e.getMessage());
         }
+    }
+
+    public static void setCategory(Category category) {
+        AddCategory.category = category;
     }
 }

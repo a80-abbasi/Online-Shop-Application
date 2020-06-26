@@ -40,7 +40,7 @@ public class Category {
         this.specialFeatures = specialFeatures;
     }
 
-    //todo: completing this
+    //todo: checking this
     public void addSpecialFeature(String specialFeature) {
         specialFeatures.add(specialFeature);
         for (Category subCategory : subCategories) {
@@ -95,6 +95,7 @@ public class Category {
         return subCategory;
     }
 
+    //todo: checking this
     public void removeSpecialFeature(String specialFeature) {
         for (String productId : productIds) {
             Product product = Product.getProductByID(productId);
@@ -102,7 +103,19 @@ public class Category {
                 product.removeSpecialFeature(specialFeature);
             }
         }
+        for (Category subCategory : subCategories) {
+            subCategory.removeSpecialFeature(specialFeature);
+        }
         specialFeatures.remove(specialFeature);
+    }
+
+    public Category getParentCategory() {
+        return parentCategory;
+    }
+
+    //todo: checking this
+    public void removeSubCategory(Category category) {
+        subCategories.remove(category);
     }
 
     public static void showAllCategories(){
@@ -123,10 +136,14 @@ public class Category {
     //todo: checking this
     public static void removeCategory(Category category) {
         for (String productId : category.productIds) {
-            Product.removeProduct(Product.getProductByID(productId));
+            Product product = Product.getProductByID(productId);
+            product.removeCategory(category);
         }
         for (Category subCategory : category.getSubCategories()) {
-            allCategories.remove(subCategory);
+            Category.removeCategory(subCategory);
+        }
+        if (category.getParentCategory() != null) {
+            category.parentCategory.removeSubCategory(category);
         }
         allCategories.remove(category);
     }

@@ -176,9 +176,5 @@ public class CustomerProfileMenu {
         stage.setScene(scene1);
         stage.show();
     }
-
-
-
-
 }
 
