@@ -168,7 +168,7 @@ public class ProductPageController {
                 loginPopUp = new Stage();
                 Scene scene;
                 try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("loginMenu.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("LoginMenu.fxml"));
                     scene = new Scene(fxmlLoader.load());
                 } catch (IOException ex) {
                     ex.printStackTrace();
