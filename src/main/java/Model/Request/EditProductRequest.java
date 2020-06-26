@@ -2,9 +2,6 @@ package Model.Request;
 
 import Model.Product.Product;
 import Model.Product.ProductStatus;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 
@@ -18,12 +15,14 @@ public class EditProductRequest extends EditAddProductRequest {
         this.setProductId(product.getProductId());
         this.setProductName(product.getProductName());
         this.setProductStatus(ProductStatus.WAITING_TO_EDIT);
-        this.setCompanyName(product.getCompanyName());
-        this.setPrice(product.getPrice());
-        this.setExistingNumber(product.getExistingNumber());
-        this.setProductSeller(product.getProductSeller());
+        this.setProductCompanyName(product.getCompanyName());
+        this.setProductPrice(product.getPrice());
+        this.setProductExistingNumber(product.getExistingNumber());
+        this.setProductExplanations(product.getExplanations());
+        this.setProductImageAddress(product.getImageAddress());
         this.setProductCategory(product.getProductCategory());
         this.setProductSpecialFeatures(product.getSpecialFeatures());
+        this.setProductSeller(product.getProductSeller());
     }
 
     public EditProductRequest(){
@@ -51,10 +50,10 @@ public class EditProductRequest extends EditAddProductRequest {
             product.setProductId(productId);
             product.setProductName(productName);
             product.setProductStatus(ProductStatus.CONFIRMED);
-            product.setCompanyName(companyName);
-            product.setPrice(price);
-            product.setExistingNumber(existingNumber);
-            product.setProductSeller(productSeller);
+            product.setCompanyName(productCompanyName);
+            product.setPrice(productPrice);
+            product.setExistingNumber(productExistingNumber);
+            product.setExplanations(productExplanations);
             product.setProductCategory(productCategory);
             product.setSpecialFeatures(productSpecialFeatures);
             if (!(productCategory.getProducts().contains(product))) {
@@ -70,9 +69,9 @@ public class EditProductRequest extends EditAddProductRequest {
                 ", productId='" + productId + '\'' +
                 ", productStatus=" + productStatus +
                 ", productName='" + productName + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", price=" + price +
-                ", existingNumber=" + existingNumber +
+                ", companyName='" + productCompanyName + '\'' +
+                ", price=" + productPrice +
+                ", existingNumber=" + productExistingNumber +
                 ", productSeller=" + productSeller +
                 ", requestId='" + requestId + '\'' +
                 ", requestType=" + requestType +

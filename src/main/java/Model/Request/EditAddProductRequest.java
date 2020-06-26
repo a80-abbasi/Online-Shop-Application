@@ -12,9 +12,11 @@ public abstract class EditAddProductRequest extends Request {
     protected String productId;
     protected ProductStatus productStatus;
     protected String productName;
-    protected String companyName;
-    protected double price;
-    protected int existingNumber;
+    protected String productCompanyName;
+    protected double productPrice;
+    protected int productExistingNumber;
+    protected String productExplanations;
+    protected String productImageAddress;
     protected Seller productSeller;
     protected Category productCategory;
     protected HashMap<String, Integer> productSpecialFeatures;
@@ -40,16 +42,16 @@ public abstract class EditAddProductRequest extends Request {
         return productName;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getProductCompanyName() {
+        return productCompanyName;
     }
 
-    public double getPrice() {
-        return price;
+    public double getProductPrice() {
+        return productPrice;
     }
 
-    public int getExistingNumber() {
-        return existingNumber;
+    public int getProductExistingNumber() {
+        return productExistingNumber;
     }
 
     public Seller getProductSeller() {
@@ -58,6 +60,14 @@ public abstract class EditAddProductRequest extends Request {
 
     public HashMap<String, Integer> getProductSpecialFeatures() {
         return productSpecialFeatures;
+    }
+
+    public String getProductExplanations() {
+        return productExplanations;
+    }
+
+    public String getProductImageAddress() {
+        return productImageAddress;
     }
 
     public void setProductId(String productId) {
@@ -72,16 +82,16 @@ public abstract class EditAddProductRequest extends Request {
         this.productName = productName;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setProductCompanyName(String productCompanyName) {
+        this.productCompanyName = productCompanyName;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
     }
 
-    public void setExistingNumber(int existingNumber) {
-        this.existingNumber = existingNumber;
+    public void setProductExistingNumber(int productExistingNumber) {
+        this.productExistingNumber = productExistingNumber;
     }
 
     public void setProductSeller(Seller productSeller) {
@@ -98,6 +108,14 @@ public abstract class EditAddProductRequest extends Request {
 
     public void setProductSpecialFeatureValue(String key, int value) {
         this.productSpecialFeatures.replace(key, value);
+    }
+
+    public void setProductExplanations(String productExplanations) {
+        this.productExplanations = productExplanations;
+    }
+
+    public void setProductImageAddress(String productImageAddress) {
+        this.productImageAddress = productImageAddress;
     }
 
     @Override
