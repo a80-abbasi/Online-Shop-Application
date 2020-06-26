@@ -100,4 +100,13 @@ public class RegisterSellerRequest extends Request {
     public void remove() {
         allRegisterSellerRequests.remove(this);
     }
+
+    public static RegisterSellerRequest getRequestById(String requestId) {
+        for (RegisterSellerRequest registerSellerRequest : allRegisterSellerRequests) {
+            if (registerSellerRequest.getRequestId().equals(requestId)) {
+                return registerSellerRequest;
+            }
+        }
+        return null;
+    }
 }

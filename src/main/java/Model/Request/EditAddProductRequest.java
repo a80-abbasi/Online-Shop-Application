@@ -4,9 +4,11 @@ import Model.Account.Seller;
 import Model.Product.Category;
 import Model.Product.ProductStatus;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class EditAddProductRequest extends Request {
+    private static ArrayList<EditAddProductRequest> allEditAddProductRequests = new ArrayList<>();
     protected String productId;
     protected ProductStatus productStatus;
     protected String productName;
@@ -19,6 +21,7 @@ public abstract class EditAddProductRequest extends Request {
 
     public EditAddProductRequest(String requestId, RequestType requestType) {
         super(requestId, requestType);
+        allEditAddProductRequests.add(this);
     }
 
     public Category getProductCategory() {
@@ -102,4 +105,13 @@ public abstract class EditAddProductRequest extends Request {
 
     @Override
     public abstract String toString();
+
+    public static EditAddProductRequest getRequestById(String requestId) {
+        for (EditAddProductRequest editAddProductRequest : allEditAddProductRequests) {
+            if (editAddProductRequest.getRequestId().equals(requestId)) {
+                return editAddProductRequest;
+            }
+        }
+        return null;
+    }
 }

@@ -27,7 +27,6 @@ public class ManageRequests {
 
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
-        allRequestsTable = new TableView();
         allRequestsTable = adminProfileManager.getAllRequestsTable(allRequestsTable);
     }
 
@@ -51,7 +50,7 @@ public class ManageRequests {
         Request request = (Request) selectedRequest;
         if (request instanceof EditAddOffRequest) {
             try {
-                EditAddOffRequestMenu.setEditAddOffRequest((EditAddOffRequest) request);
+                EditAddOffRequestMenu.setEditAddOffRequest(EditAddOffRequest.getRequestById(request.getRequestId()));
                 App.setRoot("EditAddOffRequestMenu");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -59,7 +58,7 @@ public class ManageRequests {
         }
         else if (request instanceof EditAddProductRequest) {
             try {
-                EditAddProductRequestMenu.setEditAddProductRequest((EditAddProductRequest) request);
+                EditAddProductRequestMenu.setEditAddProductRequest(EditAddProductRequest.getRequestById(request.getRequestId()));
                 App.setRoot("EditAddProductRequestMenu");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -67,7 +66,7 @@ public class ManageRequests {
         }
         else if (request instanceof RegisterSellerRequest) {
             try {
-                RegisterSellerRequestMenu.setRegisterSellerRequest((RegisterSellerRequest) request);
+                RegisterSellerRequestMenu.setRegisterSellerRequest(RegisterSellerRequest.getRequestById(request.getRequestId()));
                 App.setRoot("RegisterSellerRequestMenu");
             } catch (IOException e) {
                 e.printStackTrace();

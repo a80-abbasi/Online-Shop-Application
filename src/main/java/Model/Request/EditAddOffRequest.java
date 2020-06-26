@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class EditAddOffRequest extends Request {
+    private static ArrayList<EditAddOffRequest> allEditAddOffRequests = new ArrayList<>();
     protected String offID;
     protected Date startTime;
     protected Date endTime;
@@ -75,4 +76,13 @@ public abstract class EditAddOffRequest extends Request {
 
     @Override
     public abstract String toString();
+
+    public static EditAddOffRequest getRequestById(String requestId) {
+        for (EditAddOffRequest editAddOffRequest : allEditAddOffRequests) {
+            if (editAddOffRequest.getRequestId().equals(requestId)) {
+                return editAddOffRequest;
+            }
+        }
+        return null;
+    }
 }

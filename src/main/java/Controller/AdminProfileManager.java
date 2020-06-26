@@ -4,10 +4,9 @@ import Model.Account.Account;
 import Model.Account.Admin;
 import Model.Account.Customer;
 import Model.Account.Discount;
-import Model.Request.Request;
+import Model.Request.*;
 import Model.Product.Category;
 import Model.Product.Product;
-import Model.Request.RequestType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -282,10 +281,7 @@ public class AdminProfileManager extends ProfileManager {
         TableColumn<String, Request> column1 = new TableColumn<>("Request ID");
         column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
 
-        TableColumn<RequestType, Request> column2 = new TableColumn<>("Request Type");
-        column2.setCellValueFactory(new PropertyValueFactory<>("requestType"));
-
-        allRequests.getColumns().addAll(column1, column2);
+        allRequests.getColumns().add(column1);
         for (Request request : Request.getAllRequests()) {
             allRequests.getItems().add(request);
         }
