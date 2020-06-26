@@ -196,12 +196,11 @@ public class CustomerProfileMenu {
         table.getColumns().addAll(orderIdCol, orderDateCol);
 
         try{
-            table.getItems().add(new OrderData("Isabella",  "Johnson"));
             ArrayList<BuyLog> buyLogs = customerProfileManager.customer.getBuyLogs();
             for (int i = 0; i < buyLogs.size(); i++) {
                 table.getItems().add(new OrderData(buyLogs.get(i).getID(),buyLogs.get(i).getDate().toString()));
             }
-            final Label label = new Label("Orders ID And DAte");
+            final Label label = new Label("Orders ID And Date");
             label.setFont(new Font("Arial", 20));
             Stage stage = new Stage();
 
@@ -243,11 +242,11 @@ public class CustomerProfileMenu {
         percentCol.setCellValueFactory(new PropertyValueFactory<>("percent"));
 
         TableColumn<String, DiscountData> maxPossibleUsageCol = new TableColumn("MaxPossibleUsage");
-        discountEndTimeCol.setMinWidth(50);
+        discountEndTimeCol.setMinWidth(100);
         discountEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("maxPossibleUsage"));
 
         table.getColumns().addAll(discountIdCol, discountStartTimeCol, discountEndTimeCol, percentCol, maxPossibleUsageCol);
-        table.getItems().add(new DiscountData("a", "a", "a", "a", "a"));
+//        table.getItems().add(new DiscountData("a", "a", "a", "a", "a"));
 
         try{
             ArrayList<Discount> discounts = customerProfileManager.customer.getAllDiscountCodesForCustomer();
@@ -260,7 +259,7 @@ public class CustomerProfileMenu {
             Stage stage = new Stage();
 
             stage.setTitle("Discount Codes");
-            stage.setWidth(620);
+            stage.setWidth(650);
             stage.setHeight(500);
 
             VBox vbox = new VBox();

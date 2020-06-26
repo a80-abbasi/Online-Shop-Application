@@ -169,7 +169,7 @@ public class CustomerProfileManager extends ProfileManager{
         }
         if(!discountCode.equals("")) {
             discount = Discount.getDiscountByDiscountCode(discountCode);
-            priceWithOffAndDiscount -= priceWithOffAndDiscount * discount.getDiscountPercent();
+            priceWithOffAndDiscount -= priceWithOffAndDiscount * discount.getDiscountPercent()/100;
         }
         return priceWithOffAndDiscount;
     }
@@ -201,8 +201,6 @@ public class CustomerProfileManager extends ProfileManager{
         }
         //discount.getDiscountPerCustomer();
         //todo: check discount code use less than
-
-        //Sell log
 
     }
 

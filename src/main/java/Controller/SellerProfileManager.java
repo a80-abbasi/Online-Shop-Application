@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 
 public class SellerProfileManager extends ProfileManager {
-    private Seller seller;
+    public Seller seller;
 
     public SellerProfileManager(Seller seller) {
         super(seller);
