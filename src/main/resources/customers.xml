@@ -76,6 +76,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -118,6 +119,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -143,6 +145,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -185,6 +188,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -210,6 +214,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -252,6 +257,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -277,6 +283,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -319,6 +326,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -344,6 +352,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -386,6 +395,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -411,6 +421,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -453,6 +464,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -478,6 +490,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -520,6 +533,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -545,6 +559,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -587,6 +602,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -612,6 +628,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -654,6 +671,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -679,6 +697,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -721,6 +740,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -746,6 +766,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -788,6 +809,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -813,6 +835,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -855,6 +878,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -880,6 +904,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -922,6 +947,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -947,6 +973,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -989,6 +1016,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1014,6 +1042,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1056,6 +1085,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1081,6 +1111,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1123,6 +1154,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1148,6 +1180,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1190,6 +1223,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1227,6 +1261,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1269,6 +1304,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1294,6 +1330,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1336,6 +1373,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1361,6 +1399,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1403,6 +1442,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1428,6 +1468,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1470,6 +1511,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1495,6 +1537,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1537,6 +1580,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1562,6 +1606,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1604,6 +1649,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1629,6 +1675,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1671,6 +1718,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1696,6 +1744,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1738,6 +1787,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1763,6 +1813,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1805,6 +1856,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1830,6 +1882,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1872,6 +1925,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1897,6 +1951,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -1939,6 +1994,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -1964,6 +2020,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2006,6 +2063,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2031,6 +2089,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2073,6 +2132,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2098,6 +2158,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2140,6 +2201,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2165,6 +2227,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2207,6 +2270,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2232,6 +2296,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2274,6 +2339,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2299,6 +2365,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2341,6 +2408,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2366,6 +2434,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2408,6 +2477,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2433,6 +2503,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2475,6 +2546,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2500,6 +2572,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2542,6 +2615,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2567,6 +2641,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2609,6 +2684,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2634,6 +2710,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2676,6 +2753,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2701,6 +2779,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2743,6 +2822,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2768,6 +2848,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2810,6 +2891,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2835,6 +2917,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2877,6 +2960,7 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>
@@ -2902,6 +2986,7 @@
                     </allScores>
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
+                    <explanations></explanations>
                     <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
@@ -2944,6 +3029,904 @@
                         <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                        <email>A</email>
+                        <lastName>a</lastName>
+                        <name>a</name>
+                        <password>a</password>
+                        <phoneNumber>A</phoneNumber>
+                        <username>a</username>
+                        <balance>10.0</balance>
+                        <nameOfCompany>a0</nameOfCompany>
+                    </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
                     <visitNumber>35</visitNumber>
                 </key>

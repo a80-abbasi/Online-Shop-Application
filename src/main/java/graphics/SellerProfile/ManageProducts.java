@@ -152,6 +152,7 @@ public class ManageProducts {
         productPriceField.setText(String.valueOf(product.getPrice()));
         productExistingNumberField.setText(String.valueOf(product.getExistingNumber()));
         productExplanationsField.setText(product.getExplanations());
+        ManageProducts.productImageAddress = product.getImageAddress();
 
         category = product.getProductCategory();
         productSpecialFeaturesTable.getItems().setAll(category.getSpecialFeatures());

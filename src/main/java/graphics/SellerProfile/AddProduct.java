@@ -7,11 +7,15 @@ import Model.Product.Category;
 import graphics.AlertBox;
 import graphics.App;
 import graphics.products.ProductPageController;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -43,6 +47,8 @@ public class AddProduct {
 
     private Category category;
 
+    private ArrayList<FeatureData> allFeatureData;
+
     private SellerProfileManager sellerProfileManager;
 
     public void initialize(){
@@ -50,7 +56,14 @@ public class AddProduct {
         App.setBackButton(backImage, "SellerProfileMenu");
         ProductPageController.setMainMenuButton(mainMenuImage);
 
+        allFeatureData = new ArrayList<>();
+
         this.sellerProfileManager = new SellerProfileManager((Seller) Account.getLoggedInAccount());
+
+        specialFeatureColumn.setCellValueFactory(new PropertyValueFactory<String, FeatureData>("specialFeature"));
+        valueColumn.setCellValueFactory(new PropertyValueFactory<String, FeatureData>("value"));
+
+        valueColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         for (String categoryName : sellerProfileManager.getAllCategories()) {
             MenuItem menuItem = new MenuItem(categoryName);
             menuItem.setOnAction(new EventHandler<ActionEvent>() {
@@ -69,8 +82,11 @@ public class AddProduct {
         if (category.getSpecialFeatures().isEmpty()) {
             return;
         }
+        specialFeaturesTable.getItems().clear();
         for (String specialFeature : category.getSpecialFeatures()) {
-            specialFeaturesTable.getItems().add(specialFeature);
+            FeatureData featureData = new FeatureData(specialFeature, "");
+            specialFeaturesTable.getItems().add(featureData);
+            allFeatureData.add(featureData);
         }
     }
 
@@ -82,10 +98,8 @@ public class AddProduct {
         String productExistingNumber = productExistingNumberField.getText();
         String productExplanations = productExplanationsField.getText();
         ArrayList<String> values = new ArrayList<>();
-        int i = 0;
-        while (valueColumn.getCellData(i) != null) {
-            values.add((String) valueColumn.getCellData(i));
-            i++;
+        for (FeatureData featureData : allFeatureData) {
+            values.add(featureData.getValue());
         }
         boolean informationIncomplete = productID.isEmpty() || productName.isEmpty() || productCompanyName.isEmpty() || productPrice.isEmpty() || productExistingNumber.isEmpty() ||
                 productExplanations.isEmpty() || values.size() != specialFeaturesTable.getItems().size();
@@ -117,5 +131,10 @@ public class AddProduct {
             selectImagePopUp.setResizable(false);
             selectImagePopUp.showAndWait();
         }
+    }
+
+    public void editValueForSpecialFeature(TableColumn.CellEditEvent cellEditEvent) {
+        FeatureData featureData = (FeatureData) specialFeaturesTable.getSelectionModel().getSelectedItem();
+        featureData.setValue((String) cellEditEvent.getNewValue());
     }
 }

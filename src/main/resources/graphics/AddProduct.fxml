@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.SellerProfile.AddProduct">
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.SellerProfile.AddProduct">
     <children>
         <Label layoutX="139.0" layoutY="146.0" text="Product ID">
             <font>
@@ -113,5 +120,41 @@
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </MenuButton>
+      <ImageView fx:id="backImage" fitHeight="40.0" fitWidth="34.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mainMenuImage" fitHeight="34.0" fitWidth="34.0" layoutX="64.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/mainMenu.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="978.0" layoutY="685.0" mnemonicParsing="false" onAction="#addImageButtonPressed" prefHeight="44.0" prefWidth="128.0" text="Add Image">
+         <font>
+            <Font name="Times New Roman Bold" size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="139.0" layoutY="511.0" text="Explanations">
+         <font>
+            <Font name="Times New Roman" size="24.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="productExplanationsField" layoutX="327.0" layoutY="505.0" prefHeight="224.0" prefWidth="300.0">
+         <font>
+            <Font name="Times New Roman" size="24.0" />
+         </font>
+      </TextArea>
+      <TableView fx:id="specialFeaturesTable" editable="true" layoutX="892.0" layoutY="359.0" prefHeight="257.0" prefWidth="300.0">
+        <columns>
+          <TableColumn fx:id="specialFeatureColumn" prefWidth="151.0" text="Special Feature" />
+          <TableColumn fx:id="valueColumn" onEditCommit="#editValueForSpecialFeature" prefWidth="148.0" text="Value" />
+        </columns>
+      </TableView>
+      <MenuButton fx:id="selectCategoryMenuButton" layoutX="892.0" layoutY="138.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="300.0" text="Select Category">
+         <font>
+            <Font name="Times New Roman" size="24.0" />
+         </font>
+      </MenuButton>
     </children>
 </AnchorPane>
