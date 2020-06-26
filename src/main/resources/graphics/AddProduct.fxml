@@ -100,5 +100,10 @@
             <Image url="@../Images/mainMenu.png" />
          </image>
       </ImageView>
+      <Button layoutX="1358.0" layoutY="679.0" mnemonicParsing="false" onAction="#addImageButtonPressed" prefHeight="44.0" prefWidth="128.0" text="Add Image">
+         <font>
+            <Font name="Times New Roman Bold" size="20.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

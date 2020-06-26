@@ -104,7 +104,7 @@
                            </font>
                         </Label>
                         <Label layoutX="47.0" layoutY="438.0" text="remaining:" />
-                        <Label fx:id="remainingLabel" layoutX="119.0" layoutY="438.0" text="remainingLabel" />
+                        <Label fx:id="remainingLabel" layoutX="133.0" layoutY="438.0" text="remainingLabel" />
                         <Button layoutX="421.0" layoutY="434.0" mnemonicParsing="false" onAction="#compareButtonPressed" text="compare" />
                      </children>
                   </Pane>
@@ -177,8 +177,8 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="210.0" layoutY="521.0" text="visit number:" />
-                  <Label fx:id="visitNumberLabel" layoutX="296.0" layoutY="521.0" text="visitNumberLabel" />
+                  <Label layoutX="570.0" layoutY="521.0" text="visit number:" />
+                  <Label fx:id="visitNumberLabel" layoutX="656.0" layoutY="521.0" text="visitNumberLabel" />
                   <Label fx:id="timeLeftLabel" layoutX="1129.0" layoutY="47.0" text="Off ends in:" textFill="RED">
                      <font>
                         <Font name="System Bold" size="19.0" />
