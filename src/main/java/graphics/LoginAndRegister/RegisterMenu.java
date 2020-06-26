@@ -95,7 +95,7 @@ public class RegisterMenu {
     public void setAccountTypeSeller(ActionEvent event) {
         this.accountType = AccountType.SELLER;
 
-        this.companyLabel = new Label("graphics/SellerProfile/Company");
+        this.companyLabel = new Label("Company");
         companyLabel.setLayoutX(69.0);
         companyLabel.setLayoutY(305);
         companyLabel.setFont(Font.font("Times New Roman", 14));
