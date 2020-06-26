@@ -108,7 +108,6 @@ public class AddProduct {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("selectProductImage.fxml"));
                 scene = new Scene(fxmlLoader.load());
-                fxmlLoader.getController();
             } catch (IOException e) {
                 e.printStackTrace();
                 return;

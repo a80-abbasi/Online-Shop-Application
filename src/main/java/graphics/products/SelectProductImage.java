@@ -1,6 +1,7 @@
 package graphics.products;
 
 import graphics.SellerProfile.AddProduct;
+import graphics.SellerProfile.ManageProducts;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -13,6 +14,7 @@ public class SelectProductImage {
     public Pane mainPain;
 
     ArrayList<String> imageAddresses;
+    boolean changePhoto = false;
 
     public void initialize(){
         setAvailableImages();
@@ -41,9 +43,14 @@ public class SelectProductImage {
         imageView.setPreserveRatio(true);
         imageView.setFitWidth(175);
         imageView.setOnMouseClicked(e -> {
-            AddProduct.productImageAddress = imageAddress;
+            if (changePhoto){
+                ManageProducts.productImageAddress = imageAddress;
+            }
+            else {
+                AddProduct.productImageAddress = imageAddress;
+                AddProduct.selectImagePopUp = null;
+            }
             ((Stage) mainPain.getScene().getWindow()).close();
-            AddProduct.selectImagePopUp = null;
         });
         return imageView;
     }
@@ -56,5 +63,10 @@ public class SelectProductImage {
         for (String image : images) {
             imageAddresses.add(PATH + image + ".jpg");
         }
+    }
+
+    public void prepareForChangingPhoto(){
+        changePhoto = true;
+        initialize();
     }
 }
