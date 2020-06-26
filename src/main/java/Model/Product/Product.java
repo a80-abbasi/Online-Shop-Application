@@ -71,7 +71,7 @@ public class Product {
     }
 
     public Product() {
-        this("", null, "", "", 0, null, 0, null, null);
+        this("", null, "", "", 0, 0, "", "", null, null, null);
     }
 
     public void addASpecialFeature(String feature, int amount){

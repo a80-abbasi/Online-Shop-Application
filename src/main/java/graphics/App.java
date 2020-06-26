@@ -79,7 +79,7 @@ public class App extends Application {
     private static void addProduct(String name) {
         Seller seller = new Seller();
         seller.setName("Ali");
-        Product product = new Product("1", ProductStatus.CONFIRMED, name, "Samsung", 1000, seller, 0, null, null);
+        Product product = new Product("",  ProductStatus.CONFIRMED, "mobile", "samsung", 900, 10, "good product", "address", null, null, null);
         product.setImageAddress(new Image("file:src\\main\\resources\\Images\\phone.jpg"));
         product.getAllScores().add(new Score(null, product, 4));
         product.getAllScores().add(new Score(null, product, 3));
