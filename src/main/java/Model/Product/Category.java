@@ -40,9 +40,9 @@ public class Category {
         this.specialFeatures = specialFeatures;
     }
 
-    //todo: checking this
     public void addSpecialFeature(String specialFeature) {
         specialFeatures.add(specialFeature);
+        productIds.forEach(productIds -> Product.getProductByID(productIds).addASpecialFeature(specialFeature, 0));
         for (Category subCategory : subCategories) {
             subCategory.addSpecialFeature(specialFeature);
         }
@@ -50,8 +50,10 @@ public class Category {
 
     public void addProductToCategory(Product product){
         productIds.add(product.getProductId());
-        if (parentCategory != null){
-            parentCategory.addProductToCategory(product);
+        Category currentCategory = this;
+        while (currentCategory.parentCategory != null){
+            currentCategory.parentCategory.addProductToCategory(product);
+            currentCategory = parentCategory;
         }
     }
 
@@ -85,7 +87,7 @@ public class Category {
         return products;
     }
 
-    //todo: completing this
+    //todo: completing this:: i think its ok!
     public Category addSubCategoryWithName(String name){
         Category subCategory = new Category(name, this);
         for (String feature : specialFeatures) {
@@ -95,7 +97,6 @@ public class Category {
         return subCategory;
     }
 
-    //todo: checking this
     public void removeSpecialFeature(String specialFeature) {
         for (String productId : productIds) {
             Product product = Product.getProductByID(productId);
@@ -103,17 +104,16 @@ public class Category {
                 product.removeSpecialFeature(specialFeature);
             }
         }
-        for (Category subCategory : subCategories) {
-            subCategory.removeSpecialFeature(specialFeature);
-        }
         specialFeatures.remove(specialFeature);
+        if (parentCategory != null) {
+            removeSpecialFeature(specialFeature);
+        }
     }
 
     public Category getParentCategory() {
         return parentCategory;
     }
 
-    //todo: checking this
     public void removeSubCategory(Category category) {
         subCategories.remove(category);
     }
@@ -133,7 +133,6 @@ public class Category {
         return null;
     }
 
-    //todo: checking this
     public static void removeCategory(Category category) {
         for (String productId : category.productIds) {
             Product product = Product.getProductByID(productId);

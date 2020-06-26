@@ -65,7 +65,7 @@ public class SellerProfileManager extends ProfileManager {
         ArrayList<Category> allCategories = Category.getAllCategories();
         ArrayList<String> allCategoriesNames = new ArrayList<>();
         for (Category category : allCategories) {
-            allCategoriesNames.add(category.toString());
+            allCategoriesNames.add(category.getName());
         }
         return allCategoriesNames;
     }
@@ -97,6 +97,119 @@ public class SellerProfileManager extends ProfileManager {
         return addProductRequest;
     }
 
+    public void makeNewAddProductRequest(String productID, String productName, String productCompanyName,
+                                         String productPrice, String productExistingNumber, String productExplanations,
+                                         Category productCategory, ArrayList<String> specialFeatureValues,
+                                         String productImageAddress) throws Exception{
+        try {
+            ArrayList<String> specialFeatures = productCategory.getSpecialFeatures();
+            ArrayList<Integer> values = getSpecialFeatureValuesInInteger(specialFeatureValues);
+            HashMap<String, Integer> productSpecialFeatures = new HashMap<>();
+            int i = 0;
+            for (String specialFeature : specialFeatures) {
+                productSpecialFeatures.put(specialFeature, values.get(i));
+                i++;
+            }
+            if (checkProductIDValidity(productID) && checkProductNameValidity(productName) &&
+                    checkProductCompanyName(productCompanyName) && checkProductPrice(productPrice) &&
+                    checkProductExistingNumber(productExistingNumber) && checkProductExplanations(productExplanations)) {
+                new AddProductRequest(productID, productName, productCompanyName, Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber),
+                        productExplanations, productImageAddress, productCategory, productSpecialFeatures, this.seller);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    private boolean checkProductIDValidity(String productID) throws Exception {
+        if (Product.getProductByID(productID) != null && !(productID.trim().isEmpty())) {
+            return true;
+        }
+        else {
+            throw new Exception("There is another product with this ID");
+        }
+    }
+
+    private boolean checkProductNameValidity(String productName) throws Exception {
+        if (productName.trim().isEmpty()) {
+            throw new Exception("Invalid Product Name");
+        }
+        else {
+            return true;
+        }
+    }
+
+    private boolean checkProductCompanyName(String productCompanyName) throws Exception {
+        if (productCompanyName.trim().isEmpty()) {
+            throw new Exception("Invalid Company Name");
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkProductPrice(String productPrice) throws Exception {
+        try {
+            Double.parseDouble(productPrice);
+            return true;
+        } catch (Exception e) {
+            throw new Exception("Invalid Product Price");
+        }
+    }
+
+    private boolean checkProductExistingNumber(String productExistingNumber) throws Exception {
+        try {
+            Integer.parseInt(productExistingNumber);
+            return true;
+        } catch (Exception e) {
+            throw new Exception("Invalid Product Existing Number");
+        }
+    }
+
+    private boolean checkProductExplanations(String productExplanations) throws Exception {
+        if (productExplanations.trim().isEmpty()) {
+            throw new Exception("Invalid Explanations");
+        } else {
+            return true;
+        }
+    }
+
+    private ArrayList<Integer> getSpecialFeatureValuesInInteger(ArrayList<String> specialFeatureValues) throws Exception{
+        ArrayList<Integer> values = new ArrayList<>();
+        for (String specialFeatureValue : specialFeatureValues) {
+            try {
+                values.add(Integer.parseInt(specialFeatureValue));
+            } catch (Exception e) {
+                throw new Exception("Invalid Value For Special Feature");
+            }
+        }
+        return values;
+    }
+
+    public void makeNewEditProductRequest(String productID, String productName, String productCompanyName,
+                                         String productPrice, String productExistingNumber, String productExplanations,
+                                         Category productCategory, ArrayList<String> specialFeatureValues,
+                                         String productImageAddress) throws Exception{
+        try {
+            ArrayList<String> specialFeatures = productCategory.getSpecialFeatures();
+            ArrayList<Integer> values = getSpecialFeatureValuesInInteger(specialFeatureValues);
+            HashMap<String, Integer> productSpecialFeatures = new HashMap<>();
+            int i = 0;
+            for (String specialFeature : specialFeatures) {
+                productSpecialFeatures.put(specialFeature, values.get(i));
+                i++;
+            }
+            if (checkProductIDValidity(productID) && checkProductNameValidity(productName) &&
+                    checkProductCompanyName(productCompanyName) && checkProductPrice(productPrice) &&
+                    checkProductExistingNumber(productExistingNumber) && checkProductExplanations(productExplanations)) {
+                Product product = Product.getProductByID(productID);
+                new EditProductRequest(product, productID, productName, productCompanyName, Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber),
+                        productExplanations, productImageAddress, productCategory, productSpecialFeatures, this.seller);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     public EditProductRequest makeNewEditProductRequest(String productId) throws NullPointerException, IllegalArgumentException{
         Product product = Product.getProductByID(productId);
         if (product == null){
@@ -124,15 +237,15 @@ public class SellerProfileManager extends ProfileManager {
     }
 
     public void setProductCompanyName(EditAddProductRequest editAddProductRequest, String companyName) {
-        editAddProductRequest.setCompanyName(companyName);
+        editAddProductRequest.setProductCompanyName(companyName);
     }
 
     public void setProductPrice(EditAddProductRequest editAddProductRequest, String producePrice) throws InputMismatchException {
-        editAddProductRequest.setPrice(Double.parseDouble(producePrice));
+        editAddProductRequest.setProductPrice(Double.parseDouble(producePrice));
     }
 
     public void setExistingNumberOfProduct(EditAddProductRequest editAddProductRequest, String existingNumber) throws InputMismatchException {
-        editAddProductRequest.setExistingNumber(Integer.parseInt(existingNumber));
+        editAddProductRequest.setProductExistingNumber(Integer.parseInt(existingNumber));
     }
 
     public void setProductCategory(EditAddProductRequest editAddProductRequest, String categoryName) throws NullPointerException{

@@ -46,23 +46,36 @@ public class Product {
     }
 
     public Product (String productId, ProductStatus productStatus, String productName, String companyName, double price,
-                    Seller seller, int existingNumber, Category productCategory, HashMap<String, Integer> specialFeatures) {
+                    int existingNumber, String explanations, String productImageAddress, Category productCategory,
+                    HashMap<String, Integer> specialFeatures, Seller productSeller) {
         this.productId = productId;
         this.productStatus = productStatus;
         this.productName = productName;
         this.companyName = companyName;
         this.price = price;
-        this.productSeller = seller;
         this.existingNumber = existingNumber;
+        this.explanations = explanations;
+        this.setImageAddress(productImageAddress);
         this.productCategory = productCategory;
         this.specialFeatures = specialFeatures;
+        this.productSeller = productSeller;
+        if (specialFeatures != null) {
+            this.specialFeatures = specialFeatures;
+        }
+        else {
+            this.specialFeatures = new HashMap<>();
+        }
         imageAddress = "";
         timeOfCreation = new Date();
         allProducts.add(this);
     }
 
     public Product() {
-        this("", null, "", "", 0, null, 0, null, null);
+        this("", null, "", "", 0, 0, "", "", null, null, null);
+    }
+
+    public void addASpecialFeature(String feature, int amount){
+        specialFeatures.putIfAbsent(feature, amount);
     }
 
     public HashMap<String, Integer> getSpecialFeatures() {
@@ -117,9 +130,7 @@ public class Product {
     }
 
     public void removeSpecialFeature(String specialFeature) {
-        if (specialFeatures.keySet().contains(specialFeature)) {
-            specialFeatures.remove(specialFeature);
-        }
+        specialFeatures.remove(specialFeature);
     }
 
     public Off getOff() {

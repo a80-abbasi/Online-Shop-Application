@@ -1,12 +1,12 @@
 package Model.Request;
 
+import Model.Account.Seller;
+import Model.Product.Category;
 import Model.Product.Product;
 import Model.Product.ProductStatus;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AddProductRequest extends EditAddProductRequest {
     private static ArrayList<AddProductRequest> allAddProductRequest = new ArrayList<>();
@@ -15,6 +15,22 @@ public class AddProductRequest extends EditAddProductRequest {
         super("add_product_" + allRequests.size(), RequestType.Adding_Product_Request);
         allAddProductRequest.add(this);
         this.setProductStatus(ProductStatus.WAITING_TO_PRODUCE);
+    }
+
+    public AddProductRequest(String productID, String productName, String productCompanyName, double productPrice,
+                             int productExistingNumber, String productExplanations, String productImageAddress,
+                             Category productCategory, HashMap<String, Integer> productSpecialFeatures, Seller productSeller) {
+        super("add_product_" + allRequests.size(), RequestType.Adding_Product_Request);
+        this.productId = productID;
+        this.productName = productName;
+        this.productCompanyName = productCompanyName;
+        this.productPrice = productPrice;
+        this.productExistingNumber = productExistingNumber;
+        this.productExplanations = productExplanations;
+        this.productImageAddress = productImageAddress;
+        this.productCategory = productCategory;
+        this.productSpecialFeatures = productSpecialFeatures;
+        this.productSeller = productSeller;
     }
 
     public static ArrayList<AddProductRequest> getAllAddProductRequest() {
@@ -28,7 +44,9 @@ public class AddProductRequest extends EditAddProductRequest {
     @Override
     public void acceptRequest() throws IllegalArgumentException{
         if (Product.getProductByID(productId) == null) {
-            Product product = new Product(productId, ProductStatus.CONFIRMED, productName, companyName, price, productSeller, existingNumber, productCategory, productSpecialFeatures);
+            Product product = new Product(productId, ProductStatus.CONFIRMED, productName, productCompanyName,
+                    productPrice, productExistingNumber, productExplanations, productImageAddress,
+                    productCategory, productSpecialFeatures, productSeller);
             productCategory.addProductToCategory(product);
         }
         else {
@@ -42,9 +60,9 @@ public class AddProductRequest extends EditAddProductRequest {
                 "productId='" + productId + '\'' +
                 ", productStatus=" + productStatus +
                 ", productName='" + productName + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", price=" + price +
-                ", existingNumber=" + existingNumber +
+                ", companyName='" + productCompanyName + '\'' +
+                ", price=" + productPrice +
+                ", existingNumber=" + productExistingNumber +
                 ", productSeller=" + productSeller +
                 ", productCategory=" + productCategory +
                 ", specialFeatures=" + productSpecialFeatures +
