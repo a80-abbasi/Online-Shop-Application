@@ -4,6 +4,7 @@ import Controller.LoginAndRegisterManager;
 import Model.Account.Account;
 import graphics.AlertBox;
 import graphics.App;
+import graphics.MainMenu;
 import graphics.products.ProductPageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -33,11 +34,14 @@ public class LoginMenu {
         Account account = Account.getLoggedInAccount();
         if (account != null){
             pane.getChildren().removeAll(pane.getChildren().stream().filter(node ->
-                    !node.equals(loginButton) && !node.equals(loggedInLabel)).collect(Collectors.toList()));
+                    !node.equals(logOutButton) && !node.equals(loggedInLabel)).collect(Collectors.toList()));
             logOutButton.setOnAction(e -> {
                 Account.setLoggedInAccount(null);
+                ProductPageController.loginPopUp = null;
+                MainMenu.isLoginMenuOpen = false;
+                ((Stage) logOutButton.getScene().getWindow()).close();
                 try {
-                    App.setRoot("MainMenu");
+                    ((MainMenu) App.setRoot("MainMenu")).initialize();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

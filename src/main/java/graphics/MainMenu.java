@@ -24,7 +24,7 @@ public class MainMenu {
     public Button profileButton;
     public ImageView accountImage;
 
-    private static boolean isLoginMenuOpen;
+    public static boolean isLoginMenuOpen;
 
     public void initialize(){
         ProductPageController.setLoginButton(accountImage, "MainMenu");

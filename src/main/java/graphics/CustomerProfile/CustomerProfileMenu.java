@@ -2,13 +2,11 @@ package graphics.CustomerProfile;
 
 import Controller.CustomerProfileManager;
 import Controller.SellerProfileManager;
-import Model.Account.Account;
-import Model.Account.BuyLog;
-import Model.Account.Customer;
-import Model.Account.Seller;
+import Model.Account.*;
 import Model.Product.Comment;
 import Model.Product.Product;
 import graphics.AlertBox;
+import javafx.beans.Observable;
 import graphics.App;
 import graphics.products.ProductPageController;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,10 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -53,6 +48,9 @@ public class CustomerProfileMenu {
     public ImageView backImage;
     public ImageView mainMenuImage;
     public ImageView cartImage;
+    public Tab showOrdersTab;
+    public ScrollPane showOrdersScrollPane;
+    public TableView ordersTable;
     private TableView table = new TableView();
 
     private ArrayList<Pane> showingBuyLogs = new ArrayList<>();
@@ -136,53 +134,146 @@ public class CustomerProfileMenu {
     }
 
 
-    public void showOrderByID(MouseEvent mouseEvent) throws Exception{
-        String orderID =  orderIDForShowOrder.getText();
-        //BuyLog buyLog = customerProfileManager.customer.getBuyLogByID(orderID);
+    public void showOrderByID(MouseEvent mouseEvent) throws Exception {
         TableView table = new TableView<>();
         TableColumn<String, Data> productNameCol = new TableColumn("Product Name");
         productNameCol.setMinWidth(200);
-        productNameCol.setCellValueFactory(
-                new PropertyValueFactory<>("productName"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
 
         TableColumn<String, Data> productNumberCol = new TableColumn("Product Number");
         productNumberCol.setMinWidth(100);
-        productNumberCol.setCellValueFactory(
-                new PropertyValueFactory<>("productNumber"));
+        productNumberCol.setCellValueFactory(new PropertyValueFactory<>("productNumber"));
 
         TableColumn<String, Data> productSellerCol = new TableColumn("Product Seller");
         productSellerCol.setMinWidth(200);
-        productSellerCol.setCellValueFactory(
-                new PropertyValueFactory<>("productSeller"));
+        productSellerCol.setCellValueFactory(new PropertyValueFactory<>("productSeller"));
 
         table.getColumns().addAll(productNameCol, productNumberCol, productSellerCol);
-        table.getItems().add(new Data("a", "a", "a"));
+        //table.getItems().add(new Data("a", "a", "a"));
 
-        //table.setEditable(true);
+        try{
+            String orderID =  orderIDForShowOrder.getText();
+            BuyLog buyLog = customerProfileManager.customer.getBuyLogByID(orderID);
+            for (int i = 0; i < buyLog.getBoughtProducts().keySet().size(); i++) {
+                ArrayList<Product> products = new ArrayList<>(buyLog.getBoughtProducts().keySet());
+                table.getItems().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getProductSeller().getName()));
+            }
+            final Label label = new Label("Date" + buyLog.getDate() + "                 " + "Price:" + buyLog.getPaidAmount()+"$");
+            label.setFont(new Font("Arial", 20));
+            Stage stage = new Stage();
 
-        //        for (int i = 0; i < buyLog.getBoughtProducts().keySet().size(); i++) {
-    //            ArrayList<Product> products = new ArrayList<>(buyLog.getBoughtProducts().keySet());
-    //            FXCollections.observableArrayList().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getProductSeller().getName()));
-    //        }
+            stage.setTitle("Order");
+            stage.setWidth(550);
+            stage.setHeight(500);
 
-        Stage stage = new Stage();
-        //public void start(Stage stage) {
-        stage.setTitle("Order");
-        stage.setWidth(550);
-        stage.setHeight(500);
+            VBox vbox = new VBox();
+            vbox.setSpacing(5);
+            vbox.setPadding(new Insets(10, 0, 0, 10));
+            vbox.getChildren().addAll(label, table);
 
-        final Label label = new Label("Date" + "1.2.3" + "Price:" + "10$");
-        label.setFont(new Font("Arial", 20));
+            Scene scene1 = new Scene(vbox);
 
-        VBox vbox = new VBox();
-        vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 0, 0, 10));
-        vbox.getChildren().addAll(label, table);
+            stage.setScene(scene1);
+            stage.show();
+        } catch (NullPointerException e) {
+            AlertBox.showMessage("null exception", "There is no BuyLog");
+        }
 
-        Scene scene1 = new Scene(vbox);
+    }
 
-        stage.setScene(scene1);
-        stage.show();
+
+    public void showAllOrders(MouseEvent mouseEvent) throws Exception{
+
+        TableView table = new TableView<>();
+        TableColumn<String, OrderData> orderIdCol = new TableColumn("Order ID");
+        orderIdCol.setMinWidth(300);
+        orderIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+        TableColumn<String, OrderData> orderDateCol = new TableColumn("Date");
+        orderDateCol.setMinWidth(300);
+        orderDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        table.getColumns().addAll(orderIdCol, orderDateCol);
+
+        try{
+            table.getItems().add(new OrderData("Isabella",  "Johnson"));
+            ArrayList<BuyLog> buyLogs = customerProfileManager.customer.getBuyLogs();
+            for (int i = 0; i < buyLogs.size(); i++) {
+                table.getItems().add(new OrderData(buyLogs.get(i).getID(),buyLogs.get(i).getDate().toString()));
+            }
+            final Label label = new Label("Orders ID And DAte");
+            label.setFont(new Font("Arial", 20));
+            Stage stage = new Stage();
+
+            stage.setTitle("Orders");
+            stage.setWidth(600);
+            stage.setHeight(500);
+
+            VBox vbox = new VBox();
+            vbox.setSpacing(5);
+            vbox.setPadding(new Insets(10, 0, 0, 10));
+            vbox.getChildren().addAll(label, table);
+
+            Scene scene1 = new Scene(vbox);
+
+            stage.setScene(scene1);
+            stage.show();
+        } catch (NullPointerException e) {
+            AlertBox.showMessage("null exception", "There is no BuyLog");
+        }
+
+    }
+
+    public void ShowDiscountCodes(MouseEvent mouseEvent) {
+        TableView table = new TableView<>();
+        TableColumn<String, DiscountData> discountIdCol = new TableColumn("ID");
+        discountIdCol.setMinWidth(150);
+        discountIdCol.setCellValueFactory(new PropertyValueFactory<>("discountId"));
+
+        TableColumn<String, DiscountData> discountStartTimeCol = new TableColumn("Start");
+        discountStartTimeCol.setMinWidth(100);
+        discountStartTimeCol.setCellValueFactory(new PropertyValueFactory<>("discountStartTime"));
+
+        TableColumn<String, DiscountData> discountEndTimeCol = new TableColumn("End");
+        discountEndTimeCol.setMinWidth(100);
+        discountEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("discountEndTime"));
+
+        TableColumn<String, DiscountData> percentCol = new TableColumn("Percent");
+        percentCol.setMinWidth(100);
+        percentCol.setCellValueFactory(new PropertyValueFactory<>("percent"));
+
+        TableColumn<String, DiscountData> maxPossibleUsageCol = new TableColumn("MaxPossibleUsage");
+        discountEndTimeCol.setMinWidth(50);
+        discountEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("maxPossibleUsage"));
+
+        table.getColumns().addAll(discountIdCol, discountStartTimeCol, discountEndTimeCol, percentCol, maxPossibleUsageCol);
+        table.getItems().add(new DiscountData("a", "a", "a", "a", "a"));
+
+        try{
+            ArrayList<Discount> discounts = customerProfileManager.customer.getAllDiscountCodesForCustomer();
+            for (int i = 0; i < discounts.size(); i++) {
+                Discount discount = discounts.get(i);
+                table.getItems().add(new DiscountData(discount.getDiscountCode(),discount.getStartTime().toString(),discount.getEndTime().toString(),Double.toString(discount.getDiscountPercent()),Double.toString(discount.getMaxPossibleDiscount())));
+            }
+            final Label label = new Label("Discount Codes");
+            label.setFont(new Font("Arial", 20));
+            Stage stage = new Stage();
+
+            stage.setTitle("Discount Codes");
+            stage.setWidth(620);
+            stage.setHeight(500);
+
+            VBox vbox = new VBox();
+            vbox.setSpacing(5);
+            vbox.setPadding(new Insets(10, 0, 0, 10));
+            vbox.getChildren().addAll(label, table);
+
+            Scene scene1 = new Scene(vbox);
+
+            stage.setScene(scene1);
+            stage.show();
+        } catch (NullPointerException e) {
+            AlertBox.showMessage("null exception", "There is no BuyLog");
+        }
     }
 }
-
