@@ -27,7 +27,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         if (AdminProfileManager.isThereAdmin()) {
-            scene = new Scene(loadFXML("mainMenu").load());
+            scene = new Scene(loadFXML("MainMenu").load());
         }
         else {
             AlertBox.showMessage("Register Admin", "You must first register admin");

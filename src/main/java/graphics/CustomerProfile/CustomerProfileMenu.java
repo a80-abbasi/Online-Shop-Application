@@ -47,6 +47,7 @@ public class CustomerProfileMenu {
     public TextField passwordField;
     public TextField usernameField;
     public Label balanceLabel;
+    public AnchorPane showDiscountCodesScroll;
     private TableView table = new TableView();
 
     private ArrayList<Pane> showingBuyLogs = new ArrayList<>();
@@ -127,16 +128,20 @@ public class CustomerProfileMenu {
     }
 
 
-    public void showOrderByID(MouseEvent mouseEvent) {
+    public void showOrderByID(MouseEvent mouseEvent) throws Exception{
         String orderID =  orderIDForShowOrder.getText();
-        BuyLog buylog = customerProfileManager.customer.getBuyLogByID(orderID);
+        //BuyLog buyLog = customerProfileManager.customer.getBuyLogByID(orderID);
         TableView<Data> table = new TableView<Data>();
         final ObservableList<Data> data = FXCollections.observableArrayList();
-        for (int i = 0; i < buylog.getBoughtProducts().keySet().size(); i++) {
-            ArrayList<Product> products = new ArrayList<>();
-            products.addAll(buylog.getBoughtProducts().keySet());
-            FXCollections.observableArrayList().add(new Data(products.get(i).getProductName(), buylog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getProductSeller().getName()));
-        }
+        FXCollections.observableArrayList().add(new Data("a", "b", "c"));
+        FXCollections.observableArrayList().add(new Data("a", "b", "c"));
+        FXCollections.observableArrayList().add(new Data("a", "b", "c"));
+
+        //        for (int i = 0; i < buyLog.getBoughtProducts().keySet().size(); i++) {
+    //            ArrayList<Product> products = new ArrayList<>(buyLog.getBoughtProducts().keySet());
+    //            FXCollections.observableArrayList().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getProductSeller().getName()));
+    //        }
+
         Stage stage = new Stage();
         //public void start(Stage stage) {
         Scene scene = new Scene(new Group());
@@ -144,9 +149,9 @@ public class CustomerProfileMenu {
         stage.setWidth(550);
         stage.setHeight(500);
 
-        final Label label = new Label("Order");
+        final Label label = new Label("Date" + "1.2.3" + "Price:" + "10$");
         label.setFont(new Font("Arial", 20));
-        
+
         //table.setEditable(true);
 
         TableColumn productNameCol = new TableColumn("Product Name");

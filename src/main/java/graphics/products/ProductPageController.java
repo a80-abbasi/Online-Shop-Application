@@ -32,7 +32,10 @@ import javafx.util.Duration;
 import org.controlsfx.control.Rating;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProductPageController {
 

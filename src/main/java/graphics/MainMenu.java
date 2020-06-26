@@ -44,7 +44,7 @@ public class MainMenu {
             try {
                 if (ProductPageController.loginPopUp == null && !isLoginMenuOpen) {
                     Stage registerPopUp = new Stage();
-                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("loginMenu.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("LoginMenu.fxml"));
                     Scene scene = new Scene(fxmlLoader.load());
                     registerPopUp.setScene(scene);
                     registerPopUp.setTitle("login");
