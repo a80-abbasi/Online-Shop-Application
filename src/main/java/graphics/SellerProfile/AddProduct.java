@@ -59,13 +59,19 @@ public class AddProduct {
                     setCategory(categoryName);
                 }
             });
-            selectCategoryMenuButton.getItems().add(new MenuItem(categoryName));
+            selectCategoryMenuButton.getItems().add(menuItem);
         }
     }
 
     private void setCategory(String categoryName) {
         this.category = Category.getCategoryByName(categoryName);
-        specialFeaturesTable.getItems().addAll(category.getSpecialFeatures());
+        selectCategoryMenuButton.setText(categoryName);
+        if (category.getSpecialFeatures().isEmpty()) {
+            return;
+        }
+        for (String specialFeature : category.getSpecialFeatures()) {
+            specialFeaturesTable.getItems().add(specialFeature);
+        }
     }
 
     public void confirm(MouseEvent mouseEvent) {

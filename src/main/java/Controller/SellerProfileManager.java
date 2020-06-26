@@ -65,7 +65,7 @@ public class SellerProfileManager extends ProfileManager {
         ArrayList<Category> allCategories = Category.getAllCategories();
         ArrayList<String> allCategoriesNames = new ArrayList<>();
         for (Category category : allCategories) {
-            allCategoriesNames.add(category.toString());
+            allCategoriesNames.add(category.getName());
         }
         return allCategoriesNames;
     }
