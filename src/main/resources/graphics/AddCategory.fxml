@@ -8,7 +8,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="graphics.AdminProfile.Categories.ManageCategoriesMenu"
+            fx:controller="graphics.AdminProfile.Categories.AddCategory"
             prefHeight="800.0" prefWidth="1550.0">
 
 </AnchorPane>
