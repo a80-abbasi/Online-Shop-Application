@@ -3,6 +3,7 @@ package Model.Account;
 import Model.Product.Product;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class Customer extends Account {
@@ -10,11 +11,11 @@ public class Customer extends Account {
     private static HashMap<Product, Integer> tmpCart = new HashMap<>();
     private double balance;
     private HashMap<Product, Integer> cart;
-    private ArrayList<BuyLog> buyLogs;
+    private final ArrayList<BuyLog> buyLogs;
     private HashMap<Discount, Integer> usedDiscounts;
-    private ArrayList<Discount> allDiscountCodesForCustomer = new ArrayList<>(); //todo:admin add codes to this array too!
+    private final ArrayList<Discount> allDiscountCodesForCustomer = new ArrayList<>(); //todo:admin add codes to this array too!
     private int numberOfDiscountGifts;
-    private static ArrayList<String> customerFieldsForPurchase = new ArrayList<>();
+    private static final ArrayList<String> customerFieldsForPurchase = new ArrayList<>();
     static {
         customerFieldsForPurchase.add("name");
         customerFieldsForPurchase.add("lastName");
@@ -147,6 +148,7 @@ public class Customer extends Account {
     public static void setTmpCart(HashMap<Product, Integer> tmpCart) {
         Customer.tmpCart = tmpCart;
     }
+
 
     @Override
     public String toString() {

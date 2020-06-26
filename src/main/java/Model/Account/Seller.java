@@ -3,6 +3,8 @@ package Model.Account;
 import Model.Product.Product;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 public class Seller extends Account {
     private static ArrayList<Seller> allSellers = new ArrayList<>();
