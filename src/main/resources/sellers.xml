@@ -1280,4 +1280,44 @@
         <balance>10.0</balance>
         <nameOfCompany>a0</nameOfCompany>
     </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
 </sellers>
