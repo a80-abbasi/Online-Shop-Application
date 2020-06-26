@@ -48,6 +48,7 @@ public class CustomerProfileMenu {
     public TextField usernameField;
     public Label balanceLabel;
     public AnchorPane showDiscountCodesScroll;
+    public TableView showOrderTable;
     private TableView table = new TableView();
 
     private ArrayList<Pane> showingBuyLogs = new ArrayList<>();
@@ -128,53 +129,51 @@ public class CustomerProfileMenu {
     }
 
 
-    public void showOrderByID(MouseEvent mouseEvent) throws Exception{
-        String orderID =  orderIDForShowOrder.getText();
-        //BuyLog buyLog = customerProfileManager.customer.getBuyLogByID(orderID);
+    public void showOrderByID(MouseEvent mouseEvent) throws Exception {
         TableView table = new TableView<>();
         TableColumn<String, Data> productNameCol = new TableColumn("Product Name");
         productNameCol.setMinWidth(200);
-        productNameCol.setCellValueFactory(
-                new PropertyValueFactory<>("productName"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
 
         TableColumn<String, Data> productNumberCol = new TableColumn("Product Number");
         productNumberCol.setMinWidth(100);
-        productNumberCol.setCellValueFactory(
-                new PropertyValueFactory<>("productNumber"));
+        productNumberCol.setCellValueFactory(new PropertyValueFactory<>("productNumber"));
 
         TableColumn<String, Data> productSellerCol = new TableColumn("Product Seller");
         productSellerCol.setMinWidth(200);
-        productSellerCol.setCellValueFactory(
-                new PropertyValueFactory<>("productSeller"));
+        productSellerCol.setCellValueFactory(new PropertyValueFactory<>("productSeller"));
 
         table.getColumns().addAll(productNameCol, productNumberCol, productSellerCol);
         table.getItems().add(new Data("a", "a", "a"));
 
-        //table.setEditable(true);
+        try{
+            String orderID =  orderIDForShowOrder.getText();
+            BuyLog buyLog = customerProfileManager.customer.getBuyLogByID(orderID);
+            for (int i = 0; i < buyLog.getBoughtProducts().keySet().size(); i++) {
+                ArrayList<Product> products = new ArrayList<>(buyLog.getBoughtProducts().keySet());
+                table.getItems().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getProductSeller().getName()));
+            }
+            final Label label = new Label("Date" + buyLog.getDate() + "                 " + "Price:" + buyLog.getPaidAmount()+"$");
+            label.setFont(new Font("Arial", 20));
+            Stage stage = new Stage();
 
-        //        for (int i = 0; i < buyLog.getBoughtProducts().keySet().size(); i++) {
-    //            ArrayList<Product> products = new ArrayList<>(buyLog.getBoughtProducts().keySet());
-    //            FXCollections.observableArrayList().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getProductSeller().getName()));
-    //        }
+            stage.setTitle("Order");
+            stage.setWidth(550);
+            stage.setHeight(500);
 
-        Stage stage = new Stage();
-        //public void start(Stage stage) {
-        stage.setTitle("Order");
-        stage.setWidth(550);
-        stage.setHeight(500);
+            VBox vbox = new VBox();
+            vbox.setSpacing(5);
+            vbox.setPadding(new Insets(10, 0, 0, 10));
+            vbox.getChildren().addAll(label, table);
 
-        final Label label = new Label("Date" + "1.2.3" + "Price:" + "10$");
-        label.setFont(new Font("Arial", 20));
+            Scene scene1 = new Scene(vbox);
 
-        VBox vbox = new VBox();
-        vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 0, 0, 10));
-        vbox.getChildren().addAll(label, table);
+            stage.setScene(scene1);
+            stage.show();
+        } catch (NullPointerException e) {
+            AlertBox.showMessage("null exception", "There is no BuyLog");
+        }
 
-        Scene scene1 = new Scene(vbox);
-
-        stage.setScene(scene1);
-        stage.show();
     }
 
 
