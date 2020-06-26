@@ -5,6 +5,7 @@ import Controller.SellerProfileManager;
 import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Seller;
+import graphics.AlertBox;
 import graphics.App;
 import graphics.products.ProductPageController;
 import javafx.scene.control.Button;
@@ -36,5 +37,6 @@ public class AddCompanyInformation {
         sellerProfileManager.seller.setPhoneNumberOfCompany(phoneNumber.getText());
         sellerProfileManager.seller.setCompanyAddress(address.getText());
         sellerProfileManager.seller.setCompanyOpenYear(openYear.getText());
+        AlertBox.showMessage("", "Your Information Submitted");
     }
 }
