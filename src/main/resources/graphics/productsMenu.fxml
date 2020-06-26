@@ -117,10 +117,11 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <MenuButton fx:id="categories" layoutX="1267.0" layoutY="438.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="260.0" text="Select Cagory">
+      <MenuButton fx:id="categories" layoutX="1268.0" layoutY="483.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="260.0" text="Select Cagory">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </MenuButton>
+      <MenuButton fx:id="sortByFeatureMenuButton" disable="true" layoutX="1268.0" layoutY="427.0" mnemonicParsing="false" opacity="0.0" prefHeight="25.0" prefWidth="260.0" text="sort based on special features" wrapText="true" />
    </children>
 </Pane>

@@ -22,6 +22,7 @@ public class ProductsManager {
     private boolean existenceFilter;
     private int maximumPriceFilter;
     private int minimumPriceFilter;
+    private String specialFeatureSort = null;
 
     public void showAllCategories () {
         Category.showAllCategories();
@@ -52,6 +53,14 @@ public class ProductsManager {
 
     public void deleteAProduct(Product product){
         deletedProducts.add(product);
+    }
+
+    public void useSpecialFeatureSort(String specialFeatureSort){
+        this.specialFeatureSort = specialFeatureSort;
+    }
+
+    public void disableSpecialFeatureSort(){
+        specialFeatureSort = null;
     }
 
     public ArrayList<Product> showProducts () {
@@ -91,6 +100,11 @@ public class ProductsManager {
             sortedFilteredProducts.add(product);
         }
         sortedFilteredProducts.sort(currentSortMode);
+        if (categoryFilter != null){
+            if (specialFeatureSort != null){
+                products.sort(Comparator.comparing(product -> -product.getSpecialFeatures().get(specialFeatureSort)));
+            }
+        }
         return sortedFilteredProducts;
     }
 

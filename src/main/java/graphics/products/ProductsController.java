@@ -51,6 +51,7 @@ public class ProductsController {
     public MenuButton categories;
     public Pane mainPane;
     public ImageView profileImage;
+    public MenuButton sortByFeatureMenuButton;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
@@ -77,6 +78,9 @@ public class ProductsController {
             categories.setText("All Categories");
             mainPane.getChildren().removeAll(mainPane.getChildren().stream().filter(node -> node instanceof MenuButton).
                     filter(menuButton -> menuButton != categories).collect(Collectors.toList()));
+            sortByFeatureMenuButton.setDisable(true);
+            sortByFeatureMenuButton.setOpacity(0);
+            productsManager.disableSpecialFeatureSort();
             showProducts();
         });
         categories.getItems().add(allCategoriesItem);
@@ -87,12 +91,35 @@ public class ProductsController {
         ProductPageController.setProfileButton(profileImage, "productsMenu");
     }
 
+    private void setSortBySpecialFeatureMenuButton(Category category){
+        sortByFeatureMenuButton.setOpacity(1);
+        sortByFeatureMenuButton.setDisable(false);
+        sortByFeatureMenuButton.getItems().clear();
+        MenuItem doNot = new MenuItem("don't sort by special feature");
+        sortByFeatureMenuButton.getItems().add(doNot);
+        doNot.setOnAction(e -> {
+            productsManager.disableSpecialFeatureSort();
+            sortByFeatureMenuButton.setText("don't sort by special feature");
+            showProducts();
+        });
+        for (String feature : category.getSpecialFeatures()) {
+            MenuItem featureItem = new MenuItem(feature);
+            sortByFeatureMenuButton.getItems().add(featureItem);
+            featureItem.setOnAction(e -> {
+                sortByFeatureMenuButton.setText("sort by: " + feature);
+                productsManager.useSpecialFeatureSort(feature);
+                showProducts();
+            });
+        }
+    }
+
     private void setCategories(ArrayList<Category> allCategories, MenuButton menuButton) {
         for (Category category : allCategories) {
             MenuItem categoriesItem = new MenuItem(category.getName());
             categoriesItem.setOnAction(e -> {
                 menuButton.setText(category.getName());
                 productsManager.addCategoryFilter(category);
+                setSortBySpecialFeatureMenuButton(category);
                 if (!category.getSubCategories().isEmpty()){
                     MenuButton subMenuButton = new MenuButton();
                     subMenuButton.setText("Select sub category");
