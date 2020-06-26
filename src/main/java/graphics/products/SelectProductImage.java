@@ -41,7 +41,7 @@ public class SelectProductImage {
         imageView.setPreserveRatio(true);
         imageView.setFitWidth(175);
         imageView.setOnMouseClicked(e -> {
-            AddProduct.productImage = imageView;
+            AddProduct.productImageAddress = imageAddress;
             ((Stage) mainPain.getScene().getWindow()).close();
             AddProduct.selectImagePopUp = null;
         });

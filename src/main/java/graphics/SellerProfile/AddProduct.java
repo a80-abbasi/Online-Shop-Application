@@ -28,11 +28,11 @@ public class AddProduct {
     public ImageView backImage;
     public ImageView mainMenuImage;
 
-    public static ImageView productImage;
+    public static String productImageAddress;
     public static Stage selectImagePopUp;
 
     public void initialize(){
-        productImage = new ImageView(new Image("file:src\\main\\resources\\Images\\products\\unKnown.jpg"));
+        productImageAddress = "file:src\\main\\resources\\Images\\products\\unKnown.jpg";
         App.setBackButton(backImage, "SellerProfileMenu");
         ProductPageController.setMainMenuButton(mainMenuImage);
     }
