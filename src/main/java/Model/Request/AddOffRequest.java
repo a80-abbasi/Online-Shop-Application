@@ -28,6 +28,7 @@ public class AddOffRequest extends EditAddOffRequest {
         this.endTime = offEndTime;
         this.offAmount = offAmount;
         this.offProductIDs = offProductIDs;
+        allAddOffRequest.add(this);
     }
 
     public static ArrayList<AddOffRequest> getAllAddOffRequest() {

@@ -35,6 +35,7 @@ public class EditOffRequest extends EditAddOffRequest {
         this.setOffAmount(offAmount);
         this.setOffStatus(OffStatus.PENDING_FOR_EDITION);
         this.setOffProductIDs(offProductIDs);
+        allEditOffRequests.add(this);
     }
 
     public EditOffRequest() {

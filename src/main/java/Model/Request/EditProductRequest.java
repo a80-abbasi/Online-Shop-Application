@@ -43,6 +43,7 @@ public class EditProductRequest extends EditAddProductRequest {
         this.productCategory = productCategory;
         this.productSpecialFeatures = productSpecialFeatures;
         this.productSeller = productSeller;
+        allEditProductRequests.add(this);
     }
 
     public EditProductRequest(){
