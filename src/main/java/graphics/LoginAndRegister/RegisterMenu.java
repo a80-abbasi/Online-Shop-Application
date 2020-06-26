@@ -5,10 +5,7 @@ import Model.Account.AccountType;
 import graphics.AlertBox;
 import graphics.App;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 
@@ -27,6 +24,7 @@ public class RegisterMenu {
     public TextField usernameField;
     public TextField companyField;
     public Label companyLabel;
+    public MenuButton accountTypeMenuButton;
 
     private LoginAndRegisterManager loginAndRegisterManager;
     private AccountType accountType;
@@ -51,6 +49,7 @@ public class RegisterMenu {
                 try {
                     loginAndRegisterManager.registerCustomer(username.trim(), password.trim(), firstName.trim(), lastName, email, phoneNumber);
                     AlertBox.showMessage("Register Customer", "Customer Registered Successfully");
+                    loginAndRegisterManager.loginUser(username.trim(), password.trim());
                     try {
                         App.setRoot(parentMenu);
                     } catch (IOException e) {
@@ -90,6 +89,7 @@ public class RegisterMenu {
         companyField = null;
 
         this.confirmButton.setLayoutY(300);
+        accountTypeMenuButton.setText("Sign Up Customer");
     }
 
     public void setAccountTypeSeller(ActionEvent event) {
@@ -108,6 +108,7 @@ public class RegisterMenu {
         this.confirmButton.setLayoutY(340);
 
         this.registerPane.getChildren().addAll(companyField, companyLabel);
+        accountTypeMenuButton.setText("Sign Up Seller");
     }
 
     public static void setParentMenu(String parentMenu) {
