@@ -29,7 +29,7 @@ public class SellerProfileMenu extends Menu {
 
     //todo: does this work right?
     public Menu getViewCompanyInformationMenu() {
-        return new Menu("View Company Information Menu", this) {
+        return new Menu("View graphics.SellerProfile.Company Information Menu", this) {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");

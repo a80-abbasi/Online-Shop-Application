@@ -47,7 +47,7 @@ public class SellerProfileMenu {
         emailField.setText(sellerProfileManager.getEmail());
         phoneNumberField.setText(sellerProfileManager.getPhoneNumber());
         companyField.setText(sellerProfileManager.getCompanyName());
-        balance.setText(Double.toString(sellerProfileManager.seller.getBalance()));
+        balance.setText(Double.toString(sellerProfileManager.seller.getBalance())+"$");
         ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
@@ -186,5 +186,23 @@ public class SellerProfileMenu {
     public void showCategories(MouseEvent mouseEvent) {
         TableView allCategoriesTable = sellerProfileManager.getAllCategoriesTable();
         showTable(allCategoriesTable, "All Categories");
+    }
+
+    public void addCompanyInformation(MouseEvent mouseEvent) {
+            try {
+                App.setRoot("addCompanyInformation");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    }
+
+    public void ShowCompanyInformation(MouseEvent mouseEvent) {
+            try {
+                App.setRoot("ShowCompanyInformation");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
     }
 }

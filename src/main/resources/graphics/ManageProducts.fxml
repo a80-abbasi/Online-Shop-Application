@@ -113,10 +113,10 @@
       <TextArea fx:id="productExplanationsField" layoutX="879.0" layoutY="525.0" prefHeight="143.0" prefWidth="300.0" />
       <MenuButton fx:id="categoriesMenuButton" layoutX="1207.0" layoutY="231.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="300.0" />
       <TableView fx:id="productSpecialFeaturesTable" layoutX="1207.0" layoutY="375.0" prefHeight="292.0" prefWidth="300.0">
-        <columns>
-          <TableColumn fx:id="specialFeaturesColumn" editable="false" prefWidth="150.5" text="Special Features" />
-          <TableColumn fx:id="valueColumn" prefWidth="148.5" text="Values" />
-        </columns>
+         <columns>
+            <TableColumn fx:id="specialFeaturesColumn" editable="false" prefWidth="150.5" text="Special Features" />
+            <TableColumn fx:id="valueColumn" prefWidth="148.5" text="Values" />
+         </columns>
       </TableView>
       <Button fx:id="changeImageButton" layoutX="1288.0" layoutY="710.0" mnemonicParsing="false" onAction="#changeImagePressed" prefHeight="44.0" prefWidth="138.0" text="Change Image">
          <font>

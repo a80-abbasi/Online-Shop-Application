@@ -90,10 +90,10 @@ public class EditProductMenu extends Menu {
     }
 
     private Menu getEditCompanyName() {
-        return new Menu("Edit Company Name", this) {
+        return new Menu("Edit graphics.SellerProfile.Company Name", this) {
             @Override
             public void execute() {
-                System.out.println("Enter Company Name, (back) to return or (logout) to log out::");
+                System.out.println("Enter graphics.SellerProfile.Company Name, (back) to return or (logout) to log out::");
                 String companyName = scanner.nextLine();
                 sellerProfileManager.setProductCompanyName(editProductRequest, companyName);
                 if (companyName.equalsIgnoreCase("back")) {
@@ -102,7 +102,7 @@ public class EditProductMenu extends Menu {
                     loginAndRegisterManager.logoutUser();
                 }
                 sellerProfileManager.setProductCompanyName(editProductRequest, companyName);
-                System.out.println("Company Name " + companyName + " successfully added to your request");
+                System.out.println("graphics.SellerProfile.Company Name " + companyName + " successfully added to your request");
                 this.parentMenu.execute();
             }
         };
