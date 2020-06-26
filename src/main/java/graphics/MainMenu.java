@@ -24,10 +24,10 @@ public class MainMenu {
     public Button profileButton;
     public ImageView accountImage;
 
-    private boolean isLoginMenuOpen;
+    private static boolean isLoginMenuOpen;
 
     public void initialize(){
-        ProductPageController.setProfileButton(accountImage, "MainMenu");
+        ProductPageController.setLoginButton(accountImage, "MainMenu");
     }
 
     public void goToProductsMenu(ActionEvent event) {
@@ -39,6 +39,10 @@ public class MainMenu {
     }
 
     public void goToProfileMenu(ActionEvent event) {
+        openProfile();
+    }
+
+    public static void openProfile(){
         Account account = Account.getLoggedInAccount();
         if (account == null) {
             try {
@@ -58,7 +62,7 @@ public class MainMenu {
                     });
                     registerPopUp.show();
                     LoginMenu.setParentMenu("MainMenu");
-                     AlertBox.showMessage("Login Error", "You must login first!");
+                    AlertBox.showMessage("Login Error", "You must login first!");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
