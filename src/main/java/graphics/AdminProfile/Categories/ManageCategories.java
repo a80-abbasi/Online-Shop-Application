@@ -6,10 +6,12 @@ import Model.Account.Admin;
 import Model.Product.Category;
 import graphics.AlertBox;
 import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -28,6 +30,8 @@ public class ManageCategories {
     public Button removeSubCategoriesButton;
     public Button addSubCategoriesButton;
     public Button addSpecialFeatureButton;
+    public ImageView backImage;
+    public ImageView mainMenuImage;
 
     private Category selectedCategory;
 
@@ -36,6 +40,9 @@ public class ManageCategories {
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
         allCategoriesTable = adminProfileManager.getAllCategoriesTable(allCategoriesTable);
+
+        App.setBackButton(backImage, "AdminProfileMenu");
+        ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
     public void showCategoryDetails(MouseEvent mouseEvent) {

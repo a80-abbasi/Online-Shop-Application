@@ -6,9 +6,11 @@ import Model.Account.Admin;
 import Model.Product.Category;
 import graphics.AlertBox;
 import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -22,9 +24,11 @@ public class AddCategory {
     public TextField subCategoryFeaturesField;
     public ListView<String> subCategoryFeaturesList;
     public Button confirmButton;
+    public TextField subCategoriesField;
 
     private static Category category;
-    public TextField subCategoriesField;
+    public ImageView backImage;
+    public ImageView mainMenuImage;
 
     private ArrayList<String> specialFeatures;
     private ArrayList<Category> subCategories;
@@ -44,6 +48,9 @@ public class AddCategory {
         } else {
             turnToAddSubCategoryMode();
         }
+
+        App.setBackButton(backImage, parentMenu);
+        ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
     public void addFeature(MouseEvent mouseEvent) {
