@@ -51,7 +51,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="174.0" fitWidth="243.0" layoutX="43.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="141.0" fitWidth="183.0" layoutX="76.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" />
               <Label layoutX="20.0" layoutY="329.0" prefHeight="46.0" prefWidth="106.0" text="Username">
                   <font>
                       <Font size="18.0" />
@@ -117,6 +117,11 @@
                       <Font size="18.0" />
                   </font>
               </Button>
+            <Label layoutX="89.0" layoutY="14.0" prefHeight="30.0" prefWidth="158.0" text="Customer Profile">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <ImageView fx:id="backImage" fitHeight="40.0" fitWidth="34.0" layoutX="1404.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
