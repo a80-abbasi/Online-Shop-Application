@@ -2,10 +2,7 @@ package graphics.CustomerProfile;
 
 import Controller.CustomerProfileManager;
 import Controller.SellerProfileManager;
-import Model.Account.Account;
-import Model.Account.BuyLog;
-import Model.Account.Customer;
-import Model.Account.Seller;
+import Model.Account.*;
 import Model.Product.Comment;
 import Model.Product.Product;
 import graphics.AlertBox;
@@ -225,5 +222,58 @@ public class CustomerProfileMenu {
             AlertBox.showMessage("null exception", "There is no BuyLog");
         }
 
+    }
+
+    public void ShowDiscountCodes(MouseEvent mouseEvent) {
+        TableView table = new TableView<>();
+        TableColumn<String, DiscountData> discountIdCol = new TableColumn("ID");
+        discountIdCol.setMinWidth(150);
+        discountIdCol.setCellValueFactory(new PropertyValueFactory<>("discountId"));
+
+        TableColumn<String, DiscountData> discountStartTimeCol = new TableColumn("Start");
+        discountStartTimeCol.setMinWidth(100);
+        discountStartTimeCol.setCellValueFactory(new PropertyValueFactory<>("discountStartTime"));
+
+        TableColumn<String, DiscountData> discountEndTimeCol = new TableColumn("End");
+        discountEndTimeCol.setMinWidth(100);
+        discountEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("discountEndTime"));
+
+        TableColumn<String, DiscountData> percentCol = new TableColumn("Percent");
+        percentCol.setMinWidth(100);
+        percentCol.setCellValueFactory(new PropertyValueFactory<>("percent"));
+
+        TableColumn<String, DiscountData> maxPossibleUsageCol = new TableColumn("MaxPossibleUsage");
+        discountEndTimeCol.setMinWidth(50);
+        discountEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("maxPossibleUsage"));
+
+        table.getColumns().addAll(discountIdCol, discountStartTimeCol, discountEndTimeCol, percentCol, maxPossibleUsageCol);
+        table.getItems().add(new DiscountData("a", "a", "a", "a", "a"));
+
+        try{
+            ArrayList<Discount> discounts = customerProfileManager.customer.getAllDiscountCodesForCustomer();
+            for (int i = 0; i < discounts.size(); i++) {
+                Discount discount = discounts.get(i);
+                table.getItems().add(new DiscountData(discount.getDiscountCode(),discount.getStartTime().toString(),discount.getEndTime().toString(),Double.toString(discount.getDiscountPercent()),Double.toString(discount.getMaxPossibleDiscount())));
+            }
+            final Label label = new Label("Discount Codes");
+            label.setFont(new Font("Arial", 20));
+            Stage stage = new Stage();
+
+            stage.setTitle("Discount Codes");
+            stage.setWidth(620);
+            stage.setHeight(500);
+
+            VBox vbox = new VBox();
+            vbox.setSpacing(5);
+            vbox.setPadding(new Insets(10, 0, 0, 10));
+            vbox.getChildren().addAll(label, table);
+
+            Scene scene1 = new Scene(vbox);
+
+            stage.setScene(scene1);
+            stage.show();
+        } catch (NullPointerException e) {
+            AlertBox.showMessage("null exception", "There is no BuyLog");
+        }
     }
 }
