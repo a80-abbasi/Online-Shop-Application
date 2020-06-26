@@ -178,5 +178,10 @@
             <Image url="@../Images/mainMenu.png" />
          </image>
       </ImageView>
+      <Label layoutX="482.0" layoutY="40.0" text="Admin Profile Menu">
+         <font>
+            <Font name="Times New Roman" size="40.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

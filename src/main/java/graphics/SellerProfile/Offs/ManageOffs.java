@@ -50,7 +50,7 @@ public class ManageOffs {
         notIncludingProducts = new TableView();
         offsTable = sellerProfileManager.getSellerOffsTable(offsTable);
         notIncludingProducts = sellerProfileManager.getSellerProductsTable(notIncludingProducts);
-        App.setBackButton(backImage, "AdminProfileMenu");
+        App.setBackButton(backImage, "SellerProfileMenu");
         ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
