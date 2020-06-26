@@ -133,7 +133,7 @@ public class AdminProfileManager extends ProfileManager {
         }
     }
 
-    public void createDiscountCode(String discountCode, Date startTime, Date endTime, String discountPercent, String maxPossibleDiscount, String discountPerCustomer, ArrayList<String> includingCustomers) throws Exception{
+    public void createDiscountCode(String discountCode, Date startTime, Date endTime, String discountPercent, String maxPossibleDiscount, String discountPerCustomer, ArrayList<String> includingCustomers) throws Exception {
         if (checkDiscountCodeValidity(discountCode) && checkDiscountPercentValidity(discountPercent) && checkMaxPossibleDiscountValidity(maxPossibleDiscount) && checkDiscountPerCustomerValidity(discountPerCustomer) && checkCustomersValidity(includingCustomers)) {
             new Discount(discountCode, startTime, endTime, Double.parseDouble(discountPercent), Double.parseDouble(maxPossibleDiscount), Integer.parseInt(discountPerCustomer), includingCustomers);
         }
@@ -219,7 +219,7 @@ public class AdminProfileManager extends ProfileManager {
         }
     }
 
-    public void editDiscountIncludingCustomers(String discountCode, ArrayList<String> customersUsername) throws Exception{
+    public void editDiscountIncludingCustomers(String discountCode, ArrayList<String> customersUsername) throws Exception {
         if (checkCustomersValidity(customersUsername) && checkDiscountCodeValidity(discountCode)) {
             Discount discount = Discount.getDiscountByDiscountCode(discountCode);
             discount.setIncludingCustomers(customersUsername);
@@ -260,7 +260,7 @@ public class AdminProfileManager extends ProfileManager {
         }
     }
 
-    private boolean checkCustomersValidity(ArrayList<String> customersUsername) throws IllegalArgumentException{
+    private boolean checkCustomersValidity(ArrayList<String> customersUsername) throws IllegalArgumentException {
         for (String s : customersUsername) {
             if (Account.getAccountByUsername(s) == null || !(Account.getAccountByUsername(s) instanceof Customer)) {
                 throw new IllegalArgumentException("Invalid Customer Username.");
@@ -328,15 +328,32 @@ public class AdminProfileManager extends ProfileManager {
         return Category.getAllCategories();
     }
 
-    public void addCategory(String categoryName, ArrayList<String> specialFeatures) {
-        Category category = new Category(categoryName);
-        category.setSpecialFeatures(specialFeatures);
+    public void addCategory(String categoryName, ArrayList<String> specialFeatures) throws Exception {
+        if (Category.getCategoryByName(categoryName) == null) {
+            if (specialFeatures.isEmpty()) {
+                throw new Exception("Special Features Field is Empty");
+            } else {
+                Category category = new Category(categoryName);
+                category.setSpecialFeatures(specialFeatures);
+            }
+        } else {
+            throw new Exception("There is another Category with this name");
+        }
     }
 
-    //todo: completing this
-    public void addSubCategory(String subCategoryName, String parentCategory) {
-        Category category = Category.getCategoryByName(parentCategory);
-        category.addSubCategoryWithName(subCategoryName);
+    public Category addAndGetSubCategory(String subCategoryName, Category parentCategory, ArrayList<String> specialFeatures) throws Exception {
+        if (parentCategory == null) {
+            throw new Exception("You haven't add category yet");
+        } else {
+            if (subCategoryName.isEmpty() || subCategoryName.trim().isEmpty()) {
+                throw new Exception("You haven't entered subCategory name");
+            } else if (specialFeatures.isEmpty()) {
+                throw new Exception("Special Features Field is Empty");
+            }
+        }
+        Category subCategory = parentCategory.addSubCategoryWithName(subCategoryName);
+        subCategory.setSpecialFeatures(specialFeatures);
+        return subCategory;
     }
 
     public void editCategoryName(Category category, String newCategoryName) throws IllegalArgumentException {
