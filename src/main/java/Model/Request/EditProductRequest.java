@@ -54,6 +54,7 @@ public class EditProductRequest extends EditAddProductRequest {
             product.setPrice(productPrice);
             product.setExistingNumber(productExistingNumber);
             product.setExplanations(productExplanations);
+            product.setImageAddress(productImageAddress);
             product.setProductCategory(productCategory);
             product.setSpecialFeatures(productSpecialFeatures);
             if (!(productCategory.getProducts().contains(product))) {
