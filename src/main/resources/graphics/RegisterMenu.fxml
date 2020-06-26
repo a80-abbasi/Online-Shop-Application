@@ -61,7 +61,7 @@
                 <Font name="Times New Roman" size="14.0" />
             </font>
         </Button>
-      <MenuButton layoutX="410.0" layoutY="61.0" mnemonicParsing="false" text="Sign Up Customer">
+      <MenuButton fx:id="accountTypeMenuButton" layoutX="410.0" layoutY="61.0" mnemonicParsing="false" text="Sign Up Customer">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#setAccountTypeCustomer" text="Sign Up Customer" />
           <MenuItem mnemonicParsing="false" onAction="#setAccountTypeSeller" text="Sign Up Seller" />

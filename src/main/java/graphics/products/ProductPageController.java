@@ -9,6 +9,7 @@ import Model.Product.Product;
 import Model.Product.Score;
 import graphics.App;
 import graphics.LoginAndRegister.LoginMenu;
+import graphics.MainMenu;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -84,13 +85,16 @@ public class ProductPageController {
     public Label helpUsLabel;
     public ImageView backImage;
     public ImageView cartImage;
+    public ImageView loginImage;
+    public Button deleteProductButton;
+    public Label remainingLabel;
+    public ImageView mainMenuButton;
+    public ImageView profileImage;
 
     public TextField titleTextField;
     public TextArea commentTextArea;
     public Label XLabel;
     public Label commentNoteLabel;
-    public ImageView profileImage;
-    public Button deleteProductButton;
 
     private Product product;
     private ArrayList<Pane> showingComments = new ArrayList<>();
@@ -136,12 +140,30 @@ public class ProductPageController {
         setOffLeftTimeLabel();
         App.setBackButton(backImage, parentAddress);
         setCartButton(cartImage);
-        setProfileButton(profileImage, "productPage");
+        setLoginButton(loginImage, "productPage");
+        setMainMenuButton(mainMenuButton);
+        setProfileButton(profileImage);
     }
 
-    public static void setProfileButton(ImageView profileImage, String parentAddress){
+    public static void setProfileButton(ImageView profileImage){
         shadowOnMouseHover(profileImage);
-        profileImage.setOnMouseClicked(e -> {
+        profileImage.setOnMouseClicked(e -> MainMenu.openProfile());
+    }
+
+    public static void setMainMenuButton(ImageView mainMenuImage){
+        shadowOnMouseHover(mainMenuImage);
+        mainMenuImage.setOnMouseClicked(e -> {
+            try {
+                App.setRoot("MainMenu");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+    }
+
+    public static void setLoginButton(ImageView loginImage, String parentAddress){
+        shadowOnMouseHover(loginImage);
+        loginImage.setOnMouseClicked(e -> {
             if (loginPopUp == null){
                 loginPopUp = new Stage();
                 Scene scene;
@@ -160,7 +182,6 @@ public class ProductPageController {
                 loginPopUp.setScene(scene);
                 loginPopUp.setTitle("login");
                 loginPopUp.setResizable(false);
-                /*loginPopUp.initStyle(StageStyle.UNDECORATED);*/
                 loginPopUp.showAndWait();
             }
         });
@@ -284,6 +305,7 @@ public class ProductPageController {
         companyNameLabel.setText(product.getCompanyName());
         sellerNameLabel.setText(product.getProductSeller().getName());
         visitNumberLabel.setText(String.valueOf(product.getVisitNumber()));
+        remainingLabel.setText(String.valueOf(product.getExistingNumber()));
         setPropertiesLabel();
     }
 
@@ -605,5 +627,14 @@ public class ProductPageController {
 
     public static Stage getCartPopUp() {
         return cartPopUp;
+    }
+
+    public void compareButtonPressed(ActionEvent event) {
+        try {
+            ProductsController productsController = (ProductsController) App.setRoot("productsMenu");
+            productsController.prepareForComparison(product, imageStackPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,4 +1,4 @@
-package graphics.AdminProfile;
+package graphics.AdminProfile.Categories;
 
 import Controller.AdminProfileManager;
 import Model.Account.Account;

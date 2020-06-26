@@ -11,10 +11,12 @@ import graphics.LoginAndRegister.CreateAdminAccount;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -95,26 +97,39 @@ public class AdminProfileMenu {
     }
 
     public void manageUsers(MouseEvent mouseEvent) {
+        Stage stage = new Stage();
+
         TableView allUsersTable = adminProfileManager.getAllUsersTable();
-        allUsersTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        allUsersTable.getItems().remove(Account.getLoggedInAccount());
         Button deleteUserButton = new Button("Delete User");
+        deleteUserButton.setFont(Font.font("Times New Roman", 16));
         deleteUserButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                ObservableList selectedUsers = allUsersTable.getSelectionModel().getSelectedItems();
-
-                for (Object selectedUser : selectedUsers) {
-                    String selectedUsername = ((Account) selectedUser).getUsername();
-                    adminProfileManager.deleteUser(selectedUsername);
-                    AlertBox.showMessage("Delete User", "User with ID : <" + selectedUsername + "> deleted");
-                    allUsersTable.getItems().remove(selectedUser);
+                Object selectedUser = allUsersTable.getSelectionModel().getSelectedItem();
+                if (selectedUser == null) {
+                    return;
                 }
+                String selectedUsername = ((Account) selectedUser).getUsername();
+                adminProfileManager.deleteUser(selectedUsername);
+                AlertBox.showMessage("Delete User", "User with ID : <" + selectedUsername + "> deleted");
+                allUsersTable.getItems().remove(selectedUser);
+            }
+        });
+
+        Button doneButton = new Button("Done!");
+        doneButton.setFont(Font.font("Times New Roman", 16));
+        doneButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                stage.close();
             }
         });
 
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(allUsersTable, deleteUserButton);
-        Stage stage = new Stage();
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(20);
+        vBox.getChildren().addAll(allUsersTable, deleteUserButton, doneButton);
         stage.setScene(new Scene(vBox));
         stage.show();
     }
@@ -166,7 +181,11 @@ public class AdminProfileMenu {
     }
 
     public void addCategory(MouseEvent mouseEvent) {
-        //todo
+        try {
+            App.setRoot("AddCategory");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void setParentMenu(String parentMenu) {

@@ -38,7 +38,7 @@
                         <Image url="@../Images/cart.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="profileImage" fitHeight="37.0" fitWidth="34.0" layoutX="106.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="loginImage" fitHeight="37.0" fitWidth="34.0" layoutX="106.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/account.png" />
                      </image>
@@ -48,6 +48,11 @@
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Button>
+                  <ImageView fx:id="mainMenuButton" fitHeight="38.0" fitWidth="36.0" layoutX="158.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/mainMenu.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane layoutX="15.0" layoutY="67.0" prefHeight="552.0" prefWidth="1510.0" style="-fx-border-color: #c5c5c5;">
@@ -93,6 +98,9 @@
                               <Font name="Times New Roman" size="27.0" />
                            </font>
                         </Label>
+                        <Label layoutX="47.0" layoutY="438.0" text="remaining:" />
+                        <Label fx:id="remainingLabel" layoutX="119.0" layoutY="438.0" text="remainingLabel" />
+                        <Button layoutX="421.0" layoutY="434.0" mnemonicParsing="false" onAction="#compareButtonPressed" text="compare" />
                      </children>
                   </Pane>
                   <Pane layoutX="1181.0" layoutY="110.0" prefHeight="304.0" prefWidth="262.0" style="-fx-background-color: #d5d5d5; -fx-background-radius: 30 0 30 0;">
@@ -176,6 +184,11 @@
                         <Font name="System Bold" size="19.0" />
                      </font>
                   </Label>
+                  <ImageView fx:id="profileImage" fitHeight="32.0" fitWidth="37.0" layoutX="210.0" layoutY="-50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/profileMenu.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <TabPane layoutX="15.0" layoutY="628.0" prefHeight="567.0" prefWidth="1508.0" style="-fx-border-color: #c5c5c5;" tabClosingPolicy="UNAVAILABLE">

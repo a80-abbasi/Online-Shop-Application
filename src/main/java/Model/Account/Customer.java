@@ -31,6 +31,7 @@ public class Customer extends Account {
         cart = new HashMap<>();
         buyLogs = new ArrayList<>();
         usedDiscounts = new HashMap<>();
+        this.balance = 1500;
     }
 
     public Customer(){

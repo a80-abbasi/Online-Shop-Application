@@ -6,6 +6,8 @@ import Model.Product.Category;
 import Model.Product.Product;
 import graphics.App;
 import graphics.ToggleSwitch;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -21,6 +23,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import org.controlsfx.control.Rating;
 
 import java.io.IOException;
@@ -50,7 +53,15 @@ public class ProductsController {
     public ImageView cartImage;
     public MenuButton categories;
     public Pane mainPane;
-    public ImageView profileImage;
+    public ImageView loginImage;
+    public MenuButton sortByFeatureMenuButton;
+    public ImageView magnifier2;
+    public ImageView magnifier3;
+    public TextField filterBySellerTextField;
+    public TextField filterByCompanyTextField;
+    public Label messageLabel;
+    public ImageView mainMenuButton;
+    public ImageView profileImage1;
 
     private ArrayList<Product> showingProducts;
     private ProductsManager productsManager;
@@ -62,6 +73,9 @@ public class ProductsController {
     private static final int numberOfProductsPerPage = 10;
     private boolean disableSearchIsHidden = true;
     private static String parentAddress = "mainMenu";
+    private boolean isComparisonPage;
+    private Product firstProductForComparison;
+    private StackPane firstProductStackPane;
 
     public void initialize() {
         productsManager = new ProductsManager();
@@ -71,12 +85,16 @@ public class ProductsController {
 
         showProducts();
         setSliders();
+        setFilterBySellerAndCompany();
         MenuItem allCategoriesItem = new MenuItem("All Categories");
         allCategoriesItem.setOnAction(e -> {
             productsManager.disableCategoryFilter();
             categories.setText("All Categories");
             mainPane.getChildren().removeAll(mainPane.getChildren().stream().filter(node -> node instanceof MenuButton).
                     filter(menuButton -> menuButton != categories).collect(Collectors.toList()));
+            sortByFeatureMenuButton.setDisable(true);
+            sortByFeatureMenuButton.setOpacity(0);
+            productsManager.disableSpecialFeatureSort();
             showProducts();
         });
         categories.getItems().add(allCategoriesItem);
@@ -84,7 +102,66 @@ public class ProductsController {
 
         ProductPageController.setCartButton(cartImage);
         App.setBackButton(backImage, parentAddress);
-        ProductPageController.setProfileButton(profileImage, "productsMenu");
+        ProductPageController.setLoginButton(loginImage, "productsMenu");
+        ProductPageController.setMainMenuButton(mainMenuButton);
+        ProductPageController.setProfileButton(profileImage1);
+    }
+
+    public void prepareForComparison(Product firstProductForComparison, StackPane firstProductStackPane){
+        this.firstProductForComparison = firstProductForComparison;
+        this.firstProductStackPane = firstProductStackPane;
+        isComparisonPage = true;
+        messageLabel.setText("Select Second Product for Comparison");
+        messageLabel.setOpacity(1);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> messageLabel.setOpacity(0)));
+        timeline.setCycleCount(1);
+        timeline.play();
+        showProducts();
+    }
+
+    private void setFilterBySellerAndCompany() {
+        shadowOnMouseHover(magnifier2);
+        shadowOnMouseHover(magnifier3);
+        magnifier2.setOnMouseClicked(e -> {
+            if (filterBySellerTextField.getText().isBlank()){
+                productsManager.disableFilterBySeller();
+            }
+            else {
+                productsManager.addFilterBySeller(filterBySellerTextField.getText());
+            }
+            showProducts();
+        });
+        magnifier3.setOnMouseClicked(e -> {
+            if (filterByCompanyTextField.getText().isBlank()){
+                productsManager.disableFilterByCompany();
+            }
+            else {
+                productsManager.addFilterByCompany(filterByCompanyTextField.getText());
+            }
+            showProducts();
+        });
+    }
+
+    private void setSortBySpecialFeatureMenuButton(Category category){
+        sortByFeatureMenuButton.setOpacity(1);
+        sortByFeatureMenuButton.setDisable(false);
+        sortByFeatureMenuButton.getItems().clear();
+        MenuItem doNot = new MenuItem("don't sort by special feature");
+        sortByFeatureMenuButton.getItems().add(doNot);
+        doNot.setOnAction(e -> {
+            productsManager.disableSpecialFeatureSort();
+            sortByFeatureMenuButton.setText("don't sort by special feature");
+            showProducts();
+        });
+        for (String feature : category.getSpecialFeatures()) {
+            MenuItem featureItem = new MenuItem(feature);
+            sortByFeatureMenuButton.getItems().add(featureItem);
+            featureItem.setOnAction(e -> {
+                sortByFeatureMenuButton.setText("sort by: " + feature);
+                productsManager.useSpecialFeatureSort(feature);
+                showProducts();
+            });
+        }
     }
 
     private void setCategories(ArrayList<Category> allCategories, MenuButton menuButton) {
@@ -93,6 +170,7 @@ public class ProductsController {
             categoriesItem.setOnAction(e -> {
                 menuButton.setText(category.getName());
                 productsManager.addCategoryFilter(category);
+                setSortBySpecialFeatureMenuButton(category);
                 if (!category.getSubCategories().isEmpty()){
                     MenuButton subMenuButton = new MenuButton();
                     subMenuButton.setText("Select sub category");
@@ -240,8 +318,29 @@ public class ProductsController {
         vBox.setPrefHeight(280);
         vBox.setSpacing(8);
         shadowOnMouseHover(vBox);
-        vBox.setOnMouseClicked(event -> openProduct(product, stackPane));
+        vBox.setOnMouseClicked(event -> {
+            if (isComparisonPage){
+                goToComparisonPage(product, stackPane);
+            }
+            else {
+                openProduct(product, stackPane);
+            }
+        });
         return vBox;
+    }
+
+    private void goToComparisonPage(Product secondProduct, StackPane secondProductStackPane){
+        try {
+            ComparisonPageController comparisonPageController = ((ComparisonPageController)App.setRoot("comparisonPage"));
+            comparisonPageController.setProduct1(firstProductForComparison);
+            comparisonPageController.setProduct2(secondProduct);
+            comparisonPageController.setFirstProductImageStackPane(firstProductStackPane);
+            comparisonPageController.setSecondProductImageStackPane(secondProductStackPane);
+
+            comparisonPageController.setEveryThing();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void openProduct(Product product, StackPane imageStackPane){

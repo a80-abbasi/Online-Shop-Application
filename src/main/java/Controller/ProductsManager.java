@@ -22,6 +22,9 @@ public class ProductsManager {
     private boolean existenceFilter;
     private int maximumPriceFilter;
     private int minimumPriceFilter;
+    private String specialFeatureSort = null;
+    private String filterBySeller = null;
+    private String filterByCompany = null;
 
     public void showAllCategories () {
         Category.showAllCategories();
@@ -52,6 +55,30 @@ public class ProductsManager {
 
     public void deleteAProduct(Product product){
         deletedProducts.add(product);
+    }
+
+    public void useSpecialFeatureSort(String specialFeatureSort){
+        this.specialFeatureSort = specialFeatureSort;
+    }
+
+    public void disableSpecialFeatureSort(){
+        specialFeatureSort = null;
+    }
+
+    public void addFilterBySeller(String name){
+        filterBySeller = name;
+    }
+
+    public void disableFilterBySeller(){
+        filterBySeller = null;
+    }
+
+    public void addFilterByCompany(String name){
+        filterByCompany = name;
+    }
+
+    public void disableFilterByCompany(){
+        filterByCompany = null;
     }
 
     public ArrayList<Product> showProducts () {
@@ -88,9 +115,24 @@ public class ProductsManager {
                     continue;
                 }
             }
+            if (filterBySeller != null){
+                if (!product.getProductSeller().getName().contains(filterBySeller)){
+                    continue;
+                }
+            }
+            if (filterByCompany != null){
+                if (!product.getCompanyName().contains(filterByCompany)){
+                    continue;
+                }
+            }
             sortedFilteredProducts.add(product);
         }
         sortedFilteredProducts.sort(currentSortMode);
+        if (categoryFilter != null){
+            if (specialFeatureSort != null){
+                products.sort(Comparator.comparing(product -> -product.getSpecialFeatures().get(specialFeatureSort)));
+            }
+        }
         return sortedFilteredProducts;
     }
 
