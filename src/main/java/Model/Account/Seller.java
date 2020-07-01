@@ -104,6 +104,16 @@ public class Seller extends Account {
         CompanyOpenYear = companyOpenYear;
     }
 
+    public static Seller getSellerByUserName(String username){
+        for (Seller seller : allSellers) {
+            if (seller.getUsername().equalsIgnoreCase(username)){
+                return seller;
+            }
+        }
+        return null;
+    }
+
+
     @Override
     public String toString() {
         return "Seller{" +

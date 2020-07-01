@@ -26,6 +26,15 @@ public class Admin extends Account{
         return allAdmins;
     }
 
+    public static Admin getAdminByUserName(String username){
+        for (Admin admin : allAdmins) {
+            if (admin.getUsername().equalsIgnoreCase(username)){
+                return admin;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Admin{" +

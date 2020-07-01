@@ -55,7 +55,7 @@ public class Product {
         this.price = price;
         this.existingNumber = existingNumber;
         this.explanations = explanations;
-        this.setImageAddress(productImageAddress);
+        this.imageAddress = productImageAddress;
         this.productCategory = productCategory;
         this.specialFeatures = specialFeatures;
         this.productSeller = productSeller;
@@ -65,7 +65,6 @@ public class Product {
         else {
             this.specialFeatures = new HashMap<>();
         }
-        imageAddress = "";
         timeOfCreation = new Date();
         allProducts.add(this);
     }

@@ -353,7 +353,7 @@ public class AdminProfileManager extends ProfileManager {
             }
         }
         Category subCategory = parentCategory.addSubCategoryWithName(subCategoryName);
-        subCategory.setSpecialFeatures(specialFeatures);
+        subCategory.getSpecialFeatures().addAll(specialFeatures);
         return subCategory;
     }
 

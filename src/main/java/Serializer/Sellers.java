@@ -1,5 +1,6 @@
 package Serializer;
 
+import Model.Account.Admin;
 import Model.Account.Seller;
 
 import javax.xml.bind.JAXB;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Sellers {
     private final static String pathName = "src\\main\\resources\\sellers.xml";
@@ -25,6 +27,14 @@ public class Sellers {
         if(file.exists() && !file.isDirectory() && file.length() > 0) {
             try(BufferedReader input = Files.newBufferedReader(Paths.get(pathName))) {
                 Sellers sellers = JAXB.unmarshal(input, Sellers.class);
+                HashMap<String, Integer> duplicateSellers = new HashMap<>();
+                sellers.allSellers.forEach(seller -> duplicateSellers.put(seller.getUsername(),
+                        duplicateSellers.getOrDefault(seller.getUsername(), 0) + 1));
+                duplicateSellers.forEach((seller, number) -> {
+                    for (int i = 0; i < number - 1; i++) {
+                        sellers.allSellers.remove(Seller.getSellerByUserName(seller));
+                    }
+                });
                 Seller.setAllSellers(sellers.allSellers);
             } catch (IOException e) {
                 System.out.println("Error opening file");

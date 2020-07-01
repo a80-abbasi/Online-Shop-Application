@@ -64,7 +64,7 @@ public class ProductsController {
     public ImageView profileImage1;
 
     private ArrayList<Product> showingProducts;
-    private ProductsManager productsManager;
+    public static ProductsManager productsManager;
     private int maxPrice;
     private int minPrice;
     private int pageIndex;
@@ -78,7 +78,6 @@ public class ProductsController {
     private StackPane firstProductStackPane;
 
     public void initialize() {
-        productsManager = new ProductsManager();
         addToggleButtonForExistingFilter();
         addToggleButtonForOffFilter();
         addPageFactoryForPagination();
@@ -91,7 +90,9 @@ public class ProductsController {
             productsManager.disableCategoryFilter();
             categories.setText("All Categories");
             mainPane.getChildren().removeAll(mainPane.getChildren().stream().filter(node -> node instanceof MenuButton).
-                    filter(menuButton -> menuButton != categories).collect(Collectors.toList()));
+                    filter(menuButton -> menuButton != categories && menuButton != sortByFeatureMenuButton).collect(Collectors.toList()));
+            sortByFeatureMenuButton.setOpacity(0);
+            sortByFeatureMenuButton.setDisable(true);
             sortByFeatureMenuButton.setDisable(true);
             sortByFeatureMenuButton.setOpacity(0);
             productsManager.disableSpecialFeatureSort();
@@ -177,7 +178,7 @@ public class ProductsController {
                     MenuItem allCategoriesItem = new MenuItem("All sub categories");
                     allCategoriesItem.setOnAction(event -> {
                         mainPane.getChildren().removeAll(mainPane.getChildren().stream().filter(node -> node instanceof MenuButton).
-                                filter(node -> node != categories && node != menuButton && node != subMenuButton).collect(Collectors.toList()));
+                                filter(node -> node != categories && node != menuButton && node != subMenuButton && node != sortByFeatureMenuButton).collect(Collectors.toList()));
                         productsManager.addCategoryFilter(category);
                         subMenuButton.setText("All sub categories");
                         showProducts();
@@ -191,7 +192,7 @@ public class ProductsController {
                 }
                 else {
                     mainPane.getChildren().removeAll(mainPane.getChildren().stream().filter(node -> node instanceof MenuButton).
-                            filter(node -> node != categories && node != menuButton).collect(Collectors.toList()));
+                            filter(node -> node != categories && node != menuButton && node != sortByFeatureMenuButton).collect(Collectors.toList()));
                 }
                 showProducts();
             });

@@ -27,6 +27,7 @@ public class Discount {
         this.maxPossibleDiscount = maxPossibleDiscount;
         this.discountPerCustomer = discountPerCustomer;
         this.includingCustomerUsername = includingCustomerUsername;
+        allDiscounts.add(this);
     }
 
     public static void setAllDiscounts(ArrayList<Discount> allDiscounts) {

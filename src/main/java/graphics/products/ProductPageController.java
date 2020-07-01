@@ -104,10 +104,12 @@ public class ProductPageController {
     public static Stage loginPopUp;
     private ProductPageController parentForCommentPage;
     private static String parentAddress;
-    private ProductsManager productsManager;
+    public static ProductsManager productsManager;
 
     public void initialize(){
-        productsManager = new ProductsManager();
+    }
+
+    public void setEveryThing(){
         if (Account.getLoggedInAccount() instanceof Admin){
             deleteProductButton.setOpacity(1);
             deleteProductButton.setOnAction(e -> {
@@ -123,9 +125,6 @@ public class ProductPageController {
             deleteProductButton.setOpacity(0);
             deleteProductButton.setDisable(false);
         }
-    }
-
-    public void setEveryThing(){
         product.setVisitNumber(product.getVisitNumber() + 1);
         setLabels();
         setRates();
@@ -418,11 +417,7 @@ public class ProductPageController {
                 e.consume();
                 noteForRateLabel.setText("You cant rate anymore");
             } else {
-                hasRated = true;
                 rateProduct(rate);
-                rate.setDisable(true);
-                rate.setUpdateOnHover(false);
-                setRates();
             }
         });
         setRatesAndProgresses();
@@ -459,8 +454,17 @@ public class ProductPageController {
         }
         else if (account instanceof Customer){
             Customer customer = (Customer) account;
-            product.addRate(customer, (int) (rating.getRating() + 0.5));
-            setRates();
+            if (customer.getBuyLogs().stream().anyMatch(log -> log.getBoughtProducts().containsKey(product))){
+                product.addRate(customer, (int) (rating.getRating() + 0.5));
+                hasRated = true;
+                rating.setDisable(true);
+                rating.setUpdateOnHover(false);
+                setRates();
+            }
+            else {
+                noteForRateLabel.setText("You must buy product to rate it");
+                flag = true;
+            }
         }
         else {
             noteForRateLabel.setText("You must be logged in as a customer");
@@ -473,6 +477,7 @@ public class ProductPageController {
 
     private void resizeImage() {
         for (Node image : imageStackPane.getChildren()) {
+            ((ImageView)image).setPreserveRatio(true);
             ((ImageView)image).setFitWidth(450);
         }
     }
@@ -581,7 +586,7 @@ public class ProductPageController {
                 ProductPageController newPage = ((ProductPageController) fxmlLoader.getController());
                 newPage.setProduct(product);
                 newPage.setParentForCommentPage(this);
-            } catch (IOException e) {
+            } catch (IOException | NullPointerException e) {
                 e.printStackTrace();
                 return;
             }

@@ -15,7 +15,6 @@ public class ProductsManager {
 
     private Comparator<Product> currentSortMode = new ProductComparatorForVisitNumber();
     private ArrayList<FilteringType> currentFilters = new ArrayList<>();
-    private ArrayList<Product> deletedProducts = new ArrayList<>();
     private SortType currentSort = SortType.SORT_BY_VISIT;
     private String nameFilter;
     private Category categoryFilter;
@@ -54,7 +53,8 @@ public class ProductsManager {
     }
 
     public void deleteAProduct(Product product){
-        deletedProducts.add(product);
+        allProducts.remove(product);
+        Category.getAllCategories().forEach(category -> category.getProductIds().remove(product.getProductId()));
     }
 
     public void useSpecialFeatureSort(String specialFeatureSort){
@@ -93,7 +93,6 @@ public class ProductsManager {
         if (currentFilters.contains(FilteringType.OFF_FILTER)){
             products = getProductsWithOff(products);
         }
-        products.removeAll(deletedProducts);
         for (Product product : products) {
             if (nameFilter != null) {
                 if (!getMatcher(product.getProductName(), "(?i)" + nameFilter).find()){
@@ -297,11 +296,4 @@ public class ProductsManager {
     public HashMap<Product, Integer> getCart(){
         return ((Customer) Account.getLoggedInAccount()).getCart();
     }
-
-    public static double costWithOffAndDigest (String discountCode) {
-        getTotalPrice();
-        //todo
-        return 0;
-    }
-
 }

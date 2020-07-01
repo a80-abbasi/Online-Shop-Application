@@ -32,6 +32,14 @@ public class Category {
         this("");
     }
 
+    public ArrayList<String> getProductIds() {
+        return productIds;
+    }
+
+    public void setProductIds(ArrayList<String> productIds) {
+        this.productIds = productIds;
+    }
+
     public ArrayList<String> getSpecialFeatures() {
         return specialFeatures;
     }
