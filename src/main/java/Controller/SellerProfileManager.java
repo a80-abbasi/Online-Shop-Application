@@ -303,7 +303,7 @@ public class SellerProfileManager extends ProfileManager {
 
     public void makeNewEditOffRequest(String offID, Date offStartTime, Date offEndTime, String offAmount, ArrayList<String> offProductIDs) throws Exception {
         try {
-            if (checkOffAmountValidity(offAmount) && checkOffIDValidity(offID)) {
+            if (checkOffAmountValidity(offAmount)) {
                 new EditOffRequest(offID, offStartTime, offEndTime, Integer.parseInt(offAmount), offProductIDs);
             }
         } catch (Exception e) {
@@ -322,7 +322,10 @@ public class SellerProfileManager extends ProfileManager {
 
     private boolean checkOffAmountValidity(String offAmount) throws Exception {
         try {
-            Integer.parseInt(offAmount);
+            int offAmountValue = Integer.parseInt(offAmount);
+            if (offAmountValue > 100 || offAmountValue < 0) {
+                throw new Exception("Off Amount should be between 0 and 100");
+            }
             return true;
         } catch (Exception e) {
             throw new Exception("Invalid Off Amount");

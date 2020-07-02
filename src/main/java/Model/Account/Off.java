@@ -40,10 +40,6 @@ public class Off {
         allOffs.add(this);
     }
 
-    public void setProductIDs(ArrayList<String> productIDs) {
-        this.productIDs = productIDs;
-    }
-
     public static void setAllOffs(ArrayList<Off> allOffs) {
         Off.allOffs = allOffs;
     }
@@ -82,6 +78,10 @@ public class Off {
 
     public OffStatus getOffStatus() {
         return offStatus;
+    }
+
+    public void setProductIDs(ArrayList<String> productIDs) {
+        this.productIDs = productIDs;
     }
 
     public void setOffStatus(OffStatus offStatus) {

@@ -67,7 +67,11 @@ public class ManageOffs {
         offEndTimePicker.setValue(off.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         offAmountField.setText(String.valueOf(off.getOffAmount()));
 
+        offProductsField.setText("");
         offProductIDs = off.getProductIDs();
+        if (offProductIDs == null) {
+            return;
+        }
         for (String offProductID : offProductIDs) {
             offProductsField.setText(offProductsField.getText() + offProductID + ", ");
         }
@@ -96,6 +100,7 @@ public class ManageOffs {
         Stage window = new Stage();
         window.setScene(scene);
         window.setTitle("Add Product");
+        window.show();
     }
 
     public void addOffProduct() {
@@ -113,6 +118,7 @@ public class ManageOffs {
         notIncludingProducts = new TableView();
         notIncludingProducts = sellerProfileManager.getSellerProductsTable(notIncludingProducts);
         offProductIDs.clear();
+        offProductsField.setText("");
     }
 
     public void confirm(MouseEvent mouseEvent) {
