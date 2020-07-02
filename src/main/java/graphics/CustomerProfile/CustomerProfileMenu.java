@@ -147,7 +147,7 @@ public class CustomerProfileMenu {
                 ArrayList<Product> products = new ArrayList<>(buyLog.getBoughtProducts().keySet());
                 table.getItems().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getSeller().getName()));
             }
-            final Label label = new Label("Date" + buyLog.getDate() + "                 " + "Price:" + buyLog.getPaidAmount()+"$");
+            final Label label = new Label("Date" + buyLog.getDate() + " " + "Price:" + buyLog.getPaidAmount()+"$");
             label.setFont(new Font("Arial", 20));
             Stage stage = new Stage();
 
@@ -241,7 +241,7 @@ public class CustomerProfileMenu {
             ArrayList<Discount> discounts = customerProfileManager.customer.getAllDiscountCodesForCustomer();
             for (int i = 0; i < discounts.size(); i++) {
                 Discount discount = discounts.get(i);
-                table.getItems().add(new DiscountData(discount.getDiscountCode(),discount.getStartTime().toString(),discount.getEndTime().toString(),Double.toString(discount.getDiscountPercent()),Double.toString(discount.getMaxPossibleDiscount())));
+                table.getItems().add(new DiscountData(discount.getDiscountCode(),discount.getStartTime().toString(),discount.getEndTime().toString(),Double.toString(discount.getDiscountPercent()),Double.toString(discount.getDiscountPerCustomer())));
             }
             final Label label = new Label("Discount Codes");
             label.setFont(new Font("Arial", 20));
