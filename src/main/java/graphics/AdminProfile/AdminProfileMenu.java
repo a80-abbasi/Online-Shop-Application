@@ -158,7 +158,7 @@ public class AdminProfileMenu {
     //todo: adding delete button in productsMenu
     public void manageProducts(MouseEvent mouseEvent) {
         try {
-            App.setRoot("ProductsMenu");
+            App.setRoot("productsMenu");
         } catch (IOException e) {
             e.printStackTrace();
         }
