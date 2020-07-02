@@ -39,7 +39,8 @@ public class EditOffRequest extends EditAddOffRequest {
     }
 
     public EditOffRequest() {
-        this(null);
+        super("edit_off_" + allRequests.size(), RequestType.Editing_Off_Request);
+        allEditOffRequests.add(this);
     }
 
     public static ArrayList<EditOffRequest> getAllEditOffRequests() {
