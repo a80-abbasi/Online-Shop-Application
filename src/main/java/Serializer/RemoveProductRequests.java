@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class RemoveProductRequests {
-    private final static String pathName = "src\\main\\resources\\removeProductRequests.xml";
+    private final static String pathName = "src\\main\\resources\\RemoveProductRequests.xml";
 
     @XmlElement(name = "removeProductRequest")
     private ArrayList<RemoveProductRequest> allRemoveProductRequests = new ArrayList<>();

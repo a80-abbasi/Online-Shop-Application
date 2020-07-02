@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class RegisterSellerRequests {
-    private final static String pathName = "src\\main\\resources\\registerSellerRequests.xml";
+    private final static String pathName = "src\\main\\resources\\RegisterSellerRequests.xml";
 
     @XmlElement(name = "registerSellerRequest")
     private ArrayList<RegisterSellerRequest> allRegisterSellerRequests = new ArrayList<>();

@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Offs {
-    private final static String pathName = "src\\main\\resources\\offs.xml";
+    private final static String pathName = "src\\main\\resources\\Offs.xml";
 
     @XmlElement(name = "off")
     private ArrayList<Off> allOffs = new ArrayList<>();
