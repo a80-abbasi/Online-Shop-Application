@@ -154,6 +154,10 @@ public class Category {
         allCategories.remove(category);
     }
 
+    public void removeProduct(Product product) {
+        this.productIds.remove(product.getProductId());
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

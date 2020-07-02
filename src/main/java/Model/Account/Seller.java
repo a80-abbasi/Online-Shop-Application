@@ -113,6 +113,16 @@ public class Seller extends Account {
         return null;
     }
 
+    public static void removeAccount(Seller seller) {
+        getAllAccounts().remove(seller);
+        allSellers.remove(seller);
+        for (Off off : seller.getOffs()) {
+            Off.removeOff(off);
+        }
+        for (Product product : seller.getProducts()) {
+            Product.removeProduct(product);
+        }
+    }
 
     @Override
     public String toString() {
