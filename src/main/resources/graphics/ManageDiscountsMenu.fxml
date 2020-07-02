@@ -79,7 +79,10 @@
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </Label>
-        <TextField fx:id="includingCustomersField" editable="false" layoutX="1171.0" layoutY="533.0" prefHeight="44.0" prefWidth="300.0" />
+        <TextField fx:id="includingCustomersField" editable="false" layoutX="1171.0" layoutY="533.0" prefHeight="44.0" prefWidth="300.0">
+         <font>
+            <Font name="Times New Roman" size="24.0" />
+         </font></TextField>
       <Button layoutX="1334.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#showNotIncludingCustomers" prefHeight="44.0" prefWidth="137.0" text="Add Customers">
          <font>
             <Font name="Times New Roman" size="18.0" />

@@ -46,7 +46,6 @@ public class ManageOffs {
         this.sellerProfileManager = new SellerProfileManager((Seller) Account.getLoggedInAccount());
         offProductIDs = new ArrayList<>();
 
-        offsTable = new TableView();
         notIncludingProducts = new TableView();
         offsTable = sellerProfileManager.getSellerOffsTable(offsTable);
         notIncludingProducts = sellerProfileManager.getSellerProductsTable(notIncludingProducts);

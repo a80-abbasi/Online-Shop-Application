@@ -73,6 +73,7 @@ public class ManageDiscountsMenu {
         discountPerCustomerField.setText(String.valueOf(selectedDiscount.getDiscountPerCustomer()));
 
         includingCustomers = selectedDiscount.getIncludingCustomerUsername();
+        includingCustomersField.setText("");
         for (String s : selectedDiscount.getIncludingCustomerUsername()) {
             includingCustomersField.setText(includingCustomersField.getText() + s + ", ");
         }

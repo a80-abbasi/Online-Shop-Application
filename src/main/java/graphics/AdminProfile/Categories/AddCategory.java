@@ -46,6 +46,8 @@ public class AddCategory {
         if (category == null) {
             specialFeaturesList.getItems().clear();
             subCategoryFeaturesList.getItems().clear();
+            categoryNameField.setText("");
+            subCategoriesField.setText("");
         } else {
             turnToAddSubCategoryMode();
         }
