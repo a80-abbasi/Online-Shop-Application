@@ -61,10 +61,10 @@ public class PurchaseMenuController {
                     flag = true;
                 }
                 else if (!discount.isAvailable()){
-                    discountMessageLabel.setText("There is no discount with this code");
+                    discountMessageLabel.setText("This discount is unavailable now.");
                     flag = true;
                 }
-                else if (customer.getUsedDiscounts().get(discount) >= discount.getDiscountPerCustomer()){
+                else if (customer.getUsedDiscounts().getOrDefault(discount, 0) >= discount.getDiscountPerCustomer()){
                     discountMessageLabel.setText("You have used this discount maximum times!");
                     flag = true;
                 }

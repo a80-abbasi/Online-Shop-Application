@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -43,8 +44,8 @@ public class AddOff {
 
     public void confirm(MouseEvent mouseEvent) {
         String offID = offIDField.getText();
-        Date offStartTime = new Date(offStartTimeDatePicker.getValue().toEpochDay());
-        Date offEndTime = new Date(offEndTimePicker.getValue().toEpochDay());
+        Date offStartTime = Date.from(offStartTimeDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date offEndTime = Date.from(offEndTimePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         String offAmount = offAmountField.getText();
         boolean checkConfirmButtonInability = offID.isEmpty() || offStartTimeDatePicker.getValue() == null || offEndTimePicker.getValue() == null || offAmount.isEmpty() || offProductsField.getText().isEmpty();
         if (!(checkConfirmButtonInability)) {

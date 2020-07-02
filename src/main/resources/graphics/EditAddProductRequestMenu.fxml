@@ -125,5 +125,6 @@
             <Image url="@../Images/mainMenu.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="imageView" fitHeight="388.0" fitWidth="372.0" layoutX="38.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>

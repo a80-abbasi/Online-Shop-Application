@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -46,8 +47,10 @@ public class CreateDiscountCode {
     public void confirm() {
         String discountCode = discountCodeField.getText();
         //todo: checking this
-        Date startTime = new Date(startTimeDate.getValue().toEpochDay());
-        Date endTime = new Date(endTimeDate.getValue().toEpochDay());
+        //Date startTime = new Date(startTimeDate.getValue().toEpochDay());
+        Date startTime = Date.from(startTimeDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        //Date endTime = new Date(endTimeDate.getValue().toEpochDay());
+        Date endTime = Date.from(endTimeDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         String discountPercent = discountPercentField.getText();
         String maxPossibleDiscount = maxPossibleDiscountField.getText();
         String discountPerCustomer = discountPerCustomerField.getText();

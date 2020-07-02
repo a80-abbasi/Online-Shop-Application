@@ -85,8 +85,10 @@ public class ManageDiscountsMenu {
     public void confirm(MouseEvent mouseEvent) {
         String discountCode = discountCodeField.getText();
         //todo: checking this
-        Date startTime = new Date(startTimeDate.getValue().toEpochDay());
-        Date endTime = new Date(endTimeDate.getValue().toEpochDay());
+        //Date startTime = new Date(startTimeDate.getValue().toEpochDay());
+        //Date endTime = new Date(endTimeDate.getValue().toEpochDay());
+        Date startTime = Date.from(startTimeDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date endTime = Date.from(endTimeDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         String discountPercent = discountPercentField.getText();
         String maxPossibleDiscount = maxPossibleDiscountField.getText();
         String discountPerCustomer = discountPerCustomerField.getText();

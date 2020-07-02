@@ -21,7 +21,6 @@ public class Category {
     public Category(String name, Category parentCategory) {
         this.name = name;
         this.parentCategory = parentCategory;
-        parentCategory.getSubCategories().add(this);
         subCategories = new ArrayList<>();
         productIds = new ArrayList<>();
         specialFeatures = new ArrayList<>();

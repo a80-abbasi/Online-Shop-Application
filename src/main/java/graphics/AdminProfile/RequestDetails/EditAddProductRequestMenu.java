@@ -9,6 +9,7 @@ import graphics.App;
 import graphics.products.ProductPageController;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
@@ -29,6 +30,7 @@ public class EditAddProductRequestMenu {
     private static String parentMenu = "ManageRequests";
     public ImageView backImage;
     public ImageView mainMenuImage;
+    public ImageView imageView;
 
     private AdminProfileManager adminProfileManager;
 
@@ -48,6 +50,7 @@ public class EditAddProductRequestMenu {
             productSpecialFeaturesField.setText(productSpecialFeaturesField.getText() + s + ": " + editAddProductRequest.getProductSpecialFeatures().get(s) + ", ");
         }
         requestTitle.setText(editAddProductRequest.getRequestType());
+        imageView.setImage(new Image(editAddProductRequest.getProductImageAddress()));
 
         App.setBackButton(backImage, parentMenu);
         ProductPageController.setMainMenuButton(mainMenuImage);

@@ -13,7 +13,7 @@ public class Customer extends Account {
     private HashMap<Product, Integer> cart;
     private final ArrayList<BuyLog> buyLogs;
     private HashMap<Discount, Integer> usedDiscounts;
-    private final ArrayList<Discount> allDiscountCodesForCustomer = new ArrayList<>(); //todo:admin add codes to this array too!
+    private ArrayList<Discount> allDiscountCodesForCustomer = new ArrayList<>(); //todo:admin add codes to this array too!
     private int numberOfDiscountGifts;
     private static final ArrayList<String> customerFieldsForPurchase = new ArrayList<>();
     static {
