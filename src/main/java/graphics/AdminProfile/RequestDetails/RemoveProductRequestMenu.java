@@ -78,6 +78,6 @@ public class RemoveProductRequestMenu {
 
     public static void setRemoveProductRequest(RemoveProductRequest removeProductRequest) {
         RemoveProductRequestMenu.removeProductRequest = removeProductRequest;
-        product = removeProductRequest.getProduct();
+        RemoveProductRequestMenu.product = removeProductRequest.getProduct();
     }
 }

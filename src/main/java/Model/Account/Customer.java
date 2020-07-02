@@ -174,5 +174,8 @@ public class Customer extends Account {
     @Override
     public void removeUser() {
         allCustomers.remove(this);
+        for (Discount discount : allDiscountCodesForCustomer) {
+            discount.removeCustomer(this);
+        }
     }
 }

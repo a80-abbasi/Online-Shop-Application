@@ -154,7 +154,8 @@ public class ManageProducts {
         }
         Product product = (Product) selectedProduct;
         sellerProfileManager.removeProduct(product.getProductId());
-        AlertBox.showMessage("Remove Product", "Product With ID <" + product.getProductId() + "> Removed Successfully");
+        AlertBox.showMessage("Remove Product", "Your Request In Order to remove Product With ID <" +
+                product.getProductId() + "> Was Sent To Admins Successfully");
         productsTable.getItems().remove(product);
 
         productIDField.setText("");

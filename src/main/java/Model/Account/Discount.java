@@ -111,6 +111,10 @@ public class Discount {
         return currentDate.compareTo(startTime) >= 0 && currentDate.compareTo(endTime) <= 0;
     }
 
+    public void removeCustomer(Customer customer) {
+        includingCustomerUsername.remove(customer.getUsername());
+    }
+
     public static ArrayList<Discount> getAllDiscounts() {
         return allDiscounts;
     }

@@ -113,13 +113,13 @@ public class Seller extends Account {
         return null;
     }
 
-    public static void removeAccount(Seller seller) {
-        getAllAccounts().remove(seller);
-        allSellers.remove(seller);
-        for (Off off : seller.getOffs()) {
+    @Override
+    public void removeUser() {
+        allSellers.remove(this);
+        for (Off off : this.getOffs()) {
             Off.removeOff(off);
         }
-        for (Product product : seller.getProducts()) {
+        for (Product product : this.getProducts()) {
             Product.removeProduct(product);
         }
     }
@@ -139,10 +139,5 @@ public class Seller extends Account {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
-    }
-
-    @Override
-    public void removeUser() {
-        allSellers.remove(this);
     }
 }

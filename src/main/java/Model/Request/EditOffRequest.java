@@ -61,22 +61,17 @@ public class EditOffRequest extends EditAddOffRequest {
 
     @Override
     public void acceptRequest() throws IllegalArgumentException{
-        if (Off.getOffById(offID) != null && (!(Off.getOffById(offID).equals(off)))) {
-            throw new IllegalArgumentException();
+        for (String productID : off.getProductIDs()) {
+            Product.getProductByID(productID).setOff(null);
         }
-        else {
-            for (String productID : off.getProductIDs()) {
-                Product.getProductByID(productID).setOff(null);
-            }
-            off.setOffID(offID);
-            off.setStartTime(startTime);
-            off.setEndTime(endTime);
-            off.setOffStatus(OffStatus.CONFIRMED);
-            off.setOffAmount(offAmount);
-            off.setProductsIDs(offProductIDs);
-            for (String productID : offProductIDs) {
-                Product.getProductByID(productID).setOff(off);
-            }
+        off.setOffID(offID);
+        off.setStartTime(startTime);
+        off.setEndTime(endTime);
+        off.setOffStatus(OffStatus.CONFIRMED);
+        off.setOffAmount(offAmount);
+        off.setProductsIDs(offProductIDs);
+        for (String productID : offProductIDs) {
+            Product.getProductByID(productID).setOff(off);
         }
     }
 

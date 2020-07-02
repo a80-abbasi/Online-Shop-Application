@@ -51,6 +51,7 @@ public class AddOff {
             try {
                 sellerProfileManager.makeNewAddOffRequest(offID, offStartTime, offEndTime, offAmount, offProductIDs);
                 AlertBox.showMessage("Add Off", "Your Request Was Successfully Sent To Admins");
+                App.setRoot(parentMenu);
             } catch (Exception e) {
                 AlertBox.showMessage("Failed To Add", e.getMessage());
             }

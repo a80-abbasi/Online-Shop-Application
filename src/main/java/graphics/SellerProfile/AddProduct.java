@@ -44,6 +44,8 @@ public class AddProduct {
 
     private Category category;
 
+    private static String parentMenu = "SellerProfileMenu";
+
     private ArrayList<FeatureData> allFeatureData;
 
     private SellerProfileManager sellerProfileManager;
@@ -107,6 +109,7 @@ public class AddProduct {
             sellerProfileManager.makeNewAddProductRequest(productID, productName, productCompanyName, productPrice,
                     productExistingNumber, productExplanations, category, values, productImageAddress);
             AlertBox.showMessage("Add Product", "Your Request Was Successfully Sent To Admins");
+            App.setRoot(parentMenu);
         } catch (Exception e) {
             AlertBox.showMessage("Failed to Add Product", e.getMessage());
         }

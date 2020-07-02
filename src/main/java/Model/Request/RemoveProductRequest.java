@@ -17,12 +17,12 @@ public class RemoveProductRequest extends Request {
         allRemoveProductRequests.add(this);
     }
 
-    public RemoveProductRequest(){
-        this(null);
-    }
-
     public Product getProduct() {
         return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public static ArrayList<RemoveProductRequest> getAllRemoveProductRequests() {
