@@ -115,7 +115,7 @@ public class ProductsManager {
                 }
             }
             if (filterBySeller != null){
-                if (!product.getProductSeller().getName().contains(filterBySeller)){
+                if (!product.getSeller().getName().contains(filterBySeller)){
                     continue;
                 }
             }

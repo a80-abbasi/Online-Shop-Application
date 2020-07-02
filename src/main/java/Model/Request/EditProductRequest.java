@@ -25,7 +25,7 @@ public class EditProductRequest extends EditAddProductRequest {
         this.setProductImageAddress(product.getImageAddress());
         this.setProductCategory(product.getProductCategory());
         this.setProductSpecialFeatures(product.getSpecialFeatures());
-        this.setProductSeller(product.getProductSeller());
+        this.setProductSeller(product.getSeller());
     }
 
     public EditProductRequest(Product product, String productID, String productName, String productCompanyName, double productPrice,

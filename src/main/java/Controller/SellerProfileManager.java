@@ -72,8 +72,9 @@ public class SellerProfileManager extends ProfileManager {
 
     public HashMap<String, String> getProductBuyers(String productId) {
         HashMap<String, String> allBuyersUsernameAndPhoneNumber = new HashMap<>();
-        for (Customer customer : Product.getProductByID(productId).getProductBuyers()) {
-            allBuyersUsernameAndPhoneNumber.put(customer.getUsername(),customer.getPhoneNumber());
+        for (String userName : Product.getProductByID(productId).getProductBuyers()) {
+            Customer customer = Customer.getCustomerById(userName);
+            allBuyersUsernameAndPhoneNumber.put(userName,customer.getPhoneNumber());
         }
         return allBuyersUsernameAndPhoneNumber;
     }
@@ -484,8 +485,8 @@ public class SellerProfileManager extends ProfileManager {
         column5.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
         productBuyersTable.getColumns().addAll(column1, column2, column3, column4, column5);
-        for (Customer customer : product.getProductBuyers()) {
-            productBuyersTable.getItems().add(customer);
+        for (String username : product.getProductBuyers()) {
+            productBuyersTable.getItems().add(Customer.getCustomerById(username));
         }
         productBuyersTable.setPlaceholder(new Label("No Data to display"));
         return productBuyersTable;

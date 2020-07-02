@@ -79,6 +79,7 @@ public class CartController {
                         thisStage.setTitle("login");
                         thisStage.setResizable(false);
                         AlertBox.showMessage("login error", "you must login as a customer in order to purchase");
+                        ProductPageController.cartPopUp = null;
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }

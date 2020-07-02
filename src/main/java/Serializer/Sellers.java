@@ -1,6 +1,5 @@
 package Serializer;
 
-import Model.Account.Admin;
 import Model.Account.Seller;
 
 import javax.xml.bind.JAXB;
