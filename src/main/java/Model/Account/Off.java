@@ -36,12 +36,16 @@ public class Off {
         allOffs.add(this);
     }
 
-    public static void setAllOffs(ArrayList<Off> allOffs) {
-        Off.allOffs = allOffs;
-    }
-
     public Off() {
         allOffs.add(this);
+    }
+
+    public void setProductIDs(ArrayList<String> productIDs) {
+        this.productIDs = productIDs;
+    }
+
+    public static void setAllOffs(ArrayList<Off> allOffs) {
+        Off.allOffs = allOffs;
     }
 
     public String getOffID() {

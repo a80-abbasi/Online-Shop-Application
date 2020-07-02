@@ -21,6 +21,11 @@ public class BuyLog extends Log {
         this.boughtProducts = new HashMap<>(cart);
     }
 
+    public BuyLog() {
+        allBuyLogs.add(this);
+        this.boughtProducts = new HashMap<>();
+    }
+
     public double getPaidAmount() {
         return paidAmount;
     }

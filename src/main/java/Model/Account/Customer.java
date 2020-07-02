@@ -3,7 +3,6 @@ package Model.Account;
 import Model.Product.Product;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 public class Customer extends Account {
@@ -37,6 +36,10 @@ public class Customer extends Account {
 
     public Customer(){
         this("", "", "", "", "", "", 0);
+    }
+
+    public void setAllDiscountCodesForCustomer(ArrayList<Discount> allDiscountCodesForCustomer) {
+        this.allDiscountCodesForCustomer = allDiscountCodesForCustomer;
     }
 
     public int getNumberOfDiscountGifts() {
