@@ -31,9 +31,9 @@ public class CustomerProfileManager extends ProfileManager{
         if (totalMoneyPaid > minimumAmountOfMoney * (customer.getNumberOfDiscountGifts() + 1)){
             customer.setBalance(customer.getNumberOfDiscountGifts() + 1);
             output = ("Congratulations! you have won" + discountPercentage + "% discount up to" + maxPossibleDiscount +
-                    "$ for buying more than" + customer.getNumberOfDiscountGifts() * minimumAmountOfMoney + "dollars from Us!") +
+                    "$ for buying more than " + (customer.getNumberOfDiscountGifts() + 1) * minimumAmountOfMoney + " dollars from Us!") +
             ("\nNote! you can use it once till next month.") +
-            ("\nYour discount code is:");
+            ("\nYour discount code is:" );
             String code = AdminProfileManager.generateRandomDiscountCode();
             output += code;
             Date now = new Date();
@@ -54,8 +54,9 @@ public class CustomerProfileManager extends ProfileManager{
 
     public boolean isInputValidForBuyLogID(String ID) {
         for (BuyLog buyLog : customer.getBuyLogs()) {//todo:if buy log be null we will give wrong input;
-            if (buyLog.getID().equals(ID));
+            if (buyLog.getID().equals(ID)){
             return true;
+            }
         }
         return false;
     }

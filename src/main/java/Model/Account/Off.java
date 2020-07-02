@@ -41,7 +41,7 @@ public class Off {
     }
 
     public Off() {
-        this("", null, null, 0, null);
+        allOffs.add(this);
     }
 
     public String getOffID() {

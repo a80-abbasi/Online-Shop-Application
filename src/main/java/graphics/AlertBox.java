@@ -21,7 +21,7 @@ public class AlertBox {
 
     private static Parent makeAlertBox(Stage window, String message) {
         VBox vBox = new VBox(30);
-        vBox.setPrefSize(300, 100);
+        vBox.setPrefSize(300, 130);
         Label label = new Label(message);
         label.setWrapText(true);
         Button OKButton = new Button("OK!");

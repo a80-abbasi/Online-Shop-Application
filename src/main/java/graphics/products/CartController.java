@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -133,6 +134,11 @@ public class CartController {
         Label serial, name, price, quantity, amount;
         serial = new Label(String.valueOf(row));
         name = new Label(product.getProductName());
+        name.setOnMouseClicked(event -> {
+            ProductsController.openProduct(product, new StackPane(new ImageView(new Image(product.getImageAddress()))));
+            ProductPageController.cartPopUp.close();
+            ProductPageController.cartPopUp = null;
+        });
         price = new Label(String.valueOf(product.getPriceWithOff()));
         quantity = new Label(String.valueOf(number));
         amount = new Label(String.valueOf(product.getPriceWithOff() * number));

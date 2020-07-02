@@ -201,6 +201,7 @@ public class PurchaseMenuController {
         if (!discountGift.isEmpty()){
             AlertBox.showMessage("Discount Gift", discountGift);
         }
+        validateButton.setDisable(true);
     }
 
     public void setCart(HashMap<Product, Integer> cart) {

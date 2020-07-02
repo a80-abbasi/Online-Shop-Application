@@ -324,6 +324,7 @@ public class ProductsController {
                 goToComparisonPage(product, stackPane);
             }
             else {
+                loginImage.getScene().setCursor(Cursor.DEFAULT);
                 openProduct(product, stackPane);
             }
         });
@@ -344,9 +345,8 @@ public class ProductsController {
         }
     }
 
-    private void openProduct(Product product, StackPane imageStackPane){
+    public static void openProduct(Product product, StackPane imageStackPane){
         try {
-            imageStackPane.getScene().setCursor(Cursor.DEFAULT);
             ProductPageController productPageController = (ProductPageController) App.setRoot("productPage");
             ProductPageController.setParentAddress("productsMenu");
             productPageController.setProduct(product);

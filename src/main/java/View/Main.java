@@ -26,7 +26,6 @@ public class Main{
         Customers.deserializeXML();
         Admins.deserializeXML();
         Products.deserializeXML();
-        Categories.deserializeXML();
         Discounts.deserializeXML();
         Offs.deserializeXML();
         AddOffRequests.deserializeXML();
@@ -34,6 +33,7 @@ public class Main{
         EditOffRequests.deserializeXML();
         RegisterSellerRequests.deserializeXML();
         RemoveProductRequests.deserializeXML();
+        Categories.deserializeXML();
         Sellers.deserializeXML();
     }
 
