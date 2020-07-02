@@ -124,8 +124,8 @@ public class PurchaseMenuController {
                     flag.set(false);
                 }
                 else {
-                    finishBuying(finalPrice);
                     showBoughtProducts();
+                    finishBuying(finalPrice);
                     buyItemsButton.setDisable(true);
                     buyItemsButton.setOpacity(0.5);
                 }
@@ -184,14 +184,14 @@ public class PurchaseMenuController {
     private void finishBuying(double finalAmount){
         customer.setBalance(customer.getBalance() - finalAmount); //decrease customer money
         cart.forEach((product, number) -> {//increase sellers money & creating sell log
-            Seller seller = product.getProductSeller();
-            seller.setBalance(product.getProductSeller().getBalance() + product.getPriceWithOff() * number);
+            Seller seller = product.getSeller();
+            seller.setBalance(product.getSeller().getBalance() + product.getPriceWithOff() * number);
             SellLog sellLog = new SellLog("SellLog" + (SellLog.getAllSellLogs().size() + 1), new Date(), product.getPriceWithOff(),
                     product.getPrice() - product.getPriceWithOff(), product, number, customer.getName());
             seller.getSellLogs().add(sellLog);
             product.setExistingNumber(product.getExistingNumber() - number); //decrease product existing number
-            if (!product.getProductBuyers().contains(customer)){ //set product buyers
-                product.getProductBuyers().add(customer);
+            if (!product.getProductBuyers().contains(customer.getUsername())){ //set product buyers
+                product.getProductBuyers().add(customer.getUsername());
             }
         });
         BuyLog buyLog = new BuyLog("BuyLog" + (BuyLog.getAllBuyLogs().size() + 1), new Date(), finalAmount, totalAmount - finalAmount, cart);

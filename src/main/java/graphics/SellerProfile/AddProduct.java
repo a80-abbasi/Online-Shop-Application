@@ -7,8 +7,6 @@ import Model.Product.Category;
 import graphics.AlertBox;
 import graphics.App;
 import graphics.products.ProductPageController;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -129,6 +126,10 @@ public class AddProduct {
             selectImagePopUp.setScene(scene);
             selectImagePopUp.setTitle("select product image");
             selectImagePopUp.setResizable(false);
+            selectImagePopUp.setOnCloseRequest(e -> {
+                selectImagePopUp.close();
+                selectImagePopUp = null;
+            });
             selectImagePopUp.showAndWait();
         }
     }

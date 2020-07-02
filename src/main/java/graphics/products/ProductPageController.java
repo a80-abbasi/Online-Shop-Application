@@ -302,7 +302,7 @@ public class ProductPageController {
         nameLabel.setText(product.getProductName());
         categoryLabel.setText(product.getProductCategory() == null ? "Others" : product.getProductCategory().getName());
         companyNameLabel.setText(product.getCompanyName());
-        sellerNameLabel.setText(product.getProductSeller().getName());
+        sellerNameLabel.setText(product.getSeller().getName());
         visitNumberLabel.setText(String.valueOf(product.getVisitNumber()));
         remainingLabel.setText(String.valueOf(product.getExistingNumber()));
         setPropertiesLabel();

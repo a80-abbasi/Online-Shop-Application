@@ -22,10 +22,10 @@ public class Product {
     private Discount discount;
     private ArrayList<Score> allScores;
     private ArrayList<Comment> productComments;
-    private Seller productSeller;
+    private String productSeller;
     private int visitNumber;
     private Date timeOfCreation;
-    private ArrayList<Customer> productBuyers;
+    private ArrayList<String> productBuyers;
     private Off off;
 
     private static ArrayList<String> productFields = new ArrayList<>();
@@ -58,8 +58,8 @@ public class Product {
         this.imageAddress = productImageAddress;
         this.productCategory = productCategory;
         this.specialFeatures = specialFeatures;
-        this.productSeller = productSeller;
-        this.productSeller.getProducts().add(this);
+        this.productSeller = productSeller.getUsername();
+        productSeller.getProducts().add(this);
 
         if (specialFeatures != null) {
             this.specialFeatures = specialFeatures;
@@ -72,7 +72,15 @@ public class Product {
     }
 
     public Product() {
-        this("", null, "", "", 0, 0, "", "", null, null, null);
+
+    }
+
+    public void setProductSeller(String productSeller) {
+        this.productSeller = productSeller;
+    }
+
+    public String getProductSeller() {
+        return productSeller;
     }
 
     public void addASpecialFeature(String feature, int amount){
@@ -210,12 +218,12 @@ public class Product {
         this.productComments = productComments;
     }
 
-    public Seller getProductSeller() {
-        return productSeller;
+    public Seller getSeller() {
+        return Seller.getSellerByUserName(productSeller);
     }
 
     public void setProductSeller(Seller productSeller) {
-        this.productSeller = productSeller;
+        this.productSeller = productSeller.getUsername();
     }
 
     public int getVisitNumber() {
@@ -258,7 +266,7 @@ public class Product {
         this.timeOfCreation = timeOfCreation;
     }
 
-    public ArrayList<Customer> getProductBuyers() {
+    public ArrayList<String> getProductBuyers() {
         return productBuyers;
     }
 
@@ -288,7 +296,7 @@ public class Product {
         this.off = off;
     }
 
-    public void setProductBuyers(ArrayList<Customer> productBuyers) {
+    public void setProductBuyers(ArrayList<String> productBuyers) {
         this.productBuyers = productBuyers;
     }
 
@@ -323,7 +331,7 @@ public class Product {
                 "Off Percentage", (off == null || !off.isAvailable() ? 0 : off.getOffAmount()),
                 "discount percentage", discount.getDiscountPercent(), "max discount amount", discount.getMaxPossibleDiscount(),
                 "category", productCategory.getName(),
-                "seller", productSeller.getName(),
+                "seller", Seller.getSellerByUserName(productSeller).getName(),
                 "average score", getTotalScore());
     }
 

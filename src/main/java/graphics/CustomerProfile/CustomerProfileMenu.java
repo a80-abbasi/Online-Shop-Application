@@ -1,29 +1,19 @@
 package graphics.CustomerProfile;
 
 import Controller.CustomerProfileManager;
-import Controller.SellerProfileManager;
 import Model.Account.*;
-import Model.Product.Comment;
 import Model.Product.Product;
 import graphics.AlertBox;
-import javafx.beans.Observable;
 import graphics.App;
 import graphics.products.ProductPageController;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -33,7 +23,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class CustomerProfileMenu {
     public Button confirmButton;
@@ -156,7 +145,7 @@ public class CustomerProfileMenu {
             BuyLog buyLog = customerProfileManager.customer.getBuyLogByID(orderID);
             for (int i = 0; i < buyLog.getBoughtProducts().keySet().size(); i++) {
                 ArrayList<Product> products = new ArrayList<>(buyLog.getBoughtProducts().keySet());
-                table.getItems().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getProductSeller().getName()));
+                table.getItems().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getSeller().getName()));
             }
             final Label label = new Label("Date" + buyLog.getDate() + "                 " + "Price:" + buyLog.getPaidAmount()+"$");
             label.setFont(new Font("Arial", 20));
