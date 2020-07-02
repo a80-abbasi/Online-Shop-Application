@@ -15,7 +15,6 @@ public class Discount {
 
     {
         allDiscounts = new ArrayList<>();
-        includingCustomerUsername = new ArrayList<>();
     }
 
     public Discount (String discountCode, Date startTime, Date endTime, double discountPercent, double maxPossibleDiscount,
@@ -26,7 +25,11 @@ public class Discount {
         this.discountPercent = discountPercent;
         this.maxPossibleDiscount = maxPossibleDiscount;
         this.discountPerCustomer = discountPerCustomer;
-        this.includingCustomerUsername = includingCustomerUsername;
+        this.setIncludingCustomers(includingCustomerUsername);
+        allDiscounts.add(this);
+    }
+
+    public Discount() {
         allDiscounts.add(this);
     }
 
@@ -85,6 +88,10 @@ public class Discount {
 
     public void setIncludingCustomers(ArrayList<String> includingCustomerUsername) {
         this.includingCustomerUsername = includingCustomerUsername;
+        for (String s : includingCustomerUsername) {
+            Customer customer = Customer.getCustomerById(s);
+            customer.getAllDiscountCodesForCustomer().add(this);
+        }
     }
 
     public String getDiscountCode() {
@@ -93,6 +100,14 @@ public class Discount {
 
     public int getDiscountPerCustomer() {
         return discountPerCustomer;
+    }
+
+    public void setDiscountPercent(double discountPercent) {
+        this.discountPercent = discountPercent;
+    }
+
+    public void setIncludingCustomerUsername(ArrayList<String> includingCustomerUsername) {
+        this.includingCustomerUsername = includingCustomerUsername;
     }
 
     public boolean isAvailable(){

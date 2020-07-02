@@ -59,6 +59,8 @@ public class Product {
         this.productCategory = productCategory;
         this.specialFeatures = specialFeatures;
         this.productSeller = productSeller;
+        this.productSeller.getProducts().add(this);
+
         if (specialFeatures != null) {
             this.specialFeatures = specialFeatures;
         }

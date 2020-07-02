@@ -236,8 +236,13 @@ public class AdminProfileManager extends ProfileManager {
 
     private boolean checkDiscountPercentValidity(String discountPercent) throws Exception {
         try {
-            Double.parseDouble(discountPercent);
-            return true;
+            double discountPercentValue = Double.parseDouble(discountPercent);
+            if (discountPercentValue < 100 && discountPercentValue > 0) {
+                return true;
+            }
+            else {
+                throw new Exception("Discount Percent should be between 0 and 100");
+            }
         } catch (Exception e) {
             throw new Exception("Invalid Discount Percent");
         }

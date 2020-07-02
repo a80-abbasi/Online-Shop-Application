@@ -82,7 +82,10 @@ public class CreateDiscountCode {
     }
 
     public void clearIncludingCustomers(MouseEvent mouseEvent) {
-        customerTable.getItems().addAll(includingCustomers);
+        customerTable.getItems().clear();
+        for (String customerID : includingCustomers) {
+            customerTable.getItems().add((Customer) Customer.getCustomerById(customerID));
+        }
         includingCustomers.clear();
         includingCustomersField.setText("");
     }

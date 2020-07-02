@@ -48,7 +48,6 @@ public class ManageDiscountsMenu {
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
         {
-            allDiscountsTable = new TableView();
             notIncludingCustomers = new TableView();
         }
         allDiscountsTable = adminProfileManager.getAllDiscountsTable(allDiscountsTable);
@@ -148,11 +147,21 @@ public class ManageDiscountsMenu {
         Discount selectedDiscount = (Discount) selectedItem;
         adminProfileManager.removeDiscount(selectedDiscount.getDiscountCode());
         allDiscountsTable.getItems().remove(selectedDiscount);
+        discountCodeField.setText("");
+        startTimeDate.setValue(null);
+        endTimeDate.setValue(null);
+        discountPercentField.setText("");
+        maxPossibleDiscountField.setText("");
+        discountPerCustomerField.setText("");
+        includingCustomersField.setText("");
+        includingCustomers.clear();
     }
 
     public void clearIncludingCustomers(MouseEvent mouseEvent) {
-        notIncludingCustomers = new TableView();
-        notIncludingCustomers = adminProfileManager.getAllCustomersTable(notIncludingCustomers);
+        notIncludingCustomers.getItems().clear();
+        for (String customerID : includingCustomers) {
+            notIncludingCustomers.getItems().add((Customer) Customer.getCustomerById(customerID));
+        }
         includingCustomers.clear();
         includingCustomersField.setText("");
     }
