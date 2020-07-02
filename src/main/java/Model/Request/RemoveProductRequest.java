@@ -17,6 +17,10 @@ public class RemoveProductRequest extends Request {
         allRemoveProductRequests.add(this);
     }
 
+    public RemoveProductRequest(String requestId, RequestType requestType) {
+        super("", null);
+    }
+
     public Product getProduct() {
         return product;
     }
