@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Categories {
-    private final static String pathName = "src\\main\\resources\\Categories.xml";
+    private final static String pathName = "src\\main\\resources\\categories.xml";
 
     @XmlElement(name = "category")
     private ArrayList<Category> allCategories = new ArrayList<>();

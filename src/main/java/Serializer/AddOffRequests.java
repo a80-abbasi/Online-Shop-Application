@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class AddOffRequests {
-    private final static String pathName = "src\\main\\resources\\AddOffRequests.xml";
+    private final static String pathName = "src\\main\\resources\\addOffRequests.xml";
 
     @XmlElement(name = "addOffRequest")
     private ArrayList<AddOffRequest> allAddOffRequests = new ArrayList<>();

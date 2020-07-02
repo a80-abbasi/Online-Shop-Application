@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Customers {
-    private final static String pathName = "src\\main\\resources\\Customers.xml";
+    private final static String pathName = "src\\main\\resources\\customers.xml";
 
     @XmlElement(name = "customer")
     private ArrayList<Customer> allCustomer = new ArrayList<>();

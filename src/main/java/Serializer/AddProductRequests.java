@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class AddProductRequests {
-    private final static String pathName = "src\\main\\resources\\AddProductRequest.xml";
+    private final static String pathName = "src\\main\\resources\\addProductRequest.xml";
 
     @XmlElement(name = "admin")
     private ArrayList<AddProductRequest> allAddProductRequests = new ArrayList<>();
