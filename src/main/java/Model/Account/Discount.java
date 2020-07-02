@@ -126,6 +126,10 @@ public class Discount {
 
     public static void removeDiscount(Discount discount) {
         allDiscounts.remove(discount);
+        for (String customerUsername : discount.getIncludingCustomerUsername()) {
+            Customer customer = Customer.getCustomerById(customerUsername);
+            customer.getAllDiscountCodesForCustomer().remove(discount);
+        }
     }
 
     @Override

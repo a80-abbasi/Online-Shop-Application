@@ -321,6 +321,9 @@ public class Product {
 
     //todo: checking this, removing from offs, discounts and categories?
     public static void removeProduct(Product product) {
+        Seller seller = Seller.getSellerByUserName(product.getProductSeller());
+        seller.getProducts().remove(product);
+        product.getProductCategory().removeProduct(product);
         allProducts.remove(product);
     }
 

@@ -134,6 +134,10 @@ public class Off {
         return allOffIds;
     }
 
+    public static void removeOff(Off off) {
+        allOffs.remove(off);
+    }
+
     @Override
     public String toString() {
         return "Off{" +
