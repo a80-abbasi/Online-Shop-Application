@@ -17,6 +17,7 @@ public abstract class EditAddOffRequest extends Request {
 
     public EditAddOffRequest(String requestID, RequestType requestType) {
         super(requestID, requestType);
+        allEditAddOffRequests.add(this);
     }
 
     public ArrayList<String> getOffProductIDs() {

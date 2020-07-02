@@ -48,7 +48,7 @@ public class ManageProducts {
     private Category category;
     private Product product;
 
-    private ArrayList<FeatureData> allFeatureData;
+    private ArrayList<FeatureData> productFeatureData;
 
     private SellerProfileManager sellerProfileManager;
 
@@ -56,7 +56,7 @@ public class ManageProducts {
         this.sellerProfileManager = new SellerProfileManager((Seller) Account.getLoggedInAccount());
         productsTable = sellerProfileManager.getSellerProductsTable(productsTable);
 
-        allFeatureData = new ArrayList<>();
+        productFeatureData = new ArrayList<>();
 
         specialFeaturesColumn.setCellValueFactory(new PropertyValueFactory<String, FeatureData>("specialFeature"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<String, FeatureData>("value"));
@@ -84,10 +84,11 @@ public class ManageProducts {
             return;
         }
         productSpecialFeaturesTable.getItems().clear();
+        productFeatureData.clear();
         for (String specialFeature : category.getSpecialFeatures()) {
             FeatureData featureData = new FeatureData(specialFeature, "");
             productSpecialFeaturesTable.getItems().add(featureData);
-            allFeatureData.add(featureData);
+            productFeatureData.add(featureData);
         }
     }
 
@@ -99,7 +100,7 @@ public class ManageProducts {
         String productExistingNumber = productExistingNumberField.getText();
         String productExplanations = productExplanationsField.getText();
         ArrayList<String> values = new ArrayList<>();
-        for (FeatureData featureData : allFeatureData) {
+        for (FeatureData featureData : productFeatureData) {
             values.add(featureData.getValue());
         }
         boolean informationIncomplete = productID.isEmpty() || productName.isEmpty() || productCompanyName.isEmpty() || productPrice.isEmpty() || productExistingNumber.isEmpty() ||
@@ -155,6 +156,16 @@ public class ManageProducts {
         sellerProfileManager.removeProduct(product.getProductId());
         AlertBox.showMessage("Remove Product", "Product With ID <" + product.getProductId() + "> Removed Successfully");
         productsTable.getItems().remove(product);
+
+        productIDField.setText("");
+        productNameField.setText("");
+        productCompanyNameField.setText("");
+        productPriceField.setText("");
+        productExistingNumberField.setText("");
+        productExplanationsField.setText("");
+        productSpecialFeaturesTable.getItems().clear();
+        productFeatureData.clear();
+
     }
 
     public void showProductDetails(MouseEvent mouseEvent) {
@@ -172,7 +183,11 @@ public class ManageProducts {
         ManageProducts.productImageAddress = product.getImageAddress();
 
         category = product.getProductCategory();
-        productSpecialFeaturesTable.getItems().setAll(category.getSpecialFeatures());
+
+        for (String specialFeature : product.getSpecialFeatures().keySet()) {
+            productFeatureData.add(new FeatureData(specialFeature, String.valueOf(product.getSpecialFeatures().get(specialFeature))));
+        }
+        productSpecialFeaturesTable.getItems().setAll(productFeatureData);
         categoriesMenuButton.setText(product.getProductCategory().getName());
     }
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Discount {
-    private static ArrayList<Discount> allDiscounts;
+    private static ArrayList<Discount> allDiscounts = new ArrayList<>();
     private String discountCode;
     private Date startTime;
     private Date endTime;
@@ -12,10 +12,6 @@ public class Discount {
     private double maxPossibleDiscount;
     private int discountPerCustomer;
     private ArrayList<String> includingCustomerUsername;
-
-    {
-        allDiscounts = new ArrayList<>();
-    }
 
     public Discount (String discountCode, Date startTime, Date endTime, double discountPercent, double maxPossibleDiscount,
                      int discountPerCustomer, ArrayList<String> includingCustomerUsername) {

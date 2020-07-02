@@ -88,7 +88,7 @@ public class ManageCategories {
     public void addSubCategory(MouseEvent mouseEvent) {
         AddCategory.setCategory(selectedCategory);
         try {
-            App.setRoot("ManageCategories");
+            App.setRoot("AddCategory");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -46,7 +46,6 @@ public class ManageOffs {
         this.sellerProfileManager = new SellerProfileManager((Seller) Account.getLoggedInAccount());
         offProductIDs = new ArrayList<>();
 
-        offsTable = new TableView();
         notIncludingProducts = new TableView();
         offsTable = sellerProfileManager.getSellerOffsTable(offsTable);
         notIncludingProducts = sellerProfileManager.getSellerProductsTable(notIncludingProducts);
@@ -117,7 +116,9 @@ public class ManageOffs {
 
     public void confirm(MouseEvent mouseEvent) {
         String offID = offIDField.getText();
-        Date offStartTime = new Date(offStartTimeDatePicker.getValue().toEpochDay());
+        /*Date offStartTime = new Date(offStartTimeDatePicker.getValue().toEpochDay());
+        Date offEndTime = new Date(offEndTimePicker.getValue().toEpochDay());*/
+        Date offStartTime = Date.from(offStartTimeDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         Date offEndTime = new Date(offEndTimePicker.getValue().toEpochDay());
         String offAmount = offAmountField.getText();
         boolean checkConfirmButtonInability = offID.isEmpty() || offStartTimeDatePicker.getValue() == null || offEndTimePicker.getValue() == null || offAmount.isEmpty() || offProductsField.getText().isEmpty();

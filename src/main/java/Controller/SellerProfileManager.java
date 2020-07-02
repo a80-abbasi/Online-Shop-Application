@@ -195,7 +195,7 @@ public class SellerProfileManager extends ProfileManager {
                 productSpecialFeatures.put(specialFeature, values.get(i));
                 i++;
             }
-            if (checkProductIDValidity(productID) && checkProductNameValidity(productName) &&
+            if (checkProductNameValidity(productName) &&
                     checkProductCompanyName(productCompanyName) && checkProductPrice(productPrice) &&
                     checkProductExistingNumber(productExistingNumber) && checkProductExplanations(productExplanations)) {
                 Product product = Product.getProductByID(productID);
