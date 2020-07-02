@@ -46,7 +46,7 @@ public class ProfileManager {
     }
 
     public String getLastName() {
-        return account.getPassword();
+        return account.getLastName();
     }
 
     public String getEmail() {

@@ -40,11 +40,12 @@ public class AddCategory {
 
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
+        specialFeatures = new ArrayList<>();
+        subCategories = new ArrayList<>();
+        subCategorySpecialFeatures = new ArrayList<>();
         if (category == null) {
-            specialFeatures = new ArrayList<>();
-            category = null;
-            subCategories = new ArrayList<>();
-            subCategorySpecialFeatures = new ArrayList<>();
+            specialFeaturesList.getItems().clear();
+            subCategoryFeaturesList.getItems().clear();
         } else {
             turnToAddSubCategoryMode();
         }
@@ -85,6 +86,7 @@ public class AddCategory {
             }
         } else {
             AlertBox.showMessage("Add Categories", "Category and its SubCategories Added Successfully");
+            category = null;
             try {
                 App.setRoot(parentMenu);
             } catch (IOException e) {
@@ -113,6 +115,10 @@ public class AddCategory {
             AlertBox.showMessage("Add SubCategory", subCategoryName + " SubCategory Successfully Added");
             subCategoriesField.setText(subCategoriesField.getText() + subCategoryName + ", ");
             subCategories.add(subCategory);
+
+            subCategorySpecialFeatures.clear();
+            subCategoryNameField.setText("");
+            subCategoryFeaturesList.getItems().clear();
         } catch (Exception e) {
             AlertBox.showMessage("Failed To Add SubCategory", e.getMessage());
         }
