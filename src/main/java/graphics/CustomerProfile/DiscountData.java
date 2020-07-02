@@ -5,14 +5,14 @@ public class DiscountData {
     private String discountStartTime;
     private String discountEndTime;
     private String percent;
-    private String maxPossibleUsage;
+    private String discountPerCustomer;
 
-    public DiscountData(String discountId, String discountStartTime, String discountEndTime, String percent, String maxPossibleUsage) {
+    public DiscountData(String discountId, String discountStartTime, String discountEndTime, String percent, String discountPerCustomer) {
         this.discountId = discountId;
         this.discountStartTime = discountStartTime;
         this.discountEndTime = discountEndTime;
         this.percent = percent;
-        this.maxPossibleUsage = maxPossibleUsage;
+        this.discountPerCustomer = discountPerCustomer;
     }
 
     public String getDiscountId() {
@@ -31,7 +31,7 @@ public class DiscountData {
         return percent;
     }
 
-    public String getMaxPossibleUsage() {
-        return maxPossibleUsage;
+    public String getDiscountPerCustomer() {
+        return discountPerCustomer;
     }
 }
