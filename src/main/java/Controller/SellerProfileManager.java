@@ -294,7 +294,7 @@ public class SellerProfileManager extends ProfileManager {
     public void makeNewAddOffRequest(String offID, Date offStartTime, Date offEndTime, String offAmount, ArrayList<String> offProductIDs) throws Exception {
         try {
             if (checkOffAmountValidity(offAmount) && checkOffIDValidity(offID)) {
-                new AddOffRequest(offID, offStartTime, offEndTime, Integer.parseInt(offAmount), offProductIDs);
+                new AddOffRequest(offID, offStartTime, offEndTime, Integer.parseInt(offAmount), offProductIDs, this.seller);
             }
         } catch (Exception e) {
             throw e;

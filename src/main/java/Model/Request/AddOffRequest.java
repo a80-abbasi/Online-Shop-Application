@@ -2,6 +2,7 @@ package Model.Request;
 
 import Model.Account.Off;
 import Model.Account.OffStatus;
+import Model.Account.Seller;
 import Model.Product.Product;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -13,6 +14,8 @@ import java.util.Date;
 public class AddOffRequest extends EditAddOffRequest {
     private static ArrayList<AddOffRequest> allAddOffRequest = new ArrayList<>();
 
+    private Seller offSeller;
+
     public AddOffRequest() {
         super("add_off_" + allRequests.size(), RequestType.Adding_Off_Request);
         allAddOffRequest.add(this);
@@ -20,7 +23,7 @@ public class AddOffRequest extends EditAddOffRequest {
         this.offProductIDs = new ArrayList<>();
     }
 
-    public AddOffRequest(String offID, Date offStartTime, Date offEndTime, int offAmount, ArrayList<String> offProductIDs) {
+    public AddOffRequest(String offID, Date offStartTime, Date offEndTime, int offAmount, ArrayList<String> offProductIDs, Seller offSeller) {
         super("add_off_" + allRequests.size(), RequestType.Adding_Off_Request);
         this.setOffStatus(OffStatus.PENDING_FOR_CREATION);
         this.offID = offID;
@@ -28,6 +31,7 @@ public class AddOffRequest extends EditAddOffRequest {
         this.endTime = offEndTime;
         this.offAmount = offAmount;
         this.offProductIDs = offProductIDs;
+        this.offSeller = offSeller;
         allAddOffRequest.add(this);
     }
 
@@ -47,6 +51,7 @@ public class AddOffRequest extends EditAddOffRequest {
                 offProducts.add(Product.getProductByID(offProductID));
             }
             Off off = new Off(offID, startTime, endTime, offAmount, offProducts);
+            offSeller.getOffs().add(off);
             for (Product product : offProducts) {
                 product.setOff(off);
             }

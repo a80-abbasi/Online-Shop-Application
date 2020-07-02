@@ -232,7 +232,7 @@ public class CustomerProfileMenu {
 
         TableColumn<String, DiscountData> maxPossibleUsageCol = new TableColumn("MaxPossibleUsage");
         discountEndTimeCol.setMinWidth(100);
-        discountEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("maxPossibleUsage"));
+        discountEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("discountPerCustomer"));
 
         table.getColumns().addAll(discountIdCol, discountStartTimeCol, discountEndTimeCol, percentCol, maxPossibleUsageCol);
 //        table.getItems().add(new DiscountData("a", "a", "a", "a", "a"));

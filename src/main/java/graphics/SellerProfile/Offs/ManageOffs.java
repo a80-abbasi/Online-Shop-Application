@@ -47,6 +47,7 @@ public class ManageOffs {
         offProductIDs = new ArrayList<>();
 
         notIncludingProducts = new TableView();
+
         offsTable = sellerProfileManager.getSellerOffsTable(offsTable);
         notIncludingProducts = sellerProfileManager.getSellerProductsTable(notIncludingProducts);
         App.setBackButton(backImage, "SellerProfileMenu");
