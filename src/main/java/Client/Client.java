@@ -31,10 +31,6 @@ public class Client extends Application {
         }
         stage.setScene(scene);
         stage.show();
-        stage.setOnCloseRequest(e->{
-            Main.serializeXML();
-            stage.close();
-        });
     }
 
     public static Object setRoot(String fxml) throws IOException {

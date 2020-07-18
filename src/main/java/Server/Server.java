@@ -1,6 +1,10 @@
 package Server;
 
+import Controller.ProductsManager;
+import Model.Account.Account;
+import Model.Account.Customer;
 import Model.Product.Category;
+import Model.Product.Comment;
 import Model.Product.Product;
 import View.Main;
 import com.google.gson.Gson;
@@ -19,6 +23,8 @@ public class Server extends Application {
     private static final int serverPort = 8080;
     private static ServerSocket serverSocket;
     private static Socket clientSocket;
+    private static ProductsManager productsManager = new ProductsManager();
+    private static final Gson gson = new Gson();
 
     @Override
     public void start(Stage stage) {
@@ -62,14 +68,48 @@ public class Server extends Application {
                 DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
 
                 String message = dataInputStream.readUTF();
+                if (message.startsWith("{\"token\":\"")) { //for requests with token
+                    String token = getJasonObjectItem(message, "token");
+                    Account account = Account.getAccountByToken(token);
+                    if (account != null){
+                        String content = getJasonObjectItem(message, "content");
 
-                if (message.equals("getProducts")){
-                    dataOutputStream.writeUTF(new Gson().toJson(Product.getAllProducts()));
+                        if (content.startsWith("add to cart: ")){
+                            Customer customer = (Customer) account;
+                            Product product = Product.getProductByID(content.substring("add to cart: ".length()));
+                            customer.addToCart(product, 1);
+                        }
+                        else if (content.startsWith("rate product: ")){
+                            Customer customer = (Customer) account;
+                            String[] split = content.split("\\s+");
+                            Product product = Product.getProductByID(split[2]);
+                            int rate = Integer.parseInt(split[3]);
+                            product.addRate(customer, rate);
+                        }
+                        else if (content.startsWith("new comment: ")){
+                            Comment comment = gson.fromJson(content.substring("new comment: ".length()), Comment.class);
+                            Product.getProductByID(comment.getId()).addAComment(comment);
+                        }
+                    }
+                }
+                else if (message.equals("getProducts")){
+                    dataOutputStream.writeUTF(gson.toJson(Product.getAllProducts()));
                     dataOutputStream.flush();
                 }
                 else if (message.equals("getCategories")){
-                    dataOutputStream.writeUTF(new Gson().toJson(Category.getAllCategories()));
+                    dataOutputStream.writeUTF(gson.toJson(Category.getAllCategories()));
                     dataOutputStream.flush();
+                }
+                else if (message.startsWith("delete product: ")){
+                    Product product = Product.getProductByID(message.substring("delete product: ".length()));
+                    productsManager.deleteAProduct(product);
+                }
+                else if (message.startsWith("visit product: ")){
+                    Product product = Product.getProductByID(message.substring("visit product: ".length()));
+                    product.setVisitNumber(product.getVisitNumber() + 1);
+                }
+                else if (message.startsWith("get product: ")){
+
                 }
 
                 clientSocket.close();
@@ -77,5 +117,11 @@ public class Server extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static String getJasonObjectItem(String jasonObject, String item){
+        int index1 = jasonObject.indexOf(item) + item.length() + 3;
+        int index2 = jasonObject.indexOf("\"", index1);
+        return jasonObject.substring(index1, index2);
     }
 }

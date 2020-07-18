@@ -30,6 +30,14 @@ public class Connection {
         }
     }
 
+    public static void sendToServerWithToken(String message){
+        sendToServer(createJsonObject(token, message));
+    }
+
+    private static String createJsonObject(String token, String content){
+        return "{\"token\":\"" + token + "\",\"content\":\"" + content + "\"}";
+    }
+
     public static String receiveFromServer(){
         if (clientSocket == null || !clientSocket.isConnected() || clientSocket.isClosed()){
             throw new RuntimeException("clientSocket is not connected");

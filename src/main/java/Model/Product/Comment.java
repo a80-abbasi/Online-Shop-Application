@@ -21,7 +21,6 @@ public class Comment {
         this.title = title;
         date = new Date();
         status = CommentStatus.WAITING_FOR_CONFIRM;
-        Product.getProductByID(id).addAComment(this);
     }
 
     public Comment() {

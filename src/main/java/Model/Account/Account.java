@@ -79,6 +79,14 @@ public abstract class Account {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public static ArrayList<Account> getAllAccounts() {
         return allAccounts;
     }
@@ -94,6 +102,15 @@ public abstract class Account {
     public static Account getAccountByUsername (String username) {
         for (Account account : allAccounts) {
             if (account.getUsername().equalsIgnoreCase(username)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public static Account getAccountByToken (String token) {
+        for (Account account : allAccounts) {
+            if (account.getToken().equals(token)) {
                 return account;
             }
         }

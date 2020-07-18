@@ -1,5 +1,6 @@
 package graphics.products;
 
+import Client.Connection;
 import Controller.ProductsManager;
 import Model.Account.Account;
 import Model.Account.Admin;
@@ -7,6 +8,7 @@ import Model.Account.Customer;
 import Model.Product.Comment;
 import Model.Product.Product;
 import Model.Product.Score;
+import com.google.gson.Gson;
 import graphics.App;
 import graphics.LoginAndRegister.LoginMenu;
 import graphics.MainMenu;
@@ -113,7 +115,8 @@ public class ProductPageController {
         if (Account.getLoggedInAccount() instanceof Admin){
             deleteProductButton.setOpacity(1);
             deleteProductButton.setOnAction(e -> {
-                productsManager.deleteAProduct(product); //todo: send delete request
+                //productsManager.deleteAProduct(product); //todo: send delete request
+                Connection.sendToServer("delete product: " + product.getProductId());
                 try {
                     App.setRoot(parentAddress);
                 } catch (IOException ex) {
@@ -125,7 +128,8 @@ public class ProductPageController {
             deleteProductButton.setOpacity(0);
             deleteProductButton.setDisable(false);
         }
-        product.setVisitNumber(product.getVisitNumber() + 1); //todo: send increase request
+        //product.setVisitNumber(product.getVisitNumber() + 1); //todo: send increase request
+        Connection.sendToServer("visit product: " + product.getProductId());
         setLabels();
         setRates();
         resizeImage();
@@ -372,7 +376,7 @@ public class ProductPageController {
                 Account account = Account.getLoggedInAccount();
                 if (account == null || account instanceof Customer){
                     HashMap<Product, Integer> cart;
-                    if (account == null){
+                    if (account == null) {
                         cart = Customer.getTmpCart();
                     }
                     else {
@@ -383,7 +387,10 @@ public class ProductPageController {
                     }
                     else {
                         productAddedLabel.setText("Product Added to Your Cart.");
-                        cart.put(product, cart.getOrDefault(product, 0) + 1);
+                        cart.put(product, cart.getOrDefault(product, 0) + 1); //todo: add Product to cart request
+                        if (account != null){
+                            Connection.sendToServerWithToken("add to cart: " + product.getProductId());
+                        }
                     }
                 }
                 else {
@@ -455,7 +462,10 @@ public class ProductPageController {
         else if (account instanceof Customer){
             Customer customer = (Customer) account;
             if (customer.getBuyLogs().stream().anyMatch(log -> log.getBoughtProducts().containsKey(product))){
-                product.addRate(customer, (int) (rating.getRating() + 0.5));
+                int rate = (int) (rating.getRating() + 0.5);
+                //product.addRate(customer, rate); //todo: send rate request
+                Connection.sendToServerWithToken("rate product: " + product.getProductId() + " " + rate);
+                refreshPage();
                 hasRated = true;
                 rating.setDisable(true);
                 rating.setUpdateOnHover(false);
@@ -473,6 +483,13 @@ public class ProductPageController {
         if (flag){
             noteForRateLabel.setTextFill(Color.RED);
         }
+    }
+
+    private void refreshPage() {
+        Connection.sendToServer("get product: " + product.getProductId());
+        product = new Gson().fromJson(Connection.receiveFromServer(), Product.class);
+        initialize();
+        setEveryThing();
     }
 
     private void resizeImage() {
@@ -602,10 +619,12 @@ public class ProductPageController {
         if (!commentTextArea.getText().isBlank()){
             String comment = commentTextArea.getText();
             String title = titleTextField.getText();
-            new Comment(Account.getLoggedInAccount(), product.getProductId(), comment, title);
+            Comment sendingComment = new Comment(Account.getLoggedInAccount(), product.getProductId(), comment, title); //todo: send comment request
+            Connection.sendToServerWithToken("new comment: " + new Gson().toJson(sendingComment));
             parentForCommentPage.setComments();
             parentForCommentPage.commentPopUp.close();
             parentForCommentPage.commentPopUp = null;
+            refreshPage();
         }
         else {
             commentNoteLabel.setText("Comment Text Can't Be Blank");
