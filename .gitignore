@@ -113,4 +113,17 @@ modules.xml
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+*.xml
 # End of https://www.gitignore.io/api/java,intellij+all
+!/src/main/resources/admin.xml
+!/src/main/resources/discounts.xml
+!/src/main/resources/categories.xml
+!/src/main/resources/products.xml
+!/src/main/resources/AddProductRequest.xml
+!/src/main/resources/editOffRequest.xml
+!/src/main/resources/sellers.xml
+!/src/main/resources/addOffRequests.xml
+!/src/main/resources/offs.xml
+!/src/main/resources/removeProductRequests.xml
+!/src/main/resources/customers.xml
+!/src/main/resources/registerSellerRequests.xml
