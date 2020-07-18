@@ -389,7 +389,7 @@ public class ProductPageController {
                         productAddedLabel.setText("Product Added to Your Cart.");
                         cart.put(product, cart.getOrDefault(product, 0) + 1); //todo: add Product to cart request
                         if (account != null){
-                            Connection.sendToServerWithToken("add to cart: " + product.getProductId());
+                            Connection.sendToServerWithToken("add to cart: " + product.getProductId() + " 1");
                         }
                     }
                 }

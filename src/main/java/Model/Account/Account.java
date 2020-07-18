@@ -1,5 +1,7 @@
 package Model.Account;
 
+import Client.Connection;
+
 import java.util.ArrayList;
 
 public abstract class Account {
@@ -92,7 +94,7 @@ public abstract class Account {
     }
 
     public static Account getLoggedInAccount() {
-        return loggedInAccount;
+        return Connection.getLoggedInAccount();
     }
 
     public static void setLoggedInAccount(Account loggedInAccount) {

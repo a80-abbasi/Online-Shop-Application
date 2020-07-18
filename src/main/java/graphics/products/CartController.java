@@ -1,5 +1,6 @@
 package graphics.products;
 
+import Client.Connection;
 import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Product.Product;
@@ -45,7 +46,7 @@ public class CartController {
             cart = Customer.getTmpCart();
         }
         else if (account instanceof Customer){
-            Customer customer = (Customer) account;
+            Customer customer = (Customer) account; //todo: do we need to send request?
             cart = customer.getCart();
         }
         if (cart == null || cart.isEmpty()){
@@ -163,6 +164,7 @@ public class CartController {
         ProductPageController.shadowOnMouseHover(deleteImage);
         increaseImage.setOnMouseClicked(e -> {
             if (product .getExistingNumber() > number) {
+                Connection.sendToServerWithToken("add to cart: " + product.getProductId() + " 1");
                 cart.put(product, number + 1);
                 gridPane.getChildren().clear();
                 mainPane.getChildren().clear();
@@ -177,6 +179,7 @@ public class CartController {
             }
         });
         decreaseImage.setOnMouseClicked(e -> {
+            Connection.sendToServerWithToken("add to cart: " + product.getProductId() + " -1");
             if (number > 1) {
                 cart.put(product, number - 1);
             }
@@ -188,6 +191,7 @@ public class CartController {
             fillCart();
         });
         deleteImage.setOnMouseClicked(e -> {
+            Connection.sendToServerWithToken("add to cart: " + product.getProductId() + -cart.get(product));
             cart.remove(product);
             gridPane.getChildren().clear();
             mainPane.getChildren().clear();

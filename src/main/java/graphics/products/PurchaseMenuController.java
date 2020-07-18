@@ -1,8 +1,10 @@
 package graphics.products;
 
+import Client.Connection;
 import Controller.CustomerProfileManager;
 import Model.Account.*;
 import Model.Product.Product;
+import com.google.gson.Gson;
 import graphics.AlertBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -55,7 +57,9 @@ public class PurchaseMenuController {
             }
             else {
                 String discountCode = discountTextField.getText();
-                Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+                //Discount discount = Discount.getDiscountByDiscountCode(discountCode); //todo: get Discount request
+                Connection.sendToServer("get discount: " + discountCode);
+                Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
                 if (discount == null){
                     discountMessageLabel.setText("There is no discount with this code");
                     flag = true;
@@ -74,8 +78,9 @@ public class PurchaseMenuController {
                             discount.getDiscountPercent(), discount.getMaxPossibleDiscount()));
                     discountMessageLabel.setOpacity(1);
                     this.discount = discount;
-                    HashMap<Discount, Integer> usedDiscounts = customer.getUsedDiscounts();
-                    usedDiscounts.put(discount, usedDiscounts.getOrDefault(discount, 0) + 1);
+                    //HashMap<Discount, Integer> usedDiscounts = customer.getUsedDiscounts();
+                    //usedDiscounts.put(discount, usedDiscounts.getOrDefault(discount, 0) + 1); //todo: increase discount usage request
+                    Connection.sendToServerWithToken("use discount: " + discount.getDiscountCode());
                 }
             }
             if (flag){
@@ -125,7 +130,9 @@ public class PurchaseMenuController {
                 }
                 else {
                     showBoughtProducts();
-                    finishBuying(finalPrice);
+                    //finishBuying(finalPrice, cart, customer, totalAmount); //todo: send buy request
+                    Connection.sendToServerWithToken("finish buying: " + finalPrice + " " + totalAmount);
+                    validateButton.setDisable(true);
                     buyItemsButton.setDisable(true);
                     buyItemsButton.setOpacity(0.5);
                 }
@@ -181,7 +188,7 @@ public class PurchaseMenuController {
         gridPane.add(amount, 4, row);
     }
 
-    private void finishBuying(double finalAmount){
+    public static void finishBuying(double finalAmount, HashMap<Product, Integer> cart, Customer customer, double totalAmount){
         customer.setBalance(customer.getBalance() - finalAmount); //decrease customer money
         cart.forEach((product, number) -> {//increase sellers money & creating sell log
             Seller seller = product.getSeller();
@@ -201,7 +208,6 @@ public class PurchaseMenuController {
         if (!discountGift.isEmpty()){
             AlertBox.showMessage("Discount Gift", discountGift);
         }
-        validateButton.setDisable(true);
     }
 
     public void setCart(HashMap<Product, Integer> cart) {

@@ -1,5 +1,8 @@
 package Client;
 
+import Model.Account.Account;
+import com.google.gson.Gson;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -49,5 +52,10 @@ public class Connection {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static Account getLoggedInAccount(){
+        Connection.sendToServerWithToken("get logged in account");
+        return new Gson().fromJson(Connection.receiveFromServer(), Account.class);
     }
 }
