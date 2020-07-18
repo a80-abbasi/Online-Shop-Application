@@ -1,5 +1,6 @@
 package graphics;
 
+import Client.Client;
 import Controller.AdminProfileManager;
 import Controller.ProductsManager;
 import View.Main;
@@ -40,7 +41,7 @@ public class App extends Application {
 
     public static Object setRoot(String fxml) throws IOException {
         FXMLLoader fxmlLoader = loadFXML(fxml);
-        scene.setRoot(fxmlLoader.load());
+        Client.scene.setRoot(fxmlLoader.load());
         return fxmlLoader.getController();
     }
 

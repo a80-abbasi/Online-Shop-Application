@@ -2,6 +2,7 @@ package Client;
 
 import Controller.AdminProfileManager;
 import Controller.ProductsManager;
+import View.Main;
 import graphics.AlertBox;
 import graphics.App;
 import graphics.LoginAndRegister.CreateAdminAccount;
@@ -16,7 +17,7 @@ import java.io.IOException;
 
 public class Client extends Application {
 
-    private static Scene scene;
+    public static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -30,6 +31,10 @@ public class Client extends Application {
         }
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(e->{
+            Main.serializeXML();
+            stage.close();
+        });
     }
 
     public static Object setRoot(String fxml) throws IOException {
@@ -43,6 +48,7 @@ public class Client extends Application {
     }
 
     public static void main(String[] args) {
+        Main.deserializeXML();
         ProductPageController.productsManager = new ProductsManager();
         ProductsController.productsManager = new ProductsManager();
         launch();

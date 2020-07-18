@@ -1,9 +1,12 @@
 package graphics.products;
 
+import Client.Connection;
 import Controller.ProductsManager;
 import Controller.SortType;
 import Model.Product.Category;
 import Model.Product.Product;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import graphics.App;
 import graphics.ToggleSwitch;
 import javafx.animation.KeyFrame;
@@ -81,7 +84,6 @@ public class ProductsController {
         addToggleButtonForExistingFilter();
         addToggleButtonForOffFilter();
         addPageFactoryForPagination();
-
         showProducts();
         setSliders();
         setFilterBySellerAndCompany();
@@ -99,7 +101,8 @@ public class ProductsController {
             showProducts();
         });
         categories.getItems().add(allCategoriesItem);
-        setCategories(Category.getAllCategories(), categories);
+        Connection.sendToServer("getCategories");
+        setCategories(new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Category>>(){}.getType()), categories);
 
         ProductPageController.setCartButton(cartImage);
         App.setBackButton(backImage, parentAddress);
@@ -249,6 +252,7 @@ public class ProductsController {
     }
 
     private void showProducts() {
+        productsManager.setAllProducts();
         showingProducts = productsManager.showProducts();
         pagination.setPageCount(showingProducts.size() % numberOfProductsPerPage == 0 ?
                 showingProducts.size() / numberOfProductsPerPage : showingProducts.size() / numberOfProductsPerPage + 1);

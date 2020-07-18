@@ -113,7 +113,7 @@ public class ProductPageController {
         if (Account.getLoggedInAccount() instanceof Admin){
             deleteProductButton.setOpacity(1);
             deleteProductButton.setOnAction(e -> {
-                productsManager.deleteAProduct(product);
+                productsManager.deleteAProduct(product); //todo: send delete request
                 try {
                     App.setRoot(parentAddress);
                 } catch (IOException ex) {
@@ -125,7 +125,7 @@ public class ProductPageController {
             deleteProductButton.setOpacity(0);
             deleteProductButton.setDisable(false);
         }
-        product.setVisitNumber(product.getVisitNumber() + 1);
+        product.setVisitNumber(product.getVisitNumber() + 1); //todo: send increase request
         setLabels();
         setRates();
         resizeImage();

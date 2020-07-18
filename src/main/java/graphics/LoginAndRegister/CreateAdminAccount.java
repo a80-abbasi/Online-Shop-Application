@@ -19,7 +19,7 @@ public class CreateAdminAccount {
     public TextField phoneNumberField;
     public PasswordField passwordField;
 
-    private static String parentMenu;
+    private static String parentMenu = "MainMenu";
 
     private LoginAndRegisterManager loginAndRegisterManager;
 

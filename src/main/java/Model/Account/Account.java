@@ -11,6 +11,7 @@ public abstract class Account {
     protected String lastName;
     protected String email;
     protected String phoneNumber;
+    private String token;
 
     public Account(String username, String password, String name, String lastName, String email, String phoneNumber) {
         this.username = username;

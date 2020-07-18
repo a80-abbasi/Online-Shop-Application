@@ -31,7 +31,7 @@ public class Connection {
     }
 
     public static String receiveFromServer(){
-        if (!clientSocket.isConnected() || clientSocket.isClosed()){
+        if (clientSocket == null || !clientSocket.isConnected() || clientSocket.isClosed()){
             throw new RuntimeException("clientSocket is not connected");
         }
         try {

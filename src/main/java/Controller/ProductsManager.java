@@ -1,8 +1,11 @@
 package Controller;
 
+import Client.Connection;
 import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Product.*;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProductsManager {
-    private ArrayList<Product> allProducts = Product.getAllProducts();
+    private ArrayList<Product> allProducts;
 
     private Comparator<Product> currentSortMode = new ProductComparatorForVisitNumber();
     private ArrayList<FilteringType> currentFilters = new ArrayList<>();
@@ -24,6 +27,11 @@ public class ProductsManager {
     private String specialFeatureSort = null;
     private String filterBySeller = null;
     private String filterByCompany = null;
+
+    public void setAllProducts() {
+        Connection.sendToServer("getProducts");
+        allProducts = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Product>>(){}.getType());
+    }
 
     public void showAllCategories () {
         Category.showAllCategories();
