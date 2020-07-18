@@ -1,5 +1,6 @@
 package graphics.LoginAndRegister;
 
+import Client.Connection;
 import Controller.LoginAndRegisterManager;
 import Model.Account.Account;
 import graphics.AlertBox;
@@ -15,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 public class LoginMenu {
@@ -61,6 +63,8 @@ public class LoginMenu {
             loginAndRegisterManager.loginUser(username, password);
             ((Stage) usernameField.getScene().getWindow()).close();
             ProductPageController.loginPopUp = null;
+            Connection.sendToServer("login: ");
+            Connection.setToken(Connection.receiveFromServer());
         } catch (IllegalArgumentException e) {
             AlertBox.showMessage("Login Failed", e.getMessage());
         }

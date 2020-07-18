@@ -21,6 +21,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Server extends Application {
     private static final int serverPort = 8080;
@@ -139,6 +140,18 @@ public class Server extends Application {
                     dataOutputStream.writeUTF(gson.toJson(discount));
                     dataOutputStream.flush();
                 }
+                else if (message.startsWith("login: ")){
+                    Account account = Account.getAccountByUsername(message.substring("login: ".length()));
+                    String token = generateToken();
+                    account.setToken(token);
+                    dataOutputStream.writeUTF(token);
+                    dataOutputStream.flush();
+                }
+                else if (message.startsWith("get account: ")){
+                    Account account = Account.getAccountByUsername(message.substring("get account: ".length()));
+                    dataOutputStream.writeUTF(gson.toJson(account));
+                    dataOutputStream.flush();
+                }
 
                 clientSocket.close();
             }
@@ -151,5 +164,22 @@ public class Server extends Application {
         int index1 = jasonObject.indexOf(item) + item.length() + 3;
         int index2 = jasonObject.indexOf("content") - 3;
         return jasonObject.substring(index1, index2);
+    }
+
+    private static String generateToken(){
+        char[] code = new char[25];
+        Random random = new Random();
+        for (int i = 0; i < 25; ++i) {
+            int a = random.nextInt(62);
+
+            if (a < 10)
+                code[i] = (char) (a + 48);
+
+            else if (a < 36)
+                code[i] = (char) (a + 55);
+            else
+                code[i] = (char) (a + 61);
+        }
+        return String.valueOf(code);
     }
 }

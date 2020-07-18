@@ -1,10 +1,12 @@
 package Controller;
 
 
+import Client.Connection;
 import Model.Account.*;
 import Model.Product.Product;
 import Model.Request.RegisterSellerRequest;
 import View.MainMenu;
+import com.google.gson.Gson;
 
 public class LoginAndRegisterManager {
 
@@ -42,7 +44,8 @@ public class LoginAndRegisterManager {
     }
 
     public void loginUser(String username, String password) throws IllegalArgumentException {
-        Account account = Account.getAccountByUsername(username);
+        Connection.sendToServer("get account: " + username);
+        Account account = new Gson().fromJson(Connection.receiveFromServer(), Account.class);
         if (account == null) {
             throw new IllegalArgumentException("There is no Account with this Username");
         }
