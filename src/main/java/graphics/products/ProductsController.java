@@ -102,7 +102,7 @@ public class ProductsController {
         });
         categories.getItems().add(allCategoriesItem);
         Connection.sendToServer("getCategories");
-        setCategories(new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Category>>(){}.getType()), categories);
+        setCategories(new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Category>>(){}.getType()), categories); //todo: request
 
         ProductPageController.setCartButton(cartImage);
         App.setBackButton(backImage, parentAddress);

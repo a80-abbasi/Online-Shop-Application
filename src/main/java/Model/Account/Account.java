@@ -98,7 +98,14 @@ public abstract class Account {
     }
 
     public static void setLoggedInAccount(Account loggedInAccount) {
+        if (loggedInAccount == null){
+            logout();
+        }
         Account.loggedInAccount = loggedInAccount;
+    }
+
+    public static void logout(){
+        Connection.sendToServerWithToken("logout");
     }
 
     public static Account getAccountByUsername (String username) {
@@ -112,6 +119,9 @@ public abstract class Account {
 
     public static Account getAccountByToken (String token) {
         for (Account account : allAccounts) {
+            if (account.getToken() == null){
+                continue;
+            }
             if (account.getToken().equals(token)) {
                 return account;
             }

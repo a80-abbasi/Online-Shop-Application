@@ -1,6 +1,9 @@
 package Client;
 
 import Model.Account.Account;
+import Model.Account.Admin;
+import Model.Account.Customer;
+import Model.Account.Seller;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -56,6 +59,20 @@ public class Connection {
 
     public static Account getLoggedInAccount(){
         Connection.sendToServerWithToken("get logged in account");
-        return new Gson().fromJson(Connection.receiveFromServer(), Account.class);
+        return getAccountFromServer();
+    }
+
+    public static Account getAccountFromServer(){
+        Gson gson = new Gson();
+        String loggedInInfo = Connection.receiveFromServer();
+        if (loggedInInfo.startsWith("Admin: ")){
+            return gson.fromJson(loggedInInfo.substring("Admin: ".length()), Admin.class);
+        }
+        else if (loggedInInfo.startsWith("Customer: ")){
+            return gson.fromJson(loggedInInfo.substring("Customer: ".length()), Customer.class);
+        }
+        else {
+            return gson.fromJson(loggedInInfo.substring("Seller: ".length()), Seller.class);
+        }
     }
 }

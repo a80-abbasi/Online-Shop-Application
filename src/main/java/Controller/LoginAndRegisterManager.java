@@ -45,7 +45,7 @@ public class LoginAndRegisterManager {
 
     public void loginUser(String username, String password) throws IllegalArgumentException {
         Connection.sendToServer("get account: " + username);
-        Account account = new Gson().fromJson(Connection.receiveFromServer(), Account.class);
+        Account account = Connection.getAccountFromServer();
         if (account == null) {
             throw new IllegalArgumentException("There is no Account with this Username");
         }

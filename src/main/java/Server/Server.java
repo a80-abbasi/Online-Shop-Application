@@ -1,9 +1,7 @@
 package Server;
 
 import Controller.ProductsManager;
-import Model.Account.Account;
-import Model.Account.Customer;
-import Model.Account.Discount;
+import Model.Account.*;
 import Model.Product.Category;
 import Model.Product.Comment;
 import Model.Product.Product;
@@ -72,15 +70,16 @@ public class Server extends Application {
                 DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
 
                 String message = dataInputStream.readUTF();
+                System.out.println(message);
+                System.out.println();
                 String[] splitMessage = message.split("\\s+");
                 if (message.startsWith("{\"token\":\"")) { //for requests with token
                     String token = getJasonObjectItem(message, "token");
                     Account account = Account.getAccountByToken(token);
+                    String content = getJasonObjectItem(message, "content");
+                    String[] splitContent = content.split("\\s+");
 
                     if (account != null){
-                        String content = getJasonObjectItem(message, "content");
-                        String[] splitContent = content.split("\\s+");
-
                         if (content.startsWith("add to cart: ")){
                             Customer customer = (Customer) account;
                             Product product = Product.getProductByID(splitContent[3]);
@@ -108,10 +107,12 @@ public class Server extends Application {
                             double totalAmount = Double.parseDouble(splitContent[3]);
                             PurchaseMenuController.finishBuying(finalAmount, customer.getCart(), customer, totalAmount);
                         }
-                        else if (content.equals("get logged in account")){
-                            dataOutputStream.writeUTF(gson.toJson(account));
-                            dataOutputStream.flush();
+                        else if (content.equals("logout")){
+                            account.setToken(null);
                         }
+                    }
+                    if (content.equals("get logged in account")){
+                        sendAccountInfo(dataOutputStream, account);
                     }
                 }
                 else if (message.equals("getProducts")){
@@ -149,8 +150,7 @@ public class Server extends Application {
                 }
                 else if (message.startsWith("get account: ")){
                     Account account = Account.getAccountByUsername(message.substring("get account: ".length()));
-                    dataOutputStream.writeUTF(gson.toJson(account));
-                    dataOutputStream.flush();
+                    sendAccountInfo(dataOutputStream, account);
                 }
 
                 clientSocket.close();
@@ -161,9 +161,12 @@ public class Server extends Application {
     }
 
     private static String getJasonObjectItem(String jasonObject, String item){
-        int index1 = jasonObject.indexOf(item) + item.length() + 3;
-        int index2 = jasonObject.indexOf("content") - 3;
-        return jasonObject.substring(index1, index2);
+        if (item.equals("token")){
+            return jasonObject.substring(10, jasonObject.indexOf(',') - 1);
+        }
+        else {
+            return jasonObject.substring(jasonObject.indexOf(',') + 12, jasonObject.length() - 2);
+        }
     }
 
     private static String generateToken(){
@@ -181,5 +184,23 @@ public class Server extends Application {
                 code[i] = (char) (a + 61);
         }
         return String.valueOf(code);
+    }
+
+    private static void sendAccountInfo(DataOutputStream dataOutputStream, Account account){
+        try {
+            if (account instanceof Admin) {
+                dataOutputStream.writeUTF("Admin: " + gson.toJson((Admin) account));
+            }
+            else if (account instanceof Customer) {
+                dataOutputStream.writeUTF("Customer: " + gson.toJson((Customer) account));
+            }
+            else {
+                dataOutputStream.writeUTF("Seller: " + gson.toJson((Seller) account));
+            }
+        dataOutputStream.flush();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

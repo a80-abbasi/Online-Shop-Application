@@ -63,7 +63,7 @@ public class LoginMenu {
             loginAndRegisterManager.loginUser(username, password);
             ((Stage) usernameField.getScene().getWindow()).close();
             ProductPageController.loginPopUp = null;
-            Connection.sendToServer("login: ");
+            Connection.sendToServer("login: " + username);
             Connection.setToken(Connection.receiveFromServer());
         } catch (IllegalArgumentException e) {
             AlertBox.showMessage("Login Failed", e.getMessage());
