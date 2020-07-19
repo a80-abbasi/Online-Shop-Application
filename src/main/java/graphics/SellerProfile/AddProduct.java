@@ -10,12 +10,18 @@ import graphics.products.ProductPageController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -49,6 +55,8 @@ public class AddProduct {
     private ArrayList<FeatureData> allFeatureData;
 
     private SellerProfileManager sellerProfileManager;
+    private boolean isSellingFile = false;
+    private String addressOfFileForSell;
 
     public void initialize(){
         productImageAddress = "file:src\\main\\resources\\Images\\products\\unKnown.jpg";
@@ -140,5 +148,51 @@ public class AddProduct {
     public void editValueForSpecialFeature(TableColumn.CellEditEvent cellEditEvent) {
         FeatureData featureData = (FeatureData) specialFeaturesTable.getSelectionModel().getSelectedItem();
         featureData.setValue((String) cellEditEvent.getNewValue());
+    }
+
+    public void selectFileForSelling(ActionEvent event) {
+        Stage stage = new Stage();
+        Label label = new Label("Drag a file to here!");
+        label.setStyle("-fx-font-size: 30; -fx-font-weight: Bold; -fx-font-family: 'Times New Roman'");
+        Label dropped = new Label("");
+        VBox dragTarget = new VBox();
+        dragTarget.setPadding(new Insets(50, 50, 50, 50));
+        dragTarget.setSpacing(50);
+        dragTarget.getChildren().addAll(label,dropped);
+        dragTarget.setOnDragOver(event1 -> {
+            if (event1.getGestureSource() != dragTarget
+                    && event1.getDragboard().hasFiles()) {
+                /* allow for both copying and moving, whatever user chooses */
+                event1.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+            }
+            event1.consume();
+        });
+
+        dragTarget.setOnDragDropped(event12 -> {
+            Dragboard db = event12.getDragboard();
+            boolean success = false;
+            if (db.hasFiles()) {
+                dropped.setText(db.getFiles().toString());
+                isSellingFile = true;
+                addressOfFileForSell = db.getFiles().toString();
+                addressOfFileForSell = addressOfFileForSell.substring(1, addressOfFileForSell.length() - 1);
+                System.out.println(addressOfFileForSell);
+                success = true;
+            }
+            /* let the source know whether the string was successfully
+             * transferred and used */
+            event12.setDropCompleted(success);
+            event12.consume();
+            if (success){
+                stage.close();
+            }
+        });
+
+        StackPane root = new StackPane();
+        root.getChildren().add(dragTarget);
+        Scene scene = new Scene(root, 500, 250);
+        stage.setTitle("Drag file for selling");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 }
