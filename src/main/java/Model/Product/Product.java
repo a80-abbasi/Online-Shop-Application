@@ -3,6 +3,8 @@ package Model.Product;
 import Model.Account.*;
 import javafx.scene.image.Image;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,7 +12,8 @@ import java.util.HashMap;
 public class Product {
     private static ArrayList<Product> allProducts = new ArrayList<>();
     private String productId;
-    private String imageAddress;
+    //private String imageAddress;
+    private byte[] imageBytes;
     private ProductStatus productStatus; 
     private String productName;
     private String companyName;
@@ -27,6 +30,9 @@ public class Product {
     private Date timeOfCreation;
     private ArrayList<String> productBuyers;
     private Off off;
+    private boolean isFile;
+    private byte[] file;
+    private String fileName;
 
     private static ArrayList<String> productFields = new ArrayList<>();
     static {
@@ -46,7 +52,7 @@ public class Product {
     }
 
     public Product (String productId, ProductStatus productStatus, String productName, String companyName, double price,
-                    int existingNumber, String explanations, String productImageAddress, Category productCategory,
+                    int existingNumber, String explanations, byte[] imageBytes, Category productCategory,
                     HashMap<String, Integer> specialFeatures, Seller productSeller) {
         this.productId = productId;
         this.productStatus = productStatus;
@@ -55,7 +61,7 @@ public class Product {
         this.price = price;
         this.existingNumber = existingNumber;
         this.explanations = explanations;
-        this.imageAddress = productImageAddress;
+        this.imageBytes = imageBytes;
         this.productCategory = productCategory;
         this.specialFeatures = specialFeatures;
         this.productSeller = productSeller.getUsername();
@@ -95,20 +101,25 @@ public class Product {
         this.specialFeatures = specialFeatures;
     }
 
-    public void setImageAddress(String imageAddress) {
-        this.imageAddress = imageAddress;
+    public byte[] getImageBytes() {
+        return imageBytes;
     }
 
-    public String getImageAddress() {
-        return imageAddress;
+    public void setImageBytes(byte[] imageBytes) {
+        this.imageBytes = imageBytes;
     }
 
     public Image getImage() {
-        return new Image(imageAddress);
-    }
-
-    public void setImageAddress(Image image) {
-        this.imageAddress = image.getUrl();
+        //return new Image(imageBytes);
+        String address = "E:\\University\\term 2\\AP\\Project\\Project_team-30\\src\\main\\resources\\Images\\Client Images" + productName + getProductSeller() + ".jpg";
+        //File file = new File("file:src\\main\\resources\\Images\\Client Images\\" + productName + getProductSeller() + ".jpg");
+        try (FileOutputStream fileOuputStream = new FileOutputStream(address)){
+            fileOuputStream.write(imageBytes);
+            return new Image(address);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new Image("E:\\University\\term 2\\AP\\Project\\Project_team-30\\src\\main\\resources\\Images\\Client Images\\unKnown.jpg");
     }
 
     public void addRate(Customer customer, int score){
@@ -290,6 +301,30 @@ public class Product {
         }
         return price;
 
+    }
+
+    public boolean isFile() {
+        return isFile;
+    }
+
+    public void setFile(boolean file) {
+        isFile = file;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public void setOff(Off off) {

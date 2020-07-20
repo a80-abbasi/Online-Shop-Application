@@ -22,7 +22,6 @@ public class EditProductRequest extends EditAddProductRequest {
         this.setProductPrice(product.getPrice());
         this.setProductExistingNumber(product.getExistingNumber());
         this.setProductExplanations(product.getExplanations());
-        this.setProductImageAddress(product.getImageAddress());
         this.setProductCategory(product.getProductCategory());
         this.setProductSpecialFeatures(product.getSpecialFeatures());
         this.setProductSeller(product.getSeller());
@@ -75,7 +74,6 @@ public class EditProductRequest extends EditAddProductRequest {
             product.setPrice(productPrice);
             product.setExistingNumber(productExistingNumber);
             product.setExplanations(productExplanations);
-            product.setImageAddress(productImageAddress);
             product.setProductCategory(productCategory);
             product.setSpecialFeatures(productSpecialFeatures);
             if (!(productCategory.getProducts().contains(product))) {

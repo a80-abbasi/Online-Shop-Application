@@ -101,7 +101,7 @@ public class SellerProfileManager extends ProfileManager {
     public void makeNewAddProductRequest(String productID, String productName, String productCompanyName,
                                          String productPrice, String productExistingNumber, String productExplanations,
                                          Category productCategory, ArrayList<String> specialFeatureValues,
-                                         String productImageAddress) throws Exception{
+                                         byte[] image, byte[] file, String fileType) throws Exception{
         ArrayList<String> specialFeatures = productCategory.getSpecialFeatures();
         ArrayList<Integer> values = getSpecialFeatureValuesInInteger(specialFeatureValues);
         HashMap<String, Integer> productSpecialFeatures = new HashMap<>();
@@ -114,7 +114,7 @@ public class SellerProfileManager extends ProfileManager {
                 checkProductCompanyName(productCompanyName) && checkProductPrice(productPrice) &&
                 checkProductExistingNumber(productExistingNumber) && checkProductExplanations(productExplanations)) {
             new AddProductRequest(productID, productName, productCompanyName, Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber),
-                    productExplanations, productImageAddress, productCategory, productSpecialFeatures, this.seller);
+                    productExplanations, productCategory, productSpecialFeatures, this.seller, image, file, fileType);
         }
     }
 

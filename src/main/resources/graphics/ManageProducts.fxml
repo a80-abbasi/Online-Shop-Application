@@ -124,11 +124,6 @@
             <TableColumn fx:id="valueColumn" onEditCommit="#editValueForSpecialFeature" prefWidth="148.5" text="Values" />
          </columns>
       </TableView>
-      <Button fx:id="changeImageButton" layoutX="1288.0" layoutY="710.0" mnemonicParsing="false" onAction="#changeImagePressed" prefHeight="44.0" prefWidth="138.0" text="Change Image">
-         <font>
-            <Font name="Times New Roman" size="18.0" />
-         </font>
-      </Button>
       <TextField fx:id="productIDField" editable="false" layoutX="880.0" layoutY="156.0" prefHeight="44.0" prefWidth="300.0">
          <font>
             <Font name="Times New Roman" size="24.0" />

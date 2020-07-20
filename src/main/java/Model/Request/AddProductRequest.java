@@ -11,6 +11,10 @@ import java.util.HashMap;
 public class AddProductRequest extends EditAddProductRequest {
     private static ArrayList<AddProductRequest> allAddProductRequest = new ArrayList<>();
 
+    private byte[] image;
+    private byte[] file;
+    private String fileName;
+
     public AddProductRequest() {
         super("add_product_" + allRequests.size(), RequestType.Adding_Product_Request);
         allAddProductRequest.add(this);
@@ -18,8 +22,8 @@ public class AddProductRequest extends EditAddProductRequest {
     }
 
     public AddProductRequest(String productID, String productName, String productCompanyName, double productPrice,
-                             int productExistingNumber, String productExplanations, String productImageAddress,
-                             Category productCategory, HashMap<String, Integer> productSpecialFeatures, Seller productSeller) {
+                             int productExistingNumber, String productExplanations, Category productCategory,
+                             HashMap<String, Integer> productSpecialFeatures, Seller productSeller, byte[] image, byte[] file, String fileName) {
         super("add_product_" + allRequests.size(), RequestType.Adding_Product_Request);
         this.productId = productID;
         this.productName = productName;
@@ -27,10 +31,12 @@ public class AddProductRequest extends EditAddProductRequest {
         this.productPrice = productPrice;
         this.productExistingNumber = productExistingNumber;
         this.productExplanations = productExplanations;
-        this.productImageAddress = productImageAddress;
         this.productCategory = productCategory;
         this.productSpecialFeatures = productSpecialFeatures;
         this.productSeller = productSeller;
+        this.image = image;
+        this.file = file;
+        this.fileName = fileName;
         allAddProductRequest.add(this);
     }
 
@@ -44,11 +50,17 @@ public class AddProductRequest extends EditAddProductRequest {
 
     @Override
     public void acceptRequest() throws IllegalArgumentException{
+
         if (Product.getProductByID(productId) == null) {
             Product product = new Product(productId, ProductStatus.CONFIRMED, productName, productCompanyName,
-                    productPrice, productExistingNumber, productExplanations, productImageAddress,
+                    productPrice, productExistingNumber, productExplanations, image,
                     productCategory, productSpecialFeatures, productSeller);
             productCategory.addProductToCategory(product);
+            if (fileName != null && !fileName.isBlank()){
+                product.setFile(file);
+                product.setFileName(fileName);
+                product.setFile(true);
+            }
         }
         else {
             throw new IllegalArgumentException();

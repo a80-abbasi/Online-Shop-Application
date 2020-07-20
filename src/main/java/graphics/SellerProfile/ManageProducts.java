@@ -40,7 +40,6 @@ public class ManageProducts {
     public MenuButton categoriesMenuButton;
     public TableColumn specialFeaturesColumn;
     public TableColumn valueColumn;
-    public Button changeImageButton;
     public TableView productSpecialFeaturesTable;
 
     public static String productImageAddress;
@@ -181,7 +180,6 @@ public class ManageProducts {
         productPriceField.setText(String.valueOf(product.getPrice()));
         productExistingNumberField.setText(String.valueOf(product.getExistingNumber()));
         productExplanationsField.setText(product.getExplanations());
-        ManageProducts.productImageAddress = product.getImageAddress();
 
         category = product.getProductCategory();
 
@@ -190,23 +188,6 @@ public class ManageProducts {
         }
         productSpecialFeaturesTable.getItems().setAll(productFeatureData);
         categoriesMenuButton.setText(product.getProductCategory().getName());
-    }
-
-    public void changeImagePressed(ActionEvent event) {
-        Stage selectImagePopUp = new Stage();
-        Scene scene;
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("selectProductImage.fxml"));
-            scene = new Scene(fxmlLoader.load());
-            ((SelectProductImage)fxmlLoader.getController()).prepareForChangingPhoto();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        selectImagePopUp.setScene(scene);
-        selectImagePopUp.setTitle("select product image");
-        selectImagePopUp.setResizable(false);
-        selectImagePopUp.showAndWait();
     }
 
     public void editValueForSpecialFeature(TableColumn.CellEditEvent cellEditEvent) {

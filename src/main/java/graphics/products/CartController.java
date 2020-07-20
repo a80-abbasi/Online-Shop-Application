@@ -136,7 +136,7 @@ public class CartController {
         serial = new Label(String.valueOf(row));
         name = new Label(product.getProductName());
         name.setOnMouseClicked(event -> {
-            ProductsController.openProduct(product, new StackPane(new ImageView(new Image(product.getImageAddress()))));
+            ProductsController.openProduct(product, new StackPane(new ImageView(product.getImage())));
             ProductPageController.cartPopUp.close();
             ProductPageController.cartPopUp = null;
         });
