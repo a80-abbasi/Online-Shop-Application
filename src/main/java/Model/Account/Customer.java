@@ -69,11 +69,12 @@ public class Customer extends Account {
     public void addToCart(Product product, int number) {
         if (cart.containsKey(product)) {
             int newNumber = cart.get(product) + number;
-            if (number <= 0) {
-                cart.remove(product);
-            }
-            else {
-                cart.put(product, newNumber);
+            if (product.isFile() && newNumber > 1) {
+                if (number <= 0) {
+                    cart.remove(product);
+                } else {
+                    cart.put(product, newNumber);
+                }
             }
         }
         else if (number > 0) {

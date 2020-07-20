@@ -165,7 +165,9 @@ public class CartController {
         increaseImage.setOnMouseClicked(e -> {
             if (product .getExistingNumber() > number) {
                 Connection.sendToServerWithToken("add to cart: " + product.getProductId() + " 1");
-                cart.put(product, number + 1);
+                if (!product.isFile()) {
+                    cart.put(product, number + 1);
+                }
                 gridPane.getChildren().clear();
                 mainPane.getChildren().clear();
                 fillCart();

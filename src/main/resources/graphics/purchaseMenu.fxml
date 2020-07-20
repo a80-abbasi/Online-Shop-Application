@@ -86,6 +86,7 @@
                         </Pane>
                         <Label fx:id="totalLabel" layoutX="48.0" layoutY="464.0" opacity="0.0" prefHeight="18.0" prefWidth="32.0" text="total:" />
                         <Label fx:id="totalAmountLabel" layoutX="80.0" layoutY="465.0" opacity="0.0" text="totalAmountLabel" />
+                        <Label fx:id="filesDownloadedLabel" layoutX="405.0" layoutY="464.0" opacity="0.0" prefHeight="18.0" prefWidth="281.0" text="Your files are downloaded to: resources\bought files" />
                      </children>
                   </AnchorPane>
               </content>

@@ -385,6 +385,9 @@ public class ProductPageController {
                     if (cart.containsKey(product) && cart.get(product) == product.getExistingNumber()){
                         productAddedLabel.setText("There is no more of this product");
                     }
+                    else if (product.isFile() && cart.containsKey(product)){
+                        productAddedLabel.setText("This file is already in your cart.");
+                    }
                     else {
                         productAddedLabel.setText("Product Added to Your Cart.");
                         cart.put(product, cart.getOrDefault(product, 0) + 1); //todo: add Product to cart request

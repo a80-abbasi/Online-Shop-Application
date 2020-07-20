@@ -11,10 +11,13 @@ import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -36,6 +39,7 @@ public class PurchaseMenuController {
     public TabPane tabPane;
     public Label totalLabel;
     public Label totalAmountLabel;
+    public Label filesDownloadedLabel;
 
     private Discount discount;
     private Customer customer;
@@ -132,6 +136,8 @@ public class PurchaseMenuController {
                     showBoughtProducts();
                     //finishBuying(finalPrice, cart, customer, totalAmount); //todo: send buy request
                     Connection.sendToServerWithToken("finish buying: " + finalPrice + " " + totalAmount);
+                    downloadFiles();
+                    filesDownloadedLabel.setOpacity(1);
                     validateButton.setDisable(true);
                     buyItemsButton.setDisable(true);
                     buyItemsButton.setOpacity(0.5);
@@ -145,6 +151,23 @@ public class PurchaseMenuController {
                 timeline.play();
             }
         });
+    }
+
+    private void downloadFiles() {
+        for (Product product : cart.keySet()) {
+            if (product.isFile()){
+                downloadFile(product.getFile(), product.getProductName() + product.getFileName());
+            }
+        }
+    }
+
+    private void downloadFile(byte[] file, String fileName){
+        String address = "E:\\University\\term 2\\AP\\Project\\Project_team-30\\src\\main\\resources\\bought file"+fileName;
+        try (FileOutputStream fileOutputStream = new FileOutputStream(address)){
+            fileOutputStream.write(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showBoughtProducts(){
