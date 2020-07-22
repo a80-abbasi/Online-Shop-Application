@@ -27,6 +27,7 @@ public class ProductsManager {
     private String specialFeatureSort = null;
     private String filterBySeller = null;
     private String filterByCompany = null;
+    private boolean actionFilter;
 
     public void setAllProducts() {
         Connection.sendToServer("getProducts");
@@ -81,6 +82,14 @@ public class ProductsManager {
         filterBySeller = null;
     }
 
+    public void addActionFilter(){
+        actionFilter = true;
+    }
+
+    public void disableActionFilter(){
+        actionFilter = false;
+    }
+
     public void addFilterByCompany(String name){
         filterByCompany = name;
     }
@@ -129,6 +138,11 @@ public class ProductsManager {
             }
             if (filterByCompany != null){
                 if (!product.getCompanyName().contains(filterByCompany)){
+                    continue;
+                }
+            }
+            if (actionFilter){
+                if (!product.isActionAvailable()){
                     continue;
                 }
             }
