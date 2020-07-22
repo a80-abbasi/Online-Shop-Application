@@ -162,7 +162,7 @@ public class PurchaseMenuController {
     }
 
     private void downloadFile(byte[] file, String fileName){
-        String address = "E:\\University\\term 2\\AP\\Project\\Project_team-30\\src\\main\\resources\\bought file"+fileName;
+        String address = "src\\main\\resources\\bought file"+fileName;
         try (FileOutputStream fileOutputStream = new FileOutputStream(address)){
             fileOutputStream.write(file);
         } catch (IOException e) {

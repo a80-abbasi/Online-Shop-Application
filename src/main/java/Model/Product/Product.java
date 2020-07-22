@@ -33,6 +33,7 @@ public class Product {
     private boolean isFile;
     private byte[] file;
     private String fileName;
+    private boolean isInAction;
 
     private static ArrayList<String> productFields = new ArrayList<>();
     static {
@@ -111,7 +112,7 @@ public class Product {
 
     public Image getImage() {
         //return new Image(imageBytes);
-        String address = "E:\\University\\term 2\\AP\\Project\\Project_team-30\\src\\main\\resources\\Images\\Client Images" + productName + getProductSeller() + ".jpg";
+        String address = "src\\main\\resources\\Images\\Client Images" + productName + getProductSeller() + ".jpg";
         //File file = new File("file:src\\main\\resources\\Images\\Client Images\\" + productName + getProductSeller() + ".jpg");
         try (FileOutputStream fileOuputStream = new FileOutputStream(address)){
             fileOuputStream.write(imageBytes);
@@ -119,7 +120,7 @@ public class Product {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new Image("E:\\University\\term 2\\AP\\Project\\Project_team-30\\src\\main\\resources\\Images\\Client Images\\unKnown.jpg");
+        return new Image("src\\main\\resources\\Images\\Client Images\\unKnown.jpg");
     }
 
     public void addRate(Customer customer, int score){
@@ -333,6 +334,14 @@ public class Product {
 
     public void setProductBuyers(ArrayList<String> productBuyers) {
         this.productBuyers = productBuyers;
+    }
+
+    public boolean isInAction() {
+        return isInAction;
+    }
+
+    public void setInAction(boolean inAction) {
+        isInAction = inAction;
     }
 
     //todo: checking this

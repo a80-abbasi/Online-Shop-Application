@@ -43,6 +43,7 @@ public class ManageProducts {
     public TableView productSpecialFeaturesTable;
 
     public static String productImageAddress;
+    public Button addToActionButton;
 
     private Category category;
     private Product product;
@@ -193,5 +194,15 @@ public class ManageProducts {
     public void editValueForSpecialFeature(TableColumn.CellEditEvent cellEditEvent) {
         FeatureData featureData = (FeatureData) productSpecialFeaturesTable.getSelectionModel().getSelectedItem();
         featureData.setValue((String) cellEditEvent.getNewValue());
+    }
+
+    public void addProductToAction(ActionEvent event) {
+        Object selectedProduct = productsTable.getSelectionModel().getSelectedItem();
+        if (selectedProduct == null) {
+            return;
+        }
+        product = (Product) selectedProduct;
+        product.setInAction(true);
+        addToActionButton.setDisable(false);
     }
 }

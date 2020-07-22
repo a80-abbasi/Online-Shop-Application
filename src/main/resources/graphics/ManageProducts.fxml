@@ -128,5 +128,10 @@
          <font>
             <Font name="Times New Roman" size="24.0" />
          </font></TextField>
+      <Button fx:id="addToActionButton" layoutX="1266.0" layoutY="710.0" mnemonicParsing="false" onAction="#addProductToAction" prefHeight="44.0" prefWidth="205.0" text="Add this product to action">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
