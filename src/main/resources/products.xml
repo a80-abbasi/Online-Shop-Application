@@ -22,7 +22,6 @@
                             <companyName>Samsung</companyName>
                             <existingNumber>2</existingNumber>
                             <explanations></explanations>
-                            <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                             <price>1000.0</price>
                             <productComments>
                                 <accountUserName>amir</accountUserName>
@@ -54,14 +53,6 @@
                             <productId>1</productId>
                             <productName>name</productName>
                             <productSeller>
-                                <email>A</email>
-                                <lastName>a</lastName>
-                                <name>a</name>
-                                <password>a</password>
-                                <phoneNumber>A</phoneNumber>
-                                <username>a</username>
-                                <balance>10.0</balance>
-                                <nameOfCompany>a0</nameOfCompany>
                             </productSeller>
                             <productStatus>CONFIRMED</productStatus>
                             <specialFeatures/>
@@ -79,7 +70,6 @@
         <companyName>Samsung</companyName>
         <existingNumber>2</existingNumber>
         <explanations></explanations>
-        <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
         <price>1000.0</price>
         <productComments>
             <accountUserName>amir</accountUserName>
@@ -120,14 +110,6 @@
         <productId>1</productId>
         <productName>name</productName>
         <productSeller>
-            <email>A</email>
-            <lastName>a</lastName>
-            <name>a</name>
-            <password>a</password>
-            <phoneNumber>A</phoneNumber>
-            <username>a</username>
-            <balance>10.0</balance>
-            <nameOfCompany>a0</nameOfCompany>
         </productSeller>
         <productStatus>CONFIRMED</productStatus>
         <specialFeatures/>

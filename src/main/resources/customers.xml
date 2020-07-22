@@ -37,30 +37,6 @@
         <usedDiscounts/>
     </customer>
     <customer>
-        <email>ab@ab.ab</email>
-        <lastName>ab</lastName>
-        <name>ab</name>
-        <password>ab</password>
-        <phoneNumber>9089090</phoneNumber>
-        <username>ab</username>
-        <balance>100.0</balance>
-        <cart/>
-        <numberOfDiscountGifts>0</numberOfDiscountGifts>
-        <usedDiscounts/>
-    </customer>
-    <customer>
-        <email>ac@ac.ac</email>
-        <lastName>ac</lastName>
-        <name>ac</name>
-        <password>ac</password>
-        <phoneNumber>9089090</phoneNumber>
-        <username>ac</username>
-        <balance>100.0</balance>
-        <cart/>
-        <numberOfDiscountGifts>0</numberOfDiscountGifts>
-        <usedDiscounts/>
-    </customer>
-    <customer>
         <email>b@b.b</email>
         <lastName>b</lastName>
         <name>b</name>
@@ -77,7 +53,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -109,14 +84,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -146,7 +113,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -178,14 +144,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -215,7 +173,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -247,14 +204,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -284,7 +233,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -316,14 +264,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -353,7 +293,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -385,14 +324,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -422,7 +353,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -454,14 +384,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -491,7 +413,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -523,14 +444,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -560,7 +473,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -592,14 +504,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -629,7 +533,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -661,14 +564,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -698,7 +593,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -730,14 +624,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -767,7 +653,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -799,14 +684,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -836,7 +713,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -868,14 +744,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -905,7 +773,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -937,290 +804,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
-                    </productSeller>
-                    <productStatus>CONFIRMED</productStatus>
-                    <specialFeatures/>
-                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
-                    <visitNumber>35</visitNumber>
-                </key>
-                <value>1</value>
-            </entry>
-        </cart>
-        <numberOfDiscountGifts>0</numberOfDiscountGifts>
-        <usedDiscounts/>
-    </customer>
-    <customer>
-        <email>b@b.b</email>
-        <lastName>b</lastName>
-        <name>b</name>
-        <password>b</password>
-        <phoneNumber>2</phoneNumber>
-        <username>b</username>
-        <balance>0.0</balance>
-        <cart>
-            <entry>
-                <key>
-                    <allScores>
-                        <score>4</score>
-                    </allScores>
-                    <companyName>Samsung</companyName>
-                    <existingNumber>2</existingNumber>
-                    <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
-                    <price>1000.0</price>
-                    <productComments>
-                        <accountUserName>amir</accountUserName>
-                        <bought>false</bought>
-                        <comment>hatman bekharid &lt;3</comment>
-                        <date>2020-06-25T13:09:05.030+04:30</date>
-                        <id>1</id>
-                        <status>WAITING_FOR_CONFIRM</status>
-                        <title>hi</title>
-                    </productComments>
-                    <productComments>
-                        <accountUserName>amir</accountUserName>
-                        <bought>false</bought>
-                        <comment>hatman bekharid &lt;3</comment>
-                        <date>2020-06-25T13:16:25.851+04:30</date>
-                        <id>1</id>
-                        <status>WAITING_FOR_CONFIRM</status>
-                        <title>hi</title>
-                    </productComments>
-                    <productComments>
-                        <accountUserName>amir</accountUserName>
-                        <bought>false</bought>
-                        <comment>love this porduct</comment>
-                        <date>2020-06-25T13:16:25.851+04:30</date>
-                        <id>1</id>
-                        <status>WAITING_FOR_CONFIRM</status>
-                        <title>phone</title>
-                    </productComments>
-                    <productId>1</productId>
-                    <productName>name</productName>
-                    <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
-                    </productSeller>
-                    <productStatus>CONFIRMED</productStatus>
-                    <specialFeatures/>
-                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
-                    <visitNumber>35</visitNumber>
-                </key>
-                <value>1</value>
-            </entry>
-        </cart>
-        <numberOfDiscountGifts>0</numberOfDiscountGifts>
-        <usedDiscounts/>
-    </customer>
-    <customer>
-        <email>b@b.b</email>
-        <lastName>b</lastName>
-        <name>b</name>
-        <password>b</password>
-        <phoneNumber>2</phoneNumber>
-        <username>b</username>
-        <balance>0.0</balance>
-        <cart>
-            <entry>
-                <key>
-                    <allScores>
-                        <score>4</score>
-                    </allScores>
-                    <companyName>Samsung</companyName>
-                    <existingNumber>2</existingNumber>
-                    <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
-                    <price>1000.0</price>
-                    <productComments>
-                        <accountUserName>amir</accountUserName>
-                        <bought>false</bought>
-                        <comment>hatman bekharid &lt;3</comment>
-                        <date>2020-06-25T13:09:05.030+04:30</date>
-                        <id>1</id>
-                        <status>WAITING_FOR_CONFIRM</status>
-                        <title>hi</title>
-                    </productComments>
-                    <productComments>
-                        <accountUserName>amir</accountUserName>
-                        <bought>false</bought>
-                        <comment>hatman bekharid &lt;3</comment>
-                        <date>2020-06-25T13:16:25.851+04:30</date>
-                        <id>1</id>
-                        <status>WAITING_FOR_CONFIRM</status>
-                        <title>hi</title>
-                    </productComments>
-                    <productComments>
-                        <accountUserName>amir</accountUserName>
-                        <bought>false</bought>
-                        <comment>love this porduct</comment>
-                        <date>2020-06-25T13:16:25.851+04:30</date>
-                        <id>1</id>
-                        <status>WAITING_FOR_CONFIRM</status>
-                        <title>phone</title>
-                    </productComments>
-                    <productId>1</productId>
-                    <productName>name</productName>
-                    <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
-                    </productSeller>
-                    <productStatus>CONFIRMED</productStatus>
-                    <specialFeatures/>
-                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
-                    <visitNumber>35</visitNumber>
-                </key>
-                <value>1</value>
-            </entry>
-        </cart>
-        <numberOfDiscountGifts>0</numberOfDiscountGifts>
-        <usedDiscounts/>
-    </customer>
-    <customer>
-        <email>b@b.b</email>
-        <lastName>b</lastName>
-        <name>b</name>
-        <password>b</password>
-        <phoneNumber>2</phoneNumber>
-        <username>b</username>
-        <balance>0.0</balance>
-        <cart>
-            <entry>
-                <key>
-                    <allScores>
-                        <score>4</score>
-                    </allScores>
-                    <companyName>Samsung</companyName>
-                    <existingNumber>2</existingNumber>
-                    <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
-                    <price>1000.0</price>
-                    <productComments>
-                        <accountUserName>amir</accountUserName>
-                        <bought>false</bought>
-                        <comment>hatman bekharid &lt;3</comment>
-                        <date>2020-06-25T13:09:05.030+04:30</date>
-                        <id>1</id>
-                        <status>WAITING_FOR_CONFIRM</status>
-                        <title>hi</title>
-                    </productComments>
-                    <productComments>
-                        <accountUserName>amir</accountUserName>
-                        <bought>false</bought>
-                        <comment>hatman bekharid &lt;3</comment>
-                        <date>2020-06-25T13:16:25.851+04:30</date>
-                        <id>1</id>
-                        <status>WAITING_FOR_CONFIRM</status>
-                        <title>hi</title>
-                    </productComments>
-                    <productComments>
-                        <accountUserName>amir</accountUserName>
-                        <bought>false</bought>
-                        <comment>love this porduct</comment>
-                        <date>2020-06-25T13:16:25.851+04:30</date>
-                        <id>1</id>
-                        <status>WAITING_FOR_CONFIRM</status>
-                        <title>phone</title>
-                    </productComments>
-                    <productId>1</productId>
-                    <productName>name</productName>
-                    <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
-                    </productSeller>
-                    <productStatus>CONFIRMED</productStatus>
-                    <specialFeatures/>
-                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
-                    <visitNumber>35</visitNumber>
-                </key>
-                <value>1</value>
-            </entry>
-        </cart>
-        <numberOfDiscountGifts>0</numberOfDiscountGifts>
-        <usedDiscounts/>
-    </customer>
-    <customer>
-        <email>b@b.b</email>
-        <lastName>b</lastName>
-        <name>b</name>
-        <password>b</password>
-        <phoneNumber>2</phoneNumber>
-        <username>b</username>
-        <balance>0.0</balance>
-        <cart>
-            <entry>
-                <key>
-                    <allScores>
-                        <score>4</score>
-                    </allScores>
-                    <companyName>Samsung</companyName>
-                    <existingNumber>2</existingNumber>
-                    <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
-                    <price>1000.0</price>
-                    <productComments>
-                        <accountUserName>amir</accountUserName>
-                        <bought>false</bought>
-                        <comment>hatman bekharid &lt;3</comment>
-                        <date>2020-06-25T13:09:05.030+04:30</date>
-                        <id>1</id>
-                        <status>WAITING_FOR_CONFIRM</status>
-                        <title>hi</title>
-                    </productComments>
-                    <productComments>
-                        <accountUserName>amir</accountUserName>
-                        <bought>false</bought>
-                        <comment>hatman bekharid &lt;3</comment>
-                        <date>2020-06-25T13:16:25.851+04:30</date>
-                        <id>1</id>
-                        <status>WAITING_FOR_CONFIRM</status>
-                        <title>hi</title>
-                    </productComments>
-                    <productComments>
-                        <accountUserName>amir</accountUserName>
-                        <bought>false</bought>
-                        <comment>love this porduct</comment>
-                        <date>2020-06-25T13:16:25.851+04:30</date>
-                        <id>1</id>
-                        <status>WAITING_FOR_CONFIRM</status>
-                        <title>phone</title>
-                    </productComments>
-                    <productId>1</productId>
-                    <productName>name</productName>
-                    <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -1262,7 +845,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -1294,14 +876,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -1331,7 +905,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -1363,14 +936,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -1400,7 +965,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -1432,14 +996,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -1469,7 +1025,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -1501,14 +1056,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -1538,7 +1085,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -1570,14 +1116,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -1607,7 +1145,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -1639,14 +1176,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -1676,7 +1205,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -1708,14 +1236,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -1745,7 +1265,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -1777,14 +1296,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -1814,7 +1325,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -1846,14 +1356,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -1883,7 +1385,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -1915,14 +1416,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -1952,7 +1445,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -1984,14 +1476,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2021,7 +1505,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2053,14 +1536,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2090,7 +1565,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2122,14 +1596,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2159,7 +1625,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2191,14 +1656,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2228,7 +1685,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2260,14 +1716,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2297,7 +1745,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2329,14 +1776,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2366,7 +1805,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2398,14 +1836,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2435,7 +1865,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2467,14 +1896,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2504,7 +1925,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2536,14 +1956,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2573,7 +1985,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2605,14 +2016,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2642,7 +2045,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2674,14 +2076,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2711,7 +2105,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2743,14 +2136,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2780,7 +2165,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2812,14 +2196,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2849,7 +2225,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2881,14 +2256,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2918,7 +2285,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -2950,14 +2316,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -2987,7 +2345,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3019,14 +2376,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3056,7 +2405,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3088,14 +2436,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3125,7 +2465,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3157,14 +2496,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3194,7 +2525,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3226,14 +2556,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3263,7 +2585,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3295,14 +2616,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3332,7 +2645,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3364,14 +2676,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3401,7 +2705,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3433,14 +2736,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3470,7 +2765,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3502,14 +2796,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3539,7 +2825,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3571,14 +2856,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3608,7 +2885,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3640,14 +2916,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3677,7 +2945,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3709,14 +2976,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3746,7 +3005,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3778,14 +3036,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3815,7 +3065,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3847,14 +3096,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3884,7 +3125,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3916,14 +3156,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -3953,7 +3185,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -3985,14 +3216,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -4022,7 +3245,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -4054,14 +3276,6 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
@@ -4091,7 +3305,6 @@
                     <companyName>Samsung</companyName>
                     <existingNumber>2</existingNumber>
                     <explanations></explanations>
-                    <imageAddress>file:src\\main\\resources\\Images\\products\\phone.jpg</imageAddress>
                     <price>1000.0</price>
                     <productComments>
                         <accountUserName>amir</accountUserName>
@@ -4123,15 +3336,247 @@
                     <productId>1</productId>
                     <productName>name</productName>
                     <productSeller>
-                        <email>A</email>
-                        <lastName>a</lastName>
-                        <name>a</name>
-                        <password>a</password>
-                        <phoneNumber>A</phoneNumber>
-                        <username>a</username>
-                        <balance>10.0</balance>
-                        <nameOfCompany>a0</nameOfCompany>
                     </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                            </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                            </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                            </productSeller>
+                    <productStatus>CONFIRMED</productStatus>
+                    <specialFeatures/>
+                    <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
+                    <visitNumber>35</visitNumber>
+                </key>
+                <value>1</value>
+            </entry>
+        </cart>
+        <numberOfDiscountGifts>0</numberOfDiscountGifts>
+        <usedDiscounts/>
+    </customer>
+    <customer>
+        <email>b@b.b</email>
+        <lastName>b</lastName>
+        <name>b</name>
+        <password>b</password>
+        <phoneNumber>2</phoneNumber>
+        <username>b</username>
+        <balance>0.0</balance>
+        <cart>
+            <entry>
+                <key>
+                    <allScores>
+                        <score>4</score>
+                    </allScores>
+                    <companyName>Samsung</companyName>
+                    <existingNumber>2</existingNumber>
+                    <explanations></explanations>
+                    <price>1000.0</price>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:09:05.030+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>hatman bekharid &lt;3</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>hi</title>
+                    </productComments>
+                    <productComments>
+                        <accountUserName>amir</accountUserName>
+                        <bought>false</bought>
+                        <comment>love this porduct</comment>
+                        <date>2020-06-25T13:16:25.851+04:30</date>
+                        <id>1</id>
+                        <status>WAITING_FOR_CONFIRM</status>
+                        <title>phone</title>
+                    </productComments>
+                    <productId>1</productId>
+                    <productName>name</productName>
+                    <productSeller>
+                            </productSeller>
                     <productStatus>CONFIRMED</productStatus>
                     <specialFeatures/>
                     <timeOfCreation>2020-06-24T11:56:35.162+04:30</timeOfCreation>
