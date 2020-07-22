@@ -65,6 +65,7 @@ public class ProductsController {
     public Label messageLabel;
     public ImageView mainMenuButton;
     public ImageView profileImage1;
+    public Pane onlyActionPane;
 
     private ArrayList<Product> showingProducts;
     public static ProductsManager productsManager;
@@ -82,6 +83,7 @@ public class ProductsController {
 
     public void initialize() {
         addToggleButtonForExistingFilter();
+        addToggleButtonForActionFilter();
         addToggleButtonForOffFilter();
         addPageFactoryForPagination();
         showProducts();
@@ -209,6 +211,26 @@ public class ProductsController {
             showProducts();
             return productsPane;
         });
+    }
+
+    private void addToggleButtonForActionFilter(){
+        ToggleSwitch toggleSwitch = new ToggleSwitch(50, new EventHandler<Event>() {
+            boolean isOn = false;
+            @Override
+            public void handle(Event event) {
+                isOn = !isOn;
+                if (isOn){
+                    productsManager.addActionFilter();
+                }
+                else {
+                    productsManager.disableActionFilter();
+                }
+                showProducts();
+            }
+        });
+        toggleSwitch.setLayoutX(200);
+        toggleSwitch.setLayoutY(20);
+        onlyActionPane.getChildren().add(toggleSwitch);
     }
 
     private void addToggleButtonForOffFilter(){

@@ -60,7 +60,7 @@ public class AddProduct {
     private String addressOfFileForSell;
 
     public void initialize(){
-        productImageAddress = "E:\\University\\term 2\\AP\\Project\\Project_team-30\\src\\main\\resources\\Images\\products\\unKnown.jpg";
+        productImageAddress = "src\\main\\resources\\Images\\products\\unKnown.jpg";
         App.setBackButton(backImage, "SellerProfileMenu");
         ProductPageController.setMainMenuButton(mainMenuImage);
 

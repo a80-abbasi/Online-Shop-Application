@@ -1,5 +1,6 @@
 package graphics.SellerProfile;
 
+import Client.Connection;
 import Controller.SellerProfileManager;
 import Model.Account.Account;
 import Model.Account.Seller;
@@ -12,6 +13,7 @@ import graphics.products.SelectProductImage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -24,7 +26,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ManageProducts {
     public TextField productIDField;
@@ -43,6 +47,7 @@ public class ManageProducts {
     public TableView productSpecialFeaturesTable;
 
     public static String productImageAddress;
+    public Button addToActionButton;
 
     private Category category;
     private Product product;
@@ -193,5 +198,31 @@ public class ManageProducts {
     public void editValueForSpecialFeature(TableColumn.CellEditEvent cellEditEvent) {
         FeatureData featureData = (FeatureData) productSpecialFeaturesTable.getSelectionModel().getSelectedItem();
         featureData.setValue((String) cellEditEvent.getNewValue());
+    }
+
+    public void addProductToAction(ActionEvent event) {
+        Object selectedProduct = productsTable.getSelectionModel().getSelectedItem();
+        if (selectedProduct == null) {
+            return;
+        }
+        product = (Product) selectedProduct;
+        Stage stage = new Stage();
+        Label label = new Label("select end time of action");
+        DatePicker datePicker = new DatePicker();
+        Button button = new Button("done!");
+        VBox vBox = new VBox(label, datePicker, button);
+        vBox.setSpacing(50);
+        vBox.setPadding(new Insets(100, 100, 100, 100));
+        button.setOnAction(e -> {
+            Date actionEndTime = Date.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            product.setEndOfAction(actionEndTime);
+            product.setInAction(true);
+            addToActionButton.setDisable(false);
+            Connection.sendToServerWithToken("add product to auction: " + actionEndTime.getTime() + product.getProductId());
+            stage.close();
+        });
+        Scene scene = new Scene(vBox);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 }
