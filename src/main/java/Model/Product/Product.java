@@ -34,6 +34,8 @@ public class Product {
     private byte[] file;
     private String fileName;
     private boolean isInAction;
+    private HashMap<String, Double> customersAmountForAction;
+    private Date endOfAction;
 
     private static ArrayList<String> productFields = new ArrayList<>();
     static {
@@ -75,6 +77,7 @@ public class Product {
             this.specialFeatures = new HashMap<>();
         }
         timeOfCreation = new Date();
+        customersAmountForAction = new HashMap<>();
         allProducts.add(this);
     }
 
@@ -114,8 +117,8 @@ public class Product {
         //return new Image(imageBytes);
         String address = "src\\main\\resources\\Images\\Client Images" + productName + getProductSeller() + ".jpg";
         //File file = new File("file:src\\main\\resources\\Images\\Client Images\\" + productName + getProductSeller() + ".jpg");
-        try (FileOutputStream fileOuputStream = new FileOutputStream(address)){
-            fileOuputStream.write(imageBytes);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(address)){
+            fileOutputStream.write(imageBytes);
             return new Image(address);
         } catch (IOException e) {
             e.printStackTrace();
@@ -344,6 +347,22 @@ public class Product {
         isInAction = inAction;
     }
 
+    public HashMap<String, Double> getCustomersAmountForAction() {
+        return customersAmountForAction;
+    }
+
+    public Date getEndOfAction() {
+        return endOfAction;
+    }
+
+    public void setEndOfAction(Date endOfAction) {
+        this.endOfAction = endOfAction;
+    }
+
+    public boolean isActionAvailable(){
+        return isInAction && (new Date().getTime() < getEndOfAction().getTime());
+    }
+
     //todo: checking this
     public void removeCategory(Category category) {
         productCategory = null;
@@ -393,5 +412,23 @@ public class Product {
                 ", score=" + getTotalScore() +
                 ", 'does" + (existingNumber != 0 ? "" :  "not") + "exist'" +
                 '}';
+    }
+
+    public void endAuction() {
+        setInAction(false);
+        HashMap<String, Double> auction = getCustomersAmountForAction();
+        double maxPrice = 0;
+        String winner = "";
+        for (String username : auction.keySet()) {
+            if (auction.get(username) > maxPrice){
+                maxPrice = auction.get(username);
+                winner = username;
+            }
+        }
+        Customer customer = Customer.getCustomerById(winner);
+        customer.setBalance(customer.getBalance() - maxPrice);
+        Seller seller = getSeller();
+        seller.setBalance(seller.getBalance() + maxPrice);
+        auction.clear();
     }
 }
