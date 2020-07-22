@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -66,6 +67,7 @@ public class Server extends Application {
             serverSocket = new ServerSocket(serverPort);
             while (true){
                 clientSocket = serverSocket.accept();
+                checkEndOfAuctions();
                 DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
                 DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
 
@@ -109,6 +111,19 @@ public class Server extends Application {
                         }
                         else if (content.equals("logout")){
                             account.setToken(null);
+                        }
+                        else if (content.startsWith("add customer to auction: ")){
+                            double amount = Double.parseDouble(splitContent[3]);
+                            String productId = splitContent[4];
+                            Product product = Product.getProductByID(productId);
+                            product.getCustomersAmountForAction().put(account.getUsername(), amount);
+                        }
+                        else if (content.startsWith("add product to auction: ")){
+                            long time = Long.parseLong(splitContent[4]);
+                            Date date = new Date(time);
+                            Product product = Product.getProductByID(content.substring(content.indexOf(splitContent[4]) + splitContent[4].length()));
+                            product.setInAction(true);
+                            product.setEndOfAction(date);
                         }
                     }
                     if (content.equals("get logged in account")){
@@ -158,6 +173,14 @@ public class Server extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void checkEndOfAuctions() {
+        Product.getAllProducts().stream().filter(Product::isInAction).forEach(product -> {
+            if (!product.isActionAvailable()){
+                product.endAuction();
+            }
+        });
     }
 
     private static String getJasonObjectItem(String jasonObject, String item){

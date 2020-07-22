@@ -27,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -389,10 +390,21 @@ public class ProductPageController {
                         productAddedLabel.setText("This file is already in your cart.");
                     }
                     else {
-                        productAddedLabel.setText("Product Added to Your Cart.");
-                        cart.put(product, cart.getOrDefault(product, 0) + 1); //todo: add Product to cart request
-                        if (account != null){
-                            Connection.sendToServerWithToken("add to cart: " + product.getProductId() + " 1");
+                        if (product.isInAction() && product.isActionAvailable()){
+                            if (account == null){
+                                productAddedLabel.setText("You must login as a customer to make a suggestion in action");
+                            }
+                            else{
+                             Customer customer = (Customer) account;
+                                addASuggestionForAction(customer);
+                            }
+                        }
+                        else {
+                            productAddedLabel.setText("Product Added to Your Cart.");
+                            cart.put(product, cart.getOrDefault(product, 0) + 1); //todo: add Product to cart request
+                            if (account != null) {
+                                Connection.sendToServerWithToken("add to cart: " + product.getProductId() + " 1");
+                            }
                         }
                     }
                 }
@@ -405,6 +417,39 @@ public class ProductPageController {
                 timeline.play();
             });
         }
+    }
+
+    private void addASuggestionForAction(Customer customer){
+        Stage stage = new Stage();
+        Label label = new Label("enter your Amount:");
+        TextField textField = new TextField();
+        Button button = new Button("done!");
+        button.setOnAction(event -> {
+            double amount;
+            try {
+                amount = Double.parseDouble(textField.getText().trim());
+            } catch (NumberFormatException e) {
+                productAddedLabel.setText("Please enter a number!");
+                return;
+            }
+            if (amount >= customer.getBalance()){
+                productAddedLabel.setText("You must have more that entering amount in your wallet!");
+                return;
+            }
+            double previousAmount = product.getCustomersAmountForAction().getOrDefault(customer, 0.0);
+            if (amount <= previousAmount){
+                productAddedLabel.setText("Your new amount must be higher than previous one!");
+                return;
+            }
+            product.getCustomersAmountForAction().put(customer.getUsername(), amount); //todo: send request to server to add this customer to action
+            Connection.sendToServer("add customer to auction: " + amount + " " + product.getProductId());
+        });
+        VBox vBox = new VBox(label, textField, button);
+        vBox.setSpacing(50);
+        vBox.setPadding(new Insets(100, 100, 100, 100));
+        Scene scene = new Scene(vBox);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     private void setRates() {
