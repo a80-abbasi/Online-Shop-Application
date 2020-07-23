@@ -315,32 +315,48 @@ public class AdminProfileManager extends ProfileManager {
         TableColumn<String, Request> column1 = new TableColumn<>("Request ID");
         column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
 
-        allRequestsTable.getColumns().add(column1);
+        TableColumn<RequestType, Request> column2 = new TableColumn<>("Request Type");
+        column2.setCellValueFactory(new PropertyValueFactory<>("requestType"));
+
+        allRequestsTable.getColumns().addAll(column1, column2);
 
         ArrayList<Request> allRequests = new ArrayList<>();
 
-        for (Request request : Request.getAllRequests()) {
+        Connection.sendToServer("getAddOffRequests");
+        ArrayList<AddOffRequest> allAddOffRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<AddOffRequest>>(){}.getType());
+        allRequests.addAll(allAddOffRequests);
+
+        Connection.sendToServer("getAddProductRequests");
+        ArrayList<AddProductRequest> allAddProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<AddProductRequest>>(){}.getType());
+        allRequests.addAll(allAddProductRequests);
+
+        Connection.sendToServer("getEditOffRequests");
+        ArrayList<EditOffRequest> allEditOffRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<EditOffRequest>>(){}.getType());
+        allRequests.addAll(allEditOffRequests);
+
+        Connection.sendToServer("getEditProductRequests");
+        ArrayList<EditProductRequest> allEditProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<EditOffRequest>>(){}.getType());
+        allRequests.addAll(allEditProductRequests);
+
+        Connection.sendToServer("getRegisterSellerRequests");
+        ArrayList<RegisterSellerRequest> allRegisterSellerRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<RegisterSellerRequest>>(){}.getType());
+        allRequests.addAll(allRegisterSellerRequests);
+
+        Connection.sendToServer("getRemoveProductRequests");
+        ArrayList<RemoveProductRequest> allRemoveProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<RemoveProductRequest>>(){}.getType());
+        allRequests.addAll(allRemoveProductRequests);
+
+        for (Request request : allRequests) {
             allRequestsTable.getItems().add(request);
         }
         allRequestsTable.setPlaceholder(new Label("No Data to display"));
         return allRequestsTable;
-    }
-
-    public ArrayList<String> getAllRequests() {
-        ArrayList<Request> allRequests = Request.getAllRequests();
-        ArrayList<String> allRequestIds = new ArrayList<>();
-        for (Request request : allRequests) {
-            allRequestIds.add(request.getRequestId());
-        }
-        return allRequestIds;
-    }
-
-    public String getDetailsOfRequest(String requestId) throws NullPointerException {
-        Request request = Request.getRequestById(requestId);
-        if (request == null) {
-            throw new NullPointerException();
-        }
-        return request.toString();
     }
 
     public void acceptRequest(String requestId) throws NullPointerException, IllegalArgumentException {
@@ -348,8 +364,9 @@ public class AdminProfileManager extends ProfileManager {
         if (request == null) {
             throw new NullPointerException();
         } else {
-            request.acceptRequest();
-            Request.removeRequest(request);
+            //request.acceptRequest();
+            //Request.removeRequest(request);
+            Connection.sendToServer("accept request: " + requestId);
         }
     }
 
@@ -358,7 +375,8 @@ public class AdminProfileManager extends ProfileManager {
         if (request == null) {
             throw new NullPointerException();
         }
-        Request.removeRequest(request);
+        //Request.removeRequest(request);
+        Connection.sendToServer("decline request: " + requestId);
     }
 
     public ArrayList<Category> getAllCategories() {
@@ -512,5 +530,22 @@ public class AdminProfileManager extends ProfileManager {
         } else {
             discount.setDiscountCode(discountCodeAfter);
         }
+    }
+
+    public String getDetailsOfRequest(String requestId) throws NullPointerException {
+        Request request = Request.getRequestById(requestId);
+        if (request == null) {
+            throw new NullPointerException();
+        }
+        return request.toString();
+    }
+
+    public ArrayList<String> getAllRequests() {
+        ArrayList<Request> allRequests = Request.getAllRequests();
+        ArrayList<String> allRequestIds = new ArrayList<>();
+        for (Request request : allRequests) {
+            allRequestIds.add(request.getRequestId());
+        }
+        return allRequestIds;
     }
 }

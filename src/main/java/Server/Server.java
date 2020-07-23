@@ -5,7 +5,7 @@ import Model.Account.*;
 import Model.Product.Category;
 import Model.Product.Comment;
 import Model.Product.Product;
-import Model.Request.RegisterSellerRequest;
+import Model.Request.*;
 import View.Main;
 import com.google.gson.Gson;
 import graphics.products.PurchaseMenuController;
@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Server extends Application {
-    private static final int serverPort = 8080;
+    private static final int serverPort = 8000;
     private static ServerSocket serverSocket;
     private static Socket clientSocket;
     private static ProductsManager productsManager = new ProductsManager();
@@ -149,6 +149,74 @@ public class Server extends Application {
                 else if (message.startsWith("register seller request: ")) {
                     registerSellerRequest(message);
                 }
+                else if (message.startsWith("delete user: ")) {
+                    deleteUser(message.substring(("delete user: ").length()));
+                }
+                else if (message.equals("getAdmins")) {
+                    sendAllAdmins(dataOutputStream);
+                }
+                else if (message.equals("getSellers")) {
+                    sendAllSellers(dataOutputStream);
+                }
+                else if (message.equals("getCustomers")) {
+                    sendAllCustomers(dataOutputStream);
+                }
+                else if (message.equals("getAddOffRequests")) {
+                    sendAllAddOffRequests(dataOutputStream);
+                }
+                else if (message.equals("getAddProductRequests")) {
+                    sendAllAddProductRequests(dataOutputStream);
+                }
+                else if (message.equals("getEditOffRequests")) {
+                    sendAllEditOffRequests(dataOutputStream);
+                }
+                else if (message.equals("getEditProductRequests")) {
+                    sendAllEditProductRequests(dataOutputStream);
+                }
+                else if (message.equals("getRegisterSellerRequests")) {
+                    sendAllRegisterSellerRequests(dataOutputStream);
+                }
+                else if (message.equals("getRemoveProductRequests")) {
+                    sendAllRemoveProductRequests(dataOutputStream);
+                }
+                else if (message.startsWith("accept request: ")) {
+                    acceptRequest(message.substring(("accept request: ").length()));
+                }
+                else if (message.startsWith("decline request: ")) {
+                    declineRequest(message.substring(("decline request: ").length()));
+                }
+                else if (message.equals("getCategories")){
+                    dataOutputStream.writeUTF(gson.toJson(Category.getAllCategories()));
+                    dataOutputStream.flush();
+                }
+                else if (message.equals("getProducts")){
+                    dataOutputStream.writeUTF(gson.toJson(Product.getAllProducts()));
+                    dataOutputStream.flush();
+                }
+                else if (message.startsWith("get product: ")){
+                    Product product = Product.getProductByID(splitMessage[2]);
+                    dataOutputStream.writeUTF(gson.toJson(product));
+                    dataOutputStream.flush();
+                }
+                else if (message.startsWith("visit product: ")){
+                    Product product = Product.getProductByID(message.substring("visit product: ".length()));
+                    product.setVisitNumber(product.getVisitNumber() + 1);
+                }
+                else if (message.startsWith("delete product: ")){
+                    Product product = Product.getProductByID(message.substring("delete product: ".length()));
+                    productsManager.deleteAProduct(product);
+                }
+                else if (message.startsWith("remove product: ")) {
+                    removeProduct(message.substring(("remove product: ").length()));
+                }
+                else if (message.equals("getDiscounts")) {
+                    sendAllDiscounts(dataOutputStream);
+                }
+                else if (message.startsWith("get discount: ")){
+                    Discount discount = Discount.getDiscountByDiscountCode(message.substring("get discount: ".length()));
+                    dataOutputStream.writeUTF(gson.toJson(discount));
+                    dataOutputStream.flush();
+                }
                 else if (message.startsWith("Create discountCode: ")) {
                     createDiscountCode(message.substring(("Create discountCode: ").length()));
                 }
@@ -170,51 +238,7 @@ public class Server extends Application {
                 else if (message.startsWith("edit discount includingCustomers: ")) {
                     editDiscountIncludingCustomers(message.split(","));
                 }
-                else if (message.startsWith("remove product: ")) {
-                    removeProduct(message.substring(("remove product: ").length()));
-                }
-                else if (message.startsWith("delete user: ")) {
-                    deleteUser(message.substring(("delete user: ").length()));
-                }
-                else if (message.equals("getAdmins")) {
-                    sendAllAdmins(dataOutputStream);
-                }
-                else if (message.equals("getSellers")) {
-                    sendAllSellers(dataOutputStream);
-                }
-                else if (message.equals("getCustomers")) {
-                    sendAllCustomers(dataOutputStream);
-                }
-                else if (message.equals("getDiscounts")) {
-                    sendAllDiscounts(dataOutputStream);
-                }
-                else if (message.equals("getProducts")){
-                    dataOutputStream.writeUTF(gson.toJson(Product.getAllProducts()));
-                    dataOutputStream.flush();
-                }
-                else if (message.equals("getCategories")){
-                    dataOutputStream.writeUTF(gson.toJson(Category.getAllCategories()));
-                    dataOutputStream.flush();
-                }
-                else if (message.startsWith("delete product: ")){
-                    Product product = Product.getProductByID(message.substring("delete product: ".length()));
-                    productsManager.deleteAProduct(product);
-                }
-                else if (message.startsWith("visit product: ")){
-                    Product product = Product.getProductByID(message.substring("visit product: ".length()));
-                    product.setVisitNumber(product.getVisitNumber() + 1);
-                }
-                else if (message.startsWith("get product: ")){
-                    Product product = Product.getProductByID(splitMessage[2]);
-                    dataOutputStream.writeUTF(gson.toJson(product));
-                    dataOutputStream.flush();
-                }
-                else if (message.startsWith("get discount: ")){
-                    Discount discount = Discount.getDiscountByDiscountCode(message.substring("get discount: ".length()));
-                    dataOutputStream.writeUTF(gson.toJson(discount));
-                    dataOutputStream.flush();
-                }
-                else if (message.equals("remove discount: ")) {
+                else if (message.startsWith("remove discount: ")) {
                     removeDiscount(message.substring(("remove discount: ").length()));
                 }
                 else if (message.startsWith("login: ")){
@@ -233,6 +257,71 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void declineRequest(String requestID) {
+        Request request = Request.getRequestById(requestID);
+        Request.removeRequest(request);
+    }
+
+    private static void acceptRequest(String requestID) {
+        Request request = Request.getRequestById(requestID);
+        request.acceptRequest();
+        Request.removeRequest(request);
+    }
+
+    private static void sendAllRemoveProductRequests(DataOutputStream dataOutputStream) {
+        try {
+            dataOutputStream.writeUTF(gson.toJson(RemoveProductRequest.getAllRemoveProductRequests()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendAllRegisterSellerRequests(DataOutputStream dataOutputStream) {
+        try {
+            dataOutputStream.writeUTF(gson.toJson(RegisterSellerRequest.getAllRegisterSellerRequests()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendAllEditProductRequests(DataOutputStream dataOutputStream) {
+        try {
+            dataOutputStream.writeUTF(gson.toJson(EditProductRequest.getAllEditProductRequests()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendAllEditOffRequests(DataOutputStream dataOutputStream) {
+        try {
+            dataOutputStream.writeUTF(gson.toJson(EditOffRequest.getAllEditOffRequests()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendAllAddProductRequests(DataOutputStream dataOutputStream) {
+        try {
+            dataOutputStream.writeUTF(gson.toJson(AddProductRequest.getAllAddProductRequest()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendAllAddOffRequests(DataOutputStream dataOutputStream) {
+        try {
+            dataOutputStream.writeUTF(gson.toJson(AddOffRequest.getAllAddOffRequest()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
