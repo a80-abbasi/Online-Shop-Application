@@ -25,6 +25,15 @@ public class LoginAndRegisterManager {
         }
     }
 
+    public void registerSupporter(String username, String password, String name, String lastName, String email,
+                                  String phoneNumber) throws IllegalArgumentException {
+        if (checkUsernameValidity(username) && checkPasswordValidity(password) && checkNameValidity(name) && checkNameValidity(lastName)
+                && checkEmailValidity(email) && checkPhoneNumberValidity(phoneNumber)) {
+            String message = "register supporter request: ," + username + "," + password + "," + name + "," + lastName + "," + email + "," + phoneNumber + ",";
+            Connection.sendToServer(message);
+        }
+    }
+
     public void registerSeller(String username, String password, String name, String lastName, String email,
                                String phoneNumber, String companyName) throws IllegalArgumentException {
         if (checkUsernameValidity(username) && checkPasswordValidity(password) && checkNameValidity(name) && checkNameValidity(lastName)
@@ -119,5 +128,4 @@ public class LoginAndRegisterManager {
     public boolean isLogin() {
         return Account.getLoggedInAccount() != null;
     }
-
 }

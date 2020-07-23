@@ -6,10 +6,7 @@ import Model.Account.Account;
 import Model.Account.Admin;
 import Model.Request.*;
 import com.google.gson.Gson;
-import graphics.AdminProfile.RequestDetails.EditAddOffRequestMenu;
-import graphics.AdminProfile.RequestDetails.EditAddProductRequestMenu;
-import graphics.AdminProfile.RequestDetails.RegisterSellerRequestMenu;
-import graphics.AdminProfile.RequestDetails.RemoveProductRequestMenu;
+import graphics.AdminProfile.RequestDetails.*;
 import graphics.AlertBox;
 import graphics.App;
 import graphics.products.ProductPageController;
@@ -93,6 +90,15 @@ public class ManageRequests {
                 RegisterSellerRequest registerSellerRequest = new Gson().fromJson(Connection.receiveFromServer(), RegisterSellerRequest.class);
                 RegisterSellerRequestMenu.setRegisterSellerRequest(registerSellerRequest);
                 App.setRoot("RegisterSellerRequestMenu");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (request instanceof RegisterSupporterRequest) {
+            try {
+                Connection.sendToServer("get registerSupporterRequest: " + request.getRequestId());
+                RegisterSupporterRequest registerSupporterRequest = new Gson().fromJson(Connection.receiveFromServer(), RegisterSupporterRequest.class);
+                RegisterSupporterRequestMenu.setRegisterSupporterRequest(registerSupporterRequest);
+                App.setRoot("RegisterSupporterRequestMenu");
             } catch (IOException e) {
                 e.printStackTrace();
             }
