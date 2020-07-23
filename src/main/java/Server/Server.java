@@ -179,6 +179,24 @@ public class Server extends Application {
                 else if (message.equals("getRemoveProductRequests")) {
                     sendAllRemoveProductRequests(dataOutputStream);
                 }
+                else if (message.startsWith("get addOffRequest: ")) {
+                    sendAddOffRequest(dataOutputStream, message.substring(("get addOffRequest: ").length()));
+                }
+                else if (message.startsWith("get editOffRequest: ")) {
+                    sendEditOffRequest(dataOutputStream, message.substring(("get editOffRequest: ").length()));
+                }
+                else if (message.startsWith("get addProductRequest: ")) {
+                    sendAddProductRequest(dataOutputStream, message.substring(("get addProductRequest: ").length()));
+                }
+                else if (message.startsWith("get editProductRequest: ")) {
+                    sendEditProductRequest(dataOutputStream, message.substring(("get editProductRequest: ").length()));
+                }
+                else if (message.startsWith("get registerSellerRequest: ")) {
+                    sendRegisterSellerRequest(dataOutputStream, message.substring(("get registerSellerRequest: ").length()));
+                }
+                else if (message.startsWith("get removeProductRequest: ")) {
+                    sendRemoveProductRequest(dataOutputStream, message.substring(("get removeProductRequest: ").length()));
+                }
                 else if (message.startsWith("accept request: ")) {
                     acceptRequest(message.substring(("accept request: ").length()));
                 }
@@ -257,6 +275,66 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void sendRemoveProductRequest(DataOutputStream dataOutputStream, String removeProductRequestID) {
+        RemoveProductRequest removeProductRequest = RemoveProductRequest.getRequestById(removeProductRequestID);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(removeProductRequest));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendRegisterSellerRequest(DataOutputStream dataOutputStream, String registerSellerRequestID) {
+        RegisterSellerRequest registerSellerRequest = RegisterSellerRequest.getRequestById(registerSellerRequestID);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(registerSellerRequest));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendEditProductRequest(DataOutputStream dataOutputStream, String editProductRequestID) {
+        EditProductRequest editProductRequest = (EditProductRequest) EditAddProductRequest.getRequestById(editProductRequestID);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(editProductRequest));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendAddProductRequest(DataOutputStream dataOutputStream, String addProductRequestID) {
+        AddProductRequest addProductRequest = (AddProductRequest) EditAddProductRequest.getRequestById(addProductRequestID);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(addProductRequest));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendEditOffRequest(DataOutputStream dataOutputStream, String editOffRequestID) {
+        EditOffRequest editOffRequest = (EditOffRequest) EditAddOffRequest.getRequestById(editOffRequestID);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(editOffRequest));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendAddOffRequest(DataOutputStream dataOutputStream, String addOffRequestID) {
+        AddOffRequest addOffRequest = (AddOffRequest) EditAddOffRequest.getRequestById(addOffRequestID);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(addOffRequest));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

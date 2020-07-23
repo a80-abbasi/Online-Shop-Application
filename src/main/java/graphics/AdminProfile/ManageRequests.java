@@ -1,9 +1,11 @@
 package graphics.AdminProfile;
 
+import Client.Connection;
 import Controller.AdminProfileManager;
 import Model.Account.Account;
 import Model.Account.Admin;
 import Model.Request.*;
+import com.google.gson.Gson;
 import graphics.AdminProfile.RequestDetails.EditAddOffRequestMenu;
 import graphics.AdminProfile.RequestDetails.EditAddProductRequestMenu;
 import graphics.AdminProfile.RequestDetails.RegisterSellerRequestMenu;
@@ -55,28 +57,50 @@ public class ManageRequests {
         Request request = (Request) selectedRequest;
         if (request instanceof EditAddOffRequest) {
             try {
-                EditAddOffRequestMenu.setEditAddOffRequest(EditAddOffRequest.getRequestById(request.getRequestId()));
+                EditAddOffRequest editAddOffRequest;
+                if (request instanceof EditOffRequest) {
+                    Connection.sendToServer("get editOffRequest: " + request.getRequestId());
+                    editAddOffRequest = new Gson().fromJson(Connection.receiveFromServer(), EditOffRequest.class);
+                }
+                else {
+                    Connection.sendToServer("get addOffRequest: " + request.getRequestId());
+                    editAddOffRequest = new Gson().fromJson(Connection.receiveFromServer(), AddOffRequest.class);
+                }
+                EditAddOffRequestMenu.setEditAddOffRequest(editAddOffRequest);
                 App.setRoot("EditAddOffRequestMenu");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (request instanceof EditAddProductRequest) {
             try {
-                EditAddProductRequestMenu.setEditAddProductRequest(EditAddProductRequest.getRequestById(request.getRequestId()));
+                EditAddProductRequest editAddProductRequest;
+                if (request instanceof AddProductRequest) {
+                    Connection.sendToServer("get addProductRequest: " + request.getRequestId());
+                    editAddProductRequest = new Gson().fromJson(Connection.receiveFromServer(), AddProductRequest.class);
+                }
+                else {
+                    Connection.sendToServer("get editProductRequest: " + request.getRequestId());
+                    editAddProductRequest = new Gson().fromJson(Connection.receiveFromServer(), EditProductRequest.class);
+                }
+                EditAddProductRequestMenu.setEditAddProductRequest(editAddProductRequest);
                 App.setRoot("EditAddProductRequestMenu");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (request instanceof RegisterSellerRequest) {
             try {
-                RegisterSellerRequestMenu.setRegisterSellerRequest(RegisterSellerRequest.getRequestById(request.getRequestId()));
+                Connection.sendToServer("get registerSellerRequest: " + request.getRequestId());
+                RegisterSellerRequest registerSellerRequest = new Gson().fromJson(Connection.receiveFromServer(), RegisterSellerRequest.class);
+                RegisterSellerRequestMenu.setRegisterSellerRequest(registerSellerRequest);
                 App.setRoot("RegisterSellerRequestMenu");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (request instanceof RemoveProductRequest) {
             try {
-                RemoveProductRequestMenu.setRemoveProductRequest(RemoveProductRequest.getRequestById(request.getRequestId()));
+                Connection.sendToServer("get removeProductRequest: " + request.getRequestId());
+                RemoveProductRequest removeProductRequest = new Gson().fromJson(Connection.receiveFromServer(), RemoveProductRequest.class);
+                RemoveProductRequestMenu.setRemoveProductRequest(removeProductRequest);
                 App.setRoot("RemoveProductRequestMenu");
             } catch (IOException e) {
                 e.printStackTrace();
