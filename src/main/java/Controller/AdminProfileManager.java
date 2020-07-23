@@ -548,4 +548,52 @@ public class AdminProfileManager extends ProfileManager {
         }
         return allRequestIds;
     }
+
+    public TableView getSaleHistoryTable(TableView allRequestsTable) {
+        TableColumn<String, Request> column1 = new TableColumn<>("Date");
+        column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
+
+        TableColumn<RequestType, Request> column2 = new TableColumn<>("");
+        column2.setCellValueFactory(new PropertyValueFactory<>("requestType"));
+
+        allRequestsTable.getColumns().addAll(column1, column2);
+
+        ArrayList<Request> allRequests = new ArrayList<>();
+
+        Connection.sendToServer("getAddOffRequests");
+        ArrayList<AddOffRequest> allAddOffRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<AddOffRequest>>(){}.getType());
+        allRequests.addAll(allAddOffRequests);
+
+        Connection.sendToServer("getAddProductRequests");
+        ArrayList<AddProductRequest> allAddProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<AddProductRequest>>(){}.getType());
+        allRequests.addAll(allAddProductRequests);
+
+        Connection.sendToServer("getEditOffRequests");
+        ArrayList<EditOffRequest> allEditOffRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<EditOffRequest>>(){}.getType());
+        allRequests.addAll(allEditOffRequests);
+
+        Connection.sendToServer("getEditProductRequests");
+        ArrayList<EditProductRequest> allEditProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<EditOffRequest>>(){}.getType());
+        allRequests.addAll(allEditProductRequests);
+
+        Connection.sendToServer("getRegisterSellerRequests");
+        ArrayList<RegisterSellerRequest> allRegisterSellerRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<RegisterSellerRequest>>(){}.getType());
+        allRequests.addAll(allRegisterSellerRequests);
+
+        Connection.sendToServer("getRemoveProductRequests");
+        ArrayList<RemoveProductRequest> allRemoveProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<RemoveProductRequest>>(){}.getType());
+        allRequests.addAll(allRemoveProductRequests);
+
+        for (Request request : allRequests) {
+            allRequestsTable.getItems().add(request);
+        }
+        allRequestsTable.setPlaceholder(new Label("No Data to display"));
+        return allRequestsTable;
+    }
 }
