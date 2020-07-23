@@ -108,14 +108,6 @@ public class AdminProfileManager extends ProfileManager {
         return allCustomersTable;
     }
 
-    public String viewUser(String username) throws NullPointerException {
-        Account account = Account.getAccountByUsername(username);
-        if (account == null) {
-            throw new NullPointerException();
-        }
-        return account.toString();
-    }
-
     public void deleteUser(String username) throws NullPointerException, IllegalArgumentException {
         if (username.equals("")) {
             throw new IllegalArgumentException("You must enter username.");
@@ -160,9 +152,18 @@ public class AdminProfileManager extends ProfileManager {
         }
     }
 
-    public void createDiscountCode(String discountCode, Date startTime, Date endTime, String discountPercent, String maxPossibleDiscount, String discountPerCustomer, ArrayList<String> includingCustomers) throws Exception {
-        if (checkDiscountCodeValidity(discountCode) && checkDiscountPercentValidity(discountPercent) && checkMaxPossibleDiscountValidity(maxPossibleDiscount) && checkDiscountPerCustomerValidity(discountPerCustomer) && checkCustomersValidity(includingCustomers)) {
-            new Discount(discountCode, startTime, endTime, Double.parseDouble(discountPercent), Double.parseDouble(maxPossibleDiscount), Integer.parseInt(discountPerCustomer), includingCustomers);
+    public void createDiscountCode(String discountCode, Date startTime, Date endTime, String discountPercent,
+                                   String maxPossibleDiscount, String discountPerCustomer,
+                                   ArrayList<String> includingCustomers) throws Exception {
+
+        if (checkDiscountCodeValidity(discountCode) && checkDiscountPercentValidity(discountPercent) &&
+                checkMaxPossibleDiscountValidity(maxPossibleDiscount) &&
+                checkDiscountPerCustomerValidity(discountPerCustomer) && checkCustomersValidity(includingCustomers)) {
+
+            Discount discount = new Discount(discountCode, startTime, endTime, Double.parseDouble(discountPercent),
+                    Double.parseDouble(maxPossibleDiscount), Integer.parseInt(discountPerCustomer), includingCustomers);
+            Connection.sendToServer("Create discountCode: " + new Gson().toJson(discount));
+            Discount.getAllDiscounts().remove(discount);
         }
     }
 
@@ -172,7 +173,9 @@ public class AdminProfileManager extends ProfileManager {
 
         allDiscountsTable.getColumns().add(column);
 
-        for (Discount discount : Discount.getAllDiscounts()) {
+        Connection.sendToServer("getDiscounts");
+        ArrayList<Discount> allDiscounts = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Discount>>(){}.getType());
+        for (Discount discount : allDiscounts) {
             allDiscountsTable.getItems().add(discount);
         }
 
@@ -184,72 +187,68 @@ public class AdminProfileManager extends ProfileManager {
         return Discount.getAllDiscounts();
     }
 
-    public String viewDiscount(String discountCode) throws NullPointerException {
-        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
-        if (discount == null) {
-            throw new NullPointerException();
-        }
-        return discount.toString();
-    }
-
-    public void editDiscountCode(String discountCodeBefore, String discountCodeAfter) throws NullPointerException, IllegalArgumentException {
-        Discount discount = Discount.getDiscountByDiscountCode(discountCodeBefore);
-        if (discount == null) {
-            throw new NullPointerException();
-        } else if (Discount.getDiscountByDiscountCode(discountCodeAfter) != null) {
-            throw new IllegalArgumentException();
-        } else {
-            discount.setDiscountCode(discountCodeAfter);
-        }
-    }
-
     public void editDiscountStartTime(String discountCode, Date startTime) throws NullPointerException {
-        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        Connection.sendToServer("get Discount: " + discountCode);
+        Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
         if (discount == null) {
             throw new NullPointerException();
         }
-        discount.setStartTime(startTime);
+        //discount.setStartTime(startTime);
+        Connection.sendToServer("edit discount startTime: ," + discountCode + "," + new Gson().toJson(startTime));
     }
 
     public void editDiscountEndTime(String discountCode, Date endTime) throws NullPointerException {
-        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        Connection.sendToServer("get Discount: " + discountCode);
+        Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
         if (discount == null) {
             throw new NullPointerException();
         }
-        discount.setEndTime(endTime);
+        //discount.setEndTime(endTime);
+        Connection.sendToServer("edit discount endTime: ," + discountCode + "," + new Gson().toJson(endTime));
     }
 
     public void editDiscountPercent(String discountCode, String discountPercent) throws NullPointerException, Exception {
-        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        Connection.sendToServer("get Discount: " + discountCode);
+        Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
         if (discount == null) {
             throw new NullPointerException();
         } else if (checkDiscountPercentValidity(discountPercent)) {
-            discount.setDiscountPercent(Double.parseDouble(discountPercent));
+            Connection.sendToServer("edit discount percent: ," + discountCode + "," + discountPercent);
         }
     }
 
     public void editDiscountMaxPossibleDiscount(String discountCode, String maxPossibleDiscount) throws NullPointerException, Exception {
-        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        Connection.sendToServer("get Discount: " + discountCode);
+        Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
         if (discount == null) {
             throw new NullPointerException();
         } else if (checkMaxPossibleDiscountValidity(maxPossibleDiscount)) {
-            discount.setMaxPossibleDiscount(Double.parseDouble(maxPossibleDiscount));
+            //discount.setMaxPossibleDiscount(Double.parseDouble(maxPossibleDiscount));
+            Connection.sendToServer("edit discount maxPossibleDiscount: ," + discountCode + "," + maxPossibleDiscount);
         }
     }
 
     public void editDiscountPerCustomer(String discountCode, String discountPerCustomer) throws NullPointerException, Exception {
-        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        Connection.sendToServer("get Discount: " + discountCode);
+        Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
         if (discount == null) {
             throw new NullPointerException();
         } else if (checkDiscountPercentValidity(discountPerCustomer)) {
-            discount.setDiscountPerCustomer(Integer.parseInt(discountPerCustomer));
+            //discount.setDiscountPerCustomer(Integer.parseInt(discountPerCustomer));
+            Connection.sendToServer("edit discount discountPerCustomer: ," + discountCode + "," + discountPerCustomer);
         }
     }
 
     public void editDiscountIncludingCustomers(String discountCode, ArrayList<String> customersUsername) throws Exception {
         if (checkCustomersValidity(customersUsername) && checkDiscountCodeValidity(discountCode)) {
-            Discount discount = Discount.getDiscountByDiscountCode(discountCode);
-            discount.setIncludingCustomers(customersUsername);
+            Connection.sendToServer("get Discount: " + discountCode);
+            Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
+            //discount.setIncludingCustomers(customersUsername);
+            String message = "edit discount includingCustomers: ," + discountCode + ",";
+            for (String customer : customersUsername) {
+                message = message + customer + ",";
+            }
+            Connection.sendToServer(message + " ");
         }
     }
 
@@ -294,7 +293,9 @@ public class AdminProfileManager extends ProfileManager {
 
     private boolean checkCustomersValidity(ArrayList<String> customersUsername) throws IllegalArgumentException {
         for (String s : customersUsername) {
-            if (Account.getAccountByUsername(s) == null || !(Account.getAccountByUsername(s) instanceof Customer)) {
+            Connection.sendToServer("get account :" + s);
+            Account account = Connection.getAccountFromServer();
+            if (account == null || !(account instanceof Customer)) {
                 throw new IllegalArgumentException("Invalid Customer Username.");
             }
         }
@@ -302,23 +303,27 @@ public class AdminProfileManager extends ProfileManager {
     }
 
     public void removeDiscount(String discountCode) throws NullPointerException {
-        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        Connection.sendToServer("get Discount: " + discountCode);
+        Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
         if (discount == null) {
             throw new NullPointerException();
         }
-        Discount.removeDiscount(discount);
+        Connection.sendToServer("remove discount: " + discountCode);
     }
 
-    public TableView getAllRequestsTable(TableView allRequests) {
+    public TableView getAllRequestsTable(TableView allRequestsTable) {
         TableColumn<String, Request> column1 = new TableColumn<>("Request ID");
         column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
 
-        allRequests.getColumns().add(column1);
+        allRequestsTable.getColumns().add(column1);
+
+        ArrayList<Request> allRequests = new ArrayList<>();
+
         for (Request request : Request.getAllRequests()) {
-            allRequests.getItems().add(request);
+            allRequestsTable.getItems().add(request);
         }
-        allRequests.setPlaceholder(new Label("No Data to display"));
-        return allRequests;
+        allRequestsTable.setPlaceholder(new Label("No Data to display"));
+        return allRequestsTable;
     }
 
     public ArrayList<String> getAllRequests() {
@@ -423,6 +428,32 @@ public class AdminProfileManager extends ProfileManager {
         Category.removeCategory(category);
     }
 
+    public TableView getAllCategoriesTable(TableView allCategoriesTable) {
+        TableColumn<String, Category> column = new TableColumn<>("Category Name");
+        column.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        allCategoriesTable.getColumns().add(column);
+        for (Category category : Category.getAllCategories()) {
+            allCategoriesTable.getItems().add(category);
+        }
+        allCategoriesTable.setPlaceholder(new Label("No Data To Display"));
+        return allCategoriesTable;
+    }
+
+    //todo: checking this
+    public void removeSubCategory(Category parentCategory, String subCategory) {
+        parentCategory.removeSubCategory(Category.getCategoryByName(subCategory));
+    }
+
+    //phase1
+    public String viewUser(String username) throws NullPointerException {
+        Account account = Account.getAccountByUsername(username);
+        if (account == null) {
+            throw new NullPointerException();
+        }
+        return account.toString();
+    }
+
     public static boolean isProductWithThisID(String productID) {
         for (Product product : Product.getAllProducts()) {
             if (product.getProductId().equals(productID)) {
@@ -464,20 +495,22 @@ public class AdminProfileManager extends ProfileManager {
         return false;
     }
 
-    public TableView getAllCategoriesTable(TableView allCategoriesTable) {
-        TableColumn<String, Category> column = new TableColumn<>("Category Name");
-        column.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-        allCategoriesTable.getColumns().add(column);
-        for (Category category : Category.getAllCategories()) {
-            allCategoriesTable.getItems().add(category);
+    public String viewDiscount(String discountCode) throws NullPointerException {
+        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        if (discount == null) {
+            throw new NullPointerException();
         }
-        allCategoriesTable.setPlaceholder(new Label("No Data To Display"));
-        return allCategoriesTable;
+        return discount.toString();
     }
 
-    //todo: checking this
-    public void removeSubCategory(Category parentCategory, String subCategory) {
-        parentCategory.removeSubCategory(Category.getCategoryByName(subCategory));
+    public void editDiscountCode(String discountCodeBefore, String discountCodeAfter) throws NullPointerException, IllegalArgumentException {
+        Discount discount = Discount.getDiscountByDiscountCode(discountCodeBefore);
+        if (discount == null) {
+            throw new NullPointerException();
+        } else if (Discount.getDiscountByDiscountCode(discountCodeAfter) != null) {
+            throw new IllegalArgumentException();
+        } else {
+            discount.setDiscountCode(discountCodeAfter);
+        }
     }
 }

@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
@@ -148,6 +149,27 @@ public class Server extends Application {
                 else if (message.startsWith("register seller request: ")) {
                     registerSellerRequest(message);
                 }
+                else if (message.startsWith("Create discountCode: ")) {
+                    createDiscountCode(message.substring(("Create discountCode: ").length()));
+                }
+                else if (message.startsWith("edit discount startTime: ")) {
+                    editDiscountStartTime(message.split(","));
+                }
+                else if (message.startsWith("edit discount endTime: ")) {
+                    editDiscountEndTime(message.split(","));
+                }
+                else if (message.startsWith("edit discount percent: ")) {
+                    editDiscountPercent(message.split(","));
+                }
+                else if (message.startsWith("edit discount maxPossibleDiscount: ")) {
+                    editDiscountMaxPossibleDiscount(message.split(","));
+                }
+                else if (message.startsWith("edit discount discountPerCustomer: ")) {
+                    editDiscountPerCustomer(message.split(","));
+                }
+                else if (message.startsWith("edit discount includingCustomers: ")) {
+                    editDiscountIncludingCustomers(message.split(","));
+                }
                 else if (message.startsWith("remove product: ")) {
                     removeProduct(message.substring(("remove product: ").length()));
                 }
@@ -162,6 +184,9 @@ public class Server extends Application {
                 }
                 else if (message.equals("getCustomers")) {
                     sendAllCustomers(dataOutputStream);
+                }
+                else if (message.equals("getDiscounts")) {
+                    sendAllDiscounts(dataOutputStream);
                 }
                 else if (message.equals("getProducts")){
                     dataOutputStream.writeUTF(gson.toJson(Product.getAllProducts()));
@@ -189,6 +214,9 @@ public class Server extends Application {
                     dataOutputStream.writeUTF(gson.toJson(discount));
                     dataOutputStream.flush();
                 }
+                else if (message.equals("remove discount: ")) {
+                    removeDiscount(message.substring(("remove discount: ").length()));
+                }
                 else if (message.startsWith("login: ")){
                     Account account = Account.getAccountByUsername(message.substring("login: ".length()));
                     String token = generateToken();
@@ -205,6 +233,64 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void editDiscountIncludingCustomers(String[] split) {
+        Discount discount = Discount.getDiscountByDiscountCode(split[1]);
+        ArrayList<String> includingCustomers = new ArrayList<>();
+        for (int i = 2; i < split.length - 1; i++) {
+            includingCustomers.add(split[i]);
+        }
+        discount.setIncludingCustomers(includingCustomers);
+    }
+
+    private static void editDiscountPerCustomer(String[] split) {
+        Discount discount = Discount.getDiscountByDiscountCode(split[1]);
+        int discountPerCustomer = Integer.parseInt(split[2]);
+        discount.setDiscountPerCustomer(discountPerCustomer);
+    }
+
+    private static void editDiscountMaxPossibleDiscount(String[] split) {
+        Discount discount = Discount.getDiscountByDiscountCode(split[1]);
+        Double maxPossibleDiscount = Double.parseDouble(split[2]);
+        discount.setMaxPossibleDiscount(maxPossibleDiscount);
+    }
+
+    private static void editDiscountPercent(String[] split) {
+        Discount discount = Discount.getDiscountByDiscountCode(split[1]);
+        double discountPercent = Double.parseDouble(split[2]);
+        discount.setDiscountPercent(discountPercent);
+    }
+
+    private static void editDiscountEndTime(String[] split) {
+        Discount discount = Discount.getDiscountByDiscountCode(split[1]);
+        Date endTime = gson.fromJson(split[2], Date.class);
+        discount.setEndTime(endTime);
+    }
+
+    private static void editDiscountStartTime(String[] splitMessage) {
+        Discount discount = Discount.getDiscountByDiscountCode(splitMessage[1]);
+        Date startTime = gson.fromJson(splitMessage[2], Date.class);
+        discount.setStartTime(startTime);
+    }
+
+    private static void createDiscountCode(String discountJson) {
+        Discount discount = gson.fromJson(discountJson, Discount.class);
+        Discount.getAllDiscounts().add(discount);
+    }
+
+    private static void removeDiscount(String discountCode) {
+        Discount discount = Discount.getDiscountByDiscountCode(discountCode);
+        Discount.removeDiscount(discount);
+    }
+
+    private static void sendAllDiscounts(DataOutputStream dataOutputStream) {
+        try {
+            dataOutputStream.writeUTF(gson.toJson(Discount.getAllDiscounts()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
