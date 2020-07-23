@@ -12,6 +12,7 @@ public class BuyLog extends Log {
     private double discountAmount;
     private boolean hasDelivered;
     private HashMap<Product, Integer> boughtProducts;
+    private String sendingCondition;
 
     public BuyLog(String ID, Date date, double paidAmount, double discountAmount, HashMap<Product, Integer> cart) {
         super(ID, date);
@@ -19,6 +20,7 @@ public class BuyLog extends Log {
         allBuyLogs.add(this);
         this.discountAmount = discountAmount;
         this.boughtProducts = new HashMap<>(cart);
+        setSendingCondition("Did not send");
     }
 
     public BuyLog() {
@@ -68,6 +70,14 @@ public class BuyLog extends Log {
 
     public static ArrayList<BuyLog> getAllBuyLogs() {
         return allBuyLogs;
+    }
+
+    public void setSendingCondition(String sendingCondition) {
+        this.sendingCondition = sendingCondition;
+    }
+
+    public String getSendingCondition() {
+        return sendingCondition;
     }
 
     @Override
