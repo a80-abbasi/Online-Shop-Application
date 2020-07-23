@@ -347,6 +347,11 @@ public class AdminProfileManager extends ProfileManager {
                 new TypeToken<ArrayList<RegisterSellerRequest>>(){}.getType());
         allRequests.addAll(allRegisterSellerRequests);
 
+        Connection.sendToServer("getRegisterSupporterRequests");
+        ArrayList<RegisterSupporterRequest> allRegisterSupporterRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<RegisterSupporterRequest>>(){}.getType());
+        allRequests.addAll(allRegisterSupporterRequests);
+
         Connection.sendToServer("getRemoveProductRequests");
         ArrayList<RemoveProductRequest> allRemoveProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
                 new TypeToken<ArrayList<RemoveProductRequest>>(){}.getType());
