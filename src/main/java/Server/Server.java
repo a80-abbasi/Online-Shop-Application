@@ -140,6 +140,12 @@ public class Server extends Application {
                 else if (message.startsWith("register seller request: ")) {
                     registerSellerRequest(message);
                 }
+                else if (message.startsWith("remove product: ")) {
+                    removeProduct(message.substring(("remove product: ").length()));
+                }
+                else if (message.startsWith("delete user: ")) {
+                    deleteUser(message.substring(("delete user: ").length()));
+                }
                 else if (message.equals("getProducts")){
                     dataOutputStream.writeUTF(gson.toJson(Product.getAllProducts()));
                     dataOutputStream.flush();
@@ -183,6 +189,16 @@ public class Server extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void deleteUser(String username) {
+        Account account = Account.getAccountByUsername(username);
+        Account.deleteAccount(account);
+    }
+
+    private static void removeProduct(String productID) {
+        Product product = Product.getProductByID(productID);
+        Product.removeProduct(product);
     }
 
     private static void registerAdmin(String message) {

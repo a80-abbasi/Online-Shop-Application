@@ -99,7 +99,7 @@ public class AdminProfileManager extends ProfileManager {
             if (account == null) {
                 throw new NullPointerException("There is no account with this username.");
             }
-            Account.deleteAccount(account);
+            Connection.sendToServer("delete user: " + username);
         }
     }
 
@@ -131,7 +131,7 @@ public class AdminProfileManager extends ProfileManager {
         if (product == null) {
             throw new NullPointerException();
         } else {
-            Product.removeProduct(product);
+            Connection.sendToServer("remove product: " + productId);
         }
     }
 

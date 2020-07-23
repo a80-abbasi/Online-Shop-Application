@@ -39,7 +39,8 @@ public class LoginAndRegisterManager {
                               String phoneNumber) throws IllegalArgumentException {
         if (checkUsernameValidity(username) && checkPasswordValidity(password) && checkNameValidity(name) && checkNameValidity(lastName)
                 && checkEmailValidity(email) && checkPhoneNumberValidity(phoneNumber)) {
-            new Admin(username, password, name, lastName, email, phoneNumber);
+            String message = "register admin: ," + username + "," + password + "," + name + "," + lastName + "," + email + "," + phoneNumber + ", ";
+            Connection.sendToServer(message);
         }
     }
 

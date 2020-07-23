@@ -24,7 +24,6 @@ public class Client extends Application {
             scene = new Scene(loadFXML("MainMenu").load());
         }
         else {
-            AlertBox.showMessage("Register Admin", "You must first register admin");
             scene = new Scene(loadFXML("CreateAdminAccount").load());
             CreateAdminAccount.setParentMenu("MainMenu");
         }
