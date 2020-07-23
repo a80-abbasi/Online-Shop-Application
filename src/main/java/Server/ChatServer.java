@@ -15,7 +15,7 @@ public class ChatServer {
 
     private static Set<PrintWriter> writers = new HashSet<>();
 
-    public static void main(String[] args) throws Exception {
+    public static void main() throws Exception {
         System.out.println("The chat server is running...");
         var pool = Executors.newFixedThreadPool(500);
         try (var listener = new ServerSocket(59001)) {
