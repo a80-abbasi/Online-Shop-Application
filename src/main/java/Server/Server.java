@@ -146,6 +146,9 @@ public class Server extends Application {
                 else if (message.startsWith("register customer: ")) {
                     registerCustomer(message);
                 }
+                else if (message.startsWith("register supporter request: ")) {
+                    registerSupporterRequest(message);
+                }
                 else if (message.startsWith("register seller request: ")) {
                     registerSellerRequest(message);
                 }
@@ -176,6 +179,9 @@ public class Server extends Application {
                 else if (message.equals("getRegisterSellerRequests")) {
                     sendAllRegisterSellerRequests(dataOutputStream);
                 }
+                else if (message.equals("getRegisterSupporterRequests")) {
+                    sendAllRegisterSupporterRequests(dataOutputStream);
+                }
                 else if (message.equals("getRemoveProductRequests")) {
                     sendAllRemoveProductRequests(dataOutputStream);
                 }
@@ -193,6 +199,9 @@ public class Server extends Application {
                 }
                 else if (message.startsWith("get registerSellerRequest: ")) {
                     sendRegisterSellerRequest(dataOutputStream, message.substring(("get registerSellerRequest: ").length()));
+                }
+                else if (message.startsWith("get registerSupporterRequest: ")) {
+                    sendRegisterSupporterRequest(dataOutputStream, message.substring(("get registerSupporterRequest: ").length()));
                 }
                 else if (message.startsWith("get removeProductRequest: ")) {
                     sendRemoveProductRequest(dataOutputStream, message.substring(("get removeProductRequest: ").length()));
@@ -275,6 +284,16 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void sendRegisterSupporterRequest(DataOutputStream dataOutputStream, String registerSupporterRequestID) {
+        RegisterSupporterRequest registerSupporterRequest = RegisterSupporterRequest.getRequestById(registerSupporterRequestID);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(registerSupporterRequest));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -361,6 +380,15 @@ public class Server extends Application {
     private static void sendAllRegisterSellerRequests(DataOutputStream dataOutputStream) {
         try {
             dataOutputStream.writeUTF(gson.toJson(RegisterSellerRequest.getAllRegisterSellerRequests()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendAllRegisterSupporterRequests(DataOutputStream dataOutputStream) {
+        try {
+            dataOutputStream.writeUTF(gson.toJson(RegisterSupporterRequest.getAllRegisterSupporterRequests()));
             dataOutputStream.flush();
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -518,6 +546,17 @@ public class Server extends Application {
         String email = userInfo[5];
         String phoneNumber = userInfo[6];
         new Customer(username, password, firstName, lastName, email, phoneNumber, 0);
+    }
+
+    private static void registerSupporterRequest(String message) {
+        String[] userInfo = message.split(",");
+        String username = userInfo[1];
+        String password = userInfo[2];
+        String firstName = userInfo[3];
+        String lastName = userInfo[4];
+        String email = userInfo[5];
+        String phoneNumber = userInfo[6];
+        new RegisterSupporterRequest(username, password, firstName, lastName, email, phoneNumber);
     }
 
     private static void registerSellerRequest(String message) {
