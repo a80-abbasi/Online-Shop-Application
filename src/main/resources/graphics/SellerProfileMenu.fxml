@@ -89,6 +89,27 @@
         </Button>
       <Accordion layoutX="50.0" layoutY="170.0" prefHeight="416.0" prefWidth="273.0">
         <panes>
+            <TitledPane animated="false" text="Wallet">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="-1.0" mnemonicParsing="false" onMouseClicked="#chargeWallet" prefHeight="44.0" prefWidth="279.0" text="Charge Money">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="-1.0" layoutY="44.0" mnemonicParsing="false" onMouseClicked="#withdrawFromWallet" prefHeight="44.0" prefWidth="279.0" text="Withdraw Money">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+               <font>
+                  <Font name="Times New Roman" size="24.0" />
+               </font>
+            </TitledPane>
           <TitledPane animated="false" text="Offs">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
