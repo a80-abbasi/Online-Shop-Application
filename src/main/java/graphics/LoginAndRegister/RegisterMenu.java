@@ -57,6 +57,18 @@ public class RegisterMenu {
                 } catch (IllegalArgumentException e) {
                     AlertBox.showMessage("Failed to Register", e.getMessage());
                 }
+            } else if (accountType == AccountType.SUPPORTER) {
+                try {
+                    loginAndRegisterManager.registerSupporter(username.trim(), password.trim(), firstName.trim(), lastName, email, phoneNumber);
+                    AlertBox.showMessage("Register Supporter", "Your Request Was Sent to Admin Successfully");
+                    try {
+                        App.setRoot(parentMenu);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (IllegalArgumentException e) {
+                    AlertBox.showMessage("Failed to Register", e.getMessage());
+                }
             } else if (accountType == AccountType.SELLER) {
                 String companyName = companyField.getText();
                 try {
@@ -89,6 +101,16 @@ public class RegisterMenu {
 
         this.confirmButton.setLayoutY(300);
         accountTypeMenuButton.setText("Sign Up Customer");
+    }
+
+    public void setAccountTypeSupporter(ActionEvent actionEvent) {
+        this.accountType = AccountType.SUPPORTER;
+        registerPane.getChildren().removeAll(companyLabel, companyField);
+        companyLabel = null;
+        companyField = null;
+
+        this.confirmButton.setLayoutY(300);
+        accountTypeMenuButton.setText("Sign Up Supporter");
     }
 
     public void setAccountTypeSeller(ActionEvent event) {
