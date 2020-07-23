@@ -131,6 +131,14 @@ public class Server extends Application {
                         sendAccountInfo(dataOutputStream, account);
                     }
                 }
+                else if (message.equals("isThereAdmin")) {
+                    if (Admin.getAllAdmins().isEmpty()) {
+                        dataOutputStream.writeUTF("no");
+                    } else {
+                        dataOutputStream.writeUTF("yes");
+                    }
+                    dataOutputStream.flush();
+                }
                 else if (message.startsWith("register admin: ")) {
                     registerAdmin(message);
                 }
@@ -145,6 +153,15 @@ public class Server extends Application {
                 }
                 else if (message.startsWith("delete user: ")) {
                     deleteUser(message.substring(("delete user: ").length()));
+                }
+                else if (message.equals("getAdmins")) {
+                    sendAllAdmins(dataOutputStream);
+                }
+                else if (message.equals("getSellers")) {
+                    sendAllSellers(dataOutputStream);
+                }
+                else if (message.equals("getCustomers")) {
+                    sendAllCustomers(dataOutputStream);
                 }
                 else if (message.equals("getProducts")){
                     dataOutputStream.writeUTF(gson.toJson(Product.getAllProducts()));
@@ -188,6 +205,33 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void sendAllAdmins(DataOutputStream dataOutputStream) {
+        try {
+            dataOutputStream.writeUTF(gson.toJson(Admin.getAllAdmins()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendAllSellers(DataOutputStream dataOutputStream) {
+        try {
+            dataOutputStream.writeUTF(gson.toJson(Seller.getAllSellers()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendAllCustomers(DataOutputStream dataOutputStream) {
+        try {
+            dataOutputStream.writeUTF(gson.toJson(Customer.getAllCustomers()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

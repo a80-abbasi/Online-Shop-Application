@@ -1,13 +1,12 @@
 package Controller;
 
 import Client.Connection;
-import Model.Account.Account;
-import Model.Account.Admin;
-import Model.Account.Customer;
-import Model.Account.Discount;
+import Model.Account.*;
 import Model.Request.*;
 import Model.Product.Category;
 import Model.Product.Product;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,10 +21,12 @@ public class AdminProfileManager extends ProfileManager {
     }
 
     public static boolean isThereAdmin() {
-        if (Admin.getAllAdmins().isEmpty()) {
-            return false;
-        } else {
+        Connection.sendToServer("isThereAdmin");
+        String response = Connection.receiveFromServer();
+        if (response.equalsIgnoreCase("yes")) {
             return true;
+        } else {
+            return false;
         }
     }
 
@@ -52,14 +53,35 @@ public class AdminProfileManager extends ProfileManager {
         column5.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
         allUsers.getColumns().addAll(column1, column2, column3, column4, column5);
-        for (Account account : Account.getAllAccounts()) {
+
+        Connection.sendToServer("getCustomers");
+        ArrayList<Customer> allCustomers = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Customer>>(){}.getType());
+        Connection.sendToServer("getSellers");
+        ArrayList<Seller> allSellers = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Seller>>(){}.getType());
+        Connection.sendToServer("getAdmins");
+        ArrayList<Admin> allAdmins = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Admin>>(){}.getType());
+
+        ArrayList<Account> allAccounts = new ArrayList<>();
+        for (Admin admin : allAdmins) {
+            allAccounts.add(admin);
+        }
+        for (Seller seller : allSellers) {
+            allAccounts.add(seller);
+        }
+        for (Customer customer : allCustomers) {
+            allAccounts.add(customer);
+        }
+        for (Account account : allAccounts) {
+            if (account.equals(Account.getLoggedInAccount())) {
+                continue;
+            }
             allUsers.getItems().add(account);
         }
         allUsers.setPlaceholder(new Label("No Data to display"));
         return allUsers;
     }
 
-    public TableView getAllCustomersTable(TableView allCustomers) {
+    public TableView getAllCustomersTable(TableView allCustomersTable) {
         TableColumn<String, Customer> column1 = new TableColumn<>("Username");
         column1.setCellValueFactory(new PropertyValueFactory<>("username"));
 
@@ -75,12 +97,15 @@ public class AdminProfileManager extends ProfileManager {
         TableColumn<String, Customer> column5 = new TableColumn<>("Phone Number");
         column5.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
-        allCustomers.getColumns().addAll(column1, column2, column3, column4, column5);
-        for (Customer customer : Customer.getAllCustomers()) {
-            allCustomers.getItems().add(customer);
+        allCustomersTable.getColumns().addAll(column1, column2, column3, column4, column5);
+
+        Connection.sendToServer("getCustomers");
+        ArrayList<Customer> allCustomers = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Customer>>(){}.getType());
+        for (Customer customer : allCustomers) {
+            allCustomersTable.getItems().add(customer);
         }
-        allCustomers.setPlaceholder(new Label("No Data to display"));
-        return allCustomers;
+        allCustomersTable.setPlaceholder(new Label("No Data to display"));
+        return allCustomersTable;
     }
 
     public String viewUser(String username) throws NullPointerException {
