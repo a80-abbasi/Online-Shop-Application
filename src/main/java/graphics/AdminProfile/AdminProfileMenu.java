@@ -199,4 +199,12 @@ public class AdminProfileMenu {
     public static void setParentMenu(String parentMenu) {
         AdminProfileMenu.parentMenu = parentMenu;
     }
+
+    public void ManageSalesHistory(MouseEvent mouseEvent) {
+        try {
+            App.setRoot("ManageSalesHistory");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
