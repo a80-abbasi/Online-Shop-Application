@@ -361,36 +361,6 @@
         <nameOfCompany>a0</nameOfCompany>
     </seller>
     <seller>
-        <email>A</email>
-        <lastName>a</lastName>
-        <name>a</name>
-        <password>a</password>
-        <phoneNumber>A</phoneNumber>
-        <username>a</username>
-        <balance>10.0</balance>
-        <nameOfCompany>a0</nameOfCompany>
-    </seller>
-    <seller>
-        <email>A</email>
-        <lastName>a</lastName>
-        <name>a</name>
-        <password>a</password>
-        <phoneNumber>A</phoneNumber>
-        <username>a</username>
-        <balance>10.0</balance>
-        <nameOfCompany>a0</nameOfCompany>
-    </seller>
-    <seller>
-        <email>A</email>
-        <lastName>a</lastName>
-        <name>a</name>
-        <password>a</password>
-        <phoneNumber>A</phoneNumber>
-        <username>a</username>
-        <balance>10.0</balance>
-        <nameOfCompany>a0</nameOfCompany>
-    </seller>
-    <seller>
         <email>am@am.am</email>
         <lastName>am</lastName>
         <name>am</name>
@@ -1696,6 +1666,60 @@
         <name>a</name>
         <password>a</password>
         <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <token>5hzusGmb1oswbD2PNDQ7v2i8a</token>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <token>5hzusGmb1oswbD2PNDQ7v2i8a</token>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <token>5hzusGmb1oswbD2PNDQ7v2i8a</token>
+        <username>a</username>
+        <balance>10.0</balance>
+        <nameOfCompany>a0</nameOfCompany>
+    </seller>
+    <seller>
+        <email>A</email>
+        <lastName>a</lastName>
+        <name>a</name>
+        <password>a</password>
+        <phoneNumber>A</phoneNumber>
+        <token>5hzusGmb1oswbD2PNDQ7v2i8a</token>
         <username>a</username>
         <balance>10.0</balance>
         <nameOfCompany>a0</nameOfCompany>
