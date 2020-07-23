@@ -205,4 +205,12 @@ public class SellerProfileMenu {
             }
 
     }
+
+    public void chargeWallet(MouseEvent mouseEvent) {
+
+    }
+
+    public void withdrawFromWallet(MouseEvent mouseEvent) {
+
+    }
 }

@@ -231,8 +231,8 @@ public class CustomerProfileMenu {
         percentCol.setCellValueFactory(new PropertyValueFactory<>("percent"));
 
         TableColumn<String, DiscountData> maxPossibleUsageCol = new TableColumn("MaxPossibleUsage");
-        discountEndTimeCol.setMinWidth(100);
-        discountEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("discountPerCustomer"));
+        maxPossibleUsageCol.setMinWidth(100);
+        maxPossibleUsageCol.setCellValueFactory(new PropertyValueFactory<>("discountPerCustomer"));
 
         table.getColumns().addAll(discountIdCol, discountStartTimeCol, discountEndTimeCol, percentCol, maxPossibleUsageCol);
 //        table.getItems().add(new DiscountData("a", "a", "a", "a", "a"));
@@ -241,7 +241,9 @@ public class CustomerProfileMenu {
             ArrayList<Discount> discounts = customerProfileManager.customer.getAllDiscountCodesForCustomer();
             for (int i = 0; i < discounts.size(); i++) {
                 Discount discount = discounts.get(i);
-                table.getItems().add(new DiscountData(discount.getDiscountCode(),discount.getStartTime().toString(),discount.getEndTime().toString(),Double.toString(discount.getDiscountPercent()),Double.toString(discount.getDiscountPerCustomer())));
+                table.getItems().add(new DiscountData(discount.getDiscountCode(),discount.getStartTime().toString(),
+                        discount.getEndTime().toString(),Double.toString(discount.getDiscountPercent()),
+                        String.valueOf(discount.getDiscountPerCustomer())));
             }
             final Label label = new Label("Discount Codes");
             label.setFont(new Font("Arial", 20));

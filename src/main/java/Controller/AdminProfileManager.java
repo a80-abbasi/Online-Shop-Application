@@ -1,5 +1,6 @@
 package Controller;
 
+import Client.Connection;
 import Model.Account.Account;
 import Model.Account.Admin;
 import Model.Account.Customer;
@@ -119,8 +120,9 @@ public class AdminProfileManager extends ProfileManager {
         return String.valueOf(code);
     }
 
-    public void createManagerProfile(String username, String password, String name, String lastName, String email, String phoneNumber) {
-        new Admin(username, password, name, lastName, email, phoneNumber);
+    public void registerAdmin(String username, String password, String name, String lastName, String email, String phoneNumber) {
+        String message = "register admin: ," + username + "," + password + "," + name + "," + lastName + "," + email + "," + phoneNumber + ", ";
+        Connection.sendToServer(message);
     }
 
     //todo: checking this
@@ -197,7 +199,7 @@ public class AdminProfileManager extends ProfileManager {
         if (discount == null) {
             throw new NullPointerException();
         } else if (checkDiscountPercentValidity(discountPercent)) {
-            discount.setDiscountPercent(Integer.parseInt(discountPercent));
+            discount.setDiscountPercent(Double.parseDouble(discountPercent));
         }
     }
 

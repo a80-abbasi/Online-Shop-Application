@@ -86,6 +86,9 @@ public class Discount {
         this.includingCustomerUsername = includingCustomerUsername;
         for (String s : includingCustomerUsername) {
             Customer customer = Customer.getCustomerById(s);
+            if (customer.getAllDiscountCodesForCustomer().contains(this)) {
+                return;
+            }
             customer.getAllDiscountCodesForCustomer().add(this);
         }
     }

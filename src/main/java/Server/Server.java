@@ -5,6 +5,7 @@ import Model.Account.*;
 import Model.Product.Category;
 import Model.Product.Comment;
 import Model.Product.Product;
+import Model.Request.RegisterSellerRequest;
 import View.Main;
 import com.google.gson.Gson;
 import graphics.products.PurchaseMenuController;
@@ -130,6 +131,15 @@ public class Server extends Application {
                         sendAccountInfo(dataOutputStream, account);
                     }
                 }
+                else if (message.startsWith("register admin: ")) {
+                    registerAdmin(message);
+                }
+                else if (message.startsWith("register customer: ")) {
+                    registerCustomer(message);
+                }
+                else if (message.startsWith("register seller request: ")) {
+                    registerSellerRequest(message);
+                }
                 else if (message.equals("getProducts")){
                     dataOutputStream.writeUTF(gson.toJson(Product.getAllProducts()));
                     dataOutputStream.flush();
@@ -173,6 +183,40 @@ public class Server extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void registerAdmin(String message) {
+        String[] userInfo = message.split(",");
+        String username = userInfo[1];
+        String password = userInfo[2];
+        String firstName = userInfo[3];
+        String lastName = userInfo[4];
+        String email = userInfo[5];
+        String phoneNumber = userInfo[6];
+        new Admin(username, password, firstName, lastName, email, phoneNumber);
+    }
+
+    private static void registerCustomer(String message) {
+        String[] userInfo = message.split(",");
+        String username = userInfo[1];
+        String password = userInfo[2];
+        String firstName = userInfo[3];
+        String lastName = userInfo[4];
+        String email = userInfo[5];
+        String phoneNumber = userInfo[6];
+        new Customer(username, password, firstName, lastName, email, phoneNumber, 0);
+    }
+
+    private static void registerSellerRequest(String message) {
+        String[] userInfo = message.split(",");
+        String username = userInfo[1];
+        String password = userInfo[2];
+        String firstName = userInfo[3];
+        String lastName = userInfo[4];
+        String email = userInfo[5];
+        String phoneNumber = userInfo[6];
+        String companyName = userInfo[7];
+        new RegisterSellerRequest(username, password, firstName, lastName, email, phoneNumber, companyName);
     }
 
     private static void checkEndOfAuctions() {
@@ -220,7 +264,7 @@ public class Server extends Application {
             else {
                 dataOutputStream.writeUTF("Seller: " + gson.toJson((Seller) account));
             }
-        dataOutputStream.flush();
+            dataOutputStream.flush();
         }
         catch (IOException e) {
             e.printStackTrace();

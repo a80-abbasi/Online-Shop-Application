@@ -49,7 +49,6 @@ public class RegisterMenu {
                 try {
                     loginAndRegisterManager.registerCustomer(username.trim(), password.trim(), firstName.trim(), lastName, email, phoneNumber);
                     AlertBox.showMessage("Register Customer", "Customer Registered Successfully");
-                    loginAndRegisterManager.loginUser(username.trim(), password.trim());
                     try {
                         App.setRoot(parentMenu);
                     } catch (IOException e) {

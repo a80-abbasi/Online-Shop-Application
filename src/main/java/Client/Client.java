@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Client extends Application {
-
     public static Scene scene;
 
     @Override

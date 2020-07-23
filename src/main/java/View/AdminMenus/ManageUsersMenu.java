@@ -2,7 +2,6 @@ package View.AdminMenus;
 
 import Controller.AdminProfileManager;
 import Model.Account.Account;
-import Model.Account.Admin;
 import View.Menu;
 
 import java.util.ArrayList;
@@ -96,7 +95,7 @@ public class ManageUsersMenu extends Menu {
                 String email = scanner.nextLine();
                 System.out.println("Enter phone number:");
                 String phoneNumber = scanner.nextLine();
-                adminProfileManager.createManagerProfile(username, password, name, lastName, email, phoneNumber);
+                adminProfileManager.registerAdmin(username, password, name, lastName, email, phoneNumber);
                 System.out.println("Enter (Back) to return or (Create Manager Profile) to create another manager profile:");
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("back")) {

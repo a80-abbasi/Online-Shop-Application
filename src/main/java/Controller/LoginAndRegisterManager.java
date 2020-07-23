@@ -19,7 +19,9 @@ public class LoginAndRegisterManager {
                                  String phoneNumber) throws IllegalArgumentException {
         if (checkUsernameValidity(username) && checkPasswordValidity(password) && checkNameValidity(name) && checkNameValidity(lastName)
                 && checkEmailValidity(email) && checkPhoneNumberValidity(phoneNumber)) {
-            new Customer(username, password, name, lastName, email, phoneNumber, 0);
+            String message = "register customer: ," + username + "," + password + "," + name + "," + lastName + "," + email + "," + phoneNumber + ",";
+            Connection.sendToServer(message);
+            //new Customer(username, password, name, lastName, email, phoneNumber, 0);
         }
     }
 
@@ -27,7 +29,9 @@ public class LoginAndRegisterManager {
                                String phoneNumber, String companyName) throws IllegalArgumentException {
         if (checkUsernameValidity(username) && checkPasswordValidity(password) && checkNameValidity(name) && checkNameValidity(lastName)
                 && checkEmailValidity(email) && checkPhoneNumberValidity(phoneNumber) && checkNameValidity(companyName)) {
-            new RegisterSellerRequest(username, password, name, lastName, email, phoneNumber, companyName);
+            String message = "register seller request: ," + username + "," + password + "," + name + "," + lastName + "," + email + "," + phoneNumber + "," + companyName + ",";
+            Connection.sendToServer(message);
+            //new RegisterSellerRequest(username, password, name, lastName, email, phoneNumber, companyName);
         }
     }
 
