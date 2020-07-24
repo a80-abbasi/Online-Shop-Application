@@ -142,7 +142,7 @@ public class CustomerProfileMenu {
 
         try{
             String orderID =  orderIDForShowOrder.getText();
-            BuyLog buyLog = customerProfileManager.customer.getBuyLogByID(orderID);
+            BuyLog buyLog = customerProfileManager.getBuyLogByID(orderID);//todo:!!
             for (int i = 0; i < buyLog.getBoughtProducts().keySet().size(); i++) {
                 ArrayList<Product> products = new ArrayList<>(buyLog.getBoughtProducts().keySet());
                 table.getItems().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getSeller().getName()));
@@ -185,7 +185,7 @@ public class CustomerProfileMenu {
         table.getColumns().addAll(orderIdCol, orderDateCol);
 
         try{
-            ArrayList<BuyLog> buyLogs = customerProfileManager.customer.getBuyLogs();
+            ArrayList<BuyLog> buyLogs = customerProfileManager.getBuyLogs();//todo: !!!
             for (int i = 0; i < buyLogs.size(); i++) {
                 table.getItems().add(new OrderData(buyLogs.get(i).getID(),buyLogs.get(i).getDate().toString()));
             }
@@ -238,9 +238,9 @@ public class CustomerProfileMenu {
 //        table.getItems().add(new DiscountData("a", "a", "a", "a", "a"));
 
         try{
-            ArrayList<Discount> discounts = customerProfileManager.customer.getAllDiscountCodesForCustomer();
+            ArrayList<Discount> discounts = customerProfileManager.getAllDiscountCodesForCustomer();//todo:!!1
             for (int i = 0; i < discounts.size(); i++) {
-                Discount discount = discounts.get(i);
+                Discount discount = discounts.get(i);//todo: todo!!!
                 table.getItems().add(new DiscountData(discount.getDiscountCode(),discount.getStartTime().toString(),
                         discount.getEndTime().toString(),Double.toString(discount.getDiscountPercent()),
                         String.valueOf(discount.getDiscountPerCustomer())));

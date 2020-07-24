@@ -255,4 +255,15 @@ public class CustomerProfileManager extends ProfileManager{
         seller.getSellLogs().add(sellLog);
     }
 
+    public BuyLog getBuyLogByID(String orderID) {
+        return null;
+    }
+
+    public ArrayList<BuyLog> getBuyLogs() {
+        return null;
+    }
+
+    public ArrayList<Discount> getAllDiscountCodesForCustomer() {
+        return null;
+    }
 }

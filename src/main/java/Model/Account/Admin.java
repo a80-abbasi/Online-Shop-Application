@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class Admin extends Account{
     private static ArrayList<Admin> allAdmins;
 
+    private static int minBankBalance = 1000;
+    private static int bankingFeePercent = 5;
+
     static {
         allAdmins = new ArrayList<>();
     }
@@ -33,6 +36,22 @@ public class Admin extends Account{
             }
         }
         return null;
+    }
+
+    public static int getMinBankBalance() {
+        return minBankBalance;
+    }
+
+    public static void setMinBankBalance(int minBankBalance) {
+        Admin.minBankBalance = minBankBalance;
+    }
+
+    public static int getBankingFeePercent() {
+        return bankingFeePercent;
+    }
+
+    public static void setBankingFeePercent(int bankingFeePercent) {
+        Admin.bankingFeePercent = bankingFeePercent;
     }
 
     @Override
