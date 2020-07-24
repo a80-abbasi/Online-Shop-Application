@@ -196,6 +196,18 @@ public class Server extends Application {
                         else if (content.startsWith("get customer discounts: ")) {
                             sendCustomerDiscounts(dataOutputStream, account);
                         }
+                        else if (content.startsWith("charge wallet: ")){
+                            int money = Integer.parseInt(content.substring("charge wallet: ".length()));
+                            Customer customer = (Customer) account;
+                            String outPut;
+                            try {
+                                outPut = BankConnection.move(customer.getUsername(), customer.getPassword(), money, customer.getBankAccountID(), Admin.getStoreBankID());
+                            } catch (Exception e) {
+                                outPut = e.getMessage();
+                            }
+                            dataOutputStream.writeUTF(outPut);
+                            dataOutputStream.flush();
+                        }
                     }
                     if (content.equals("get logged in account")){
                         sendAccountInfo(dataOutputStream, account);
@@ -390,6 +402,10 @@ public class Server extends Application {
                         Admin mainAdmin = Admin.getAllAdmins().get(0);
                         Admin.setStoreBankID(BankConnection.createAccount(mainAdmin.getName(), mainAdmin.getLastName(), mainAdmin.getUsername(), mainAdmin.getPassword()));
                     }
+                }
+                else if (message.equals("get min wallet balance")){
+                    dataOutputStream.writeUTF(String.valueOf(Admin.getMinWalletBalance()));
+                    dataOutputStream.flush();
                 }
                 clientSocket.close();
             }
