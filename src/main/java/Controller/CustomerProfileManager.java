@@ -183,27 +183,27 @@ public class CustomerProfileManager extends ProfileManager{
         return totalCost;
     }
 
-    public void doingsAfterBuyProducts(double price, double totalPrice, String usedDiscountCode) {
-        customer.setBalance(customer.getBalance() - price);
-        setUsedDiscountCodes(usedDiscountCode);
-        addBuyLog(price,totalPrice, customer.getCart());
-        //System.out.println(checkForDiscountGift());
-        for (Product product : customer.getCart().keySet()) {
-            Seller seller = product.getSeller();
-            int productNewExistingNumber = product.getExistingNumber() - customer.getCart().get(product);
-            seller.setBalance(seller.getBalance() + product.getPriceWithOff()); //seller setBalance
-            product.setExistingNumber(productNewExistingNumber); //Product setExistingNumber
-            if (!product.getProductBuyers().contains(customer))
-                product.getProductBuyers().add(customer.getUsername()); //Product setProductBuyers
-        }
-        for (Product product :customer.getCart().keySet()) {
-            double received = product.getPriceWithOff();
-            addSellLog(received, product.getPrice() - received, product, customer.getCart().get(product),customer.getName(), product.getSeller());
-        }
+//    public void doingsAfterBuyProducts(double price, double totalPrice, String usedDiscountCode) {
+//        customer.setBalance(customer.getBalance() - price);
+//        setUsedDiscountCodes(usedDiscountCode);
+//        addBuyLog(price,totalPrice, customer.getCart());
+//        //System.out.println(checkForDiscountGift());
+//        for (Product product : customer.getCart().keySet()) {
+//            Seller seller = product.getSeller();
+//            int productNewExistingNumber = product.getExistingNumber() - customer.getCart().get(product);
+//            seller.setBalance(seller.getBalance() + product.getPriceWithOff()); //seller setBalance
+//            product.setExistingNumber(productNewExistingNumber); //Product setExistingNumber
+//            if (!product.getProductBuyers().contains(customer))
+//                product.getProductBuyers().add(customer.getUsername()); //Product setProductBuyers
+//        }
+//        for (Product product :customer.getCart().keySet()) {
+//            double received = product.getPriceWithOff();
+//            addSellLog(received, product.getPrice() - received, product, customer.getCart().get(product),customer.getName(), product.getSeller());
+//        }
         //discount.getDiscountPerCustomer();
         //todo: check discount code use less than
 
-    }
+//    }
 
     public boolean canCustomerPay(double cost) {
         if (customer.getBalance() >= cost) {
@@ -243,11 +243,11 @@ public class CustomerProfileManager extends ProfileManager{
         }
     }
 
-    public void addBuyLog(double price, double totalPrice, HashMap<Product, Integer> Cart) { //todo
-        String buyLogID = customer.getUsername() + customer.getBuyLogs().size();
-        BuyLog buyLog = new BuyLog(buyLogID, new Date(), price, totalPrice - price, customer.getCart());
-        customer.getBuyLogs().add(buyLog);
-    }
+//    public void addBuyLog(double price, double totalPrice, HashMap<Product, Integer> Cart) { //todo
+//        String buyLogID = customer.getUsername() + customer.getBuyLogs().size();
+//        BuyLog buyLog = new BuyLog(buyLogID, new Date(), price, totalPrice - price, customer.getCart());
+//        customer.getBuyLogs().add(buyLog);
+//    }
 
     public void addSellLog(double received, double offAmount, Product product, int number, String buyerName, Seller seller) {
         String sellLogID = seller.getUsername() + seller.getSellLogs().size();

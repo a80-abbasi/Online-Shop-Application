@@ -13,14 +13,16 @@ public class BuyLog extends Log {
     private boolean hasDelivered;
     private HashMap<Product, Integer> boughtProducts;
     private String sendingCondition;
+    private String address;
 
-    public BuyLog(String ID, Date date, double paidAmount, double discountAmount, HashMap<Product, Integer> cart) {
+    public BuyLog(String ID, Date date, double paidAmount, double discountAmount, HashMap<Product, Integer> cart, String address) {
         super(ID, date);
         this.paidAmount = paidAmount;
         allBuyLogs.add(this);
         this.discountAmount = discountAmount;
         this.boughtProducts = new HashMap<>(cart);
         setSendingCondition("Did not send");
+        this.address = address;
     }
 
     public BuyLog() {

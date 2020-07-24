@@ -12,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -26,6 +27,7 @@ import java.util.stream.Stream;
 
 public class PurchaseMenuController {
 
+    private static String address;
     public TextField nameTextField;
     public TextField phoneNumberTextField;
     public TextArea addressTextArea;
@@ -224,7 +226,7 @@ public class PurchaseMenuController {
                 product.getProductBuyers().add(customer.getUsername());
             }
         });
-        BuyLog buyLog = new BuyLog("BuyLog" + (BuyLog.getAllBuyLogs().size() + 1), new Date(), finalAmount, totalAmount - finalAmount, cart);
+        BuyLog buyLog = new BuyLog("BuyLog" + (BuyLog.getAllBuyLogs().size() + 1), new Date(), finalAmount, totalAmount - finalAmount, cart, address);
         customer.getBuyLogs().add(buyLog); //creating buy log
         cart.clear(); //empty cart
         String discountGift = new CustomerProfileManager(customer).checkForDiscountGift();
@@ -237,5 +239,13 @@ public class PurchaseMenuController {
         this.cart = cart;
         setValidateButton();
         setBuyItemsButton();
+    }
+
+    public String getAddressTextArea() {
+        return addressTextArea.toString();
+    }
+
+    public void BuyItems(MouseEvent mouseEvent) {
+        address = getAddressTextArea();
     }
 }
