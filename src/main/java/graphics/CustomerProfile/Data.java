@@ -6,7 +6,7 @@ public class Data {
     private String productSeller;
     private String sendCondition;
 
-    Data(String pName, String pNumber, String pSeller, String sCondition) {
+    public Data(String pName, String pNumber, String pSeller, String sCondition) {
         this.productName = pName;
         this.productNumber = pNumber;
         this.productSeller = pSeller;
