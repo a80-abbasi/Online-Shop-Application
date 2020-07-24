@@ -22,6 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CustomerProfileMenu {
@@ -131,7 +132,7 @@ public class CustomerProfileMenu {
 
             TableView table = getOrderTable(buyLog);
 
-            final Label label = new Label("Date" + buyLog.getDate() + " " + "Price:" + buyLog.getPaidAmount()+"$");
+            final Label label = new Label("Date" + buyLog.getDate() + " " + "Price:" + buyLog.getPaidAmount()+"$" + "\n" + buyLog.getAddress());
             label.setFont(new Font("Arial", 20));
 
             vbox.getChildren().addAll(label, table);
@@ -160,12 +161,18 @@ public class CustomerProfileMenu {
         productSellerCol.setMinWidth(200);
         productSellerCol.setCellValueFactory(new PropertyValueFactory<>("productSeller"));
 
+        TableColumn<String, Data> productSendCol = new TableColumn("Send Condition");
+        productSellerCol.setMinWidth(200);
+        productSellerCol.setCellValueFactory(new PropertyValueFactory<>("sendCondition"));
+
+
+
         table.getColumns().addAll(productNameCol, productNumberCol, productSellerCol);
 
         ArrayList<Product> products = new ArrayList<>(buyLog.getBoughtProducts().keySet());
         for (int i = 0; i < products.size(); i++) {
             table.getItems().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(),
-                    products.get(i).getSeller().getName()));
+                    products.get(i).getSeller().getName(), String.valueOf(products.get(i).isFile())));
         }
         return table;
     }
@@ -276,5 +283,10 @@ public class CustomerProfileMenu {
     }
 
     public void connectSupporters(MouseEvent mouseEvent) {
+        try {
+            App.setRoot("ConnectSupporters");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
