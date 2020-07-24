@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Admin extends Account{
     private static ArrayList<Admin> allAdmins;
+    private String storeBankID;
 
     static {
         allAdmins = new ArrayList<>();
@@ -33,6 +34,16 @@ public class Admin extends Account{
             }
         }
         return null;
+    }
+
+    public static void setStoreBankID(String storeBankID){
+        for (Admin admin : allAdmins) {
+            admin.storeBankID = storeBankID;
+        }
+    }
+
+    public static String getStoreBankID(){
+        return allAdmins.get(0).storeBankID;
     }
 
     @Override
