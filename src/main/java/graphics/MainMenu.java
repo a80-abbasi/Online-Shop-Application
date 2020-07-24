@@ -6,6 +6,7 @@ import graphics.AdminProfile.AdminProfileMenu;
 import graphics.CustomerProfile.CustomerProfileMenu;
 import graphics.LoginAndRegister.LoginMenu;
 import graphics.SellerProfile.SellerProfileMenu;
+import graphics.SupporterProfile.SupporterProfileMenu;
 import graphics.products.ProductPageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
