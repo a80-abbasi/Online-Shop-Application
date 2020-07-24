@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="addCompanyInformation" prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.SellerProfile.SellerProfileMenu">
+<AnchorPane fx:id="addCompanyInformation" prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.SellerProfile.SellerProfileMenu">
     <children>
         <TextField fx:id="usernameField" editable="false" layoutX="1028.0" layoutY="150.0">
             <font>
@@ -89,22 +84,9 @@
         </Button>
       <Accordion layoutX="50.0" layoutY="170.0" prefHeight="416.0" prefWidth="273.0">
         <panes>
-            <TitledPane animated="false" text="Wallet">
+            <TitledPane animated="false" onMouseClicked="#goToSellerWalletMenu" text="Wallet">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="-1.0" mnemonicParsing="false" onMouseClicked="#chargeWallet" prefHeight="44.0" prefWidth="279.0" text="Charge Money">
-                           <font>
-                              <Font name="Times New Roman" size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="-1.0" layoutY="44.0" mnemonicParsing="false" onMouseClicked="#withdrawFromWallet" prefHeight="44.0" prefWidth="279.0" text="Withdraw Money">
-                           <font>
-                              <Font name="Times New Roman" size="18.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
                <font>
                   <Font name="Times New Roman" size="24.0" />
@@ -160,7 +142,7 @@
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </TitledPane>
-            <TitledPane animated="false" onMouseClicked="#showCompanyInformation" text="Company Information">
+            <TitledPane animated="false" text="Company Information">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

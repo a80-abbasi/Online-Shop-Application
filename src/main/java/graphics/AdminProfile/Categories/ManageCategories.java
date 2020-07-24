@@ -85,16 +85,16 @@ public class ManageCategories {
         specialFeaturesList.getItems().add(specialFeature);
     }
 
-    public void addSubCategory(MouseEvent mouseEvent) {
+    /*public void addSubCategory(MouseEvent mouseEvent) {
         AddCategory.setCategory(selectedCategory);
         try {
             App.setRoot("AddCategory");
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-    public void removeSubCategory(MouseEvent mouseEvent) {
+    /*public void removeSubCategory(MouseEvent mouseEvent) {
         Object selectedSubCategory = subCategoriesList.getSelectionModel().getSelectedItem();
         if (selectedSubCategory == null) {
             return;
@@ -102,7 +102,7 @@ public class ManageCategories {
         String subCategoryName = (String) selectedSubCategory;
         adminProfileManager.removeSubCategory(selectedCategory, subCategoryName);
         subCategoriesList.getItems().remove(subCategoryName);
-    }
+    }*/
 
     public void removeSpecialFeature(MouseEvent mouseEvent) {
         Object selectedSpecialFeature = specialFeaturesList.getSelectionModel().getSelectedItem();

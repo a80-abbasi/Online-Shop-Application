@@ -7,90 +7,42 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AdminProfile.Categories.AddCategory">
     <children>
-        <Label layoutX="110.0" layoutY="173.0" text="Category Name">
+        <Label layoutX="468.0" layoutY="156.0" text="Category Name">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </Label>
-        <Label layoutX="107.0" layoutY="236.0" text="Special Features">
+        <Label layoutX="465.0" layoutY="219.0" text="Special Features">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </Label>
-        <Label layoutX="107.0" layoutY="646.0" text="SubCategories">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <TextField fx:id="categoryNameField" layoutX="314.0" layoutY="165.0">
+        <TextField fx:id="categoryNameField" layoutX="672.0" layoutY="148.0">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </TextField>
-        <TextField fx:id="specialFeaturesField" layoutX="314.0" layoutY="228.0">
+        <TextField fx:id="specialFeaturesField" layoutX="672.0" layoutY="211.0">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </TextField>
-        <TextField fx:id="subCategoriesField" editable="false" layoutX="314.0" layoutY="638.0">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <ListView fx:id="specialFeaturesList" layoutX="314.0" layoutY="347.0" prefHeight="258.0" prefWidth="300.0" />
-        <Button layoutX="492.0" layoutY="272.0" mnemonicParsing="false" onMouseClicked="#addFeature" prefHeight="44.0" prefWidth="122.0" text="Add Feature">
+        <ListView fx:id="specialFeaturesList" layoutX="672.0" layoutY="330.0" prefHeight="258.0" prefWidth="300.0" />
+        <Button layoutX="850.0" layoutY="255.0" mnemonicParsing="false" onMouseClicked="#addFeature" prefHeight="44.0" prefWidth="122.0" text="Add Feature">
             <font>
                 <Font name="Times New Roman" size="18.0" />
             </font>
         </Button>
-        <Label layoutX="775.0" layoutY="173.0" text="SubCategory Name">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <Line endX="-53.5" endY="473.0" layoutX="750.0" layoutY="284.0" startX="-53.5" startY="-171.0" />
-        <TextField fx:id="subCategoryNameField" editable="false" layoutX="1036.0" layoutY="165.0">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <Label layoutX="775.0" layoutY="236.0" text="Special Features">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
-        <TextField fx:id="subCategoryFeaturesField" editable="false" layoutX="1036.0" layoutY="228.0">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <Button layoutX="1214.0" layoutY="272.0" mnemonicParsing="false" onMouseClicked="#addSubCategoryFeature" prefHeight="44.0" prefWidth="122.0" text="Add Feature">
+        <Button fx:id="confirmButton" layoutX="672.0" layoutY="652.0" mnemonicParsing="false" onMouseClicked="#confirm" prefHeight="44.0" prefWidth="300.0" text="Confirm">
             <font>
                 <Font name="Times New Roman" size="18.0" />
             </font>
         </Button>
-        <ListView fx:id="subCategoryFeaturesList" layoutX="1036.0" layoutY="347.0" prefHeight="258.0" prefWidth="300.0" />
-        <Button fx:id="confirmButton" layoutX="314.0" layoutY="714.0" mnemonicParsing="false" onMouseClicked="#confirm" prefHeight="44.0" prefWidth="300.0" text="Confirm">
-            <font>
-                <Font name="Times New Roman" size="18.0" />
-            </font>
-        </Button>
-        <Button layoutX="1036.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#addSubCategory" prefHeight="44.0" prefWidth="300.0" text="Add SubCategory">
-            <font>
-                <Font name="Times New Roman" size="18.0" />
-            </font>
-        </Button>
-        <Label layoutX="1057.0" layoutY="73.0" text="Add SubCategory">
-            <font>
-                <Font name="Times New Roman" size="36.0" />
-            </font>
-        </Label>
-        <Label layoutX="363.0" layoutY="73.0" text="Add Category">
+        <Label layoutX="721.0" layoutY="71.0" text="Add Category">
             <font>
                 <Font name="Times New Roman" size="36.0" />
             </font>

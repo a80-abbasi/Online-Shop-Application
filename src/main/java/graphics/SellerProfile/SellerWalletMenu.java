@@ -7,7 +7,7 @@ import graphics.AlertBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class SellerWallet {
+public class SellerWalletMenu {
     public TextField balanceField;
     public TextField withdrawAmountField;
     public TextField chargeAmountField;

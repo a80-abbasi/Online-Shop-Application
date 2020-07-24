@@ -151,14 +151,6 @@ public class SellerProfileMenu {
         showTable(salesHistory, "Sales History");
     }
 
-    public void showCompanyInformation(MouseEvent mouseEvent) {
-
-    }
-
-    public void showBalance(MouseEvent mouseEvent) {
-
-    }
-
     private void showTable(TableView tableView, String stageTitle) {
         Stage window = new Stage();
         window.setTitle(stageTitle);
@@ -189,28 +181,27 @@ public class SellerProfileMenu {
     }
 
     public void addCompanyInformation(MouseEvent mouseEvent) {
-            try {
-                App.setRoot("AddCompanyInformation");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            App.setRoot("AddCompanyInformation");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     public void ShowCompanyInformation(MouseEvent mouseEvent) {
-            try {
-                App.setRoot("ShowCompanyInformation");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+        try {
+            App.setRoot("ShowCompanyInformation");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void chargeWallet(MouseEvent mouseEvent) {
-
-    }
-
-    public void withdrawFromWallet(MouseEvent mouseEvent) {
-
+    public void goToSellerWalletMenu(MouseEvent mouseEvent) {
+        try {
+            App.setRoot("SellerWalletMenu");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
