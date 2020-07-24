@@ -291,7 +291,7 @@ public class PurchaseMenuController {
         customer.setBalance(customer.getBalance() - finalAmount); //decrease customer money
         cart.forEach((product, number) -> {//increase sellers money & creating sell log
             Seller seller = product.getSeller();
-            seller.setBalance(product.getSeller().getBalance() + product.getPriceWithOff() * number * (100 - Admin.getBankingFeePercent()) / 100);
+            seller.setBalance((int)(product.getSeller().getBalance() + product.getPriceWithOff() * number * (100 - Admin.getBankingFeePercent()) / 100));
             SellLog sellLog = new SellLog("SellLog" + (SellLog.getAllSellLogs().size() + 1), new Date(), product.getPriceWithOff(),
                     product.getPrice() - product.getPriceWithOff(), product, number, customer.getName());
             seller.getSellLogs().add(sellLog);

@@ -14,6 +14,7 @@ public abstract class Account {
     protected String email;
     protected String phoneNumber;
     private String token;
+    private boolean online;
 
     public Account(String username, String password, String name, String lastName, String email, String phoneNumber) {
         this.username = username;
@@ -31,6 +32,14 @@ public abstract class Account {
 
     public static void setAllAccounts(ArrayList<Account> allAccounts) {
         Account.allAccounts = allAccounts;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
     }
 
     public String getUsername() {
@@ -132,6 +141,26 @@ public abstract class Account {
     public static void deleteAccount(Account account) {
         allAccounts.remove(account);
         account.removeUser();
+    }
+
+    public static ArrayList<Account> getOnlineUsers(){
+        ArrayList<Account> onlineAccount = new ArrayList<>();
+        for (Account account : allAccounts) {
+            if (account.isOnline()){
+                onlineAccount.add(account);
+            }
+        }
+        return onlineAccount;
+    }
+
+    public static ArrayList<String> getOnlineUsersUsername(){
+        ArrayList<String> onlineAccount = new ArrayList<>();
+        for (Account account : allAccounts) {
+            if (account.isOnline()){
+                onlineAccount.add(account.getUsername());
+            }
+        }
+        return onlineAccount;
     }
 
     public abstract void removeUser();

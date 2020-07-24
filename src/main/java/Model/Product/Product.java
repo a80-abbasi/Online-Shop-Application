@@ -428,7 +428,7 @@ public class Product {
         Customer customer = Customer.getCustomerById(winner);
         customer.setBalance(customer.getBalance() - maxPrice);
         Seller seller = getSeller();
-        seller.setBalance(seller.getBalance() + maxPrice);
+        seller.setBalance((int)(seller.getBalance() + maxPrice));
         auction.clear();
     }
 }

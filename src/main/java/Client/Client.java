@@ -27,6 +27,12 @@ public class Client extends Application {
             CreateAdminAccount.setParentMenu("MainMenu");
         }
         stage.setScene(scene);
+        stage.setOnCloseRequest(windowEvent -> {
+            if (Connection.getAccountFromServer() != null) {
+                Connection.sendToServer("logout");
+            }
+            stage.close();
+        });
         stage.show();
     }
 
