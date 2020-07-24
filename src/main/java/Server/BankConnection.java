@@ -38,7 +38,7 @@ public class BankConnection {
         }
     }
 
-    public static String creatAccount(String firstName, String lastName, String userName, String password){
+    public static String createAccount(String firstName, String lastName, String userName, String password){
         connectToBank();
         sendMessageToBank(String.format("%s %s %s %s %s %s", "create_account", firstName, lastName, userName, password, password));
         String message = getMessageFromBank();

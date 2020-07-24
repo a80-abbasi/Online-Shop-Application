@@ -1,6 +1,7 @@
 package Model.Account;
 
 import Model.Product.Product;
+import Server.BankConnection;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,8 @@ public class Seller extends Account {
     private String phoneNumberOfCompany;
     private String CompanyAddress;
     private String CompanyOpenYear;
+    private String bankAccountID;
+    private String bankAccountToken;
 
     public Seller(String username, String password, String name, String lastName, String email, String phoneNumber, String nameOfCompany,
                   double balance) {
@@ -26,10 +29,19 @@ public class Seller extends Account {
         sellLogs = new ArrayList<>();
         products = new ArrayList<>();
         offs = new ArrayList<>();
+        createBankAccount();
     }
 
     public Seller() {
         this("", "", "", "", "", "", "", 0);
+    }
+
+    private void createBankAccount() {
+        bankAccountID = BankConnection.createAccount(name, lastName, username, password);
+    }
+
+    public String getBankAccountID() {
+        return bankAccountID;
     }
 
     public static ArrayList<Seller> getAllSellers() {
