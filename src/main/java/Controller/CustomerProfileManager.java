@@ -1,9 +1,11 @@
 package Controller;
 
+import Client.ChatClient;
 import Client.Connection;
 import Model.Account.*;
 import Model.Product.Product;
 import Model.Product.Score;
+import Server.ChatServer;
 import View.Menu;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,8 +37,8 @@ public class CustomerProfileManager extends ProfileManager{
             customer.setBalance(customer.getNumberOfDiscountGifts() + 1);
             output = ("Congratulations! you have won" + discountPercentage + "% discount up to" + maxPossibleDiscount +
                     "$ for buying more than " + (customer.getNumberOfDiscountGifts() + 1) * minimumAmountOfMoney + " dollars from Us!") +
-            ("\nNote! you can use it once till next month.") +
-            ("\nYour discount code is:" );
+                    ("\nNote! you can use it once till next month.") +
+                    ("\nYour discount code is:" );
             String code = AdminProfileManager.generateRandomDiscountCode();
             output += code;
             Date now = new Date();
@@ -79,7 +81,7 @@ public class CustomerProfileManager extends ProfileManager{
     public boolean isInputValidForBuyLogID(String ID) {
         for (BuyLog buyLog : customer.getBuyLogs()) {//todo:if buy log be null we will give wrong input;
             if (buyLog.getID().equals(ID)){
-            return true;
+                return true;
             }
         }
         return false;
@@ -212,8 +214,8 @@ public class CustomerProfileManager extends ProfileManager{
 //            double received = product.getPriceWithOff();
 //            addSellLog(received, product.getPrice() - received, product, customer.getCart().get(product),customer.getName(), product.getSeller());
 //        }
-        //discount.getDiscountPerCustomer();
-        //todo: check discount code use less than
+    //discount.getDiscountPerCustomer();
+    //todo: check discount code use less than
 
 //    }
 
@@ -274,4 +276,15 @@ public class CustomerProfileManager extends ProfileManager{
         }
         return iDAndDate;
     }
+    public void connectSupporter() throws Exception {
+        new Thread(() -> {
+            try {
+                Server.ChatServer.main(Server.ChatServer.getI() + 5000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+        ChatClient.main(ChatServer.getI() + 5000);
+    }
+
 }

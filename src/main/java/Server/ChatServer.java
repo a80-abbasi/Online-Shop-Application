@@ -11,14 +11,16 @@ import java.util.concurrent.Executors;
 
 public class ChatServer {
 
+    private static int i = 0;
+
     private static Set<String> names = new HashSet<>();
 
     private static Set<PrintWriter> writers = new HashSet<>();
 
-    public static void main() throws Exception {
+    public static void main(int port) throws Exception {
         System.out.println("The chat server is running...");
         var pool = Executors.newFixedThreadPool(500);
-        try (var listener = new ServerSocket(59001)) {
+        try (var listener = new ServerSocket(port)) {
             while (true) {
                 pool.execute(new Handler(listener.accept()));
             }
@@ -88,5 +90,13 @@ public class ChatServer {
                 }
             }
         }
+    }
+
+    public static int getI() {
+        return i;
+    }
+
+    public static void setI(int i) {
+        ChatServer.i = i;
     }
 }

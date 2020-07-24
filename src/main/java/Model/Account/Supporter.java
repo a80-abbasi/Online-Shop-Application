@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Supporter extends Account{
     private static ArrayList<Supporter> allSupporters;
+    private boolean lineCondition = false;
 
     static {
         allSupporters = new ArrayList<>();
@@ -56,5 +57,14 @@ public class Supporter extends Account{
     public void removeUser() {
         allSupporters.remove(this);
     }
+
+    public void setLineCondition(boolean lineCondition) {
+        this.lineCondition = lineCondition;
+    }
+
+    public boolean getLineCondition() {
+        return lineCondition;
+    }
+
 }
 

@@ -1,5 +1,7 @@
 package Client;
 
+import Server.ChatServer;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -44,9 +46,9 @@ public class ChatClient {
                 JOptionPane.PLAIN_MESSAGE);
     }
 
-    private void run() throws IOException {
+    private void run(int port) throws IOException {
         try {
-            var socket = new Socket(serverAddress, 59001);
+            var socket = new Socket(serverAddress, port);
             in = new Scanner(socket.getInputStream());
             out = new PrintWriter(socket.getOutputStream(), true);
 
@@ -67,10 +69,11 @@ public class ChatClient {
         }
     }
 
-    public static void main() throws Exception {
+    public static void main(int port) throws Exception {
+        Server.ChatServer.setI(ChatServer.getI() + 1);
         var client = new ChatClient("localhost");
         client.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         client.frame.setVisible(true);
-        client.run();
+        client.run(port);
     }
 }

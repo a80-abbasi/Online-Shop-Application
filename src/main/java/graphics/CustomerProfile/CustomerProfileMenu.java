@@ -274,4 +274,7 @@ public class CustomerProfileMenu {
         }
         return table;
     }
+
+    public void connectSupporters(MouseEvent mouseEvent) {
+    }
 }
