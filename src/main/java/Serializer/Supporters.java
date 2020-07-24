@@ -1,7 +1,6 @@
 package Serializer;
 
 import Model.Account.Supporter;
-import Model.Account.Customer;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlElement;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Supporters {
-    private final static String pathName = "src\\main\\resources\\supporter.xml";
+    private final static String pathName = "src\\main\\resources\\supporters.xml";
 
     @XmlElement(name = "supporter")
     private ArrayList<Supporter> allSupporters = new ArrayList<>();
