@@ -164,7 +164,6 @@ public class AddProduct {
             boolean success = false;
             if (db.hasFiles()) {
                 dropped.setText(db.getFiles().toString());
-                isSellingFile = true;
                 productImageAddress = db.getFiles().toString();
                 productImageAddress = productImageAddress.substring(1, productImageAddress.length() - 1);
                 success = true;
