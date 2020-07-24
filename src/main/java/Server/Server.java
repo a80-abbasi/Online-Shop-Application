@@ -183,6 +183,7 @@ public class Server extends Application {
                         }
                         else if (content.equals("logout")){
                             account.setToken(null);
+                            account.setOnline(false);
                         }
                         else if (content.startsWith("add customer to auction: ")){
                             double amount = Double.parseDouble(splitContent[3]);
@@ -204,42 +205,16 @@ public class Server extends Application {
                             sendCustomerDiscounts(dataOutputStream, account);
                         }
                         else if (content.startsWith("charge wallet: ")){
-                            int money = Integer.parseInt(content.substring("charge wallet: ".length()));
-                            String outPut = "";
-                            if (account instanceof Customer) {
-                                Customer customer = (Customer) account;
-                                try {
-                                    outPut = BankConnection.move(customer.getUsername(), customer.getPassword(), money, customer.getBankAccountID(), Admin.getStoreBankID());
-                                } catch (Exception e) {
-                                    outPut = e.getMessage();
-                                }
-                            }
-                            else if (account instanceof Seller) {
-                                Seller seller = (Seller) account;
-                                try {
-                                    outPut = BankConnection.move(seller.getUsername(), seller.getPassword(), money, seller.getBankAccountID(), Admin.getStoreBankID());
-                                } catch (Exception e) {
-                                    outPut = e.getMessage();
-                                }
-                            }
-                            dataOutputStream.writeUTF(outPut);
-                            dataOutputStream.flush();
+                            chargeWallet(dataOutputStream, account, content);
                         }
                         else if (content.startsWith("withdraw from wallet: ")) {//todo:
-                            int withdrawalMoney = Integer.parseInt(content.substring(("withdraw from wallet: ").length()));
-                            Seller seller = (Seller) account;
-                            String output = "";
-                            try {
-                                output = BankConnection.move(seller.getUsername(), seller.getPassword(), withdrawalMoney,
-                                        Admin.getStoreBankID(), seller.getBankAccountID());
-                            } catch (Exception e) {
-                                output = e.getMessage();
-                            }
-                            dataOutputStream.writeUTF(output);
-                            dataOutputStream.flush();
+                            withdrawFromWallet(dataOutputStream, account, content);
                         }
                         else if (message.startsWith("get account balance")) {
                             sendAccountBalance(dataOutputStream, account);
+                        }
+                        else if (message.startsWith("get bank account balance")) {
+                            sendBankAccountBalance(dataOutputStream, account);
                         }
                     }
                     if (content.equals("get logged in account")){
@@ -435,6 +410,7 @@ public class Server extends Application {
                     Account account = Account.getAccountByUsername(message.substring("login: ".length()));
                     String token = generateToken();
                     account.setToken(token);
+                    account.setOnline(true);
                     dataOutputStream.writeUTF(token);
                     dataOutputStream.flush();
                 }
@@ -471,6 +447,84 @@ public class Server extends Application {
         }
     }
 
+    private static void sendBankAccountBalance(DataOutputStream dataOutputStream, Account account) {
+        String output = "";
+        try {
+            output = BankConnection.getBalance(account.getUsername(), account.getPassword());
+        } catch (Exception e) {
+            output = e.getMessage();
+        }
+        try {
+            dataOutputStream.writeUTF(output);
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendAccountBalance(DataOutputStream dataOutputStream, Account account) {
+        String output = "";
+        try {
+            if (account instanceof Customer) {
+                Customer customer = (Customer) account;
+                output = String.valueOf(customer.getBalance());
+            }
+            else if (account instanceof Seller) {
+                Seller seller = (Seller) account;
+                output = String.valueOf(seller.getBalance());
+            }
+        } catch (Exception e) {
+            output = e.getMessage();
+        }
+        try {
+            dataOutputStream.writeUTF(output);
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void chargeWallet(DataOutputStream dataOutputStream, Account account, String content) throws IOException {
+        int money = Integer.parseInt(content.substring("charge wallet: ".length()));
+        String outPut = "";
+        if (account instanceof Customer) {
+            Customer customer = (Customer) account;
+            try {
+                outPut = BankConnection.move(customer.getUsername(), customer.getPassword(), money, customer.getBankAccountID(), Admin.getStoreBankID());
+                customer.setBalance(customer.getBalance() + money);
+            } catch (Exception e) {
+                outPut = e.getMessage();
+            }
+        }
+        else if (account instanceof Seller) {
+            Seller seller = (Seller) account;
+            try {
+                outPut = BankConnection.move(seller.getUsername(), seller.getPassword(), money, seller.getBankAccountID(), Admin.getStoreBankID());
+                seller.setBalance(seller.getBalance() + money);
+            } catch (Exception e) {
+                outPut = e.getMessage();
+            }
+        }
+        dataOutputStream.writeUTF(outPut);
+        dataOutputStream.flush();
+    }
+
+    private static void withdrawFromWallet(DataOutputStream dataOutputStream, Account account, String content) throws IOException {
+        int withdrawalMoney = Integer.parseInt(content.substring(("withdraw from wallet: ").length()));
+        Seller seller = (Seller) account;
+        String output = "";
+        try {
+            Admin mainAdmin = Admin.getAllAdmins().get(0);//todo:!!!
+            output = BankConnection.move(mainAdmin.getUsername(), mainAdmin.getPassword(), withdrawalMoney,
+                    Admin.getStoreBankID(), seller.getBankAccountID());
+            seller.setBalance(seller.getBalance() - withdrawalMoney);
+        } catch (Exception e) {
+            output = e.getMessage();
+        }
+        dataOutputStream.writeUTF(output);
+        dataOutputStream.flush();
+    }
+
     private static void removeCategory(String categoryName) {
         Category category = Category.getCategoryByName(categoryName);
         Category.removeCategory(category);
@@ -494,21 +548,6 @@ public class Server extends Application {
         Category category = Category.getCategoryByName(categoryName);
         try {
             dataOutputStream.writeUTF(gson.toJson(category));
-            dataOutputStream.flush();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private static void sendAccountBalance(DataOutputStream dataOutputStream, Account account) {
-        String output = "";
-        try {
-            output = BankConnection.getBalance(account.getUsername(), account.getPassword());
-        } catch (Exception e) {
-            output = e.getMessage();
-        }
-        try {
-            dataOutputStream.writeUTF(output);
             dataOutputStream.flush();
         } catch (IOException e) {
             System.out.println(e.getMessage());

@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
 
 import java.util.*;
 
@@ -68,7 +69,10 @@ public class AdminProfileManager extends ProfileManager {
         TableColumn<String, Account> column5 = new TableColumn<>("Phone Number");
         column5.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
-        allUsers.getColumns().addAll(column1, column2, column3, column4, column5);
+        TableColumn<String, Account> column6 = new TableColumn<>("Status");
+        column6.setCellValueFactory(new PropertyValueFactory<>("online"));
+
+        allUsers.getColumns().addAll(column1, column2, column3, column4, column5, column6);
 
         Connection.sendToServer("getCustomers");
         ArrayList<Customer> allCustomers = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Customer>>(){}.getType());
@@ -102,6 +106,7 @@ public class AdminProfileManager extends ProfileManager {
             allUsers.getItems().add(account);
         }
         allUsers.setPlaceholder(new Label("No Data to display"));
+        allUsers.setPrefSize(600, 600);
         return allUsers;
     }
 

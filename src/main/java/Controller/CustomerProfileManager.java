@@ -24,6 +24,32 @@ public class CustomerProfileManager extends ProfileManager{
         this.customer = customer;
     }
 
+    public double getBalance() {
+        Connection.sendToServerWithToken("get account balance");
+        double customerBalance = Double.parseDouble(Connection.receiveFromServer());
+        return customerBalance;
+    }
+
+    private double getBankAccountBalance() {
+        Connection.sendToServerWithToken("get bank account balance");
+        double customerBankAccountBalance = Double.parseDouble(Connection.receiveFromServer());
+        return customerBankAccountBalance;
+    }
+
+    public void chargeWallet(int chargeWalletAmount) throws Exception{
+        double bankAccountBalance = getBankAccountBalance();
+        double previousBalance = getBalance();
+        int minWalletBalance = AdminProfileManager.getMinWalletBalance();
+        if (bankAccountBalance < chargeWalletAmount) {
+            throw new Exception("You don't have enough money");
+        }
+        else if ((previousBalance + chargeWalletAmount) < minWalletBalance) {
+            throw new Exception("You must have at least " + minWalletBalance + " in your wallet.");
+        }
+        else {
+            Connection.sendToServerWithToken("charge wallet: " + chargeWalletAmount);
+        }
+    }
 
     public String checkForDiscountGift(){
         final int minimumAmountOfMoney = 1000;
@@ -83,15 +109,42 @@ public class CustomerProfileManager extends ProfileManager{
         return customerDiscounts;
     }
 
-    public boolean isInputValidForBuyLogID(String ID) {
-        for (BuyLog buyLog : customer.getBuyLogs()) {//todo:if buy log be null we will give wrong input;
-            if (buyLog.getID().equals(ID)){
-                return true;
+    public void connectSupporter(int supporterID) throws Exception {
+        new Thread(() -> {
+            try {
+                Server.ChatServer.main(Server.ChatServer.getI() + supporterID);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }
-        return false;
+        }).start();
+        ChatClient.main(ChatServer.getI() + supporterID);
     }
 
+    public TableView getAllSupportersTable(TableView allSupportersTable) {
+        TableColumn<String, Supporter> column1 = new TableColumn<>("Supporter ID");
+        column1.setCellValueFactory(new PropertyValueFactory<>("SupporterID"));
+
+        TableColumn<String, Supporter> column2 = new TableColumn<>("Supporter Line");
+        column2.setCellValueFactory(new PropertyValueFactory<>("lineCondition"));
+
+        allSupportersTable.getColumns().addAll(column1, column2);
+
+        Connection.sendToServer("getSupporters");
+        ArrayList<Supporter> allSupporters = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Supporter>>(){}.getType());
+
+        for (Supporter supporter : allSupporters) {
+            allSupportersTable.getItems().add(supporter);
+        }
+        allSupportersTable.setPlaceholder(new Label("No Data to display"));
+        return allSupportersTable;
+    }
+
+
+
+
+
+
+    //phase1
     public int getNumberOfProductInCart(Product product, Customer customer) {
         for (Product product1 : customer.getCart().keySet()) {
             if (product1.getProductId().equals(product.getProductId())) {
@@ -273,6 +326,16 @@ public class CustomerProfileManager extends ProfileManager{
         }
         return iDAndDate;
     }
+
+    public boolean isInputValidForBuyLogID(String ID) {
+        for (BuyLog buyLog : customer.getBuyLogs()) {//todo:if buy log be null we will give wrong input;
+            if (buyLog.getID().equals(ID)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void connectSupporter(int supporterID) throws Exception {
         new Thread(() -> {
             try {
@@ -302,5 +365,4 @@ public class CustomerProfileManager extends ProfileManager{
         allSupportersTable.setPlaceholder(new Label("No Data to display"));
         return allSupportersTable;
     }
-
 }
