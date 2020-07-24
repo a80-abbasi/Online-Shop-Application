@@ -313,8 +313,8 @@ public class CustomerProfileManager extends ProfileManager{
     }
 
     public TableView getAllSupportersTable(TableView allSupportersTable) {
-        TableColumn<String, Supporter> column1 = new TableColumn<>("Supporter ID");
-        column1.setCellValueFactory(new PropertyValueFactory<>("SupporterID"));
+        TableColumn<String, Supporter> column1 = new TableColumn<>("Supporter Name");
+        column1.setCellValueFactory(new PropertyValueFactory<>("username"));
 
         TableColumn<String, Supporter> column2 = new TableColumn<>("Supporter Line");
         column2.setCellValueFactory(new PropertyValueFactory<>("lineCondition"));
