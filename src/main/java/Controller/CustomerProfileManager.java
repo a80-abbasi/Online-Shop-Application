@@ -1,8 +1,10 @@
 package Controller;
 
+import Client.ChatClient;
 import Model.Account.*;
 import Model.Product.Product;
 import Model.Product.Score;
+import Server.ChatServer;
 import View.Menu;
 
 import java.util.*;
@@ -253,6 +255,17 @@ public class CustomerProfileManager extends ProfileManager{
         String sellLogID = seller.getUsername() + seller.getSellLogs().size();
         SellLog sellLog = new SellLog(sellLogID, new Date(), received, offAmount, product, number, buyerName);
         seller.getSellLogs().add(sellLog);
+    }
+
+    public void connectSupporter() throws Exception {
+        new Thread(() -> {
+            try {
+                Server.ChatServer.main(Server.ChatServer.getI() + 5000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+        ChatClient.main(ChatServer.getI() + 5000);
     }
 
 }
