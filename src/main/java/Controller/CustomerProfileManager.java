@@ -276,12 +276,12 @@ public class CustomerProfileManager extends ProfileManager{
     public void connectSupporter(int supporterID) throws Exception {
         new Thread(() -> {
             try {
-                Server.ChatServer.main(Server.ChatServer.getI() + supporterID);
+                Server.ChatServer.main(Server.ChatServer.getI() + supporterID + 1000);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }).start();
-        ChatClient.main(ChatServer.getI() + supporterID);
+        ChatClient.main(ChatServer.getI() + supporterID + 1000);
     }
 
     public TableView getAllSupportersTable(TableView allSupportersTable) {
