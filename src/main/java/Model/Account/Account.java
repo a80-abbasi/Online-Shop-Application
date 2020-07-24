@@ -38,6 +38,15 @@ public abstract class Account {
         return online;
     }
 
+    public String getOnline() {
+        if (online) {
+            return "Online";
+        }
+        else {
+            return "Offline";
+        }
+    }
+
     public void setOnline(boolean online) {
         this.online = online;
     }
