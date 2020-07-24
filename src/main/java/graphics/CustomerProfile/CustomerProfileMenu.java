@@ -137,6 +137,7 @@ public class CustomerProfileMenu {
         productSellerCol.setMinWidth(200);
         productSellerCol.setCellValueFactory(new PropertyValueFactory<>("productSeller"));
 
+
         table.getColumns().addAll(productNameCol, productNumberCol, productSellerCol);
         //table.getItems().add(new Data("a", "a", "a"));
 
@@ -147,7 +148,7 @@ public class CustomerProfileMenu {
                 ArrayList<Product> products = new ArrayList<>(buyLog.getBoughtProducts().keySet());
                 table.getItems().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(), products.get(i).getSeller().getName()));
             }
-            final Label label = new Label("Date" + buyLog.getDate() + " " + "Price:" + buyLog.getPaidAmount()+"$");
+            final Label label = new Label("Date" + buyLog.getDate() + " " + "Price:" + buyLog.getPaidAmount()+"$" +"\n"+ buyLog.getAddress());
             label.setFont(new Font("Arial", 20));
             Stage stage = new Stage();
 
@@ -265,5 +266,8 @@ public class CustomerProfileMenu {
         } catch (NullPointerException e) {
             AlertBox.showMessage("null exception", "There is no BuyLog");
         }
+    }
+
+    public void connectSupporters(MouseEvent mouseEvent) {
     }
 }
