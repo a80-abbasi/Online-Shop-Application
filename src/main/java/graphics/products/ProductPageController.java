@@ -8,6 +8,7 @@ import Model.Account.Customer;
 import Model.Product.Comment;
 import Model.Product.Product;
 import Model.Product.Score;
+import Server.ChatServer;
 import com.google.gson.Gson;
 import graphics.App;
 import graphics.LoginAndRegister.LoginMenu;
@@ -153,7 +154,11 @@ public class ProductPageController {
         if (Objects.equals(Connection.receiveFromServer(), "yes")) {
             shadowOnMouseHover(chatImage);
             chatImage.setOnMouseClicked(event -> {
-                //todo: open auction chat
+                try {
+                    ChatServer.main(10000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             });
         }
         else {

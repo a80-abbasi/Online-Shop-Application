@@ -56,6 +56,13 @@ public class Server extends Application {
     }
 
     public static void main(String[] args) {
+        new Thread(() -> {
+            try {
+                ChatServer.main(10000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
         Main.deserializeXML();
         Thread thread = new Thread(Server::run);
         thread.setPriority(Thread.MAX_PRIORITY);
