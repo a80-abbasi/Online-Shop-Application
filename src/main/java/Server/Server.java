@@ -190,6 +190,12 @@ public class Server extends Application {
                             product.setInAction(true);
                             product.setEndOfAction(date);
                         }
+                        else if (content.startsWith("get customer buyLogs: ")) {
+                            sendCustomerBuyLogs(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("get customer discounts: ")) {
+                            sendCustomerDiscounts(dataOutputStream, account);
+                        }
                     }
                     if (content.equals("get logged in account")){
                         sendAccountInfo(dataOutputStream, account);
@@ -365,6 +371,9 @@ public class Server extends Application {
                 else if (message.startsWith("remove discount: ")) {
                     removeDiscount(message.substring(("remove discount: ").length()));
                 }
+                else if (message.startsWith("get buyLog: ")) {
+                    sendBuyLog(dataOutputStream, message.substring(("get buyLog: ").length()));
+                }
                 else if (message.startsWith("login: ")){
                     Account account = Account.getAccountByUsername(message.substring("login: ".length()));
                     String token = generateToken();
@@ -381,6 +390,36 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void sendBuyLog(DataOutputStream dataOutputStream, String buyLogID) {
+        BuyLog buyLog = BuyLog.getBuyLogByID(buyLogID);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(buyLog));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendCustomerBuyLogs(DataOutputStream dataOutputStream, Account account) {
+        Customer customer = Customer.getCustomerById(account.getUsername());
+        try {
+            dataOutputStream.writeUTF(gson.toJson(customer.getBuyLogs()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendCustomerDiscounts(DataOutputStream dataOutputStream, Account account) {
+        Customer customer = Customer.getCustomerById(account.getUsername());
+        try {
+            dataOutputStream.writeUTF(gson.toJson(customer.getAllDiscountCodesForCustomer()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

@@ -34,7 +34,7 @@ public class Customer extends Account {
         cart = new HashMap<>();
         buyLogs = new ArrayList<>();
         usedDiscounts = new HashMap<>();
-        this.balance = Admin.getMinBankBalance();
+        this.balance = 1500;
         createBankAccount();
     }
 
@@ -45,8 +45,8 @@ public class Customer extends Account {
     private void createBankAccount() {
         bankAccountID = BankConnection.createAccount(name, lastName, username, password);
         try {
-            BankConnection.deposit(username, password, Admin.getMinBankBalance(), bankAccountID);
-            balance = balance - Admin.getMinBankBalance();
+            BankConnection.deposit(username, password, 1000, bankAccountID);
+            balance = balance - 1000;
         } catch (Exception e) {
             e.printStackTrace();
         }

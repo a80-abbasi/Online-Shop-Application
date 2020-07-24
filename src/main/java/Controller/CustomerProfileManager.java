@@ -1,9 +1,12 @@
 package Controller;
 
+import Client.Connection;
 import Model.Account.*;
 import Model.Product.Product;
 import Model.Product.Score;
 import View.Menu;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.*;
 
@@ -52,6 +55,27 @@ public class CustomerProfileManager extends ProfileManager{
         return output;
     }
 
+    public BuyLog getBuyLogByID(String orderID) throws NullPointerException{
+        Connection.sendToServer("get buyLog: " + orderID);
+        BuyLog buyLog = new Gson().fromJson(Connection.receiveFromServer(), BuyLog.class);
+        if (buyLog == null) {
+            throw new NullPointerException();
+        }
+        return buyLog;
+    }
+
+    public ArrayList<BuyLog> getBuyLogs() {
+        Connection.sendToServerWithToken("get customer buyLogs: ");
+        ArrayList<BuyLog> customerBuyLogs = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<BuyLog>>(){}.getType());
+        return customerBuyLogs;
+    }
+
+    public ArrayList<Discount> getAllDiscountCodesForCustomer() {
+        Connection.sendToServerWithToken("get customer discounts: ");
+        ArrayList<Discount> customerDiscounts = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Discount>>(){}.getType());
+        return customerDiscounts;
+    }
+
     public boolean isInputValidForBuyLogID(String ID) {
         for (BuyLog buyLog : customer.getBuyLogs()) {//todo:if buy log be null we will give wrong input;
             if (buyLog.getID().equals(ID)){
@@ -70,14 +94,6 @@ public class CustomerProfileManager extends ProfileManager{
         return 0;
     }
 
-    public HashMap<String, Date> showOrderIDAndDate () {
-        HashMap<String, Date> iDAndDate = new HashMap<>();
-        for (BuyLog buyLog : customer.getBuyLogs()) {
-            iDAndDate.put(buyLog.getID(),buyLog.getDate());
-        }
-        return iDAndDate;
-    }
-
     public BuyLog showOrder(String id) {
         return customer.getBuyLogByID(id);
     }
@@ -86,10 +102,6 @@ public class CustomerProfileManager extends ProfileManager{
         int intScore = Integer.parseInt(stringScore);
         Score score = new Score(customer, Product.getProductByID(id), intScore);
         Product.getProductByID(id).getAllScores().add(score);
-    }
-
-    public ArrayList<Discount> viewDiscountCodes(Account account) {
-        return null;
     }
 
     public double viewBalance() {
@@ -255,15 +267,11 @@ public class CustomerProfileManager extends ProfileManager{
         seller.getSellLogs().add(sellLog);
     }
 
-    public BuyLog getBuyLogByID(String orderID) {
-        return null;
-    }
-
-    public ArrayList<BuyLog> getBuyLogs() {
-        return null;
-    }
-
-    public ArrayList<Discount> getAllDiscountCodesForCustomer() {
-        return null;
+    public HashMap<String, Date> showOrderIDAndDate () {
+        HashMap<String, Date> iDAndDate = new HashMap<>();
+        for (BuyLog buyLog : customer.getBuyLogs()) {
+            iDAndDate.put(buyLog.getID(),buyLog.getDate());
+        }
+        return iDAndDate;
     }
 }

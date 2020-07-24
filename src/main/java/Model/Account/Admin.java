@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Admin extends Account{
     private static ArrayList<Admin> allAdmins;
 
-    private static int minBankBalance = 1000;
+    private static int minBankBalance = 10;
     private static int bankingFeePercent = 5;
 
     static {
