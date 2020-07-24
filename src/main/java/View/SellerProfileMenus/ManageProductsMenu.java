@@ -97,7 +97,7 @@ public class ManageProductsMenu extends Menu {
                     loginAndRegisterManager.logoutUser();
                 } else {
                     if (SellerProfileManager.isProductIdFormatValid(input)) {
-                        sellerProfileManager.removeProduct(input);
+                        sellerProfileManager.removeProductRequest(input);
                         System.out.println("Your product removed successfully");
                         parentMenu.execute();
                     } else {

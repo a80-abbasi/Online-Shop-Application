@@ -84,7 +84,37 @@ public class Server extends Application {
                     String[] splitContent = content.split("\\s+");
 
                     if (account != null){
-                        if (content.startsWith("add to cart: ")){
+                        if (content.startsWith("get seller products: ")) {
+                            sendSellerProducts(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("get seller sellLogs: ")) {
+                            sendSellerSellLogs(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("get company name: ")) {
+                            sendSellerCompanyName(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("get company phone number: ")) {
+                            sendSellerCompanyPhoneNumber(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("get company address: ")) {
+                            sendSellerCompanyAddress(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("get company open year: ")) {
+                            sendSellerCompanyOpenYear(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("edit company name: ")) {
+                            editSellerCompanyName(account, content.substring(("edit company name: ").length()));
+                        }
+                        else if (content.startsWith("edit company phone number: ")) {
+                            editSellerCompanyPhoneNumber(account, content.substring(("edit company phone number: ").length()));
+                        }
+                        else if (content.startsWith("edit company address: ")) {
+                            editSellerCompanyAddress(account, content.substring(("edit company address: ").length()));
+                        }
+                        else if (content.startsWith("edit company open year: ")) {
+                            editSellerCompanyOpenYear(account, content.substring(("edit company open year: ").length()));
+                        }
+                        else if (content.startsWith("add to cart: ")){
                             Customer customer = (Customer) account;
                             Product product = Product.getProductByID(splitContent[3]);
                             customer.addToCart(product, Integer.parseInt(splitContent[4]));
@@ -131,6 +161,16 @@ public class Server extends Application {
                     if (content.equals("get logged in account")){
                         sendAccountInfo(dataOutputStream, account);
                     }
+                    else if (content.startsWith("can go to auction chat: ")){
+                        Product product = Product.getProductByID(content.substring("can go to auction chat: ".length()));
+                        if ((account instanceof Customer) && product.getCustomersAmountForAction().containsKey(account.getUsername())){
+                            dataOutputStream.writeUTF("yes");
+                        }
+                        else {
+                            dataOutputStream.writeUTF("no");
+                        }
+                        dataOutputStream.flush();
+                    }
                 }
                 else if (message.equals("isThereAdmin")) {
                     if (Admin.getAllAdmins().isEmpty()) {
@@ -154,6 +194,9 @@ public class Server extends Application {
                 }
                 else if (message.startsWith("delete user: ")) {
                     deleteUser(message.substring(("delete user: ").length()));
+                }
+                else if (message.startsWith("get customer: ")) {
+                    sendCustomer(dataOutputStream, message.substring(("get customer: ").length()));
                 }
                 else if (message.equals("getAdmins")) {
                     sendAllAdmins(dataOutputStream);
@@ -206,6 +249,21 @@ public class Server extends Application {
                 else if (message.startsWith("get removeProductRequest: ")) {
                     sendRemoveProductRequest(dataOutputStream, message.substring(("get removeProductRequest: ").length()));
                 }
+                else if (message.startsWith("add product request: ")) {
+                    addProductRequest(message.substring(("add product request: ").length()));
+                }
+                else if (message.startsWith("edit product request: ")) {
+                    editProductRequest(message.substring(("edit product request: ").length()));
+                }
+                else if (message.startsWith("remove product request: ")) {
+                    removeProductRequest(message.substring(("remove product request: ").length()));
+                }
+                else if (message.startsWith("add off request: ")) {
+                    addOffRequest(message.substring(("add off request: ").length()));
+                }
+                else if (message.startsWith("edit off request: ")) {
+                    editOffRequest(message.substring(("edit off request: ").length()));
+                }
                 else if (message.startsWith("accept request: ")) {
                     acceptRequest(message.substring(("accept request: ").length()));
                 }
@@ -225,6 +283,9 @@ public class Server extends Application {
                     dataOutputStream.writeUTF(gson.toJson(product));
                     dataOutputStream.flush();
                 }
+                else if (message.startsWith("get product buyers: ")) {
+                    sendProductBuyers(dataOutputStream, message.substring(("get product buyers: ").length()));
+                }
                 else if (message.startsWith("visit product: ")){
                     Product product = Product.getProductByID(message.substring("visit product: ".length()));
                     product.setVisitNumber(product.getVisitNumber() + 1);
@@ -235,6 +296,9 @@ public class Server extends Application {
                 }
                 else if (message.startsWith("remove product: ")) {
                     removeProduct(message.substring(("remove product: ").length()));
+                }
+                else if (message.startsWith("get off: ")) {
+                    sendOff(dataOutputStream, message.substring(("get off: ").length()));
                 }
                 else if (message.equals("getDiscounts")) {
                     sendAllDiscounts(dataOutputStream);
@@ -284,6 +348,145 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void editSellerCompanyOpenYear(Account account, String newCompanyOpenYear) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        seller.setCompanyOpenYear(newCompanyOpenYear);
+    }
+
+    private static void editSellerCompanyAddress(Account account, String newCompanyAddress) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        seller.setCompanyAddress(newCompanyAddress);
+    }
+
+    private static void editSellerCompanyPhoneNumber(Account account, String newCompanyPhoneNumber) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        seller.setPhoneNumberOfCompany(newCompanyPhoneNumber);
+    }
+
+    private static void sendSellerCompanyOpenYear(DataOutputStream dataOutputStream, Account account) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        try {
+            dataOutputStream.writeUTF(seller.getCompanyOpenYear());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendSellerCompanyAddress(DataOutputStream dataOutputStream, Account account) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        try {
+            dataOutputStream.writeUTF(seller.getCompanyAddress());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendSellerCompanyPhoneNumber(DataOutputStream dataOutputStream, Account account) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        try {
+            dataOutputStream.writeUTF(seller.getPhoneNumberOfCompany());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void editSellerCompanyName(Account account, String newCompanyName) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        seller.setNameOfCompany(newCompanyName);
+    }
+
+    private static void sendSellerCompanyName(DataOutputStream dataOutputStream, Account account) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        try {
+            dataOutputStream.writeUTF(seller.getNameOfCompany());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void editOffRequest(String editOffRequestJson) {
+        EditOffRequest editOffRequest = new Gson().fromJson(editOffRequestJson, EditOffRequest.class);
+        Request.getAllRequests().add(editOffRequest);
+        EditOffRequest.getAllEditOffRequests().add(editOffRequest);
+    }
+
+    private static void addOffRequest(String addOffRequestJson) {
+        AddOffRequest addOffRequest = new Gson().fromJson(addOffRequestJson, AddOffRequest.class);
+        Request.getAllRequests().add(addOffRequest);
+        AddOffRequest.getAllAddOffRequest().add(addOffRequest);
+    }
+
+    private static void removeProductRequest(String productID) {
+        Product product = Product.getProductByID(productID);
+        new RemoveProductRequest(product);
+    }
+
+    private static void editProductRequest(String editProductRequestJson) {
+        EditProductRequest editProductRequest = new Gson().fromJson(editProductRequestJson, EditProductRequest.class);
+        Request.getAllRequests().add(editProductRequest);
+        EditProductRequest.getAllEditProductRequests().add(editProductRequest);
+    }
+
+    private static void addProductRequest(String addProductRequestJson) {
+        AddProductRequest addProductRequest = new Gson().fromJson(addProductRequestJson, AddProductRequest.class);
+        Request.getAllRequests().add(addProductRequest);
+        AddProductRequest.getAllAddProductRequest().add(addProductRequest);
+    }
+
+    private static void sendOff(DataOutputStream dataOutputStream, String offID) {
+        Off off = Off.getOffById(offID);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(off));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendSellerSellLogs(DataOutputStream dataOutputStream, Account account) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        try {
+            dataOutputStream.writeUTF(gson.toJson(seller.getSellLogs()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendCustomer(DataOutputStream dataOutputStream, String customerID) {
+        Customer customer = Customer.getCustomerById(customerID);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(customer));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendProductBuyers(DataOutputStream dataOutputStream, String productID) {
+        Product product = Product.getProductByID(productID);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(product.getProductBuyers()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendSellerProducts(DataOutputStream dataOutputStream, Account account) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        try {
+            dataOutputStream.writeUTF(gson.toJson(seller.getProducts()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -612,6 +815,9 @@ public class Server extends Application {
             }
             else if (account instanceof Customer) {
                 dataOutputStream.writeUTF("Customer: " + gson.toJson((Customer) account));
+            }
+            else if (account instanceof Supporter) {
+                dataOutputStream.writeUTF("Supporter: " + gson.toJson((Supporter) account));
             }
             else {
                 dataOutputStream.writeUTF("Seller: " + gson.toJson((Seller) account));

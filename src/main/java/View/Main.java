@@ -35,6 +35,7 @@ public class Main{
         RemoveProductRequests.deserializeXML();
         Categories.deserializeXML();
         Sellers.deserializeXML();
+        Supporters.deserializeXML();
     }
 
     public static void serializeXML(){
@@ -50,5 +51,6 @@ public class Main{
         EditOffRequests.serializeXML();
         RegisterSellerRequests.serializeXML();
         RemoveProductRequests.serializeXML();
+        Supporters.serializeXML();
     }
 }

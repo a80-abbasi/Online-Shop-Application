@@ -58,6 +58,11 @@
                         <Image url="@../Images/profileMenu.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="chatImage" fitHeight="37.0" fitWidth="37.0" layoutX="256.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/chat.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane layoutX="15.0" layoutY="67.0" prefHeight="552.0" prefWidth="1510.0" style="-fx-border-color: #c5c5c5;">

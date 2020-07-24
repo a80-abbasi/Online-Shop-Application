@@ -9,10 +9,8 @@ import Model.Product.Product;
 import graphics.AlertBox;
 import graphics.App;
 import graphics.products.ProductPageController;
-import graphics.products.SelectProductImage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -25,7 +23,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -157,7 +154,7 @@ public class ManageProducts {
             return;
         }
         Product product = (Product) selectedProduct;
-        sellerProfileManager.removeProduct(product.getProductId());
+        sellerProfileManager.removeProductRequest(product.getProductId());
         AlertBox.showMessage("Remove Product", "Your Request In Order to remove Product With ID <" +
                 product.getProductId() + "> Was Sent To Admins Successfully");
         productsTable.getItems().remove(product);

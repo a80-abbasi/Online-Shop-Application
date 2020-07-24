@@ -1,9 +1,6 @@
 package graphics;
 
-import Model.Account.Account;
-import Model.Account.Admin;
-import Model.Account.Customer;
-import Model.Account.Seller;
+import Model.Account.*;
 import View.Main;
 import graphics.AdminProfile.AdminProfileMenu;
 import graphics.CustomerProfile.CustomerProfileMenu;
@@ -82,6 +79,14 @@ public class MainMenu {
                 CustomerProfileMenu.setParentMenu("MainMenu");
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+        else if (account instanceof Supporter) {
+            try {
+                App.setRoot("SupporterProfileMenu");
+                SupporterProfileMenu.setParentMenu("MainMenu");
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
         }
         else if (account instanceof Seller) {

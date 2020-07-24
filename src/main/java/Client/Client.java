@@ -3,7 +3,6 @@ package Client;
 import Controller.AdminProfileManager;
 import Controller.ProductsManager;
 import View.Main;
-import graphics.AlertBox;
 import graphics.App;
 import graphics.LoginAndRegister.CreateAdminAccount;
 import graphics.products.ProductPageController;
