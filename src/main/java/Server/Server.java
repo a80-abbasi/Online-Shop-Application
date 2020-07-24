@@ -191,6 +191,16 @@ public class Server extends Application {
                     if (content.equals("get logged in account")){
                         sendAccountInfo(dataOutputStream, account);
                     }
+                    else if (content.startsWith("can go to auction chat: ")){
+                        Product product = Product.getProductByID(content.substring("can go to auction chat: ".length()));
+                        if ((account instanceof Customer) && product.getCustomersAmountForAction().containsKey(account.getUsername())){
+                            dataOutputStream.writeUTF("yes");
+                        }
+                        else {
+                            dataOutputStream.writeUTF("no");
+                        }
+                        dataOutputStream.flush();
+                    }
                 }
                 else if (message.equals("isThereAdmin")) {
                     if (Admin.getAllAdmins().isEmpty()) {

@@ -36,10 +36,7 @@ import javafx.util.Duration;
 import org.controlsfx.control.Rating;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ProductPageController {
 
@@ -93,6 +90,7 @@ public class ProductPageController {
     public Label remainingLabel;
     public ImageView mainMenuButton;
     public ImageView profileImage;
+    public ImageView chatImage;
 
     public TextField titleTextField;
     public TextArea commentTextArea;
@@ -147,6 +145,20 @@ public class ProductPageController {
         setLoginButton(loginImage, "productPage");
         setMainMenuButton(mainMenuButton);
         setProfileButton(profileImage);
+        setChatButton(chatImage);
+    }
+
+    private void setChatButton(ImageView chatImage) {
+        Connection.sendToServerWithToken("can go to auction chat: " + product.getProductId());
+        if (Objects.equals(Connection.receiveFromServer(), "yes")) {
+            shadowOnMouseHover(chatImage);
+            chatImage.setOnMouseClicked(event -> {
+                //todo: open auction chat
+            });
+        }
+        else {
+            cartImage.setOpacity(0);
+        }
     }
 
     public static void setProfileButton(ImageView profileImage){
