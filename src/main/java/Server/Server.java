@@ -183,6 +183,7 @@ public class Server extends Application {
                         }
                         else if (content.equals("logout")){
                             account.setToken(null);
+                            account.setOnline(false);
                         }
                         else if (content.startsWith("add customer to auction: ")){
                             double amount = Double.parseDouble(splitContent[3]);
@@ -435,6 +436,7 @@ public class Server extends Application {
                     Account account = Account.getAccountByUsername(message.substring("login: ".length()));
                     String token = generateToken();
                     account.setToken(token);
+                    account.setOnline(true);
                     dataOutputStream.writeUTF(token);
                     dataOutputStream.flush();
                 }
