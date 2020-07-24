@@ -1,16 +1,13 @@
 package Client;
 
-import Model.Account.Account;
-import Model.Account.Admin;
-import Model.Account.Customer;
-import Model.Account.Seller;
+import Model.Account.*;
 import com.google.gson.Gson;
 
 import java.io.*;
 import java.net.Socket;
 
 public class Connection {
-    private static final int serverPort = 8080;
+    private static final int serverPort = 8000;
 
     private static String token;
     private static Socket clientSocket;
@@ -70,6 +67,9 @@ public class Connection {
         }
         else if (loggedInInfo.startsWith("Customer: ")){
             return gson.fromJson(loggedInInfo.substring("Customer: ".length()), Customer.class);
+        }
+        else if (loggedInInfo.startsWith("Supporter: ")) {
+            return gson.fromJson(loggedInInfo.substring(("Supporter: ").length()), Supporter.class);
         }
         else {
             return gson.fromJson(loggedInInfo.substring("Seller: ".length()), Seller.class);

@@ -1,5 +1,6 @@
 package Controller;
 
+import Client.Connection;
 import Model.Account.Account;
 
 public class ProfileManager {
@@ -34,27 +35,39 @@ public class ProfileManager {
     }
 
     public String getUsername() {
-        return account.getUsername();
+        Connection.sendToServerWithToken("get username: ");
+        String username = Connection.receiveFromServer();
+        return username;
     }
 
     public String getPassword() {
-        return account.getPassword();
+        Connection.sendToServerWithToken("get password: ");
+        String password = Connection.receiveFromServer();
+        return password;
     }
 
     public String getFirstName() {
-        return account.getName();
+        Connection.sendToServerWithToken("get first name: ");
+        String firstName = Connection.receiveFromServer();
+        return firstName;
     }
 
     public String getLastName() {
-        return account.getLastName();
+        Connection.sendToServerWithToken("get last name: ");
+        String lastName = Connection.receiveFromServer();
+        return lastName;
     }
 
     public String getEmail() {
-        return account.getEmail();
+        Connection.sendToServerWithToken("get email: ");
+        String email = Connection.receiveFromServer();
+        return email;
     }
 
     public String getPhoneNumber() {
-        return account.getPhoneNumber();
+        Connection.sendToServerWithToken("get phone number: ");
+        String phoneNumber = Connection.receiveFromServer();
+        return phoneNumber;
     }
 
     public void editPassword(String password) throws IllegalArgumentException{
@@ -62,13 +75,13 @@ public class ProfileManager {
             throw new IllegalArgumentException("Invalid Password.");
         }
         else {
-            this.account.setPassword(password);
+            Connection.sendToServerWithToken("edit password: " + password);
         }
     }
 
     public void editFirstName(String firstName) throws IllegalArgumentException {
         if (firstName.matches("[a-zA-Z ]+")){
-            this.account.setName(firstName);
+            Connection.sendToServerWithToken("edit first name: " + firstName);
         }
         else {
             throw new IllegalArgumentException("Invalid Name.");
@@ -77,7 +90,7 @@ public class ProfileManager {
 
     public void editLastName(String lastName) throws IllegalArgumentException {
         if (lastName.matches("[a-zA-Z ]+")){
-            this.account.setLastName(lastName);
+            Connection.sendToServerWithToken("edit last name: " + lastName);
         }
         else {
             throw new IllegalArgumentException("Invalid Name.");
@@ -86,7 +99,7 @@ public class ProfileManager {
 
     public void editEmail(String email) throws IllegalArgumentException {
         if (email.matches(".+?@\\w+\\.\\w+")){
-            this.account.setEmail(email);
+            Connection.sendToServerWithToken("edit email: " + email);
         }
         else {
             throw new IllegalArgumentException("Invalid Email.");
@@ -95,7 +108,7 @@ public class ProfileManager {
 
     public void editPhoneNumber(String phoneNumber) throws IllegalArgumentException {
         if (phoneNumber.matches("\\d+")){
-            this.account.setPhoneNumber(phoneNumber);
+            Connection.sendToServerWithToken("edit phone number: " + phoneNumber);
         }
         else {
             throw new IllegalArgumentException("Invalid Phone Number.");

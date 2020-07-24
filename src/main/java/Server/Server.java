@@ -84,7 +84,37 @@ public class Server extends Application {
                     String[] splitContent = content.split("\\s+");
 
                     if (account != null){
-                        if (content.startsWith("get seller products: ")) {
+                        if (content.startsWith("get password: ")) {
+                            sendAccountPassword(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("edit password: ")) {
+                            editAccountPassword(account, content.substring(("edit password: ").length()));
+                        }
+                        else if (content.startsWith("get first name: ")) {
+                            sendAccountFirstName(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("edit first name: ")) {
+                            editAccountFirstName(account, content.substring(("edit first name: ").length()));
+                        }
+                        else if (content.startsWith("get last name: ")) {
+                            sendAccountLastName(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("edit last name: ")) {
+                            editAccountLastName(account, content.substring(("edit last name: ").length()));
+                        }
+                        else if (content.startsWith("get email: ")) {
+                            sendAccountEmail(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("edit email")) {
+                            editAccountEmail(account, content.substring(("edit email").length()));
+                        }
+                        else if (content.startsWith("get phone number: ")) {
+                            sendAccountPhoneNumber(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("edit phone number: ")) {
+                            editAccountPhoneNumber(account, content.substring(("edit phone number: ").length()));
+                        }
+                        else if (content.startsWith("get seller products: ")) {
                             sendSellerProducts(dataOutputStream, account);
                         }
                         else if (content.startsWith("get seller sellLogs: ")) {
@@ -338,6 +368,71 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void editAccountPhoneNumber(Account account, String newPhoneNumber) {
+        account.setPhoneNumber(newPhoneNumber);
+    }
+
+    private static void sendAccountPhoneNumber(DataOutputStream dataOutputStream, Account account) {
+        try {
+            dataOutputStream.writeUTF(account.getPhoneNumber());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void editAccountEmail(Account account, String newEmail) {
+        account.setEmail(newEmail);
+    }
+
+    private static void sendAccountEmail(DataOutputStream dataOutputStream, Account account) {
+        try {
+            dataOutputStream.writeUTF(account.getEmail());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void editAccountLastName(Account account, String newLastName) {
+        account.setLastName(newLastName);
+    }
+
+    private static void sendAccountLastName(DataOutputStream dataOutputStream, Account account) {
+        try {
+            dataOutputStream.writeUTF(account.getLastName());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void editAccountFirstName(Account account, String newFirstName) {
+        account.setName(newFirstName);
+    }
+
+    private static void sendAccountFirstName(DataOutputStream dataOutputStream, Account account) {
+        try {
+            dataOutputStream.writeUTF(account.getName());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void editAccountPassword(Account account, String newPassword) {
+        account.setPassword(newPassword);
+    }
+
+    private static void sendAccountPassword(DataOutputStream dataOutputStream, Account account) {
+        try {
+            dataOutputStream.writeUTF(account.getUsername());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
