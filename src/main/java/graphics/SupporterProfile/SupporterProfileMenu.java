@@ -1,8 +1,11 @@
-package graphics;
+package graphics.SupporterProfile;
 
 import Controller.ProfileManager;
+import Controller.SupporterProfileManager;
 import Model.Account.Account;
 import Model.Account.Supporter;
+import graphics.AlertBox;
+import graphics.App;
 import graphics.products.ProductPageController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -24,7 +27,10 @@ public class SupporterProfileMenu {
 
     private ProfileManager profileManager;
 
+    private SupporterProfileManager supporterProfileManager;
+
     private static String parentMenu;
+
 
     public static void setParentMenu(String parentMenu) {
         SupporterProfileMenu.parentMenu = parentMenu;
@@ -89,6 +95,7 @@ public class SupporterProfileMenu {
 
     private void changePhoneNumber() {
         String phoneNumber = phoneNumberField.getText();
+
         try {
             profileManager.editPhoneNumber(phoneNumber);
         } catch (IllegalArgumentException e) {
@@ -97,7 +104,10 @@ public class SupporterProfileMenu {
     }
 
     public void ReadyForSupporting(MouseEvent mouseEvent) throws Exception {
-        Server.ChatServer.main();
-        Client.ChatClient.main();
+        supporterProfileManager.supporter.setLineCondition(true);
+    }
+
+    public void stopSupporting(MouseEvent mouseEvent) {
+        supporterProfileManager.supporter.setLineCondition(false);
     }
 }

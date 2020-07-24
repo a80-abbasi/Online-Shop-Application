@@ -91,4 +91,8 @@ public class BuyLog extends Log {
                 ", boughtProducts=" + boughtProducts +
                 '}';
     }
+
+    public String getAddress() {
+        return address;
+    }
 }
