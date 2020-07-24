@@ -419,15 +419,13 @@ public class AdminProfileManager extends ProfileManager {
         return category;
     }
 
-    public Category addAndGetCategory(String categoryName, ArrayList<String> specialFeatures) throws Exception {
+    public void addCategory(String categoryName, ArrayList<String> specialFeatures) throws Exception {
         Category category = getCategoryByName(categoryName);
         if (category == null) {
             if (specialFeatures.isEmpty()) {
                 throw new Exception("Special Features Field is Empty");
             } else {
-                Connection.sendToServer("add category: ," + categoryName + "," + new Gson().toJson(specialFeatures));
-                category = new Gson().fromJson(Connection.receiveFromServer(), Category.class);
-                return category;
+                Connection.sendToServer("add category: ," + categoryName + "," + (new Gson().toJson(specialFeatures)) + ",");
             }
         } else {
             throw new Exception("There is another Category with this name");

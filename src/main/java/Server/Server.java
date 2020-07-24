@@ -361,7 +361,7 @@ public class Server extends Application {
                     sendOff(dataOutputStream, message.substring(("get off: ").length()));
                 }
                 else if (message.startsWith("add category: ")) {
-                    addCategoryAndSend(dataOutputStream, message);
+                    addCategory(message);
                 }
                 else if (message.startsWith("get category: ")) {
                     sendCategory(dataOutputStream, message.substring(("get category: ").length()));
@@ -451,16 +451,14 @@ public class Server extends Application {
         }
     }
 
-    private static void addCategoryAndSend(DataOutputStream dataOutputStream, String message) {
+    private static void addCategory(String message) {
         String[] splitMessage = message.split(",");
         String categoryName = splitMessage[1];
-        ArrayList<String> specialFeatures = new Gson().fromJson(splitMessage[2], new TypeToken<ArrayList<String>>(){}.getType());
-        Category category = new Category(categoryName);
-        category.setSpecialFeatures(specialFeatures);
         try {
-            dataOutputStream.writeUTF(gson.toJson(category));
-            dataOutputStream.flush();
-        } catch (IOException e) {
+            ArrayList<String> specialFeatures = gson.fromJson(splitMessage[2], new TypeToken<ArrayList<String>>(){}.getType());
+            Category category = new Category(categoryName);
+            category.setSpecialFeatures(specialFeatures);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

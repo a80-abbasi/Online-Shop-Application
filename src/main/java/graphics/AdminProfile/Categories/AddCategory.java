@@ -3,7 +3,6 @@ package graphics.AdminProfile.Categories;
 import Controller.AdminProfileManager;
 import Model.Account.Account;
 import Model.Account.Admin;
-import Model.Product.Category;
 import graphics.AlertBox;
 import graphics.App;
 import graphics.products.ProductPageController;
@@ -22,7 +21,6 @@ public class AddCategory {
     public ListView<String> specialFeaturesList;
     public Button confirmButton;
 
-    private static Category category;
     public ImageView backImage;
     public ImageView mainMenuImage;
 
@@ -35,10 +33,8 @@ public class AddCategory {
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
         specialFeatures = new ArrayList<>();
-        if (category == null) {
-            specialFeaturesList.getItems().clear();
-            categoryNameField.setText("");
-        }
+        specialFeaturesList.getItems().clear();
+        categoryNameField.setText("");
 
         App.setBackButton(backImage, parentMenu);
         ProductPageController.setMainMenuButton(mainMenuImage);
@@ -55,24 +51,17 @@ public class AddCategory {
     }
 
     public void confirm(MouseEvent mouseEvent) {
-        if (category == null) {
-            String categoryName = categoryNameField.getText();
+        String categoryName = categoryNameField.getText();
+        try {
+            adminProfileManager.addCategory(categoryName, specialFeatures);
+            AlertBox.showMessage("Add Category", categoryName + " Category Added Successfully");
             try {
-                category = adminProfileManager.addAndGetCategory(categoryName, specialFeatures);
-                AlertBox.showMessage("Add Category", categoryName + " Category Added Successfully");
-                category = null;
-                try {
-                    App.setRoot(parentMenu);
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                }
-            } catch (Exception e) {
-                AlertBox.showMessage("Failed To Add Category", e.getMessage());
+                App.setRoot(parentMenu);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
+        } catch (Exception e) {
+            AlertBox.showMessage("Failed To Add Category", e.getMessage());
         }
-    }
-
-    public static void setCategory(Category category) {
-        AddCategory.category = category;
     }
 }
