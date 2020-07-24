@@ -90,6 +90,30 @@ public class Server extends Application {
                         else if (content.startsWith("get seller sellLogs: ")) {
                             sendSellerSellLogs(dataOutputStream, account);
                         }
+                        else if (content.startsWith("get company name: ")) {
+                            sendSellerCompanyName(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("get company phone number: ")) {
+                            sendSellerCompanyPhoneNumber(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("get company address: ")) {
+                            sendSellerCompanyAddress(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("get company open year: ")) {
+                            sendSellerCompanyOpenYear(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("edit company name: ")) {
+                            editSellerCompanyName(account, content.substring(("edit company name: ").length()));
+                        }
+                        else if (content.startsWith("edit company phone number: ")) {
+                            editSellerCompanyPhoneNumber(account, content.substring(("edit company phone number: ").length()));
+                        }
+                        else if (content.startsWith("edit company address: ")) {
+                            editSellerCompanyAddress(account, content.substring(("edit company address: ").length()));
+                        }
+                        else if (content.startsWith("edit company open year: ")) {
+                            editSellerCompanyOpenYear(account, content.substring(("edit company open year: ").length()));
+                        }
                         else if (content.startsWith("add to cart: ")){
                             Customer customer = (Customer) account;
                             Product product = Product.getProductByID(splitContent[3]);
@@ -324,6 +348,66 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void editSellerCompanyOpenYear(Account account, String newCompanyOpenYear) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        seller.setCompanyOpenYear(newCompanyOpenYear);
+    }
+
+    private static void editSellerCompanyAddress(Account account, String newCompanyAddress) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        seller.setCompanyAddress(newCompanyAddress);
+    }
+
+    private static void editSellerCompanyPhoneNumber(Account account, String newCompanyPhoneNumber) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        seller.setPhoneNumberOfCompany(newCompanyPhoneNumber);
+    }
+
+    private static void sendSellerCompanyOpenYear(DataOutputStream dataOutputStream, Account account) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        try {
+            dataOutputStream.writeUTF(seller.getCompanyOpenYear());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendSellerCompanyAddress(DataOutputStream dataOutputStream, Account account) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        try {
+            dataOutputStream.writeUTF(seller.getCompanyAddress());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void sendSellerCompanyPhoneNumber(DataOutputStream dataOutputStream, Account account) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        try {
+            dataOutputStream.writeUTF(seller.getPhoneNumberOfCompany());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void editSellerCompanyName(Account account, String newCompanyName) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        seller.setNameOfCompany(newCompanyName);
+    }
+
+    private static void sendSellerCompanyName(DataOutputStream dataOutputStream, Account account) {
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
+        try {
+            dataOutputStream.writeUTF(seller.getNameOfCompany());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

@@ -26,8 +26,45 @@ public class SellerProfileManager extends ProfileManager {
         this.seller = seller;
     }
 
+    public String getCompanyName() {
+        Connection.sendToServerWithToken("get company name: ");
+        String companyName = Connection.receiveFromServer();
+        return companyName;
+    }
+
     public void editCompanyName(String companyName) {
-        this.seller.setNameOfCompany(companyName);//todo: !!!
+        Connection.sendToServerWithToken("edit company name: " + companyName);
+        //this.seller.setNameOfCompany(companyName);
+    }
+
+    public String getCompanyPhoneNumber() {
+        Connection.sendToServerWithToken("get company phone number: ");
+        String companyPhoneNumber = Connection.receiveFromServer();
+        return companyPhoneNumber;
+    }
+
+    public String getCompanyOpenYear() {
+        Connection.sendToServerWithToken("get company open year: ");
+        String companyOpenYear = Connection.receiveFromServer();
+        return companyOpenYear;
+    }
+
+    public String getCompanyAddress() {
+        Connection.sendToServerWithToken("get company address: ");
+        String companyAddress = Connection.receiveFromServer();
+        return companyAddress;
+    }
+
+    public void editPhoneNumberOfCompany(String companyPhoneNumber) {
+        Connection.sendToServerWithToken("edit company phone number: " + companyPhoneNumber);
+    }
+
+    public void editCompanyAddress(String companyAddress) {
+        Connection.sendToServerWithToken("edit company address: " + companyAddress);
+    }
+
+    public void editCompanyOpenYear(String companyOpenYear) {
+        Connection.sendToServerWithToken("edit company open year: " + companyOpenYear);
     }
 
     public TableView getSellerProductsTable(TableView sellerProductsTable) {
@@ -333,10 +370,6 @@ public class SellerProfileManager extends ProfileManager {
         Connection.sendToServer("get off: " + offID);
         Off off = new Gson().fromJson(Connection.receiveFromServer(), Off.class);
         return off;
-    }
-
-    public String getCompanyName() {
-        return this.seller.getNameOfCompany();
     }
 
 
