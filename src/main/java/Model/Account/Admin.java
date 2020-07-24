@@ -6,7 +6,7 @@ public class Admin extends Account{
     private static ArrayList<Admin> allAdmins;
     private String storeBankID;
 
-    private static int minBankBalance = 10;
+    private static int minWalletBalance = 10;
     private static int bankingFeePercent = 5;
 
     static {
@@ -49,12 +49,12 @@ public class Admin extends Account{
         return allAdmins.get(0).storeBankID;
     }
 
-    public static int getMinBankBalance() {
-        return minBankBalance;
+    public static int getMinWalletBalance() {
+        return minWalletBalance;
     }
 
-    public static void setMinBankBalance(int minBankBalance) {
-        Admin.minBankBalance = minBankBalance;
+    public static void setMinWalletBalance(int minWalletBalance) {
+        Admin.minWalletBalance = minWalletBalance;
     }
 
     public static int getBankingFeePercent() {
