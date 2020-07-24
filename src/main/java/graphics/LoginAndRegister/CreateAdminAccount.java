@@ -1,5 +1,6 @@
 package graphics.LoginAndRegister;
 
+import Client.Connection;
 import Controller.LoginAndRegisterManager;
 import graphics.AlertBox;
 import graphics.App;
@@ -39,6 +40,7 @@ public class CreateAdminAccount {
             try {
                 loginAndRegisterManager.registerAdmin(username, password, firstName, lastName, email, phoneNumber);
                 AlertBox.showMessage("Admin Register", "Admin Successfully registered");
+                Connection.sendToServer("create admin account");
                 try {
                     App.setRoot(parentMenu);
                 } catch (IOException e) {

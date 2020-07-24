@@ -1,6 +1,7 @@
 package Model.Account;
 
 import Model.Product.Product;
+import Server.BankConnection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,8 @@ public class Customer extends Account {
         customerFieldsForPurchase.add("PostCode");
     }
 
+    private String bankAccountID;
+
     public Customer(String username, String password, String name, String lastName, String email, String phoneNumber, int balance) {
         super(username, password, name, lastName, email, phoneNumber);
         this.balance = balance;
@@ -32,10 +35,21 @@ public class Customer extends Account {
         buyLogs = new ArrayList<>();
         usedDiscounts = new HashMap<>();
         this.balance = 1500;
+        createBankAccount();
     }
 
     public Customer(){
         this("", "", "", "", "", "", 0);
+    }
+
+    private void createBankAccount() {
+        bankAccountID = BankConnection.createAccount(name, lastName, username, password);
+        try {
+            BankConnection.deposit(username, password, 1000, bankAccountID);
+            balance = balance - 1000;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setAllDiscountCodesForCustomer(ArrayList<Discount> allDiscountCodesForCustomer) {

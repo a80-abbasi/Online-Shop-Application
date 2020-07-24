@@ -30,6 +30,15 @@ public class BuyLog extends Log {
         this.boughtProducts = new HashMap<>();
     }
 
+    public static BuyLog getBuyLogByID(String buyLogID) {
+        for (BuyLog buyLog : allBuyLogs) {
+            if (buyLog.getID().equals(buyLogID)) {
+                return buyLog;
+            }
+        }
+        return null;
+    }
+
     public double getPaidAmount() {
         return paidAmount;
     }
