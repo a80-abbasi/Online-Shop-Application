@@ -155,7 +155,7 @@ public class ProductPageController {
             shadowOnMouseHover(chatImage);
             chatImage.setOnMouseClicked(event -> {
                 try {
-                    ChatServer.main(10000);
+                    ChatServer.main(9000);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
