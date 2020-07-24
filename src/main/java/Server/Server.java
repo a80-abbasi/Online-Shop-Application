@@ -218,6 +218,22 @@ public class Server extends Application {
                             dataOutputStream.writeUTF(outPut);
                             dataOutputStream.flush();
                         }
+                        else if (content.startsWith("withdraw from wallet: ")) {//todo:
+                            int withdrawalMoney = Integer.parseInt(content.substring(("withdraw from wallet: ").length()));
+                            Seller seller = (Seller) account;
+                            String output = "";
+                            try {
+                                output = BankConnection.move(seller.getUsername(), seller.getPassword(), withdrawalMoney,
+                                        Admin.getStoreBankID(), seller.getBankAccountID());
+                            } catch (Exception e) {
+                                output = e.getMessage();
+                            }
+                            dataOutputStream.writeUTF(output);
+                            dataOutputStream.flush();
+                        }
+                        else if (message.startsWith("get account balance")) {
+                            sendAccountBalance(dataOutputStream, account);
+                        }
                     }
                     if (content.equals("get logged in account")){
                         sendAccountInfo(dataOutputStream, account);
@@ -433,6 +449,21 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void sendAccountBalance(DataOutputStream dataOutputStream, Account account) {
+        String output = "";
+        try {
+            output = BankConnection.getBalance(account.getUsername(), account.getPassword());
+        } catch (Exception e) {
+            output = e.getMessage();
+        }
+        try {
+            dataOutputStream.writeUTF(output);
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

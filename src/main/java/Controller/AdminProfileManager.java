@@ -20,13 +20,13 @@ public class AdminProfileManager extends ProfileManager {
         super(admin);
     }
 
-    public int getMinWalletBalance() {
+    public static int getMinWalletBalance() {
         Connection.sendToServer("get min wallet balance");
         int minWalletBalance = Integer.parseInt(Connection.receiveFromServer());
         return minWalletBalance;
     }
 
-    public int getBankingFeePercent() {
+    public static int getBankingFeePercent() {
         Connection.sendToServer("get banking fee percent");
         int bankingFeePercent = Integer.parseInt(Connection.receiveFromServer());
         return bankingFeePercent;

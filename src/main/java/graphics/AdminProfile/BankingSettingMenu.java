@@ -17,8 +17,8 @@ public class BankingSettingMenu {
 
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Connection.getLoggedInAccount());
-        minWalletBalanceField.setText(String.valueOf(adminProfileManager.getMinWalletBalance()));
-        bankingFeePercentField.setText(String.valueOf(adminProfileManager.getBankingFeePercent()));
+        minWalletBalanceField.setText(String.valueOf(AdminProfileManager.getMinWalletBalance()));
+        bankingFeePercentField.setText(String.valueOf(AdminProfileManager.getBankingFeePercent()));
     }
 
     public void confirm(MouseEvent mouseEvent) {
