@@ -469,49 +469,33 @@ public class AdminProfileManager extends ProfileManager {
     }
 
     public TableView getSaleHistoryTable(TableView allRequestsTable) {
-        TableColumn<String, Request> column1 = new TableColumn<>("Date");
-        column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
+        TableColumn<String, BuyLog> column1 = new TableColumn<>("ID");
+        column1.setCellValueFactory(new PropertyValueFactory<>("ID"));
 
-        TableColumn<RequestType, Request> column2 = new TableColumn<>("");
-        column2.setCellValueFactory(new PropertyValueFactory<>("requestType"));
+        TableColumn<String, BuyLog> column2 = new TableColumn<>("Date");
+        column2.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        allRequestsTable.getColumns().addAll(column1, column2);
+        TableColumn<String, BuyLog> column3 = new TableColumn<>("Paid Amount");
+        column3.setCellValueFactory(new PropertyValueFactory<>("paidAmount"));
 
-        ArrayList<Request> allRequests = new ArrayList<>();
+        TableColumn<String, BuyLog> column4 = new TableColumn<>("Discount Amount");
+        column4.setCellValueFactory(new PropertyValueFactory<>("discountAmount"));
 
-        Connection.sendToServer("getAddOffRequests");
-        ArrayList<AddOffRequest> allAddOffRequests = new Gson().fromJson(Connection.receiveFromServer(),
-                new TypeToken<ArrayList<AddOffRequest>>(){}.getType());
-        allRequests.addAll(allAddOffRequests);
+        TableColumn<String, BuyLog> column5 = new TableColumn<>("Address");
+        column5.setCellValueFactory(new PropertyValueFactory<>("address"));
 
-        Connection.sendToServer("getAddProductRequests");
-        ArrayList<AddProductRequest> allAddProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
-                new TypeToken<ArrayList<AddProductRequest>>(){}.getType());
-        allRequests.addAll(allAddProductRequests);
+        TableColumn<String, BuyLog> column6 = new TableColumn<>("Sending Condition");
+        column6.setCellValueFactory(new PropertyValueFactory<>("sendingCondition"));
 
-        Connection.sendToServer("getEditOffRequests");
-        ArrayList<EditOffRequest> allEditOffRequests = new Gson().fromJson(Connection.receiveFromServer(),
-                new TypeToken<ArrayList<EditOffRequest>>(){}.getType());
-        allRequests.addAll(allEditOffRequests);
+        allRequestsTable.getColumns().addAll(column1, column2, column3,column4,column5,column6);
 
-        Connection.sendToServer("getEditProductRequests");
-        ArrayList<EditProductRequest> allEditProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
-                new TypeToken<ArrayList<EditOffRequest>>(){}.getType());
-        allRequests.addAll(allEditProductRequests);
+        Connection.sendToServer("getCustomers");
+        ArrayList<Customer> allCustomers = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Customer>>(){}.getType());
 
-        Connection.sendToServer("getRegisterSellerRequests");
-        ArrayList<RegisterSellerRequest> allRegisterSellerRequests = new Gson().fromJson(Connection.receiveFromServer(),
-                new TypeToken<ArrayList<RegisterSellerRequest>>(){}.getType());
-        allRequests.addAll(allRegisterSellerRequests);
-
-        Connection.sendToServer("getRemoveProductRequests");
-        ArrayList<RemoveProductRequest> allRemoveProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
-                new TypeToken<ArrayList<RemoveProductRequest>>(){}.getType());
-        allRequests.addAll(allRemoveProductRequests);
-
-        for (Request request : allRequests) {
-            allRequestsTable.getItems().add(request);
-        }
+//        ArrayList<>
+//        for (Customer customer : allCustomers) {
+//            allRequestsTable.getItems().add(request);
+//        }
         allRequestsTable.setPlaceholder(new Label("No Data to display"));
         return allRequestsTable;
     }
