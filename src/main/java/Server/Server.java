@@ -722,6 +722,9 @@ public class Server extends Application {
             else if (account instanceof Customer) {
                 dataOutputStream.writeUTF("Customer: " + gson.toJson((Customer) account));
             }
+            else if (account instanceof Supporter) {
+                dataOutputStream.writeUTF("Supporter: " + gson.toJson((Supporter) account));
+            }
             else {
                 dataOutputStream.writeUTF("Seller: " + gson.toJson((Seller) account));
             }

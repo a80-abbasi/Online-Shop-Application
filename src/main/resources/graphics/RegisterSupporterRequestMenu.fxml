@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="graphics.AdminProfile.RequestDetails.RegisterSupporterRequestMenu"
-            prefHeight="800.0" prefWidth="1550.0">
+<AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AdminProfile.RequestDetails.RegisterSupporterRequestMenu">
     <children>
         <TextField fx:id="requestIDField" editable="false" layoutX="700.0" layoutY="110.0" prefHeight="44.0" prefWidth="300.0">
             <font>
@@ -48,11 +41,6 @@
             </font>
         </TextField>
         <TextField fx:id="phoneNumberField" editable="false" layoutX="700.0" layoutY="530.0">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </TextField>
-        <TextField fx:id="companyField" editable="false" layoutX="700.0" layoutY="590.0">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>
@@ -97,22 +85,17 @@
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </Label>
-        <Label layoutX="540.0" layoutY="595.0" text="Company">
-            <font>
-                <Font name="Times New Roman" size="24.0" />
-            </font>
-        </Label>
         <Label layoutX="681.0" layoutY="33.0" text="Register Seller Request">
             <font>
                 <Font name="Times New Roman" size="36.0" />
             </font>
         </Label>
-        <Button layoutX="700.0" layoutY="667.0" mnemonicParsing="false" onMouseClicked="#declineRequest" prefHeight="40.0" prefWidth="122.0" text="Decline">
+        <Button layoutX="700.0" layoutY="611.0" mnemonicParsing="false" onMouseClicked="#declineRequest" prefHeight="40.0" prefWidth="122.0" text="Decline">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>
         </Button>
-        <Button layoutX="878.0" layoutY="667.0" mnemonicParsing="false" onMouseClicked="#acceptRequest" prefHeight="44.0" prefWidth="122.0" text="Accept">
+        <Button layoutX="878.0" layoutY="611.0" mnemonicParsing="false" onMouseClicked="#acceptRequest" prefHeight="44.0" prefWidth="122.0" text="Accept">
             <font>
                 <Font name="Times New Roman" size="24.0" />
             </font>
