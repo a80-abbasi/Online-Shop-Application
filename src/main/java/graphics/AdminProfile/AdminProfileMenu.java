@@ -8,6 +8,7 @@ import graphics.AlertBox;
 
 import graphics.App;
 import graphics.LoginAndRegister.CreateAdminAccount;
+import graphics.LoginAndRegister.CreateSupporterAccount;
 import graphics.products.ProductPageController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -205,6 +206,15 @@ public class AdminProfileMenu {
             App.setRoot("ManageSalesHistory");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void addSupporter(MouseEvent mouseEvent) {
+        CreateSupporterAccount.setParentMenu("AdminProfileMenu");
+        try {
+            App.setRoot("CreateSupporterAccount");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -29,7 +29,7 @@ public class LoginAndRegisterManager {
                                   String phoneNumber) throws IllegalArgumentException {
         if (checkUsernameValidity(username) && checkPasswordValidity(password) && checkNameValidity(name) && checkNameValidity(lastName)
                 && checkEmailValidity(email) && checkPhoneNumberValidity(phoneNumber)) {
-            String message = "register supporter request: ," + username + "," + password + "," + name + "," + lastName + "," + email + "," + phoneNumber + ",";
+            String message = "register supporter : ," + username + "," + password + "," + name + "," + lastName + "," + email + "," + phoneNumber + ",";
             Connection.sendToServer(message);
         }
     }

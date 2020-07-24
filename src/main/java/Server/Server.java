@@ -84,7 +84,10 @@ public class Server extends Application {
                     String[] splitContent = content.split("\\s+");
 
                     if (account != null){
-                        if (content.startsWith("get password: ")) {
+                        if (content.startsWith("get username: ")) {
+                            sendAccountUsername(dataOutputStream, account);
+                        }
+                        else if (content.startsWith("get password: ")) {
                             sendAccountPassword(dataOutputStream, account);
                         }
                         else if (content.startsWith("edit password: ")) {
@@ -216,8 +219,8 @@ public class Server extends Application {
                 else if (message.startsWith("register customer: ")) {
                     registerCustomer(message);
                 }
-                else if (message.startsWith("register supporter request: ")) {
-                    registerSupporterRequest(message);
+                else if (message.startsWith("register supporter : ")) {
+                    registerSupporter(message);
                 }
                 else if (message.startsWith("register seller request: ")) {
                     registerSellerRequest(message);
@@ -236,6 +239,9 @@ public class Server extends Application {
                 }
                 else if (message.equals("getCustomers")) {
                     sendAllCustomers(dataOutputStream);
+                }
+                else if (message.equals("getSupporters")) {
+                    sendAllSupporters(dataOutputStream);
                 }
                 else if (message.equals("getAddOffRequests")) {
                     sendAllAddOffRequests(dataOutputStream);
@@ -272,9 +278,6 @@ public class Server extends Application {
                 }
                 else if (message.startsWith("get registerSellerRequest: ")) {
                     sendRegisterSellerRequest(dataOutputStream, message.substring(("get registerSellerRequest: ").length()));
-                }
-                else if (message.startsWith("get registerSupporterRequest: ")) {
-                    sendRegisterSupporterRequest(dataOutputStream, message.substring(("get registerSupporterRequest: ").length()));
                 }
                 else if (message.startsWith("get removeProductRequest: ")) {
                     sendRemoveProductRequest(dataOutputStream, message.substring(("get removeProductRequest: ").length()));
@@ -378,6 +381,15 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void sendAccountUsername(DataOutputStream dataOutputStream, Account account) {
+        try {
+            dataOutputStream.writeUTF(account.getUsername());
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -585,7 +597,7 @@ public class Server extends Application {
         }
     }
 
-    private static void sendRegisterSupporterRequest(DataOutputStream dataOutputStream, String registerSupporterRequestID) {
+    /*private static void sendRegisterSupporterRequest(DataOutputStream dataOutputStream, String registerSupporterRequestID) {
         RegisterSupporterRequest registerSupporterRequest = RegisterSupporterRequest.getRequestById(registerSupporterRequestID);
         try {
             dataOutputStream.writeUTF(gson.toJson(registerSupporterRequest));
@@ -593,7 +605,7 @@ public class Server extends Application {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
     private static void sendRemoveProductRequest(DataOutputStream dataOutputStream, String removeProductRequestID) {
         RemoveProductRequest removeProductRequest = RemoveProductRequest.getRequestById(removeProductRequestID);
@@ -814,6 +826,15 @@ public class Server extends Application {
         }
     }
 
+    private static void sendAllSupporters(DataOutputStream dataOutputStream) {
+        try {
+            dataOutputStream.writeUTF(gson.toJson(Supporter.getAllSupporters()));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private static void deleteUser(String username) {
         Account account = Account.getAccountByUsername(username);
         Account.deleteAccount(account);
@@ -846,7 +867,7 @@ public class Server extends Application {
         new Customer(username, password, firstName, lastName, email, phoneNumber, 0);
     }
 
-    private static void registerSupporterRequest(String message) {
+    private static void registerSupporter(String message) {
         String[] userInfo = message.split(",");
         String username = userInfo[1];
         String password = userInfo[2];
@@ -854,7 +875,7 @@ public class Server extends Application {
         String lastName = userInfo[4];
         String email = userInfo[5];
         String phoneNumber = userInfo[6];
-        new RegisterSupporterRequest(username, password, firstName, lastName, email, phoneNumber);
+        new Supporter(username, password, firstName, lastName, email, phoneNumber);
     }
 
     private static void registerSellerRequest(String message) {
