@@ -4,6 +4,9 @@ import Client.Connection;
 import Controller.AdminProfileManager;
 import Model.Account.Account;
 import Model.Account.Admin;
+import Model.Account.BuyLog;
+import Model.Account.Supporter;
+import Model.Product.Product;
 import Model.Request.*;
 import com.google.gson.Gson;
 import graphics.AdminProfile.RequestDetails.EditAddOffRequestMenu;
@@ -12,18 +15,28 @@ import graphics.AdminProfile.RequestDetails.RegisterSellerRequestMenu;
 import graphics.AdminProfile.RequestDetails.RemoveProductRequestMenu;
 import graphics.AlertBox;
 import graphics.App;
+import graphics.CustomerProfile.Data;
 import graphics.products.ProductPageController;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ManageSaleHistory {
 
-    public TableView allRequestsTable;
     public ImageView backImage;
     public ImageView mainMenuImage;
+    public TableView allBuyLogsTable;
 
     private AdminProfileManager adminProfileManager;
 
@@ -31,81 +44,83 @@ public class ManageSaleHistory {
 
     public void initialize() {
         this.adminProfileManager = new AdminProfileManager((Admin) Account.getLoggedInAccount());
-        allRequestsTable = adminProfileManager.getSaleHistoryTable(allRequestsTable);
+        allBuyLogsTable = adminProfileManager.getSaleHistoryTable(allBuyLogsTable);
 
         App.setBackButton(backImage, parentMenu);
         ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
-    public void acceptRequest(MouseEvent mouseEvent) {
-        Object selectedRequest = allRequestsTable.getSelectionModel().getSelectedItem();
-        if (selectedRequest == null) {
+    public void send(MouseEvent mouseEvent) {
+        Object selectedBuyLog = allBuyLogsTable.getSelectionModel().getSelectedItem();
+        if (selectedBuyLog == null) {
             return;
         }
-
-        String selectedRequestID = ((Request) selectedRequest).getRequestId();
-        adminProfileManager.acceptRequest(selectedRequestID);
-        AlertBox.showMessage("Accept Request", "Request with ID : <" + selectedRequestID + "> accepted.");
-        allRequestsTable.getItems().remove(selectedRequest);
+        if (((BuyLog) selectedBuyLog).getSendingCondition().equals("Send")) {
+            AlertBox.showMessage("Send Condition", "Your buylog is already send");
+            return;
+        }
+        ((BuyLog) selectedBuyLog).setSendingCondition("Send");
     }
 
-    public void showRequestDetails(MouseEvent mouseEvent) {
-        Object selectedRequest = allRequestsTable.getSelectionModel().getSelectedItem();
-        if (selectedRequest == null) {
+    public void ShowProducts(MouseEvent mouseEvent) {
+        Object selectedBuyLog = allBuyLogsTable.getSelectionModel().getSelectedItem();
+        if (selectedBuyLog == null) {
             return;
         }
-        Request request = (Request) selectedRequest;
-        if (request instanceof EditAddOffRequest) {
-            try {
-                EditAddOffRequest editAddOffRequest;
-                if (request instanceof EditOffRequest) {
-                    Connection.sendToServer("get editOffRequest: " + request.getRequestId());
-                    editAddOffRequest = new Gson().fromJson(Connection.receiveFromServer(), EditOffRequest.class);
-                }
-                else {
-                    Connection.sendToServer("get addOffRequest: " + request.getRequestId());
-                    editAddOffRequest = new Gson().fromJson(Connection.receiveFromServer(), AddOffRequest.class);
-                }
-                EditAddOffRequestMenu.setEditAddOffRequest(editAddOffRequest);
-                App.setRoot("EditAddOffRequestMenu");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (request instanceof EditAddProductRequest) {
-            try {
-                EditAddProductRequest editAddProductRequest;
-                if (request instanceof AddProductRequest) {
-                    Connection.sendToServer("get addProductRequest: " + request.getRequestId());
-                    editAddProductRequest = new Gson().fromJson(Connection.receiveFromServer(), AddProductRequest.class);
-                }
-                else {
-                    Connection.sendToServer("get editProductRequest: " + request.getRequestId());
-                    editAddProductRequest = new Gson().fromJson(Connection.receiveFromServer(), EditProductRequest.class);
-                }
-                EditAddProductRequestMenu.setEditAddProductRequest(editAddProductRequest);
-                App.setRoot("EditAddProductRequestMenu");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (request instanceof RegisterSellerRequest) {
-            try {
-                Connection.sendToServer("get registerSellerRequest: " + request.getRequestId());
-                RegisterSellerRequest registerSellerRequest = new Gson().fromJson(Connection.receiveFromServer(), RegisterSellerRequest.class);
-                RegisterSellerRequestMenu.setRegisterSellerRequest(registerSellerRequest);
-                App.setRoot("RegisterSellerRequestMenu");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (request instanceof RemoveProductRequest) {
-            try {
-                Connection.sendToServer("get removeProductRequest: " + request.getRequestId());
-                RemoveProductRequest removeProductRequest = new Gson().fromJson(Connection.receiveFromServer(), RemoveProductRequest.class);
-                RemoveProductRequestMenu.setRemoveProductRequest(removeProductRequest);
-                App.setRoot("RemoveProductRequestMenu");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            Stage stage = new Stage();
+
+            stage.setTitle("Order");
+            stage.setWidth(550);
+            stage.setHeight(500);
+
+            VBox vbox = new VBox();
+            vbox.setSpacing(5);
+            vbox.setPadding(new Insets(10, 0, 0, 10));
+
+            BuyLog buyLog = (BuyLog)selectedBuyLog;
+
+            TableView table = getOrderTable(buyLog);
+
+            final Label label = new Label("Date" + buyLog.getDate() + " " + "Price:" + buyLog.getPaidAmount()+"$" + "\n" + buyLog.getAddress());
+            label.setFont(new Font("Arial", 20));
+
+            vbox.getChildren().addAll(label, table);
+
+            Scene scene1 = new Scene(vbox);
+
+            stage.setScene(scene1);
+            stage.show();
+        } catch (NullPointerException e) {
+            AlertBox.showMessage("null exception", "There is no BuyLog");
         }
     }
 
+    private TableView getOrderTable(BuyLog buyLog) {
+        TableView table = new TableView<>();
+        TableColumn<String, Data> productNameCol = new TableColumn("Product Name");
+        productNameCol.setMinWidth(200);
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
+
+        TableColumn<String, Data> productNumberCol = new TableColumn("Product Number");
+        productNumberCol.setMinWidth(100);
+        productNumberCol.setCellValueFactory(new PropertyValueFactory<>("productNumber"));
+
+        TableColumn<String, Data> productSellerCol = new TableColumn("Product Seller");
+        productSellerCol.setMinWidth(200);
+        productSellerCol.setCellValueFactory(new PropertyValueFactory<>("productSeller"));
+
+        TableColumn<String, Data> productSendCol = new TableColumn("Send Condition");
+        productSellerCol.setMinWidth(200);
+        productSellerCol.setCellValueFactory(new PropertyValueFactory<>("sendCondition"));
+
+        table.getColumns().addAll(productNameCol, productNumberCol, productSellerCol);
+
+        ArrayList<Product> products = new ArrayList<>(buyLog.getBoughtProducts().keySet());
+        for (int i = 0; i < products.size(); i++) {
+            table.getItems().add(new Data(products.get(i).getProductName(), buyLog.getBoughtProducts().get(products.get(i)).toString(),
+                    products.get(i).getSeller().getName(), String.valueOf(products.get(i).isFile())));
+        }
+        return table;
+    }
 }

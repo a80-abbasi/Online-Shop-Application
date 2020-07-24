@@ -7,18 +7,13 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AdminProfile.ManageSaleHistory">
     <children>
-        <TableView fx:id="allRequestsTable" layoutX="482.0" layoutY="172.0" prefHeight="456.0" prefWidth="586.0" />
+        <TableView fx:id="allBuyLogsTable" layoutX="482.0" layoutY="172.0" prefHeight="456.0" prefWidth="586.0" />
         <Label layoutX="648.0" layoutY="77.0" text="Manage Sales">
             <font>
                 <Font name="Times New Roman" size="36.0" />
             </font>
         </Label>
-        <Button layoutX="923.0" layoutY="646.0" mnemonicParsing="false" onMouseClicked="#acceptRequest" prefHeight="40.0" prefWidth="145.0" text="Send">
-            <font>
-                <Font name="Times New Roman" size="18.0" />
-            </font>
-        </Button>
-        <Button layoutX="482.0" layoutY="646.0" mnemonicParsing="false" onMouseClicked="#showRequestDetails" prefHeight="40.0" prefWidth="145.0" text="Show Details">
+        <Button layoutX="834.0" layoutY="647.0" mnemonicParsing="false" onMouseClicked="#send" prefHeight="40.0" prefWidth="145.0" text="Send">
             <font>
                 <Font name="Times New Roman" size="18.0" />
             </font>
@@ -33,5 +28,10 @@
                 <Image url="@../Images/mainMenu.png" />
             </image>
         </ImageView>
+      <Button layoutX="584.0" layoutY="647.0" mnemonicParsing="false" onMouseClicked="#ShowProducts" prefHeight="40.0" prefWidth="146.0" text="Show Products">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
