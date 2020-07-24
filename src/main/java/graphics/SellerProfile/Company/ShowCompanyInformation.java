@@ -23,9 +23,9 @@ public class ShowCompanyInformation {
         String parentMenu = "SellerProfileMenu";
         App.setBackButton(backImage, parentMenu);
         ProductPageController.setMainMenuButton(mainMenuImage);
-        CompanyName.setText(sellerProfileManager.seller.getNameOfCompany());
-        PhoneNumber.setText(sellerProfileManager.seller.getPhoneNumberOfCompany());
-        OpenYear.setText(sellerProfileManager.seller.getCompanyOpenYear());
-        Address.setText(sellerProfileManager.seller.getCompanyOpenYear());
+        CompanyName.setText(sellerProfileManager.getCompanyName());
+        PhoneNumber.setText(sellerProfileManager.getCompanyPhoneNumber());
+        OpenYear.setText(sellerProfileManager.getCompanyOpenYear());
+        Address.setText(sellerProfileManager.getCompanyAddress());
     }
 }
