@@ -11,7 +11,6 @@ import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -21,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
@@ -36,12 +36,13 @@ public class PurchaseMenuController {
     public TextField discountTextField;
     public Label discountMessageLabel;
     public Pane buyLogPane;
-    public Button buyItemsButton;
+    public Button buyItemsWithWalletButton;
     public Button validateButton;
     public TabPane tabPane;
     public Label totalLabel;
     public Label totalAmountLabel;
     public Label filesDownloadedLabel;
+    public Button buyItemsWithBankButton;
 
     private Discount discount;
     private Customer customer;
@@ -98,7 +99,7 @@ public class PurchaseMenuController {
         });
     }
 
-    private void setBuyItemsButton(){
+    private void setBuyItemsWithWalletButton(){
         totalAmount = cart.entrySet().stream().mapToDouble(entry -> entry.getKey().getPriceWithOff() * entry.getValue()).sum();
         AtomicBoolean flag = new AtomicBoolean(true);
         if (discount != null) {
@@ -107,7 +108,7 @@ public class PurchaseMenuController {
         else {
             finalPrice = totalAmount;
         }
-        buyItemsButton.setOnAction(e -> {
+        buyItemsWithWalletButton.setOnAction(e -> {
             Stream.of(addressTextArea, phoneNumberTextField, nameTextField).forEach(field -> {
                 if (field.getText().isBlank()) {
                     tabPane.getSelectionModel().select(0);
@@ -130,19 +131,22 @@ public class PurchaseMenuController {
                     phoneNumberTextField.selectAll();
                     flag.set(false);
                 }
-                else if (customer.getBalance() < finalPrice){
-                    alertLabel.setText("You don't have enough money :(");
-                    flag.set(false);
-                }
                 else {
-                    showBoughtProducts();
-                    //finishBuying(finalPrice, cart, customer, totalAmount); //todo: send buy request
-                    Connection.sendToServerWithToken("finish buying: " + finalPrice + " " + totalAmount);
-                    downloadFiles();
-                    filesDownloadedLabel.setOpacity(1);
-                    validateButton.setDisable(true);
-                    buyItemsButton.setDisable(true);
-                    buyItemsButton.setOpacity(0.5);
+                    Connection.sendToServer("get min wallet balance");
+                    int minWalletBalance = Integer.parseInt(Connection.receiveFromServer());
+                    if (customer.getBalance() < finalPrice + minWalletBalance){
+                        alertLabel.setText("You don't have enough money :(");
+                        flag.set(false);
+                    }
+                    else {
+                        showBoughtProducts();
+                        Connection.sendToServerWithToken("finish buying: " + finalPrice + " " + totalAmount);
+                        downloadFiles();
+                        filesDownloadedLabel.setOpacity(1);
+                        validateButton.setDisable(true);
+                        buyItemsWithWalletButton.setDisable(true);
+                        buyItemsWithWalletButton.setOpacity(0.5);
+                    }
                 }
             }
             if (!flag.get()){
@@ -153,6 +157,76 @@ public class PurchaseMenuController {
                 timeline.play();
             }
         });
+    }
+
+    private void setBuyItemsWithBankButton(){
+        totalAmount = cart.entrySet().stream().mapToDouble(entry -> entry.getKey().getPriceWithOff() * entry.getValue()).sum();
+        AtomicBoolean flag = new AtomicBoolean(true);
+        if (discount != null) {
+            finalPrice = totalAmount - discount.calculateTotalDiscount(totalAmount);
+        }
+        else {
+            finalPrice = totalAmount;
+        }
+        buyItemsWithBankButton.setOnAction(e -> {
+            Stream.of(addressTextArea, phoneNumberTextField, nameTextField).forEach(field -> {
+                if (field.getText().isBlank()) {
+                    tabPane.getSelectionModel().select(0);
+                    field.requestFocus();
+                    alertLabel.setOpacity(1);
+                    alertLabel.setText("required fields can't be blank!");
+                    flag.set(false);
+                }
+            });
+            if (flag.get()){
+                if (!nameTextField.getText().matches("[a-zA-Z]+")){
+                    alertLabel.setText("receiver name is invalid");
+                    nameTextField.requestFocus();
+                    nameTextField.selectAll();
+                    flag.set(false);
+                }
+                else if (!phoneNumberTextField.getText().matches("\\d+")){
+                    alertLabel.setText("phone number is invalid");
+                    phoneNumberTextField.requestFocus();
+                    phoneNumberTextField.selectAll();
+                    flag.set(false);
+                }
+                else {
+                    Connection.sendToServerWithToken("charge wallet: " + ((int)finalPrice + 1));
+                    if (Connection.receiveFromServer().equalsIgnoreCase("done successfully")) {
+                        showBoughtProducts();
+                        Connection.sendToServerWithToken("finish buying: " + finalPrice + " " + totalAmount);
+                        downloadFiles();
+                        filesDownloadedLabel.setOpacity(1);
+                        validateButton.setDisable(true);
+                        buyItemsWithBankButton.setDisable(true);
+                        buyItemsWithBankButton.setOpacity(0.5);
+                    }
+                    else {
+                        alertLabel.setText("Your bank account doesn't have enough money :(");
+                        flag.set(false);
+                    }
+                }
+            }
+            if (!flag.get()){
+                tabPane.getSelectionModel().select(0);
+                alertLabel.setOpacity(1);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> alertLabel.setOpacity(0)));
+                timeline.setCycleCount(1);
+                timeline.play();
+            }
+        });
+    }
+
+    private void showItemsAndSendRequest(){
+        showBoughtProducts();
+        //finishBuying(finalPrice, cart, customer, totalAmount); //todo: send buy request
+        Connection.sendToServerWithToken("finish buying: " + finalPrice + " " + totalAmount);
+        downloadFiles();
+        filesDownloadedLabel.setOpacity(1);
+        validateButton.setDisable(true);
+        buyItemsWithWalletButton.setDisable(true);
+        buyItemsWithWalletButton.setOpacity(0.5);
     }
 
     private void downloadFiles() {
@@ -217,7 +291,7 @@ public class PurchaseMenuController {
         customer.setBalance(customer.getBalance() - finalAmount); //decrease customer money
         cart.forEach((product, number) -> {//increase sellers money & creating sell log
             Seller seller = product.getSeller();
-            seller.setBalance(product.getSeller().getBalance() + product.getPriceWithOff() * number);
+            seller.setBalance(product.getSeller().getBalance() + product.getPriceWithOff() * number * (100 - Admin.getBankingFeePercent()) / 100);
             SellLog sellLog = new SellLog("SellLog" + (SellLog.getAllSellLogs().size() + 1), new Date(), product.getPriceWithOff(),
                     product.getPrice() - product.getPriceWithOff(), product, number, customer.getName());
             seller.getSellLogs().add(sellLog);
@@ -238,7 +312,8 @@ public class PurchaseMenuController {
     public void setCart(HashMap<Product, Integer> cart) {
         this.cart = cart;
         setValidateButton();
-        setBuyItemsButton();
+        setBuyItemsWithWalletButton();
+        setBuyItemsWithBankButton();
     }
 
     public String getAddressTextArea() {
