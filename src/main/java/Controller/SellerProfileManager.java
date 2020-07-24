@@ -26,6 +26,12 @@ public class SellerProfileManager extends ProfileManager {
         this.seller = seller;
     }
 
+    public static Category getCategoryByName(String categoryName) {
+        Connection.sendToServer("get category: " + categoryName);
+        Category category = new Gson().fromJson(Connection.receiveFromServer(), Category.class);
+        return category;
+    }
+
     public double getBalance() {
         Connection.sendToServerWithToken("get account balance");
         double sellerBalance = Double.parseDouble(Connection.receiveFromServer());
@@ -177,6 +183,12 @@ public class SellerProfileManager extends ProfileManager {
         }
         allCategoriesTable.setPlaceholder(new Label("No Data To Display"));
         return allCategoriesTable;
+    }
+
+    public ArrayList<Category> getAllCategories() {
+        Connection.sendToServer("getCategories");
+        ArrayList<Category> allCategories = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Category>>(){}.getType());
+        return allCategories;
     }
 
     public TableView getSellerSalesHistoryTable() {
@@ -434,15 +446,6 @@ public class SellerProfileManager extends ProfileManager {
             sellerProductsIds.add(product.getProductId());
         }
         return sellerProductsIds;
-    }
-
-    public ArrayList<String> getAllCategories() {
-        ArrayList<Category> allCategories = Category.getAllCategories();
-        ArrayList<String> allCategoriesNames = new ArrayList<>();
-        for (Category category : allCategories) {
-            allCategoriesNames.add(category.getName());
-        }
-        return allCategoriesNames;
     }
 
     public HashMap<String, String> getProductBuyers(String productId) {

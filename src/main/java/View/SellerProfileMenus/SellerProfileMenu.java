@@ -2,6 +2,7 @@ package View.SellerProfileMenus;
 
 import Controller.SellerProfileManager;
 import Model.Account.Seller;
+import Model.Product.Category;
 import View.Menu;
 import View.ViewPersonalInfoMenu;
 
@@ -59,7 +60,7 @@ public class SellerProfileMenu extends Menu {
             @Override
             public void show() {
                 System.out.println(this.getName() + ":");
-                for (String category : sellerProfileManager.getAllCategories()) {
+                for (Category category : sellerProfileManager.getAllCategories()) {
                     System.out.println(category);
                 }
                 System.out.println("1. Logout");

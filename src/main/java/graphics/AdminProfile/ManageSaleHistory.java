@@ -1,18 +1,10 @@
 package graphics.AdminProfile;
 
-import Client.Connection;
 import Controller.AdminProfileManager;
 import Model.Account.Account;
 import Model.Account.Admin;
 import Model.Account.BuyLog;
-import Model.Account.Supporter;
 import Model.Product.Product;
-import Model.Request.*;
-import com.google.gson.Gson;
-import graphics.AdminProfile.RequestDetails.EditAddOffRequestMenu;
-import graphics.AdminProfile.RequestDetails.EditAddProductRequestMenu;
-import graphics.AdminProfile.RequestDetails.RegisterSellerRequestMenu;
-import graphics.AdminProfile.RequestDetails.RemoveProductRequestMenu;
 import graphics.AlertBox;
 import graphics.App;
 import graphics.CustomerProfile.Data;
@@ -29,7 +21,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ManageSaleHistory {
@@ -112,7 +103,7 @@ public class ManageSaleHistory {
 
         TableColumn<String, Data> productSendCol = new TableColumn("Send Condition");
         productSellerCol.setMinWidth(200);
-        productSellerCol.setCellValueFactory(new PropertyValueFactory<>("sendCondition"));
+        productSendCol.setCellValueFactory(new PropertyValueFactory<>("sendCondition"));
 
         table.getColumns().addAll(productNameCol, productNumberCol, productSellerCol);
 

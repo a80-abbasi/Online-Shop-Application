@@ -66,12 +66,12 @@ public class ManageProducts {
         App.setBackButton(backImage, "SellerProfileMenu");
 
         valueColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        for (String categoryName : sellerProfileManager.getAllCategories()) {
-            MenuItem menuItem = new MenuItem(categoryName);
+        for (Category category : sellerProfileManager.getAllCategories()) {
+            MenuItem menuItem = new MenuItem(category.getName());
             menuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    setCategory(categoryName);
+                    setCategory(category.getName());
                 }
             });
             categoriesMenuButton.getItems().add(menuItem);
@@ -79,7 +79,7 @@ public class ManageProducts {
     }
 
     private void setCategory(String categoryName) {
-        this.category = Category.getCategoryByName(categoryName);
+        this.category = SellerProfileManager.getCategoryByName(categoryName);
         categoriesMenuButton.setText(categoryName);
         if (category.getSpecialFeatures().isEmpty()) {
             return;

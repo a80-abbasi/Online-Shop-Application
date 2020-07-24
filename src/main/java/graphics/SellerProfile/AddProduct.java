@@ -72,12 +72,12 @@ public class AddProduct {
         valueColumn.setCellValueFactory(new PropertyValueFactory<String, FeatureData>("value"));
 
         valueColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        for (String categoryName : sellerProfileManager.getAllCategories()) {
-            MenuItem menuItem = new MenuItem(categoryName);
+        for (Category category : sellerProfileManager.getAllCategories()) {
+            MenuItem menuItem = new MenuItem(category.getName());
             menuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    setCategory(categoryName);
+                    setCategory(category.getName());
                 }
             });
             selectCategoryMenuButton.getItems().add(menuItem);
@@ -85,7 +85,7 @@ public class AddProduct {
     }
 
     private void setCategory(String categoryName) {
-        this.category = Category.getCategoryByName(categoryName);
+        this.category = SellerProfileManager.getCategoryByName(categoryName);
         selectCategoryMenuButton.setText(categoryName);
         if (category.getSpecialFeatures().isEmpty()) {
             return;

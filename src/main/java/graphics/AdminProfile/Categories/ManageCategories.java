@@ -14,22 +14,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
-
 public class ManageCategories {
     public TableView allCategoriesTable;
 
     public TextField categoryNameField;
+
     public TextField specialFeaturesField;
     public ListView specialFeaturesList;
 
-    public ListView subCategoriesList;
-
     public Button confirmButton;
+
     public Button removeSpecialFeatureButton;
-    public Button removeSubCategoriesButton;
-    public Button addSubCategoriesButton;
     public Button addSpecialFeatureButton;
+
     public ImageView backImage;
     public ImageView mainMenuImage;
 
@@ -55,10 +52,6 @@ public class ManageCategories {
         specialFeaturesField.setEditable(true);
         specialFeaturesList.getItems().setAll(category.getSpecialFeatures());
 
-        subCategoriesList.getItems().clear();
-        for (Category subCategory : category.getSubCategories()) {
-            subCategoriesList.getItems().add(subCategory.getName());
-        }
         this.selectedCategory = category;
 
         setEditionMode();
@@ -85,25 +78,6 @@ public class ManageCategories {
         specialFeaturesList.getItems().add(specialFeature);
     }
 
-    /*public void addSubCategory(MouseEvent mouseEvent) {
-        AddCategory.setCategory(selectedCategory);
-        try {
-            App.setRoot("AddCategory");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-    /*public void removeSubCategory(MouseEvent mouseEvent) {
-        Object selectedSubCategory = subCategoriesList.getSelectionModel().getSelectedItem();
-        if (selectedSubCategory == null) {
-            return;
-        }
-        String subCategoryName = (String) selectedSubCategory;
-        adminProfileManager.removeSubCategory(selectedCategory, subCategoryName);
-        subCategoriesList.getItems().remove(subCategoryName);
-    }*/
-
     public void removeSpecialFeature(MouseEvent mouseEvent) {
         Object selectedSpecialFeature = specialFeaturesList.getSelectionModel().getSelectedItem();
         if (selectedSpecialFeature == null) {
@@ -117,7 +91,6 @@ public class ManageCategories {
     public void confirmEdition(MouseEvent mouseEvent) {
         categoryNameField.setText("");
         selectedCategory = null;
-        subCategoriesList.getItems().clear();
         specialFeaturesList.getItems().clear();
 
         setViewMode();
@@ -126,16 +99,12 @@ public class ManageCategories {
     private void setEditionMode() {
         confirmButton.setDisable(false);
         removeSpecialFeatureButton.setDisable(false);
-        removeSubCategoriesButton.setDisable(false);
-        addSubCategoriesButton.setDisable(false);
         addSpecialFeatureButton.setDisable(false);
     }
 
     private void setViewMode() {
         confirmButton.setDisable(true);
         removeSpecialFeatureButton.setDisable(true);
-        removeSubCategoriesButton.setDisable(true);
-        addSubCategoriesButton.setDisable(true);
         addSpecialFeatureButton.setDisable(true);
     }
 }

@@ -8,6 +8,7 @@ import Model.Product.Product;
 import Model.Request.*;
 import View.Main;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import graphics.products.PurchaseMenuController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -359,6 +360,9 @@ public class Server extends Application {
                 else if (message.startsWith("get off: ")) {
                     sendOff(dataOutputStream, message.substring(("get off: ").length()));
                 }
+                else if (message.startsWith("add category: ")) {
+                    addCategoryAndSend(dataOutputStream, message);
+                }
                 else if (message.startsWith("get category: ")) {
                     sendCategory(dataOutputStream, message.substring(("get category: ").length()));
                 }
@@ -444,6 +448,20 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void addCategoryAndSend(DataOutputStream dataOutputStream, String message) {
+        String[] splitMessage = message.split(",");
+        String categoryName = splitMessage[1];
+        ArrayList<String> specialFeatures = new Gson().fromJson(splitMessage[2], new TypeToken<ArrayList<String>>(){}.getType());
+        Category category = new Category(categoryName);
+        category.setSpecialFeatures(specialFeatures);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(category));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

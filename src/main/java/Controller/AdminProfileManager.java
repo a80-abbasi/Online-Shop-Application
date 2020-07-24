@@ -425,8 +425,8 @@ public class AdminProfileManager extends ProfileManager {
             if (specialFeatures.isEmpty()) {
                 throw new Exception("Special Features Field is Empty");
             } else {
-                category = new Category(categoryName);
-                category.setSpecialFeatures(specialFeatures);
+                Connection.sendToServer("add category: ," + categoryName + "," + new Gson().toJson(specialFeatures));
+                category = new Gson().fromJson(Connection.receiveFromServer(), Category.class);
                 return category;
             }
         } else {
