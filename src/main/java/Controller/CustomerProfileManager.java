@@ -244,14 +244,6 @@ public class CustomerProfileManager extends ProfileManager{
         return input.matches("\\A\\d+\\z");
     }
 
-
-    public void setProductExistingNumber() {
-        for (Product product : customer.getCart().keySet()) {
-            Seller seller = product.getSeller();
-            seller.setBalance(seller.getBalance() + product.getPriceWithOff());
-        }
-    }
-
     public void setUsedDiscountCodes(String usedDiscountCode) {
         if (!usedDiscountCode.equals("")) {
             Discount discount =  Discount.getDiscountByDiscountCode(usedDiscountCode);
