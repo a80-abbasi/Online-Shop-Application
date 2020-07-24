@@ -4,11 +4,13 @@ public class Data {
     private String productName;
     private String productNumber;
     private String productSeller;
+    private String sendCondition;
 
-    Data(String pName, String pNumber, String pSeller) {
+    Data(String pName, String pNumber, String pSeller, String sCondition) {
         this.productName = pName;
         this.productNumber = pNumber;
         this.productSeller = pSeller;
+        this.sendCondition = sCondition;
     }
 
     public String getProductName() {
@@ -21,6 +23,10 @@ public class Data {
 
     public String getProductSeller() {
         return productSeller;
+    }
+
+    public String getSendCondition() {
+        return sendCondition;
     }
 
     /*public String getProductName() {

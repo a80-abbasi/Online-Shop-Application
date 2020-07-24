@@ -144,7 +144,7 @@
       </ImageView>
       <Pane layoutX="1338.0" layoutY="53.0" onMouseClicked="#connectSupporters" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button layoutX="6.0" layoutY="8.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="190.0" text="Connect supporters" />
+            <Button layoutX="6.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#connectSupporters" prefHeight="46.0" prefWidth="190.0" text="Connect supporters" />
          </children>
       </Pane>
     </children>

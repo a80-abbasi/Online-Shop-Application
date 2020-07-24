@@ -11,7 +11,7 @@ public class Customer extends Account {
     private static HashMap<Product, Integer> tmpCart = new HashMap<>();
     private double balance;
     private HashMap<Product, Integer> cart;
-    private final ArrayList<BuyLog> buyLogs;
+    private ArrayList<BuyLog> buyLogs;
     private HashMap<Discount, Integer> usedDiscounts;
     private ArrayList<Discount> allDiscountCodesForCustomer = new ArrayList<>(); //todo:admin add codes to this array too!
     private int numberOfDiscountGifts;
@@ -30,16 +30,16 @@ public class Customer extends Account {
     public Customer(String username, String password, String name, String lastName, String email, String phoneNumber, int balance) {
         super(username, password, name, lastName, email, phoneNumber);
         this.balance = balance;
-        allCustomers.add(this);
         cart = new HashMap<>();
         buyLogs = new ArrayList<>();
         usedDiscounts = new HashMap<>();
         this.balance = 1500;
         createBankAccount();
+        allCustomers.add(this);
     }
 
     public Customer(){
-        this("", "", "", "", "", "", 0);
+        allCustomers.add(this);
     }
 
     public String getBankAccountID() {

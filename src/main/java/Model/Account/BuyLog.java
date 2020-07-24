@@ -5,6 +5,7 @@ import Model.Product.Product;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class BuyLog extends Log {
     private static ArrayList<BuyLog> allBuyLogs = new ArrayList<>();
@@ -21,7 +22,13 @@ public class BuyLog extends Log {
         allBuyLogs.add(this);
         this.discountAmount = discountAmount;
         this.boughtProducts = new HashMap<>(cart);
-        setSendingCondition("Did not send");
+        for (Product product: cart.keySet()) {
+            if(product.isFile()){
+                setSendingCondition("Send");
+            }else{
+                setSendingCondition("Did not send");
+            }
+        }
         this.address = address;
     }
 
