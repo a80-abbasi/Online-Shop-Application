@@ -6,6 +6,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.AdminProfile.BankingSettingMenu">
    <children>
       <Label layoutX="708.0" layoutY="149.0" text="Wallet Setting">
@@ -38,5 +40,15 @@
             <Font name="Times New Roman" size="24.0" />
          </font>
       </Label>
+      <ImageView fx:id="backImage" fitHeight="40.0" fitWidth="34.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mainMenuImage" fitHeight="34.0" fitWidth="34.0" layoutX="64.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/mainMenu.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -4,7 +4,10 @@ import Controller.SellerProfileManager;
 import Model.Account.Account;
 import Model.Account.Seller;
 import graphics.AlertBox;
+import graphics.App;
+import graphics.products.ProductPageController;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class SellerWalletMenu {
@@ -12,11 +15,17 @@ public class SellerWalletMenu {
     public TextField withdrawAmountField;
     public TextField chargeAmountField;
 
+    public ImageView backImage;
+    public ImageView mainMenuImage;
+
     private SellerProfileManager sellerProfileManager;
 
     public void initialize() {
         this.sellerProfileManager = new SellerProfileManager((Seller) Account.getLoggedInAccount());
         balanceField.setText(String.valueOf(sellerProfileManager.getBalance()));
+
+        ProductPageController.setMainMenuButton(mainMenuImage);
+        App.setBackButton(backImage, "SellerProfileMenu");
     }
 
     public void withdrawFromWallet(MouseEvent mouseEvent) {

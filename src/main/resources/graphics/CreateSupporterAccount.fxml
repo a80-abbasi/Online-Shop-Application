@@ -4,6 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.LoginAndRegister.CreateSupporterAccount">
     <children>
         <TextField fx:id="usernameField" layoutX="650.0" layoutY="203.0">
@@ -66,6 +68,16 @@
                 <Font name="Times New Roman" size="36.0" />
             </font>
         </Label>
+        <ImageView fx:id="backImage" fitHeight="40.0" fitWidth="34.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Images/back.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="mainMenuImage" fitHeight="34.0" fitWidth="34.0" layoutX="64.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Images/mainMenu.png" />
+            </image>
+        </ImageView>
     </children>
 
 </AnchorPane>
