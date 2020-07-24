@@ -33,7 +33,7 @@ public class Seller extends Account {
     }
 
     public Seller() {
-        this("", "", "", "", "", "", "", 0);
+        allSellers.add(this);
     }
 
     private void createBankAccount() {
