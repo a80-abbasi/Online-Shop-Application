@@ -377,6 +377,18 @@ public class Server extends Application {
                 else if (message.startsWith("get off: ")) {
                     sendOff(dataOutputStream, message.substring(("get off: ").length()));
                 }
+                else if (message.startsWith("get category: ")) {
+                    sendCategory(dataOutputStream, message.substring(("get category: ").length()));
+                }
+                else if (message.startsWith("remove category special feature: ")) {
+                    removeCategorySpecialFeature(message);
+                }
+                else if (message.startsWith("add category special feature: ")) {
+                    addCategorySpecialFeature(message);
+                }
+                else if (message.startsWith("remove category: ")) {
+                    removeCategory(message.substring(("remove category: ").length()));
+                }
                 else if (message.equals("getDiscounts")) {
                     sendAllDiscounts(dataOutputStream);
                 }
@@ -449,6 +461,35 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void removeCategory(String categoryName) {
+        Category category = Category.getCategoryByName(categoryName);
+        Category.removeCategory(category);
+    }
+
+    private static void addCategorySpecialFeature(String message) {
+        String[] splitMessage = message.split(",");
+        Category category = new Gson().fromJson(splitMessage[1], Category.class);
+        String specialFeature = splitMessage[2];
+        category.addSpecialFeature(specialFeature);
+    }
+
+    private static void removeCategorySpecialFeature(String message) {
+        String[] splitMessage = message.split(",");
+        Category category = new Gson().fromJson(splitMessage[1], Category.class);
+        String specialFeature = splitMessage[2];
+        category.removeSpecialFeature(specialFeature);
+    }
+
+    private static void sendCategory(DataOutputStream dataOutputStream, String categoryName) {
+        Category category = Category.getCategoryByName(categoryName);
+        try {
+            dataOutputStream.writeUTF(gson.toJson(category));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

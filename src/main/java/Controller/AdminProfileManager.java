@@ -408,16 +408,19 @@ public class AdminProfileManager extends ProfileManager {
         Connection.sendToServer("decline request: " + requestId);
     }
 
-    public ArrayList<Category> getAllCategories() {
-        return Category.getAllCategories();
+    private Category getCategoryByName(String categoryName) {
+        Connection.sendToServer("get category: " + categoryName);
+        Category category = new Gson().fromJson(Connection.receiveFromServer(), Category.class);
+        return category;
     }
 
     public Category addAndGetCategory(String categoryName, ArrayList<String> specialFeatures) throws Exception {
-        if (Category.getCategoryByName(categoryName) == null) {
+        Category category = getCategoryByName(categoryName);
+        if (category == null) {
             if (specialFeatures.isEmpty()) {
                 throw new Exception("Special Features Field is Empty");
             } else {
-                Category category = new Category(categoryName);
+                category = new Category(categoryName);
                 category.setSpecialFeatures(specialFeatures);
                 return category;
             }
@@ -426,32 +429,10 @@ public class AdminProfileManager extends ProfileManager {
         }
     }
 
-    public Category addAndGetSubCategory(String subCategoryName, Category parentCategory, ArrayList<String> specialFeatures) throws Exception {
-        if (parentCategory == null) {
-            throw new Exception("You haven't add category yet");
-        } else {
-            if (subCategoryName.isEmpty() || subCategoryName.trim().isEmpty()) {
-                throw new Exception("You haven't entered subCategory name");
-            } else if (specialFeatures.isEmpty()) {
-                throw new Exception("Special Features Field is Empty");
-            }
-        }
-        Category subCategory = parentCategory.addSubCategoryWithName(subCategoryName);
-        subCategory.getSpecialFeatures().addAll(specialFeatures);
-        return subCategory;
-    }
-
-    public void editCategoryName(Category category, String newCategoryName) throws IllegalArgumentException {
-        if (Category.getCategoryByName(newCategoryName) != null) {
-            throw new IllegalArgumentException();
-        }
-        category.setName(newCategoryName);
-    }
-
     //todo: checking this
     public void removeCategorySpecialFeature(Category category, String specialFeature) throws NullPointerException {
         if (category.getSpecialFeatures().contains(specialFeature)) {
-            category.removeSpecialFeature(specialFeature);
+            Connection.sendToServer("remove category special feature: ," + new Gson().toJson(category) + "," + specialFeature);
         } else {
             throw new NullPointerException();
         }
@@ -462,17 +443,17 @@ public class AdminProfileManager extends ProfileManager {
         if (category.getSpecialFeatures().contains(specialFeature)) {
             throw new IllegalArgumentException();
         } else {
-            category.addSpecialFeature(specialFeature);
+            Connection.sendToServer("add category special feature: ," + new Gson().toJson(category) + "," + specialFeature);
         }
     }
 
     //todo: checking this
     public void removeCategory(String categoryName) throws NullPointerException {
-        Category category = Category.getCategoryByName(categoryName);
+        Category category = getCategoryByName(categoryName);
         if (category == null) {
             throw new NullPointerException();
         }
-        Category.removeCategory(category);
+        Connection.sendToServer("remove category: " + categoryName);
     }
 
     public TableView getAllCategoriesTable(TableView allCategoriesTable) {
@@ -485,11 +466,6 @@ public class AdminProfileManager extends ProfileManager {
         }
         allCategoriesTable.setPlaceholder(new Label("No Data To Display"));
         return allCategoriesTable;
-    }
-
-    //todo: checking this
-    public void removeSubCategory(Category parentCategory, String subCategory) {
-        parentCategory.removeSubCategory(Category.getCategoryByName(subCategory));
     }
 
     public TableView getSaleHistoryTable(TableView allRequestsTable) {
@@ -543,6 +519,36 @@ public class AdminProfileManager extends ProfileManager {
 
 
 
+    public ArrayList<Category> getAllCategories() {
+        return Category.getAllCategories();
+    }
+
+    //todo: checking this
+    public void removeSubCategory(Category parentCategory, String subCategory) {
+        parentCategory.removeSubCategory(Category.getCategoryByName(subCategory));
+    }
+
+    public Category addAndGetSubCategory(String subCategoryName, Category parentCategory, ArrayList<String> specialFeatures) throws Exception {
+        if (parentCategory == null) {
+            throw new Exception("You haven't add category yet");
+        } else {
+            if (subCategoryName.isEmpty() || subCategoryName.trim().isEmpty()) {
+                throw new Exception("You haven't entered subCategory name");
+            } else if (specialFeatures.isEmpty()) {
+                throw new Exception("Special Features Field is Empty");
+            }
+        }
+        Category subCategory = parentCategory.addSubCategoryWithName(subCategoryName);
+        subCategory.getSpecialFeatures().addAll(specialFeatures);
+        return subCategory;
+    }
+
+    public void editCategoryName(Category category, String newCategoryName) throws IllegalArgumentException {
+        if (Category.getCategoryByName(newCategoryName) != null) {
+            throw new IllegalArgumentException();
+        }
+        category.setName(newCategoryName);
+    }
 
     //phase1
     public String viewUser(String username) throws NullPointerException {

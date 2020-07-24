@@ -49,9 +49,9 @@ public class AddCategory {
             categoryNameField.setText("");
             subCategoriesField.setText("");
             subCategoriesField.setText("");
-        } else {
+        } /*else {
             turnToAddSubCategoryMode();
-        }
+        }*/
 
         App.setBackButton(backImage, parentMenu);
         ProductPageController.setMainMenuButton(mainMenuImage);
@@ -67,7 +67,7 @@ public class AddCategory {
         specialFeaturesList.getItems().add(specialFeature);
     }
 
-    public void addSubCategoryFeature(MouseEvent mouseEvent) {
+    /*public void addSubCategoryFeature(MouseEvent mouseEvent) {
         String subCategorySpecialFeature = subCategoryFeaturesField.getText();
         if (subCategorySpecialFeature.isEmpty() || subCategorySpecialFeature.trim().isEmpty()) {
             return;
@@ -75,7 +75,7 @@ public class AddCategory {
         subCategorySpecialFeatures.add(subCategorySpecialFeature);
         subCategoryFeaturesField.setText("");
         subCategoryFeaturesList.getItems().add(subCategorySpecialFeature);
-    }
+    }*/
 
     public void confirm(MouseEvent mouseEvent) {
         if (category == null) {
@@ -83,11 +83,17 @@ public class AddCategory {
             try {
                 category = adminProfileManager.addAndGetCategory(categoryName, specialFeatures);
                 AlertBox.showMessage("Add Category", categoryName + " Category Added Successfully" + "\n" + "You can now add SubCategories");
-                turnToAddSubCategoryMode();
+                category = null;
+                try {
+                    App.setRoot(parentMenu);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
             } catch (Exception e) {
                 AlertBox.showMessage("Failed To Add Category", e.getMessage());
             }
-        } else {
+        }
+        /*else {
             AlertBox.showMessage("Add Categories", "Category and its SubCategories Added Successfully");
             category = null;
             try {
@@ -95,10 +101,10 @@ public class AddCategory {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
-    private void turnToAddSubCategoryMode() {
+    /*private void turnToAddSubCategoryMode() {
         subCategoryNameField.setEditable(true);
         subCategoryFeaturesField.setEditable(true);
         categoryNameField.setEditable(false);
@@ -109,9 +115,9 @@ public class AddCategory {
                 specialFeaturesList.getItems().add(specialFeature);
             }
         }
-    }
+    }*/
 
-    public void addSubCategory(MouseEvent mouseEvent) {
+    /*public void addSubCategory(MouseEvent mouseEvent) {
         String subCategoryName = subCategoryNameField.getText();
         try {
             Category subCategory = adminProfileManager.addAndGetSubCategory(subCategoryName, category, subCategorySpecialFeatures);
@@ -125,7 +131,7 @@ public class AddCategory {
         } catch (Exception e) {
             AlertBox.showMessage("Failed To Add SubCategory", e.getMessage());
         }
-    }
+    }*/
 
     public static void setCategory(Category category) {
         AddCategory.category = category;
