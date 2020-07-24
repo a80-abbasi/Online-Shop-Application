@@ -388,7 +388,7 @@ public class Server extends Application {
                 else if (message.equalsIgnoreCase("create admin account")){
                     if (Admin.getAllAdmins().size() == 1){
                         Admin mainAdmin = Admin.getAllAdmins().get(0);
-                        Admin.setStoreBankID(BankConnection.creatAccount(mainAdmin.getName(), mainAdmin.getLastName(), mainAdmin.getUsername(), mainAdmin.getPassword()));
+                        Admin.setStoreBankID(BankConnection.createAccount(mainAdmin.getName(), mainAdmin.getLastName(), mainAdmin.getUsername(), mainAdmin.getPassword()));
                     }
                 }
                 clientSocket.close();
