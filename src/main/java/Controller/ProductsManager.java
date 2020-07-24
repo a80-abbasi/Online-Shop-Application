@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ProductsManager {
+public class  ProductsManager {
     private ArrayList<Product> allProducts;
 
     private Comparator<Product> currentSortMode = new ProductComparatorForVisitNumber();
