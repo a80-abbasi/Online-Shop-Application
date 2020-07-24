@@ -46,19 +46,19 @@ public class BankConnection {
         return message;
     }
 
-    public static String getToken(String userName, String password){
+    public static String getToken(String userName, String password) throws Exception {
         connectToBank();
         sendMessageToBank(String.format("get_token %s %s", userName, password));
-        String message = getMessageFromBank();
+        String token = getMessageFromBank();
+        if (token.equalsIgnoreCase("invalid username or password")){
+            throw new Exception(token);
+        }
         exit();
-        return message;
+        return token;
     }
 
     public static String deposit(String username, String password, int money, String destinationID) throws Exception {
         String token = getToken(username, password);
-        if (token.equalsIgnoreCase("invalid username or password")){
-            throw new Exception(token);
-        }
         connectToBank();
         sendMessageToBank(String.format("create_receipt %s %s %d %s %s %s", token, "deposit", money, "-1", destinationID, ""));
         String receiptID = getMessageFromBank();
@@ -71,11 +71,36 @@ public class BankConnection {
         return message;
     }
 
+    public static String withdraw(String username, String password, int money, String sourceID) throws Exception {
+        String token = getToken(username, password);
+        connectToBank();
+        sendMessageToBank(String.format("create_receipt %s %s %d %s %s %s", token, "withdraw", money, sourceID, "-1", ""));
+        String receiptID = getMessageFromBank();
+        sendMessageToBank(String.format("pay %s", receiptID));
+        String message = getMessageFromBank();
+        if (!message.equalsIgnoreCase("done successfully")){
+            throw new Exception(message);
+        }
+        exit();
+        return message;
+    }
+
+    public static String move(String username, String password, int money, String sourceID, String destinationID) throws Exception {
+        String token = getToken(username, password);
+        connectToBank();
+        sendMessageToBank(String.format("create_receipt %s %s %d %s %s %s", token, "move", money, sourceID, destinationID, ""));
+        String receiptID = getMessageFromBank();
+        sendMessageToBank(String.format("pay %s", receiptID));
+        String message = getMessageFromBank();
+        if (!message.equalsIgnoreCase("done successfully")){
+            throw new Exception(message);
+        }
+        exit();
+        return message;
+    }
+
     public static String getBalance(String userName, String password) throws Exception {
         String token = getToken(userName, password);
-        if (token.equalsIgnoreCase("invalid username or password")){
-            throw new Exception(token);
-        }
         connectToBank();
         sendMessageToBank(String.format("get_balance %s", token));
         String message = getMessageFromBank();
