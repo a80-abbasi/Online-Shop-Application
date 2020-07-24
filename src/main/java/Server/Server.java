@@ -376,7 +376,12 @@ public class Server extends Application {
                     Account account = Account.getAccountByUsername(message.substring("get account: ".length()));
                     sendAccountInfo(dataOutputStream, account);
                 }
-
+                else if (message.equalsIgnoreCase("create admin account")){
+                    if (Admin.getAllAdmins().size() == 1){
+                        Admin mainAdmin = Admin.getAllAdmins().get(0);
+                        Admin.setStoreBankID(BankConnection.creatAccount(mainAdmin.getName(), mainAdmin.getLastName(), mainAdmin.getUsername(), mainAdmin.getPassword()));
+                    }
+                }
                 clientSocket.close();
             }
         } catch (IOException e) {
