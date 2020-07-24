@@ -26,7 +26,7 @@ public class SellerProfileManager extends ProfileManager {
         this.seller = seller;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         seller = (Seller) Connection.getLoggedInAccount();
         return seller.getBalance();
     }

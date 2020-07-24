@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class Seller extends Account {
     private static ArrayList<Seller> allSellers = new ArrayList<>();
     private String nameOfCompany;
-    private int balance;
+    private double balance;
     private ArrayList<SellLog> sellLogs;
     private ArrayList<Product> products;
     private ArrayList<Off> offs;
@@ -68,15 +68,15 @@ public class Seller extends Account {
         return offs;
     }
 
-    public int getBalance() {
-            return balance;
+    public double getBalance() {
+        return balance;
     }
 
     public void setNameOfCompany(String nameOfCompany) {
         this.nameOfCompany = nameOfCompany;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
