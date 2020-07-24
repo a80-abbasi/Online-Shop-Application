@@ -56,6 +56,13 @@ public class Server extends Application {
     }
 
     public static void main(String[] args) {
+        new Thread(() -> {
+            try {
+                ChatServer.main(10000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
         Main.deserializeXML();
         Thread thread = new Thread(Server::run);
         thread.setPriority(Thread.MAX_PRIORITY);
@@ -198,15 +205,41 @@ public class Server extends Application {
                         }
                         else if (content.startsWith("charge wallet: ")){
                             int money = Integer.parseInt(content.substring("charge wallet: ".length()));
-                            Customer customer = (Customer) account;
-                            String outPut;
-                            try {
-                                outPut = BankConnection.move(customer.getUsername(), customer.getPassword(), money, customer.getBankAccountID(), Admin.getStoreBankID());
-                            } catch (Exception e) {
-                                outPut = e.getMessage();
+                            String outPut = "";
+                            if (account instanceof Customer) {
+                                Customer customer = (Customer) account;
+                                try {
+                                    outPut = BankConnection.move(customer.getUsername(), customer.getPassword(), money, customer.getBankAccountID(), Admin.getStoreBankID());
+                                } catch (Exception e) {
+                                    outPut = e.getMessage();
+                                }
+                            }
+                            else if (account instanceof Seller) {
+                                Seller seller = (Seller) account;
+                                try {
+                                    outPut = BankConnection.move(seller.getUsername(), seller.getPassword(), money, seller.getBankAccountID(), Admin.getStoreBankID());
+                                } catch (Exception e) {
+                                    outPut = e.getMessage();
+                                }
                             }
                             dataOutputStream.writeUTF(outPut);
                             dataOutputStream.flush();
+                        }
+                        else if (content.startsWith("withdraw from wallet: ")) {//todo:
+                            int withdrawalMoney = Integer.parseInt(content.substring(("withdraw from wallet: ").length()));
+                            Seller seller = (Seller) account;
+                            String output = "";
+                            try {
+                                output = BankConnection.move(seller.getUsername(), seller.getPassword(), withdrawalMoney,
+                                        Admin.getStoreBankID(), seller.getBankAccountID());
+                            } catch (Exception e) {
+                                output = e.getMessage();
+                            }
+                            dataOutputStream.writeUTF(output);
+                            dataOutputStream.flush();
+                        }
+                        else if (message.startsWith("get account balance")) {
+                            sendAccountBalance(dataOutputStream, account);
                         }
                     }
                     if (content.equals("get logged in account")){
@@ -407,10 +440,37 @@ public class Server extends Application {
                     dataOutputStream.writeUTF(String.valueOf(Admin.getMinWalletBalance()));
                     dataOutputStream.flush();
                 }
+                else if (message.equals("get banking fee percent")) {
+                    dataOutputStream.writeUTF(String.valueOf(Admin.getBankingFeePercent()));
+                    dataOutputStream.flush();
+                }
+                else if (message.startsWith("edit min wallet balance: ")) {
+                    int minWalletBalance = Integer.parseInt(message.substring(("edit min wallet balance: ").length()));
+                    Admin.setMinWalletBalance(minWalletBalance);
+                }
+                else if (message.startsWith("edit banking fee percent: ")) {
+                    int bankingFeePercent = Integer.parseInt(message.substring(("edit banking fee percent: ").length()));
+                    Admin.setBankingFeePercent(bankingFeePercent);
+                }
                 clientSocket.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void sendAccountBalance(DataOutputStream dataOutputStream, Account account) {
+        String output = "";
+        try {
+            output = BankConnection.getBalance(account.getUsername(), account.getPassword());
+        } catch (Exception e) {
+            output = e.getMessage();
+        }
+        try {
+            dataOutputStream.writeUTF(output);
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

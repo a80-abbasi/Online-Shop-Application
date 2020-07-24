@@ -5,10 +5,15 @@ import Client.Connection;
 import Model.Account.*;
 import Model.Product.Product;
 import Model.Product.Score;
+import Model.Request.*;
 import Server.ChatServer;
 import View.Menu;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.*;
 
@@ -19,6 +24,7 @@ public class CustomerProfileManager extends ProfileManager{
         super(customer);
         this.customer = customer;
     }
+
 
     public String checkForDiscountGift(){
         final int minimumAmountOfMoney = 1000;
@@ -238,14 +244,6 @@ public class CustomerProfileManager extends ProfileManager{
         return input.matches("\\A\\d+\\z");
     }
 
-
-    public void setProductExistingNumber() {
-        for (Product product : customer.getCart().keySet()) {
-            Seller seller = product.getSeller();
-            seller.setBalance(seller.getBalance() + product.getPriceWithOff());
-        }
-    }
-
     public void setUsedDiscountCodes(String usedDiscountCode) {
         if (!usedDiscountCode.equals("")) {
             Discount discount =  Discount.getDiscountByDiscountCode(usedDiscountCode);
@@ -276,15 +274,15 @@ public class CustomerProfileManager extends ProfileManager{
         }
         return iDAndDate;
     }
-    public void connectSupporter() throws Exception {
+    public void connectSupporter(int supporterID) throws Exception {
         new Thread(() -> {
             try {
-                Server.ChatServer.main(Server.ChatServer.getI() + 5000);
+                Server.ChatServer.main(Server.ChatServer.getI() + supporterID);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }).start();
-        ChatClient.main(ChatServer.getI() + 5000);
+        ChatClient.main(ChatServer.getI() + supporterID);
     }
 
 }

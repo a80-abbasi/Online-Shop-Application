@@ -26,6 +26,25 @@ public class SellerProfileManager extends ProfileManager {
         this.seller = seller;
     }
 
+    public int getBalance() {
+        seller = (Seller) Connection.getLoggedInAccount();
+        return seller.getBalance();
+    }
+
+    public void chargeWallet(int chargeAmountMoney) {
+        Connection.sendToServerWithToken("charge wallet: " + chargeAmountMoney);
+    }
+
+    public void withdrawFromWallet(int withdrawAmountMoney) throws Exception {
+        int minWalletBalance = AdminProfileManager.getMinWalletBalance();
+        Connection.sendToServer("get account balance");
+        int storeBalance = Integer.parseInt(Connection.receiveFromServer());
+        if ((storeBalance - withdrawAmountMoney) < minWalletBalance) {
+            throw new Exception("Wallet cannot contain less than " + minWalletBalance);
+        }
+        Connection.sendToServerWithToken("withdraw from wallet: " + withdrawAmountMoney);//todo: !!
+    }
+
     public String getCompanyName() {
         Connection.sendToServerWithToken("get company name: ");
         String companyName = Connection.receiveFromServer();

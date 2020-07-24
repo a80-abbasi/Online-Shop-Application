@@ -217,4 +217,13 @@ public class AdminProfileMenu {
             System.out.println(e.getMessage());
         }
     }
+
+    public void goToBankingSettingMenu(MouseEvent mouseEvent) {
+        BankingSettingMenu.setParentMenu("AdminProfileMenu");
+        try {
+            App.setRoot("BankingSettingMenu");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Supporter extends Account{
     private static ArrayList<Supporter> allSupporters;
     private boolean lineCondition = false;
+    private int SupporterID = (allSupporters.size()*100) + 100;
 
     static {
         allSupporters = new ArrayList<>();
@@ -66,5 +67,8 @@ public class Supporter extends Account{
         return lineCondition;
     }
 
+    public int getSupporterID() {
+        return SupporterID;
+    }
 }
 
