@@ -27,19 +27,31 @@ public class SellerProfileManager extends ProfileManager {
     }
 
     public double getBalance() {
-        seller = (Seller) Connection.getLoggedInAccount();
-        return seller.getBalance();
+        Connection.sendToServerWithToken("get account balance");
+        double sellerBalance = Double.parseDouble(Connection.receiveFromServer());
+        return sellerBalance;
     }
 
-    public void chargeWallet(int chargeAmountMoney) {
-        Connection.sendToServerWithToken("charge wallet: " + chargeAmountMoney);
+    public double getBankAccountBalance() {
+        Connection.sendToServerWithToken("get bank account balance");
+        double sellerBankAccountBalance = Double.parseDouble(Connection.receiveFromServer());
+        return sellerBankAccountBalance;
+    }
+
+    public void chargeWallet(int chargeAmountMoney) throws Exception{
+        double sellerBankAccountBalance = getBankAccountBalance();
+        if (sellerBankAccountBalance > chargeAmountMoney) {
+            Connection.sendToServerWithToken("charge wallet: " + chargeAmountMoney);
+        }
+        else {
+            throw new Exception("You don't have enough money in your bank account");
+        }
     }
 
     public void withdrawFromWallet(int withdrawAmountMoney) throws Exception {
         int minWalletBalance = AdminProfileManager.getMinWalletBalance();
-        Connection.sendToServer("get account balance");
-        int storeBalance = Integer.parseInt(Connection.receiveFromServer());
-        if ((storeBalance - withdrawAmountMoney) < minWalletBalance) {
+        double sellerBalance = getBalance();
+        if ((sellerBalance - withdrawAmountMoney) < minWalletBalance) {
             throw new Exception("Wallet cannot contain less than " + minWalletBalance);
         }
         Connection.sendToServerWithToken("withdraw from wallet: " + withdrawAmountMoney);//todo: !!
