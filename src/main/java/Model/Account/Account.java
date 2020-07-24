@@ -143,6 +143,26 @@ public abstract class Account {
         account.removeUser();
     }
 
+    public static ArrayList<Account> getOnlineUsers(){
+        ArrayList<Account> onlineAccount = new ArrayList<>();
+        for (Account account : allAccounts) {
+            if (account.isOnline()){
+                onlineAccount.add(account);
+            }
+        }
+        return onlineAccount;
+    }
+
+    public static ArrayList<String> getOnlineUsersUsername(){
+        ArrayList<String> onlineAccount = new ArrayList<>();
+        for (Account account : allAccounts) {
+            if (account.isOnline()){
+                onlineAccount.add(account.getUsername());
+            }
+        }
+        return onlineAccount;
+    }
+
     public abstract void removeUser();
 
     @Override
