@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Admin extends Account{
     private static ArrayList<Admin> allAdmins;
+    private String storeBankID;
 
     private static int minBankBalance = 10;
     private static int bankingFeePercent = 5;
@@ -36,6 +37,16 @@ public class Admin extends Account{
             }
         }
         return null;
+    }
+
+    public static void setStoreBankID(String storeBankID){
+        for (Admin admin : allAdmins) {
+            admin.storeBankID = storeBankID;
+        }
+    }
+
+    public static String getStoreBankID(){
+        return allAdmins.get(0).storeBankID;
     }
 
     public static int getMinBankBalance() {

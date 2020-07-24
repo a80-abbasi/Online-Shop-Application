@@ -4,8 +4,8 @@ import java.io.*;
 import java.net.Socket;
 
 public class BankConnection {
-    public static final int PORT = 2222;
-    public static final String IP = "127.0.0.1";
+    private static final int PORT = 2222;
+    private static final String IP = "127.0.0.1";
 
     private static DataOutputStream outputStream;
     private static DataInputStream inputStream;
