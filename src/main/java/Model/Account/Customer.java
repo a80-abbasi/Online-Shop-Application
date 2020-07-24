@@ -42,6 +42,14 @@ public class Customer extends Account {
         this("", "", "", "", "", "", 0);
     }
 
+    public String getBankAccountID() {
+        return bankAccountID;
+    }
+
+    public void setBankAccountID(String bankAccountID) {
+        this.bankAccountID = bankAccountID;
+    }
+
     private void createBankAccount() {
         bankAccountID = BankConnection.createAccount(name, lastName, username, password);
         try {
