@@ -60,6 +60,7 @@ public class ManageSaleHistory {
             return;
         }
         ((BuyLog) selectedBuyLog).setSendingCondition("Send");
+        allBuyLogsTable = adminProfileManager.getSaleHistoryTable(allBuyLogsTable);
     }
 
     public void ShowProducts(MouseEvent mouseEvent) {
