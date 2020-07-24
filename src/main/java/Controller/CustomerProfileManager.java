@@ -1,9 +1,11 @@
 package Controller;
 
+import Client.ChatClient;
 import Client.Connection;
 import Model.Account.*;
 import Model.Product.Product;
 import Model.Product.Score;
+import Server.ChatServer;
 import View.Menu;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
