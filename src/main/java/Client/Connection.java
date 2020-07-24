@@ -10,7 +10,7 @@ import java.io.*;
 import java.net.Socket;
 
 public class Connection {
-    private static final int serverPort = 8080;
+    private static final int serverPort = 8000;
 
     private static String token;
     private static Socket clientSocket;

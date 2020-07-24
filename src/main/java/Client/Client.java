@@ -41,7 +41,6 @@ public class Client extends Application {
     }
 
     public static void main(String[] args) {
-        Main.deserializeXML();
         ProductPageController.productsManager = new ProductsManager();
         ProductsController.productsManager = new ProductsManager();
         launch();
