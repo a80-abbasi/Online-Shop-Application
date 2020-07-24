@@ -30,10 +30,6 @@ public class AdminProfileManager extends ProfileManager {
         }
     }
 
-    public ArrayList<Account> getAllUsers() {
-        return Account.getAllAccounts();
-    }
-
     public TableView getAllUsersTable() {
         TableView allUsers = new TableView();
 
@@ -56,8 +52,13 @@ public class AdminProfileManager extends ProfileManager {
 
         Connection.sendToServer("getCustomers");
         ArrayList<Customer> allCustomers = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Customer>>(){}.getType());
+
+        Connection.sendToServer("getSupporters");
+        ArrayList<Supporter> allSupporters = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Supporter>>(){}.getType());
+
         Connection.sendToServer("getSellers");
         ArrayList<Seller> allSellers = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Seller>>(){}.getType());
+
         Connection.sendToServer("getAdmins");
         ArrayList<Admin> allAdmins = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Admin>>(){}.getType());
 
@@ -70,6 +71,9 @@ public class AdminProfileManager extends ProfileManager {
         }
         for (Customer customer : allCustomers) {
             allAccounts.add(customer);
+        }
+        for (Supporter supporter : allSupporters) {
+            allAccounts.add(supporter);
         }
         for (Account account : allAccounts) {
             if (account.equals(Account.getLoggedInAccount())) {
@@ -347,10 +351,10 @@ public class AdminProfileManager extends ProfileManager {
                 new TypeToken<ArrayList<RegisterSellerRequest>>(){}.getType());
         allRequests.addAll(allRegisterSellerRequests);
 
-        Connection.sendToServer("getRegisterSupporterRequests");
+        /*Connection.sendToServer("getRegisterSupporterRequests");
         ArrayList<RegisterSupporterRequest> allRegisterSupporterRequests = new Gson().fromJson(Connection.receiveFromServer(),
                 new TypeToken<ArrayList<RegisterSupporterRequest>>(){}.getType());
-        allRequests.addAll(allRegisterSupporterRequests);
+        allRequests.addAll(allRegisterSupporterRequests);*/
 
         Connection.sendToServer("getRemoveProductRequests");
         ArrayList<RemoveProductRequest> allRemoveProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
@@ -468,6 +472,58 @@ public class AdminProfileManager extends ProfileManager {
         parentCategory.removeSubCategory(Category.getCategoryByName(subCategory));
     }
 
+    public TableView getSaleHistoryTable(TableView allRequestsTable) {
+        TableColumn<String, Request> column1 = new TableColumn<>("Date");
+        column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
+
+        TableColumn<RequestType, Request> column2 = new TableColumn<>("");
+        column2.setCellValueFactory(new PropertyValueFactory<>("requestType"));
+
+        allRequestsTable.getColumns().addAll(column1, column2);
+
+        ArrayList<Request> allRequests = new ArrayList<>();
+
+        Connection.sendToServer("getAddOffRequests");
+        ArrayList<AddOffRequest> allAddOffRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<AddOffRequest>>(){}.getType());
+        allRequests.addAll(allAddOffRequests);
+
+        Connection.sendToServer("getAddProductRequests");
+        ArrayList<AddProductRequest> allAddProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<AddProductRequest>>(){}.getType());
+        allRequests.addAll(allAddProductRequests);
+
+        Connection.sendToServer("getEditOffRequests");
+        ArrayList<EditOffRequest> allEditOffRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<EditOffRequest>>(){}.getType());
+        allRequests.addAll(allEditOffRequests);
+
+        Connection.sendToServer("getEditProductRequests");
+        ArrayList<EditProductRequest> allEditProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<EditOffRequest>>(){}.getType());
+        allRequests.addAll(allEditProductRequests);
+
+        Connection.sendToServer("getRegisterSellerRequests");
+        ArrayList<RegisterSellerRequest> allRegisterSellerRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<RegisterSellerRequest>>(){}.getType());
+        allRequests.addAll(allRegisterSellerRequests);
+
+        Connection.sendToServer("getRemoveProductRequests");
+        ArrayList<RemoveProductRequest> allRemoveProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<ArrayList<RemoveProductRequest>>(){}.getType());
+        allRequests.addAll(allRemoveProductRequests);
+
+        for (Request request : allRequests) {
+            allRequestsTable.getItems().add(request);
+        }
+        allRequestsTable.setPlaceholder(new Label("No Data to display"));
+        return allRequestsTable;
+    }
+
+
+
+
+
     //phase1
     public String viewUser(String username) throws NullPointerException {
         Account account = Account.getAccountByUsername(username);
@@ -554,51 +610,7 @@ public class AdminProfileManager extends ProfileManager {
         return allRequestIds;
     }
 
-    public TableView getSaleHistoryTable(TableView allRequestsTable) {
-        TableColumn<String, Request> column1 = new TableColumn<>("Date");
-        column1.setCellValueFactory(new PropertyValueFactory<>("requestId"));
-
-        TableColumn<RequestType, Request> column2 = new TableColumn<>("");
-        column2.setCellValueFactory(new PropertyValueFactory<>("requestType"));
-
-        allRequestsTable.getColumns().addAll(column1, column2);
-
-        ArrayList<Request> allRequests = new ArrayList<>();
-
-        Connection.sendToServer("getAddOffRequests");
-        ArrayList<AddOffRequest> allAddOffRequests = new Gson().fromJson(Connection.receiveFromServer(),
-                new TypeToken<ArrayList<AddOffRequest>>(){}.getType());
-        allRequests.addAll(allAddOffRequests);
-
-        Connection.sendToServer("getAddProductRequests");
-        ArrayList<AddProductRequest> allAddProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
-                new TypeToken<ArrayList<AddProductRequest>>(){}.getType());
-        allRequests.addAll(allAddProductRequests);
-
-        Connection.sendToServer("getEditOffRequests");
-        ArrayList<EditOffRequest> allEditOffRequests = new Gson().fromJson(Connection.receiveFromServer(),
-                new TypeToken<ArrayList<EditOffRequest>>(){}.getType());
-        allRequests.addAll(allEditOffRequests);
-
-        Connection.sendToServer("getEditProductRequests");
-        ArrayList<EditProductRequest> allEditProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
-                new TypeToken<ArrayList<EditOffRequest>>(){}.getType());
-        allRequests.addAll(allEditProductRequests);
-
-        Connection.sendToServer("getRegisterSellerRequests");
-        ArrayList<RegisterSellerRequest> allRegisterSellerRequests = new Gson().fromJson(Connection.receiveFromServer(),
-                new TypeToken<ArrayList<RegisterSellerRequest>>(){}.getType());
-        allRequests.addAll(allRegisterSellerRequests);
-
-        Connection.sendToServer("getRemoveProductRequests");
-        ArrayList<RemoveProductRequest> allRemoveProductRequests = new Gson().fromJson(Connection.receiveFromServer(),
-                new TypeToken<ArrayList<RemoveProductRequest>>(){}.getType());
-        allRequests.addAll(allRemoveProductRequests);
-
-        for (Request request : allRequests) {
-            allRequestsTable.getItems().add(request);
-        }
-        allRequestsTable.setPlaceholder(new Label("No Data to display"));
-        return allRequestsTable;
+    public ArrayList<Account> getAllUsers() {
+        return Account.getAllAccounts();
     }
 }
