@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.CustomerProfile.ConnectSupporters">
     <children>
-        <TableView fx:id="allRequestsTable" layoutX="482.0" layoutY="172.0" prefHeight="456.0" prefWidth="586.0" />
+        <TableView fx:id="allSupportersTable" layoutX="482.0" layoutY="172.0" prefHeight="456.0" prefWidth="586.0" />
         <Label layoutX="629.0" layoutY="80.0" prefHeight="40.0" prefWidth="289.0" text="Connect Supporters">
             <font>
                 <Font name="Times New Roman" size="36.0" />
