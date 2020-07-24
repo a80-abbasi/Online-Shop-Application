@@ -31,7 +31,7 @@ public class ConnectSupporters {
 
     public void initialize() {
         this.customerProfileManager = new CustomerProfileManager((Customer) Account.getLoggedInAccount());
-        //allSupportersTable = customerProfileManager.getAllSupportersTable(allSupportersTable);
+        allSupportersTable = customerProfileManager.getAllSupportersTable(allSupportersTable);
 
         App.setBackButton(backImage, parentMenu);
         ProductPageController.setMainMenuButton(mainMenuImage);
@@ -42,7 +42,7 @@ public class ConnectSupporters {
         if (selectedSupporter == null) {
             return;
         }
-        if (((Supporter)selectedSupporter).getLineCondition() == false) {
+        if (!((Supporter) selectedSupporter).getLineCondition()) {
             AlertBox.showMessage("Supporter Condition", "Supporter is offline now!");
             return;
         }

@@ -5,7 +5,6 @@ import Client.Connection;
 import Model.Account.*;
 import Model.Product.Product;
 import Model.Product.Score;
-import Model.Request.*;
 import Server.ChatServer;
 import View.Menu;
 import com.google.gson.Gson;
@@ -283,6 +282,25 @@ public class CustomerProfileManager extends ProfileManager{
             }
         }).start();
         ChatClient.main(ChatServer.getI() + supporterID);
+    }
+
+    public TableView getAllSupportersTable(TableView allSupportersTable) {
+        TableColumn<String, Supporter> column1 = new TableColumn<>("Supporter ID");
+        column1.setCellValueFactory(new PropertyValueFactory<>("SupporterID"));
+
+        TableColumn<String, Supporter> column2 = new TableColumn<>("Supporter Line");
+        column2.setCellValueFactory(new PropertyValueFactory<>("lineCondition"));
+
+        allSupportersTable.getColumns().addAll(column1, column2);
+
+        Connection.sendToServer("getSupporters");
+        ArrayList<Supporter> allSupporters = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Supporter>>(){}.getType());
+
+        for (Supporter supporter : allSupporters) {
+            allSupportersTable.getItems().add(supporter);
+        }
+        allSupportersTable.setPlaceholder(new Label("No Data to display"));
+        return allSupportersTable;
     }
 
 }
