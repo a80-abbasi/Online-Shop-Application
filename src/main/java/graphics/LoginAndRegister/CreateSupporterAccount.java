@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
@@ -20,6 +21,8 @@ public class CreateSupporterAccount {
     public PasswordField passwordField;
 
     private static String parentMenu = "MainMenu";
+    public ImageView backImage;
+    public ImageView mainMenuImage;
 
     private LoginAndRegisterManager loginAndRegisterManager;
 
