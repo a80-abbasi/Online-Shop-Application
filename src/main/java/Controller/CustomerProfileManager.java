@@ -25,6 +25,32 @@ public class CustomerProfileManager extends ProfileManager{
         this.customer = customer;
     }
 
+    public double getBalance() {
+        Connection.sendToServerWithToken("get account balance");
+        double customerBalance = Double.parseDouble(Connection.receiveFromServer());
+        return customerBalance;
+    }
+
+    private double getBankAccountBalance() {
+        Connection.sendToServerWithToken("get bank account balance");
+        double customerBankAccountBalance = Double.parseDouble(Connection.receiveFromServer());
+        return customerBankAccountBalance;
+    }
+
+    public void chargeWallet(int chargeWalletAmount) throws Exception{
+        double bankAccountBalance = getBankAccountBalance();
+        double previousBalance = getBalance();
+        int minWalletBalance = AdminProfileManager.getMinWalletBalance();
+        if (bankAccountBalance < chargeWalletAmount) {
+            throw new Exception("You don't have enough money");
+        }
+        else if ((previousBalance + chargeWalletAmount) < minWalletBalance) {
+            throw new Exception("You must have at least " + minWalletBalance + " in your wallet.");
+        }
+        else {
+            Connection.sendToServerWithToken("charge wallet: " + chargeWalletAmount);
+        }
+    }
 
     public String checkForDiscountGift(){
         final int minimumAmountOfMoney = 1000;
@@ -284,5 +310,4 @@ public class CustomerProfileManager extends ProfileManager{
         }).start();
         ChatClient.main(ChatServer.getI() + supporterID);
     }
-
 }
