@@ -28,7 +28,7 @@ public class Client extends Application {
         }
         stage.setScene(scene);
         stage.setOnCloseRequest(windowEvent -> {
-            if (Connection.getAccountFromServer() != null) {
+            if (Connection.getLoggedInAccount() != null) {
                 Connection.sendToServer("logout");
             }
             stage.close();

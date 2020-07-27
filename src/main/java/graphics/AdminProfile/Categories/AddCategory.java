@@ -58,7 +58,7 @@ public class AddCategory {
             try {
                 App.setRoot(parentMenu);
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         } catch (Exception e) {
             AlertBox.showMessage("Failed To Add Category", e.getMessage());

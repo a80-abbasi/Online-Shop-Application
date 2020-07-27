@@ -1,7 +1,14 @@
+import Model.Account.Account;
+import Model.Account.Customer;
+import Model.Product.Product;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -75,8 +82,5 @@ public class BankAPI {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-
     }
-
-
 }
