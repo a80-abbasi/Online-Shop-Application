@@ -1,7 +1,5 @@
 package graphics.SellerProfile;
 
-import java.util.ArrayList;
-
 public class FeatureData {
     private String specialFeature;
     private String value;
