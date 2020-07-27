@@ -1,16 +1,23 @@
 package Client;
 
 import Model.Account.*;
+import Model.Product.Category;
+import Model.Product.Product;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Connection {
     private static final int serverPort = 8000;
 
     private static String token;
     private static Socket clientSocket;
+    private static DataInputStream dataInputStream;
+    private static DataOutputStream dataOutputStream;
 
     private Connection(){}
 
@@ -25,7 +32,7 @@ public class Connection {
     public static void sendToServer(String message){
         try {
             clientSocket = new Socket("localhost", serverPort);
-            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
+            dataOutputStream = new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
             dataOutputStream.writeUTF(message);
             dataOutputStream.flush();
         } catch (IOException e) {
@@ -46,7 +53,7 @@ public class Connection {
             throw new RuntimeException("clientSocket is not connected");
         }
         try {
-            DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
+            dataInputStream = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
             return dataInputStream.readUTF();
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,5 +81,40 @@ public class Connection {
         else {
             return gson.fromJson(loggedInInfo.substring("Seller: ".length()), Seller.class);
         }
+    }
+
+    public static Product getProduct(String productId){
+        try {
+            Connection.sendToServer("get product with id: " + productId);
+            Product product = new Gson().fromJson(Connection.receiveFromServer(), Product.class);
+            byte[] image = dataInputStream.readAllBytes();
+            product.setImageBytes(image);
+            if (product.isFile()) {
+                byte[] file = dataInputStream.readAllBytes();
+                product.setFile(file);
+            }
+            return product;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static ArrayList<Product> getAllProducts(){
+        Connection.sendToServer("get all products IDs");
+        List<String> productIDs = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<String>>(){}.getType());
+        ArrayList<Product> products = new ArrayList<>();
+        for (String id : productIDs) {
+            products.add(getProduct(id));
+        }
+        return products;
+    }
+
+    public static DataInputStream getDataInputStream() {
+        return dataInputStream;
+    }
+
+    public static DataOutputStream getDataOutputStream() {
+        return dataOutputStream;
     }
 }

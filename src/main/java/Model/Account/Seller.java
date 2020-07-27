@@ -1,24 +1,23 @@
 package Model.Account;
 
+import Client.Connection;
 import Model.Product.Product;
 import Server.BankConnection;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class Seller extends Account {
     private static ArrayList<Seller> allSellers = new ArrayList<>();
     private String nameOfCompany;
     private double balance;
     private ArrayList<SellLog> sellLogs;
-    private ArrayList<Product> products;
+    private ArrayList<String> productIDs;
     private ArrayList<Off> offs;
     private String phoneNumberOfCompany;
     private String CompanyAddress;
     private String CompanyOpenYear;
     private String bankAccountID;
-    private String bankAccountToken;
 
     public Seller(String username, String password, String name, String lastName, String email, String phoneNumber, String nameOfCompany,
                   int balance) {
@@ -27,13 +26,21 @@ public class Seller extends Account {
         this.nameOfCompany = nameOfCompany;
         this.balance = balance;
         sellLogs = new ArrayList<>();
-        products = new ArrayList<>();
+        productIDs = new ArrayList<>();
         offs = new ArrayList<>();
         createBankAccount();
     }
 
     public Seller() {
         allSellers.add(this);
+    }
+
+    public ArrayList<String> getProductIDs() {
+        return productIDs;
+    }
+
+    public void setProductIDs(ArrayList<String> productIDs) {
+        this.productIDs = productIDs;
     }
 
     private void createBankAccount() {
@@ -61,6 +68,10 @@ public class Seller extends Account {
     }
 
     public ArrayList<Product> getProducts() {
+        ArrayList<Product> products = new ArrayList<>();
+        for (String id : productIDs) {
+            products.add(Connection.getProduct(id));
+        }
         return products;
     }
 
@@ -85,7 +96,7 @@ public class Seller extends Account {
     }
 
     public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+        this.productIDs = products.stream().map(Product::getProductId).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public void setOffs(ArrayList<Off> offs) {
@@ -142,7 +153,7 @@ public class Seller extends Account {
                 "nameOfCompany='" + nameOfCompany + '\'' +
                 ", balance=" + balance +
                 ", sellLogs=" + sellLogs +
-                ", products=" + products +
+                ", products=" + productIDs +
                 ", offs=" + offs +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +

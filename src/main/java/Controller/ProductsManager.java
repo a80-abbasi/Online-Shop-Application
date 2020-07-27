@@ -30,8 +30,7 @@ public class  ProductsManager {
     private boolean actionFilter;
 
     public void setAllProducts() {
-        Connection.sendToServer("getProducts");
-        allProducts = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Product>>(){}.getType());
+        allProducts = Connection.getAllProducts();
     }
 
     public void showAllCategories () {
