@@ -387,22 +387,22 @@ public class Server extends Application {
                     createDiscountCode(message.substring(("Create discountCode: ").length()));
                 }
                 else if (message.startsWith("edit discount startTime: ")) {
-                    editDiscountStartTime(message.split(","));
+                    editDiscountStartTime(message.split("&"));
                 }
                 else if (message.startsWith("edit discount endTime: ")) {
-                    editDiscountEndTime(message.split(","));
+                    editDiscountEndTime(message.split("&"));
                 }
                 else if (message.startsWith("edit discount percent: ")) {
-                    editDiscountPercent(message.split(","));
+                    editDiscountPercent(message.split("&"));
                 }
                 else if (message.startsWith("edit discount maxPossibleDiscount: ")) {
-                    editDiscountMaxPossibleDiscount(message.split(","));
+                    editDiscountMaxPossibleDiscount(message.split("&"));
                 }
                 else if (message.startsWith("edit discount discountPerCustomer: ")) {
-                    editDiscountPerCustomer(message.split(","));
+                    editDiscountPerCustomer(message.split("&"));
                 }
                 else if (message.startsWith("edit discount includingCustomers: ")) {
-                    editDiscountIncludingCustomers(message.split(","));
+                    editDiscountIncludingCustomers(message.split("&"));
                 }
                 else if (message.startsWith("remove discount: ")) {
                     removeDiscount(message.substring(("remove discount: ").length()));
@@ -452,15 +452,11 @@ public class Server extends Application {
     }
 
     private static void addCategory(String message) {
-        String[] splitMessage = message.split(",");
+        String[] splitMessage = message.split("&");
         String categoryName = splitMessage[1];
-        try {
-            ArrayList<String> specialFeatures = gson.fromJson(splitMessage[2], new TypeToken<ArrayList<String>>(){}.getType());
-            Category category = new Category(categoryName);
-            category.setSpecialFeatures(specialFeatures);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        ArrayList<String> specialFeatures = gson.fromJson(splitMessage[2], new TypeToken<ArrayList<String>>(){}.getType());
+        Category category = new Category(categoryName);
+        category.setSpecialFeatures(specialFeatures);
     }
 
     private static void sendBankAccountBalance(DataOutputStream dataOutputStream, Account account) {
@@ -547,14 +543,14 @@ public class Server extends Application {
     }
 
     private static void addCategorySpecialFeature(String message) {
-        String[] splitMessage = message.split(",");
+        String[] splitMessage = message.split("&");
         Category category = new Gson().fromJson(splitMessage[1], Category.class);
         String specialFeature = splitMessage[2];
         category.addSpecialFeature(specialFeature);
     }
 
     private static void removeCategorySpecialFeature(String message) {
-        String[] splitMessage = message.split(",");
+        String[] splitMessage = message.split("&");
         Category category = new Gson().fromJson(splitMessage[1], Category.class);
         String specialFeature = splitMessage[2];
         category.removeSpecialFeature(specialFeature);

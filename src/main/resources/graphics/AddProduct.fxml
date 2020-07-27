@@ -112,7 +112,7 @@
         <TableView fx:id="specialFeaturesTable" editable="true" layoutX="892.0" layoutY="359.0" prefHeight="257.0" prefWidth="300.0">
             <columns>
                 <TableColumn fx:id="specialFeatureColumn" editable="false" prefWidth="151.0" text="Special Feature" />
-                <TableColumn fx:id="valueColumn" prefWidth="148.0" text="Value" />
+                <TableColumn fx:id="valueColumn" onEditCommit="#editValueForSpecialFeature" prefWidth="148.0" text="Value" />
             </columns>
         </TableView>
         <MenuButton fx:id="selectCategoryMenuButton" layoutX="892.0" layoutY="138.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="300.0" text="Select Category">
