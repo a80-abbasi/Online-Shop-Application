@@ -21,6 +21,8 @@ public abstract class EditAddProductRequest extends Request {
     protected Category productCategory;
     protected HashMap<String, Integer> productSpecialFeatures;
 
+    protected byte[] imageBytes;
+
     public EditAddProductRequest(String requestId, RequestType requestType) {
         super(requestId, requestType);
         allEditAddProductRequests.add(this);

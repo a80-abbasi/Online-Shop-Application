@@ -54,6 +54,7 @@ public class AddProductRequest extends EditAddProductRequest {
                     productCategory, productSpecialFeatures, productSeller);
             productCategory.addProductToCategory(product);
             product.setImageAddressInServer("src\\main\\resources\\server\\" + productId + ".jpg");
+            product.setImageBytes(imageBytes);
             if (fileName != null && !fileName.isBlank()){
                 //product.setFile(file);
                 product.setFileAddressInServer("src\\main\\resources\\server\\" + fileName);
@@ -94,5 +95,9 @@ public class AddProductRequest extends EditAddProductRequest {
     @Override
     public void remove() {
         allAddProductRequest.remove(this);
+    }
+
+    public void setProductImageBytes(byte[] imageBytes) {
+
     }
 }

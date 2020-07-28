@@ -211,14 +211,14 @@ public class Server extends Application {
                         else if (content.startsWith("withdraw from wallet: ")) {//todo:
                             withdrawFromWallet(dataOutputStream, account, content);
                         }
-                        else if (message.startsWith("get account balance")) {
+                        else if (content.startsWith("get account balance")) {
                             sendAccountBalance(dataOutputStream, account);
                         }
-                        else if (message.startsWith("get bank account balance")) {
+                        else if (content.startsWith("get bank account balance")) {
                             sendBankAccountBalance(dataOutputStream, account);
                         }
-                        else if (message.startsWith("set line condition: ")) {
-                            setSupporterLineCondition(account, message.substring(("set line condition: ").length()));
+                        else if (content.startsWith("set line condition: ")) {
+                            setSupporterLineCondition(account, content.substring(("set line condition: ").length()));
                         }
                     }
                     if (content.equals("get logged in account")){
@@ -519,12 +519,11 @@ public class Server extends Application {
         } catch (Exception e) {
             output = e.getMessage();
         }
-        System.out.println(output + "amiri");
         try {
-            dataOutputStream.writeUTF("40");
+            dataOutputStream.writeUTF(output);
             dataOutputStream.flush();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -539,6 +538,7 @@ public class Server extends Application {
             } catch (Exception e) {
                 outPut = e.getMessage();
             }
+            System.out.println(outPut);
         }
         else if (account instanceof Seller) {
             Seller seller = Seller.getSellerByUserName(account.getUsername());

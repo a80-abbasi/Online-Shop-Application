@@ -114,9 +114,10 @@ public class SellerProfileManager extends ProfileManager {
 
         sellerProductsTable.getColumns().addAll(column, column1);
 
-        Connection.sendToServerWithToken("get seller products: ");
-        ArrayList<Product> sellerProducts = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Product>>(){}.getType());
-        for (Product product : sellerProducts) {
+        Connection.sendToServerWithToken("get seller product IDs: ");
+        ArrayList<String> sellerProducts = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<String>>(){}.getType());
+        for (String productID : sellerProducts) {
+            Product product = Connection.getProduct(productID);
             sellerProductsTable.getItems().add(product);
         }
         sellerProductsTable.setPlaceholder(new Label("No Data To Display"));
@@ -233,8 +234,7 @@ public class SellerProfileManager extends ProfileManager {
     }
 
     public Product getProductByID(String id) {
-        Connection.sendToServer("get product: " + id);
-        Product product = new Gson().fromJson(Connection.receiveFromServer(), Product.class);
+        Product product = Connection.getProduct(id);
         return product;
     }
 
@@ -255,16 +255,23 @@ public class SellerProfileManager extends ProfileManager {
                 checkProductExistingNumber(productExistingNumber) && checkProductExplanations(productExplanations)) {
             AddProductRequest addProductRequest = new AddProductRequest(productID, productName, productCompanyName,
                     Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber), productExplanations,
-                    productCategory, productSpecialFeatures, this.seller, fileType);
-            Connection.sendToServer("add product request: " + new Gson().toJson(addProductRequest));
+                    productCategory, productSpecialFeatures, Seller.getSellerByUserName(Account.getLoggedInAccount().getUsername()), fileType);
+            String message = "add product request: &" + new Gson().toJson(addProductRequest) + "&";
+            message = message + image.toString();
+            if (file != null) {
+                message = message + "&" + file.toString();
+            }
+            Connection.sendToServer(message);
             Request.getAllRequests().remove(addProductRequest);
             AddProductRequest.getAllAddProductRequest().remove(addProductRequest);
             //Connection.sendToServer(image);
-            DataOutputStream dataOutputStream = Connection.getDataOutputStream();
+            /*DataOutputStream dataOutputStream = Connection.getDataOutputStream();
             dataOutputStream.write(image);
             if (file != null){
                 dataOutputStream.write(file);
             }
+            dataOutputStream.flush();
+            */
         }
     }
 
@@ -446,14 +453,14 @@ public class SellerProfileManager extends ProfileManager {
         seller.getSellLogs().add(sellLog);
     }
 
-    public ArrayList<String> getSellerProducts() {
+    /*public ArrayList<String> getSellerProducts() {
         ArrayList<Product> sellerProducts = seller.getProducts();
         ArrayList<String> sellerProductsIds = new ArrayList<>();
         for (Product product : sellerProducts) {
             sellerProductsIds.add(product.getProductId());
         }
         return sellerProductsIds;
-    }
+    }*/
 
     public HashMap<String, String> getProductBuyers(String productId) {
         HashMap<String, String> allBuyersUsernameAndPhoneNumber = new HashMap<>();
@@ -512,7 +519,7 @@ public class SellerProfileManager extends ProfileManager {
         return offsAmountAndID;
     }
 
-    public HashMap<String, String> getSellerProductsNameAndID() {
+    /*public HashMap<String, String> getSellerProductsNameAndID() {
         HashMap<String, String> SellerProductsNameAndID = new HashMap<>();
         for (int i = 0; i < seller.getProducts().size(); i ++) {
             SellerProductsNameAndID.put(String.valueOf(seller.getProducts().get(i).getProductName()), seller.getProducts().get(i).getProductId());
@@ -522,7 +529,7 @@ public class SellerProfileManager extends ProfileManager {
 
     public AddOffRequest addOffRequest () {
         return new AddOffRequest();
-    }
+    }*/
 
     public EditOffRequest makeNewEditOffRequest(String offID) throws NullPointerException, IllegalArgumentException {
         Off off = Off.getOffById(offID);
@@ -563,7 +570,7 @@ public class SellerProfileManager extends ProfileManager {
         }
     }
 
-    public void setOffProduct(EditAddOffRequest editAddOffRequest, String productID) throws NullPointerException, IllegalArgumentException {
+    /*public void setOffProduct(EditAddOffRequest editAddOffRequest, String productID) throws NullPointerException, IllegalArgumentException {
         Product product = Product.getProductByID(productID);
         if (product == null) {
             throw new NullPointerException();
@@ -574,7 +581,7 @@ public class SellerProfileManager extends ProfileManager {
         else {
             editAddOffRequest.addOffProduct(product);
         }
-    }
+    }*/
 
     public void removeProductInOffRequest(EditOffRequest editOffRequest, String productID) throws NullPointerException, IllegalArgumentException {
         Product product = Product.getProductByID(productID);
@@ -648,7 +655,7 @@ public class SellerProfileManager extends ProfileManager {
         return addProductRequest;
     }
 
-    public EditProductRequest makeNewEditProductRequest(String productId) throws NullPointerException, IllegalArgumentException{
+    /*public EditProductRequest makeNewEditProductRequest(String productId) throws NullPointerException, IllegalArgumentException{
         Product product = Product.getProductByID(productId);
         if (product == null){
             throw new NullPointerException();
@@ -661,5 +668,5 @@ public class SellerProfileManager extends ProfileManager {
         else {
             throw new IllegalArgumentException();
         }
-    }
+    }*/
 }

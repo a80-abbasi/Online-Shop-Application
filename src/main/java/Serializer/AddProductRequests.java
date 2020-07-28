@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class AddProductRequests {
     private final static String pathName = "src\\main\\resources\\AddProductRequest.xml";
 
-    @XmlElement(name = "admin")
+    @XmlElement(name = "addProductRequest")
     private ArrayList<AddProductRequest> allAddProductRequests = new ArrayList<>();
     private AddProductRequests(){
     }
@@ -25,8 +25,8 @@ public class AddProductRequests {
         File file = new File(pathName);
         if(file.exists() && !file.isDirectory() && file.length() > 0) {
             try(BufferedReader input = Files.newBufferedReader(Paths.get(pathName))) {
-                AddProductRequests admins = JAXB.unmarshal(input, AddProductRequests.class);
-                AddProductRequest.setAllAddProductRequest(admins.allAddProductRequests);
+                AddProductRequests addProductRequests = JAXB.unmarshal(input, AddProductRequests.class);
+                AddProductRequest.setAllAddProductRequest(addProductRequests.allAddProductRequests);
             } catch (IOException e) {
                 System.out.println("Error opening file");
             }
@@ -35,9 +35,9 @@ public class AddProductRequests {
 
     public static void serializeXML(){
         try(BufferedWriter output = Files.newBufferedWriter(Paths.get(pathName))) {
-            AddProductRequests admins = new AddProductRequests();
-            admins.allAddProductRequests = AddProductRequest.getAllAddProductRequest();
-            JAXB.marshal(admins, output);
+            AddProductRequests addProductRequests = new AddProductRequests();
+            addProductRequests.allAddProductRequests = AddProductRequest.getAllAddProductRequest();
+            JAXB.marshal(addProductRequests, output);
         }
         catch (IOException e) {
             System.out.println("Error opening file");

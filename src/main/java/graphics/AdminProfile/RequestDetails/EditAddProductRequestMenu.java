@@ -50,7 +50,7 @@ public class EditAddProductRequestMenu {
             productSpecialFeaturesField.setText(productSpecialFeaturesField.getText() + s + ": " + editAddProductRequest.getProductSpecialFeatures().get(s) + ", ");
         }
         requestTitle.setText(editAddProductRequest.getRequestType());
-        imageView.setImage(new Image(editAddProductRequest.getProductImageAddress()));
+        //imageView.setImage(new Image(editAddProductRequest.getProductImageAddress()));
 
         App.setBackButton(backImage, parentMenu);
         ProductPageController.setMainMenuButton(mainMenuImage);

@@ -67,13 +67,13 @@ public class Seller extends Account {
         return sellLogs;
     }
 
-    public ArrayList<Product> getProducts() {
+    /*public ArrayList<Product> getProducts() {
         ArrayList<Product> products = new ArrayList<>();
         for (String id : productIDs) {
             products.add(Connection.getProduct(id));
         }
         return products;
-    }
+    }*/
 
     public ArrayList<Off> getOffs() {
         return offs;
@@ -142,7 +142,8 @@ public class Seller extends Account {
         for (Off off : this.getOffs()) {
             Off.removeOff(off);
         }
-        for (Product product : this.getProducts()) {
+        for (String productID : this.getProductIDs()) {
+            Product product = Product.getProductByID(productID);
             Product.removeProduct(product);
         }
     }

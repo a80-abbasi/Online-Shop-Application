@@ -23,7 +23,7 @@ public class ManageProductsMenu extends Menu {
 
     @Override
     public void show() {
-        System.out.println(sellerProfileManager.getSellerProductsNameAndID());
+        //System.out.println(sellerProfileManager.getSellerProductsNameAndID());
         super.show();
     }
 

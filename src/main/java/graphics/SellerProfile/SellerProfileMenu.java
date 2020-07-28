@@ -201,7 +201,7 @@ public class SellerProfileMenu {
         try {
             App.setRoot("SellerWalletMenu");
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

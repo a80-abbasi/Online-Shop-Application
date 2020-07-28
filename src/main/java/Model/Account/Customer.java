@@ -53,7 +53,8 @@ public class Customer extends Account {
     private void createBankAccount() {
         bankAccountID = BankConnection.createAccount(name, lastName, username, password);
         try {
-            BankConnection.deposit(username, password, 1000, bankAccountID);
+            String output = BankConnection.deposit(username, password, 1000, bankAccountID);
+            System.out.println(output);//todo
             balance = balance - 1000;
         } catch (Exception e) {
             e.printStackTrace();

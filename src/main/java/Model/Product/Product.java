@@ -68,7 +68,7 @@ public class Product {
         this.productCategory = productCategory;
         this.specialFeatures = specialFeatures;
         this.productSeller = productSeller.getUsername();
-        productSeller.getProducts().add(this);
+        productSeller.getProductIDs().add(productId);
 
         if (specialFeatures != null) {
             this.specialFeatures = specialFeatures;
@@ -401,7 +401,7 @@ public class Product {
     //todo: checking this, removing from offs, discounts and categories?
     public static void removeProduct(Product product) {
         Seller seller = Seller.getSellerByUserName(product.getProductSeller());
-        seller.getProducts().remove(product);
+        seller.getProductIDs().remove(product.getProductId());
         product.getProductCategory().removeProduct(product);
         allProducts.remove(product);
     }

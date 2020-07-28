@@ -157,7 +157,7 @@ public class EditOffMenu extends Menu {
                     System.out.println("Enter ID of Product:");
                     String productId = scanner.nextLine();
                     try {
-                        sellerProfileManager.setOffProduct(editOffRequest, productId);
+                        //sellerProfileManager.setOffProduct(editOffRequest, productId);
                         System.out.println("Product " + productId + " added successfully to your request.");
                     }
                     catch (NullPointerException e) {

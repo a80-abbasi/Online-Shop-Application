@@ -29,7 +29,7 @@ public class AddOffMenu extends Menu {
     @Override
     public void show() {
         if (addOffRequest == null) {
-            this.addOffRequest = sellerProfileManager.addOffRequest();
+            //this.addOffRequest = sellerProfileManager.addOffRequest();
         }
         super.show();
     }
@@ -123,7 +123,7 @@ public class AddOffMenu extends Menu {
                 }
                 else {
                     try {
-                        sellerProfileManager.setOffProduct(addOffRequest, productId);
+                        //sellerProfileManager.setOffProduct(addOffRequest, productId);
                         System.out.println("Product " + productId + " successfully added to your request.");
                     }
                     catch (NullPointerException e) {

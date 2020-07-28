@@ -35,7 +35,7 @@ public class EditProductMenu extends Menu {
             loginAndRegisterManager.logoutUser();
         }
         try {
-            this.editProductRequest = sellerProfileManager.makeNewEditProductRequest(productId);
+            //this.editProductRequest = sellerProfileManager.makeNewEditProductRequest(productId);
             super.show();
         }
         catch (NullPointerException e) {

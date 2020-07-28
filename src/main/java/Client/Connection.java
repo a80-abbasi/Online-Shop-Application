@@ -78,8 +78,11 @@ public class Connection {
         else if (loggedInInfo.startsWith("Supporter: ")) {
             return gson.fromJson(loggedInInfo.substring(("Supporter: ").length()), Supporter.class);
         }
-        else {
+        else if (loggedInInfo.startsWith("Seller: ")){
             return gson.fromJson(loggedInInfo.substring("Seller: ".length()), Seller.class);
+        }
+        else {
+            return null;
         }
     }
 
