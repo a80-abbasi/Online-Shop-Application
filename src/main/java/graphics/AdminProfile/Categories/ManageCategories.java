@@ -106,5 +106,7 @@ public class ManageCategories {
         confirmButton.setDisable(true);
         removeSpecialFeatureButton.setDisable(true);
         addSpecialFeatureButton.setDisable(true);
+        allCategoriesTable.getItems().clear();
+        allCategoriesTable = adminProfileManager.getAllCategoriesTable(allCategoriesTable);
     }
 }

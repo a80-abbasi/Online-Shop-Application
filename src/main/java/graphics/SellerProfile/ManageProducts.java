@@ -113,6 +113,8 @@ public class ManageProducts {
             sellerProfileManager.makeNewEditProductRequest(productID, productName, productCompanyName, productPrice,
                     productExistingNumber, productExplanations, category, values, productImageAddress);
             AlertBox.showMessage("Edit Product", "Your Request Was Successfully Sent To Admins");
+            productsTable.getItems().clear();
+            productsTable = sellerProfileManager.getSellerProductsTable(productsTable);
         } catch (Exception e) {
             AlertBox.showMessage("Failed to Edit Product", e.getMessage());
         }

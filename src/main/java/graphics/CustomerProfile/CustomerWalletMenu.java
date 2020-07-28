@@ -21,7 +21,7 @@ public class CustomerWalletMenu {
 
     public void initialize() {
         this.customerProfileManager = new CustomerProfileManager((Customer) Account.getLoggedInAccount());
-        walletBalanceField.setText(String.valueOf(customerProfileManager.getBalance()));
+        //walletBalanceField.setText(String.valueOf(customerProfileManager.getBalance()));//todo:!!
         ProductPageController.setMainMenuButton(mainMenuImage);
         App.setBackButton(backImage, "CustomerProfileMenu");
     }

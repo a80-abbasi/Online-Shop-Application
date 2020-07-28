@@ -478,18 +478,19 @@ public class Server extends Application {
         String output = "";
         try {
             if (account instanceof Customer) {
-                Customer customer = (Customer) account;
+                Customer customer = Customer.getCustomerById(account.getUsername());
                 output = String.valueOf(customer.getBalance());
             }
             else if (account instanceof Seller) {
-                Seller seller = (Seller) account;
+                Seller seller = Seller.getSellerByUserName(account.getUsername());
                 output = String.valueOf(seller.getBalance());
             }
         } catch (Exception e) {
             output = e.getMessage();
         }
+        System.out.println(output + "amiri");
         try {
-            dataOutputStream.writeUTF(output);
+            dataOutputStream.writeUTF("40");
             dataOutputStream.flush();
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -500,7 +501,7 @@ public class Server extends Application {
         int money = Integer.parseInt(content.substring("charge wallet: ".length()));
         String outPut = "";
         if (account instanceof Customer) {
-            Customer customer = (Customer) account;
+            Customer customer = Customer.getCustomerById(account.getUsername());
             try {
                 outPut = BankConnection.move(customer.getUsername(), customer.getPassword(), money, customer.getBankAccountID(), Admin.getStoreBankID());
                 customer.setBalance(customer.getBalance() + money);
@@ -509,7 +510,7 @@ public class Server extends Application {
             }
         }
         else if (account instanceof Seller) {
-            Seller seller = (Seller) account;
+            Seller seller = Seller.getSellerByUserName(account.getUsername());
             try {
                 outPut = BankConnection.move(seller.getUsername(), seller.getPassword(), money, seller.getBankAccountID(), Admin.getStoreBankID());
                 seller.setBalance(seller.getBalance() + money);
@@ -523,7 +524,7 @@ public class Server extends Application {
 
     private static void withdrawFromWallet(DataOutputStream dataOutputStream, Account account, String content) throws IOException {
         int withdrawalMoney = Integer.parseInt(content.substring(("withdraw from wallet: ").length()));
-        Seller seller = (Seller) account;
+        Seller seller = Seller.getSellerByUserName(account.getUsername());
         String output = "";
         try {
             Admin mainAdmin = Admin.getAllAdmins().get(0);//todo:!!!

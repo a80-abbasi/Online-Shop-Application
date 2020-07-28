@@ -464,7 +464,9 @@ public class AdminProfileManager extends ProfileManager {
         column.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         allCategoriesTable.getColumns().add(column);
-        for (Category category : Category.getAllCategories()) {
+        Connection.sendToServer("getCategories");
+        ArrayList<Category> allCategories = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Category>>(){}.getType());
+        for (Category category : allCategories) {
             allCategoriesTable.getItems().add(category);
         }
         allCategoriesTable.setPlaceholder(new Label("No Data To Display"));
@@ -507,7 +509,9 @@ public class AdminProfileManager extends ProfileManager {
 
 
     public ArrayList<Category> getAllCategories() {
-        return Category.getAllCategories();
+        Connection.sendToServer("getCategories");
+        ArrayList<Category> allCategories = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Category>>(){}.getType());
+        return allCategories;
     }
 
     //todo: checking this

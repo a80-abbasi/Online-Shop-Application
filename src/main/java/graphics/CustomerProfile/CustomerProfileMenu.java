@@ -289,4 +289,12 @@ public class CustomerProfileMenu {
             e.printStackTrace();
         }
     }
+
+    public void goToCustomerWalletMenu(MouseEvent mouseEvent) {
+        try {
+            App.setRoot("CustomerWalletMenu");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
