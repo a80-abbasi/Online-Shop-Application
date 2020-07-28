@@ -14,7 +14,6 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -126,8 +125,8 @@ public class Server extends Application {
                         else if (content.startsWith("edit phone number: ")) {
                             editAccountPhoneNumber(account, content.substring(("edit phone number: ").length()));
                         }
-                        else if (content.startsWith("get seller products: ")) {
-                            sendSellerProducts(dataOutputStream, account);
+                        else if (content.startsWith("get seller product IDs: ")) {
+                            sendSellerProductIDs(dataOutputStream, account);
                         }
                         else if (content.startsWith("get seller sellLogs: ")) {
                             sendSellerSellLogs(dataOutputStream, account);
@@ -217,6 +216,9 @@ public class Server extends Application {
                         }
                         else if (message.startsWith("get bank account balance")) {
                             sendBankAccountBalance(dataOutputStream, account);
+                        }
+                        else if (message.startsWith("set line condition: ")) {
+                            setSupporterLineCondition(account, message.substring(("set line condition: ").length()));
                         }
                     }
                     if (content.equals("get logged in account")){
@@ -468,6 +470,15 @@ public class Server extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void setSupporterLineCondition(Account account, String lineCondition) {
+        Supporter supporter = Supporter.getSupporterByUserName(account.getUsername());
+        if (lineCondition.equals("true")) {
+            supporter.setLineCondition(true);
+        } else if (lineCondition.equals("false")) {
+            supporter.setLineCondition(false);
         }
     }
 
@@ -775,16 +786,21 @@ public class Server extends Application {
     }
 
     private static void addProductRequest(String addProductRequestJson, DataInputStream dataInputStream) throws IOException {
-        AddProductRequest addProductRequest = new Gson().fromJson(addProductRequestJson, AddProductRequest.class);
+        String[] splitMessage = addProductRequestJson.split("&");
+        AddProductRequest addProductRequest = new Gson().fromJson(splitMessage[1], AddProductRequest.class);
         Request.getAllRequests().add(addProductRequest);
         AddProductRequest.getAllAddProductRequest().add(addProductRequest);
 
-        byte[] image = dataInputStream.readAllBytes();
+        //byte[] image = dataInputStream.readAllBytes();
+        byte[] image = splitMessage[2].getBytes();
         String imageAddress = "src\\main\\resources\\server\\" + addProductRequest.getProductId() + ".jpg";
         saveFile(image, imageAddress);
+        addProductRequest.setProductImageAddress(imageAddress);
+        addProductRequest.setProductImageBytes(image);
         if (addProductRequest.getFileName() != null){
             String fileAddress = "src\\main\\resources\\server\\" + addProductRequest.getFileName();
-            byte[] file = dataInputStream.readAllBytes();
+            //byte[] file = dataInputStream.readAllBytes();
+            byte[] file = splitMessage[3].getBytes();
             saveFile(file, fileAddress);
         }
     }
@@ -792,6 +808,7 @@ public class Server extends Application {
     private static void saveFile(byte[] file, String address){
         try (FileOutputStream fileOutputStream = new FileOutputStream(address)){
             fileOutputStream.write(file);
+            fileOutputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -837,10 +854,11 @@ public class Server extends Application {
         }
     }
 
-    private static void sendSellerProducts(DataOutputStream dataOutputStream, Account account) {
+    private static void sendSellerProductIDs(DataOutputStream dataOutputStream, Account account) {
         Seller seller = Seller.getSellerByUserName(account.getUsername());
         try {
-            dataOutputStream.writeUTF(gson.toJson(seller.getProducts()));
+            ArrayList<String> getSellerProductIDs = seller.getProductIDs();
+            dataOutputStream.writeUTF(gson.toJson(getSellerProductIDs));
             dataOutputStream.flush();
         } catch (IOException e) {
             System.out.println(e.getMessage());

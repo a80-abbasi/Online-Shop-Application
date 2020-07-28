@@ -104,10 +104,10 @@ public class SupporterProfileMenu {
     }
 
     public void ReadyForSupporting(MouseEvent mouseEvent) throws Exception {
-        supporterProfileManager.supporter.setLineCondition(true);
+        supporterProfileManager.setLineCondition(true);
     }
 
     public void stopSupporting(MouseEvent mouseEvent) {
-        supporterProfileManager.supporter.setLineCondition(false);
+        supporterProfileManager.setLineCondition(false);
     }
 }
