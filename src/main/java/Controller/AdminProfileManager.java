@@ -322,8 +322,8 @@ public class AdminProfileManager extends ProfileManager {
 
     private boolean checkCustomersValidity(ArrayList<String> customersUsername) throws IllegalArgumentException {
         for (String s : customersUsername) {
-            Connection.sendToServer("get account :" + s);
-            Account account = Connection.getAccountFromServer();
+            Connection.sendToServer("get customer :" + s);
+            Account account = new Gson().fromJson(Connection.receiveFromServer(), Customer.class);
             if (account == null || !(account instanceof Customer)) {
                 throw new IllegalArgumentException("Invalid Customer Username.");
             }
