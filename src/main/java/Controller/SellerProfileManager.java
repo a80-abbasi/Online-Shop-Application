@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 
+import java.io.DataOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -254,10 +255,16 @@ public class SellerProfileManager extends ProfileManager {
                 checkProductExistingNumber(productExistingNumber) && checkProductExplanations(productExplanations)) {
             AddProductRequest addProductRequest = new AddProductRequest(productID, productName, productCompanyName,
                     Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber), productExplanations,
-                    productCategory, productSpecialFeatures, this.seller, image, file, fileType);
+                    productCategory, productSpecialFeatures, this.seller, fileType);
             Connection.sendToServer("add product request: " + new Gson().toJson(addProductRequest));
             Request.getAllRequests().remove(addProductRequest);
             AddProductRequest.getAllAddProductRequest().remove(addProductRequest);
+            //Connection.sendToServer(image);
+            DataOutputStream dataOutputStream = Connection.getDataOutputStream();
+            dataOutputStream.write(image);
+            if (file != null){
+                dataOutputStream.write(file);
+            }
         }
     }
 

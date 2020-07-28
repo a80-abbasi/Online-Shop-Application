@@ -14,16 +14,17 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Random;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Server extends Application {
     private static final int serverPort = 8000;
@@ -310,7 +311,7 @@ public class Server extends Application {
                     sendRemoveProductRequest(dataOutputStream, message.substring(("get removeProductRequest: ").length()));
                 }
                 else if (message.startsWith("add product request: ")) {
-                    addProductRequest(message.substring(("add product request: ").length()));
+                    addProductRequest(message.substring(("add product request: ").length()), dataInputStream);
                 }
                 else if (message.startsWith("edit product request: ")) {
                     editProductRequest(message.substring(("edit product request: ").length()));
@@ -339,7 +340,8 @@ public class Server extends Application {
                     dataOutputStream.flush();
                 }
                 else if (message.startsWith("get product: ")){
-                    Product product = Product.getProductByID(splitMessage[2]);
+                    Product product = Product.getProductByID(message.substring("get product: ".length()));
+                    //dataOutputStream.write(gson.toJson(product).getBytes());
                     dataOutputStream.writeUTF(gson.toJson(product));
                     dataOutputStream.flush();
                 }
@@ -443,6 +445,24 @@ public class Server extends Application {
                 else if (message.startsWith("edit banking fee percent: ")) {
                     int bankingFeePercent = Integer.parseInt(message.substring(("edit banking fee percent: ").length()));
                     Admin.setBankingFeePercent(bankingFeePercent);
+                }
+                else if (message.startsWith("get product with id: ")){
+                    String id = message.substring("get product with id: ".length());
+                    Product product = Product.getProductByID(id);
+                    dataOutputStream.writeUTF(gson.toJson(product));
+                    dataOutputStream.flush();
+                    byte[] imageBytes = Files.readAllBytes(Paths.get(product.getImageAddressInServer()));
+                    dataOutputStream.write(imageBytes);
+                    dataOutputStream.flush();
+                    if (product.isFile()){
+                        byte[] file = Files.readAllBytes(Paths.get(product.getFileAddressInServer()));
+                        dataOutputStream.write(file);
+                        dataOutputStream.flush();
+                    }
+                }
+                else if (message.equals("get all products IDs")){
+                    dataOutputStream.writeUTF(gson.toJson(Product.getAllProducts().stream().map(Product::getProductId).collect(Collectors.toList())));
+                    dataOutputStream.flush();
                 }
                 clientSocket.close();
             }
@@ -754,10 +774,27 @@ public class Server extends Application {
         EditProductRequest.getAllEditProductRequests().add(editProductRequest);
     }
 
-    private static void addProductRequest(String addProductRequestJson) {
+    private static void addProductRequest(String addProductRequestJson, DataInputStream dataInputStream) throws IOException {
         AddProductRequest addProductRequest = new Gson().fromJson(addProductRequestJson, AddProductRequest.class);
         Request.getAllRequests().add(addProductRequest);
         AddProductRequest.getAllAddProductRequest().add(addProductRequest);
+
+        byte[] image = dataInputStream.readAllBytes();
+        String imageAddress = "src\\main\\resources\\server\\" + addProductRequest.getProductId() + ".jpg";
+        saveFile(image, imageAddress);
+        if (addProductRequest.getFileName() != null){
+            String fileAddress = "src\\main\\resources\\server\\" + addProductRequest.getFileName();
+            byte[] file = dataInputStream.readAllBytes();
+            saveFile(file, fileAddress);
+        }
+    }
+
+    private static void saveFile(byte[] file, String address){
+        try (FileOutputStream fileOutputStream = new FileOutputStream(address)){
+            fileOutputStream.write(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void sendOff(DataOutputStream dataOutputStream, String offID) {

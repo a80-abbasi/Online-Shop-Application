@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Product {
     private static ArrayList<Product> allProducts = new ArrayList<>();
     private String productId;
-    //private String imageAddress;
+    private String imageAddressInServer;
     private byte[] imageBytes;
     private ProductStatus productStatus; 
     private String productName;
@@ -31,6 +31,7 @@ public class Product {
     private ArrayList<String> productBuyers;
     private Off off;
     private boolean isFile;
+    private String fileAddressInServer;
     private byte[] file;
     private String fileName;
     private boolean isInAction;
@@ -54,9 +55,9 @@ public class Product {
         productBuyers = new ArrayList<>();
     }
 
-    public Product (String productId, ProductStatus productStatus, String productName, String companyName, double price,
-                    int existingNumber, String explanations, byte[] imageBytes, Category productCategory,
-                    HashMap<String, Integer> specialFeatures, Seller productSeller) {
+    public Product(String productId, ProductStatus productStatus, String productName, String companyName, double price,
+                   int existingNumber, String explanations, Category productCategory,
+                   HashMap<String, Integer> specialFeatures, Seller productSeller) {
         this.productId = productId;
         this.productStatus = productStatus;
         this.productName = productName;
@@ -64,7 +65,6 @@ public class Product {
         this.price = price;
         this.existingNumber = existingNumber;
         this.explanations = explanations;
-        this.imageBytes = imageBytes;
         this.productCategory = productCategory;
         this.specialFeatures = specialFeatures;
         this.productSeller = productSeller.getUsername();
@@ -82,7 +82,23 @@ public class Product {
     }
 
     public Product() {
+        allProducts.add(this);
+    }
 
+    public String getImageAddressInServer() {
+        return imageAddressInServer;
+    }
+
+    public void setImageAddressInServer(String imageAddressInServer) {
+        this.imageAddressInServer = imageAddressInServer;
+    }
+
+    public String getFileAddressInServer() {
+        return fileAddressInServer;
+    }
+
+    public void setFileAddressInServer(String fileAddressInServer) {
+        this.fileAddressInServer = fileAddressInServer;
     }
 
     public void setProductSeller(String productSeller) {
@@ -123,7 +139,7 @@ public class Product {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new Image("src\\main\\resources\\Images\\Client Images\\unKnown.jpg");
+        return new Image("\"file:src\\main\\resources\\Images\\Client Images\\unKnown.jpg");
     }
 
     public void addRate(Customer customer, int score){
