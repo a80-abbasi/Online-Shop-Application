@@ -4,6 +4,10 @@ import Client.Connection;
 import Model.Account.Admin;
 import Model.Account.Customer;
 import Model.Account.Supporter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 
 public class SupporterProfileManager extends ProfileManager {
 
@@ -26,5 +30,16 @@ public class SupporterProfileManager extends ProfileManager {
             lineConditionStr = "false";
         }
         Connection.sendToServer("set line condition: " + lineConditionStr);
+    }
+
+    public Supporter getSupporterByID(int supporterID) {
+        Connection.sendToServer("getSupporters");
+        ArrayList<Supporter> allSupporters = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Supporter>>(){}.getType());
+        for (Supporter supporter : allSupporters) {
+            if (supporter.getSupporterID() == supporterID){
+                return supporter;
+            }
+        }
+        return null;
     }
 }
