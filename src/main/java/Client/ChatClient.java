@@ -5,6 +5,7 @@ import Server.ChatServer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;

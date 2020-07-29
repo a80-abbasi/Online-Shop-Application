@@ -6,6 +6,7 @@ import Model.Account.*;
 import Model.Product.Product;
 import Model.Product.Score;
 import Server.ChatServer;
+import Server.Server;
 import View.Menu;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -14,10 +15,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.Socket;
 import java.util.*;
 
 public class CustomerProfileManager extends ProfileManager{
     public Customer customer;
+    public SupporterProfileManager supporterProfileManager;
 
     public CustomerProfileManager(Customer customer) {
         super(customer);
@@ -301,15 +304,17 @@ public class CustomerProfileManager extends ProfileManager{
         return false;
     }
 
-    public void connectSupporter(int supporterID) throws Exception {
+    public void
+    connectSupporter(int supporterID) throws Exception {
         new Thread(() -> {
             try {
-                Server.ChatServer.main(Server.ChatServer.getI() + supporterID + 1000);
+                ChatServer.main(ChatServer.getI() + supporterID + 1000);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }).start();
         ChatClient.main(ChatServer.getI() + supporterID + 1000);
+        Server.getCustomersInQueue().put(supporterProfileManager.getSupporterByID(supporterID), String.valueOf(ChatServer.getI() + supporterID + 1000));
     }
 
     public TableView getAllSupportersTable(TableView allSupportersTable) {

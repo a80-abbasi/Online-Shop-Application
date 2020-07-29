@@ -23,6 +23,9 @@ import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class Server extends Application {
@@ -1181,6 +1184,14 @@ public class Server extends Application {
     private static void removeProduct(String productID) {
         Product product = Product.getProductByID(productID);
         Product.removeProduct(product);
+    }
+
+    public static HashMap<Supporter, String> getCustomersInQueue() {
+        return CustomersInQueue;
+    }
+
+    public static void setCustomersInQueue(HashMap<Supporter, String> customersInQueue) {
+        CustomersInQueue = customersInQueue;
     }
 
     private static void registerAdmin(String message) {

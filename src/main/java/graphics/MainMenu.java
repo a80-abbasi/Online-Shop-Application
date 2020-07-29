@@ -41,6 +41,7 @@ public class MainMenu {
     }
 
     public static void openProfile(){
+        System.out.println(Account.getLoggedInAccount());
         Account account = Account.getLoggedInAccount();
         if (account == null) {
             try {

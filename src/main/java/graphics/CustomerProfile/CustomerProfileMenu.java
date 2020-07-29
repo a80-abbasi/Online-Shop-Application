@@ -266,7 +266,8 @@ public class CustomerProfileMenu {
         percentCol.setMinWidth(100);
         percentCol.setCellValueFactory(new PropertyValueFactory<>("percent"));
 
-        TableColumn<String, DiscountData> maxPossibleUsageCol = new TableColumn("MaxPossibleUsage");
+        TableColumn<String,
+                DiscountData> maxPossibleUsageCol = new TableColumn("MaxPossibleUsage");
         maxPossibleUsageCol.setMinWidth(100);
         maxPossibleUsageCol.setCellValueFactory(new PropertyValueFactory<>("discountPerCustomer"));
 
