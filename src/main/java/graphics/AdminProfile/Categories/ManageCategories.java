@@ -107,6 +107,8 @@ public class ManageCategories {
         removeSpecialFeatureButton.setDisable(true);
         addSpecialFeatureButton.setDisable(true);
         allCategoriesTable.getItems().clear();
-        allCategoriesTable = adminProfileManager.getAllCategoriesTable(allCategoriesTable);
+        for (Category category : adminProfileManager.getAllCategories()) {
+            allCategoriesTable.getItems().add(category);
+        }
     }
 }

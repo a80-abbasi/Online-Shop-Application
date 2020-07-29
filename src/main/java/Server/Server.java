@@ -117,7 +117,7 @@ public class Server extends Application {
                             sendAccountEmail(dataOutputStream, account);
                         }
                         else if (content.startsWith("edit email: ")) {
-                            editAccountEmail(account, content.substring(("edit email").length()));
+                            editAccountEmail(account, content.substring(("edit email: ").length()));
                         }
                         else if (content.startsWith("get phone number: ")) {
                             sendAccountPhoneNumber(dataOutputStream, account);
@@ -575,14 +575,16 @@ public class Server extends Application {
 
     private static void addCategorySpecialFeature(String message) {
         String[] splitMessage = message.split("&");
-        Category category = new Gson().fromJson(splitMessage[1], Category.class);
+        String categoryName = splitMessage[1];
+        Category category = Category.getCategoryByName(categoryName);
         String specialFeature = splitMessage[2];
         category.addSpecialFeature(specialFeature);
     }
 
     private static void removeCategorySpecialFeature(String message) {
         String[] splitMessage = message.split("&");
-        Category category = new Gson().fromJson(splitMessage[1], Category.class);
+        String categoryName = splitMessage[1];
+        Category category = Category.getCategoryByName(categoryName);
         String specialFeature = splitMessage[2];
         category.removeSpecialFeature(specialFeature);
     }
@@ -1168,7 +1170,7 @@ public class Server extends Application {
         String email = userInfo[5];
         String phoneNumber = userInfo[6];
         Admin admin = new Admin(username, password, firstName, lastName, email, phoneNumber);
-        Admin.setStoreBankID(BankConnection.createAccount(admin.getName(), admin.getLastName(), admin.getUsername(), admin.getPassword()));
+        Admin.setAllStoreBankIDs(BankConnection.createAccount(admin.getName(), admin.getLastName(), admin.getUsername(), admin.getPassword()));
     }
 
     private static void createAdminAccount(String message) {

@@ -135,7 +135,7 @@ public class Discount {
         allDiscounts.remove(discount);
         for (String customerUsername : discount.getIncludingCustomerUsername()) {
             Customer customer = Customer.getCustomerById(customerUsername);
-            customer.getAllDiscountCodesForCustomer().remove(discount);
+            customer.removeDiscount(discount);
         }
     }
 
