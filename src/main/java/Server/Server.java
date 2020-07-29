@@ -31,6 +31,8 @@ public class Server extends Application {
     private static Socket clientSocket;
     private static ProductsManager productsManager = new ProductsManager();
     private static final Gson gson = new Gson();
+    private static DataOutputStream dataOutputStream;
+    private static DataInputStream dataInputStream;
 
     @Override
     public void start(Stage stage) {
@@ -78,8 +80,8 @@ public class Server extends Application {
             while (true){
                 clientSocket = serverSocket.accept();
                 checkEndOfAuctions();
-                DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
-                DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
+                dataInputStream = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
+                dataOutputStream = new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
 
                 String message = dataInputStream.readUTF();
                 System.out.println(message);
@@ -316,7 +318,7 @@ public class Server extends Application {
                     sendRemoveProductRequest(dataOutputStream, message.substring(("get removeProductRequest: ").length()));
                 }
                 else if (message.startsWith("add product request: ")) {
-                    addProductRequest(message, dataInputStream);
+                    addProductRequest(message);
                 }
                 else if (message.startsWith("edit product request: ")) {
                     editProductRequest(message);
@@ -809,7 +811,7 @@ public class Server extends Application {
                 productExplanations, productImageAddress, productCategory, productSpecialFeatures, seller);
     }
 
-    private static void addProductRequest(String message, DataInputStream dataInputStream) throws IOException {
+    private static void addProductRequest(String message) throws IOException {
         String[] splitMessage = message.split("&");
         String productID = splitMessage[1];
         String productName = splitMessage[2];
@@ -823,22 +825,44 @@ public class Server extends Application {
         String sellerUsername = splitMessage[9];
         Seller seller = Seller.getSellerByUserName(sellerUsername);
         String fileType = splitMessage[10];
+        if (fileType.equals("null")){
+            fileType = null;
+        }
         AddProductRequest addProductRequest = new AddProductRequest(productID, productName, productCompanyName,
                 Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber), productExplanations,
                 productCategory, productSpecialFeatures, seller, fileType);
 
+        clientSocket.close();
+        clientSocket = serverSocket.accept();
+        dataInputStream = new DataInputStream(clientSocket.getInputStream());
+        dataOutputStream = new DataOutputStream(clientSocket.getOutputStream());
+
         //todo: !!!
-        //byte[] image = dataInputStream.readAllBytes();
-        byte[] image = splitMessage[11].getBytes();
+        int length = Integer.parseInt(dataInputStream.readUTF());
+        if (length > 0){
+            byte[] image = new byte[length];
+            //byte[] image = splitMessage[11].getBytes();
+            dataInputStream.readFully(image, 0, length);
+            String imageAddress = "src\\main\\resources\\server\\" + addProductRequest.getProductId() + ".jpg";
+            saveFile(image, imageAddress);
+            addProductRequest.setProductImageAddress(imageAddress);
+        }
+        /*byte[] image = dataInputStream.readAllBytes();
+        //byte[] image = splitMessage[11].getBytes();
         String imageAddress = "src\\main\\resources\\server\\" + addProductRequest.getProductId() + ".jpg";
         saveFile(image, imageAddress);
         addProductRequest.setProductImageAddress(imageAddress);
-        addProductRequest.setProductImageBytes(image);
+        //addProductRequest.setProductImageBytes(image);*/
         if (addProductRequest.getFileName() != null){
-            String fileAddress = "src\\main\\resources\\server\\" + addProductRequest.getFileName();
-            //byte[] file = dataInputStream.readAllBytes();
-            byte[] file = splitMessage[12].getBytes();
-            saveFile(file, fileAddress);
+            int fileLength = Integer.parseInt(dataInputStream.readUTF());
+            if (fileLength > 0){
+                byte[] file = new byte[fileLength];
+                //byte[] file = splitMessage[11].getBytes();
+                dataInputStream.readFully(file, 0, fileLength);
+                String fileAddress = "src\\main\\resources\\server\\" + addProductRequest.getProductId() + ".jpg";
+                saveFile(file, fileAddress);
+                addProductRequest.setProductImageAddress(fileAddress);
+            }
         }
     }
 
