@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SupporterProfileManager extends ProfileManager {
 
@@ -35,7 +36,7 @@ public class SupporterProfileManager extends ProfileManager {
     public static Supporter getSupporterByID(int supporterID) {
         Connection.sendToServer("getSupporters");
         ArrayList<Supporter> allSupporters = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Supporter>>(){}.getType());
-        for (Supporter supporter : allSupporters) {
+        for (Supporter supporter : Objects.requireNonNull(allSupporters)) {
             if (supporter.getSupporterID() == supporterID){
                 return supporter;
             }
