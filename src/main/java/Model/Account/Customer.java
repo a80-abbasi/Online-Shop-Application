@@ -205,4 +205,8 @@ public class Customer extends Account {
             discount.removeCustomer(this);
         }
     }
+
+    public void removeDiscount(Discount discount) {
+        this.allDiscountCodesForCustomer.remove(discount);
+    }
 }

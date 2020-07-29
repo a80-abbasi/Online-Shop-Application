@@ -112,6 +112,46 @@ public class CustomerProfileManager extends ProfileManager{
         return customerDiscounts;
     }
 
+    public void connectSupporter(int supporterID) throws Exception {
+        new Thread(() -> {
+            try {
+                ChatServer.main(ChatServer.getI() + supporterID + 1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+        ChatClient.main(ChatServer.getI() + supporterID + 1000);
+        String message = "put supporter in customers in queue: &" + supporterID + "&" + (ChatServer.getI() + supporterID + 1000);
+        Connection.sendToServer(message);
+        //Server.getCustomersInQueue().put(supporterProfileManager.getSupporterByID(supporterID), String.valueOf(ChatServer.getI() + supporterID + 1000));
+    }
+
+    public TableView getAllSupportersTable(TableView allSupportersTable) {
+        TableColumn<String, Supporter> column1 = new TableColumn<>("Supporter Name");
+        column1.setCellValueFactory(new PropertyValueFactory<>("username"));
+
+        TableColumn<String, Supporter> column2 = new TableColumn<>("Supporter Line");
+        column2.setCellValueFactory(new PropertyValueFactory<>("online"));
+
+        allSupportersTable.getColumns().addAll(column1, column2);
+
+        Connection.sendToServer("getSupporters");
+        ArrayList<Supporter> allSupporters = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Supporter>>(){}.getType());
+
+        for (Supporter supporter : allSupporters) {
+            allSupportersTable.getItems().add(supporter);
+        }
+        allSupportersTable.setPlaceholder(new Label("No Data to display"));
+        return allSupportersTable;
+    }
+
+
+
+
+
+
+
+
     //phase1
     public int getNumberOfProductInCart(Product product, Customer customer) {
         for (Product product1 : customer.getCart().keySet()) {
@@ -302,37 +342,5 @@ public class CustomerProfileManager extends ProfileManager{
             }
         }
         return false;
-    }
-
-    public void
-    connectSupporter(int supporterID) throws Exception {
-        new Thread(() -> {
-            try {
-                ChatServer.main(ChatServer.getI() + supporterID + 1000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
-        ChatClient.main(ChatServer.getI() + supporterID + 1000);
-        Server.getCustomersInQueue().put(supporterProfileManager.getSupporterByID(supporterID), String.valueOf(ChatServer.getI() + supporterID + 1000));
-    }
-
-    public TableView getAllSupportersTable(TableView allSupportersTable) {
-        TableColumn<String, Supporter> column1 = new TableColumn<>("Supporter Name");
-        column1.setCellValueFactory(new PropertyValueFactory<>("username"));
-
-        TableColumn<String, Supporter> column2 = new TableColumn<>("Supporter Line");
-        column2.setCellValueFactory(new PropertyValueFactory<>("lineCondition"));
-
-        allSupportersTable.getColumns().addAll(column1, column2);
-
-        Connection.sendToServer("getSupporters");
-        ArrayList<Supporter> allSupporters = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Supporter>>(){}.getType());
-
-        for (Supporter supporter : allSupporters) {
-            allSupportersTable.getItems().add(supporter);
-        }
-        allSupportersTable.setPlaceholder(new Label("No Data to display"));
-        return allSupportersTable;
     }
 }

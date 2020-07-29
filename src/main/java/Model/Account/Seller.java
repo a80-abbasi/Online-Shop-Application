@@ -1,6 +1,5 @@
 package Model.Account;
 
-import Client.Connection;
 import Model.Product.Product;
 import Server.BankConnection;
 
@@ -24,6 +23,9 @@ public class Seller extends Account {
         super(username, password, name, lastName, email, phoneNumber);
         allSellers.add(this);
         this.nameOfCompany = nameOfCompany;
+        this.phoneNumberOfCompany = " ";
+        this.CompanyAddress = " ";
+        this.CompanyOpenYear = " ";
         this.balance = balance;
         sellLogs = new ArrayList<>();
         productIDs = new ArrayList<>();

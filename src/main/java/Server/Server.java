@@ -23,9 +23,6 @@ import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class Server extends Application {
@@ -123,7 +120,7 @@ public class Server extends Application {
                             sendAccountEmail(dataOutputStream, account);
                         }
                         else if (content.startsWith("edit email: ")) {
-                            editAccountEmail(account, content.substring(("edit email").length()));
+                            editAccountEmail(account, content.substring(("edit email: ").length()));
                         }
                         else if (content.startsWith("get phone number: ")) {
                             sendAccountPhoneNumber(dataOutputStream, account);
@@ -469,11 +466,34 @@ public class Server extends Application {
                     dataOutputStream.writeUTF(gson.toJson(Product.getAllProducts().stream().map(Product::getProductId).collect(Collectors.toList())));
                     dataOutputStream.flush();
                 }
+                else if (message.equals("get customers in queue")) {
+                    dataOutputStream.writeUTF(gson.toJson(getCustomersInQueue()));
+                    dataOutputStream.flush();
+                }
+                else if (message.startsWith("remove supporter from customers in queue: ")) {
+                    removeSupporterFromCustomersInQueue(message.substring(("remove supporter from customers in queue: ").length()));
+                }
+                else if (message.startsWith("put supporter in customers in queue: ")) {
+                    putSupporterInCustomersInQueue(message);
+                }
                 clientSocket.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void putSupporterInCustomersInQueue(String message) {
+        String[] splitMessage = message.split("&");
+        String supporterName = splitMessage[1];
+        Supporter supporter = Supporter.getSupporterByUserName(supporterName);
+        String value = splitMessage[2];
+        getCustomersInQueue().put(supporter, value);
+    }
+
+    private static void removeSupporterFromCustomersInQueue(String supporterUsername) {
+        Supporter supporter = Supporter.getSupporterByUserName(supporterUsername);
+        getCustomersInQueue().remove(supporter);
     }
 
     private static void setSupporterLineCondition(Account account, String lineCondition) {
@@ -581,14 +601,16 @@ public class Server extends Application {
 
     private static void addCategorySpecialFeature(String message) {
         String[] splitMessage = message.split("&");
-        Category category = new Gson().fromJson(splitMessage[1], Category.class);
+        String categoryName = splitMessage[1];
+        Category category = Category.getCategoryByName(categoryName);
         String specialFeature = splitMessage[2];
         category.addSpecialFeature(specialFeature);
     }
 
     private static void removeCategorySpecialFeature(String message) {
         String[] splitMessage = message.split("&");
-        Category category = new Gson().fromJson(splitMessage[1], Category.class);
+        String categoryName = splitMessage[1];
+        Category category = Category.getCategoryByName(categoryName);
         String specialFeature = splitMessage[2];
         category.removeSpecialFeature(specialFeature);
     }
@@ -1204,7 +1226,7 @@ public class Server extends Application {
         String email = userInfo[5];
         String phoneNumber = userInfo[6];
         Admin admin = new Admin(username, password, firstName, lastName, email, phoneNumber);
-        Admin.setStoreBankID(BankConnection.createAccount(admin.getName(), admin.getLastName(), admin.getUsername(), admin.getPassword()));
+        Admin.setAllStoreBankIDs(BankConnection.createAccount(admin.getName(), admin.getLastName(), admin.getUsername(), admin.getPassword()));
     }
 
     private static void createAdminAccount(String message) {

@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Region;
 
 import java.util.*;
 
@@ -216,7 +215,7 @@ public class AdminProfileManager extends ProfileManager {
     }
 
     public void editDiscountStartTime(String discountCode, Date startTime) throws NullPointerException {
-        Connection.sendToServer("get Discount: " + discountCode);
+        Connection.sendToServer("get discount: " + discountCode);
         Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
         if (discount == null) {
             throw new NullPointerException();
@@ -226,7 +225,7 @@ public class AdminProfileManager extends ProfileManager {
     }
 
     public void editDiscountEndTime(String discountCode, Date endTime) throws NullPointerException {
-        Connection.sendToServer("get Discount: " + discountCode);
+        Connection.sendToServer("get discount: " + discountCode);
         Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
         if (discount == null) {
             throw new NullPointerException();
@@ -236,7 +235,7 @@ public class AdminProfileManager extends ProfileManager {
     }
 
     public void editDiscountPercent(String discountCode, String discountPercent) throws NullPointerException, Exception {
-        Connection.sendToServer("get Discount: " + discountCode);
+        Connection.sendToServer("get discount: " + discountCode);
         Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
         if (discount == null) {
             throw new NullPointerException();
@@ -246,7 +245,7 @@ public class AdminProfileManager extends ProfileManager {
     }
 
     public void editDiscountMaxPossibleDiscount(String discountCode, String maxPossibleDiscount) throws NullPointerException, Exception {
-        Connection.sendToServer("get Discount: " + discountCode);
+        Connection.sendToServer("get discount: " + discountCode);
         Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
         if (discount == null) {
             throw new NullPointerException();
@@ -257,7 +256,7 @@ public class AdminProfileManager extends ProfileManager {
     }
 
     public void editDiscountPerCustomer(String discountCode, String discountPerCustomer) throws NullPointerException, Exception {
-        Connection.sendToServer("get Discount: " + discountCode);
+        Connection.sendToServer("get discount: " + discountCode);
         Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
         if (discount == null) {
             throw new NullPointerException();
@@ -269,7 +268,7 @@ public class AdminProfileManager extends ProfileManager {
 
     public void editDiscountIncludingCustomers(String discountCode, ArrayList<String> customersUsername) throws Exception {
         if (checkCustomersValidity(customersUsername) && checkDiscountCodeValidity(discountCode)) {
-            Connection.sendToServer("get Discount: " + discountCode);
+            Connection.sendToServer("get discount: " + discountCode);
             Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
             //discount.setIncludingCustomers(customersUsername);
             String message = "edit discount includingCustomers: &" + discountCode + "&";
@@ -332,7 +331,7 @@ public class AdminProfileManager extends ProfileManager {
     }
 
     public void removeDiscount(String discountCode) throws NullPointerException {
-        Connection.sendToServer("get Discount: " + discountCode);
+        Connection.sendToServer("get discount: " + discountCode);
         Discount discount = new Gson().fromJson(Connection.receiveFromServer(), Discount.class);
         if (discount == null) {
             throw new NullPointerException();
@@ -435,7 +434,7 @@ public class AdminProfileManager extends ProfileManager {
     //todo: checking this
     public void removeCategorySpecialFeature(Category category, String specialFeature) throws NullPointerException {
         if (category.getSpecialFeatures().contains(specialFeature)) {
-            Connection.sendToServer("remove category special feature: &" + new Gson().toJson(category) + "&" + specialFeature);
+            Connection.sendToServer("remove category special feature: &" + category.getName() + "&" + specialFeature);
         } else {
             throw new NullPointerException();
         }
@@ -446,7 +445,7 @@ public class AdminProfileManager extends ProfileManager {
         if (category.getSpecialFeatures().contains(specialFeature)) {
             throw new IllegalArgumentException();
         } else {
-            Connection.sendToServer("add category special feature: &" + new Gson().toJson(category) + "&" + specialFeature);
+            Connection.sendToServer("add category special feature: &" + category.getName() + "&" + specialFeature);
         }
     }
 
