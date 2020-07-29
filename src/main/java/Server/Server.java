@@ -23,9 +23,6 @@ import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class Server extends Application {
@@ -468,11 +465,34 @@ public class Server extends Application {
                     dataOutputStream.writeUTF(gson.toJson(Product.getAllProducts().stream().map(Product::getProductId).collect(Collectors.toList())));
                     dataOutputStream.flush();
                 }
+                else if (message.equals("get customers in queue")) {
+                    dataOutputStream.writeUTF(gson.toJson(getCustomersInQueue()));
+                    dataOutputStream.flush();
+                }
+                else if (message.startsWith("remove supporter from customers in queue: ")) {
+                    removeSupporterFromCustomersInQueue(message.substring(("remove supporter from customers in queue: ").length()));
+                }
+                else if (message.startsWith("put supporter in customers in queue: ")) {
+                    putSupporterInCustomersInQueue(message);
+                }
                 clientSocket.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void putSupporterInCustomersInQueue(String message) {
+        String[] splitMessage = message.split("&");
+        String supporterName = splitMessage[1];
+        Supporter supporter = Supporter.getSupporterByUserName(supporterName);
+        String value = splitMessage[2];
+        getCustomersInQueue().put(supporter, value);
+    }
+
+    private static void removeSupporterFromCustomersInQueue(String supporterUsername) {
+        Supporter supporter = Supporter.getSupporterByUserName(supporterUsername);
+        getCustomersInQueue().remove(supporter);
     }
 
     private static void setSupporterLineCondition(Account account, String lineCondition) {
