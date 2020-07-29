@@ -89,8 +89,6 @@ public class Client extends Application {
         }
     };
 
-
-
     public static Object setRoot(String fxml) throws IOException {
         FXMLLoader fxmlLoader = loadFXML(fxml);
         scene.setRoot(fxmlLoader.load());

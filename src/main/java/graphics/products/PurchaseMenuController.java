@@ -229,6 +229,7 @@ public class PurchaseMenuController {
         buyItemsWithWalletButton.setOpacity(0.5);
     }
 
+
     private void downloadFiles() {
         for (Product product : cart.keySet()) {
             if (product.isFile()){
