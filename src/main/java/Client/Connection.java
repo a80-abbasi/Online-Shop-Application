@@ -1,7 +1,6 @@
 package Client;
 
 import Model.Account.*;
-import Model.Product.Category;
 import Model.Product.Product;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

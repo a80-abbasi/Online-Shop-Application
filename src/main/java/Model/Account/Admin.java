@@ -22,8 +22,12 @@ public class Admin extends Account{
         this("", "", "", "", "", "");
     }
 
-    public void setStoreBankIDs(String storeBankID) {
+    public void setStoreBankID(String storeBankID) {
         this.storeBankID = storeBankID;
+    }
+
+    public String getStoreBankID() {
+        return storeBankID;
     }
 
     public static void setAllAdmins(ArrayList<Admin> allAdmins) {
@@ -49,7 +53,7 @@ public class Admin extends Account{
         }
     }
 
-    public static String getStoreBankID(){
+    public static String getBankIDOfStore(){
         return allAdmins.get(0).storeBankID;
     }
 

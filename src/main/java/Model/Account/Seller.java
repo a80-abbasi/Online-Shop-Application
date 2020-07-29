@@ -35,6 +35,9 @@ public class Seller extends Account {
 
     public Seller() {
         allSellers.add(this);
+        sellLogs = new ArrayList<>();
+        productIDs = new ArrayList<>();
+        offs = new ArrayList<>();
     }
 
     public ArrayList<String> getProductIDs() {

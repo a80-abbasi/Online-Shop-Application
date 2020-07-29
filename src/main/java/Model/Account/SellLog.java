@@ -26,11 +26,7 @@ public class SellLog extends Log {
     }
 
     public SellLog() {
-        super();
-        this.received = 0;
-        this.offAmount = 0;
-        this.product = null;
-        this.buyerName = "";
+        allSellLogs.add(this);
     }
 
     public double getReceived() {

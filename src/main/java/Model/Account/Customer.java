@@ -40,6 +40,9 @@ public class Customer extends Account {
 
     public Customer(){
         allCustomers.add(this);
+        cart = new HashMap<>();
+        buyLogs = new ArrayList<>();
+        usedDiscounts = new HashMap<>();
     }
 
     public String getBankAccountID() {

@@ -3,6 +3,8 @@ package Model.Product;
 import Model.Account.*;
 import javafx.scene.image.Image;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,6 +85,12 @@ public class Product {
 
     public Product() {
         allProducts.add(this);
+        customersAmountForAction = new HashMap<>();
+        this.specialFeatures = new HashMap<>();
+    }
+
+    public void setCustomersAmountForAction(HashMap<String, Double> customersAmountForAction) {
+        this.customersAmountForAction = customersAmountForAction;
     }
 
     public String getImageAddressInServer() {
@@ -132,14 +140,14 @@ public class Product {
     public Image getImage() {
         //return new Image(imageBytes);
         String address = "src\\main\\resources\\Images\\Client Images" + productName + getProductSeller() + ".jpg";
-        //File file = new File("file:src\\main\\resources\\Images\\Client Images\\" + productName + getProductSeller() + ".jpg");
+        //File file = new File(address);
         try (FileOutputStream fileOutputStream = new FileOutputStream(address)){
             fileOutputStream.write(imageBytes);
-            return new Image(address);
+            return new Image("file:" + address);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new Image("\"file:src\\main\\resources\\Images\\Client Images\\unKnown.jpg");
+        return new Image("file:src\\main\\resources\\Images\\Client Images\\unKnown.jpg");
     }
 
     public void addRate(Customer customer, int score){

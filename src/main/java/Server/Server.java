@@ -198,7 +198,7 @@ public class Server extends Application {
                         else if (content.startsWith("add product to auction: ")){
                             long time = Long.parseLong(splitContent[4]);
                             Date date = new Date(time);
-                            Product product = Product.getProductByID(content.substring(content.indexOf(splitContent[4]) + splitContent[4].length()));
+                            Product product = Product.getProductByID(content.substring(content.indexOf(splitContent[4]) + splitContent[4].length() + 1));
                             product.setInAction(true);
                             product.setEndOfAction(date);
                         }
@@ -360,10 +360,6 @@ public class Server extends Application {
                     Product product = Product.getProductByID(message.substring("visit product: ".length()));
                     product.setVisitNumber(product.getVisitNumber() + 1);
                 }
-                else if (message.startsWith("delete product: ")){
-                    Product product = Product.getProductByID(message.substring("delete product: ".length()));
-                    productsManager.deleteAProduct(product);
-                }
                 else if (message.startsWith("remove product: ")) {
                     removeProduct(message.substring(("remove product: ").length()));
                 }
@@ -476,6 +472,11 @@ public class Server extends Application {
                 else if (message.startsWith("put supporter in customers in queue: ")) {
                     putSupporterInCustomersInQueue(message);
                 }
+                else if (message.startsWith("delete product: ")){
+                    Product product = Product.getProductByID(message.substring("delete product: ".length()));
+                    Product.getAllProducts().remove(product);
+                    Category.getAllCategories().forEach(category -> category.getProductIds().remove(product.getProductId()));
+                }
                 clientSocket.close();
             }
         } catch (IOException e) {
@@ -556,19 +557,19 @@ public class Server extends Application {
         if (account instanceof Customer) {
             Customer customer = Customer.getCustomerById(account.getUsername());
             try {
-                outPut = BankConnection.move(customer.getUsername(), customer.getPassword(), money, customer.getBankAccountID(), Admin.getStoreBankID());
+                outPut = BankConnection.move(customer.getUsername(), customer.getPassword(), money, customer.getBankAccountID(), Admin.getBankIDOfStore());
                 customer.setBalance(customer.getBalance() + money);
             } catch (Exception e) {
                 outPut = e.getMessage();
             }
             System.out.println(outPut);
-            System.out.println(Admin.getStoreBankID());
+            System.out.println(Admin.getBankIDOfStore());
             System.out.println(Admin.getAllAdmins().get(0).toString());
         }
         else if (account instanceof Seller) {
             Seller seller = Seller.getSellerByUserName(account.getUsername());
             try {
-                outPut = BankConnection.move(seller.getUsername(), seller.getPassword(), money, seller.getBankAccountID(), Admin.getStoreBankID());
+                outPut = BankConnection.move(seller.getUsername(), seller.getPassword(), money, seller.getBankAccountID(), Admin.getBankIDOfStore());
                 seller.setBalance(seller.getBalance() + money);
             } catch (Exception e) {
                 outPut = e.getMessage();
@@ -585,7 +586,7 @@ public class Server extends Application {
         try {
             Admin mainAdmin = Admin.getAllAdmins().get(0);//todo:!!!
             output = BankConnection.move(mainAdmin.getUsername(), mainAdmin.getPassword(), withdrawalMoney,
-                    Admin.getStoreBankID(), seller.getBankAccountID());
+                    Admin.getBankIDOfStore(), seller.getBankAccountID());
             seller.setBalance(seller.getBalance() - withdrawalMoney);
         } catch (Exception e) {
             output = e.getMessage();
@@ -1226,7 +1227,8 @@ public class Server extends Application {
         String email = userInfo[5];
         String phoneNumber = userInfo[6];
         Admin admin = new Admin(username, password, firstName, lastName, email, phoneNumber);
-        Admin.setAllStoreBankIDs(BankConnection.createAccount(admin.getName(), admin.getLastName(), admin.getUsername(), admin.getPassword()));
+        String bankId = BankConnection.createAccount(admin.getName(), admin.getLastName(), admin.getUsername(), admin.getPassword());
+        Admin.setAllStoreBankIDs(bankId);
     }
 
     private static void createAdminAccount(String message) {
