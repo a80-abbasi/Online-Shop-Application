@@ -55,6 +55,7 @@ public class Client extends Application {
                     new TypeToken<HashMap<Supporter, String>>(){}.getType());
             System.out.println("chatclient 5 sec checked:"+customersInQueue);
             System.out.println("0");
+            assert customersInQueue != null;
             for (Supporter supporter: customersInQueue.keySet()) {
                 System.out.println("0.5");
                 if (Connection.getLoggedInAccount().getUsername().equals(supporter.getUsername())) {

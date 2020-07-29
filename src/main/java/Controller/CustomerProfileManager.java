@@ -128,10 +128,12 @@ public class CustomerProfileManager extends ProfileManager{
                 e.printStackTrace();
             }
         }).start();
+        HashMap<Supporter, String> customersInQueue = new Gson().fromJson(Connection.receiveFromServer(),
+                new TypeToken<HashMap<Supporter, String>>(){}.getType());
         String message = "put supporter in customers in queue: &" + supporterID + "&" + (ChatServer.getI() + supporterID + 1000);
         Thread.sleep(500);
         Connection.sendToServer(message);
-        System.out.println("SUPPORTER PUT");
+        System.out.println("SUPPORTER PUT"+ customersInQueue);
         //Server.getCustomersInQueue().put(supporterProfileManager.getSupporterByID(supporterID), String.valueOf(ChatServer.getI() + supporterID + 1000));
     }
 
