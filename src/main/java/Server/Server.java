@@ -64,7 +64,7 @@ public class Server extends Application {
     public static void main(String[] args) {
         new Thread(() -> {
             try {
-                ChatServer.main(9000);
+                ChatServer.main(5043);
             } catch (Exception e) {
                 e.printStackTrace();
             }

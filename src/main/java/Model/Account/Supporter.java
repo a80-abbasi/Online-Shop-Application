@@ -3,13 +3,10 @@ package Model.Account;
 import java.util.ArrayList;
 
 public class Supporter extends Account{
-    private static ArrayList<Supporter> allSupporters;
+    private static ArrayList<Supporter> allSupporters = new ArrayList<>();
     private boolean lineCondition = false;
-    private int SupporterID;
+    private final int SupporterID;
 
-    static {
-        allSupporters = new ArrayList<>();
-    }
 
     public Supporter(String username, String password, String name, String lastName, String email, String phoneNumber) {
         super(username, password, name, lastName, email, phoneNumber);

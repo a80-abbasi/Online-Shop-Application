@@ -130,11 +130,28 @@ public class CustomerProfileManager extends ProfileManager{
         }).start();
         String message = "put supporter in customers in queue: &" + supporterID + "&" + (ChatServer.getI() + supporterID + 1000);
         Connection.sendToServer(message);
-        //Connection.sendToServer("get customers in queue");
-        //HashMap<Supporter, String> customersInQueue = new Gson().fromJson(Connection.receiveFromServer(),
-                //new TypeToken<HashMap<Supporter, String>>(){}.getType());
-        //System.out.println("SUPPORTER PUT"+ customersInQueue);
-        //Server.getCustomersInQueue().put(supporterProfileManager.getSupporterByID(supporterID), String.valueOf(ChatServer.getI() + supporterID + 1000));
+//        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        Thread.sleep(500);
+        new Thread(() -> {
+            try {
+                Connection.sendToServer("get customers in queue");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+        Thread.sleep(500);
+        new Thread(() -> {
+            try {
+                HashMap<Supporter, String> customersInQueue = new Gson().fromJson(Connection.receiveFromServer(),
+                        new TypeToken<HashMap<Supporter, String>>(){}.getType());
+                System.out.println("SUPPORTER PUT"+ customersInQueue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+        Thread.sleep(500);
+//        System.out.println("bbbbbbbbbbbbbbbbbbbbbbb");
+//        Server.getCustomersInQueue().put(supporterProfileManager.getSupporterByID(supporterID), String.valueOf(ChatServer.getI() + supporterID + 1000));
     }
 
     public TableView getAllSupportersTable(TableView allSupportersTable) {
