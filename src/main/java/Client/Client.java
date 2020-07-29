@@ -102,6 +102,7 @@ public class Client extends Application {
     }
 
     public static void main(String[] args) {
+
         executor.scheduleAtFixedRate(connectSupporters, 5, 5, TimeUnit.SECONDS);
         ProductPageController.productsManager = new ProductsManager();
         ProductsController.productsManager = new ProductsManager();

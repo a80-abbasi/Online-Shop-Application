@@ -1,5 +1,6 @@
 package graphics.products;
 
+import Client.ChatClient;
 import Client.Connection;
 import Controller.ProductsManager;
 import Model.Account.Account;
@@ -155,7 +156,7 @@ public class ProductPageController {
             shadowOnMouseHover(chatImage);
             chatImage.setOnMouseClicked(event -> {
                 try {
-                    ChatServer.main(9000);
+                    ChatClient.main(5043);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
