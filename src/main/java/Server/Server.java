@@ -33,7 +33,7 @@ public class Server extends Application {
     private static final Gson gson = new Gson();
     private static DataOutputStream dataOutputStream;
     private static DataInputStream dataInputStream;
-    private static HashMap<Supporter, String> CustomersInQueue;
+    private static HashMap<Supporter, String> CustomersInQueue = new HashMap<>();
 
     @Override
     public void start(Stage stage) {

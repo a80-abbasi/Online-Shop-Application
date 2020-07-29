@@ -42,7 +42,7 @@ public class ConnectSupporters {
         if (selectedSupporter == null) {
             return;
         }
-        if (!((Supporter) selectedSupporter).getLineCondition()) {
+        if (!((Supporter) selectedSupporter).isOnline()) {
             AlertBox.showMessage("Supporter Condition", "Supporter is offline now!");
             return;
         }
