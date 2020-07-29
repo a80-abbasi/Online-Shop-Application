@@ -83,6 +83,8 @@ public class Product {
 
     public Product() {
         allProducts.add(this);
+        customersAmountForAction = new HashMap<>();
+        this.specialFeatures = new HashMap<>();
     }
 
     public String getImageAddressInServer() {
