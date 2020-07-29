@@ -472,7 +472,7 @@ public class AdminProfileManager extends ProfileManager {
         return allCategoriesTable;
     }
 
-    public TableView getSaleHistoryTable(TableView allRequestsTable) {
+    public TableView getSaleHistoryTable(TableView allBuyLogs) {
         TableColumn<String, BuyLog> column1 = new TableColumn<>("ID");
         column1.setCellValueFactory(new PropertyValueFactory<>("ID"));
 
@@ -491,17 +491,17 @@ public class AdminProfileManager extends ProfileManager {
         TableColumn<String, BuyLog> column6 = new TableColumn<>("Sending Condition");
         column6.setCellValueFactory(new PropertyValueFactory<>("sendingCondition"));
 
-        allRequestsTable.getColumns().addAll(column1, column2, column3,column4,column5,column6);
+        allBuyLogs.getColumns().addAll(column1, column2, column3,column4,column5,column6);
 
         Connection.sendToServer("getCustomers");
         ArrayList<Customer> allCustomers = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Customer>>(){}.getType());
-
-//        ArrayList<>
-//        for (Customer customer : allCustomers) {
-//            allRequestsTable.getItems().add(request);
-//        }
-        allRequestsTable.setPlaceholder(new Label("No Data to display"));
-        return allRequestsTable;
+        for (Customer customer : allCustomers) {
+            for (BuyLog buyLog : customer.getBuyLogs()) {
+                allBuyLogs.getItems().add(buyLog);
+            }
+        }
+        allBuyLogs.setPlaceholder(new Label("No Data to display"));
+        return allBuyLogs;
     }
 
 

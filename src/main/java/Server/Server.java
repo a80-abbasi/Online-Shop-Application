@@ -572,7 +572,8 @@ public class Server extends Application {
         else if (account instanceof Seller) {
             Seller seller = Seller.getSellerByUserName(account.getUsername());
             try {
-                outPut = BankConnection.move(seller.getUsername(), seller.getPassword(), money, seller.getBankAccountID(), Admin.getBankIDOfStore());
+                outPut = BankConnection.move(seller.getUsername(), seller.getPassword(), money,
+                        seller.getBankAccountID(), Admin.getBankIDOfStore());
                 seller.setBalance(seller.getBalance() + money);
             } catch (Exception e) {
                 outPut = e.getMessage();
