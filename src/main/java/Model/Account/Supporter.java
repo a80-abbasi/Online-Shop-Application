@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Supporter extends Account{
     private static ArrayList<Supporter> allSupporters;
     private boolean lineCondition = false;
-    private int SupporterID = (allSupporters.size()*100) + 100;
+    private int SupporterID;
 
     static {
         allSupporters = new ArrayList<>();
@@ -13,6 +13,7 @@ public class Supporter extends Account{
 
     public Supporter(String username, String password, String name, String lastName, String email, String phoneNumber) {
         super(username, password, name, lastName, email, phoneNumber);
+        SupporterID = allSupporters.size() * 100 + 100;
         allSupporters.add(this);
     }
 

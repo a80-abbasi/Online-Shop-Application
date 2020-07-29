@@ -47,7 +47,7 @@ public class SellerProfileMenu {
         emailField.setText(sellerProfileManager.getEmail());
         phoneNumberField.setText(sellerProfileManager.getPhoneNumber());
         companyField.setText(sellerProfileManager.getCompanyName());
-        balance.setText(sellerProfileManager.seller.getBalance() +"$");
+        balance.setText(sellerProfileManager.getBalance() +"$");
         ProductPageController.setMainMenuButton(mainMenuImage);
     }
 
