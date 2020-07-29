@@ -89,6 +89,10 @@ public class Product {
         this.specialFeatures = new HashMap<>();
     }
 
+    public void setCustomersAmountForAction(HashMap<String, Double> customersAmountForAction) {
+        this.customersAmountForAction = customersAmountForAction;
+    }
+
     public String getImageAddressInServer() {
         return imageAddressInServer;
     }

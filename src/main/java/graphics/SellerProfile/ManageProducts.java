@@ -217,7 +217,7 @@ public class ManageProducts {
             product.setEndOfAction(actionEndTime);
             product.setInAction(true);
             addToActionButton.setDisable(false);
-            Connection.sendToServerWithToken("add product to auction: " + actionEndTime.getTime() + product.getProductId());
+            Connection.sendToServerWithToken("add product to auction: " + actionEndTime.getTime() + " " + product.getProductId());
             stage.close();
         });
         Scene scene = new Scene(vBox);

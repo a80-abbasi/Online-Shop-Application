@@ -115,8 +115,8 @@ public class ProductPageController {
         if (Account.getLoggedInAccount() instanceof Admin){
             deleteProductButton.setOpacity(1);
             deleteProductButton.setOnAction(e -> {
-                //productsManager.deleteAProduct(product); //todo: send delete request
-                Connection.sendToServer("delete product: " + product.getProductId());
+                productsManager.deleteAProduct(product); //todo: send delete request
+                //Connection.sendToServer("delete product: " + product.getProductId());
                 try {
                     App.setRoot(parentAddress);
                 } catch (IOException ex) {
@@ -162,7 +162,7 @@ public class ProductPageController {
             });
         }
         else {
-            cartImage.setOpacity(0);
+            chatImage.setOpacity(0);
         }
     }
 
@@ -324,7 +324,7 @@ public class ProductPageController {
         nameLabel.setText(product.getProductName());
         categoryLabel.setText(product.getProductCategory() == null ? "Others" : product.getProductCategory().getName());
         companyNameLabel.setText(product.getCompanyName());
-        sellerNameLabel.setText(product.getSeller().getName());
+        sellerNameLabel.setText(product.getProductSeller());
         visitNumberLabel.setText(String.valueOf(product.getVisitNumber()));
         remainingLabel.setText(String.valueOf(product.getExistingNumber()));
         setPropertiesLabel();

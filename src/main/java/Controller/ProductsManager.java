@@ -61,8 +61,7 @@ public class  ProductsManager {
     }
 
     public void deleteAProduct(Product product){
-        allProducts.remove(product);
-        Category.getAllCategories().forEach(category -> category.getProductIds().remove(product.getProductId()));
+        Connection.sendToServer("delete product: " + product.getProductId());
     }
 
     public void useSpecialFeatureSort(String specialFeatureSort){
