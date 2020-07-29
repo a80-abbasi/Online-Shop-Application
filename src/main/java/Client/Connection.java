@@ -3,6 +3,7 @@ package Client;
 import Model.Account.*;
 import Model.Product.Product;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
@@ -72,7 +73,10 @@ public class Connection {
             return gson.fromJson(loggedInInfo.substring("Admin: ".length()), Admin.class);
         }
         else if (loggedInInfo.startsWith("Customer: ")){
-            return gson.fromJson(loggedInInfo.substring("Customer: ".length()), Customer.class);
+            String customerInfo = loggedInInfo.substring("Customer: ".length());
+            //System.out.println(customerInfo);
+            //return gson.fromJson(customerInfo, Customer.class);
+            return new GsonBuilder().enableComplexMapKeySerialization().create().fromJson(customerInfo, Customer.class);
         }
         else if (loggedInInfo.startsWith("Supporter: ")) {
             return gson.fromJson(loggedInInfo.substring(("Supporter: ").length()), Supporter.class);

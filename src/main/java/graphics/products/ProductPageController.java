@@ -412,7 +412,7 @@ public class ProductPageController {
                                 productAddedLabel.setText("You must login as a customer to make a suggestion in action");
                             }
                             else{
-                             Customer customer = (Customer) account;
+                                Customer customer = (Customer) account;
                                 addASuggestionForAction(customer);
                             }
                         }
@@ -439,6 +439,7 @@ public class ProductPageController {
     private void addASuggestionForAction(Customer customer){
         Stage stage = new Stage();
         Label label = new Label("enter your Amount:");
+        label.setWrapText(true);
         TextField textField = new TextField();
         Button button = new Button("done!");
         button.setOnAction(event -> {
@@ -446,27 +447,29 @@ public class ProductPageController {
             try {
                 amount = Double.parseDouble(textField.getText().trim());
             } catch (NumberFormatException e) {
-                productAddedLabel.setText("Please enter a number!");
+                label.setText("Please enter a number!");
                 return;
             }
-            if (amount >= customer.getBalance()){
-                productAddedLabel.setText("You must have more that entering amount in your wallet!");
+            if (amount >= customer.getBalance() + Admin.getMinWalletBalance()){
+                label.setText("You must have more that entering amount in your wallet!");
                 return;
             }
-            double previousAmount = product.getCustomersAmountForAction().getOrDefault(customer, 0.0);
+            double previousAmount = product.getCustomersAmountForAction().getOrDefault(customer.getUsername(), 0.0);
             if (amount <= previousAmount){
-                productAddedLabel.setText("Your new amount must be higher than previous one!");
+                label.setText("Your new amount must be higher than previous one!");
                 return;
             }
             product.getCustomersAmountForAction().put(customer.getUsername(), amount); //todo: send request to server to add this customer to action
-            Connection.sendToServer("add customer to auction: " + amount + " " + product.getProductId());
+            Connection.sendToServerWithToken("add customer to auction: " + amount + " " + product.getProductId());
+            setChatButton(chatImage);
+            stage.close();
         });
         VBox vBox = new VBox(label, textField, button);
         vBox.setSpacing(50);
         vBox.setPadding(new Insets(100, 100, 100, 100));
         Scene scene = new Scene(vBox);
         stage.setScene(scene);
-        stage.showAndWait();
+        stage.show();
     }
 
     private void setRates() {

@@ -8,6 +8,7 @@ import Model.Product.Product;
 import Model.Request.*;
 import View.Main;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import graphics.products.PurchaseMenuController;
 import javafx.application.Application;
@@ -190,8 +191,8 @@ public class Server extends Application {
                             account.setOnline(false);
                         }
                         else if (content.startsWith("add customer to auction: ")){
-                            double amount = Double.parseDouble(splitContent[3]);
-                            String productId = splitContent[4];
+                            double amount = Double.parseDouble(splitContent[4]);
+                            String productId = splitContent[5];
                             Product product = Product.getProductByID(productId);
                             product.getCustomersAmountForAction().put(account.getUsername(), amount);
                         }
@@ -1316,7 +1317,9 @@ public class Server extends Application {
                 dataOutputStream.writeUTF("Admin: " + gson.toJson((Admin) account));
             }
             else if (account instanceof Customer) {
-                dataOutputStream.writeUTF("Customer: " + gson.toJson((Customer) account));
+                String json = new GsonBuilder().enableComplexMapKeySerialization().create().toJson((Customer) account);
+                //dataOutputStream.writeUTF("Customer: " + gson.toJson((Customer) account));
+                dataOutputStream.writeUTF("Customer: " + json);
             }
             else if (account instanceof Supporter) {
                 dataOutputStream.writeUTF("Supporter: " + gson.toJson((Supporter) account));
