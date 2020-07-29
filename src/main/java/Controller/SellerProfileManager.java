@@ -13,11 +13,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 
+import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.InputMismatchException;
+import java.net.Socket;
+import java.util.*;
 
 public class SellerProfileManager extends ProfileManager {
     public Seller seller;
@@ -258,19 +257,22 @@ public class SellerProfileManager extends ProfileManager {
             message = message + productExplanations + "&" + new Gson().toJson(productCategory) + "&";
             message = message + new Gson().toJson(productSpecialFeatures) + "&";
             message = message + seller.getUsername() + "&" + fileType + "&";
-            message = message + image.toString();
+            /*message = message + Arrays.toString(image);
             if (file != null) {
-                message = message + "&" + file.toString();
-            }
+                message = message + "&" + Arrays.toString(file);
+            }*/
             Connection.sendToServer(message);
             //Connection.sendToServer(image);
-            /*DataOutputStream dataOutputStream = Connection.getDataOutputStream();
+            Socket clientSocket = new Socket("localhost", 8000);
+            DataOutputStream dataOutputStream = new DataOutputStream(clientSocket.getOutputStream());
+            dataOutputStream.writeUTF(String.valueOf(image.length));
             dataOutputStream.write(image);
+            //dataOutputStream.flush();
             if (file != null){
+                dataOutputStream.writeUTF(String.valueOf(file.length));
                 dataOutputStream.write(file);
             }
-            dataOutputStream.flush();
-            */
+            //dataOutputStream.flush();
         }
     }
 
