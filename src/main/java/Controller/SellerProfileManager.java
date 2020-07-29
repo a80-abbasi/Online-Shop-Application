@@ -253,17 +253,16 @@ public class SellerProfileManager extends ProfileManager {
         if (checkProductIDValidity(productID) && checkProductNameValidity(productName) &&
                 checkProductCompanyName(productCompanyName) && checkProductPrice(productPrice) &&
                 checkProductExistingNumber(productExistingNumber) && checkProductExplanations(productExplanations)) {
-            AddProductRequest addProductRequest = new AddProductRequest(productID, productName, productCompanyName,
-                    Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber), productExplanations,
-                    productCategory, productSpecialFeatures, Seller.getSellerByUserName(Account.getLoggedInAccount().getUsername()), fileType);
-            String message = "add product request: &" + new Gson().toJson(addProductRequest) + "&";
+            String message = "add product request: &" + productID + "&" + productName + "&";
+            message = message + productCompanyName + "&" + productPrice + "&" + productExistingNumber + "&";
+            message = message + productExplanations + "&" + new Gson().toJson(productCategory) + "&";
+            message = message + new Gson().toJson(productSpecialFeatures) + "&";
+            message = message + seller.getUsername() + "&" + fileType + "&";
             message = message + image.toString();
             if (file != null) {
                 message = message + "&" + file.toString();
             }
             Connection.sendToServer(message);
-            Request.getAllRequests().remove(addProductRequest);
-            AddProductRequest.getAllAddProductRequest().remove(addProductRequest);
             //Connection.sendToServer(image);
             /*DataOutputStream dataOutputStream = Connection.getDataOutputStream();
             dataOutputStream.write(image);
@@ -357,13 +356,13 @@ public class SellerProfileManager extends ProfileManager {
             if (checkProductNameValidity(productName) &&
                     checkProductCompanyName(productCompanyName) && checkProductPrice(productPrice) &&
                     checkProductExistingNumber(productExistingNumber) && checkProductExplanations(productExplanations)) {
-                Product product = Product.getProductByID(productID);
-                EditProductRequest editProductRequest = new EditProductRequest(product, productID, productName,
-                        productCompanyName, Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber),
-                        productExplanations, productImageAddress, productCategory, productSpecialFeatures, this.seller);
-                Connection.sendToServer("edit product request: " + new Gson().toJson(editProductRequest));
-                Request.getAllRequests().remove(editProductRequest);
-                EditProductRequest.getAllEditProductRequests().remove(editProductRequest);
+                String message = "edit product request: &";
+                message = message + productID + "&" + productName + "&" + productCompanyName + "&";
+                message = message + productPrice + "&" + productExistingNumber + "&" + productExplanations + "&";
+                message = message + productImageAddress + "&" + new Gson().toJson(productCategory) + "&";
+                message = message + new Gson().toJson(productSpecialFeatures) + "&";
+                message = message + seller.getUsername();
+                Connection.sendToServer("edit product request: " + message);
             }
         } catch (Exception e) {
             throw e;
@@ -377,10 +376,11 @@ public class SellerProfileManager extends ProfileManager {
     public void makeNewAddOffRequest(String offID, Date offStartTime, Date offEndTime, String offAmount, ArrayList<String> offProductIDs) throws Exception {
         try {
             if (checkOffAmountValidity(offAmount) && checkOffIDValidity(offID)) {
-                AddOffRequest addOffRequest = new AddOffRequest(offID, offStartTime, offEndTime, Integer.parseInt(offAmount), offProductIDs, this.seller);
-                Connection.sendToServer("add off request: " + new Gson().toJson(addOffRequest));
-                Request.getAllRequests().remove(addOffRequest);
-                AddOffRequest.getAllAddOffRequest().remove(addOffRequest);
+                String message = "add off request: &" + offID + "&";
+                message = message + new Gson().toJson(offStartTime) + "&" + new Gson().toJson(offEndTime) + "&";
+                message = message + offAmount + "&";
+                message = message + new Gson().toJson(offProductIDs) + "&" + new Gson().toJson(this.seller.getUsername());
+                Connection.sendToServer("add off request: " + message);
             }
         } catch (Exception e) {
             throw e;
@@ -390,10 +390,10 @@ public class SellerProfileManager extends ProfileManager {
     public void makeNewEditOffRequest(String offID, Date offStartTime, Date offEndTime, String offAmount, ArrayList<String> offProductIDs) throws Exception {
         try {
             if (checkOffAmountValidity(offAmount)) {
-                EditOffRequest editOffRequest = new EditOffRequest(offID, offStartTime, offEndTime, Integer.parseInt(offAmount), offProductIDs);
-                Connection.sendToServer("edit off request: " + new Gson().toJson(editOffRequest));
-                Request.getAllRequests().remove(editOffRequest);
-                EditOffRequest.getAllEditOffRequests().remove(editOffRequest);
+                String message = "edit off request: " + offID + "&";
+                message = message + new Gson().toJson(offStartTime) + "&" + new Gson().toJson(offEndTime) + "&";
+                message = message + offAmount + "&" + new Gson().toJson(offProductIDs);
+                Connection.sendToServer("edit off request: " + message);
             }
         } catch (Exception e) {
             throw e;
@@ -428,6 +428,9 @@ public class SellerProfileManager extends ProfileManager {
         Off off = new Gson().fromJson(Connection.receiveFromServer(), Off.class);
         return off;
     }
+
+
+
 
 
 
