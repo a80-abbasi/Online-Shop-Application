@@ -382,7 +382,7 @@ public class SellerProfileManager extends ProfileManager {
                 message = message + new Gson().toJson(offStartTime) + "&" + new Gson().toJson(offEndTime) + "&";
                 message = message + offAmount + "&";
                 message = message + new Gson().toJson(offProductIDs) + "&" + new Gson().toJson(this.seller.getUsername());
-                Connection.sendToServer("add off request: " + message);
+                Connection.sendToServerWithToken("add off request: " + message);
             }
         } catch (Exception e) {
             throw e;
