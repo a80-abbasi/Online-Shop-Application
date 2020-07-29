@@ -139,7 +139,7 @@ public class Product {
 
     public Image getImage() {
         //return new Image(imageBytes);
-        String address = "file:src\\main\\resources\\Images\\Client Images" + productName + getProductSeller() + ".jpg";
+        String address = "src\\main\\resources\\Images\\Client Images" + productName + getProductSeller() + ".jpg";
         //File file = new File(address);
         try (FileOutputStream fileOutputStream = new FileOutputStream(address)){
             fileOutputStream.write(imageBytes);

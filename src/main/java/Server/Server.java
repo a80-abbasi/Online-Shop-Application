@@ -225,6 +225,9 @@ public class Server extends Application {
                         else if (content.startsWith("set line condition: ")) {
                             setSupporterLineCondition(account, content.substring(("set line condition: ").length()));
                         }
+                        else if (content.startsWith("add off request: ")) {
+                            addOffRequest(content, (Seller) account);
+                        }
                     }
                     if (content.equals("get logged in account")){
                         sendAccountInfo(dataOutputStream, account);
@@ -328,9 +331,6 @@ public class Server extends Application {
                 }
                 else if (message.startsWith("remove product request: ")) {
                     removeProductRequest(message.substring(("remove product request: ").length()));
-                }
-                else if (message.startsWith("add off request: ")) {
-                    addOffRequest(message);
                 }
                 else if (message.startsWith("edit off request: ")) {
                     editOffRequest(message);
@@ -572,7 +572,8 @@ public class Server extends Application {
         else if (account instanceof Seller) {
             Seller seller = Seller.getSellerByUserName(account.getUsername());
             try {
-                outPut = BankConnection.move(seller.getUsername(), seller.getPassword(), money, seller.getBankAccountID(), Admin.getBankIDOfStore());
+                outPut = BankConnection.move(seller.getUsername(), seller.getPassword(), money,
+                        seller.getBankAccountID(), Admin.getBankIDOfStore());
                 seller.setBalance(seller.getBalance() + money);
             } catch (Exception e) {
                 outPut = e.getMessage();
@@ -803,7 +804,7 @@ public class Server extends Application {
         new EditOffRequest(offID, offStartTime, offEndTime, Integer.parseInt(offAmount), offProductIDs);
     }
 
-    private static void addOffRequest(String message) {
+    private static void addOffRequest(String message, Seller seller) {
         String[] splitMessage = message.split("&");
         String offID = splitMessage[1];
         Date offStartTime = gson.fromJson(splitMessage[2], Date.class);
@@ -811,7 +812,7 @@ public class Server extends Application {
         String offAmount = splitMessage[4];
         ArrayList<String> offProductIDs = gson.fromJson(splitMessage[5], new TypeToken<ArrayList<String>>(){}.getType());
         String sellerUsername = splitMessage[6];
-        Seller seller = Seller.getSellerByUserName(sellerUsername);
+        //Seller seller = Seller.getSellerByUserName(sellerUsername);
         new AddOffRequest(offID, offStartTime, offEndTime, Integer.parseInt(offAmount), offProductIDs, seller);
     }
 
@@ -889,7 +890,7 @@ public class Server extends Application {
                 byte[] file = new byte[fileLength];
                 //byte[] file = splitMessage[11].getBytes();
                 dataInputStream.readFully(file, 0, fileLength);
-                String fileAddress = "src\\main\\resources\\server\\" + addProductRequest.getProductId() + ".jpg";
+                String fileAddress = "src\\main\\resources\\server\\" + addProductRequest.getFileName();
                 saveFile(file, fileAddress);
                 addProductRequest.setProductImageAddress(fileAddress);
             }

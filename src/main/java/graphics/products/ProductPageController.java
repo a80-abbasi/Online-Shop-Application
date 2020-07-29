@@ -153,6 +153,7 @@ public class ProductPageController {
     private void setChatButton(ImageView chatImage) {
         Connection.sendToServerWithToken("can go to auction chat: " + product.getProductId());
         if (Objects.equals(Connection.receiveFromServer(), "yes")) {
+            chatImage.setOpacity(1);
             shadowOnMouseHover(chatImage);
             chatImage.setOnMouseClicked(event -> {
                 try {
