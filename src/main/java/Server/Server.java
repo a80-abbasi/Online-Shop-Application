@@ -1,6 +1,7 @@
 package Server;
 
 import Controller.ProductsManager;
+import Controller.SupporterProfileManager;
 import Model.Account.*;
 import Model.Product.Category;
 import Model.Product.Comment;
@@ -34,7 +35,7 @@ public class Server extends Application {
     private static final Gson gson = new Gson();
     private static DataOutputStream dataOutputStream;
     private static DataInputStream dataInputStream;
-    private static HashMap<Supporter, String> CustomersInQueue;
+    private static HashMap<Supporter, String> CustomersInQueue = new HashMap<>();
 
     @Override
     public void start(Stage stage) {
@@ -470,7 +471,7 @@ public class Server extends Application {
                 else if (message.startsWith("remove supporter from customers in queue: ")) {
                     removeSupporterFromCustomersInQueue(message.substring(("remove supporter from customers in queue: ").length()));
                 }
-                else if (message.startsWith("put supporter in customers in queue: ")) {
+                else if (message.startsWith("put supporter in customers in queue:")) {
                     putSupporterInCustomersInQueue(message);
                 }
                 else if (message.startsWith("delete product: ")){
@@ -487,10 +488,11 @@ public class Server extends Application {
 
     private static void putSupporterInCustomersInQueue(String message) {
         String[] splitMessage = message.split("&");
-        String supporterName = splitMessage[1];
-        Supporter supporter = Supporter.getSupporterByUserName(supporterName);
+        String supporterID = splitMessage[1];
+        Supporter supporter = SupporterProfileManager.getSupporterByID(Integer.parseInt(supporterID));
         String value = splitMessage[2];
-        getCustomersInQueue().put(supporter, value);
+        Server.CustomersInQueue.put(supporter, value);
+        System.out.println(supporter.getSupporterID());
     }
 
     private static void removeSupporterFromCustomersInQueue(String supporterUsername) {

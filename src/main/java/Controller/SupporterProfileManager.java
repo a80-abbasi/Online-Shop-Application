@@ -32,7 +32,7 @@ public class SupporterProfileManager extends ProfileManager {
         Connection.sendToServer("set line condition: " + lineConditionStr);
     }
 
-    public Supporter getSupporterByID(int supporterID) {
+    public static Supporter getSupporterByID(int supporterID) {
         Connection.sendToServer("getSupporters");
         ArrayList<Supporter> allSupporters = new Gson().fromJson(Connection.receiveFromServer(), new TypeToken<ArrayList<Supporter>>(){}.getType());
         for (Supporter supporter : allSupporters) {
