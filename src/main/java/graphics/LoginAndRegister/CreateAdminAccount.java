@@ -1,7 +1,10 @@
 package graphics.LoginAndRegister;
 
 import Client.Connection;
+import Controller.AdminProfileManager;
 import Controller.LoginAndRegisterManager;
+import Model.Account.Admin;
+import View.Main;
 import graphics.AlertBox;
 import graphics.App;
 import javafx.event.ActionEvent;
@@ -41,9 +44,13 @@ public class CreateAdminAccount {
         boolean confirmButtonInability = username.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty();
         if (!(confirmButtonInability)) {
             try {
-                loginAndRegisterManager.registerAdmin(username, password, firstName, lastName, email, phoneNumber);
+                if (AdminProfileManager.isThereAdmin()) {
+                    AdminProfileManager.registerAdmin(username, password, firstName, lastName, email, phoneNumber);
+                }
+                else {
+                    loginAndRegisterManager.registerAdmin(username, password, firstName, lastName, email, phoneNumber);
+                }
                 AlertBox.showMessage("Admin Register", "Admin Successfully registered");
-                Connection.sendToServer("create admin account");
                 try {
                     App.setRoot(parentMenu);
                 } catch (IOException e) {

@@ -166,8 +166,8 @@ public class AdminProfileManager extends ProfileManager {
         return String.valueOf(code);
     }
 
-    public void registerAdmin(String username, String password, String name, String lastName, String email, String phoneNumber) {
-        String message = "register admin: ," + username + "," + password + "," + name + "," + lastName + "," + email + "," + phoneNumber + ", ";
+    public static void registerAdmin(String username, String password, String name, String lastName, String email, String phoneNumber) {
+        String message = "create admin account: ," + username + "," + password + "," + name + "," + lastName + "," + email + "," + phoneNumber + ", ";
         Connection.sendToServer(message);
     }
 
@@ -188,11 +188,10 @@ public class AdminProfileManager extends ProfileManager {
         if (checkDiscountCodeValidity(discountCode) && checkDiscountPercentValidity(discountPercent) &&
                 checkMaxPossibleDiscountValidity(maxPossibleDiscount) &&
                 checkDiscountPerCustomerValidity(discountPerCustomer) && checkCustomersValidity(includingCustomers)) {
-
-            Discount discount = new Discount(discountCode, startTime, endTime, Double.parseDouble(discountPercent),
-                    Double.parseDouble(maxPossibleDiscount), Integer.parseInt(discountPerCustomer), includingCustomers);
-            Connection.sendToServer("Create discountCode: " + new Gson().toJson(discount));
-            Discount.getAllDiscounts().remove(discount);
+            String message = "Create discountCode: &" + discountCode + "&" + new Gson().toJson(startTime) + "&";
+            message = message + new Gson().toJson(endTime) + "&" + discountPercent + "&" + maxPossibleDiscount;
+            message = message + "&" + discountPerCustomer + "&" + new Gson().toJson(includingCustomers);
+            Connection.sendToServer("Create discountCode: " + message);
         }
     }
 
@@ -278,6 +277,7 @@ public class AdminProfileManager extends ProfileManager {
                 message = message + customer + "&";
             }
             Connection.sendToServer(message + " ");
+            //todo:
         }
     }
 
@@ -322,7 +322,7 @@ public class AdminProfileManager extends ProfileManager {
 
     private boolean checkCustomersValidity(ArrayList<String> customersUsername) throws IllegalArgumentException {
         for (String s : customersUsername) {
-            Connection.sendToServer("get customer :" + s);
+            Connection.sendToServer("get customer: " + s);
             Account account = new Gson().fromJson(Connection.receiveFromServer(), Customer.class);
             if (account == null || !(account instanceof Customer)) {
                 throw new IllegalArgumentException("Invalid Customer Username.");

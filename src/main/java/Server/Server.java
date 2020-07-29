@@ -116,7 +116,7 @@ public class Server extends Application {
                         else if (content.startsWith("get email: ")) {
                             sendAccountEmail(dataOutputStream, account);
                         }
-                        else if (content.startsWith("edit email")) {
+                        else if (content.startsWith("edit email: ")) {
                             editAccountEmail(account, content.substring(("edit email").length()));
                         }
                         else if (content.startsWith("get phone number: ")) {
@@ -246,6 +246,9 @@ public class Server extends Application {
                 else if (message.startsWith("register admin: ")) {
                     registerAdmin(message);
                 }
+                else if (message.startsWith("create admin account: ")){
+                    createAdminAccount(message);
+                }
                 else if (message.startsWith("register customer: ")) {
                     registerCustomer(message);
                 }
@@ -313,19 +316,19 @@ public class Server extends Application {
                     sendRemoveProductRequest(dataOutputStream, message.substring(("get removeProductRequest: ").length()));
                 }
                 else if (message.startsWith("add product request: ")) {
-                    addProductRequest(message.substring(("add product request: ").length()), dataInputStream);
+                    addProductRequest(message, dataInputStream);
                 }
                 else if (message.startsWith("edit product request: ")) {
-                    editProductRequest(message.substring(("edit product request: ").length()));
+                    editProductRequest(message);
                 }
                 else if (message.startsWith("remove product request: ")) {
                     removeProductRequest(message.substring(("remove product request: ").length()));
                 }
                 else if (message.startsWith("add off request: ")) {
-                    addOffRequest(message.substring(("add off request: ").length()));
+                    addOffRequest(message);
                 }
                 else if (message.startsWith("edit off request: ")) {
-                    editOffRequest(message.substring(("edit off request: ").length()));
+                    editOffRequest(message);
                 }
                 else if (message.startsWith("accept request: ")) {
                     acceptRequest(message.substring(("accept request: ").length()));
@@ -388,7 +391,7 @@ public class Server extends Application {
                     dataOutputStream.flush();
                 }
                 else if (message.startsWith("Create discountCode: ")) {
-                    createDiscountCode(message.substring(("Create discountCode: ").length()));
+                    createDiscountCode(message);
                 }
                 else if (message.startsWith("edit discount startTime: ")) {
                     editDiscountStartTime(message.split("&"));
@@ -425,12 +428,6 @@ public class Server extends Application {
                 else if (message.startsWith("get account: ")){
                     Account account = Account.getAccountByUsername(message.substring("get account: ".length()));
                     sendAccountInfo(dataOutputStream, account);
-                }
-                else if (message.equalsIgnoreCase("create admin account")){
-                    if (Admin.getAllAdmins().size() == 1){
-                        Admin mainAdmin = Admin.getAllAdmins().get(0);
-                        Admin.setStoreBankID(BankConnection.createAccount(mainAdmin.getName(), mainAdmin.getLastName(), mainAdmin.getUsername(), mainAdmin.getPassword()));
-                    }
                 }
                 else if (message.equals("get min wallet balance")){
                     dataOutputStream.writeUTF(String.valueOf(Admin.getMinWalletBalance()));
@@ -539,6 +536,8 @@ public class Server extends Application {
                 outPut = e.getMessage();
             }
             System.out.println(outPut);
+            System.out.println(Admin.getStoreBankID());
+            System.out.println(Admin.getAllAdmins().get(0).toString());
         }
         else if (account instanceof Seller) {
             Seller seller = Seller.getSellerByUserName(account.getUsername());
@@ -762,16 +761,26 @@ public class Server extends Application {
         }
     }
 
-    private static void editOffRequest(String editOffRequestJson) {
-        EditOffRequest editOffRequest = new Gson().fromJson(editOffRequestJson, EditOffRequest.class);
-        Request.getAllRequests().add(editOffRequest);
-        EditOffRequest.getAllEditOffRequests().add(editOffRequest);
+    private static void editOffRequest(String message) {
+        String[] splitMessage = message.split("&");
+        String offID = splitMessage[1];
+        Date offStartTime = gson.fromJson(splitMessage[2], Date.class);
+        Date offEndTime = gson.fromJson(splitMessage[3], Date.class);
+        String offAmount = splitMessage[4];
+        ArrayList<String> offProductIDs = gson.fromJson(splitMessage[5], new TypeToken<ArrayList<String>>(){}.getType());
+        new EditOffRequest(offID, offStartTime, offEndTime, Integer.parseInt(offAmount), offProductIDs);
     }
 
-    private static void addOffRequest(String addOffRequestJson) {
-        AddOffRequest addOffRequest = new Gson().fromJson(addOffRequestJson, AddOffRequest.class);
-        Request.getAllRequests().add(addOffRequest);
-        AddOffRequest.getAllAddOffRequest().add(addOffRequest);
+    private static void addOffRequest(String message) {
+        String[] splitMessage = message.split("&");
+        String offID = splitMessage[1];
+        Date offStartTime = gson.fromJson(splitMessage[2], Date.class);
+        Date offEndTime = gson.fromJson(splitMessage[3], Date.class);
+        String offAmount = splitMessage[4];
+        ArrayList<String> offProductIDs = gson.fromJson(splitMessage[5], new TypeToken<ArrayList<String>>(){}.getType());
+        String sellerUsername = splitMessage[6];
+        Seller seller = Seller.getSellerByUserName(sellerUsername);
+        new AddOffRequest(offID, offStartTime, offEndTime, Integer.parseInt(offAmount), offProductIDs, seller);
     }
 
     private static void removeProductRequest(String productID) {
@@ -779,20 +788,48 @@ public class Server extends Application {
         new RemoveProductRequest(product);
     }
 
-    private static void editProductRequest(String editProductRequestJson) {
-        EditProductRequest editProductRequest = new Gson().fromJson(editProductRequestJson, EditProductRequest.class);
-        Request.getAllRequests().add(editProductRequest);
-        EditProductRequest.getAllEditProductRequests().add(editProductRequest);
+    private static void editProductRequest(String message) {
+        String[] splitMessage = message.split("&");
+        String productID = splitMessage[1];
+        Product product = Product.getProductByID(productID);
+        String productName = splitMessage[2];
+        String productCompanyName = splitMessage[3];
+        String productPrice = splitMessage[4];
+        String productExistingNumber = splitMessage[5];
+        String productExplanations = splitMessage[6];
+        String productImageAddress = splitMessage[7];
+        Category productCategory = gson.fromJson(splitMessage[8], Category.class);
+        HashMap<String, Integer> productSpecialFeatures = gson.fromJson(splitMessage[9],
+                new TypeToken<HashMap<String, Integer>>(){}.getType());
+        String sellerUsername = splitMessage[10];
+        Seller seller = Seller.getSellerByUserName(sellerUsername);
+
+        new EditProductRequest(product, productID, productName,
+                productCompanyName, Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber),
+                productExplanations, productImageAddress, productCategory, productSpecialFeatures, seller);
     }
 
-    private static void addProductRequest(String addProductRequestJson, DataInputStream dataInputStream) throws IOException {
-        String[] splitMessage = addProductRequestJson.split("&");
-        AddProductRequest addProductRequest = new Gson().fromJson(splitMessage[1], AddProductRequest.class);
-        Request.getAllRequests().add(addProductRequest);
-        AddProductRequest.getAllAddProductRequest().add(addProductRequest);
+    private static void addProductRequest(String message, DataInputStream dataInputStream) throws IOException {
+        String[] splitMessage = message.split("&");
+        String productID = splitMessage[1];
+        String productName = splitMessage[2];
+        String productCompanyName = splitMessage[3];
+        String productPrice = splitMessage[4];
+        String productExistingNumber = splitMessage[5];
+        String productExplanations = splitMessage[6];
+        Category productCategory = gson.fromJson(splitMessage[7], Category.class);
+        HashMap<String, Integer> productSpecialFeatures = gson.fromJson(splitMessage[8],
+                new TypeToken<HashMap<String, Integer>>(){}.getType());
+        String sellerUsername = splitMessage[9];
+        Seller seller = Seller.getSellerByUserName(sellerUsername);
+        String fileType = splitMessage[10];
+        AddProductRequest addProductRequest = new AddProductRequest(productID, productName, productCompanyName,
+                Double.parseDouble(productPrice), Integer.parseInt(productExistingNumber), productExplanations,
+                productCategory, productSpecialFeatures, seller, fileType);
 
+        //todo: !!!
         //byte[] image = dataInputStream.readAllBytes();
-        byte[] image = splitMessage[2].getBytes();
+        byte[] image = splitMessage[11].getBytes();
         String imageAddress = "src\\main\\resources\\server\\" + addProductRequest.getProductId() + ".jpg";
         saveFile(image, imageAddress);
         addProductRequest.setProductImageAddress(imageAddress);
@@ -800,7 +837,7 @@ public class Server extends Application {
         if (addProductRequest.getFileName() != null){
             String fileAddress = "src\\main\\resources\\server\\" + addProductRequest.getFileName();
             //byte[] file = dataInputStream.readAllBytes();
-            byte[] file = splitMessage[3].getBytes();
+            byte[] file = splitMessage[12].getBytes();
             saveFile(file, fileAddress);
         }
     }
@@ -1016,6 +1053,7 @@ public class Server extends Application {
             includingCustomers.add(split[i]);
         }
         discount.setIncludingCustomers(includingCustomers);
+        //todo:
     }
 
     private static void editDiscountPerCustomer(String[] split) {
@@ -1048,9 +1086,17 @@ public class Server extends Application {
         discount.setStartTime(startTime);
     }
 
-    private static void createDiscountCode(String discountJson) {
-        Discount discount = gson.fromJson(discountJson, Discount.class);
-        Discount.getAllDiscounts().add(discount);
+    private static void createDiscountCode(String message) {
+        String[] splitMessage = message.split("&");
+        String discountCode = splitMessage[1];
+        Date startTime = gson.fromJson(splitMessage[2], Date.class);
+        Date endTime = gson.fromJson(splitMessage[3], Date.class);
+        String discountPercent = splitMessage[4];
+        String maxPossibleDiscount = splitMessage[5];
+        String discountPerCustomer = splitMessage[6];
+        ArrayList<String> includingCustomers = gson.fromJson(splitMessage[7], new TypeToken<ArrayList<String>>(){}.getType());
+        new Discount(discountCode, startTime, endTime, Double.parseDouble(discountPercent),
+                Double.parseDouble(maxPossibleDiscount), Integer.parseInt(discountPerCustomer), includingCustomers);
     }
 
     private static void removeDiscount(String discountCode) {
@@ -1114,6 +1160,18 @@ public class Server extends Application {
     }
 
     private static void registerAdmin(String message) {
+        String[] userInfo = message.split(",");
+        String username = userInfo[1];
+        String password = userInfo[2];
+        String firstName = userInfo[3];
+        String lastName = userInfo[4];
+        String email = userInfo[5];
+        String phoneNumber = userInfo[6];
+        Admin admin = new Admin(username, password, firstName, lastName, email, phoneNumber);
+        Admin.setStoreBankID(BankConnection.createAccount(admin.getName(), admin.getLastName(), admin.getUsername(), admin.getPassword()));
+    }
+
+    private static void createAdminAccount(String message) {
         String[] userInfo = message.split(",");
         String username = userInfo[1];
         String password = userInfo[2];
